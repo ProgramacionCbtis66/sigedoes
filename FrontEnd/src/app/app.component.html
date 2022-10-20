@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-sm bg-success bg-gradient navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="home" (click)="visibleLoginRegistro()">
+      <img src="{{logo}}" width="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item" id="idhome" *ngIf="!mostrar">
+          <a class="nav-link" routerLink="home" (click)="visibleLoginRegistro()">Home</a>
+        </li>
+        <li *ngIf="mostrar" class="nav-item" id="idlogin">
+          <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="mostrar" >
+          <a class="nav-link" id="idregistro" routerLink="registro" (click)="visibleLoginRegistro()">Registro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="esferas" (click)="visibleLoginRegistro()">Otra Cosa</a>
+        </li>
+      </ul>
+    </div>
+
+    <hr class="dropdown-divider">
+
+    <div class="d-flex border border-primary">
+
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-success bg-gradient text-ligth text-center opacity-25">
+  <div class="fw-ligth d-inline-flex pt-2">
+    <p class="px-2"><i class="fa-regular fa-copyright"></i></p>
+    <p>CompuServer</p>
+  </div>
+</footer>
