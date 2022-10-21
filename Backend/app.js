@@ -5,7 +5,7 @@ const cors = require('cors');
 
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
-app.use(cors());
+app.use(cors({origin: "*" }));
 
 //ruteo
 
