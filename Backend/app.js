@@ -5,15 +5,15 @@ const cors = require('cors');
 
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
-app.use(cors());
+app.use(cors({origin: "*" }));
 
 //ruteo
 
 const userRouter = require('./api/routes/user');
 app.use('/insize', userRouter);
  // correo
- const emailSend = require('./api/routes/enviarEmail');
- app.use('/email', emailSend);
+ //const emailSend = require('./api/routes/enviarEmail');
+ //app.use('/email', emailSend);
 
 
 
