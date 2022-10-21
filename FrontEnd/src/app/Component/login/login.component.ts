@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  titulo = "Acceso al sistema";
+  titulo = "Inicio de Sesión";
   usuario = {
     "nombre": "",
     "pass": ""
