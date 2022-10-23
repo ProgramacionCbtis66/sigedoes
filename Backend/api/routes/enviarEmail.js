@@ -1,20 +1,42 @@
 const express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
-var nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+var email = "";
 
-Emailrouter.post('/enviar', (req, res)=>{
-    const email = req.body;
-    EnviarCorreo()
+
+Emailrouter.post('/enviar', (req, res) => {
+    
+    email = req.body;
+    console.log(email);
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "jorgecortescbtis66@gmail.com",
+        pass: "ibwchrluddbkxjea"
+      }
+    });
+
+    const mailOptions = {
+      from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
+      to: `"${email.email}"`,
+      subject: `"${email.asunto}"`,
+      html: "<h1>Prueba de correo enviado</h1>"
+    };
+   
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+        res.send('error') // if error occurs send error as response to client
+      } else {
+        console.log('Correo Enviado: ' + info.response);
+        res.send('Correo enviado satisfactoriamente')//si el correo se envía con éxito enviar Enviado con éxitoas response
+      }
+    });
 });
+   
 
-const EnviarCorreo = (mail, callback) => {
-        const transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
-          port: 587,
-          secure: false,
-          auth: {
-            user: "<sender email>",
-            pass: "<password>"
-          }
-}
+module.exports = Emailrouter;

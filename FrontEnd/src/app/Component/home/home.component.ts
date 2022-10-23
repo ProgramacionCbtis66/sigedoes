@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
-    alert("Home component");
+    
   }
 
 

@@ -13,6 +13,7 @@ import { Error404Component } from './Component/error404/error404.component';
 //Servicios
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CoreModule } from './core.module';
+import { PdfComponent } from './Component/pdf/pdf.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CoreModule } from './core.module';
     LoginComponent,
     HomeComponent,
     RegistroComponent,
-    Error404Component
+    Error404Component,
+    PdfComponent
   ],
   imports: [
     BrowserModule,

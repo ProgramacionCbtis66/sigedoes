@@ -10,10 +10,13 @@ router.post('/login',(req,res)=>{
     console.log(req.body);
     ccn.query('select iduser, user, rol from user where user = ? and password = ?',[nombre,pass],
         (err,rows,fields)=>{
+            
             if(!err) {
                 if(rows.length > 0) {
                     let datos = JSON.stringify(rows[0]);
                     const token = jwt.sign(datos,'stil');
+
+                    console.log(token,datos);
                     res.json({token});
                 }else{
                    res.json({Error:"Usuario y contraseña incorrecta"});
