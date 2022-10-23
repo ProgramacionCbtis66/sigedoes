@@ -33,7 +33,7 @@ Emailrouter.post('/enviar', (req, res) => {
         res.send('error') // if error occurs send error as response to client
       } else {
         console.log('Correo Enviado: ' + info.response);
-        res.send('Correo enviado satisfactoriamente')//if mail is sent successfully send Sent successfully as response
+        res.send('Correo enviado satisfactoriamente')//si el correo se envía con éxito enviar Enviado con éxitoas response
       }
     });
 });
