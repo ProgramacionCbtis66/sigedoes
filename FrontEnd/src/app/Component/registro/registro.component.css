@@ -1,9 +1,51 @@
+header{
+    font-family: 'Times New Roman', Times, serif;
+}
 .vrd-3g{
     background-color: #13322B;
 }
-.centrao{
+#separador{
+    margin-top: 0px;
+    
+}
+.titulo{
     text-align: center;
-    background-color: coral;
-    padding: 0;
-    width: 40%;
+    font-size: 35px;
+    
+}
+.registro{
+    display: inline-block;
+    margin-bottom: 0px;
+}
+.dato{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+.junto{
+    display: inline-block;
+}
+.enviar::before{
+    display: none;
+}
+.separar{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.distancia{
+    margin-top: 35px;
+}
+.datos{
+    padding-left: 15px;
+    padding-top: 5px;
+    font-size: 22px;
+    padding-right: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.ingresar{
+    font-size: 28px;
+    
 }

@@ -1,21 +1,61 @@
-<div class="">
-<div class="">
-    <h4>Usuario</h4>
-    <input type="text">
-</div>
-<div class="">
-    <h4>Correo</h4>
-    <input type="text">
-</div>
-<div class="">
-    <h4>Contraseña</h4>
-    <input type="text">
-</div>
-<div class="">
-    <h4>Id de Usuario</h4>
-    <input type="text">
-</div>
-<div class="">
-    <h4>UserName</h4>
-    <input type="text">
-</div>
+<header class="row">
+<div class="col-lg-1"></div>
+    <div class="col-lg-10 ">
+        <div class="distancia titulo">Sistema para la emisión de Constancias de Estudios</div>
+        <div class="border border-secondary"></div>
+    </div>
+<div class="col-lg-1"></div>
+    
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+        <div class="row">
+        
+            <!--Parte Izquierda Del Sistema-->
+            <div class="col-lg-6">
+                <div class="border border-secondary" id="separador">
+                 
+                </div>
+            </div>
+            <!--Parte Derecha Del Sistema-->
+            <div class="col-lg-6">
+                <!--Registro-->
+                
+
+                <!--Caja De Información-->
+                <div class="border border-secondary rounded" id="separador">
+                <div class="border border-danger registro">Registro</div>
+                <!--Introduccion-->
+                    <div class="border-botom border-secondary border-bottom ">
+                        <label class="datos ingresar" for="">Ingrese Sus Datos Para Poder Registrarse</label>
+                    </div>
+                <!--Correo Institucional-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.correo" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="Correo Institucional">
+                        <label for="floatingInput">Ingrese Su Correo Institucional</label>
+                    </div>
+                    <!--Contraseña-->
+                    <div class="form-floating separar border rounded">
+                        <input [(ngModel)]="usuario.pass" type="password" class="form-control" id="floatingPassword"
+                         placeholder="Password">
+                        <label for="floatingPassword">Ingrese Su Contraseña</label>
+                    </div>
+                    <!--Nombre De Usuario-->
+                    <div class="form-floating separar">
+                        <input [(ngModel)]=usuario.usuario type="email" class="form-control" id="floatingInput"
+                        placeholder="Ingrese Su Nombre De Usuario">
+                        <label for="floatingInput">Nombre De Usuario</label>
+                    </div>
+                    <!--UserName-->
+                    <div class="form-floating separar">
+                        <input [(ngModel)]="usuario.UserName" type="email" class="form-control" id="floatingInput"
+                        placeholder="Ingrese Su Nombre De Usuario">
+                        <label for="floatinInput">Nombre De Usuario</label>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</header>

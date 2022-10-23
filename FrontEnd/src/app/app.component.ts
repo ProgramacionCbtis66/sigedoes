@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class AppComponent implements OnInit{
 
-  title = 'Club H';
+  title = 'Constancias';
   mostrar: boolean = true;
   foto : string ="";
   logo : string = '.././assets/img/logo.jpg';
