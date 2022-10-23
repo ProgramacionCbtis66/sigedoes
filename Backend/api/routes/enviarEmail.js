@@ -1,7 +1,7 @@
 const express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
-var nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 var email = "";
 
 
@@ -32,8 +32,8 @@ Emailrouter.post('/enviar', (req, res) => {
         console.log(error);
         res.send('error') // if error occurs send error as response to client
       } else {
-        console.log('Email sent: ' + info.response);
-        res.send('Sent Successfully')//if mail is sent successfully send Sent successfully as response
+        console.log('Correo Enviado: ' + info.response);
+        res.send('Correo enviado satisfactoriamente')//if mail is sent successfully send Sent successfully as response
       }
     });
 });

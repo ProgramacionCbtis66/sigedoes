@@ -14,8 +14,8 @@
         <li *ngIf="mostrar" class="nav-item" id="idlogin">
           <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Login</a>
         </li>
-        <li class="nav-item" *ngIf="mostrar" >
-          <a class="nav-link" id="idregistro" routerLink="registro" (click)="visibleLoginRegistro()">Registro</a>
+        <li class="nav-item" *ngIf="false">
+          <a class="nav-link" id="idregistro">Registro</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="esferas" (click)="visibleLoginRegistro()">Otra Cosa</a>
@@ -23,12 +23,22 @@
       </ul>
     </div>
 
-    <hr class="dropdown-divider">
 
-    <div class="d-flex border border-primary">
+    <div class="dropdown d-flex" *ngIf="!mostrar">
+      <a class="btn dropdown-toggle text-color-3G" href="#" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+         Salir
 
+      </a>
+
+      <ul class="dropdown-menu">
+        <li><button class="dropdown-item " (click)="salir()">Salir</button></li>
+      </ul>
     </div>
+    <div class="p-4"></div>
+    <div class="p-2"></div>
   </div>
+
 </nav>
 
 <router-outlet></router-outlet>

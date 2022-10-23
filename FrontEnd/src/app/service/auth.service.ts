@@ -24,7 +24,7 @@ export class AuthService {
 
   isAuth(): boolean {
     const token = localStorage.getItem("color");
-    if (token !== null && token !== "sin colores") {
+    if (token !== null && token !== "") {
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "udefined") {
         this.estatus= true;
         return false;

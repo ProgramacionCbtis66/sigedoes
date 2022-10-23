@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 
@@ -15,10 +16,11 @@ export class AppComponent implements OnInit{
   foto : string ="";
   logo : string = '.././assets/img/logo.jpg';
 
-  constructor(private titulo : Title, private auth: AuthService){}
+
+  constructor(private titulo : Title, private auth: AuthService, private router:Router){}
 
   visibleLoginRegistro(){
-     
+
     if(this.auth.isAuth()){
       this.mostrar = false;
     }else{
@@ -31,6 +33,12 @@ export class AppComponent implements OnInit{
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
     }
+  }
+  salir(){
+    this.auth.estatus = false;
+    this.mostrar = true;
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
 
