@@ -5,8 +5,6 @@ const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
 const { contentBBVA, contentBasico } = require('./PDFformat/formato1');
 
-
-
 var tipo = '';
 
 var contents = "";

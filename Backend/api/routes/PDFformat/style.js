@@ -6,9 +6,14 @@ module.exports = {
         aligment: "center",
         color: "#000000",
     },
-    normal:{
+    normal: {
         color: "#000000",
         fontSize: 12,
         aligment: "justify",
+    },
+    cursivo: {
+        fontSize: 12,
+        color: "#808080",
+        italics: true
     }
 }

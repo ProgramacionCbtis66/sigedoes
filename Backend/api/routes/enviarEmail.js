@@ -2,7 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
 const nodemailer = require('nodemailer');
-const PdfPrinter = require('pdfmake');
+
 
 var email = "";
  
