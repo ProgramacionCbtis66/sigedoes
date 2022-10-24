@@ -2,16 +2,17 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
 const nodemailer = require('nodemailer');
+const PdfPrinter = require('pdfmake');
+
 var email = "";
-const PDF = require('./pdfCreate');
-
-
+ 
+ 
 Emailrouter.post('/enviar', (req, res) => {
-    
     email = req.body;
-    console.log(email.tipo);
-    PDF.tipo=email.tipo;
-    PDF.pdfDoc;
+    const create = require('./pdfCreate');
+    create(email,email.tipo);
+    //pdf.tipo = email.tipo;
+    //pdf.pdfDoc;
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
