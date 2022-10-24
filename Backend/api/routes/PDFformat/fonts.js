@@ -4,14 +4,10 @@ module.exports = {
 		bold: __dirname + '/Roboto/Roboto-Medium.ttf',
 		italics: __dirname + '/Roboto/Roboto-Italic.ttf',
 		bolditalics: __dirname + '/Roboto/Roboto-MediumItalic.ttf'
-        
     },
     
-    Courier: {
-        normal: 'Courier',
-        bold: 'Courier-Bold',
-        italics: 'Courier-Oblique',
-        bolditalics: 'Courier-BoldOblique'
+    TimeNewRoman: {
+        normal: __dirname + '/TimeNewRoman/times.ttf',
     },
     Helvetica: {
         normal: 'Helvetica',
