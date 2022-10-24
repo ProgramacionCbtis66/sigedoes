@@ -23,9 +23,9 @@
                 <div class="border border-secondary" id="separador">
                     <div>
                     <div>Ingrese La Contraseña</div>
-                        <input [(ngModel)]="usuario.contra" type="email" class="form-control letra" id="floatingInput contra"
+                        <!--<input [(ngModel)]="usuario.contra" type="email" class="form-control letra" id="floatingInput contra"
                         placeholder="Contraseña">
-                        <button (click)='verificar()' type="button">Subir</button>
+                        <button (click)='verificar()' type="button">Subir</button>-->
                     </div>
                 </div>
             </div>
@@ -44,30 +44,28 @@
                         placeholder="Correo Institucional">
                         <label for="floatingInput">Ingrese Su Correo Institucional</label>
                     </div>
-                    
-                    <!--Contraseña-->
-                    <div class="form-floating separar border rounded">
-                        <input [(ngModel)]="usuario.pass" type="password" class="form-control" id="floatingPassword"
-                         placeholder="Password">
-                        <label for="floatingPassword">Ingrese Su Contraseña</label>
-                    </div>
-                    
-                    <!--Nombre De Usuario-->
-                    <div class="form-floating separar">
-                        <input [(ngModel)]="usuario.usuario" type="email" class="form-control" id="floatingInput"
-                        placeholder="Ingrese Su Nombre De Usuario">
-                        <label for="floatingInput">Nombre De Usuario</label>
-                    </div>
-                    
                     <!--UserName-->
                     <div class="form-floating separar">
                         <input [(ngModel)]="usuario.UserName" type="email" class="form-control" id="floatingInput"
                         placeholder="Ingrese Su Nombre De Usuario">
-                        <label for="floatinInput">Nombre De Usuario</label>
+                        <label for="floatinInput">Ingrese Su Nombre De Usuario</label>
+                    </div>
+                    <!--Contraseña-->
+                    <div class="form-floating separar border rounded">
+                        <input [(ngModel)]="usuario.pass" type="email" class="form-control" id="floatingInput"
+                         placeholder="Password">
+                        <label for="floatingInput">Ingrese Su Contraseña</label>
+                    </div>
+                    
+                    <!--Repetir Contraseña-->
+                    <div class="form-floating separar">
+                        <input [(ngModel)]="usuario.pass2" type="email" class="form-control" id="floatingInput"
+                        placeholder="Ingrese Su Nombre De Usuario">
+                        <label for="floatingInput">Repita Su Contraseña</label>
                     </div>
                     <!--Registro-->
                     <div>
-                        <button type="button" (click)='Registro()'>Registrarse</button>
+                        <button class="botonfinal" type="button" (click)='Registro()'>Registrarse</button>
                     </div>
                 </div>
                 

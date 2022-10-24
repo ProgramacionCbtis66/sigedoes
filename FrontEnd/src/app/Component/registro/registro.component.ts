@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
+import { notDeepEqual } from 'assert';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -15,11 +16,8 @@ export class RegistroComponent implements OnInit {
   usuario = {
     "correo": "",
     "pass": "",
-    "usuario":"",
-    "IdUsuario":"",
+    "pass2":"",
     "UserName":"",
-    "contra":"",
-    "nombre":""
   };
   
   constructor() { }
@@ -31,21 +29,39 @@ export class RegistroComponent implements OnInit {
     
   }
   Registro(){
-    if (this.usuario.UserName != "" && this.usuario.correo != "" && this.usuario.pass != "" && this.usuario.usuario != ""){
-      Notiflix.Loading.standard("Accesando");
-    
-      if(this.usuario.contra == this.usuario.pass){
-        Notiflix.Notify.info("La contraseña es correcta");
-        Notiflix.Loading.remove();
+    let contra = "";
+    let contra2 = "";
+    let correo = "";
+    let noUsuario = "";
+    contra = this.usuario.pass;
+    contra2 = this.usuario.pass2;
+    correo = this.usuario.correo;
+    noUsuario = this.usuario.UserName;
+
+    if(contra != "" && contra2 != "" && correo != "" && noUsuario != ""){
+
+      if(contra == contra2){
+        Notiflix.Notify.info("Las contraseñas coinciden");
+        Notiflix.Loading.standard("Guardando Datos");}
+      else{
+          Notiflix.Notify.failure("Las Contraseñas No Coinciden");
+        }
+    }else{
+      Notiflix.Notify.warning("Debe De Llenar Todos Los Campos")
+    }
     }
 
-      
-    }
-       
-    if(this.usuario.IdUsuario != "" && this.usuario.UserName != "" && this.usuario.correo != "" && this.usuario.pass != "" && this.usuario.usuario != ""){
-      Notiflix.Notify.failure("Falta llenar un campo!");
-
-    
+    public contraseña() {
+      Notiflix.Loading.standard("Ingresando");
+    let contra = "";
+    let contra2 = "";
+    contra = this.usuario.pass;
+    contra2 = this.usuario.pass2;
+    if(contra == contra2){
+      Notiflix.Notify.info("Las contraseñas coinciden");
+    }else{
+      Notiflix.Notify.failure("Las Contraseñas No Coinciden");
     }
   }
-}
+
+  }
