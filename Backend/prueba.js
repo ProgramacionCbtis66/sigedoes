@@ -1,1 +1,2 @@
-console.log(__dirname +'\\api\\Pdf');
+import { builtinModules as builtin } from 'node:module';
+
