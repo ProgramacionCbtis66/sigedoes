@@ -5,8 +5,9 @@ import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { PdfComponent } from './Component/pdf/pdf.component';
 import { RegistroComponent } from './Component/registro/registro.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard,AuthGuardAdmin } from './guards/auth.guard';
 import { AuthLogin } from './guards/auth.guard2';
+import { ConstanciaComponent } from './Component/constancia/constancia.component';
 
 
 const routes: Routes = [
@@ -14,9 +15,11 @@ const routes: Routes = [
   {path:"home", component: HomeComponent, canActivate:[AuthGuard]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin] },
+  {path:"constancia", component: ConstanciaComponent, canActivate:[AuthGuardAdmin]},
   {path:"pdf", component: PdfComponent},
   {path:"", redirectTo: "home", pathMatch:"full"},
   {path:"**", component: Error404Component },
+
 
 
 ];

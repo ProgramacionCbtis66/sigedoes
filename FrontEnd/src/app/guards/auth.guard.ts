@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +10,34 @@ import { AuthService } from '../service/auth.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,
-    private router: Router){}
+    private router: Router) { }
 
-  canActivate():boolean {
-   if(this.authService.isAuth()){
+  canActivate(): boolean {
+    if (this.authService.isAuth()) {
       return true;
-    }else{
+    } else {
       this.router.navigate(['login']);
       return false;
     }
   }
+}
+
+export class AuthGuardAdmin implements CanActivate {
+  constructor(private authService: AuthService,
+    private router: Router) { }
+
+  canActivate(): boolean {
+    const token = localStorage.getItem("color");
+    if (token !== null && token !== "") {
+      let rol = this.authService.decodifica();
+      console.log(rol);
+      if (this.authService.isAuth()) {
+        return true;
+      } else {
+        this.router.navigate(['login']);
+        return false;
+      }
+    }else{return false;}
+    }
+    
 }
