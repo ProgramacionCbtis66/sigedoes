@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PdfCreateService } from 'src/app/service/pdf-create.service';
-
+//import pdfMake from 'pdfmake/build/pdfmake';
+//import pdfFonts from 'pdfmake/build/vfs_fonts';
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-pdf',
@@ -19,6 +21,18 @@ export class PdfComponent implements OnInit {
     console.log(PDF);
   }
 
+  /*createPDF(){
+ 
+    const pdfDefinition: any = {
+      content: [
+        {
+          text: 'Hola mundo lol',
+        }
+      ]
+    }
+ 
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    pdf.open();
 
-
+  }*/
 }
