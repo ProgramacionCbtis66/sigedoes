@@ -17,19 +17,35 @@ export class RegistroComponent implements OnInit {
     "pass": "",
     "usuario":"",
     "IdUsuario":"",
-    "UserName":""
+    "UserName":"",
+    "contra":"",
+    "nombre":""
   };
+  
   constructor() { }
 
   ngOnInit(): void {
+    
   }
-
+  verificar(){
+    
+  }
   Registro(){
-    if (this.usuario.IdUsuario != "" && this.usuario.UserName != "" && this.usuario.correo != "" && this.usuario.pass != "" && this.usuario.usuario != ""){
+    if (this.usuario.UserName != "" && this.usuario.correo != "" && this.usuario.pass != "" && this.usuario.usuario != ""){
       Notiflix.Loading.standard("Accesando");
+    
+      if(this.usuario.contra == this.usuario.pass){
+        Notiflix.Notify.info("La contraseña es correcta");
+        Notiflix.Loading.remove();
     }
-    else if(this.usuario.IdUsuario != "" || this.usuario.UserName != "" || this.usuario.correo != "" || this.usuario.pass != "" || this.usuario.usuario != ""){
+
+      
+    }
+       
+    if(this.usuario.IdUsuario != "" && this.usuario.UserName != "" && this.usuario.correo != "" && this.usuario.pass != "" && this.usuario.usuario != ""){
       Notiflix.Notify.failure("Falta llenar un campo!");
+
+    
     }
   }
 }
