@@ -3,13 +3,15 @@ var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
 const nodemailer = require('nodemailer');
 var email = "";
-const Pdf = require('./pdfCreate');
+const PDF = require('./pdfCreate');
+
 
 Emailrouter.post('/enviar', (req, res) => {
     
     email = req.body;
-    console.log(email);
-
+    console.log(email.tipo);
+    PDF.tipo=email.tipo;
+    PDF.pdfDoc;
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -27,8 +29,10 @@ Emailrouter.post('/enviar', (req, res) => {
       html: "<h1>Enviando un pdf de prueba</h1>",
       attachments: [
         {  // File Stream attachment
-          filename: `${Pdf.filename}`,
-          path:  __dirname + `\\api\\assets\\${email.email}`,
+          //filename: `${Pdf.filename}`,
+          filename : "prueba.pdf",
+         // path:  __dirname + `\\api\\assets\\${email.email}`,
+         path: './api/assets/prueba.pdf',
           cid: `${email.email}`
       }
     ]

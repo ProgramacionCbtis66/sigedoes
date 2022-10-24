@@ -1,10 +1,12 @@
 module.exports = {
-    Roboto: {
-        normal: './Roboto/Roboto-Regular.ttf',
-        bold: './Roboto/Roboto-Medium.ttf',
-        italics: './Roboto/Roboto-Italic.ttf',
-        bolditalics: './Roboto/Roboto-MediumItalic.ttf'
+    Roboto:{
+        normal: __dirname + '/Roboto/Roboto-Regular.ttf',
+		bold: __dirname + '/Roboto/Roboto-Medium.ttf',
+		italics: __dirname + '/Roboto/Roboto-Italic.ttf',
+		bolditalics: __dirname + '/Roboto/Roboto-MediumItalic.ttf'
+        
     },
+    
     Courier: {
         normal: 'Courier',
         bold: 'Courier-Bold',
