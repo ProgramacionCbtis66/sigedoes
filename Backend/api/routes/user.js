@@ -7,16 +7,23 @@ const ccn = require('../connection/connection');
 
 router.post('/login',(req,res)=>{
     const {nombre,pass} = req.body;
-    console.log(req.body);
+    
     ccn.query('select iduser, user, rol from user where user = ? and password = ?',[nombre,pass],
         (err,rows,fields)=>{
             
             if(!err) {
-                if(rows.length > 0) {
+                if(rows.length > 0){
+                  
                     let datos = JSON.stringify(rows[0]);
-                    const token = jwt.sign(datos,'stil');
-
-                    console.log(token,datos);
+                    let dato = JSON.parse(datos);
+                    dato.exp = Date.now()/1000 + (180);
+                    let data = JSON.stringify(dato);
+                    console.log(data);
+                    
+                    
+                    const token = jwt.sign(data,'stil');
+                    
+                    
                     res.json({token});
                 }else{
                    res.json({Error:"Usuario y contraseña incorrecta"});

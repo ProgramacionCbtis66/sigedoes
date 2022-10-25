@@ -24,21 +24,32 @@ export class AuthService {
 
   isAuth(): boolean {
     const token = localStorage.getItem("color");
-    if (token !== null && token !== "") {
+    if (token !== null && token !== "" && !this.tokeExpired()) {
+
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "udefined") {
-        this.estatus= true;
+        this.estatus = true;
         return false;
       } else {
-        this.estatus= false ;
+        this.estatus = false;
         return true;
       }
     } return false;
   }
 
   decodifica(): any {
-    const token = localStorage.getItem("color");
-    const cod = decode(token);
-    return cod;
+    return decode(localStorage.getItem("color"));
+  }
+
+  tokeExpired(): boolean {
+    const tokenDecode = this.decodifica();
+    var tiempo = (tokenDecode.exp - Date.now() / 1000 ) ;
+    console.log(tiempo);
+    if (tiempo < 0) {
+       localStorage.clear();
+       return false;
+    } else {
+      return false;
+    }
   }
 
 }
