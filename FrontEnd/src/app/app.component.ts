@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   title = 'Constancias';
   mostrar: boolean = true;
   foto : string ="";
-  logo : string = '.././assets/img/logo.jpg';
+  logo : string = '.././assets/img/Logocb.png';
 
 
   constructor(private titulo : Title, private auth: AuthService, private router:Router){}
