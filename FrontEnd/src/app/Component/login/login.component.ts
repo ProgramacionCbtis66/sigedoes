@@ -24,7 +24,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+  
+  registrarse(){
+    this.router.navigate(['registro']);
+  }
   Acceso() {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       Notiflix.Loading.standard("Accesando");
