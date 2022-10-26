@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
 
   titulo = "Inicio de Sesión";
   logoCbtis = '.././assets/img/foto.jpg';
-  contra = 'juanito830';
-  correo = 'juanito830@gmail.com';
   usuario = {
     "nombre": "",
     "pass": ""
@@ -32,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['registro']);
   }
   Acceso() {
-    console.log("registro")
+   
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       Notiflix.Loading.standard("Accesando");
       this.auth.login(this.usuario).subscribe((res: any) => {
@@ -52,16 +50,5 @@ export class LoginComponent implements OnInit {
     } else {
       Notiflix.Notify.failure("Usuario o contraseña vacio, llene los campos");
     }
-    var contraseña="";
-    var correo = "";
-    contraseña = this.usuario.pass;
-    correo = this.usuario.nombre;
-    this
-    if(contraseña == this.contra && correo == this.correo){
-      Notiflix.Loading.remove();
-      Notiflix.Notify.info("El correo ha sido correcto");
-      this.router.navigate(['/home']);
-    }
   }
-
 }
