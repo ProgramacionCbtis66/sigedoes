@@ -4,12 +4,15 @@ import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
 import { notDeepEqual } from 'assert';
+
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
+
   registrarse = 'Registrarse';
   informacion = 'Info';
   infografia : string = '.././assets/img/infografia.png';
@@ -24,16 +27,15 @@ export class RegistroComponent implements OnInit {
     "semestre":"",
     "area":"",
     "turno":""
-    
   };
-  
-  constructor() { }
+
+  constructor(private app : AppComponent) { app.registro=true; app.iflogin=false;}
 
   ngOnInit(): void {
-    
+
   }
   verificar(){
-    
+
   }
   Registro(){
     let contra = "";
@@ -49,8 +51,9 @@ export class RegistroComponent implements OnInit {
 
       if(contra == contra2){
         Notiflix.Notify.info("Las contraseñas coinciden");
-        Notiflix.Loading.standard("Guardando Datos");}
-      else{
+        Notiflix.Loading.standard("Guardando Datos");
+        console.log (this.usuario);
+      }else{
           Notiflix.Notify.failure("Las Contraseñas No Coinciden");
         }
     }else{

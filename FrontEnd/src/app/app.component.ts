@@ -15,16 +15,17 @@ export class AppComponent implements OnInit{
   mostrar: boolean = true;
   foto : string ="";
   logo : string = '.././assets/img/Logocb.png';
-
+  registro = false;
+  iflogin = true;
 
   constructor(private titulo : Title, private auth: AuthService, private router:Router){}
 
   visibleLoginRegistro(){
-
     if(this.auth.isAuth()){
       this.mostrar = false;
     }else{
       this.mostrar = true;
+      this.iflogin = true;
     }
   }
 

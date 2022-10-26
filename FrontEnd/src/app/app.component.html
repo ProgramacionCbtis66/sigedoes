@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-3g bg-gradient navbar-dark">
+<nav class="navbar navbar-expand-sm bg-3g bg-gradient navbar-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="home" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="35">
@@ -11,15 +11,15 @@
         <li class="nav-item" id="idhome" *ngIf="!mostrar">
           <a class="nav-link" routerLink="home" (click)="visibleLoginRegistro()">Home</a>
         </li>
-        <li *ngIf="mostrar" class="nav-item" id="idlogin">
+        <li *ngIf="mostrar && iflogin" class="nav-item" id="idlogin">
           <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Login</a>
         </li>
-        
-        <li class="nav-item" *ngIf="true">
+
+        <li class="nav-item" *ngIf="false">
           <a class="nav-link" routerLink="pdf" id="idregistro">PDF</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="esferas" (click)="visibleLoginRegistro()">Otra Cosa</a>
+        <li class="nav-item" *ngIf="registro">
+          <a class="nav-link" routerLink="registro">Registro</a>
         </li>
       </ul>
     </div>
@@ -40,12 +40,12 @@
   </div>
 
 </nav>
-
-<router-outlet></router-outlet>
-
-<footer class="bg-success bg-gradient text-ligth text-center opacity-25">
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<footer class="bg-success bg-gradient text-ligth text-center opacity-25 mt-4">
   <div class="fw-ligth d-inline-flex pt-2">
     <p class="px-2"><i class="fa-regular fa-copyright"></i></p>
-    <p>CompuServer</p>
+    <p>3G programción</p>
   </div>
 </footer>

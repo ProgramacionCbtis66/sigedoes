@@ -11,7 +11,7 @@ import * as Notiflix from 'notiflix';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   titulo = "Inicio de Sesión";
   logoCbtis = '.././assets/img/foto.jpg';
   contra = 'juanito830';
@@ -21,13 +21,14 @@ export class LoginComponent implements OnInit {
     "pass": ""
   };
 
-  constructor(private auth: AuthService, private router: Router, private app: AppComponent) { }
+  constructor(private auth: AuthService, private router: Router, private app: AppComponent) {app.registro=false ;}
 
   ngOnInit(): void {
 
   }
-  
+
   registrarse(){
+
     this.router.navigate(['registro']);
   }
   Acceso() {

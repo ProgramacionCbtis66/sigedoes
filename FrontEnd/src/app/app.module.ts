@@ -14,6 +14,7 @@ import { Error404Component } from './Component/error404/error404.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CoreModule } from './core.module';
 import { PdfComponent } from './Component/pdf/pdf.component';
+import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 
 
 @NgModule({
@@ -23,19 +24,21 @@ import { PdfComponent } from './Component/pdf/pdf.component';
     HomeComponent,
     RegistroComponent,
     Error404Component,
-    PdfComponent
+    PdfComponent,
+    OlvidePassComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CoreModule
+   
   ],
   providers:[
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     Title,
     JwtHelperService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
