@@ -12,12 +12,19 @@ import { notDeepEqual } from 'assert';
 export class RegistroComponent implements OnInit {
   registrarse = 'Registrarse';
   informacion = 'Info';
-
+  infografia : string = '.././assets/img/infografia.png';
   usuario = {
     "correo": "",
     "pass": "",
     "pass2":"",
     "UserName":"",
+    "curp":"",
+    "noctrl":"",
+    "especialidad":"",
+    "semestre":"",
+    "area":"",
+    "turno":""
+    
   };
   
   constructor() { }

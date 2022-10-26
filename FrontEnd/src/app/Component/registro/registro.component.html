@@ -1,6 +1,6 @@
 <header class="row">
 <div class="col-lg-1"></div>
-    <div class="col-lg-10 ">
+    <div class="col-lg-10">
         <div class="distancia titulo fw-light">Sistema para la emisión de Constancias de Estudios</div>
         <div class="row d-flex">
     <div class="col-lg-6 d-flex h4 pb-2 mb-4 text-success border-2 border-bottom border-success">
@@ -20,13 +20,8 @@
         
             <!--Parte Izquierda Del Sistema-->
             <div class="col-lg-6">
-                <div class="border border-secondary" id="separador">
-                    <div>
-                    <div>Ingrese La Contraseña</div>
-                        <!--<input [(ngModel)]="usuario.contra" type="email" class="form-control letra" id="floatingInput contra"
-                        placeholder="Contraseña">
-                        <button (click)='verificar()' type="button">Subir</button>-->
-                    </div>
+                <div id="separador">
+                    <img src="{{infografia}}" class="infografia">
                 </div>
             </div>
             <!--Parte Derecha Del Sistema-->
@@ -43,6 +38,36 @@
                         <input [(ngModel)]="usuario.correo" type="email" class="form-control letra" id="floatingInput"
                         placeholder="Correo Institucional">
                         <label for="floatingInput">Ingrese Su Correo Institucional</label>
+                    </div>
+                    <!--Curp-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.curp" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="Ingrese su curp">
+                        <label for="floatingInput">Ingrese Su Curp</label>
+                    </div>
+                    <!--Especialidad-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.especialidad" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="Especialidad">
+                        <label for="floatingInput">Ingrese Su Especialidad</label>
+                    </div>
+                    <!--Semestre-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.semestre" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="floatingInput">
+                        <label for="floatingInput">Ingrese Su Semestre</label>
+                    </div>
+                    <!--Area-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.area" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="floatinginput">
+                        <label for="">Ingrese Su Area</label>
+                    </div>
+                    <!--Turno-->
+                    <div class="form-floating separar rounded">
+                        <input [(ngModel)]="usuario.turno" type="email" class="form-control letra" id="floatingInput"
+                        placeholder="floatingInput">
+                        <label for="">Ingrese Su Turno</label>
                     </div>
                     <!--UserName-->
                     <div class="form-floating separar">
@@ -68,10 +93,10 @@
                         <button class="botonfinal" type="button" (click)='Registro()'>Registrarse</button>
                     </div>
                 </div>
-                <a class="btn btn-success" routerLink="constancia">Llegar</a>
+                
                 
             </div>
         </div>
     </div>
-    <div class="col-lg-1"></div>
+    <!--<div class="col-lg-1"></div>-->
 </header>
