@@ -10,6 +10,7 @@ module.exports = {
         color: "#000000",
         fontSize: 12,
         aligment: "justify",
+        font: "Times"
     },
     cursivo: {
         fontSize: 12,
