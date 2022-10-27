@@ -8,7 +8,7 @@ const ccn = require('../connection/connection');
 router.post('/login',(req,res)=>{
     const {nombre,pass} = req.body;
     
-    ccn.query('select userName, numControl, rol from usuario where userName = ? and password = ?', [nombre,pass],
+    ccn.query('select userName, rol from usuario where userName = ? and password = ?', [nombre,pass],
         (err,rows,fields)=>{
             
             if(!err) {
