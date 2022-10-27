@@ -29,7 +29,7 @@ export class RegistroComponent implements OnInit {
     "turno":""
   };
 
-  constructor(private app : AppComponent) { app.registro=true; app.iflogin=false;}
+  constructor(private auth: AuthService,  private router: Router, private app : AppComponent) { app.registro=true; app.iflogin=false;}
 
   ngOnInit(): void {
 
@@ -72,6 +72,27 @@ export class RegistroComponent implements OnInit {
     }else{
       Notiflix.Notify.failure("Las Contraseñas No Coinciden");
     }
-  }
+  
 
+  if (this.usuario.correo !== "" && this.usuario.pass !== ""){
+    Notiflix.Loading.standard("Accesando");
+    this.auth.login(this.usuario).subscribe((res: any) => {
+      if (res.token !== null && res.token != undefined) {
+        localStorage.setItem('color', res.token);
+        this.app.visibleLoginRegistro();
+        Notiflix.Loading.remove();
+        this.router.navigate(['/home']);
+      } else if (res.Error == "Usuario y contraseña incorrecta") {
+        Notiflix.Loading.remove();
+        Notiflix.Notify.warning("Usuario y contraseña incorrecta");
+      } else {
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure("Error de conexion, intente mas tarde");
+      }
+    });
+  } else {
+    Notiflix.Notify.failure("Usuario o contraseña vacio, llene los campos");
   }
+}
+}
+  

@@ -1,35 +1,31 @@
 <header class="row d-flex justify-content-center">
-  <div class="col-lg-12 pt-4">
+ <div class="col-lg-12 pt-4">
     <div class="mb-4 text-center display-6 fw-light">Sistema para la emisión de Constancias de Estudios</div>
-    <div class="row d-flex">
-      <div class="col-lg-6 d-flex h4 pb-2 mb-4 text-success border-2 border-bottom border-success">
-        <h5><i class="fa-solid fa-right-to-bracket"></i></h5>
-        <h5 class="px-2">{{informacion}}</h5>
-      </div>
-      <div class="col-6 d-flex h4 pb-2 mb-4 text-success border-2 border-bottom border-success">
-        <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
-        <h3 class="  px-2">{{registrarse}}</h3>
-        <a class="text-ligth px-5" routerLink="/login">¿Ya tienes una cuenta?</a>
-      </div>
-    </div>
   </div>
+  <div class="row">
 
-  
-    <div class="row">
-
-      <!--Parte Izquierda Del Sistema-->
-      <div class="col-lg-6">
+    <!--Parte Izquierda Del Sistema-->
+      <div class="col-lg-6 mb-5">
         <div>
-          <img src="{{infografia}}" class="infografia">
+          <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
+            <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
+            <h3 class="px-2">{{informacion}}</h3>
+          </div>
+          <img src="{{infografia}}" class="infografia justify-content-center img-fluid">
         </div>
       </div>
-      <!--Parte Derecha Del Sistema-->
-      <div class="col-lg-6">
+
+    <!--Parte Derecha Del Sistema-->
+    <div class="col-lg-6">
+      <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
+        <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
+        <h3 class="px-2">{{registrarse}}</h3>
+      </div>
         <!--Caja De Información-->
         <div class="border border-secondary rounded">
           <!--Introduccion-->
-          <div class="border-botom border-secondary border-bottom ">
-            <h3 class="p-3 bg-secondary">Ingrese Sus Datos Para Poder Registrarse</h3>
+          <div class="border-botom border-secondary border-bottom bg-secondary">
+            <h3 class="p-3 ">Ingrese Sus Datos Para Poder Registrarse</h3>
           </div>
           <!--nombre de Usuario-->
           <div class="input-group mb-3">
@@ -79,10 +75,6 @@
 
           </div>
         </div>
-
-
       </div>
     </div>
-  
-  <!--<div class="col-lg-1"></div>-->
 </header>
