@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-error404',
@@ -11,5 +12,8 @@ export class Error404Component implements OnInit {
 
   ngOnInit(): void {
   }
-
+  public noti(){
+    var data = "";
+    Notiflix.Notify.info("El correo ha sido enviado");
+  }
 }

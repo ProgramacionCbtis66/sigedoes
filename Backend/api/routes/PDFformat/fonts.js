@@ -5,12 +5,25 @@ module.exports = {
 		italics: __dirname + '/Roboto/Roboto-Italic.ttf',
 		bolditalics: __dirname + '/Roboto/Roboto-MediumItalic.ttf'
     },
+    
+    Times: {
+        normal: 'Times-Roman',
+        bold: 'Times-Bold',
+        italics: 'Times-Italic',
+        bolditalics: 'Times-BoldItalic'
+    },
     Helvetica: {
         normal: 'Helvetica',
         bold: 'Helvetica-Bold',
         italics: 'Helvetica-Oblique',
         bolditalics: 'Helvetica-BoldOblique'
     },
+    Courier: {
+        normal: 'Courier',
+        bold: 'Courier-Bold',
+        italics: 'Courier-Oblique',
+        bolditalics: 'Courier-BoldOblique'
+      },
     Times: {
         normal: 'Times-Roman',
         bold: 'Times-Bold',
