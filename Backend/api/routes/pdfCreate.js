@@ -55,7 +55,7 @@ function create(req, tipo) {
     //if (tipo == "BBVA") { contents = contentBBVA; }
     //if (tipo == "BASICO") { contents = contentBasico; }
     const docDefinition = {
-        content: contenido['content'],
+        content: contenido,
         style: Style
     }
     const printer = new pdf(Font);
