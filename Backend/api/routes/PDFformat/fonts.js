@@ -6,8 +6,11 @@ module.exports = {
 		bolditalics: __dirname + '/Roboto/Roboto-MediumItalic.ttf'
     },
     
-    TimeNewRoman: {
-        normal: __dirname + '/TimeNewRoman/times.ttf',
+    Times: {
+        normal: 'Times-Roman',
+        bold: 'Times-Bold',
+        italics: 'Times-Italic',
+        bolditalics: 'Times-BoldItalic'
     },
     Helvetica: {
         normal: 'Helvetica',
@@ -15,6 +18,12 @@ module.exports = {
         italics: 'Helvetica-Oblique',
         bolditalics: 'Helvetica-BoldOblique'
     },
+    Courier: {
+        normal: 'Courier',
+        bold: 'Courier-Bold',
+        italics: 'Courier-Oblique',
+        bolditalics: 'Courier-BoldOblique'
+      },
     Times: {
         normal: 'Times-Roman',
         bold: 'Times-Bold',
