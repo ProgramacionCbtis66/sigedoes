@@ -25,67 +25,53 @@
       </div>
       <!--Parte Derecha Del Sistema-->
       <div class="col-lg-6">
-
         <!--Caja De Información-->
         <div class="border border-secondary rounded">
           <!--Introduccion-->
           <div class="border-botom border-secondary border-bottom ">
-            <h3 class="p-3 " for="">Ingrese Sus Datos Para Poder Registrarse</h3>
+            <h3 class="p-3 bg-secondary">Ingrese Sus Datos Para Poder Registrarse</h3>
+          </div>
+          <!--nombre de Usuario-->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">ID</span>
+            <input [(ngModel)]="usuario.UserName" type="text" class="form-control" placeholder="User Name" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <!--Correo Institucional-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.correo" type="email" class="form-control letra" id="floatingInput"
-              placeholder="Correo Institucional">
-            <label for="floatingInput">Ingrese Su Correo Institucional</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <!--Curp-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.curp" type="email" class="form-control letra" id="floatingInput"
-              placeholder="Ingrese su curp">
-            <label for="floatingInput">Ingrese Su Curp</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Curp</span>
+            <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
           </div>
-          <!--Especialidad-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.especialidad" type="email" class="form-control letra" id="floatingInput"
-              placeholder="Especialidad">
-            <label for="floatingInput">Ingrese Su Especialidad</label>
+          <!--Especialidad y Semestre-->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Especialidad</span>
+            <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Username" aria-describedby="basic-addon1">
+            <span class="input-group-text" id="basic-addon1">"°"</span>
+            <input [(ngModel)]="usuario.semestre" type="text" placeholder="Ingrese Su Semestre">
           </div>
-          <!--Semestre-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.semestre" type="email" class="form-control letra" id="floatingInput"
-              placeholder="floatingInput">
-            <label for="floatingInput">Ingrese Su Semestre</label>
+          <!--Area y Turno-->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input [(ngModel)]="usuario.area" type="text" class="form-control" placeholder="Ingrese Su Area" aria-label="Username" aria-describedby="basic-addon1">
+            <span class="input-group-text" id="basic-addon1"></span>
+            <input [(ngModel)]="usuario.turno" type="text" placeholder="Ingrese Su Turno">
           </div>
-          <!--Area-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.area" type="email" class="form-control letra" id="floatingInput"
-              placeholder="floatinginput">
-            <label for="">Ingrese Su Area</label>
+          <!--No Control-->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">#</span>
+            <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1">
+            <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
           </div>
-          <!--Turno-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.turno" type="email" class="form-control letra" id="floatingInput"
-              placeholder="floatingInput">
-            <label for="">Ingrese Su Turno</label>
-          </div>
-          <!--UserName-->
-          <div class="form-floating m-3 rounded">
-            <input [(ngModel)]="usuario.UserName" type="email" class="form-control" id="floatingInput"
-              placeholder="Ingrese Su Nombre De Usuario">
-            <label for="floatinInput">Ingrese Su Nombre De Usuario</label>
-          </div>
-          <!--Contraseña-->
-          <div class="form-floating m-3 border rounded">
-            <input [(ngModel)]="usuario.pass" type="email" class="form-control" id="floatingInput"
-              placeholder="Password">
-            <label for="floatingInput">Ingrese Su Contraseña</label>
-          </div>
-
-          <!--Repetir Contraseña-->
-          <div class="form-floating m-3 border rounded">
-            <input [(ngModel)]="usuario.pass2" type="email" class="form-control" id="floatingInput"
-              placeholder="Ingrese Su Nombre De Usuario">
-            <label for="floatingInput">Repita Su Contraseña</label>
+          <!--contraseña y Repetir Contra-->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">***</span>
+            <input [(ngModel)]="usuario.pass" type="password" class="form-control" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
+            <span class="input-group-text" id="basic-addon1">***</span>
+            <input [(ngModel)]="usuario.pass2" type="password" class="form-control" placeholder="Repita Su Contraseña" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <!--Registro-->
           <div class="d-flex justify-content-center">
