@@ -5,10 +5,6 @@ module.exports = {
 		italics: __dirname + '/Roboto/Roboto-Italic.ttf',
 		bolditalics: __dirname + '/Roboto/Roboto-MediumItalic.ttf'
     },
-    
-    TimeNewRoman: {
-        normal: __dirname + '/TimeNewRoman/times.ttf',
-    },
     Helvetica: {
         normal: 'Helvetica',
         bold: 'Helvetica-Bold',
