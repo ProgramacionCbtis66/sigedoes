@@ -4,8 +4,8 @@ const ccn = mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password : 'juanito',
-    database:'alumno'
+    database:'constancias',
+    password : '1205'
 });
 
 ccn.connect (err=>{

@@ -33,7 +33,7 @@ Emailrouter.post('/enviar', (req, res) => {
           //filename: `${Pdf.filename}`,
           filename : "prueba.pdf",
          // path:  __dirname + `\\api\\assets\\${email.email}`,
-         path: './api/assets/prueba.pdf',
+          path: './api/assets/prueba.pdf',
           cid: `${email.email}`
       }
     ]

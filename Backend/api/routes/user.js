@@ -8,15 +8,15 @@ const ccn = require('../connection/connection');
 router.post('/login',(req,res)=>{
     const {nombre,pass} = req.body;
     
-    ccn.query('select iduser, user, rol from user where user = ? and password = ?',[nombre,pass],
+    ccn.query('select userName, rol from usuario where userName = ? and password = ?', [nombre,pass],
         (err,rows,fields)=>{
             
             if(!err) {
                 if(rows.length > 0){
-                  
+                    
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
-                    dato.exp = Date.now()/1000 + (180);
+                    dato.exp = Date.now()/1000 + (300);
                     let data = JSON.stringify(dato);
                     console.log(data);
                     
@@ -26,7 +26,7 @@ router.post('/login',(req,res)=>{
                     
                     res.json({token});
                 }else{
-                   res.json({Error:"Usuario y contraseña incorrecta"});
+                    res.json({Error:"Usuario y contraseña incorrecta"});
                 }
             }else{
                 res.json({Error: "error de consulta"});

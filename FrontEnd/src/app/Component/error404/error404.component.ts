@@ -12,8 +12,16 @@ export class Error404Component implements OnInit {
   }
   constructor() { }
 
+<<<<<<< HEAD
   ngOnInit(): void {    
     
+=======
+  ngOnInit(): void {
+  }
+  public noti(){
+    var data = "";
+    Notiflix.Notify.info("El correo ha sido enviado");
+  }
 }
 public enviar(){
   var correo = this.correo.correo;
