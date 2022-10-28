@@ -64,15 +64,12 @@ function  create(req, tipo) {
             { image: './api/assets/texto-secretaria.png', width: 520 },
             { text: "\n \n Asunto : Constancias de estudio e inscripción \n \n", style: Style.normal, alignment: 'right', bold: true },
 
-
             { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n ", style: Style.normal },
             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
             { text: " ", style: Style.header },
             { text: `Con Matricula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el TERCER SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de 07:00 a 15:00 hrs. Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022.`, style: Style.normal},
 
-        
-            
             { text: `Se extiende la presente apeticion del interesado para Tramite de ${alumno.descripcion}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}.`, style: Style.normal },
             { text: "Firma Electronica", style: Style.header },
             { text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
