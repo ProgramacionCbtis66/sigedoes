@@ -16,5 +16,11 @@ module.exports = {
         fontSize: 12,
         color: "#808080",
         italics: true
+    },
+    firma:{
+        fontSize : 10,
+        color: "#696969",
+        aligment: "justify",
+        font: "Courier"
     }
 }

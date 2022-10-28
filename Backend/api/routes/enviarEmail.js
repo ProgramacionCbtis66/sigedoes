@@ -10,9 +10,10 @@ var email = "";
 Emailrouter.post('/enviar', (req, res) => {
     email = req.body;
     const create = require('./pdfCreate');
-    create(email,email.tipo);
-    //pdf.tipo = email.tipo;
-    //pdf.pdfDoc;
+     
+    create(email, email.tipo);
+    
+     
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
