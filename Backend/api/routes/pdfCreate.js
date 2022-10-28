@@ -1,3 +1,4 @@
+'use strict';
 const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
@@ -5,31 +6,22 @@ const file = require('fs');
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
 const  convertir = require('./PDFformat/numlet');
-
-var escuela = "";
-var alumno = "";
-var solicitud= "";
-
-
-
-function  create(req, tipo) {
-
+var alumno="";
+function  create(req, tipo){
+       
     ccn.query('select * from pdf where numControl like ?', [req.numControl],
-    (err, rows, fields) => {
-            
-            if (!err) {
-                if (rows.length > 0) {
-                    let alumnos = JSON.stringify(rows[0]);
-                    alumno = JSON.parse(alumnos);
-                    
-                }else{
-                    console.log("error alumno no encontrado");
-                }
+        (err, rows, fields) => {
+        if (!err) {
+            if (rows.length > 0) {
+                let alumnos = JSON.stringify(rows[0]);
+                alumno = JSON.parse(alumnos);
             }else{
-                console.log("error " + err.message);
+                console.log( "error alumno no encontrado");
             }
-        });
-        
+        }else{
+            console.log("error " + err.message);
+        }
+    });
         // ccn.query('select * from solicitus where numControl like ?', [req.numControl],
         // (err, rows, fields) => {
             
@@ -52,23 +44,23 @@ function  create(req, tipo) {
         //     }
         // });
 
-    ccn.promise();
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
+    console.log(alumno);
    
-    contenido = {
+    const contenido = {
         asunto: [
 
             { image: './api/assets/texto-secretaria.png', width: 520 },
-            { text: "\n \n Asunto : Constancias de estudio e inscripción \n \n", style: Style.normal, alignment: 'right', bold: true },
+            { text: "\n \n Asunto : Constancias de estudio e inscripción \n \n \n \n", style: Style.normal, alignment: 'right', bold: true },
 
-            { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n ", style: Style.normal },
+            { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n \n \n ", style: Style.normal },
             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
             { text: " ", style: Style.header },
-            { text: `Con Matricula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el TERCER SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de 07:00 a 15:00 hrs. Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022.`, style: Style.normal},
+            { text: `Con Matricula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el TERCER SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de 07:00 a 15:00 hrs. Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment : 'justify'},
 
             { text: `Se extiende la presente apeticion del interesado para Tramite de ${alumno.descripcion}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}.`, style: Style.normal },
             { text: "Firma Electronica", style: Style.header },
@@ -76,8 +68,8 @@ function  create(req, tipo) {
             Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT
             cy fF ZF Uk FD Ul Va fG 51 bG x8 bn Vs bA ==`, style: Style.firma },
 
-            { text: "Director", style: Style.header },
-            { text: `${alumno.Esc_Director}`, style: Style.cursivo },
+            { text: " \n \n \n Director", style: Style.header },
+            { text: `${alumno.Esc_Director}`, style: Style.firma , alignment : "center" }
         ]
     };
 
@@ -92,7 +84,6 @@ function  create(req, tipo) {
     }
     pdfDoc.end();
 }
-
 function textomes(mes){
     switch(mes)
     {

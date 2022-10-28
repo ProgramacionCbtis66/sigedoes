@@ -2,14 +2,14 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const Emailrouter = express.Router();
 const nodemailer = require('nodemailer');
-
+const create = require('./pdfCreate');
 
 var email = "";
  
  
 Emailrouter.post('/enviar', (req, res) => {
     email = req.body;
-    const create = require('./pdfCreate');
+    
      
     create(email, email.tipo);
     
