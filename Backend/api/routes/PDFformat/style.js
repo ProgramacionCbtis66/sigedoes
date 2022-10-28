@@ -3,18 +3,28 @@ module.exports = {
     header: {
         bold: true,
         fontSize: 14,
-        aligment: "center",
+        alignment: "center",
         color: "#000000",
+        lineHeight:2
     },
     normal: {
         color: "#000000",
-        fontSize: 12,
-        aligment: "justify",
-        font: "Times"
+        fontSize: 13,
+        alignment: "justify",
+        font: "Times",
+        lineHeight: 1.5
     },
     cursivo: {
         fontSize: 12,
         color: "#808080",
-        italics: true
+        italics: true,
+        lineHeight:2
+    },
+    firma:{
+        fontSize : 10,
+        color: "#696969",
+        alignment: "justify",
+        font: "Courier",
+        lineHeight:2
     }
 }

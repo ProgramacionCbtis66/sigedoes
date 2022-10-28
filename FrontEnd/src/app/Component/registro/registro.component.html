@@ -5,18 +5,18 @@
   <div class="row">
 
     <!--Parte Izquierda Del Sistema-->
-      <div class="col-lg-6 mb-5">
+      <div class="col-lg-5 mb-5">
         <div>
           <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
             <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
             <h3 class="px-2">{{informacion}}</h3>
           </div>
-          <img src="{{infografia}}" class="infografia justify-content-center img-fluid">
+          <img src="{{infografia}}" class="max-wi justify-content-center img-fluid">
         </div>
       </div>
 
     <!--Parte Derecha Del Sistema-->
-    <div class="col-lg-6">
+    <div class="col-lg-7">
       <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
         <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
         <h3 class="px-2">{{registrarse}}</h3>
@@ -24,8 +24,8 @@
         <!--Caja De Información-->
         <div class="border border-secondary rounded">
           <!--Introduccion-->
-          <div class="border-botom border-secondary border-bottom bg-secondary">
-            <h3 class="p-3 ">Ingrese Sus Datos Para Poder Registrarse</h3>
+          <div class="border-botom border-secondary border-bottom">
+            <h3 class="p-3 fw-light">Ingrese Sus Datos Para Poder Registrarse</h3>
           </div>
           <!--nombre de Usuario-->
           <div class="input-group mb-3">
@@ -72,9 +72,22 @@
           <!--Registro-->
           <div class="d-flex justify-content-center">
             <button class="me-5 mb-3 p-4 pb-2 pt-2 bg-success rounded ps-5 pe-5" type="button" (click)='Registro()'>Registrarse</button>
-
+          
           </div>
+          <div class="row d-flex">  
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8 mt-2">
+            <div class="justify-content-center">
+              <h5 class="">**Al crear la cuenta, acepto incondicionalmente los términos y condiciones, así como el aviso de privacidad del servicio de PPD</h5>
+            </div>  
+          </div>
+
         </div>
+        </div>
+        
       </div>
+    </div>
+    <div>
+      
     </div>
 </header>
