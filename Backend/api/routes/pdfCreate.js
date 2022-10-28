@@ -1,65 +1,80 @@
-const ccn = require('./connection/connection');
+'use strict';
+const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
 
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
-//const { contentBBVA, contentBasico } = require('./PDFformat/formato1');
-
-var tipo = '';
-var contents = "";
-
-
-
-
-function create(req, tipo) {
-
-    ccn.query('select * from alumno where numControl = ?', [req.numControl]);
-        (err, rows, fields) =>{
-            if(!err){
-                if(rows.length > 0){
-
-                    let datos = JSON.stringify(rows[0]);
-                    let dato = JSON.parse(datos);
-                }
+const  convertir = require('./PDFformat/numlet');
+var alumno="";
+function  create(req, tipo){
+       
+    ccn.query('select * from pdf where numControl like ?', [req.numControl],
+        (err, rows, fields) => {
+        if (!err) {
+            if (rows.length > 0) {
+                let alumnos = JSON.stringify(rows[0]);
+                alumno = JSON.parse(alumnos);
+            }else{
+                console.log( "error alumno no encontrado");
             }
+        }else{
+            console.log("error " + err.message);
         }
-    const email = req.email;
-    contenido = {
-    content:[
-        {text:"Constacia de Estudio", style: Style.header},
-        {text:`Los algoritmos se han creado, el correo ${email} modificado y utilizado a lo largo de la historia, hace más de 500 años cuando los sumerios ilustraron tablas de arcilla una estructura de repetición utilizado para distribuir de forma equitativa la cosecha de granos entre un número variables de nombres. Como hemos visto el uso de los algoritmos se han utilizado tanto en la ciencia como en la producción. En la ingeniería de procesos se utiliza para él estudio de tiempos y movimientos y tomar la mejor decisión en la implementación de procedimientos productivos; en la ciencia y la tecnología se utiliza para procesar los datos y hacer los cálculos más rápidos y procesar grandes cantidades de volúmenes de datos; en la actualidad los algoritmos se están utilizando en  todas las áreas de las ciencias y las tecnologías del ser humano, con la tecnología de las soluciones del internet de las cosas, Big Data, la industria 4.0, y la nueva computación cuántica. Todo el mundo de este país debería saber programar”, esta frase de Steve Jobs me dejó en claro que  aprender a programar ayudaría a todos y en particular a los alumnos del nivel bachillerato a resolver todo tipo de problemas y procesar un gran volumen de información por la lógica cuando se desarrolla un algoritmo,  además deja en claro los procesos secuenciales y plasmados y de forma que cuando se tenga la solución se pueda analizar el algoritmo y se pueda mejorar los procesos, dando mantenimiento a estas soluciones o implementaciones a soluciones mayores`, style: Style.cursivo}
-    ],
-    asunto:[
-        {text: "Asunto", style: Style.header},
-        {text: `Constancias de estudio e inscripcion`,style: Style.cursivo}
-    ],
-    constancia:[
-        {text: "", style: Style.header},
-        {text: `Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de constrol escolar, la (el) alumna(o): ${nombre}.`}
-    ],
-    cuerpo:[
-        {text: "Cuerpo", style: Style.header},
-        {text: `Con Matricula se encuentra legalmente inscrito(a) es esta institución educativa Clave: 30DCT0236O, y cursando el TERCER SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${especialidad}, Clave: 352100002-16, Área: ${area}, Turno: ${turno}, con un horario de 07:00 a 15:00 hrs. Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022.`, style: Style.cursivo}
-    ],
-    final:[
-        {text: "Final", style: Style.header},
-        {text: `Se extiende la presente apeticion del interesado para Tramite de Servicio Medico, en la Ciudad de Tierra Blanca, estado de Veracruz a los trece dias del mes de Octubre de 2022.`, style: Style.cursivo}
-    ],
-    firma:[
-        {text: "Firma", style: Style.header},
-        {text: `#$&/$@`, style: Style.cursivo}
-    ],
-    director:[
-        {text: "Director", style: Style.header},
-        {text: "RICARDO SERRA BERNAL DIRECTOR", style: Style.cursivo},
-        {text:`Los algoritmos se han creado, el correo ${email} modificado y utilizado a lo largo de la historia, hace más de 500 años cuando los sumerios ilustraron tablas de arcilla una estructura de repetición utilizado ara distribuir de forma equitativa la cosecha de granos entre un número variables de hombres. Como hemos visto el uso de los algoritmos se han utilizado tanto en la ciencia como en la producción. En la n geniería de procesos se utiliza para él estudio de tiempos y movimientos y tomar la mejor decisión en la implementación de procedimientos productivos; en la ciencia y la tecnología se utiliza para procesar los datos y hacer los cálculos más rápidos y procesar grandes cantidades de volúmenes de datos; en la actualidad los algoritmos se están utilizando en  todas las áreas de las ciencias y las tecnologías del ser humano, con la tecnología de las soluciones del internet de las cosas, Big Data, la industria 4.0, y la nueva computación cuántica Todo el mundo de este país debería saber programar”, esta frase de Steve Jobs me dejó en claro que  aprender a programar ayudaría a todos y en particular a los alumnos del nivel bachillerato a resolver todo tipo de problemas y procesar un gran volumen de información por la lógica cuando se desarrolla un algoritmo,  además deja en claro los procesos secuenciales y plasmados y de forma que cuando se tenga la solución se pueda analizar el algoritmo y se pueda mejorar los procesos, dando mantenimiento a estas soluciones o implementaciones a soluciones mayores`, style: Style.normal}
-    ]
+    });
+        // ccn.query('select * from solicitus where numControl like ?', [req.numControl],
+        // (err, rows, fields) => {
+            
+        //     if (!err) {
+        //         if (rows.length > 0) {
+        //             let solicitudes = JSON.stringify(rows[0]);
+        //             solicitud = JSON.parse(solicitudes);
+        //         }
+        //     }
+        // });
+        
+        // ccn.query('select * from escuela',
+        // (err, rows, fields) => {
+           
+        //     if (!err) {
+        //         if (rows.length > 0) {
+        //             let escuelas = JSON.stringify(rows[0]);
+        //             escuela = JSON.parse(escuelas);
+        //         }
+        //     }
+        // });
+
+    const fecha = new Date();
+    let dia = convertir(fecha.getDate());
+    let mes = textomes(fecha.getMonth());
+    let year = convertir(fecha.getFullYear());
+    console.log(alumno);
+   
+    const contenido = {
+        asunto: [
+
+            { image: './api/assets/texto-secretaria.png', width: 520 },
+            { text: "\n \n Asunto : Constancias de estudio e inscripción \n \n \n \n", style: Style.normal, alignment: 'right', bold: true },
+
+            { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n \n \n ", style: Style.normal },
+            { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
+
+            { text: " ", style: Style.header },
+            { text: `Con Matricula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el TERCER SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de 07:00 a 15:00 hrs. Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment : 'justify'},
+
+            { text: `Se extiende la presente apeticion del interesado para Tramite de ${alumno.descripcion}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}.`, style: Style.normal },
+            { text: "Firma Electronica", style: Style.header },
+            { text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
+            Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT
+            cy fF ZF Uk FD Ul Va fG 51 bG x8 bn Vs bA ==`, style: Style.firma },
+
+            { text: " \n \n \n Director", style: Style.header },
+            { text: `${alumno.Esc_Director}`, style: Style.firma , alignment : "center" }
+        ]
     };
-    //if (tipo == "BBVA") { contents = contentBBVA; }
-    //if (tipo == "BASICO") { contents = contentBasico; }
+
     const docDefinition = {
-        content: contenido['content'],
+        content: contenido['asunto'],
         style: Style
     }
     const printer = new pdf(Font);
@@ -68,5 +83,22 @@ function create(req, tipo) {
         pdfDoc.pipe(file.createWriteStream("./api/assets/prueba.pdf"));
     }
     pdfDoc.end();
+}
+function textomes(mes){
+    switch(mes)
+    {
+        case 1: return "ENERO";
+        case 2: return "FEBRERO";
+        case 3: return "MARZO";
+        case 4: return "ABRIL";
+        case 5: return "MAYO";
+        case 6: return "JUNIO";
+        case 7: return "JULIO";
+        case 8: return "AGOSTO";
+        case 9: return "SEPTIEMBRE";
+        case 10: return "OCTUBRE";
+        case 11: return "NOVIMBRE";
+        case 12: return "DICIEMBRE";
+    }
 }
 module.exports = create;
