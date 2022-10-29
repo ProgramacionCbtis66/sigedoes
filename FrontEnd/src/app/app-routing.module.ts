@@ -12,14 +12,14 @@ import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.compone
 
 
 const routes: Routes = [
-
+  {path:"", redirectTo: "home", pathMatch:"full"},
   {path:"home", component: HomeComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin] },
   {path:"constancia", component: ConstanciaComponent, canActivate:[AuthGuardAdmin]},
   {path:"pdf", component: PdfComponent},
-  {path:"", redirectTo: "home", pathMatch:"full"},
+
   {path:"**", component: Error404Component },
 
 
