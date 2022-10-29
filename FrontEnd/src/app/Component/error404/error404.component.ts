@@ -7,17 +7,10 @@ import * as Notiflix from 'notiflix';
   styleUrls: ['./error404.component.css']
 })
 export class Error404Component implements OnInit {
-  correo = {
-    "correo":""
-  }
+  
   constructor() { }
 
 
   ngOnInit(): void {      
 }
-public enviar(){
-  var correo = this.correo.correo;
-  if(correo != null && correo != undefined && correo != ""){
-    Notiflix.Notify.info("El correo ha sido enviado");
-  }
-  }}
+}
