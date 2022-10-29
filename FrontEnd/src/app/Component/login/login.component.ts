@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   titulo = "Inicio de Sesión";
   logoCbtis = '.././assets/img/foto.jpg';
+  juan = "";
   usuario = {
     "nombre": "",
     "pass": ""
@@ -32,7 +33,9 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['registro']);
   }
   Acceso() {
-
+    this.auth.optnombre(this.usuario).subscribe((res:any)=>{
+      this.juan = res.nombree;
+    });
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       Notiflix.Loading.standard("Accesando");
       this.auth.login(this.usuario).subscribe((res: any) => {
@@ -41,6 +44,7 @@ export class LoginComponent implements OnInit {
           this.app.visibleLoginRegistro();
           Notiflix.Loading.remove();
           this.router.navigate(['/home']);
+
         } else if (res.Error == "Usuario y contraseña incorrecta") {
           Notiflix.Loading.remove();
           Notiflix.Notify.warning("Usuario y contraseña incorrecta");

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,6 +48,10 @@ export class AppComponent implements OnInit{
     this.titulo.setTitle(this.title);
     this.visibleLoginRegistro();
     this.inicio();
+    
   }
-
+  public recibida(){
+    
+    
+  }
 }
