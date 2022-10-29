@@ -27,11 +27,6 @@
           <div class="border-botom border-secondary border-bottom">
             <h3 class="p-3 fw-light">Ingrese Sus Datos Para Poder Registrarse</h3>
           </div>
-          <!--nombre de Usuario-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">ID</span>
-            <input [(ngModel)]="usuario.UserName" type="text" class="form-control" placeholder="User Name" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
           <!--Correo Institucional-->
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">@</span>
@@ -44,8 +39,17 @@
           </div>
           <!--Especialidad y Semestre-->
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Especialidad</span>
-            <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Username" aria-describedby="basic-addon1">
+          <!--  <span class="input-group-text" id="basic-addon1">Especialidad</span>
+            <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Username" aria-describedby="basic-addon1">-->
+            <span class="input-group-text">Especialidad:</span>
+            <select id="especialidad" class="form-select" >
+              <option value="1">Programación</option>
+              <option value="2">Electricidad</option>
+              <option value="3">Contabilidad</option>
+              <option value="4">Alimentos</option>
+              <option value="5">Electricidad</option>
+            </select>
+            
             <span class="input-group-text" id="basic-addon1">"°"</span>
             <input [(ngModel)]="usuario.semestre" type="text" placeholder="Ingrese Su Semestre">
           </div>
@@ -70,8 +74,9 @@
             <input [(ngModel)]="usuario.pass2" type="password" class="form-control" placeholder="Repita Su Contraseña" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <!--Registro-->
-          <div class="d-flex justify-content-center">
-            <button class="me-5 mb-3 p-4 pb-2 pt-2 bg-success rounded ps-5 pe-5" type="button" (click)='Registro()'>Registrarse</button>
+          
+          <div class="d-flex justify-content-center mb-2">
+            <button class="btn bg-success rounded btn-lg" type="button" (click)='Registro()'>Registrarse</button>
           
           </div>
           <div class="row d-flex">  
