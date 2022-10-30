@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import * as Notiflix from 'notiflix';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
+import decode from 'jwt-decode';
 
 @Component({
   selector: 'app-olvide-pass',
@@ -27,13 +29,13 @@ export class OlvidePassComponent implements OnInit {
     if(this.correo.correo != null && this.correo.correo != undefined && this.correo.correo != ""){
       Notiflix.Loading.standard("Accesando");
         this.userService.forgotPassword(this.correo).subscribe((res: any)=>{
-            if(res !== null && res !== undefined){
+          console.log(res.usuario);
+            if(res.usuario !== null && res.usuario !== undefined){
                 Notiflix.Loading.remove();
-                if(res == "Encontrado"){
-                    this.enviarCorreo.enviarUserContra(this.correo).subscribe((res:any)=>{
+                    this.enviarCorreo.enviarUserContra(decode(res.usuario)).subscribe((res:any)=>{
                         Notiflix.Notify.success("Correo enviado Satisfactoriamente")
                     });
-                }
+
             }else{
               Notiflix.Loading.remove();
               Notiflix.Notify.failure("Correo No valido");
