@@ -46,7 +46,7 @@ export class AuthService {
   tokeExpired(): boolean {
     const tokenDecode = this.decodifica();
     var tiempo = (tokenDecode.exp - Date.now() / 1000 ) ;
-    console.log(tiempo);
+    
     if (tiempo < 0) {
        localStorage.clear();
        return false;

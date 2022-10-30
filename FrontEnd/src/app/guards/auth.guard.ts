@@ -30,7 +30,7 @@ export class AuthGuardAdmin implements CanActivate {
     const token = localStorage.getItem("color");
     if (token !== null && token !== "") {
       let rol = this.authService.decodifica();
-      console.log(rol);
+     
       if (this.authService.isAuth()) {
         return true;
       } else {
@@ -39,5 +39,5 @@ export class AuthGuardAdmin implements CanActivate {
       }
     }else{return false;}
     }
-    
+
 }

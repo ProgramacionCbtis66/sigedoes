@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       Notiflix.Loading.standard("Accesando");
       this.auth.login(this.usuario).subscribe((res: any) => {
         if (res.token !== null && res.token != undefined) {
-          console.log(res);
+      
           localStorage.setItem('color', res.token);
           localStorage.setItem('nombre',this.usuario.nombre);
           this.app.visibleLoginRegistro();
