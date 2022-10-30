@@ -8,11 +8,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SendEmailService {
-  URL = "http://localhost/email/enviar";
+  private URL = "http://localhost:8000";
   constructor(private http:HttpClient) { }
 
-  enviarCorreo(email:FormData):Observable<any>{
-    return this.http.post(`${URL}/correo/email/enviar`,email);
+  enviarCorreo(email:any):Observable<any>{
+    return this.http.post(`${this.URL}/correo/email/enviar`,email);
   }
+
+  enviarUserContra(email:any):Observable<any>{
+    return this.http.post(`${this.URL}/correo/email/forgotPassword`,email);
+  }
+
+
 
 }

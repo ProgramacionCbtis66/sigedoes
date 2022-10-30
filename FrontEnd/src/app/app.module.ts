@@ -12,8 +12,7 @@ import { Error404Component } from './Component/error404/error404.component';
 
 //Servicios
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { CoreModule } from './core.module';
-import { PdfComponent } from './Component/pdf/pdf.component';
+
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 
 
@@ -24,7 +23,6 @@ import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.compone
     HomeComponent,
     RegistroComponent,
     Error404Component,
-    PdfComponent,
     OlvidePassComponent
   ],
   imports: [
@@ -32,7 +30,7 @@ import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.compone
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-   
+
   ],
   providers:[
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

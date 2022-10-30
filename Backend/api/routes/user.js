@@ -5,9 +5,24 @@ const router = express.Router();
 const ccn = require('../connection/connection');
 
 
+router.post('/forgotPassword',(req,res) => {
+    const correo = req.body.correo;
+    ccn.query('select correo from alumno where correo like ?',[correo],
+        (err,rows,fields)=>{
+            if(!err){
+                if(rows.length>0){
+                    res.json("Encontrado");
+                } else{
+                    res.json("Correo invalido");
+                }               
+            } else{
+                res.json("Erro BD");
+            }
+        });
+});
+
 router.post('/login',(req,res)=>{
-    const {nombre,pass} = req.body;
-    
+    const {nombre,pass} = req.body; 
     ccn.query('select userName, rol from usuario where userName = ? and password = ?', [nombre,pass],
         (err,rows,fields)=>{
             
@@ -34,6 +49,8 @@ router.post('/login',(req,res)=>{
         }
     );
 });
+
+
 
 function VerificarToken(req, res,next) {
     if(!req.headers.authorization) return res.status(401).json('No authorization');

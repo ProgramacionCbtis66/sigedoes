@@ -11,6 +11,7 @@ app.use(cors({origin: "*" }));
 
 const userRouter = require('./api/routes/user');
 app.use('/insize', userRouter);
+
  // correo
  const emailSend = require('./api/routes/enviarEmail');
  app.use('/email', emailSend);
