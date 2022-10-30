@@ -47,23 +47,38 @@
           <!--  <span class="input-group-text" id="basic-addon1">Especialidad</span>
             <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Username" aria-describedby="basic-addon1">-->
             <span class="input-group-text">Especialidad:</span>
-            <select id="especialidad" class="form-select" >
-              <option value="1">Programación</option>
-              <option value="2">Electricidad</option>
-              <option value="3">Contabilidad</option>
-              <option value="4">Alimentos</option>
-              <option value="5">Electricidad</option>
+            <select id="especialidad" [(ngModel)]="usuario.especialidad" class="form-select" >
+              <option value="Programacion">Programación</option>
+              <option value="Electricidad">Electricidad</option>
+              <option value="Contabilidad">Contabilidad</option>
+              <option value="Alimentos">Alimentos</option>
+              <option value="Soporte">Soporte</option>
             </select>
             
-            <span class="input-group-text" id="basic-addon1">"°"</span>
-            <input [(ngModel)]="usuario.semestre" type="text" placeholder="Ingrese Su Semestre">
+            <span class="input-group-text" id="basic-addon1">Semestre</span>
+            <select id="input-group-text" [(ngModel)]="usuario.semestre" class="form-select">
+              <option value="1">°1</option>
+              <option value="2">°2</option>
+              <option value="3">°3</option>
+              <option value="4">°4</option>
+              <option value="5">°5</option>
+              <option value="6">°6</option>
+            </select>
           </div>
           <!--Area y Turno-->
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input [(ngModel)]="usuario.area" type="text" class="form-control" placeholder="Ingrese Su Area" aria-label="Username" aria-describedby="basic-addon1">
-            <span class="input-group-text" id="basic-addon1"></span>
-            <input [(ngModel)]="usuario.turno" type="text" placeholder="Ingrese Su Turno">
+            <span class="input-group-text" id="basic-addon1">Area</span>
+            <select id="input-group-text" [(ngModel)]="usuario.area" class="form-select">
+              <option value="a">Area 1</option>
+              <option value="b">Area 2</option>
+              <option value="c">Area 3</option>
+            </select>
+            
+            <span class="input-group-text" id="basic-addon1">Turno</span>
+            <select id="input-group-text" [(ngModel)]="usuario.turno" class="form-select">
+              <option value="Matutino">Matutino</option>
+              <option value="Vespertino">Vespertino</option>
+            </select>
           </div>
           <!--No Control-->
           <div class="input-group mb-3">

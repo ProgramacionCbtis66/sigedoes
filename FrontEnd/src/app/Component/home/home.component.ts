@@ -7,15 +7,20 @@ import * as Notiflix from 'notiflix';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  alumnos ="";
+  alumno = localStorage.getItem('nombre');
   constructor(private auth:AuthService) { }
-
+  home = {
+    "NoPago":""
+  }
   ngOnInit(): void {
-    
+    let nombre = localStorage.getItem('nombre');
+    Notiflix.Notify.info("Bienvenido "+nombre);
   }
   public name() {
     
   }
 
-
+  comprobar(){
+    
+  }
 }

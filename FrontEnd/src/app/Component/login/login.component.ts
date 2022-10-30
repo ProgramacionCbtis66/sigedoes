@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.usuario).subscribe((res: any) => {
         if (res.token !== null && res.token != undefined) {
           localStorage.setItem('color', res.token);
+          localStorage.setItem('nombre',this.usuario.nombre);
           this.app.visibleLoginRegistro();
           Notiflix.Loading.remove();
           this.router.navigate(['/home']);
