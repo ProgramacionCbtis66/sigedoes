@@ -20,43 +20,37 @@ export class RegistroComponent implements OnInit {
     "correo": "",
     "pass": "",
     "pass2":"",
-    "UserName":"",
     "curp":"",
     "noctrl":"",
     "especialidad":"",
     "semestre":"",
     "area":"",
-    "turno":""
+    "turno":"",
+    "nombre":""
   };
 
   constructor(private auth: AuthService,  private router: Router, private app : AppComponent) { app.registro=true; app.iflogin=false;}
 
   ngOnInit(): void {}
   Registro(){
-   
-    if (this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== "" && this.usuario.UserName !== "" && this.usuario.curp !== "" && this.usuario.noctrl !== ""  && this.usuario.especialidad !== ""  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "")
+   let contra = this.usuario.pass2;
+   let contra2 = this.usuario.pass;
+    if(contra == contra2){
+    if ( this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== ""  && this.usuario.curp !== "" && this.usuario.noctrl !== ""  /*&& this.usuario.especialidad !== ""*/  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "")
     {
       Notiflix.Loading.standard("Accesando");
-      this.auth.login(this.usuario).subscribe((res: any) => 
+      this.auth.registro(this.usuario).subscribe((res: any) => 
       {
         if (res.token !== null && res.token != undefined) 
         {
-          localStorage.setItem('color', res.token);
-          this.app.visibleLoginRegistro();
           Notiflix.Loading.remove();
-          this.router.navigate(['/home']);
-        } else if (res.Error == "Usuario y contraseña incorrecta") 
-        {
-          Notiflix.Loading.remove();
-          Notiflix.Notify.warning("Usuario y contraseña incorrecta");
-        } else 
-        {
-          Notiflix.Loading.remove();
-          Notiflix.Notify.failure("Error de conexion, intente mas tarde");
-        }
+          this.router.navigate(['/login']);
+        } 
       });
     } else {
-      Notiflix.Notify.failure("Usuario o contraseña vacio, llene los campos");
+      Notiflix.Notify.failure("Por favor llene todos los campos");
+    }}else{
+      Notiflix.Notify.failure("Las contraseñas no coinciden");
     }
   }
 }

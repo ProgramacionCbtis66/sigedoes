@@ -21,11 +21,8 @@ export class AuthService {
   public login(user: any) {
     return this.http.post(`${this.URL}/insize/login`, user);
   }
-  public home(user:any){
-    return this.http.post(`${this.URL}/insize/home`,user);
-  }
-  public optnombre(user:any){
-    return this.http.post(`${this.URL}/insize/nombre`,user)
+  public registro(usuario:any){
+    return this.http.post(`${this.URL}/insize/registro`,usuario);
   }
 
   isAuth(): boolean {

@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['registro']);
   }
   Acceso() {
-    this.auth.optnombre(this.usuario).subscribe((res:any)=>{
-      this.juan = res.nombree;
-    });
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       Notiflix.Loading.standard("Accesando");
       this.auth.login(this.usuario).subscribe((res: any) => {
