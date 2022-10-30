@@ -15,7 +15,7 @@ export class RegistroComponent implements OnInit {
 
   registrarse = 'Registrarse';
   informacion = 'Info';
-  infografia : string = '.././assets/img/infografia.png';
+  infografia : string = '.././assets/img/infografiaa.png';
   usuario = {
     "correo": "",
     "pass": "",
@@ -36,9 +36,9 @@ export class RegistroComponent implements OnInit {
    let contra = this.usuario.pass2;
    let contra2 = this.usuario.pass;
     if(contra == contra2){
-    if ( this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== ""  && this.usuario.curp !== "" && this.usuario.noctrl !== ""  /*&& this.usuario.especialidad !== ""*/  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "")
+    if ( this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== ""  && this.usuario.curp !== "" && this.usuario.noctrl !== "" && this.usuario.especialidad !== ""  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "")
     {
-      Notiflix.Loading.standard("Accesando");
+      Notiflix.Loading.standard(this.usuario.especialidad);
       this.auth.registro(this.usuario).subscribe((res: any) => 
       {
         if (res.token !== null && res.token != undefined) 

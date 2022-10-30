@@ -1,45 +1,62 @@
+ 
  <div class="">
-    <div class="">
-        <div class="d-flex justify-content-center">
-            <h1 class="m-2 border border-success rounded p-2 verdecito">Bienvenido Alumno Del CBTIS66!</h1>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-7">
+            <h1 class="d-inline-flex mt-2 border border-success rounded p-2 verdecito">Bienvenido Alumno Del CBTIS66!</h1>
         </div>
-    </div>
+        <div class="col-lg-4 d-flex align-items-center">
+            <h4 class="bg-primary rounded p-2 pb-2">
+                <h6 class="d-inline-flex">Que Deseas Hacer? {{alumno}}</h6>
+            </h4>
+        </div>
+    </div>    
+    
+
     <div class="border border-2 row col-lg-2">
         <h3>Constancias:</h3>
     </div>
     <div class="row">
-    
-        <div class="col-lg-6 border rounded border-2 bg-success">
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio1" name="optradio" value="option1">Para Beca
-                <label class="form-check-label" for="radio1"></label>
+        <div class="col-lg-6">
+            <div class="border rounded border-2 bg-success">
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio1" name="optradio" value="option1">Para Beca
+                    <label class="form-check-label" for="radio1"></label>
+                </div>
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio2" name="optradio" value="option2">Para Pasaporte
+                    <label class="form-check-label" for="radio2"></label>
+                </div>
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio3" name="optradio" value="option3">Para Servicios Médicos
+                    <label class="form-check-label" for="radio3"></label>
+                </div>
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio4" name="optradio" value="option4">Para Fines Legales
+                    <label class="form-check-label" for="radio4"></label>          
+                </div>
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio5" name="optradio" value="option5">Para Seguro Social
+                    <label class="form-check-label" for="radio5"></label>
+                </div>
+                <div class="form-check m-2">
+                    <input type="radio" class="form-check-input bg-primary" id="radio6" name="optradio" value="option6">Para Inscripciones
+                    <label class="form-check-label" for="radio6"></label>
+                </div>
             </div>
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio2" name="optradio" value="option2">Para Pasaporte
-                <label class="form-check-label" for="radio2"></label>
+
+            <div class="input-group mb-3 mt-3 ms-3">
+                <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
+                <input [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
             </div>
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio3" name="optradio" value="option3">Para Servicios Médicos
-                <label class="form-check-label" for="radio3"></label>
-            </div>
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio4" name="optradio" value="option4">Para Fines Legales
-                <label class="form-check-label" for="radio4"></label>          
-            </div>
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio5" name="optradio" value="option5">Para Seguro Social
-                <label class="form-check-label" for="radio5"></label>
-            </div>
-            <div class="form-check m-2">
-                <input type="radio" class="form-check-input bg-primary" id="radio6" name="optradio" value="option6">Para Inscripciones
-                <label class="form-check-label" for="radio6"></label>
-                
-            </div>
-    </div>    
+        </div>    
         <div class="col-lg-6">
             <div class="border border-2 border-success ">
                 <h4 class="p-2">Para sacar una constancia se debe de tener en claro que se desea obtener, para que clase de trámite se requiere.</h4>
             </div>
         </div>
+    </div>
+    <div>
+        <button (click)="comprobar()" type="button">Comprobar Datos</button>
     </div>
 </div>
