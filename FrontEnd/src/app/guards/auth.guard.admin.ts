@@ -7,21 +7,6 @@ import { AuthService } from '../service/auth.service';
   providedIn: 'root',
 })
 
-export class AuthGuard implements CanActivate {
-
-  constructor(private authService: AuthService,
-    private router: Router) { }
-
-  canActivate(): boolean {
-    if (this.authService.isAuth()) {
-      return true;
-    } else {
-      this.router.navigate(['login']);
-      return false;
-    }
-  }
-}
-
 export class AuthGuardAdmin implements CanActivate {
 
   private token: any;
@@ -32,9 +17,7 @@ export class AuthGuardAdmin implements CanActivate {
   canActivate(): boolean {
       if (this.auth.isAuth()) {
           this.token = this.auth.decodifica();
-
         if (this.token.rol == "Admin"){
-          this.router.navigate(['Admin']);
             return true;
         } else {
           if (this.auth.isAuth()){

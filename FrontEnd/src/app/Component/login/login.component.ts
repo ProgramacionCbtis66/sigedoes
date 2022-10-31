@@ -49,14 +49,16 @@ export class LoginComponent implements OnInit {
           this.app.visibleLoginRegistro();
 
           Notiflix.Loading.remove();
+          if(this.auth.decodifica().rol =="Admin"){
+            this.app.Administrador=true;
+          }
           this.router.navigate(['/home']);
-
         } else if (res.Error == "Usuario y contraseña incorrecta") {
           Notiflix.Loading.remove();
-          Notiflix.Notify.warning("Usuario y contraseña incorrecta");
+          Notiflix.Notify.warning(res.Error);
         } else {
           Notiflix.Loading.remove();
-          Notiflix.Notify.failure("Error de conexion, intente mas tarde");
+          Notiflix.Notify.failure(res.Error);
         }
       });
     } else {

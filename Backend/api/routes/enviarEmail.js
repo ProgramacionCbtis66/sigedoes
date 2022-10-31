@@ -4,11 +4,11 @@ const Emailrouter = express.Router();
 const nodemailer = require('nodemailer');
 const create = require('./pdfCreate');
 
-var email = "";
+ 
  
  
 Emailrouter.post('/enviar-constancia', (req, res) => {
-    email = req.body;
+    const email = req.body;
     create(email, email.tipo);
     enviarCorreo(email,res);
 //     const transporter = nodemailer.createTransport({
@@ -49,7 +49,10 @@ Emailrouter.post('/enviar-constancia', (req, res) => {
 });
 
 Emailrouter.post('/forgotPassword',(req,res)=>{
-
+  
+  const email = req.body;
+  console.log(email);
+  enviarCorreo(email,res);
 });
 
 function enviarCorreo(email,res){
@@ -63,8 +66,8 @@ function enviarCorreo(email,res){
       pass: "ibwchrluddbkxjea"
     }
   });
-  
-  const mailOptions = new MailOptions(email.tipo);
+  console.log(email.tipo);
+  const mailOptions = new MailOptions(email.tipo,email);
  
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -75,9 +78,10 @@ function enviarCorreo(email,res){
       res.send('Correo enviado satisfactoriamente');
     }
   });
+  res.json("Correcto");
 } 
 
-function MailOptions(tipo){
+function MailOptions(tipo, email){
 
   switch(tipo){
     case 'Constancia':
@@ -98,14 +102,15 @@ function MailOptions(tipo){
           };
           return mailOptions;
     case 'forgotPassword':
+          
           const mailOptions2 = {
             from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
-            to: `"${email.email}"`,
-            subject: `"${email.asunto}"`,
-            html: `<h1>Enviando recuperacion de Contraseña</h1>
-                    <p>Usuario: ${email.nombre}`
+            to: `"${email.correo}"`,
+            subject: `"Recuperacion de contraseña"`,
+            html: `<h1>Enviando recuperacion de Contraseña</h1> <br>
+                    <p>Nombre: ${email.nombre}   Usuario: ${email.numControl}   contraseña: ${email.password}</p>`
           };
-      return mailOptions2;
+          return mailOptions2;
   }
   
 }

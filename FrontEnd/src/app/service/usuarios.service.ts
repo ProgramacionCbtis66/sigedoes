@@ -14,7 +14,7 @@ export class UsuarioService {
 
 
   forgotPassword(email:any):Observable<any>{
-    console.log(email);
+ 
     return this.http.post(`${this.URL}/insize/forgotPassword`,email);
   }
 }

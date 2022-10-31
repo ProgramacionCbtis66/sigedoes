@@ -15,8 +15,8 @@
           <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Login</a>
         </li>
 
-        <li class="nav-item" *ngIf="false">
-          <a class="nav-link" routerLink="" id="idregistro">Administrador</a>
+        <li class="nav-item" *ngIf="Administrador">
+          <a class="nav-link" routerLink="admin" id="idregistro">Administrador</a>
         </li>
         <li class="nav-item" *ngIf="registro">
           <a class="nav-link" routerLink="registro">Registro</a>
@@ -40,10 +40,20 @@
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
-</div>
-<footer class="bg-success bg-gradient text-ligth text-center opacity-25 mt-4">
-  <div class="fw-ligth d-inline-flex pt-2">
-    <p class="px-2"><i class="fa-regular fa-copyright"></i></p>
-    <p>3G programción</p>
+  <div id="layoutError_footer">
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; constacias cbtis66 2022</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
   </div>
-</footer>
+</div>
+
+

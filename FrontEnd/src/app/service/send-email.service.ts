@@ -12,11 +12,12 @@ export class SendEmailService {
   constructor(private http:HttpClient) { }
 
   enviarCorreo(email:any):Observable<any>{
-    return this.http.post(`${this.URL}/correo/email/enviar`,email);
+    return this.http.post(`${this.URL}/email/enviar`,email);
   }
 
   enviarUserContra(email:any):Observable<any>{
-    return this.http.post(`${this.URL}/correo/email/forgotPassword`,email);
+    
+    return this.http.post(`${this.URL}/email/forgotPassword`,email);
   }
 
 

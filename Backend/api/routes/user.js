@@ -7,16 +7,23 @@ const ccn = require('../connection/connection');
 
 router.post('/forgotPassword',(req,res) => {
     const correo = req.body.correo;
-    ccn.query('select correo from alumno where correo like ?',[correo],
+    console.log(correo);
+    ccn.query('select * from forgotpassword where correo like ?',[correo],
         (err,rows,fields)=>{
             if(!err){
                 if(rows.length>0){
-                    res.json("Encontrado");
+                    let datos = JSON.stringify(rows[0]);
+                    let dato = JSON.parse(datos);
+                    dato.tipo = "forgotPassword";
+                    let data = JSON.stringify(dato);
+                    const usuario = jwt.sign(data,'stil');
+                    console.log({usuario});
+                    res.json({usuario});
                 } else{
-                    res.json("Correo invalido");
+                    res.json({Error:"Correo invalido"});
                 }               
             } else{
-                res.json("Erro BD");
+                res.json({Error:"Erro BD"});
             }
         });
 });
@@ -33,8 +40,6 @@ router.post('/login',(req,res)=>{
                     let dato = JSON.parse(datos);
                     dato.exp = Date.now()/1000 + (300);
                     let data = JSON.stringify(dato);
-                    console.log(data);
-                    
                     
                     const token = jwt.sign(data,'stil');
                     
