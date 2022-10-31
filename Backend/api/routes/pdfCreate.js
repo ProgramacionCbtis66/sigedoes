@@ -70,6 +70,9 @@ function  create(req, tipo){
 
             { text: " \n \n \n Director", style: Style.header },
             { text: `${alumno.Esc_Director}`, style: Style.firma , alignment : "center" }
+        ],
+        pieDeFormato:[
+            {text: "16 de septiembre Esq. J.R. Claveria, Col. Hoja del Maíz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correo electrónico: cbtis066.dir@dgeti.sems.gob.mx", style: Style.normal}
         ]
     };
 
