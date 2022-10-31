@@ -26,5 +26,18 @@ module.exports = {
         alignment: "justify",
         font: "Courier",
         lineHeight:2
+    },
+    tableExample: {
+        margin: [0, 5, 0, 15]
+    },
+    tableOpacityExample: {
+        margin: [0, 5, 0, 15],
+        fillColor: 'blue',
+        fillOpacity: 0.3
+    }, 
+    tableHeader: {
+        bold: true,
+        fontSize: 13,
+        color: 'black'
     }
 }

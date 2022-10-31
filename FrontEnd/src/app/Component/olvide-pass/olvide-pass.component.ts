@@ -29,7 +29,6 @@ export class OlvidePassComponent implements OnInit {
     if(this.correo.correo != null && this.correo.correo != undefined && this.correo.correo != ""){
       Notiflix.Loading.standard("Accesando");
         this.userService.forgotPassword(this.correo).subscribe((res: any)=>{
-          
             if(res.usuario !== null && res.usuario !== undefined){
                 Notiflix.Loading.remove();
                     this.enviarCorreo.enviarUserContra(decode(res.usuario)).subscribe((res:any)=>{
