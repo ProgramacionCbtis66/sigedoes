@@ -13,11 +13,60 @@
     </div>    
     
 
-    <div class="border border-2 row col-lg-2">
-        <h3>Constancias:</h3>
-    </div>
+    
     <div class="row">
+        <!--Lado Izquierdo-->
         <div class="col-lg-6">
+            <div class="table-responsive border border-success border-2 mt-3 p-2 ps-3 pt-3">
+                <table class="table table-bordered table-hover ">
+                    <thead class="border">
+                        <th class="h4 p-2">Datos Del Solicitante</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{alumno}}</td>
+                        </tr>  
+                        <tr>
+                            <th>Correo</th>
+                            <td>{{correo}}</td>
+                        </tr>
+                        <tr>
+                            <th>Curp</th>
+                            <td>{{curp}}</td>
+                        </tr>
+                        <tr>
+                            <th>Especialidad</th>
+                            <td>{{especialidad}}</td>
+                        </tr>
+                        <tr>
+                            <th>Semestre</th>
+                            <td>{{semestre}}</td>
+                        </tr>
+                        <tr>
+                            <th>Area</th>
+                            <td>{{area}}</td>
+                        </tr>
+                        <tr>
+                            <th>Número De Control</th>
+                            <td>{{noctrl}}</td>
+                        </tr>
+                        <tr>
+                            <th>Turno</th>
+                            <td>{{turno}}</td>
+                        </tr>
+                        
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+        
+        <!--Lado Derecho-->
+        <div class="col-lg-6">
+            <div class="d-flex justify-content-center border border-2 bg-primary">
+                <h3>Constancias:</h3>
+            </div>
             <div class="border rounded border-2 bg-success">
                 <div class="form-check m-2">
                     <input type="radio" class="form-check-input bg-primary" id="radio1" name="optradio" value="option1">Para Beca
@@ -49,14 +98,10 @@
                 <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
                 <input [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
             </div>
-        </div>    
-        <div class="col-lg-6">
-            <div class="border border-2 border-success ">
-                <h4 class="p-2">Para sacar una constancia se debe de tener en claro que se desea obtener, para que clase de trámite se requiere.</h4>
+            <div class="ms-3">
+                <button (click)="comprobar()" type="button">Comprobar Datos</button>
             </div>
-        </div>
-    </div>
-    <div>
-        <button (click)="comprobar()" type="button">Comprobar Datos</button>
+        </div>    
+        
     </div>
 </div>

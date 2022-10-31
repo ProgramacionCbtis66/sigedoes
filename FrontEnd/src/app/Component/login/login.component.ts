@@ -39,7 +39,15 @@ export class LoginComponent implements OnInit {
         if (res.token !== null && res.token != undefined) {
           localStorage.setItem('color', res.token);
           localStorage.setItem('nombre',this.usuario.nombre);
+          localStorage.setItem('data',res.dataa.user);
+          localStorage.setItem('correo',res.dataa.correo);
+          localStorage.setItem('curp',res.dataa.curp);
+          localStorage.setItem('noctrl',res.dataa.iduser);
+          localStorage.setItem('especialidad',res.dataa.especialidad);
+          localStorage.setItem('area',res.dataa.area);
+          localStorage.setItem('turno',res.dataa.turno);
           this.app.visibleLoginRegistro();
+
           Notiflix.Loading.remove();
           if(this.auth.decodifica().rol =="Admin"){
             this.app.Administrador=true;

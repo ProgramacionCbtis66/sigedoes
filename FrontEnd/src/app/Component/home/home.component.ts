@@ -8,6 +8,14 @@ import * as Notiflix from 'notiflix';
 })
 export class HomeComponent implements OnInit {
   alumno = localStorage.getItem('nombre');
+  curp = localStorage.getItem('curp');
+  correo = localStorage.getItem('correo');
+  noctrl = localStorage.getItem('noctrl');
+  especialidad = localStorage.getItem('especialidad');
+  semestre = localStorage.getItem('semestre');
+  area = localStorage.getItem('area');
+  turno = localStorage.getItem('turno');
+
   constructor(private auth:AuthService) { }
   home = {
     "NoPago":""
@@ -21,6 +29,8 @@ export class HomeComponent implements OnInit {
   }
 
   comprobar(){
-    
+    if(this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != ""){
+      Notiflix.Notify.info("Revisando Código");
+    }
   }
 }
