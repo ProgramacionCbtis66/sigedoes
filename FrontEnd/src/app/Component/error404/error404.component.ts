@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 
 @Component({
@@ -7,10 +8,12 @@ import * as Notiflix from 'notiflix';
   styleUrls: ['./error404.component.css']
 })
 export class Error404Component implements OnInit {
-  
-  constructor() { }
 
+  constructor(private router:Router) { }
 
-  ngOnInit(): void {      
+regresar(){
+   this.router.navigate (['home']);
+}
+  ngOnInit(): void {
 }
 }

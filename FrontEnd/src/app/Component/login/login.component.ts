@@ -37,11 +37,13 @@ export class LoginComponent implements OnInit {
       Notiflix.Loading.standard("Accesando");
       this.auth.login(this.usuario).subscribe((res: any) => {
         if (res.token !== null && res.token != undefined) {
-      
           localStorage.setItem('color', res.token);
           localStorage.setItem('nombre',this.usuario.nombre);
           this.app.visibleLoginRegistro();
           Notiflix.Loading.remove();
+          if(this.auth.decodifica().rol =="Admin"){
+            this.app.Administrador=true;
+          }
           this.router.navigate(['/home']);
         } else if (res.Error == "Usuario y contraseña incorrecta") {
           Notiflix.Loading.remove();

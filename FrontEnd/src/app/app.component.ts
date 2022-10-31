@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
   logo : string = '.././assets/img/logocl.png';
   registro = false;
   iflogin = true;
+  Administrador = false;
 
   constructor(private titulo : Title, private auth: AuthService, private router:Router){}
 
@@ -48,10 +49,10 @@ export class AppComponent implements OnInit{
     this.titulo.setTitle(this.title);
     this.visibleLoginRegistro();
     this.inicio();
-    
+
   }
   public recibida(){
-    
-    
+
+
   }
 }
