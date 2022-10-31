@@ -64,6 +64,7 @@ function create(req, tipo) {
 
             { text: `Se extiende la presente apeticion del interesado para Tramite de ${alumno.descripcion}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
+<<<<<<< HEAD
             {
                 style: 'tableExample',
                 table: {
@@ -80,6 +81,13 @@ function create(req, tipo) {
 
             { text: " \n Director", style: Style.header },
             { text: `${alumno.Esc_Director}`, style: Style.firma, alignment: "center" }
+=======
+            { text: " \n \n \n Director", style: Style.header },
+            { text: `${alumno.Esc_Director}`, style: Style.firma , alignment : "center" }
+        ],
+        pieDeFormato:[
+            {text: "16 de septiembre Esq. J.R. Claveria, Col. Hoja del Maíz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correo electrónico: cbtis066.dir@dgeti.sems.gob.mx", style: Style.normal}
+>>>>>>> 903e6504e4be22efdd3cbe4bf389ffeb8fc9eb28
         ]
     };
 
