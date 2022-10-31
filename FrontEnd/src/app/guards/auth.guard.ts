@@ -9,6 +9,8 @@ import decode from 'jwt-decode';
 
 export class AuthGuard implements CanActivate {
 
+
+
   constructor(private authService: AuthService,
     private router: Router) { }
 
@@ -23,21 +25,26 @@ export class AuthGuard implements CanActivate {
 }
 
 export class AuthGuardAdmin implements CanActivate {
-  constructor(private authService: AuthService,
+  private token: any;
+  constructor(private auth: AuthService,
     private router: Router) { }
 
   canActivate(): boolean {
-    const token = localStorage.getItem("color");
-    if (token !== null && token !== "") {
-      let rol = this.authService.decodifica();
-     
-      if (this.authService.isAuth()) {
-        return true;
-      } else {
-        this.router.navigate(['login']);
+      if (this.auth.isAuth()) {
+          this.token = this.auth.decodifica();
+        if (this.token.rol == "Admin"){
+          this.router.navigate(['Admin']);
+            return true;
+        } else {
+          if (this.auth.isAuth()){
+              this.router.navigate(['Home']);
+              return true;
+          }else{
+              return false;
+          }
+        }
+      }else{
         return false;
       }
-    }else{return false;}
     }
-
 }

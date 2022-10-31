@@ -14,7 +14,7 @@ import { Error404Component } from './Component/error404/error404.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
-import { AdminstradorComponent } from './component/adminstrador/adminstrador.component';
+import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 
 
 @NgModule({

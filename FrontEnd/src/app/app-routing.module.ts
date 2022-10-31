@@ -8,10 +8,12 @@ import { AuthGuard,AuthGuardAdmin } from './guards/auth.guard';
 import { AuthLogin } from './guards/auth.guard2';
 import { ConstanciaComponent } from './Component/constancia/constancia.component';
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
+import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 
 
 const routes: Routes = [
   {path:"", redirectTo: "home", pathMatch:"full"},
+  {path:"admin",component: AdminstradorComponent,canActivate:[AuthGuardAdmin]},
   {path:"home", component: HomeComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
