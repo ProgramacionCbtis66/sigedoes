@@ -1,4 +1,4 @@
-    <div class="row">
+   <!-- <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
           <div class="ps-5 d-flex border border-3 border-success">
@@ -10,13 +10,46 @@
                 <input [(ngModel)]="correo.correo" type="text" class="ms-5" placeholder="Ingresa tu correo">
               </div>
               <div class=""></div>
-              <div class="ms-5">
-                <button class="ms-5" (click)="enviar()">Comprobar</button>
-              </div>
+              
             
                 
               </div>
             </div>
           </div>
         </div>
+      </div>-->
+<div>
+  <div>
+    <!--Línea de arriba-->
+    <div>
+      <h1 class="border border-secondary border-2 m-5 mb-2"></h1>
+    
+    </div>
+    <!--texto clave perdida-->
+    <div>
+      <h2 class="text-center text-success">Olvidé Mi Contraseña</h2>
+    </div>
+    
+    <!--Indicaciones-->
+    <div class="d-flex justify-content-center" >
+      <h6 class="card border border-white text-center text-secondary" style="width: 28rem;">Escribe tu direccion correo con el cual te registraste en la plataforma y en seguida te enviaremos un mail con los pasos indicados para poder recordar tu clave</h6>
+    </div>
+    
+    <!--Correo y Input-->
+    <div class="d-flex justify-content-center ms-2 mt-3">
+      <div class="card border border-white" style="width:28rem;">
+        <div>
+          <h6>Correo</h6>
+        </div>
+        <div>
+          <input [(ngModel)]="correo.correo" placeholder="Correo">
+        </div>
+        <div class="ms-5">
+          <button class="ms-5" (click)="enviar()">Comprobar</button>
+        </div>
       </div>
+    </div>
+
+
+  </div>
+</div>

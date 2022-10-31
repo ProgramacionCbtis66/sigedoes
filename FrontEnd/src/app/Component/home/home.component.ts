@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
     if(this.auth.isAuth()){
       let token = this.auth.decodifica();
-
+      
       this.dato.numcontrol = token.numControl;
 
       this.user.datosUser(this.dato).subscribe((res: any)=>{

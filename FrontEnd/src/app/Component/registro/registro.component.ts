@@ -17,6 +17,12 @@ export class RegistroComponent implements OnInit {
   informacion = 'Info';
   infografia : string = '.././assets/img/infografiaa.png';
   usuario = {
+    "username":"",
+    "numControl":"",
+    "password":"",
+    "rol":"",
+    "exp":300,
+    "nombre":"",
     "correo": "",
     "pass": "",
     "pass2":"",
@@ -26,7 +32,6 @@ export class RegistroComponent implements OnInit {
     "semestre":"",
     "area":"",
     "turno":"",
-    "nombre":"",
     "direccion":""
   };
 
