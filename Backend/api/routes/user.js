@@ -30,7 +30,7 @@ router.post('/forgotPassword',(req,res) => {
 
 router.post('/login',(req,res)=>{
     const {nombre,pass} = req.body; 
-    ccn.query('select userName, rol from usuario where userName = ? and password = ?', [nombre,pass],
+    ccn.query('select userName, rol, numControl from usuario where userName = ? and password = ?', [nombre,pass],
         (err,rows,fields)=>{
             
             if(!err) {
@@ -53,6 +53,23 @@ router.post('/login',(req,res)=>{
             }
         }
     );
+});
+
+router.post('/datosUser',(req,res)=>{
+   const numControls = req.body.numcontrol; 
+   console.log(numControls);
+   ccn.query('select * from pdf where numControl = ?',[numControls],
+   (err,rows,fields)=>{
+        if(!err) {
+            if(rows.length>0){
+                let datos = JSON.stringify(rows[0]);
+                let dato = JSON.parse(datos);
+                let data = JSON.stringify(dato);
+                console.log(data);
+                res.json({data});
+            }else{res.json({Erro:"no hay datos"})}
+        }else{res.json({Error:"En base de datos"});}
+   });
 });
 
 

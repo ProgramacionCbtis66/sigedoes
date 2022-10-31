@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import decode from 'jwt-decode';
 
 
@@ -13,8 +12,16 @@ export class UsuarioService {
   constructor(private http:HttpClient) { }
 
 
-  forgotPassword(email:any):Observable<any>{
- 
+  forgotPassword(email:any){
+    console.log(email);
     return this.http.post(`${this.URL}/insize/forgotPassword`,email);
   }
+
+  datosUser(numcontrol:any){
+    console.log(numcontrol);
+    return this.http.post(`${this.URL}/insize/datosUser`,numcontrol);
+  }
+
+
+
 }

@@ -21,6 +21,7 @@ export class AuthService {
   public login(user: any) {
     return this.http.post(`${this.URL}/insize/login`, user);
   }
+  
   public registro(usuario:any){
     return this.http.post(`${this.URL}/insize/registro`,usuario);
   }
