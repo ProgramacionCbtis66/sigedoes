@@ -54,7 +54,24 @@ router.post('/login',(req,res)=>{
         }
     );
 });
-
+/*router.post('/registro',(req,res)=>{
+    const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
+    ccn.query('INSERT INTO usuario (idUser,userName,numControl,password,rol,exp,nombre) VALUES (?, ?, ?, ?, ?, ?, ?, )',[noctrl,nombre,])
+});*/
+/*router.post('/registro',(req,res)=>{
+    const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
+    let xd = "3";
+    let horario = "si";
+    let CTO = "30DCT0236O";
+    let alta = "1";
+    console.log(req.body);
+    ccn.query('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [numcontrol,nombre,direccion,especialidad,area,semestre,xd,turno,horario,CTO,correo,alta,curp],
+    (err,rows,fields)=>{
+        if(!err){
+            console.log("correcto");
+        }
+    });
+});*/
 router.post('/datosUser',(req,res)=>{
    const numControls = req.body.numcontrol; 
    console.log(numControls);

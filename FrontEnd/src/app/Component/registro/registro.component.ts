@@ -26,7 +26,8 @@ export class RegistroComponent implements OnInit {
     "semestre":"",
     "area":"",
     "turno":"",
-    "nombre":""
+    "nombre":"",
+    "direccion":""
   };
 
   constructor(private auth: AuthService,  private router: Router, private app : AppComponent) { app.registro=true; app.iflogin=false;}
