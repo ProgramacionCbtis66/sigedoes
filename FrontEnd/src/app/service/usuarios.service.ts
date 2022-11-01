@@ -18,10 +18,17 @@ export class UsuarioService {
   }
 
   datosUser(numcontrol:any){
-    console.log(numcontrol);
+
     return this.http.post(`${this.URL}/insize/datosUser`,numcontrol);
   }
 
+  usuarioAceptado(numcontrol:any){
+      return this.http.post(`${this.URL}/insize/altaUsuario`,numcontrol);
+  }
+
+  UsuariosNoReg(){
+    return this.http.get(`${this.URL}/insize/listaUserNoReg`);
+  }
 
 
 }

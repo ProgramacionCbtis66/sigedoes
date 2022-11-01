@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/service/usuarios.service';
+
 
 
 @Component({
@@ -8,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminstradorComponent implements OnInit {
 
-  constructor() { }
+  datos: any;
+
+  constructor(private userServicio:UsuarioService) { }
 
   ngOnInit(): void {
+    this.userServicio.UsuariosNoReg().subscribe((res: any)=> {
+      this.datos = JSON.parse(res.data);
+    });
   }
+
+  aceptar(op:any){
+    confirm("Aceptado" + " "+ op);
+  }
+
 
 }
