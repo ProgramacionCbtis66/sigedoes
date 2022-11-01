@@ -35,6 +35,7 @@ export class AppComponent implements OnInit{
     if(this.auth.isAuth()){
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
+      if(user.rol== "Admin") this.Administrador=true;
     }
   }
   salir(){
