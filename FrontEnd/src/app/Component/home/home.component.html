@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-7">
-                <h1 class="d-inline-flex mt-2 border border-success rounded p-2 verdecito">Bienvenido Alumno Del CBTIS66!</h1>
+                <h1 class="d-inline-flex mt-2 border border-success rounded p-2">Bienvenido Alumno Del CBTIS66!</h1>
             </div>
             <div class="col-lg-4 d-flex align-items-center">
                 <h4 class="bg-primary rounded p-2 pb-2">
@@ -16,8 +16,9 @@
         <div class="row">
             <!--Lado Izquierdo-->
             <div class="col-lg-6">
-                <div class="table-responsive border border-success border-2 mt-3 p-2 ps-3 pt-3">
-                    <table class="table table-bordered table-hover ">
+                <div class="">
+                    <div class="card table-responsive border border-success border-2 mt-3 p-2 ps-3 pt-3">
+                        <table class="table table-bordered table-hover ">
                         <thead class="border">
                             <th class="h4 p-2">Datos Del Solicitante</th>
                         </thead>
@@ -58,47 +59,50 @@
                         </tbody>
 
                     </table>
+                    </div>
                 </div>
             </div>
 
             <!--Lado Derecho-->
             <div class="col-lg-6">
-                <div class="d-flex justify-content-center border border-2 bg-primary">
-                    <h3>Constancias:</h3>
-                </div>
-                <div class="border rounded border-2 bg-success">
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio1" name="optradio" value="option1">Para Beca
-                        <label class="form-check-label" for="radio1"></label>
+                <div class="card">
+                    <div class="d-flex justify-content-center border border-2 ">
+                        <h3>Constancias:</h3>
                     </div>
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio2" name="optradio" value="option2">Para Pasaporte
-                        <label class="form-check-label" for="radio2"></label>
+                    <div class="border rounded border-2">
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio1" name="optradio" value="option1">Para Beca
+                            <label class="form-check-label" for="radio1"></label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio2" name="optradio" value="option2">Para Pasaporte
+                            <label class="form-check-label" for="radio2"></label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio3" name="optradio" value="option3">Para Servicios Médicos
+                            <label class="form-check-label" for="radio3"></label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio4" name="optradio" value="option4">Para Fines Legales
+                            <label class="form-check-label" for="radio4"></label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio5" name="optradio" value="option5">Para Seguro Social
+                            <label class="form-check-label" for="radio5"></label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input type="radio" class="form-check-input bg-primary" id="radio6" name="optradio" value="option6">Para Inscripciones
+                            <label class="form-check-label" for="radio6"></label>
+                        </div>
                     </div>
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio3" name="optradio" value="option3">Para Servicios Médicos
-                        <label class="form-check-label" for="radio3"></label>
-                    </div>
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio4" name="optradio" value="option4">Para Fines Legales
-                        <label class="form-check-label" for="radio4"></label>
-                    </div>
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio5" name="optradio" value="option5">Para Seguro Social
-                        <label class="form-check-label" for="radio5"></label>
-                    </div>
-                    <div class="form-check m-2">
-                        <input type="radio" class="form-check-input bg-primary" id="radio6" name="optradio" value="option6">Para Inscripciones
-                        <label class="form-check-label" for="radio6"></label>
-                    </div>
-                </div>
 
-                <div class="input-group mb-3 mt-3 ms-3">
-                    <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
-                    <input [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
-                </div>
-                <div class="ms-3">
-                    <button (click)="comprobar()" type="button">Comprobar Datos</button>
+                    <div class="input-group mb-3 mt-3 ms-3">
+                        <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
+                        <input [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
+                    </div>
+                    <div class="ms-3">
+                        <button (click)="comprobar()" type="button">Comprobar Datos</button>
+                    </div>
                 </div>
             </div>
 
