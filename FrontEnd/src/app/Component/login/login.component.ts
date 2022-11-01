@@ -39,14 +39,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.usuario).subscribe((res: any) => {
         if (res.token !== null && res.token != undefined) {
           localStorage.setItem('color', res.token);
-          // localStorage.setItem('nombre',res.nombre);
-          // localStorage.setItem('data',res.dataa.user);
-          // localStorage.setItem('correo',res.dataa.correo);
-          // localStorage.setItem('curp',res.dataa.curp);
-          // localStorage.setItem('noctrl',res.dataa.iduser);
-          // localStorage.setItem('especialidad',res.dataa.especialidad);
-          // localStorage.setItem('area',res.dataa.area);
-          // localStorage.setItem('turno',res.dataa.turno);
+
           this.app.visibleLoginRegistro();
 
           Notiflix.Loading.remove();

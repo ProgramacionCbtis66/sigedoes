@@ -30,13 +30,12 @@ export class HomeComponent implements OnInit {
 
     if(this.auth.isAuth()){
       let token = this.auth.decodifica();
-      
+
       this.dato.numcontrol = token.numControl;
 
       this.user.datosUser(this.dato).subscribe((res: any)=>{
         if(res !="" && res!=null){
           this.datos = JSON.parse(res.data);
-          console.log(this.datos);
           this.alumno= this.datos.nombre;
           this.curp = this.datos.CURP;
           this.correo= this.datos.correo;

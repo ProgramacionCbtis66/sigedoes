@@ -12,13 +12,42 @@
 </div>
 <div class="row ms-5 me-5">
   <div class="col-lg-6">
-    <div class="card">
-      <div class="card-header">
-        Header
+    <div class="card" style="height:460px;">
+      <div class="card-header justify-content-center">
+        <p class="h5 text-center fw-light text-secondary">
+          <i class="fa fa-address-card" aria-hidden="true"></i>
+          Solicitudes de usuarios</p>
       </div>
       <div class="card-body">
-        <h4 class="card-title">Title</h4>
-        <p class="card-text">Text</p>
+        <!-- ngfor en un table -->
+        <div class="table-responsive">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Número de control</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Grado</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Especialidad</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr  *ngFor="let dato of datos; let reg = index" >
+                <td>{{dato.numControl}}</td>
+                <td>{{dato.nombre}}</td>
+                <td>{{dato.grado}}</td>
+                <td>{{dato.grupo}}</td>
+                <td>{{dato.especialidad}}</td>
+                <td class="text-center">Aceptar | Anular</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
       </div>
       <div class="card-footer text-muted">
         Footer
