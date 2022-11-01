@@ -24,7 +24,7 @@
           <table class="table table-hover table-sm">
             <thead>
               <tr>
-                <th scope="col">Número de control</th>
+                <th scope="col">Número Ctrl.</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Grado</th>
                 <th scope="col">Grupo</th>
@@ -33,13 +33,14 @@
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              <tr  *ngFor="let dato of datos; let reg = index" >
+              <tr  *ngFor="let dato of datos; let reg = index " >
                 <td>{{dato.numControl}}</td>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.grado}}</td>
                 <td>{{dato.grupo}}</td>
                 <td>{{dato.especialidad}}</td>
-                <td class="text-center">Aceptar | Anular</td>
+                <td class="text-center"> <a (click)="aceptar(dato.numControl)" class="badge bg-success"><i class="fa fa-check-circle" aria-hidden="true"></i></a> |
+                  <a (click)="aceptar(dato.numControl)" class="badge bg-danger"><i class="fa-solid fa-circle-xmark"></i></a></td>
               </tr>
             </tbody>
           </table>

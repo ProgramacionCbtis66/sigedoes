@@ -20,9 +20,9 @@ export class AdminstradorComponent implements OnInit {
     });
   }
 
-
-
-
+  aceptar(op:any){
+    confirm("Aceptado" + " "+ op);
+  }
 
 
 }

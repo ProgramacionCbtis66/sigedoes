@@ -22,7 +22,7 @@ export class UsuarioService {
     return this.http.post(`${this.URL}/insize/datosUser`,numcontrol);
   }
 
-  altaUsuario(numcontrol:any){
+  usuarioAceptado(numcontrol:any){
       return this.http.post(`${this.URL}/insize/altaUsuario`,numcontrol);
   }
 

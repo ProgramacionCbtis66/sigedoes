@@ -45,8 +45,11 @@ export class LoginComponent implements OnInit {
           Notiflix.Loading.remove();
           if(this.auth.decodifica().rol =="Admin"){
             this.app.Administrador=true;
+            this.app.mostrar=true;
+            this.router.navigate(['/admin']);
+          }else{
+            this.router.navigate(['/home']);
           }
-          this.router.navigate(['/home']);
         } else if (res.Error == "Usuario y contraseña incorrecta") {
           Notiflix.Loading.remove();
           Notiflix.Notify.warning(res.Error);

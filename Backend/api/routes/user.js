@@ -17,7 +17,7 @@ router.post('/forgotPassword', (req, res) => {
                     dato.tipo = "forgotPassword";
                     let data = JSON.stringify(dato);
                     const usuario = jwt.sign(data, 'stil');
-                    console.log({ usuario });
+             
                     res.json({ usuario });
                 } else {
                     res.json({ Error: "Correo invalido" });
@@ -30,7 +30,7 @@ router.post('/forgotPassword', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
-    ccn.query('select usuario.userName as userName, usuario.rol as rol, usuario.numControl as numControl from usuario inner join alumno on usuario.numControl like alumno.numControl where userName = ? and password = ?', [nombre, pass],
+    ccn.query('select usuario.userName as userName, usuario.rol as rol, usuario.numControl as numControl from usuario inner join alumno on usuario.numControl like usuario.numControl where userName = ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
 
             if (!err) {
@@ -74,7 +74,7 @@ router.post('/login', (req, res) => {
 });*/
 router.post('/datosUser', (req, res) => {
     const numControls = req.body.numcontrol;
-    console.log(numControls);
+   
     ccn.query('select * from pdf where numControl = ?', [numControls],
         (err, rows, fields) => {
             if (!err) {
@@ -82,16 +82,16 @@ router.post('/datosUser', (req, res) => {
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
                     let data = JSON.stringify(dato);
-                    console.log(data);
+                    
                     res.json({ data });
                 } else { res.json({ Erro: "no hay datos" }) }
             } else { res.json({ Error: "En base de datos" }); }
         });
 });
 
-router.post('/altaUsuario', (req, res) => {
+router.post('/usuarioAceptado', (req, res) => {
     const alumno = req.body;
-    ccn.query('UPDATE constancias.alumno SET alta = 1 WHERE numControl like ?', [alumno.numControls],
+    ccn.query('UPDATE constancias.alumno SET alta = 1 WHERE numControl like ?', [alumno.numControl],
         (err, rows, fields) => {
             if (!err) {
                 res.json("Aceptado");
@@ -102,7 +102,7 @@ router.post('/altaUsuario', (req, res) => {
 });
 
 router.get('/listaUserNoReg', (req,res) => {
-    console.log("ya estoy en listado get");
+    
     ccn.query('select nombre, numControl,correo, grado, grupo, turno, especialidad from alumno where alta = 0',
         (err, rows, fields) => {
             if (!err) {
