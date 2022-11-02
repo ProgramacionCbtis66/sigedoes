@@ -31,6 +31,7 @@ export class UsuarioService {
   }
 
 NoPago(datos:any){
+    console.log(datos);
     return this.http.post(`${this.URL}/insize/NoPago`,datos);
 }
 
