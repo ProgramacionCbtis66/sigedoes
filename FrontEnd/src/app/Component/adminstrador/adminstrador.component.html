@@ -16,7 +16,8 @@
       <div class="card-header justify-content-center">
         <p class="h5 text-center fw-light text-secondary">
           <i class="fa fa-address-card" aria-hidden="true"></i>
-          Solicitudes de usuarios</p>
+          Solicitudes de usuarios
+        </p>
       </div>
       <div class="card-body">
         <!-- ngfor en un table -->
@@ -33,14 +34,17 @@
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              <tr  *ngFor="let dato of datos; let reg = index " >
+              <tr *ngFor="let dato of datos; let reg = index ">
                 <td>{{dato.numControl}}</td>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.grado}}</td>
                 <td>{{dato.grupo}}</td>
                 <td>{{dato.especialidad}}</td>
-                <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></a> |
-                  <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled ><i class="fa-solid fa-circle-xmark"></i></a></td>
+                <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i
+                      class="fa fa-check-circle" aria-hidden="true"></i></a> |
+                  <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled><i
+                      class="fa-solid fa-circle-xmark"></i></a>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -55,11 +59,12 @@
     <div class="row">
       <div class="card">
         <div class="card-header">
-          <h2 class="h6 text-center fw-light text-success">Generaion de codigo de pago</h2>
+          <p class="h5 text-center fw-light text-secondary">
+            <i class="fa fa-address-card" aria-hidden="true"></i>
+            Solicitud de Pago de Servicio
+          </p>
         </div>
         <div class="card-body">
-          <h4 class="card-title">Title</h4>
-          <p class="card-text">Text</p>
         </div>
         <div class="card-footer text-muted">
           Footer
