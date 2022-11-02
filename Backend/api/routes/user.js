@@ -119,9 +119,9 @@ router.get('/listaUserNoReg', (req,res) => {
 });
 
 router.post('/NoPago',(req,res)=>{
-    const {NoPago} = req.body;
+    const {NoPago,numControl} = req.body;
     console.log(NoPago);
-    ccn.query('SELECT codigoPago from solicitud where codigoPago = ?',[NoPago],
+    ccn.query('SELECT codigoPago from solicitud where codigoPago = ? and numControl = ?',[NoPago,numControl],
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
