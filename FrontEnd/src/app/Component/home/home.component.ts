@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   turno: any;
   datos : any;
   valor1 : any;
-  tabla = true;
+  tabla = false;
   datoo : any;
   datosCons = {
     "asunto":"",
