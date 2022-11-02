@@ -75,9 +75,9 @@ router.post('/login', (req, res) => {
 });*/
 
 router.post('/datosUser', (req, res) => {
-    const numControls = req.body.numcontrol;
-   
-    ccn.query('select * from pdf where numControl = ?', [numControls],
+    const numControl = req.body.numcontrol;
+   console.log(numControl);
+    ccn.query('select * from pdf where numControl = ?', [numControl],
         (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {

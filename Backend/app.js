@@ -16,7 +16,8 @@ app.use('/insize', userRouter);
  const emailSend = require('./api/routes/enviarEmail');
  app.use('/email', emailSend);
 
-
+const adminRouter = require('./api/routes/admin');
+app.use('/admin', adminRouter);
 
 
 app.use(function(req, res, next) {

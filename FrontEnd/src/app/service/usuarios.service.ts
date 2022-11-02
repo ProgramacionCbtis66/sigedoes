@@ -18,7 +18,7 @@ export class UsuarioService {
   }
 
   datosUser(numcontrol:any){
-
+    console.log(numcontrol);
     return this.http.post(`${this.URL}/insize/datosUser`,numcontrol);
   }
 

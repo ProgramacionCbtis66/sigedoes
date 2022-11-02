@@ -1,13 +1,13 @@
 <div class="row">
   <div>
-    <h1 class="border  border-1 bg-secondary mt-3 ms-5 me-5"></h1>
+    <h1 class="border  border-1 bg-secondary mt-3 ms-3 me-3"></h1>
   </div>
   <!--texto clave perdida-->
   <div>
     <h2 class="display-6 text-center fw-light text-success">Módulo del Administrador</h2>
   </div>
   <div>
-    <h1 class="border border-1 bg-light ms-5 me-5 mb-2"></h1>
+    <h1 class="border border-1 bg-light ms-3 me-3 mb-2"></h1>
   </div>
 </div>
 <div class="row ms-5 me-5">
@@ -71,6 +71,7 @@
         </div>
       </div>
     </div>
+<<<<<<< Updated upstream
     <div class="row">
       <div class="card">
         <div class="card-header">
@@ -84,6 +85,159 @@
           Footer
         </div>
       </div>
+=======
+    <div class="col-lg-6">
+      <div class="row g-0 pb-3">
+        <div class="card">
+          <div class="card-header">
+            <p class="h5 text-center fw-light text-secondary">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              Solicitud de Pago de Servicio
+            </p>
+          </div>
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-8">
+                <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                <div class="input-group">
+                  <div class="input-group-text">Num. Control solicitante :</div>
+                  <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="Número de Control">
+                </div>
+              </div>
+              <div class="d-grid gap-2 col-4 mx-auto">
+                <a name="" id="" class="btn btn-primary " (click)="verificar()" role="button">Verificar</a>
+              </div>
+            </div>
+
+
+            <div class="row mt-2">
+              <div class="col-6">
+                <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                <div class="input-group">
+                  <div class="input-group-text">Nombre</div>
+                  <input [(ngModel)]="alumno.nombre" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="Nombre">
+                </div>
+              </div>
+              <div class="col-3">
+                <label class="visually-hidden" for="autoSizingInputGroup">Grado</label>
+                <div class="input-group">
+                  <div class="input-group-text">Grado</div>
+                  <input [(ngModel)]="alumno.grado" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="Grado">
+                </div>
+              </div>
+              <div class="col-3">
+                <label class="visually-hidden" for="autoSizingInputGroup">Grupo</label>
+                <div class="input-group">
+                  <div class="input-group-text">Grupo</div>
+                  <input [(ngModel)]="alumno.grupo" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="Grupo">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-4">
+                <label class="visually-hidden" for="autoSizingInputGroup">Correo</label>
+                <div class="input-group">
+                  <div class="input-group-text">Correo</div>
+                  <input [(ngModel)]="alumno.correo" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="correo">
+                </div>
+              </div>
+              <div class="col-5">
+                <label class="visually-hidden" for="autoSizingInputGroup">Especilidad</label>
+                <div class="input-group">
+                  <div class="input-group-text">Especilidad</div>
+                  <input [(ngModel)]="alumno.especialidad" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="Especilidad">
+                </div>
+              </div>
+              <div class="col-3">
+                <label class="visually-hidden" for="autoSizingInputGroup">Turno</label>
+                <div class="input-group">
+                  <div class="input-group-text">Turno</div>
+                  <input [(ngModel)]="alumno.turno" type="text" class="form-control" id="autoSizingInputGroup"
+                    placeholder="turno">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="card">
+          <div class="card-header">
+            <p class="h5 text-center fw-light text-secondary">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              Generador de Código de pago
+            </p>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="verificado">
+              <div class="col-12 bg-light rounded-8 bg-gradient align-baseline d-flex justify-content-center py-4">
+                <button type="button" class="btn btn-success btn-3g " data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  Generar Código
+                  <i class="fa fa-qrcode" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Generador de Código del {{alumno.escuela}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <input [(ngModel)]="numero" class="form-control form-control-lg" type="text"
+            aria-label=".form-control-lg example">
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center mt-3">
+            <a (click)="GenerarCodigoPago()" class="btn btn-primary mb-3">Generar</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center mt-3">
+            <label class="visually-hidden" for="autoSizingInputGroup">Costo</label>
+            <div class="input-group">
+              <div class="input-group-text"> $ :</div>
+              <input [(ngModel)]="solicitud.aportacion" type="text" class="form-control" id="autoSizingInputGroup"
+                placeholder="Número de Control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center mt-3">
+            <label class="visually-hidden" for="autoSizingInputGroup">Descripcion</label>
+            <div class="input-group">
+              <div class="input-group-text"> Descripcion</div>
+              <textarea [(ngModel)]="solicitud.descripcion" type="text" class="form-control" id="autoSizingInputGroup"
+                placeholder="Número de Control">
+                </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</a>
+      </div>
+>>>>>>> Stashed changes
     </div>
 
   </div>
