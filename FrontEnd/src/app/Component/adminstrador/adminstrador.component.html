@@ -10,74 +10,81 @@
     <h1 class="border border-1 bg-light ms-5 me-5 mb-2"></h1>
   </div>
 </div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card" style="height:460px;">
-        <div class="card-header justify-content-center">
+<div class="row ms-5 me-5">
+  <div class="col-lg-6">
+    <div class="card" style="height:460px;">
+      <div class="card-header justify-content-center">
+        <p class="h5 text-center fw-light text-secondary">
+          <i class="fa fa-address-card" aria-hidden="true"></i>
+          Solicitudes de usuarios
+        </p>
+      </div>
+      <div class="card-body">
+        <!-- ngfor en un table -->
+        <div class="table-responsive">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Número Ctrl.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Grado</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Especialidad</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let dato of datos; let reg = index ">
+                <td>{{dato.numControl}}</td>
+                <td>{{dato.nombre}}</td>
+                <td>{{dato.grado}}</td>
+                <td>{{dato.grupo}}</td>
+                <td>{{dato.especialidad}}</td>
+                <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i
+                      class="fa fa-check-circle" aria-hidden="true"></i></a> |
+                  <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled><i
+                      class="fa-solid fa-circle-xmark"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        Footer
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="card">
+        <div class="card-header">
           <p class="h5 text-center fw-light text-secondary">
             <i class="fa fa-address-card" aria-hidden="true"></i>
-            Solicitudes de usuarios
+            Solicitud de Pago de Servicio
           </p>
         </div>
         <div class="card-body">
-          <!-- ngfor en un table -->
-          <div class="table-responsive">
-            <table class="table table-hover table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Número Ctrl.</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Grado</th>
-                  <th scope="col">Grupo</th>
-                  <th scope="col">Especialidad</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <tr *ngFor="let dato of datos; let reg = index ">
-                  <td>{{dato.numControl}}</td>
-                  <td>{{dato.nombre}}</td>
-                  <td>{{dato.grado}}</td>
-                  <td>{{dato.grupo}}</td>
-                  <td>{{dato.especialidad}}</td>
-                  <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i
-                        class="fa fa-check-circle" aria-hidden="true"></i></a> |
-                    <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled><i
-                        class="fa-solid fa-circle-xmark"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        </div>
+        <div class="card-footer text-muted">
+          Footer
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
-      <div class="row">
-        <div class="card">
-          <div class="card-header">
-            <p class="h5 text-center fw-light text-secondary">
-              <i class="fa fa-address-card" aria-hidden="true"></i>
-              Solicitud de Pago de Servicio
-            </p>
-          </div>
-          <div class="card-body">
-          </div>
+    <div class="row">
+      <div class="card">
+        <div class="card-header">
+          Header
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Title</h4>
+          <p class="card-text">Text</p>
+        </div>
+        <div class="card-footer text-muted">
+          Footer
         </div>
       </div>
-      <div class="row">
-        <div class="card">
-          <div class="card-header">
-            Header
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Title</h4>
-            <p class="card-text">Text</p>
-          </div>
-        </div>
-      </div>
+    </div>
 
-    </div>
   </div>
 </div>
