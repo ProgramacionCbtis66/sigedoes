@@ -18,30 +18,28 @@ USE `constancias`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `solicitud`
+-- Table structure for table `registro`
 --
 
-DROP TABLE IF EXISTS `solicitud`;
+DROP TABLE IF EXISTS `registro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `solicitud` (
-  `idSolicitud` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `registro` (
+  `idregistro` int NOT NULL AUTO_INCREMENT,
   `numControl` varchar(14) NOT NULL,
-  `codigoPago` varchar(15) NOT NULL,
-  `fechaSolicitu` date NOT NULL,
-  `descripcion` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSolicitud`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `admin` varchar(14) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  PRIMARY KEY (`idregistro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `solicitud`
+-- Dumping data for table `registro`
 --
 
-LOCK TABLES `solicitud` WRITE;
-/*!40000 ALTER TABLE `solicitud` DISABLE KEYS */;
-INSERT INTO `solicitud` VALUES (1,'1400025G86','25452TTT','2022-11-15','XXXXXXXXXXX');
-/*!40000 ALTER TABLE `solicitud` ENABLE KEYS */;
+LOCK TABLES `registro` WRITE;
+/*!40000 ALTER TABLE `registro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
