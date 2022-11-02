@@ -20,8 +20,7 @@ app.use('/insize', userRouter);
 
 
 app.use(function(req, res, next) {
-    next(createError(404)),
-    next(createError(500));
+    next(createError(404));
 });
 
 

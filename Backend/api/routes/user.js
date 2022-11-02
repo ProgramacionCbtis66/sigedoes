@@ -30,7 +30,7 @@ router.post('/forgotPassword', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
-    ccn.query('select usuario.userName as userName, usuario.rol as rol, usuario.numControl as numControl from usuario inner join alumno on usuario.numControl like usuario.numControl where userName = ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
+    ccn.query('select alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
 
             if (!err) {
@@ -54,6 +54,7 @@ router.post('/login', (req, res) => {
         }
     );
 });
+
 /*router.post('/registro',(req,res)=>{
     const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
     ccn.query('INSERT INTO usuario (idUser,userName,numControl,password,rol,exp,nombre) VALUES (?, ?, ?, ?, ?, ?, ?, )',[noctrl,nombre,])
@@ -72,6 +73,7 @@ router.post('/login', (req, res) => {
         }
     });
 });*/
+
 router.post('/datosUser', (req, res) => {
     const numControls = req.body.numcontrol;
    
@@ -91,10 +93,13 @@ router.post('/datosUser', (req, res) => {
 
 router.post('/usuarioAceptado', (req, res) => {
     const alumno = req.body;
-    ccn.query('UPDATE constancias.alumno SET alta = 1 WHERE numControl like ?', [alumno.numControl],
+    console.log(req.body);
+    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.numControl],
         (err, rows, fields) => {
             if (!err) {
-                res.json("Aceptado");
+                console.log(rows.length);
+                if(alumno.op==1) res.json("Aceptado");
+                if(alumno.op==3) res.json("Rechazado");
             } else {
                 res.json("error en la cunsulta");
             }
@@ -103,7 +108,7 @@ router.post('/usuarioAceptado', (req, res) => {
 
 router.get('/listaUserNoReg', (req,res) => {
     
-    ccn.query('select nombre, numControl,correo, grado, grupo, turno, especialidad from alumno where alta = 0',
+    ccn.query('select usuario.password as password, alumno.nombre as nombre, alumno.numControl as numControl,alumno.correo as correo, alumno.grado as grado, alumno.grupo as grupo, alumno.turno as turno, alumno.especialidad as especialidad from alumno join usuario on alumno.numControl = usuario.numControl where alta = 0',
         (err, rows, fields) => {
             if (!err) {
                 res.send({data: JSON.stringify(rows)});

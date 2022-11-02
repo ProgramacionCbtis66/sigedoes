@@ -23,12 +23,13 @@ export class UsuarioService {
   }
 
   usuarioAceptado(numcontrol:any){
-      return this.http.post(`${this.URL}/insize/altaUsuario`,numcontrol);
+      return this.http.post(`${this.URL}/insize/usuarioAceptado`,numcontrol);
   }
 
   UsuariosNoReg(){
     return this.http.get(`${this.URL}/insize/listaUserNoReg`);
   }
 
+  
 
 }

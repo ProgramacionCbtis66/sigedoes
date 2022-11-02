@@ -39,16 +39,12 @@
                 <td>{{dato.grado}}</td>
                 <td>{{dato.grupo}}</td>
                 <td>{{dato.especialidad}}</td>
-                <td class="text-center"> <a (click)="aceptar(dato.numControl)" class="badge bg-success"><i class="fa fa-check-circle" aria-hidden="true"></i></a> |
-                  <a (click)="aceptar(dato.numControl)" class="badge bg-danger"><i class="fa-solid fa-circle-xmark"></i></a></td>
+                <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></a> |
+                  <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled ><i class="fa-solid fa-circle-xmark"></i></a></td>
               </tr>
             </tbody>
           </table>
         </div>
-
-
-
-
       </div>
       <div class="card-footer text-muted">
         Footer

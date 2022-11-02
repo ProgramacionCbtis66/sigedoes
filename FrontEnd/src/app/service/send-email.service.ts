@@ -16,10 +16,13 @@ export class SendEmailService {
   }
 
   enviarUserContra(email:any):Observable<any>{
-    
+
     return this.http.post(`${this.URL}/email/forgotPassword`,email);
   }
 
+  correoAcpetacion(email:any){
+    return this.http.post(`${this.URL}/email/correoAcpetacion`,email);
+  }
 
 
 }
