@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import decode from 'jwt-decode';
+
 
 
 
@@ -30,6 +30,8 @@ export class UsuarioService {
     return this.http.get(`${this.URL}/insize/listaUserNoReg`);
   }
 
-  
+NoPago(datos:any){
+    return this.http.get(`${this.URL}/insize/NoPago`,datos);
+}
 
 }
