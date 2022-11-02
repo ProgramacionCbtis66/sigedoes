@@ -18,6 +18,22 @@ export class HomeComponent implements OnInit {
   area : any;
   turno: any;
   datos : any;
+  valor1 : any;
+  tabla = true;
+  datoo : any;
+  datosCons = {
+    "asunto":"",
+    "nombre":"",
+    "matricula":"",
+    "claveIns":"",
+    "semestre":"",
+    "especialidad":"",
+    "claveEsc":"",
+    "area":"",
+    "turno":"",
+    "horario":"",
+    "periodo":""
+  }
   dato = {
     numcontrol:""
   }
@@ -55,10 +71,35 @@ export class HomeComponent implements OnInit {
   public name() {
 
   }
-
+  tabladatos(){
+    this.tabla = true;
+  }
   comprobar(){
     if(this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != ""){
-      Notiflix.Notify.info("Revisando Código");
+      Notiflix.Loading.standard("Revisando Código");
+      this.user.NoPago(this.home).subscribe((res:any)=>{
+        if(res.valido != "" && res.valido != null && res.valido != undefined){
+          if(this.tabla == false){
+            this.tabla = true;
+            Notiflix.Loading.remove();
+            }
+            else{
+              Notiflix.Loading.remove();
+              this.tabla = false;
+            }}else if(res.Error == "Número Invalido"){
+                Notiflix.Loading.remove();
+                Notiflix.Notify.info("El Número No Es Valido")
+              }
+            
+    });}
     }
+  data(){/*
+   this.datoo = document.getElementById('radio1');
+   if(this.datoo){
+     Notiflix.Notify.info("Seleccionado Beca");
+   }else if(this.datoo == null){
+    Notiflix.Notify.info("no seleccionado");
+   }*/
   }
 }
+
