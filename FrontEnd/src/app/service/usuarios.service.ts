@@ -31,7 +31,7 @@ export class UsuarioService {
   }
 
 NoPago(datos:any){
-    return this.http.get(`${this.URL}/insize/NoPago`,datos);
+    return this.http.post(`${this.URL}/insize/NoPago`,datos);
 }
 
 }
