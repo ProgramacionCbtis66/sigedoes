@@ -20,7 +20,7 @@
                         <div class="text-white">
                             <h5>--</h5>
                         </div>  
-                    <div>
+                        <div>
                             <h5>Verificar Tus Datos</h5>
                         </div>
                     </div>
@@ -144,6 +144,86 @@
                     </div>
 
             <div class="col-lg-1"></div>
-        </div>        
+        </div> <div class="border border-success mt-4"></div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center ms-3" *ngIf="tabla">
+                    <div>
+                        <h2>Paso 4: </h2>    
+                    </div>  
+                    <div class="text-white">
+                        <h5>--</h5>
+                    </div>  
+                    <div>
+                        <h5></h5>
+                    </div>    
+                </div>
+
+                <div class="">
+                            <div class="">
+                                <div class="card table-responsive border border-success border-2 p-2 ps-3 pt-3">
+                                    <table class="table table-bordered table-hover ">
+                                    <thead class="border">
+                                        <th class="h4 p-2">Datos De La Constancia</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <td>{{alumno}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Asunto</th>
+                                            <td>{{datosCons.asunto}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Matrícula</th>
+                                            <td>{{datosCons.matricula}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Clave Institucional</th>
+                                            <td>{{datosCons.claveIns}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Semestre</th>
+                                            <td>{{datosCons.semestre}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Especialidad</th>
+                                            <td>{{datosCons.especialidad}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Clave Escolar</th>
+                                            <td>{{datosCons.claveEsc}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Area</th>
+                                            <td>{{datosCons.area}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Turno</th>
+                                            <td>{{datosCons.turno}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Horario</th>
+                                            <td>{{datosCons.horario}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Periodo</th>
+                                            <td>{{datosCons.periodo}}</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="col-lg-6">
+                <button type="bottom" (click)="data()">lol</button>
+            </div>
+        </div>
     </div>
 </div>

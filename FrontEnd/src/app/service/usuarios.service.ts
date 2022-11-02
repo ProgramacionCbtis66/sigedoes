@@ -29,6 +29,8 @@ export class UsuarioService {
   UsuariosNoReg(){
     return this.http.get(`${this.URL}/insize/listaUserNoReg`);
   }
-
+  NoPago(noPago:any){
+    return this.http.post(`${this.URL}/insize/NoPago`,noPago);
+  }
 
 }

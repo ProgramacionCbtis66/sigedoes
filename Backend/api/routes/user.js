@@ -113,6 +113,20 @@ router.get('/listaUserNoReg', (req,res) => {
         });
 });
 
+router.post('/NoPago',(req,res)=>{
+    const {NoPago} = req.body;
+    ccn.query('SELECT codigoPago from solicitud where codigoPago = ?',[NoPago],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.length > 0){
+            console.log(rows[0]);
+            res.json({valido:"Aceptado"});
+            }else{
+                res.json({Error:"Número Invalido"});
+            }
+        }
+    });
+});
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);
