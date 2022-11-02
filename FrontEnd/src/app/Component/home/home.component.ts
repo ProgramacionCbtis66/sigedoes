@@ -18,24 +18,27 @@ export class HomeComponent implements OnInit {
   area : any;
   turno: any;
   datos : any;
-  valor1 : any;
   tabla = false;
   datoo : any;
+  boton = false;
+  valortipo = {
+    "tipo":"",
+  }
   datosCons = {
     "asunto":"",
     "nombre":"",
-    "matricula":"",
-    "claveIns":"",
+    "matricula":"nosecuales",
+    "claveIns":"30DCT0236O",
     "semestre":"",
     "especialidad":"",
-    "claveEsc":"",
+    "claveEsc":"352100002-16",
     "area":"",
     "turno":"",
-    "horario":"",
-    "periodo":""
+    "horario":"7:00 AM - 13:00 PM",
+    "periodo":"29 de Agosto al 13 de Diciembre del 2022."
   }
   dato = {
-    numcontrol:""
+    "numcontrol":""
   }
 
   constructor(private auth:AuthService, private user:UsuarioService) { }
@@ -75,6 +78,12 @@ export class HomeComponent implements OnInit {
     this.tabla = true;
   }
   comprobar(){
+    this.datosCons.asunto = this.valortipo.tipo;
+    this.datosCons.semestre = this.semestre;
+    this.datosCons.especialidad = this.especialidad;
+    this.datosCons.area = this.area;
+    this.datosCons.turno = this.turno;
+    this.datosCons.nombre = this.alumno;
     if(this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != ""){
       Notiflix.Loading.standard("Revisando Código");
       this.user.NoPago(this.home).subscribe((res:any)=>{
@@ -88,18 +97,16 @@ export class HomeComponent implements OnInit {
               this.tabla = false;
             }}else if(res.Error == "Número Invalido"){
                 Notiflix.Loading.remove();
-                Notiflix.Notify.info("El Número No Es Valido")
+                Notiflix.Notify.info("El Número No Es Valido");
               }
             
     });}
+    if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != ""){
+     if(this.boton){
+      this.boton = false;
+     } else{
+      this.boton = true;
+     }
     }
-  data(){/*
-   this.datoo = document.getElementById('radio1');
-   if(this.datoo){
-     Notiflix.Notify.info("Seleccionado Beca");
-   }else if(this.datoo == null){
-    Notiflix.Notify.info("no seleccionado");
-   }*/
-  }
+    }
 }
-
