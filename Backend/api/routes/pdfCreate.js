@@ -48,7 +48,6 @@ function create(req, tipo) {
     let dia = convertir(fecha.getDate());
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
-    console.log(alumno);
 
     const contenido = {
         asunto: [

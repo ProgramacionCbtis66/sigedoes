@@ -12,7 +12,6 @@ Emailrouter.post("/enviar-constancia", (req, res) => {
 
 Emailrouter.post("/forgotPassword", (req, res) => {
   const email = req.body;
-  console.log(email);
   enviarCorreo(email, res);
 });
 
@@ -25,6 +24,7 @@ Emailrouter.post("/correoAcpetacion", (req, res) => {
 Emailrouter.post("/envioSolicitud", (req, res) => {
   const email = req.body;
   enviarCorreo(email, res);
+  
 });
 
 function enviarCorreo(email, res) {
@@ -37,7 +37,7 @@ function enviarCorreo(email, res) {
       pass: "ibwchrluddbkxjea",
     },
   });
-  console.log(email.tipo);
+  
   const mailOptions = new MailOptions(email.tipo, email);
 
   transporter.sendMail(mailOptions, function (error, info) {

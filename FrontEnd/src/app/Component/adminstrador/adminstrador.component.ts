@@ -135,7 +135,7 @@ export class AdminstradorComponent implements OnInit {
       }
 
     this.email.envioSolicitud(Email).subscribe((res:any)=>{
-      if(res.Msj == "ok"){
+      if(res = "Correo enviado satisfactoriamente"){
         Notiflix.Notify.success("Solicitud Enviada A Su Correo");
       }
     });
