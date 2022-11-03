@@ -56,7 +56,7 @@ function enviarCorreo(email, res) {
 function MailOptions(tipo, email) {
 
   switch (tipo) {
-    case 'Constancia':
+    case 'constancia':
       const mailOptions = {
         from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
         to: `"${email.email}"`,

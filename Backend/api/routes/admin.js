@@ -8,7 +8,7 @@ const ccn = require('../connection/connection');
 router.post('/solicitud',(req,res)=>{
     const serv = req.body;
     console.log(serv);
-    ccn.query('insert into solicitud (numControl, codigoPago, fechaSolicitud,descripcion, aportacion,emitio ) values (?,?,?,?,?,?)',[serv.numControl, serv.codigoPago, serv.fechaSolicitud,serv.descripcion,serv.aportacion ,serv.emitio],
+    ccn.query('insert into solicitud (numControl, codigoPago, fechaSolicitud,descripcion, aportacion,emitio,activo ) values (?,?,?,?,?,?,1)',[serv.numControl, serv.codigoPago, serv.fechaSolicitud,serv.descripcion,serv.aportacion ,serv.emitio],
     (err,rows,fields)=>{
         if(!err){
                 res.json({msg:"ok"});
