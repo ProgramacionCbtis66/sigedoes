@@ -1,4 +1,3 @@
-const { dir } = require('console');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
@@ -60,32 +59,20 @@ router.post('/login', (req, res) => {
     const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
     ccn.query('INSERT INTO usuario (idUser,userName,numControl,password,rol,exp,nombre) VALUES (?, ?, ?, ?, ?, ?, ?, )',[noctrl,nombre,])
 });*/
-
-router.post('/registro',(req,res)=>{
-    const {nombre,correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,direccion,CTO,grupo} = req.body;
-    const horario = "si";
-    const alta = 0; 
-    const rol = "user";
-        //Subir datos a la tabla usuario
-    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 300, nombre],(err,rows,fields)=>{
-        if(!err){
-            console.log(rows.affectedRows);
-        }
-    });
-
-        //Subir los datos a la tabla Alumno
-    ccn.query('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [noctrl,nombre,direccion,especialidad,area,semestre,grupo,turno,horario,CTO,correo,alta,curp],
-    
+/*router.post('/registro',(req,res)=>{
+    const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
+    let xd = "3";
+    let horario = "si";
+    let CTO = "30DCT0236O";
+    let alta = "1";
+    console.log(req.body);
+    ccn.query('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [numcontrol,nombre,direccion,especialidad,area,semestre,xd,turno,horario,CTO,correo,alta,curp],
     (err,rows,fields)=>{
         if(!err){
-            if(rows.affectedRows > 0){
-                res.json({Aceptado:"Datos Aceptados"});
-            }else{
-                res.json({Error:"Los Datos No Fueron Aceptados"});
-            }
+            console.log("correcto");
         }
     });
-});
+});*/
 
 router.post('/datosUser', (req, res) => {
     const numControls = req.body.numcontrol;
