@@ -43,7 +43,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private auth:AuthService, private user:UsuarioService) { }
   home = {
-    "NoPago":""
+    NoPago:"",
+    numControl:""
   }
   ngOnInit(): void {
 
@@ -86,6 +87,7 @@ export class HomeComponent implements OnInit {
     this.datosCons.nombre = this.alumno;
     this.datosCons.matricula = this.noctrl;
     if(this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != ""){
+      this.home.numControl = this.noctrl;
       Notiflix.Loading.standard("Revisando Código");
       this.user.NoPago(this.home).subscribe((res:any)=>{
         if(res.valido != "" && res.valido != null && res.valido != undefined){
@@ -107,7 +109,7 @@ export class HomeComponent implements OnInit {
                 Notiflix.Loading.remove();
                 Notiflix.Notify.info("El Número No Es Valido");
               }
-            
+
     });}
     
     }

@@ -17,11 +17,6 @@ export class RegistroComponent implements OnInit {
   informacion = 'Info';
   infografia : string = '.././assets/img/infografiaa.png';
   usuario = {
-    "username":"",
-    "numControl":"",
-    "password":"",
-    "rol":"",
-    "exp":300,
     "nombre":"",
     "correo": "",
     "pass": "",
@@ -32,8 +27,26 @@ export class RegistroComponent implements OnInit {
     "semestre":"",
     "area":"",
     "turno":"",
-    "direccion":""
-  };
+    "direccion":"",
+    "CTO":"30DCT0236O",
+    "grupo":""
+  }
+  datanecesario = {
+    "numControl":"",
+    "nombre" :"",
+    "direccion" : "",
+    "especialidad": "",
+    "area":"",
+    "grado":"",
+   // "grupo":"",
+    "turno":"",
+   // "horario":"",
+    "CTO":"",
+    "correo":"",
+    "alta":"0",
+    "CURP":"",
+
+  }
 
   constructor(private auth: AuthService,  private router: Router, private app : AppComponent) { app.registro=true; app.iflogin=false;}
 
@@ -42,16 +55,19 @@ export class RegistroComponent implements OnInit {
    let contra = this.usuario.pass2;
    let contra2 = this.usuario.pass;
     if(contra == contra2){
-    if ( this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== ""  && this.usuario.curp !== "" && this.usuario.noctrl !== "" && this.usuario.especialidad !== ""  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "")
+    if ( this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== ""  && this.usuario.curp !== "" && this.usuario.noctrl !== "" && this.usuario.especialidad !== ""  && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "" && this.usuario.grupo != "")
     {
-      Notiflix.Loading.standard(this.usuario.especialidad);
-      this.auth.registro(this.usuario).subscribe((res: any) => 
+      Notiflix.Loading.standard("Validando");
+      this.auth.registro(this.usuario).subscribe((res: any) =>
       {
-        if (res.token !== null && res.token != undefined) 
+        if (res.Aceptado == "Datos Aceptados")
         {
           Notiflix.Loading.remove();
           this.router.navigate(['/login']);
-        } 
+        }else if(res.Error == "Los Datos No Fueron Aceptados"){
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure(res.Error);
+        }
       });
     } else {
       Notiflix.Notify.failure("Por favor llene todos los campos");
@@ -60,4 +76,4 @@ export class RegistroComponent implements OnInit {
     }
   }
 }
-  
+
