@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   datosCons = {
     "asunto":"",
     "nombre":"",
-    "matricula":"nosecuales",
+    "matricula":"",
     "claveIns":"30DCT0236O",
     "semestre":"",
     "especialidad":"",
@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit {
     this.datosCons.area = this.area;
     this.datosCons.turno = this.turno;
     this.datosCons.nombre = this.alumno;
+    this.datosCons.matricula = this.noctrl;
     if(this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != ""){
       Notiflix.Loading.standard("Revisando Código");
       this.user.NoPago(this.home).subscribe((res:any)=>{
@@ -91,6 +92,13 @@ export class HomeComponent implements OnInit {
           if(this.tabla == false){
             this.tabla = true;
             Notiflix.Loading.remove();
+            if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != ""){
+              if(this.boton){
+               this.boton = false;
+              } else{
+               this.boton = true;
+              }
+             }
             }
             else{
               Notiflix.Loading.remove();
@@ -101,12 +109,6 @@ export class HomeComponent implements OnInit {
               }
             
     });}
-    if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != ""){
-     if(this.boton){
-      this.boton = false;
-     } else{
-      this.boton = true;
-     }
-    }
+    
     }
 }
