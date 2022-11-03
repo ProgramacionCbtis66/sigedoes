@@ -1,4 +1,5 @@
 <div class="row">
+  <div class="col-lg-1"></div>
   <div class="col-lg-10 ">
     <header class="row d-flex justify-content-center">
  <div class="col-lg-12 pt-4">
@@ -51,8 +52,6 @@
           </div>
           <!--Especialidad y Semestre-->
           <div class="input-group mb-3">
-          <!--  <span class="input-group-text" id="basic-addon1">Especialidad</span>
-            <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Especialidad" aria-label="Username" aria-describedby="basic-addon1">-->
             <span class="input-group-text">Especialidad:</span>
             <select id="especialidad" [(ngModel)]="usuario.especialidad" class="form-select" >
               <option value="Programacion">Programación</option>
@@ -61,7 +60,7 @@
               <option value="Alimentos">Alimentos</option>
               <option value="Soporte">Soporte</option>
             </select>
-            
+
             <span class="input-group-text" id="basic-addon1">Semestre</span>
             <select id="input-group-text" [(ngModel)]="usuario.semestre" class="form-select">
               <option value="1">°1</option>
@@ -70,6 +69,21 @@
               <option value="4">°4</option>
               <option value="5">°5</option>
               <option value="6">°6</option>
+            </select>
+
+            <span class="input-group-text" id="basic-addon1">Grupo</span>
+            <select id="input-group-text" [(ngModel)]="usuario.grupo" class="form-select">
+              <option value="A">"A"</option>
+              <option value="B">"B"</option>
+              <option value="C">"C"</option>
+              <option value="D">"D"</option>
+              <option value="E">"E"</option>
+              <option value="F">"F"</option>
+              <option value="G">"G"</option>
+              <option value="H">"H"</option>
+              <option value="I">"I"</option>
+              <option value="J">"J"</option>
+              <option value="K">"K"</option>
             </select>
           </div>
           <!--Area y Turno-->
@@ -80,7 +94,7 @@
               <option value="b">Area 2</option>
               <option value="c">Area 3</option>
             </select>
-            
+
             <span class="input-group-text" id="basic-addon1">Turno</span>
             <select id="input-group-text" [(ngModel)]="usuario.turno" class="form-select">
               <option value="Matutino">Matutino</option>
@@ -101,26 +115,26 @@
             <input [(ngModel)]="usuario.pass2" type="password" class="form-control" placeholder="Repita Su Contraseña" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <!--Registro-->
-          
+
           <div class="d-flex justify-content-center mb-2">
             <button class="btn bg-success rounded btn-lg" type="button" (click)='Registro()'>Registrarse</button>
-          
+
           </div>
-          <div class="row d-flex">  
+          <div class="row d-flex">
           <div class="col-lg-2"></div>
           <div class="col-lg-8 mt-2">
             <div class="justify-content-center">
               <h5 class="">**Al crear la cuenta, acepto incondicionalmente los términos y condiciones, así como el aviso de privacidad del servicio de PPD</h5>
-            </div>  
+            </div>
           </div>
 
         </div>
         </div>
-        
+
       </div>
     </div>
     <div>
-      
+
     </div>
 </header>
 
