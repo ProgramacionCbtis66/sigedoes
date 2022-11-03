@@ -92,6 +92,7 @@ function create(req, tipo) {
     if (tipo !== "") {
         pdfDoc.pipe(file.createWriteStream("./api/assets/prueba.pdf"));
     }
+    
     pdfDoc.end();
 }
 function textomes(mes) {

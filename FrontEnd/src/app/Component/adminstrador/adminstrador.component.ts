@@ -122,11 +122,26 @@ export class AdminstradorComponent implements OnInit {
     this.admin.enviarSolicitud(this.solicitud).subscribe((res: any) => {
       console.log(res);
       if (res.msg == "ok") {
-        Notiflix.Notify.success("Registrado la Solicitud");
+        Notiflix.Notify.success("Registrado");
 
       }
     });
 
+      const Email = {
+        numControl : this.nc,
+        tipo : "numPago",
+        correo : this.alumno.correo,
+        numPago: this.solicitud.codigoPago
+      }
+
+    this.email.envioSolicitud(Email).subscribe((res:any)=>{
+      if(res.Msj == "ok"){
+        Notiflix.Notify.success("Solicitud Enviada A Su Correo");
+      }
+    });
+
+
+    this.nc = "";
     this.solicitud.numControl = "";
     this.solicitud.emitio = "";
     this.solicitud.codigoPago = "";
