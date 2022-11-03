@@ -8,7 +8,7 @@ const ccn = require('../connection/connection');
 
 router.post('/forgotPassword', (req, res) => {
     const correo = req.body.correo;
-    console.log(correo);
+    console.log(correo); 
     ccn.query('select * from forgotpassword where correo like ?', [correo],
         (err, rows, fields) => {
             if (!err) {
