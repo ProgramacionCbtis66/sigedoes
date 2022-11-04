@@ -88,17 +88,18 @@ router.post('/registro',(req,res)=>{
 
 router.post('/datosUser', (req, res) => {
     const numControl = req.body.numcontrol;
-   console.log(numControl);
-    ccn.query('select * from pdf where numControl = ?', [numControl],
+
+    ccn.query('select * from pdf where numControl = ?', [numControl.toString()],
         (err, rows, fields) => {
             if (!err) {
+               
                 if (rows.length > 0) {
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
                     let data = JSON.stringify(dato);
                     
                     res.json({ data });
-                } else { res.json({ Erro: "no hay datos" }) }
+                } else { res.json({ Error: "no hay datos" }) }
             } else { res.json({ Error: "En base de datos" }); }
         });
 });
@@ -134,6 +135,23 @@ router.post('/NoPago',(req,res)=>{
     const {NoPago,numControl} = req.body;
    
     ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1',[NoPago,numControl],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.length > 0){
+            console.log(rows[0]);
+            res.json({valido:"Aceptado"});
+            }else{
+                res.json({Error:"Número Invalido"});
+            }
+        }
+    });
+    
+});
+
+router.post('/verificaNoPago',(req,res)=>{
+    const {NoPago} = req.body;
+   
+    ccn.query('SELECT codigoPago from solicitud where codigoPago like ?',[NoPago],
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){

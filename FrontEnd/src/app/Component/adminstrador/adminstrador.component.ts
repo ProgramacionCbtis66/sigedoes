@@ -33,13 +33,16 @@ export class AdminstradorComponent implements OnInit {
     "escuela": "",
     "numControl": ""
   }
-  nc: any;
+  nc : any;
   datos: any;
   aceptado: any;
   verificado = false;
   numero: string = "";
 
-  constructor(private userServicio: UsuarioService, private email: SendEmailService, private admin: AdminService, private auth: AuthService) { }
+  constructor(private userServicio: UsuarioService,
+    private email: SendEmailService,
+    private admin: AdminService,
+    private auth: AuthService) { }
 
   ngOnInit(): void {
     this.userServicio.UsuariosNoReg().subscribe((res: any) => {
@@ -78,10 +81,10 @@ export class AdminstradorComponent implements OnInit {
 
   verificar() {
     const numcontrol = {
-      numcontrol: this.nc
+      numcontrol: this.nc | 0
     }
     this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
-      if (res != "" && res != null) {
+      if (res.data != "" && res.data != null) {
         const datos = JSON.parse(res.data);
         this.alumno.nombre = datos.nombre;
         this.alumno.correo = datos.correo;
@@ -98,8 +101,15 @@ export class AdminstradorComponent implements OnInit {
 
   GenerarCodigoPago() {
     this.numero = "";
-    this.numero = this.generateRandomString(12);
-
+    const numPago = {
+      numPago: this.generateRandomString(12),
+      numcontrol: this.nc
+    }
+    this.userServicio.verificaNoPago(numPago).subscribe((res: any) => {
+      if (res.valido !== "Aceptado") {
+        this.numero = this.generateRandomString(12);
+      }
+    });
   }
 
   generateRandomString(num: number) {
@@ -114,44 +124,46 @@ export class AdminstradorComponent implements OnInit {
   }
 
   enviarSolicitud() {
-    const admin = this.auth.decodifica();
-    
-    this.solicitud.emitio = admin.nombre;
-    this.solicitud.numControl = this.alumno.numControl;
-    this.solicitud.codigoPago = this.numero;
-    this.admin.enviarSolicitud(this.solicitud).subscribe((res: any) => {
+    if (this.numero !== "") {
+      const admin = this.auth.decodifica();
+      this.solicitud.emitio = admin.nombre;
+      this.solicitud.numControl = this.alumno.numControl;
+      this.solicitud.codigoPago = this.numero;
+      this.admin.enviarSolicitud(this.solicitud).subscribe((res: any) => {
 
-      if (res.msg == "ok") {
-        Notiflix.Notify.success("Registrado");
+        if (res.msg == "ok") {
+          Notiflix.Notify.success("Registrado");
 
+        }
+      });
+
+      let Email = {
+        numControl: this.nc,
+        tipo: "numPago",
+        correo: this.alumno.correo,
+        numPago: this.solicitud.codigoPago
       }
-    });
 
-     let Email = {
-      numControl : this.nc,
-      tipo : "numPago",
-      correo : this.alumno.correo,
-      numPago: this.solicitud.codigoPago
+      this.email.envioSolicitud(Email).subscribe((res: any) => {
+        if (res = "Correo enviado satisfactoriamente") {
+          Notiflix.Notify.success("Solicitud Enviada A Su Correo");
+        }
+      });
+
+      this.nc = "";
+      this.solicitud.numControl = "";
+      this.solicitud.emitio = "";
+      this.solicitud.codigoPago = "";
+      this.alumno.nombre = "";
+      this.alumno.grado = "";
+      this.alumno.grupo = "";
+      this.alumno.especialidad = "";
+      this.alumno.correo = "";
+      this.alumno.turno = "";
+      this.alumno.escuela = "";
+      this.alumno.numControl = "";
+    }else{
+        alert("Número de pago no disponible");
     }
-    console.log(Email);
-    this.email.envioSolicitud(Email).subscribe((res:any)=>{
-      if(res = "Correo enviado satisfactoriamente"){
-        Notiflix.Notify.success("Solicitud Enviada A Su Correo");
-      }
-    });
-
-
-    this.nc = "";
-    this.solicitud.numControl = "";
-    this.solicitud.emitio = "";
-    this.solicitud.codigoPago = "";
-    this.alumno.nombre = "";
-    this.alumno.grado = "";
-    this.alumno.grupo = "";
-    this.alumno.especialidad = "";
-    this.alumno.correo = "";
-    this.alumno.turno = "";
-    this.alumno.escuela = "";
-    this.alumno.numControl = "";
   }
 }

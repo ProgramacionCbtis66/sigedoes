@@ -63,18 +63,20 @@
             </p>
           </div>
           <div class="card-body ">
-            <div class="row">
+            <div class="row ">
+
               <div class="col-8">
                 <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
                 <div class="input-group">
                   <div class="input-group-text">Num. Control solicitante :</div>
                   <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="Número de Control">
+                    placeholder="Número de Control" required>
                 </div>
               </div>
               <div class="d-grid gap-2 col-4 mx-auto">
                 <a name="" id="" class="btn btn-primary " (click)="verificar()" role="button">Verificar</a>
               </div>
+
             </div>
 
 
@@ -174,7 +176,7 @@
       <div class="modal-body">
         <div class="row">
           <input [(ngModel)]="numero" class="form-control form-control-lg" type="text"
-            aria-label=".form-control-lg example">
+            aria-label=".form-control-lg example" disabled="disabled">
         </div>
         <div class="row">
           <div class="col-12 d-flex justify-content-center mt-3">
@@ -186,8 +188,8 @@
             <label class="visually-hidden" for="autoSizingInputGroup">Costo</label>
             <div class="input-group">
               <div class="input-group-text"> $ :</div>
-              <input [(ngModel)]="solicitud.aportacion" type="text" class="form-control" id="autoSizingInputGroup"
-                placeholder="Número de Control">
+              <input [(ngModel)]="solicitud.aportacion" type="number" class="form-control" id="autoSizingInputGroup"
+                >
             </div>
           </div>
         </div>
@@ -197,13 +199,13 @@
             <div class="input-group">
               <div class="input-group-text"> Descripcion</div>
               <textarea [(ngModel)]="solicitud.descripcion" type="text" class="form-control" id="autoSizingInputGroup"
-                placeholder="Número de Control">
+                placeholder="Descripciónm del pago">
                 </textarea>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar Solicitud</a>
       </div>
