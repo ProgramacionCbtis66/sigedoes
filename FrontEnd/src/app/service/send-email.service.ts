@@ -28,7 +28,7 @@ export class SendEmailService {
     return this.http.post(`${this.URL}/email/envioSolicitud`,email);
   }
 
-  envioCosntancia(email:any):Observable<any>{
+  envioConstancia(email:any):Observable<any>{
     return this.http.post(`${this.URL}/email/enviar-constancia`,email);
   }
 
