@@ -115,25 +115,25 @@ export class AdminstradorComponent implements OnInit {
 
   enviarSolicitud() {
     const admin = this.auth.decodifica();
-    console.log(admin);
+    
     this.solicitud.emitio = admin.nombre;
     this.solicitud.numControl = this.alumno.numControl;
     this.solicitud.codigoPago = this.numero;
     this.admin.enviarSolicitud(this.solicitud).subscribe((res: any) => {
-      console.log(res);
+
       if (res.msg == "ok") {
         Notiflix.Notify.success("Registrado");
 
       }
     });
 
-      const Email = {
-        numControl : this.nc,
-        tipo : "numPago",
-        correo : this.alumno.correo,
-        numPago: this.solicitud.codigoPago
-      }
-
+     let Email = {
+      numControl : this.nc,
+      tipo : "numPago",
+      correo : this.alumno.correo,
+      numPago: this.solicitud.codigoPago
+    }
+    console.log(Email);
     this.email.envioSolicitud(Email).subscribe((res:any)=>{
       if(res = "Correo enviado satisfactoriamente"){
         Notiflix.Notify.success("Solicitud Enviada A Su Correo");
