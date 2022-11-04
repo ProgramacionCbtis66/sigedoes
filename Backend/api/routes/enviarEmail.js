@@ -1,5 +1,4 @@
 const express = require("express");
-var bodyParser = require("body-parser");
 const Emailrouter = express.Router();
 const nodemailer = require("nodemailer");
 const create = require("./pdfCreate");
@@ -62,11 +61,8 @@ function MailOptions(tipo, email) {
         html: "<h1>Enviando un pdf de prueba</h1>",
         attachments: [
           {
-            // File Stream attachment
-            //filename: `${Pdf.filename}`,
-            filename: "prueba.pdf",
-            // path:  __dirname + `\\api\\assets\\${email.email}`,
-            path: "./api/assets/prueba.pdf",
+            filename: `cl${req.numControl}cb66.pdf`,
+            path: `./api/assets/cl${req.numControl}cb66.pdf`,
             cid: `${email.email}`,
           },
         ],

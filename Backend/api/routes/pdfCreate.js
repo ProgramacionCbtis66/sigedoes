@@ -22,32 +22,12 @@ function create(req, tipo) {
                 console.log("error " + err.message);
             }
         });
-    // ccn.query('select * from solicitus where numControl like ?', [req.numControl],
-    // (err, rows, fields) => {
-
-    //     if (!err) {
-    //         if (rows.length > 0) {
-    //             let solicitudes = JSON.stringify(rows[0]);
-    //             solicitud = JSON.parse(solicitudes);
-    //         }
-    //     }
-    // });
-
-    // ccn.query('select * from escuela',
-    // (err, rows, fields) => {
-
-    //     if (!err) {
-    //         if (rows.length > 0) {
-    //             let escuelas = JSON.stringify(rows[0]);
-    //             escuela = JSON.parse(escuelas);
-    //         }
-    //     }
-    // });
 
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
+   
 
     const contenido = {
         asunto: [
@@ -86,10 +66,11 @@ function create(req, tipo) {
         content: contenido['asunto'],
         style: Style
     }
+
     const printer = new pdf(Font);
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    if (tipo !== "") {
-        pdfDoc.pipe(file.createWriteStream("./api/assets/prueba.pdf"));
+    if (tipo !== "Constancia") {
+        pdfDoc.pipe(file.createWriteStream(`./api/assets/cl${req.numControl}cb66.pdf`));
     }
     
     pdfDoc.end();

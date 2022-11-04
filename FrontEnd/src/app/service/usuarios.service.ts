@@ -37,5 +37,6 @@ verificaNoPago(datos:any){
   return this.http.post(`${this.URL}/insize/NoPago`,datos);
 }
 
+
 //verificaNoPago
 }
