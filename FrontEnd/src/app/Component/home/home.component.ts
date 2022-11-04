@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
 import { UsuarioService } from 'src/app/service/usuarios.service';
+import { SendEmailService } from '../../service/send-email.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   tabla = false;
   datoo : any;
   boton = false;
+  paso3 = false;
   valortipo = {
     "tipo":"",
   }
@@ -41,7 +43,7 @@ export class HomeComponent implements OnInit {
     "numcontrol":""
   }
 
-  constructor(private auth:AuthService, private user:UsuarioService) { }
+  constructor(private auth:AuthService, private user:UsuarioService, private email:SendEmailService) { }
   home = {
     NoPago:"",
     numControl:""
@@ -75,8 +77,27 @@ export class HomeComponent implements OnInit {
   public name() {
 
   }
-  tabladatos(){
-    this.tabla = true;
+  actualizar(){
+    this.paso3 = true;
+    
+  }
+  restart(){
+    location.reload();
+  }
+  generarcons(){
+    const email = {
+      "email":"jorge@cbtis66.edu.mx",
+      "asunto":"Constancia de estudio para BBVA",
+      "tipo":"Constancia",
+      "numControl":"1400025G86"
+    }
+    envioConstancia(email).observable((res:any)=>{
+      if(res.msg=="Enviado"){
+      } 
+   });
+  }
+  carga(){
+    
   }
   comprobar(){
     this.datosCons.asunto = this.valortipo.tipo;
@@ -109,7 +130,9 @@ export class HomeComponent implements OnInit {
                 Notiflix.Loading.remove();
                 Notiflix.Notify.info("El Número No Es Valido");
               }
-
+              if(this.tabla == false){
+                this.boton = false;
+              }
     });}
     
     }

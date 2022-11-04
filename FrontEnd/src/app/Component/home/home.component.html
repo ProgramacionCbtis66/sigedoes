@@ -93,35 +93,47 @@
                             <div class="d-flex justify-content-center border-bottom border-success">
                                 <h3>Constancias:</h3>
                             </div>
-                            <div class="border-bottom border-success">
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio1" name="optradio" value="Beca">Para Beca
-                                    <label class="form-check-label" for="radio1"></label>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="">
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio1" name="optradio" value="Beca">Para Beca
+                                            <label class="form-check-label" for="radio1"></label>
+                                        </div>
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo"  class="form-check-input" id="radio2" name="optradio" value="Pasaporte">Para Pasaporte
+                                            <label class="form-check-label" for="radio2"></label>
+                                        </div>
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo"  class="form-check-input" id="radio3" name="optradio" value="Servicios Médicos">Para Servicios Médicos
+                                            <label class="form-check-label" for="radio3"></label>
+                                        </div>
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio4" name="optradio" value="Fines Legales">Para Fines Legales
+                                            <label class="form-check-label" for="radio4"></label>
+                                        </div>
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio5" name="optradio" value="Seguro Social">Para Seguro Social
+                                            <label class="form-check-label" for="radio5"></label>
+                                        </div>
+                                        <div class="form-check m-2 ms-3">
+                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio6" name="optradio" value="Inscripciones">Para Inscripciones
+                                            <label class="form-check-label" for="radio6"></label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo"  class="form-check-input" id="radio2" name="optradio" value="Pasaporte">Para Pasaporte
-                                    <label class="form-check-label" for="radio2"></label>
-                                </div>
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo"  class="form-check-input bg-primary" id="radio3" name="optradio" value="Servicios Médicos">Para Servicios Médicos
-                                    <label class="form-check-label" for="radio3"></label>
-                                </div>
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo" class="form-check-input bg-danger" id="radio4" name="optradio" value="Fines Legales">Para Fines Legales
-                                    <label class="form-check-label" for="radio4"></label>
-                                </div>
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo" class="form-check-input bg-primary" id="radio5" name="optradio" value="Seguro Social">Para Seguro Social
-                                    <label class="form-check-label" for="radio5"></label>
-                                </div>
-                                <div class="form-check m-2 ms-3">
-                                    <input type="radio" [(ngModel)]="valortipo.tipo" class="form-check-input bg-danger" id="radio6" name="optradio" value="Inscripciones">Para Inscripciones
-                                    <label class="form-check-label" for="radio6"></label>
+                                <div class="col-lg-6 mt-5">
+                                    <div class="container d-flex">
+                                        <div class="card-body">
+                                            <button class="btn btn-success p-3 ps-5 pe-5" (click)="restart()" type="button">Reiniciar</button>    
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!--Paso 3-->
-                            <div class="d-flex align-items-center ms-3 border">
+                            <div class="d-flex align-items-center ms-3 border" *ngIf="paso3">
                                     <div>
                                         <h2>Paso 3: </h2>    
                                     </div>  
@@ -132,7 +144,7 @@
                                         <h5>Ingresar El Número De Pago</h5>
                                     </div>
                             </div>
-                            <div class="card border border-success border-2">
+                            <div class="card border border-success border-2" *ngIf="paso3">
                                 <div class="d-flex justify-content-center input-group mb-2 mt-2">
                                     <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
                                     <input class="input-group-text" [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
@@ -224,7 +236,7 @@
             <div class="col-lg-6" *ngIf="boton">
                 <div class="card border border-white d-flex">
                     <div class="text-center">
-                      <button class="btn btn-success align-items-center ps-5 pe-5 border-3 p-4 m-5" type="button">CREAR CONSTANCIA</button>  
+                      <button (click)="generarcons()" class="btn btn-success align-items-center ps-5 pe-5 border-3 p-4 m-5" type="button">CREAR CONSTANCIA</button>  
                     </div>
                 </div>
             </div>
