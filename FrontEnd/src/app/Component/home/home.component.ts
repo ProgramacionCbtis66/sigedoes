@@ -79,25 +79,26 @@ export class HomeComponent implements OnInit {
   }
   actualizar(){
     this.paso3 = true;
-    
+
   }
   restart(){
     location.reload();
   }
   generarcons(){
     const email = {
-      "email":"jorge@cbtis66.edu.mx",
-      "asunto":"Constancia de estudio para BBVA",
-      "tipo":"Constancia",
-      "numControl":"1400025G86"
-    } 
+      email:this.correo,
+      asunto:this.datosCons.asunto,
+      tipo:"Constancia",
+      numControl: this.noctrl
+    }
+    console.log(email);
     this.email.envioConstancia(email).subscribe((res:any)=>{
       if(res.msg=="Enviado"){
-      } 
+      }
    });
   }
   carga(){
-     
+
   }
   comprobar(){
     this.datosCons.asunto = this.valortipo.tipo;
@@ -134,6 +135,6 @@ export class HomeComponent implements OnInit {
                 this.boton = false;
               }
     });}
-    
+
     }
 }

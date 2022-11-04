@@ -1,245 +1,230 @@
 <div class="card border border-white">
-    <div class="container"> 
-
-        <div class="d-flex justify-content-center mb-4">
-            <div class="card border border-white">
-                <div class="text-success">
-                    <h1 class="text-center">Bienvenido al sistema "Solicitud De Constancias"</h1>
-                    <h3 class="text-center">{{alumno}}</h3>
-                </div>
-            </div>
+  <div class="container">
+    <div class="d-flex justify-content-center mb-4">
+      <div class="card border border-white">
+        <div class="text-success">
+          <h1 class="text-center fw-light">Bienvenido al sistema "Solicitud De Constancias"</h1>
+          <h3 class="text-center fw-light">{{alumno}}</h3>
         </div>
-                
-                <div class="row">
-                    <!--Lado Izquierdo-->
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center ms-3">
-                        <div>
-                            <h2>Paso 1: </h2>    
-                        </div>  
-                        <div class="text-white">
-                            <h5>--</h5>
-                        </div>  
-                        <div>
-                            <h5>Verificar Tus Datos</h5>
-                        </div>
-                    </div>
-                    
-                        <div class="">
-                            <div class="">
-                                <div class="card table-responsive border border-success border-2 p-2 ps-3 pt-3">
-                                    <table class="table table-bordered table-hover ">
-                                    <thead class="border">
-                                        <th class="h4 p-2">Datos Del Solicitante</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <td>{{alumno}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Correo</th>
-                                            <td>{{correo}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Curp</th>
-                                            <td>{{curp}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Especialidad</th>
-                                            <td>{{especialidad}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Semestre</th>
-                                            <td>{{semestre}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Area</th>
-                                            <td>{{area}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Número De Control</th>
-                                            <td>{{noctrl}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Turno</th>
-                                            <td>{{turno}}</td>
-                                        </tr>
-
-                                    </tbody>
-
-                                    </table>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Lado Derecho-->
-                    <div class="col-lg-6">
-                        <div class="d-flex align-items-center ms-3">
-                                <div>
-                                    <h2>Paso 2: </h2>    
-                                </div>  
-                                <div class="text-white">
-                                    <h5>--</h5>
-                                </div>  
-                                <div>
-                                    <h5>Elegir El Tipo De Constancia</h5>
-                                </div>
-                        </div>
-                        
-                        <div class="card border border-success border-2 mb-3">
-                            <div class="d-flex justify-content-center border-bottom border-success">
-                                <h3>Constancias:</h3>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="">
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio1" name="optradio" value="Beca">Para Beca
-                                            <label class="form-check-label" for="radio1"></label>
-                                        </div>
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo"  class="form-check-input" id="radio2" name="optradio" value="Pasaporte">Para Pasaporte
-                                            <label class="form-check-label" for="radio2"></label>
-                                        </div>
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo"  class="form-check-input" id="radio3" name="optradio" value="Servicios Médicos">Para Servicios Médicos
-                                            <label class="form-check-label" for="radio3"></label>
-                                        </div>
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio4" name="optradio" value="Fines Legales">Para Fines Legales
-                                            <label class="form-check-label" for="radio4"></label>
-                                        </div>
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio5" name="optradio" value="Seguro Social">Para Seguro Social
-                                            <label class="form-check-label" for="radio5"></label>
-                                        </div>
-                                        <div class="form-check m-2 ms-3">
-                                            <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input" id="radio6" name="optradio" value="Inscripciones">Para Inscripciones
-                                            <label class="form-check-label" for="radio6"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mt-5">
-                                    <div class="container d-flex">
-                                        <div class="card-body">
-                                            <button class="btn btn-success p-3 ps-5 pe-5" (click)="restart()" type="button">Reiniciar</button>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Paso 3-->
-                            <div class="d-flex align-items-center ms-3 border" *ngIf="paso3">
-                                    <div>
-                                        <h2>Paso 3: </h2>    
-                                    </div>  
-                                    <div class="text-white">
-                                        <h5>--</h5>
-                                    </div>  
-                                    <div>
-                                        <h5>Ingresar El Número De Pago</h5>
-                                    </div>
-                            </div>
-                            <div class="card border border-success border-2" *ngIf="paso3">
-                                <div class="d-flex justify-content-center input-group mb-2 mt-2">
-                                    <span class="input-group-text" id="basic-addon1">Ingrese Su Número De Pago</span>
-                                    <input class="input-group-text" [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
-                                </div>
-                                <div class="d-flex justify-content-center me-5 mb-3">
-                                    <button class="btn btn-danger" (click)="comprobar()" type="button">Comprobar Datos</button>
-                                </div>    
-                            </div>
-                    </div>
-
-            <div class="col-lg-1"></div>
-        </div> <div class="border border-white mt-4"></div>
-        <div class="row">
-            <div class="col-lg-6" *ngIf="tabla">
-                <div class="d-flex align-items-center ms-3">
-                    <div>
-                        <h2>Paso 4: </h2>    
-                    </div>  
-                    <div class="text-white">
-                        <h5>--</h5>
-                    </div>  
-                    <div>
-                        <h5>Verifica Los Datos</h5>
-                    </div>    
-                </div>
-
-                <div class="">
-                            <div class="">
-                                <div class="card table-responsive border border-success border-2 p-2 ps-3 pt-3">
-                                    <table class="table table-bordered table-hover ">
-                                    <thead class="border">
-                                        <th class="h4">Datos De La Constancia</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <td>{{alumno}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Asunto</th>
-                                            <td>{{datosCons.asunto}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Matrícula</th>
-                                            <td>{{datosCons.matricula}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Clave Institucional</th>
-                                            <td>{{datosCons.claveIns}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Semestre</th>
-                                            <td>{{datosCons.semestre}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Especialidad</th>
-                                            <td>{{datosCons.especialidad}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Clave Escolar</th>
-                                            <td>{{datosCons.claveEsc}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Area</th>
-                                            <td>{{datosCons.area}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Turno</th>
-                                            <td>{{datosCons.turno}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Horario</th>
-                                            <td>{{datosCons.horario}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Periodo</th>
-                                            <td>{{datosCons.periodo}}</td>
-                                        </tr>
-
-                                    </tbody>
-
-                                    </table>
-                                    
-                                </div>
-                            </div>
-                        </div>
-            </div>
-
-            <div class="col-lg-6" *ngIf="boton">
-                <div class="card border border-white d-flex">
-                    <div class="text-center">
-                      <button (click)="generarcons()" class="btn btn-success align-items-center ps-5 pe-5 border-3 p-4 m-5" type="button">CREAR CONSTANCIA</button>  
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <!--Lado Izquierdo-->
+      <div class="col-lg-6">
+        <div class="d-flex justify-content-center ms-3">
+          <div>
+            <h2 class="fw-light">Paso 1: </h2>
+          </div>
+          <div>
+            <h5 class="px-3 pt-2 fw-lighter">Verificar Tus Datos</h5>
+          </div>
+        </div>
+
+        <div class="">
+          <div class="">
+            <div class="card table-responsive border border-success border-2 p-2 ps-3 pt-3">
+              <table class="table table-bordered table-hover ">
+                <thead class="border bg-light">
+                  <th class="h4 p-2 fw-light">Datos Del Solicitante</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Nombre</th>
+                    <td>{{alumno}}</td>
+                  </tr>
+                  <tr>
+                    <th>Correo</th>
+                    <td>{{correo}}</td>
+                  </tr>
+                  <tr>
+                    <th>Curp</th>
+                    <td>{{curp}}</td>
+                  </tr>
+                  <tr>
+                    <th>Especialidad</th>
+                    <td>{{especialidad}}</td>
+                  </tr>
+                  <tr>
+                    <th>Semestre</th>
+                    <td>{{semestre}}</td>
+                  </tr>
+                  <tr>
+                    <th>Area</th>
+                    <td>{{area}}</td>
+                  </tr>
+                  <tr>
+                    <th>Número De Control</th>
+                    <td>{{noctrl}}</td>
+                  </tr>
+                  <tr>
+                    <th>Turno</th>
+                    <td>{{turno}}</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Lado Derecho-->
+      <div class="col-lg-6">
+        <div class="d-flex justify-content-center ms-3">
+          <div>
+            <h2 class="fw-light">Paso 2:</h2>
+          </div>
+          <div>
+            <h5 class="px-3 pt-2 fw-lighter">Elegir El Tipo De Constancia</h5>
+          </div>
+        </div>
+
+        <div class="card border border-success border-2 mb-3">
+          <div class="d-flex justify-content-center bg-light border-bottom border-success">
+            <h3 class="fw-light">Constancias:</h3>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="">
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio1" name="optradio" value="Beca">Para Beca
+                  <label class="form-check-label" for="radio1"></label>
+                </div>
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio2" name="optradio" value="Pasaporte">Para Pasaporte
+                  <label class="form-check-label" for="radio2"></label>
+                </div>
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio3" name="optradio" value="Servicios Médicos">Para Servicios Médicos
+                  <label class="form-check-label" for="radio3"></label>
+                </div>
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio4" name="optradio" value="Fines Legales">Para Fines Legales
+                  <label class="form-check-label" for="radio4"></label>
+                </div>
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio5" name="optradio" value="Seguro Social">Para Seguro Social
+                  <label class="form-check-label" for="radio5"></label>
+                </div>
+                <div class="form-check m-2 ms-3">
+                  <input type="radio" (click)="actualizar()" [(ngModel)]="valortipo.tipo" class="form-check-input"
+                    id="radio6" name="optradio" value="Inscripciones">Para Inscripciones
+                  <label class="form-check-label" for="radio6"></label>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 mt-5" *ngIf="false">
+              <div class="card-body">
+                <button class="btn btn-3GBL p-3 ps-5 pe-5" (click)="restart()" type="button">Reiniciar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Paso 3-->
+        <div class="d-flex justify-content-center ms-3 " *ngIf="paso3">
+          <div>
+            <h2 class="fw-light">Paso 3: </h2>
+          </div>
+          <div>
+            <h5 class="px-3 pt-2 fw-lighter">Ingresar El Número De Pago</h5>
+          </div>
+        </div>
+        <div class="card border border-success border-2" *ngIf="paso3">
+          <div class="d-flex justify-content-center input-group mb-2 mt-2">
+            <span class="input-group-text fw-light fw-semibold" id="basic-addon1">Ingrese Su Número De Pago</span>
+            <input class="input-group-text" [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
+          </div>
+          <div class="d-flex justify-content-center me-5 mb-3">
+            <button class="btn btn-3GBL" (click)="comprobar()" type="button" data-bs-toggle="modal"
+              data-bs-target="#comprobacion">Comprobar Datos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="comprobacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-4 " id="staticBackdropLabel">Paso 4</h1>
+          <h5 class="px-3 pt-2 fw-lighter">Verifica Los Datos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered table-hover ">
+            <thead class="border">
+              <th class="h5 fw-lighter p-2" colspan="2">Datos De La Constancia</th>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Nombre</th>
+                <td>{{alumno}}</td>
+              </tr>
+              <tr>
+                <th>Asunto</th>
+                <td>{{datosCons.asunto}}</td>
+              </tr>
+              <tr>
+                <th>Matrícula</th>
+                <td>{{datosCons.matricula}}</td>
+              </tr>
+              <tr>
+                <th>Clave Institucional</th>
+                <td>{{datosCons.claveIns}}</td>
+              </tr>
+              <tr>
+                <th>Semestre</th>
+                <td>{{datosCons.semestre}}</td>
+              </tr>
+              <tr>
+                <th>Especialidad</th>
+                <td>{{datosCons.especialidad}}</td>
+              </tr>
+              <tr>
+                <th>Clave Escolar</th>
+                <td>{{datosCons.claveEsc}}</td>
+              </tr>
+              <tr>
+                <th>Area</th>
+                <td>{{datosCons.area}}</td>
+              </tr>
+              <tr>
+                <th>Turno</th>
+                <td>{{datosCons.turno}}</td>
+              </tr>
+              <tr>
+                <th>Horario</th>
+                <td>{{datosCons.horario}}</td>
+              </tr>
+              <tr>
+                <th>Periodo</th>
+                <td>{{datosCons.periodo}}</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()"> Crear Constancia
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

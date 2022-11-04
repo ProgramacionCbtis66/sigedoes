@@ -5,6 +5,8 @@ const create = require("./pdfCreate");
 
 Emailrouter.post("/enviar-constancia", (req, res) => {
   const email = req.body;
+   
+  create(email, email.tipo);
   create(email, email.tipo);
   enviarCorreo(email, res);
 });
@@ -61,8 +63,8 @@ function MailOptions(tipo, email) {
         html: "<h1>Enviando un pdf de prueba</h1>",
         attachments: [
           {
-            filename: `cl${req.numControl}cb66.pdf`,
-            path: `./api/assets/cl${req.numControl}cb66.pdf`,
+            filename: `cl${email.numControl}cb66.pdf`,
+            path: `./api/assets/cl${email.numControl}cb66.pdf`,
             cid: `${email.email}`,
           },
         ],
