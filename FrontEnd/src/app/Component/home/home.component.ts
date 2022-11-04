@@ -90,14 +90,14 @@ export class HomeComponent implements OnInit {
       "asunto":"Constancia de estudio para BBVA",
       "tipo":"Constancia",
       "numControl":"1400025G86"
-    }
-    envioConstancia(email).observable((res:any)=>{
+    } 
+    this.email.envioConstancia(email).observable((res:any)=>{
       if(res.msg=="Enviado"){
       } 
    });
   }
   carga(){
-    
+     
   }
   comprobar(){
     this.datosCons.asunto = this.valortipo.tipo;
