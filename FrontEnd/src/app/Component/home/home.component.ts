@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
       "tipo":"Constancia",
       "numControl":"1400025G86"
     } 
-    this.email.envioConstancia(email).observable((res:any)=>{
+    this.email.envioConstancia(email).subscribe((res:any)=>{
       if(res.msg=="Enviado"){
       } 
    });
