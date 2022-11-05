@@ -36,6 +36,9 @@ NoPago(datos:any){
 verificaNoPago(datos:any){
   return this.http.post(`${this.URL}/insize/NoPago`,datos);
 }
+NoPagoDesactivo(noPago:any){
+  return this.http.post(`${this.URL}/insize/NoPagoDesactivo`,noPago);
+}
 
 
 //verificaNoPago

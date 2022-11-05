@@ -5,8 +5,6 @@ const create = require("./pdfCreate");
 
 Emailrouter.post("/enviar-constancia", (req, res) => {
   const email = req.body;
-   
-  create(email, email.tipo);
   create(email, email.tipo);
   enviarCorreo(email, res);
 });
@@ -18,7 +16,6 @@ Emailrouter.post("/forgotPassword", (req, res) => {
 
 Emailrouter.post("/correoAcpetacion", (req, res) => {
   const email = req.body;
-  create(email, email.tipo);
   enviarCorreo(email, res);
 });
 

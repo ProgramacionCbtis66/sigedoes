@@ -86,6 +86,7 @@ router.post('/registro',(req,res)=>{
     });
 });
 
+
 router.post('/datosUser', (req, res) => {
     const numControl = req.body.numcontrol;
 
@@ -164,6 +165,18 @@ router.post('/verificaNoPago',(req,res)=>{
     });
     
 });
+
+ router.post('/NoPagoDesactivo',(req,res)=>{
+    const codpag = req.body;
+    ccn.query('UPDATE solicitud set activo = 0 where codigoPago = ?',[codpag.NoPago],
+    (err,rows,fields)=>{
+        if(!err){
+            res.json({msg:"ok"})
+        }else{
+            res.json({Error:"Error"})
+        }
+    });
+ });
 
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');

@@ -18,22 +18,15 @@ function create(req, tipo) {
                     let alumnos = JSON.stringify(rows[0]);
 
                     alumno = JSON.parse(alumnos);
-                    console.log(alumno.nombre + "   xxx>>");
-
-
                     const fecha = new Date();
                     let dia = convertir(fecha.getDate());
                     let mes = textomes(fecha.getMonth());
                     let year = convertir(fecha.getFullYear());
-
-
-                    console.log(alumno.nombre + "   ---->>");
-
                     const contenido = {
                         asunto: [
 
                             { image: './api/assets/texto-secretaria.png', width: 520 },
-                            { text: "\n \n Asunto : Constancias de estudio e inscripción \n \n \n \n", style: Style.normal, alignment: 'right', bold: true },
+                            { text: `\n \n Asunto : Constancias de estudio e inscripción \n \n \n \n`, style: Style.normal, alignment: 'right', bold: true },
 
                             { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n \n \n ", style: Style.normal },
                             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
@@ -41,7 +34,7 @@ function create(req, tipo) {
                             { text: " ", style: Style.header },
                             { text: `Con Matrícula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment: 'justify' },
 
-                            { text: `Se extiende la presente peticion del interesado para Trámite de ${alumno.descripcion}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
+                            { text: `Se extiende la presente peticion del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
                             {
                                 style: 'tableExample',

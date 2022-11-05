@@ -96,6 +96,18 @@ export class HomeComponent implements OnInit {
       if(res.msg=="Enviado"){
       }
    });
+   this.user.NoPagoDesactivo(this.home).subscribe((res:any)=>{
+    if(res.msg == "ok"){
+      this.datosCons.asunto = "";
+    this.datosCons.semestre = "";
+    this.datosCons.especialidad = "";
+    this.datosCons.area = "";
+    this.datosCons.turno = "";
+    this.datosCons.nombre = "";
+    this.datosCons.matricula = "";
+    this.home.NoPago = "";
+    }
+   });
   }
   carga(){
 
