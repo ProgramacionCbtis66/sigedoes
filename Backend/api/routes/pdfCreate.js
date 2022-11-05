@@ -65,7 +65,6 @@ function create(req, tipo) {
                     };
 
 
-
                     const docDefinition = {
                         content: contenido['asunto'],
                         style: Style
