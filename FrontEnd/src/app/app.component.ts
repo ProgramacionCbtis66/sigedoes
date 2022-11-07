@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
+  
   title = 'Constancias';
   mostrar: boolean = true;
   foto : string ="";
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit{
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
       if(user.rol== "Admin") this.Administrador=true;
+      
     }
   }
   salir(){
@@ -50,7 +51,9 @@ export class AppComponent implements OnInit{
     this.titulo.setTitle(this.title);
     this.visibleLoginRegistro();
     this.inicio();
-
+    const user = this.auth.decodifica();
+    console.log(user.rol); 
+    if(user.rol == 'user') this.Administrador = false;
   }
   public recibida(){
 
