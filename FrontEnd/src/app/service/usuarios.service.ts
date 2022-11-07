@@ -39,13 +39,5 @@ verificaNoPago(datos:any){
 NoPagoDesactivo(noPago:any){
   return this.http.post(`${this.URL}/insize/NoPagoDesactivo`,noPago);
 }
-guardarCons(noctrl:any){
-  return this.http.post(`${this.URL}/insize/ConsAgregada`,noctrl);
-}
-tenerDatos(noPago:any){
-  return this.http.post(`${this.URL}/insize/datopedir`,noPago);
-}
 
-
-//verificaNoPago
 }

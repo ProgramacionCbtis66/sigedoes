@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
   tabla = false;
   datoo : any;
   boton = false;
+  emitidas : any;
   paso3 = false;
-  emitidos = {};
   valortipo = {
     "tipo":"",
   }
@@ -31,14 +31,14 @@ export class HomeComponent implements OnInit {
     "asunto":"",
     "nombre":"",
     "matricula":"",
-    "claveIns":"30DCT0236O",
+    "claveIns":"",
     "semestre":"",
     "especialidad":"",
     "claveEsc":"352100002-16",
     "area":"",
     "turno":"",
-    "horario":"7:00 AM - 13:00 PM",
-    "periodo":"29 de Agosto al 13 de Diciembre del 2022."
+    "horario":"7:00 AM - 14:00 PM",
+    "periodo":""
   }
   dato = {
     "numcontrol":""
@@ -67,7 +67,9 @@ export class HomeComponent implements OnInit {
           this.area = this.datos.area;
           this.turno = this.datos.turno;
           this.especialidad = this.datos.especialidad;
-          console.log(this.alumno);
+          this.datosCons.periodo = this.datos.Esc_Periodo;
+          this.datosCons.claveIns = this.datos.CTO;
+          console.log(this.datos.Esc_Periodo);
         }
       });
 
@@ -76,10 +78,6 @@ export class HomeComponent implements OnInit {
     Notiflix.Notify.info("Bienvenido ");
   }
   public name() {
-
-  }
-  actualizar(){
-    this.paso3 = true;
 
   }
   restart(){
@@ -110,18 +108,15 @@ export class HomeComponent implements OnInit {
     this.home.NoPago = "";
     }
    });
-   this.user.tenerDatos(this.home.NoPago).subscribe((res:any)=>{
-      console.log(res);  
-      const emitidos = {
-        "emitio":res,
-        "noctrl":this.dato.numcontrol
-      }
-   });
+   
   
    
   }
   carga(){
 
+  }
+  actualizar(){
+    this.paso3 = true;
   }
   comprobar(){
     this.datosCons.asunto = this.valortipo.tipo;

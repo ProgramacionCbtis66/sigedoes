@@ -31,6 +31,7 @@ CREATE TABLE `escuela` (
   `Esc_correo` varchar(45) NOT NULL,
   `Esc_telefono` varchar(12) NOT NULL,
   `Esc_Director` varchar(45) NOT NULL,
+  `Esc_Periodo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`CTO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `escuela` (
 
 LOCK TABLES `escuela` WRITE;
 /*!40000 ALTER TABLE `escuela` DISABLE KEYS */;
-INSERT INTO `escuela` VALUES ('30DCT0236O','Centro de Bachillerato Tecnológico Industrial y de Servicios No. 066 “Agustín de Iturbide”','XXXX','XXXXX','XXXXX','MC DANIEL SERRA BERNAL');
+INSERT INTO `escuela` VALUES ('30DCT0236O','Centro de Bachillerato Tecnológico Industrial y de Servicios No. 066 “Agustín de Iturbide”','XXXX','XXXXX','XXXXX','MC DANIEL SERRA BERNAL','29 de Agosto al 13 de Diciembre del 2022');
 /*!40000 ALTER TABLE `escuela` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
