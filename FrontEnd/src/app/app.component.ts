@@ -36,7 +36,7 @@ export class AppComponent implements OnInit{
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
       if(user.rol== "Admin") this.Administrador=true;
-      
+      if(user.rol == 'user'){this.Administrador = true}
     }
   }
   salir(){
@@ -53,10 +53,10 @@ export class AppComponent implements OnInit{
     this.inicio();
     const user = this.auth.decodifica();
     console.log(user.rol); 
-    if(user.rol == 'user') this.Administrador = false;
+    if(user.rol == 'user'){this.Administrador = true}
   }
-  public recibida(){
-
+  recibida(){
+    
 
   }
 }

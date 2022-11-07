@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   datoo : any;
   boton = false;
   paso3 = false;
+  emitidos = {};
   valortipo = {
     "tipo":"",
   }
@@ -89,7 +90,8 @@ export class HomeComponent implements OnInit {
       email:this.correo,
       asunto:this.datosCons.asunto,
       tipo:"Constancia",
-      numControl: this.noctrl
+      numControl: this.noctrl,
+      codigoPago:this.home.NoPago
     }
     console.log(email);
     this.email.envioConstancia(email).subscribe((res:any)=>{
@@ -108,6 +110,15 @@ export class HomeComponent implements OnInit {
     this.home.NoPago = "";
     }
    });
+   this.user.tenerDatos(this.home.NoPago).subscribe((res:any)=>{
+      console.log(res);  
+      const emitidos = {
+        "emitio":res,
+        "noctrl":this.dato.numcontrol
+      }
+   });
+  
+   
   }
   carga(){
 

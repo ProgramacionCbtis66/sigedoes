@@ -41,7 +41,7 @@ function create(req, tipo) {
                                 table: {
                                     widths: [155, 'auto'],
                                     body: [
-                                        [{ qr: "jorge Cortes dominguez", fit: 150, alignment: 'left' }, [{ text: "Firma Electrónica", style: Style.header },
+                                        [{ qr:`${req.codigoPago}`, fit: 150, alignment: 'left' }, [{ text: "Firma Electrónica", style: Style.header },
                                         {
                                             text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
                 Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT

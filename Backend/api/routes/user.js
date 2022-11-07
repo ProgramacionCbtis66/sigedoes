@@ -177,7 +177,28 @@ router.post('/verificaNoPago',(req,res)=>{
         }
     });
  });
-
+ router.post('tenerDatos',(req,res)=>{
+    const noPago = req.body;
+    ccn.query('select emitio from solicitud where codigoPago = ?',[noPago],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.length > 0){
+                res.json(rows[0]);
+            }
+        }
+    });
+ });
+ router.post('consAgregada',(req,res)=>{
+    const {emitio,noctrl} = req.body;
+    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha) VALUES (?,?,?)', [noctrl,emitio,"7/11/2022"],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+                res.json({ok:"ok"})
+            } 
+        }
+    });
+ });
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);
