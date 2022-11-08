@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   datoo: any;
   boton = false;
   emitidas: any;
+  datosRegistro:any;
   paso3 = false;
   valortipo = {
     "tipo": "",
@@ -96,6 +97,22 @@ export class HomeComponent implements OnInit {
       if (res.msg == "Enviado") {
       }
     });
+
+    this.user.obtenerDatos(this.home).subscribe((res:any)=>{
+      console.log(res);
+      this.datosRegistro = {
+        "NoCtrl":this.dato.numcontrol,
+        "emitio":res.emitio,
+        "fecha":res.fechaSolicitud,
+        "CodPago":this.home.NoPago
+      }
+      console.log(this.datosRegistro);
+   });
+
+   this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
+    
+  });
+
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
         this.datosCons.asunto = "";

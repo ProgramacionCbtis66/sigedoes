@@ -1,4 +1,5 @@
 
+const e = require('express');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
@@ -139,7 +140,6 @@ router.post('/NoPago',(req,res)=>{
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
-            console.log(rows[0]);
             res.json({valido:"Aceptado"});
             }else{
                 res.json({Error:"Número Invalido"});
@@ -156,7 +156,6 @@ router.post('/verificaNoPago',(req,res)=>{
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
-            console.log(rows[0]);
             res.json({valido:"Aceptado"});
             }else{
                 res.json({Error:"Número Invalido"});
@@ -175,10 +174,34 @@ router.post('/verificaNoPago',(req,res)=>{
         }else{
             res.json({Error:"Error"})
         } 
-    });
+    }); 
  });
  
+ router.post('/ObtenerDatos',(req,res)=>{
+    const {NoPago,numControl} = req.body;
+    console.log(NoPago);
+    ccn.query('SELECT * from solicitud where codigoPago = ?',[NoPago],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.length > 0){
+                
+                console.log(rows[0]);
+                res.json( rows[0] );
+            }else{
+                res.json({err:"err"}); 
+            }
+        }
+    });
+ });
 
+router.post('/SubirRegistro',(res,req)=>{
+    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[],
+    (err,rows,fields)=>{
+        if(!err){
+            
+        }
+    });
+});
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);

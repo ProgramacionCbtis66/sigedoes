@@ -40,4 +40,10 @@ NoPagoDesactivo(noPago:any){
   return this.http.post(`${this.URL}/insize/NoPagoDesactivo`,noPago);
 }
 
+obtenerDatos(nopago:any){
+  return this.http.post(`${this.URL}/insize/ObtenerDatos`,nopago);
+}
+subirEmitido(datosRegistro:any){
+  return this.http.post(`${this.URL}/insize/SubirRegistro`,datosRegistro);
+}
 }
