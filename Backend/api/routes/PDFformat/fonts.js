@@ -24,12 +24,6 @@ module.exports = {
         italics: 'Courier-Oblique',
         bolditalics: 'Courier-BoldOblique'
       },
-    Times: {
-        normal: 'Times-Roman',
-        bold: 'Times-Bold',
-        italics: 'Times-Italic',
-        bolditalics: 'Times-BoldItalic'
-    },
     Symbol: {
         normal: 'Symbol'
     },
