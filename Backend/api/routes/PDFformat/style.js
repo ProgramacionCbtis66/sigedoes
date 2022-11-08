@@ -21,7 +21,7 @@ module.exports = {
         lineHeight:2
     },
     firma:{
-        fontSize : 10,
+        fontSize : 8,
         color: "#696969",
         alignment: "justify",
         font: "Courier",
