@@ -92,7 +92,6 @@ export class HomeComponent implements OnInit {
       numControl: this.noctrl,
       codigoPago: this.home.NoPago
     }
-    console.log(email);
     this.email.envioConstancia(email).subscribe((res: any) => {
       if (res.msg == "Enviado") {
       }
@@ -110,7 +109,7 @@ export class HomeComponent implements OnInit {
    });
 
    this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
-    
+    if(res.ok == "ok"){console.log("Joya");}else if(res.err = "err"){console.log("No joya");}
   });
 
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {

@@ -179,13 +179,10 @@ router.post('/verificaNoPago',(req,res)=>{
  
  router.post('/ObtenerDatos',(req,res)=>{
     const {NoPago,numControl} = req.body;
-    console.log(NoPago);
     ccn.query('SELECT * from solicitud where codigoPago = ?',[NoPago],
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
-                
-                console.log(rows[0]);
                 res.json( rows[0] );
             }else{
                 res.json({err:"err"}); 
@@ -194,11 +191,15 @@ router.post('/verificaNoPago',(req,res)=>{
     });
  });
 
-router.post('/SubirRegistro',(res,req)=>{
-    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[],
+router.post('/SubirRegistro',(req,res)=>{
+    console.log(req.body);
+    const {CodPago,NoCtrl,emitio,fecha} = req.body;
+    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[NoCtrl,emitio,fecha,CodPago],
     (err,rows,fields)=>{
         if(!err){
-            
+            res.json({ok:"ok"})
+        }else{
+            res.json({err:"err"})
         }
     });
 });
