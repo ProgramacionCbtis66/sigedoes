@@ -111,7 +111,7 @@
                     id="radio4" name="optradio" value="Trámites Legales">Para Fines Legales
                   <label class="form-check-label" for="radio4"></label>
                 </div>
-                
+
               </div>
             </div>
             <div class="col-lg-6">
@@ -165,74 +165,76 @@
 </div>
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="comprobacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-4 " id="staticBackdropLabel">Paso 4</h1>
-          <h5 class="px-3 pt-2 fw-lighter">Verifica Los Datos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-bordered table-hover ">
-            <thead class="border">
-              <th class="h5 fw-lighter p-2" colspan="2">Datos De La Constancia</th>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Nombre</th>
-                <td>{{alumno}}</td>
-              </tr>
-              <tr>
-                <th>Asunto</th>
-                <td>{{datosCons.asunto}}</td>
-              </tr>
-              <tr>
-                <th>Matrícula</th>
-                <td>{{datosCons.matricula}}</td>
-              </tr>
-              <tr>
-                <th>Clave Institucional</th>
-                <td>{{datosCons.claveIns}}</td>
-              </tr>
-              <tr>
-                <th>Semestre</th>
-                <td>{{datosCons.semestre}}</td>
-              </tr>
-              <tr>
-                <th>Especialidad</th>
-                <td>{{datosCons.especialidad}}</td>
-              </tr>
-              <tr>
-                <th>Clave Escolar</th>
-                <td>{{datosCons.claveEsc}}</td>
-              </tr>
-              <tr>
-                <th>Area</th>
-                <td>{{datosCons.area}}</td>
-              </tr>
-              <tr>
-                <th>Turno</th>
-                <td>{{datosCons.turno}}</td>
-              </tr>
-              <tr>
-                <th>Horario</th>
-                <td>{{datosCons.horario}}</td>
-              </tr>
-              <tr>
-                <th>Periodo</th>
-                <td>{{datosCons.periodo}}</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+<!-- Modal -->
+<div class="modal fade" id="comprobacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4 " id="staticBackdropLabel">Paso 4</h1>
+        <h5 class="px-3 pt-2 fw-lighter">Verifica Los Datos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="h5 fw-lighter p-2" colspan="2">Datos De La Constancia</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-control">
+                <p>Nombre</p>
+                <p>{{alumno}}</p>
+              </div>
+              <div class="form-control">
+                <p>Asunto</p>
+                <p>{{datosCons.asunto}}</p>
+              </div>
+              <div class="form-control">
+                <p>Matrícula</p>
+                <p>{{datosCons.matricula}}</p>
+              </div>
+              <div class="form-control">
+                <p>Clave Institucional</p>
+                <p>{{datosCons.claveIns}}</p>
+              </div>
+              <div class="form-control">
+                <p>Semestre</p>
+                <p>{{datosCons.semestre}}</p>
+              </div>
+              <div class="form-control">
+                <p>Especialidad</p>
+                <p>{{datosCons.especialidad}}</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-control">
+                <p>Clave Escolar</p>
+                <p>{{datosCons.claveEsc}}</p>
+              </div>
+              <div class="form-control">
+                <p>Area</p>
+                <p>{{datosCons.area}}</p>
+              </div>
+              <div class="form-control">
+                <p>Turno</p>
+                <p>{{datosCons.turno}}</p>
+              </div>
+              <div class="form-control">
+                <p>Horario</p>
+                <p>{{datosCons.horario}}</p>
+              </div>
+              <div class="form-control">
+                <p>Periodo</p>
+                <p>{{datosCons.periodo}}</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()"> Crear Constancia
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()">
+            Crear Constancia
           </button>
         </div>
       </div>

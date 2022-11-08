@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/service/usuarios.service';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -8,12 +9,20 @@ import { AuthService } from '../../service/auth.service';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor(private Auth:AuthService) { }
+  datos : any;
+  constructor(private Auth:AuthService, private userService:UsuarioService) { }
 
   ngOnInit(): void {
     if (this.Auth.isAuth() )
     {
-      const NumControl=
+      const datos = {
+        numcontrol : this.Auth.decodifica().numControl
+      }
+      this.userService.datosUser(datos).subscribe((res: any)=>{
+       if(JSON.parse(res.data).nombre!=""){
+          this.datos = JSON.parse(res.data);
+       }
+      });
     }
   }
 
