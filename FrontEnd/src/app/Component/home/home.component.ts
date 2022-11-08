@@ -99,9 +99,7 @@ export class HomeComponent implements OnInit {
       }
     });
     this.user.subirEmitido(this.datosRegistro).subscribe((res: any) => {
-
     });
-
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
         this.datosCons.asunto = "";
@@ -119,12 +117,11 @@ export class HomeComponent implements OnInit {
 
 
   }
-  carga() {
 
-  }
   actualizar() {
     this.paso3 = true;
   }
+  
   comprobar() {
     {
       this.datosCons.asunto = this.valortipo.tipo;
