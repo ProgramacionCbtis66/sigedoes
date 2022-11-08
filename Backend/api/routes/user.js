@@ -63,9 +63,11 @@ router.post('/login', (req, res) => {
 
 router.post('/registro',(req,res)=>{
     const {nombre,correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,direccion,CTO,grupo} = req.body;
-    const horario = "si";
     const alta = 0; 
     const rol = "user";
+    if(turno =="Matutino") horario = "07:00 a 15:00 hrs";
+    else horario = "11:00 a 19:00 hrs";
+
         //Subir datos a la tabla usuario
     ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 300, nombre],(err,rows,fields)=>{
         if(!err){
@@ -205,6 +207,7 @@ router.post('/SubirRegistro',(res,req)=>{
         }
     });
 });
+
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);

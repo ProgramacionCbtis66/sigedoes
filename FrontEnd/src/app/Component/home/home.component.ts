@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
   actualizar() {
     this.paso3 = true;
   }
-  
+
   comprobar() {
     {
       this.datosCons.asunto = this.valortipo.tipo;
