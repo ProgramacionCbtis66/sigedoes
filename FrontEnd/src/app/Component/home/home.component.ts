@@ -108,9 +108,9 @@ export class HomeComponent implements OnInit {
     this.home.NoPago = "";
     }
    });
-   
-  
-   
+
+
+
   }
   carga(){
 
