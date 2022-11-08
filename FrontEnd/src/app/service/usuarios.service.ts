@@ -41,7 +41,7 @@ NoPagoDesactivo(noPago:any){
 }
 
 obtenerDatos(nopago:any){
-  return this.http.post(`${this.URL}/insize/ObtenerDatos`,nopago);
+  return this.http.post(`${this.URL}/insize/ObtenerDatosPago`,nopago);
 }
 subirEmitido(datosRegistro:any){
   return this.http.post(`${this.URL}/insize/SubirRegistro`,datosRegistro);

@@ -2,6 +2,7 @@
 const e = require('express');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const { json } = require('stream/consumers');
 const router = express.Router();
 
 const ccn = require('../connection/connection');
@@ -177,30 +178,38 @@ router.post('/verificaNoPago',(req,res)=>{
     }); 
  });
  
- router.post('/ObtenerDatos',(req,res)=>{
-    const {NoPago,numControl} = req.body;
-    ccn.query('SELECT * from solicitud where codigoPago = ?',[NoPago],
+ router.post('/ObtenerDatosPago',(req,res)=>{
+    const NoPago = req.body;
+    ccn.query('SELECT * from solicitud where codigoPago = ?',[NoPago.NoPago],
     (err,rows,fields)=>{
         if(!err){
-            if(rows.length > 0){
-                res.json( rows[0] );
-            }else{
+                let datos = JSON.stringify(rows[0].emitio);
+                let dato = JSON.parse(datos);
+                let data = JSON.stringify(dato);
+
+                let datoos = JSON.stringify(rows[0].fechaSolicitud);
+                let datoo = JSON.parse(datoos);
+                let dataa = JSON.stringify(datoo);
+                res.json({"nombre":dataa,"emitio":data});
+            }else{ 
                 res.json({err:"err"}); 
             }
-        }
+        
     });
  });
 
 router.post('/SubirRegistro',(req,res)=>{
-    console.log(req.body);
-    const {CodPago,NoCtrl,emitio,fecha} = req.body;
+    const {NoCtrl,emitio,fecha,CodPago} = req.body;
     ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[NoCtrl,emitio,fecha,CodPago],
     (err,rows,fields)=>{
+        console.log(err);
         if(!err){
+            console.log(NoCtrl);
             res.json({ok:"ok"})
         }else{
             res.json({err:"err"})
-        }
+            console.log("Mal");
+        } 
     });
 });
 function VerificarToken(req, res, next) {
