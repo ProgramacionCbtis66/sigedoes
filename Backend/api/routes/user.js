@@ -195,10 +195,13 @@ router.post('/verificaNoPago',(req,res)=>{
  });
 
 router.post('/SubirRegistro',(res,req)=>{
-    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[],
+    const datos = res.body;
+    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[datos.NoCtrl, datos.emitio, datos.fecha, datos.CodPago],
     (err,rows,fields)=>{
         if(!err){
-            
+            res.json({valido: "Constancia Registrada"});
+        }else{
+            res.json({Error: "Constancia no Registrada"});
         }
     });
 });
