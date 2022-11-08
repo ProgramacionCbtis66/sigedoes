@@ -6,11 +6,10 @@ import { LoginComponent } from './Component/login/login.component';
 import { RegistroComponent } from './Component/registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthLogin } from './guards/auth.guard2';
-
+import { PerfilComponent } from './Component/perfil/perfil.component';
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 import { AuthGuardAdmin } from './guards/auth.guard.admin';
-import { PerfilComponent } from './Component/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -20,8 +19,9 @@ const routes: Routes = [
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
-  {path:"perfil", component: PerfilComponent, canActivate:[AuthGuard]},
-  {path:"**", component: Error404Component},
+  {path:"perfil", component: PerfilComponent },
+
+  {path:"**", component: Error404Component },
 
 
 
