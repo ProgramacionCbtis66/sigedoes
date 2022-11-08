@@ -57,11 +57,6 @@ router.post('/login', (req, res) => {
     );
 });
 
-/*router.post('/registro',(req,res)=>{
-    const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
-    ccn.query('INSERT INTO usuario (idUser,userName,numControl,password,rol,exp,nombre) VALUES (?, ?, ?, ?, ?, ?, ?, )',[noctrl,nombre,])
-});*/
-
 router.post('/registro',(req,res)=>{
     const {nombre,correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,direccion,CTO,grupo} = req.body;
     const horario = "si";
@@ -87,7 +82,6 @@ router.post('/registro',(req,res)=>{
         }
     });
 });
-
 
 router.post('/datosUser', (req, res) => {
     const numControl = req.body.numcontrol;

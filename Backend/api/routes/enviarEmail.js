@@ -44,7 +44,7 @@ function enviarCorreo(email, res) {
       res.send("error");
     } else {
       console.log("Correo Enviado: " + info.response);
-      res.send("Correo enviado satisfactoriamente");
+      res.send({msg:"Correo enviado satisfactoriamente"});
     }
   });
   res.json("Correcto");
@@ -57,7 +57,7 @@ function MailOptions(tipo, email) {
         from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
         to: `"${email.email}"`,
         subject: `"${email.asunto}"`,
-        html: "<h1>Enviando un pdf de prueba</h1>",
+        html: "<h1>Constancia De Estudios</h1>",
         attachments: [
           {
             filename: `cl${email.numControl}cb66.pdf`,

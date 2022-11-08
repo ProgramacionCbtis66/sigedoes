@@ -98,7 +98,8 @@ export class HomeComponent implements OnInit {
       codigoPago: this.home.NoPago
     }
     this.email.envioConstancia(email).subscribe((res: any) => {
-      if (res.msg == "Enviado") {
+      if (res == "Correcto") {
+        Notiflix.Notify.success("Correo Enviado Con Éxito");
       }
     });
 
