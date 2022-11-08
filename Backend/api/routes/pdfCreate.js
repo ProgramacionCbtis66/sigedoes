@@ -37,7 +37,7 @@ function create(req, tipo) {
                             { text: `Se extiende la presente peticion del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
                             {
-                                style: 'tableExample',
+                                layout: 'noBorders',
                                 table: {
                                     widths: [155, 'auto'],
                                     body: [
@@ -45,20 +45,35 @@ function create(req, tipo) {
                                         {
                                             text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
                 Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT
-                cy fF ZF Uk FD Ul Va fG 51 bG x8 bn Vs bA ==`, style: Style.firma, fillColor: '#eeeeee', border: [false, false, false, false]
+                cy fF ZF Uk FD Ul Va fG 51 bG x8 bn Vs bA ==`, style: Style.electronica
                                         }]
                                         ]
                                     ]
                                 }
                             },
 
+                           
+
                             { text: " \n Director", style: Style.header },
-                            { text: `${alumno.Esc_Director} \n \n \n \n \n \n`, style: Style.firma, alignment: "center" },
+                            { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
+
+
+                            
+                            {
+                                layout: 'noBorders',
+                                table: {
+                                    widths: [400, 'auto'],
+                                    body: [
+                                        [{ text: "16 de septiembre Esq. J.R. Claveria, Col. Hoja del Maiz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correco eléctronico: cbtis066dir@dgeti.sems.gob.mx", style: Style.electronica },''
+                                        ]
+                                    ]
+                                }
+                            },
 
                             { image: './api/assets/pieFormato.jpg', width: 570, absolutePosition: { x: 5, y: 760 } },
 
 
-                            { text: "5 de septiembre Esq. J.R. Claveria, Col. Hoja del Maiz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correco eléctronico: cbtis066dir@dgeti.sems.gob.mx", style: Style.firma }
+                            // { text: "5 de septiembre Esq. J.R. Claveria, Col. Hoja del Maiz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correco eléctronico: cbtis066dir@dgeti.sems.gob.mx", style: Style.firma }
                         ]
 
                     };

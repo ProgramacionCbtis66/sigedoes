@@ -21,6 +21,13 @@ module.exports = {
         lineHeight:2
     },
     firma:{
+        fontSize : 12,
+        color: "#696969",
+        alignment: "justify",
+        font: "Times",
+        lineHeight:2
+    },
+    electronica:{
         fontSize : 8,
         color: "#696969",
         alignment: "justify",
