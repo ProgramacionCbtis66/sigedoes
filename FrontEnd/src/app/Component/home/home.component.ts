@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   datoo: any;
   boton = false;
   emitidas: any;
-  datosRegistro:any;
+  datosRegistro: any;
   paso3 = false;
   valortipo = {
     "tipo": "",
@@ -78,12 +78,8 @@ export class HomeComponent implements OnInit {
 
     Notiflix.Notify.info("Bienvenido ");
   }
-  public name() {
 
-  }
-  restart() {
-    location.reload();
-  }
+
   generarcons() {
     const email = {
       email: this.correo,
@@ -92,26 +88,19 @@ export class HomeComponent implements OnInit {
       numControl: this.noctrl,
       codigoPago: this.home.NoPago
     }
-    console.log(email);
-    this.email.envioConstancia(email).subscribe((res: any) => {
-      if (res.msg == "Enviado") {
-      }
-    });
-
-    this.user.obtenerDatos(this.home).subscribe((res:any)=>{
+    this.email.envioConstancia(email).subscribe((res: any) => { });
+    this.user.obtenerDatos(this.home).subscribe((res: any) => {
       console.log(res);
       this.datosRegistro = {
-        "NoCtrl":this.dato.numcontrol,
-        "emitio":res.emitio,
-        "fecha":res.fechaSolicitud,
-        "CodPago":this.home.NoPago
+        "NoCtrl": this.dato.numcontrol,
+        "emitio": res.emitio,
+        "fecha": res.fechaSolicitud,
+        "CodPago": this.home.NoPago
       }
-      console.log(this.datosRegistro);
-   });
+    });
+    this.user.subirEmitido(this.datosRegistro).subscribe((res: any) => {
 
-   this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
-    
-  });
+    });
 
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
