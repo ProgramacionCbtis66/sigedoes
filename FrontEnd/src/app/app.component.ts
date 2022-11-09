@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  
+
   title = 'Constancias';
   mostrar: boolean = true;
   foto : string ="";
@@ -42,6 +42,9 @@ export class AppComponent implements OnInit{
   salir(){
     this.auth.estatus = false;
     this.mostrar = true;
+    this.registro = false;
+    this.iflogin = true;
+    this.Administrador = false;
     localStorage.clear();
     this.router.navigate(['login']);
   }
@@ -52,11 +55,11 @@ export class AppComponent implements OnInit{
     this.visibleLoginRegistro();
     this.inicio();
     const user = this.auth.decodifica();
-    console.log(user.rol); 
+    console.log(user.rol);
     if(user.rol == 'user'){this.Administrador = true}
   }
   recibida(){
-    
+
 
   }
 }
