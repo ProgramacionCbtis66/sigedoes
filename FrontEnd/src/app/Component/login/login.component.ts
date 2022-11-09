@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
-import { UsuarioService } from 'src/app/service/usuarios.service';
+
 
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private app: AppComponent) {app.registro=false ;}
 
   ngOnInit(): void {
-
+    this.app.logout=false;
   }
   forgotPassword(){
     this.router.navigate(['forgotPassword']);

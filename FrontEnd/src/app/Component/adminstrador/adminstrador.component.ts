@@ -51,6 +51,7 @@ export class AdminstradorComponent implements OnInit {
     });
     this.app.home = false;
     this.app.iflogin= false;
+    this.app.logout = true;
   }
 
   aceptar(op: any) {
