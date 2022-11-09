@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
+  home=true;
   title = 'Constancias';
   mostrar: boolean = true;
   foto : string ="";
@@ -33,9 +33,10 @@ export class AppComponent implements OnInit{
 
   inicio(){
     if(this.auth.isAuth()){
+      alert("admin");
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
-      if(user.rol== "Admin") this.Administrador=true;
+      if(user.rol== "Admin") {alert("admin");this.Administrador=true;this.mostrar = true;}
       if(user.rol == 'user'){this.Administrador = true}
     }
   }
@@ -49,7 +50,6 @@ export class AppComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
-
   ngOnInit(){
     this.titulo.setTitle(this.title);
     this.visibleLoginRegistro();
@@ -57,9 +57,5 @@ export class AppComponent implements OnInit{
     const user = this.auth.decodifica();
     console.log(user.rol);
     if(user.rol == 'user'){this.Administrador = true}
-  }
-  recibida(){
-
-
   }
 }

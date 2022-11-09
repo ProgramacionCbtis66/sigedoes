@@ -4,7 +4,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
-
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -40,6 +40,7 @@ export class AdminstradorComponent implements OnInit {
   numero: string = "";
 
   constructor(private userServicio: UsuarioService,
+    private app : AppComponent,
     private email: SendEmailService,
     private admin: AdminService,
     private auth: AuthService) { }
@@ -48,6 +49,8 @@ export class AdminstradorComponent implements OnInit {
     this.userServicio.UsuariosNoReg().subscribe((res: any) => {
       this.datos = JSON.parse(res.data);
     });
+    this.app.home = false;
+    this.app.iflogin= false;
   }
 
   aceptar(op: any) {
