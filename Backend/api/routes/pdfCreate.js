@@ -58,22 +58,8 @@ function create(req, tipo) {
                             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
 
 
-                            
-                            // {
-                            //     layout: 'noBorders',
-                            //     table: {
-                            //         widths: [400, 'auto'],
-                            //         body: [
-                            //             [{ text: "16 de septiembre Esq. J.R. Claveria, Col. Hoja del Maiz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correco eléctronico: cbtis066dir@dgeti.sems.gob.mx", style: Style.electronica },''
-                            //             ]  
-                            //         ]
-                            //     }
-                            // },
-
                             { image: './api/assets/pieFormato3.0.png', width: 570, absolutePosition: { x: 5, y: 760 } },
 
-
-                            // { text: "5 de septiembre Esq. J.R. Claveria, Col. Hoja del Maiz, Tierra Blanca, Ver. C.P.95110 Tel. 274 74 3 09 62 correco eléctronico: cbtis066dir@dgeti.sems.gob.mx", style: Style.firma }
                         ]
 
                     };

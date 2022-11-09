@@ -1,8 +1,5 @@
-
-const e = require('express');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { json } = require('stream/consumers');
 const router = express.Router();
 
 const ccn = require('../connection/connection');
@@ -32,7 +29,7 @@ router.post('/forgotPassword', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
-    ccn.query('select alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
+    ccn.query('select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
 
             if (!err) {
@@ -40,7 +37,7 @@ router.post('/login', (req, res) => {
 
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
-                    dato.exp = Date.now() / 1000 + (300);
+                    dato.exp = Date.now() / 1000 + (parseInt(dato.exp));
                     let data = JSON.stringify(dato);
 
                     const token = jwt.sign(data, 'stil');
@@ -63,7 +60,7 @@ router.post('/registro',(req,res)=>{
     const alta = 0; 
     const rol = "user";
         //Subir datos a la tabla usuario
-    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 300, nombre],(err,rows,fields)=>{
+    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 600, nombre],(err,rows,fields)=>{
         if(!err){
             console.log(rows.affectedRows);
         }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
-import { notDeepEqual } from 'assert';
+
 
 
 @Component({
@@ -60,6 +60,7 @@ export class RegistroComponent implements OnInit {
         this.auth.registro(this.usuario).subscribe((res: any) => {
           if (res.Aceptado == "Datos Aceptados") {
             Notiflix.Loading.remove();
+            Notiflix.Notify.info("Registro de datos en verificación");
             this.router.navigate(['/login']);
           } else if (res.Error == "Los Datos No Fueron Aceptados") {
             Notiflix.Loading.remove();
