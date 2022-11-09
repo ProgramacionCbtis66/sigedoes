@@ -51,6 +51,19 @@ export class RegistroComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private app: AppComponent) { app.registro = true; app.iflogin = false; }
 
   ngOnInit(): void { }
+
+  area(){
+    switch(this.usuario.especialidad){
+      case "Programacion" : case "Electricidad" : case "Soporte" :
+        this.usuario.area = "Físico Matemático"; break;
+      case "Contabilidad":
+        this.usuario.area = "Económico Administrativo"; break;
+      case "Alimentos":
+          this.usuario.area = "Químico Biológico"; break;
+    }
+    alert(this.usuario.area);
+  }
+
   Registro() {
     let contra = this.usuario.pass2;
     let contra2 = this.usuario.pass;
