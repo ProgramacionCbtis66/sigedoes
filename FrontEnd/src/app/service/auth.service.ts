@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 
 
@@ -18,10 +19,10 @@ export class AuthService {
   constructor(private http: HttpClient,
     private jwt: JwtHelperService) { }
 
-  public login(user: any) {
+  public login(user: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/login`, user);
   }
-  
+
   public registro(usuario:any){
     return this.http.post(`${this.URL}/insize/registro`,usuario);
   }
