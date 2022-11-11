@@ -15,11 +15,14 @@ export class AuthLogin implements CanActivate {
 
 
   canActivate(): boolean {
-   if (this.authService.isAuth()) {
-      this.router.navigate(['home'])
-      return false;
-    } else {
+   if (!this.authService.isAuth()) {
       return true;
+    } else{
+        if(this.authService.decodifica().rol!="Admin") {
+      return false;
+    }else{
+      return true;
+    }
     }
   }
 }

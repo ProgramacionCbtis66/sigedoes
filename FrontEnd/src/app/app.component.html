@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
-        <li class="nav-item" id="idhome" *ngIf="!mostrar">
+        <li class="nav-item" id="idhome" *ngIf="!mostrar && home">
           <a class="nav-link" routerLink="home" (click)="visibleLoginRegistro()">Home</a>
         </li>
         <li *ngIf="mostrar && iflogin" class="nav-item" id="idlogin">
@@ -23,8 +23,8 @@
         </li>
       </ul>
     </div>
-    <div class="dropdown d-flex" *ngIf="!mostrar">
-      <a class="btn dropdown-toggle text-color-3G" href="#" role="button" data-bs-toggle="dropdown"
+    <div class="dropdown d-flex" *ngIf="!mostrar || logout">
+      <a class="btn dropdown-toggle text-color-3G" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">
          Salir
       </a>
@@ -45,7 +45,7 @@
     <footer class="py-4 bg-light mt-auto">
       <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-          <div class="text-muted">Copyright &copy; constacias cbtis66 2022</div>
+          <div class="text-muted">Copyright &copy; Constancias en Línea CBTis66 2022</div>
           <div>
             <a href="#">Privacy Policy</a>
             &middot;

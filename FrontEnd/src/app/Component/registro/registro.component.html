@@ -1,142 +1,157 @@
 <div class="row">
   <div class="col-lg-1"></div>
   <div class="col-lg-10 ">
-    <header class="row d-flex justify-content-center">
- <div class="col-lg-12 pt-4">
-    <div class="mb-4 text-center display-6 fw-light">Sistema para la emisión de Constancias de Estudios</div>
-  </div>
-  <div class="row">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-12 pt-4">
+        <div class="mb-4 text-center display-6 fw-light">Sistema para la emisión de Constancias de Estudios</div>
+      </div>
+      <div class="row">
 
-    <!--Parte Izquierda Del Sistema-->
-      <div class="col-lg-5 mb-5">
-        <div>
+        <!--Parte Izquierda Del Sistema-->
+        <div class="col-lg-5 mb-5">
+          <div>
+            <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
+              <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
+              <h3 class="px-2">{{informacion}}</h3>
+            </div>
+            <img src="{{infografia}}" class="max-wi justify-content-center img-fluid">
+          </div>
+        </div>
+
+        <!--Parte Derecha Del Sistema-->
+        <div class="col-lg-7">
           <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
             <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
-            <h3 class="px-2">{{informacion}}</h3>
+            <h3 class="px-2">{{registrarse}}</h3>
           </div>
-          <img src="{{infografia}}" class="max-wi justify-content-center img-fluid">
-        </div>
-      </div>
+          <!--Caja De Información-->
+          <div class="border border-secondary rounded">
+            <!--Introduccion-->
+            <div class="border-botom border-secondary border-bottom">
+              <h3 class="p-3 fw-light">Ingrese Sus Datos Para Poder Registrarse</h3>
+            </div>
+            <!--Nombre-->
+            <div class="input-group mb-3 px-3 mt-2">
+              <span class="input-group-text" id="basic-addon1">Name</span>
+              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--Correo Institucional-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">@</span>
+              <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--Direccion-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">D</span>
+              <input [(ngModel)]="usuario.direccion" type="text" class="form-control" placeholder="Ingrese Su Dirección"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--Curp-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">Curp</span>
+              <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--Especialidad y Semestre-->
+            <div class="row d-flex mb-3">
+              <div class="col-sm-6">
+                <div class="input-group px-3">
+                  <span class="input-group-text">Especialidad:</span>
+                  <select id="especialidad" [(ngModel)]="usuario.especialidad" class="form-select"
+                    (click)='areaa()'>
+                    <option (click)='areaa()' value="Programacion">Programación</option>
+                    <option (click)='areaa()' value="Electricidad">Electricidad</option>
+                    <option (click)='areaa()' value="Contabilidad">Contabilidad</option>
+                    <option (click)='areaa()' value="Producción Industrial De Alimentos">Producción Industrial De Alimentos</option>
+                    <option (click)='areaa()' value="Soporte Y Mantenimieto Equipo De Computo">Soporte Y Mantenimieto Equipo De Computo</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="input-group px-3">
+                  <span class="input-group-text" id="basic-addon1">Sem.</span>
+                  <select id="input-group-text" [(ngModel)]="usuario.semestre" class="form-select">
+                    <option value="PRIMER">°1</option>
+                    <option value="SEGUNDO">°2</option>
+                    <option value="TERCER">°3</option>
+                    <option value="CUARTO">°4</option>
+                    <option value="QUINTO">°5</option>
+                    <option value="SEXTO">°6</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="input-group px-3">
+                  <span class="input-group-text" id="basic-addon1">Grupo</span>
+                  <select id="input-group-text" [(ngModel)]="usuario.grupo" class="form-select">
+                    <option value="A">"A"</option>
+                    <option value="B">"B"</option>
+                    <option value="C">"C"</option>
+                    <option value="D">"D"</option>
+                    <option value="E">"E"</option>
+                    <option value="F">"F"</option>
+                    <option value="G">"G"</option>
+                    <option value="H">"H"</option>
+                    <option value="I">"I"</option>
+                    <option value="J">"J"</option>
+                    <option value="K">"K"</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!--Area y Turno-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">Área</span>
+              <input type="text" [(ngModel)]="usuario.area" class="form-select" disabled>
 
-    <!--Parte Derecha Del Sistema-->
-    <div class="col-lg-7">
-      <div class="d-flex pb-2 mb-4 text-success border-2 border-bottom border-success">
-        <h3><i class="fa-solid fa-right-to-bracket"></i></h3>
-        <h3 class="px-2">{{registrarse}}</h3>
-      </div>
-        <!--Caja De Información-->
-        <div class="border border-secondary rounded">
-          <!--Introduccion-->
-          <div class="border-botom border-secondary border-bottom">
-            <h3 class="p-3 fw-light">Ingrese Sus Datos Para Poder Registrarse</h3>
-          </div>
-          <!--Nombre-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Name</span>
-            <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <!--Correo Institucional-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <!--Direccion-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">D</span>
-            <input [(ngModel)]="usuario.direccion" type="text" class="form-control" placeholder="Ingrese Su Dirección" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <!--Curp-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Curp</span>
-            <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <!--Especialidad y Semestre-->
-          <div class="input-group mb-3">
-            <span class="input-group-text">Especialidad:</span>
-            <select id="especialidad" [(ngModel)]="usuario.especialidad" class="form-select" >
-              <option value="Programacion">Programación</option>
-              <option value="Electricidad">Electricidad</option>
-              <option value="Contabilidad">Contabilidad</option>
-              <option value="Alimentos">Producción Industrial De Alimentos</option>
-              <option value="Soporte">Soporte Y Mantenimieto Equipo De Computo</option>
-            </select>
+              <span class="input-group-text" id="basic-addon1">Turno</span>
+              <select id="input-group-text" [(ngModel)]="usuario.turno" class="form-select">
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+              </select>
+            </div>
+            <!--No Control-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">#</span>
+              <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control"
+                aria-label="Username" aria-describedby="basic-addon1" value="">
+              <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
+            </div>
+            <!--contraseña y Repetir Contra-->
+            <div class="input-group mb-3 px-3">
+              <span class="input-group-text" id="basic-addon1">***</span>
+              <input [(ngModel)]="usuario.pass" type="password" class="form-control" placeholder="Contraseña"
+                aria-label="Username" aria-describedby="basic-addon1">
+              <span class="input-group-text" id="basic-addon1">***</span>
+              <input [(ngModel)]="usuario.pass2" type="password" class="form-control" placeholder="Repita Su Contraseña"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--Registro-->
 
-            <span class="input-group-text" id="basic-addon1">Semestre</span>
-            <select id="input-group-text" [(ngModel)]="usuario.semestre" class="form-select">
-              <option value="PRIMER">°1</option>
-              <option value="SEGUNDO">°2</option>
-              <option value="TERCER">°3</option>
-              <option value="CUARTO">°4</option>
-              <option value="QUINTO">°5</option>
-              <option value="SEXTO">°6</option>
-            </select>
+            <div class="d-flex justify-content-center mb-2">
+              <button class="btn bg-success rounded btn-lg" type="button" (click)='Registro()'>Registrarse</button>
 
-            <span class="input-group-text" id="basic-addon1">Grupo</span>
-            <select id="input-group-text" [(ngModel)]="usuario.grupo" class="form-select">
-              <option value="A">"A"</option>
-              <option value="B">"B"</option>
-              <option value="C">"C"</option>
-              <option value="D">"D"</option>
-              <option value="E">"E"</option>
-              <option value="F">"F"</option>
-              <option value="G">"G"</option>
-              <option value="H">"H"</option>
-              <option value="I">"I"</option>
-              <option value="J">"J"</option>
-              <option value="K">"K"</option>
-            </select>
-          </div>
-          <!--Area y Turno-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Area</span>
-            <select id="input-group-text" [(ngModel)]="usuario.area" class="form-select">
-              <option value="a">Económico Administrativo</option>
-              <option value="b">Químico Biológico</option>
-              <option value="c">Físico Matemático</option>
-            </select>
+            </div>
+            <div class="row d-flex">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-8 mt-2">
+                <div class="justify-content-center">
+                  <h5 class="">**Al crear la cuenta, acepto incondicionalmente los términos y condiciones, así como el
+                    aviso de privacidad del servicio de PPD</h5>
+                </div>
+              </div>
 
-            <span class="input-group-text" id="basic-addon1">Turno</span>
-            <select id="input-group-text" [(ngModel)]="usuario.turno" class="form-select">
-              <option value="Matutino">Matutino</option>
-              <option value="Vespertino">Vespertino</option>
-            </select>
-          </div>
-          <!--No Control-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">#</span>
-            <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1">
-            <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
-          </div>
-          <!--contraseña y Repetir Contra-->
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">***</span>
-            <input [(ngModel)]="usuario.pass" type="password" class="form-control" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
-            <span class="input-group-text" id="basic-addon1">***</span>
-            <input [(ngModel)]="usuario.pass2" type="password" class="form-control" placeholder="Repita Su Contraseña" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <!--Registro-->
-
-          <div class="d-flex justify-content-center mb-2">
-            <button class="btn bg-success rounded btn-lg" type="button" (click)='Registro()'>Registrarse</button>
-
-          </div>
-          <div class="row d-flex">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8 mt-2">
-            <div class="justify-content-center">
-              <h5 class="">**Al crear la cuenta, acepto incondicionalmente los términos y condiciones, así como el aviso de privacidad del servicio de PPD</h5>
             </div>
           </div>
 
         </div>
-        </div>
+      </div>
+      <div>
 
       </div>
     </div>
-    <div>
-
-    </div>
-</header>
 
   </div>
 </div>

@@ -23,6 +23,12 @@ export class HomeComponent implements OnInit {
   datoo: any;
   boton = false;
   emitidas: any;
+  datosRegistro = {
+    "NoCtrl":"",
+      "emitio":"",
+      "fecha":"",
+      "CodPago":""
+  }
   paso3 = false;
   valortipo = {
     "tipo": "",
@@ -91,11 +97,29 @@ export class HomeComponent implements OnInit {
       numControl: this.noctrl,
       codigoPago: this.home.NoPago
     }
-    console.log(email);
     this.email.envioConstancia(email).subscribe((res: any) => {
-      if (res.msg == "Enviado") {
+      if (res == "Correcto") {
+        Notiflix.Notify.success("Correo Enviado Con Éxito");
       }
     });
+
+    this.user.obtenerDatos(this.home).subscribe((res:any)=>{
+      this.datosRegistro = {
+        "NoCtrl":this.dato.numcontrol,
+        "emitio":res.emitio,
+        "fecha":res.nombre,
+        "CodPago":this.home.NoPago
+      } 
+        console.log(this.datosRegistro);
+        this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
+          if(res.ok == "ok"){console.log("Joya");}else if(res.err = "err"){console.log("No joya");}
+        });   
+   });
+   
+   
+   
+   
+
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
         this.datosCons.asunto = "";

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
@@ -30,7 +29,7 @@ router.post('/forgotPassword', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
-    ccn.query('select alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
+    ccn.query('select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
 
             if (!err) {
@@ -38,7 +37,7 @@ router.post('/login', (req, res) => {
 
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
-                    dato.exp = Date.now() / 1000 + (300);
+                    dato.exp = Date.now() / 1000 + (parseInt(dato.exp));
                     let data = JSON.stringify(dato);
 
                     const token = jwt.sign(data, 'stil');
@@ -55,18 +54,13 @@ router.post('/login', (req, res) => {
     );
 });
 
-/*router.post('/registro',(req,res)=>{
-    const {correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,nombre,direccion} = req.body;
-    ccn.query('INSERT INTO usuario (idUser,userName,numControl,password,rol,exp,nombre) VALUES (?, ?, ?, ?, ?, ?, ?, )',[noctrl,nombre,])
-});*/
-
 router.post('/registro',(req,res)=>{
     const {nombre,correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,direccion,CTO,grupo} = req.body;
     const horario = "si";
     const alta = 0; 
     const rol = "user";
         //Subir datos a la tabla usuario
-    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 300, nombre],(err,rows,fields)=>{
+    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 600, nombre],(err,rows,fields)=>{
         if(!err){
             console.log(rows.affectedRows);
         }
@@ -85,7 +79,6 @@ router.post('/registro',(req,res)=>{
         }
     });
 });
-
 
 router.post('/datosUser', (req, res) => {
     const numControl = req.body.numcontrol;
@@ -139,7 +132,6 @@ router.post('/NoPago',(req,res)=>{
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
-            console.log(rows[0]);
             res.json({valido:"Aceptado"});
             }else{
                 res.json({Error:"Número Invalido"});
@@ -156,7 +148,6 @@ router.post('/verificaNoPago',(req,res)=>{
     (err,rows,fields)=>{
         if(!err){
             if(rows.length > 0){
-            console.log(rows[0]);
             res.json({valido:"Aceptado"});
             }else{
                 res.json({Error:"Número Invalido"});
@@ -175,10 +166,43 @@ router.post('/verificaNoPago',(req,res)=>{
         }else{
             res.json({Error:"Error"})
         } 
-    });
+    }); 
  });
  
+ router.post('/ObtenerDatosPago',(req,res)=>{
+    const NoPago = req.body;
+    ccn.query('SELECT * from solicitud where codigoPago = ?',[NoPago.NoPago],
+    (err,rows,fields)=>{
+        if(!err){
+                let datos = JSON.stringify(rows[0].emitio);
+                let dato = JSON.parse(datos);
+                let data = JSON.stringify(dato);
 
+                let datoos = JSON.stringify(rows[0].fechaSolicitud);
+                let datoo = JSON.parse(datoos);
+                let dataa = JSON.stringify(datoo);
+                res.json({"nombre":dataa,"emitio":data});
+            }else{ 
+                res.json({err:"err"}); 
+            }
+        
+    });
+ });
+
+router.post('/SubirRegistro',(req,res)=>{
+    const {NoCtrl,emitio,fecha,CodPago} = req.body;
+    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[NoCtrl,emitio,fecha,CodPago],
+    (err,rows,fields)=>{
+        console.log(err);
+        if(!err){
+            console.log(NoCtrl);
+            res.json({ok:"ok"})
+        }else{
+            res.json({err:"err"})
+            console.log("Mal");
+        } 
+    });
+});
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);
