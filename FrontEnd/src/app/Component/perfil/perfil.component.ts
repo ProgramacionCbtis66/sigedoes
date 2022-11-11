@@ -21,6 +21,7 @@ export class PerfilComponent implements OnInit {
       this.userService.datosUser(datos).subscribe((res: any)=>{
        if(JSON.parse(res.data).nombre!=""){
           this.datos = JSON.parse(res.data);
+          alert(this.datos);
        }
       });
     }
