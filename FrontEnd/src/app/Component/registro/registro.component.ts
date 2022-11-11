@@ -87,5 +87,15 @@ export class RegistroComponent implements OnInit {
       Notiflix.Notify.failure("Las contraseñas no coinciden");
     }
   }
+  
+  areaa(){
+    if(this.usuario.especialidad == "Programacion" || this.usuario.especialidad == "Soporte Y Mantenimieto Equipo De Computo" || this.usuario.especialidad == "Electricidad"){
+      this.usuario.area = "Físico Matemático";
+    }else if(this.usuario.especialidad == "Contabilidad"){
+      this.usuario.area = "Económico Administrativo";
+    }else if(this.usuario.especialidad == "Producción Industrial De Alimentos"){
+      this.usuario.area = "Químico Biológico";
+    }
+  }
 }
 
