@@ -84,9 +84,11 @@ export class AdminstradorComponent implements OnInit {
 
 
   verificar() {
+
     const numcontrol = {
-      numcontrol: this.nc | 0
+      numcontrol: this.nc
     }
+    console.log(numcontrol.numcontrol);
     this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
       if (res.data != "" && res.data != null) {
         const datos = JSON.parse(res.data);
