@@ -113,7 +113,7 @@ export class AdminstradorComponent implements OnInit {
     }
     this.userServicio.verificaNoPago(numPago).subscribe((res: any) => {
       if (res.valido !== "Aceptado") {
-        this.numero = this.generateRandomString(12);
+        this.GenerarCodigoPago();
       }
     });
   }
