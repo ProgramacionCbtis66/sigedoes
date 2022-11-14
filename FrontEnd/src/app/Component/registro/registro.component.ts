@@ -64,7 +64,7 @@ export class RegistroComponent implements OnInit {
     alert(this.usuario.area);
   }
 
-  Registro() {
+  Registro() { 
     let contra = this.usuario.pass2;
     let contra2 = this.usuario.pass;
     if (contra == contra2) {

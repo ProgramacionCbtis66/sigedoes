@@ -9,7 +9,7 @@ import { SendEmailService } from '../../service/send-email.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  paso2 = false;
   alumno: any;
   curp: any;
   correo: any;
@@ -86,9 +86,13 @@ export class HomeComponent implements OnInit {
   public name() {
 
   }
-  restart() {
-    location.reload();
-  }
+  
+   mostrartipo(){
+    this.paso2 = true;
+   }
+   actualizar(){
+    this.datosCons.asunto = this.valortipo.tipo;
+   }
   generarcons() {
     const email = {
       email: this.correo,
@@ -102,7 +106,6 @@ export class HomeComponent implements OnInit {
         Notiflix.Notify.success("Correo Enviado Con Éxito");
       }
     });
-
     this.user.obtenerDatos(this.home).subscribe((res:any)=>{
       this.datosRegistro = {
         "NoCtrl":this.dato.numcontrol,
@@ -140,11 +143,8 @@ export class HomeComponent implements OnInit {
   carga() {
 
   }
-  actualizar() {
-    this.paso3 = true;
-  }
+  
   comprobar() {
-    {
       this.datosCons.asunto = this.valortipo.tipo;
       this.datosCons.semestre = this.semestre;
       this.datosCons.especialidad = this.especialidad;
@@ -152,13 +152,14 @@ export class HomeComponent implements OnInit {
       this.datosCons.turno = this.turno;
       this.datosCons.nombre = this.alumno;
       this.datosCons.matricula = this.noctrl;
-    }
+    
     if (this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != "") {
       this.home.numControl = this.noctrl;
       Notiflix.Loading.standard("Revisando Código");
+
       this.user.NoPago(this.home).subscribe((res: any) => {
         if (res.valido != "" && res.valido != null && res.valido != undefined) {
-          this.tabla = true;
+          this.paso2 = true;
           Notiflix.Loading.remove();
           if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != "") {
             if (this.boton) {

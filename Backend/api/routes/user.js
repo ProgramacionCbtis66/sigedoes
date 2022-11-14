@@ -6,7 +6,6 @@ const ccn = require('../connection/connection');
 
 router.post('/forgotPassword', (req, res) => {
     const correo = req.body.correo;
-    console.log(correo);
     ccn.query('select * from forgotpassword where correo like ?', [correo],
         (err, rows, fields) => {
             if (!err) {
@@ -31,7 +30,7 @@ router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
     ccn.query('select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
-
+console
             if (!err) {
                 if (rows.length > 0) {
 
@@ -62,7 +61,7 @@ router.post('/registro',(req,res)=>{
         //Subir datos a la tabla usuario
     ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)',[noctrl,noctrl,pass2,rol, 600, nombre],(err,rows,fields)=>{
         if(!err){
-            console.log(rows.affectedRows);
+            
         }
     });
 
@@ -100,11 +99,9 @@ router.post('/datosUser', (req, res) => {
 
 router.post('/usuarioAceptado', (req, res) => {
     const alumno = req.body;
-    console.log(req.body);
     ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.numControl],
         (err, rows, fields) => {
             if (!err) {
-                console.log(rows.length);
                 if(alumno.op==1) res.json("Aceptado");
                 if(alumno.op==3) res.json("Rechazado");
             } else {
@@ -193,13 +190,10 @@ router.post('/SubirRegistro',(req,res)=>{
     const {NoCtrl,emitio,fecha,CodPago} = req.body;
     ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)',[NoCtrl,emitio,fecha,CodPago],
     (err,rows,fields)=>{
-        console.log(err);
         if(!err){
-            console.log(NoCtrl);
             res.json({ok:"ok"})
         }else{
             res.json({err:"err"})
-            console.log("Mal");
         } 
     });
 });
