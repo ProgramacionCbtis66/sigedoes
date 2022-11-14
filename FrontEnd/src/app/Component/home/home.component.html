@@ -146,17 +146,17 @@
             <h2 class="fw-light">Paso 3: </h2>
           </div>
           <div>
-            <h5 class="px-3 pt-2 fw-lighter">Ingresar El Número De Pago</h5>
+            <h5 class="px-3 pt-2 fw-lighter">Ingresar el número de pago</h5>
           </div>
         </div>
         <div class="card border border-success border-2" *ngIf="paso3">
           <div class="d-flex justify-content-center input-group mb-2 mt-2">
-            <span class="input-group-text fw-light fw-semibold" id="basic-addon1">Ingrese Su Número De Pago</span>
+            <span class="input-group-text fw-light fw-semibold" id="basic-addon1">Ingrese su número de pago</span>
             <input class="input-group-text" [(ngModel)]="home.NoPago" aria-describedby="basic-addon1" type="text">
           </div>
           <div class="d-flex justify-content-center me-5 mb-3">
             <button class="btn btn-3GBL" (click)="comprobar()" type="button" data-bs-toggle="modal"
-              data-bs-target="#comprobacion">Comprobar Datos</button>
+              data-bs-target="#comprobacion">Comprobar datos</button>
           </div>
         </div>
       </div>
@@ -172,13 +172,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-4 " id="staticBackdropLabel">Paso 4</h1>
-        <h5 class="px-3 pt-2 fw-lighter">Verifica los Datos</h5>
+        <h5 class="px-3 pt-2 fw-lighter">Verifica los datos</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-12 bg-light">
-            <div class="h5 fw-lighter p-2">Datos de la Constancia</div>
+            <div class="h5 fw-lighter p-2">Datos de la donstancia</div>
           </div>
           <div class="row">
             <div class="col-sm-6">
@@ -221,9 +221,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()">
-            Crear Constancia
+            Generar constancia
           </button>
         </div>
       </div>
