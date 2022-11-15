@@ -53,7 +53,9 @@ export class AdminstradorComponent implements OnInit {
     this.app.iflogin= false;
     this.app.logout = true;
   }
-
+  si(){
+    Notiflix.Notify.info("yes");
+  }
   aceptar(op: any) {
     this.aceptado = op;
     this.aceptado.op = 1;

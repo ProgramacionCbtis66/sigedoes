@@ -41,10 +41,9 @@
                   <td>{{dato.grado}}</td>
                   <td>{{dato.grupo}}</td>
                   <td>{{dato.especialidad}}</td>
-                  <td class="text-center "> <a (click)="aceptar(dato)" class="badge bg-success" disabled><i
-                        class="fa fa-check-circle" aria-hidden="true"></i></a> |
-                    <a (click)="Noaceptado(dato)" class="badge bg-danger" disabled><i
-                        class="fa-solid fa-circle-xmark"></i></a>
+                  <td class="text-center "> <a (click)="si()" data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i
+                        class="fa fa-check-circle" aria-hidden="true"></i></a>
+                    
                   </td>
                 </tr>
               </tbody>
@@ -209,3 +208,72 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar Solicitud</a>
       </div>
+    </div>
+  </div>      
+</div>
+<!--Modal datos-->
+<div class="modal fade" id="aceptado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="h3">
+          Datos Del Solicitante:
+        </div>
+      </div>
+      <div class="modal-body">
+        <div>
+          <table class="table table-bordered">
+            <tr class="">
+              <th class="pb-2 pt-2 ">Nombre</th>
+              <td>xd</td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Número de Control</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Dirección</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Especialidad</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th  class="pb-2 pt-2">Área</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Grado</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Grupo</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Turno</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Horario</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">CTO</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Correo</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="pb-2 pt-2">Curp</th>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
