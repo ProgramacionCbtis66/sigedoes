@@ -98,6 +98,9 @@ export class HomeComponent implements OnInit {
     if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != "") {
       this.tabla = true;
     }
+    if(this.datosCons.asunto == ""){
+      Notiflix.Notify.failure("Tiene Que Elegir El Tipo De Constancia");
+    }
    }
   generarcons() {
     const email = {
