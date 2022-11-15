@@ -93,6 +93,12 @@ export class HomeComponent implements OnInit {
    actualizar(){
     this.datosCons.asunto = this.valortipo.tipo;
    }
+   veridatos(){
+    this.datosCons.asunto = this.valortipo.tipo;
+    if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != "") {
+      this.tabla = true;
+    }
+   }
   generarcons() {
     const email = {
       email: this.correo,
@@ -101,6 +107,7 @@ export class HomeComponent implements OnInit {
       numControl: this.noctrl,
       codigoPago: this.home.NoPago
     }
+    
     this.email.envioConstancia(email).subscribe((res: any) => {
       if (res == "Correcto") {
         Notiflix.Notify.success("Correo Enviado Con Éxito");
@@ -113,16 +120,12 @@ export class HomeComponent implements OnInit {
         "fecha":res.nombre,
         "CodPago":this.home.NoPago
       } 
-        console.log(this.datosRegistro);
+      console
         this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
-          if(res.ok == "ok"){console.log("Joya");}else if(res.err = "err"){console.log("No joya");}
+         
         });   
    });
    
-   
-   
-   
-
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
         this.datosCons.asunto = "";
@@ -138,13 +141,13 @@ export class HomeComponent implements OnInit {
     });
 
 
-
   }
   carga() {
 
   }
   
   comprobar() {
+    this.datosCons.asunto = this.valortipo.tipo;
       this.datosCons.asunto = this.valortipo.tipo;
       this.datosCons.semestre = this.semestre;
       this.datosCons.especialidad = this.especialidad;
@@ -161,14 +164,7 @@ export class HomeComponent implements OnInit {
         if (res.valido != "" && res.valido != null && res.valido != undefined) {
           this.paso2 = true;
           Notiflix.Loading.remove();
-          if (this.datosCons.asunto != "" && this.datosCons.nombre != "" && this.datosCons.semestre != "" && this.datosCons.especialidad != "" && this.datosCons.area != "" && this.datosCons.turno != "" && this.datosCons.matricula != "" && this.datosCons.claveIns != "" && this.datosCons.claveEsc != "" && this.datosCons.horario != "" && this.datosCons.periodo != "") {
-            if (this.boton) {
-              this.boton = false;
-            } else {
-              this.boton = true;
-            }
-          }
-
+          
         } else {
           Notiflix.Loading.remove();
           Notiflix.Notify.info("El Número No Es Valido");

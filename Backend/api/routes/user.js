@@ -159,8 +159,9 @@ router.post('/verificaNoPago',(req,res)=>{
     ccn.query('UPDATE solicitud set activo = 0 where codigoPago = ?',[codpag.NoPago],
     (err,rows,fields)=>{
         if(!err){
-            res.json({msg:"ok"})
-        }else{
+            res.json({msg:"ok"});
+            
+        }else{ 
             res.json({Error:"Error"})
         } 
     }); 
