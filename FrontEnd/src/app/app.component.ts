@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
 
   visibleLoginRegistro(){
     if(this.auth.isAuth()){
-
+      this.iflogin = false;
       this.mostrar = false;
     }else{
       this.mostrar = true;
