@@ -23,12 +23,14 @@
         </li>
       </ul>
     </div>
-    <div class="dropdown d-flex" *ngIf="!mostrar || logout">
+    <div class="dropdown-center d-flex" *ngIf="!mostrar || logout">
       <a class="btn dropdown-toggle text-color-3G" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">
-         Salir
+         <i class="fa fa-user-circle" aria-hidden="true"></i>
       </a>
       <ul class="dropdown-menu">
+        <li><p class="text-wrap fw-light fs-6">{{usuario}}</p></li>
+        <li><hr class="dropdown-divider"></li>
         <li><button class="dropdown-item " (click)="salir()">Salir</button></li>
       </ul>
     </div>

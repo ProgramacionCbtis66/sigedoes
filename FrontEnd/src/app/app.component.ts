@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  usuario= "";
   logout =true;
   home=true;
   title = 'Constancias';
@@ -25,23 +26,14 @@ export class AppComponent implements OnInit{
 
   visibleLoginRegistro(){
     if(this.auth.isAuth()){
+
       this.mostrar = false;
-      this.logout =true;
     }else{
       this.mostrar = true;
       this.iflogin = true;
     }
   }
 
-  inicio(){
-    if(this.auth.isAuth()){
-
-      const user = this.auth.decodifica();
-      this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
-      if(user.rol== "Admin") {this.Administrador=true;}
-      if(user.rol == 'user'){this.Administrador = false;}
-    }
-  }
   salir(){
     this.auth.estatus = false;
     this.mostrar = true;
@@ -54,10 +46,19 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.titulo.setTitle(this.title);
-    this.visibleLoginRegistro();
-    this.inicio();
-    const user = this.auth.decodifica();
-    console.log(user.rol);
-    if(user.rol == 'user'){this.Administrador = true}
+    if(this.auth.isAuth()){
+      this.mostrar = false;
+      this.logout =true;
+      const user = this.auth.decodifica();
+      this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
+      this.usuario = user["nombre"];
+      if(user.rol== "Admin") {this.Administrador=true;}
+      if(user.rol == 'user'){this.Administrador = false;}
+
+    }else{
+      this.mostrar = true;
+      this.iflogin = true;
+      this.logout =false;
+    }
   }
 }
