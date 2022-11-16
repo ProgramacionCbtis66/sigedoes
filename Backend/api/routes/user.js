@@ -139,12 +139,12 @@ router.post('/NoPago',(req,res)=>{
 });
 
 router.post('/verificaNoPago',(req,res)=>{
-    const {NoPago} = req.body;
+    const {numPago} = req.body;
    
-    ccn.query('SELECT codigoPago from solicitud where codigoPago like ?',[NoPago],
+    ccn.query('SELECT codigoPago from solicitud where codigoPago like ?',[numPago],
     (err,rows,fields)=>{
         if(!err){
-            if(rows.length > 0){
+            if(rows.length <= 0){
             res.json({valido:"Aceptado"});
             }else{
                 res.json({Error:"Número Invalido"});

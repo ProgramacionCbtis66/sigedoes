@@ -114,9 +114,9 @@ export class AdminstradorComponent implements OnInit {
       numcontrol: this.nc
     }
     this.userServicio.verificaNoPago(numPago).subscribe((res: any) => {
-      if (res.valido !== "Aceptado") {
-        this.GenerarCodigoPago();
-      }
+      if (res.valido == "Aceptado") {
+        this.numero = numPago.numPago;
+      }else{this.GenerarCodigoPago();}
     });
   }
 
