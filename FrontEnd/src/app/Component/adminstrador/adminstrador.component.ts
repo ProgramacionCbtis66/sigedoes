@@ -13,7 +13,7 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./adminstrador.component.css']
 })
 export class AdminstradorComponent implements OnInit {
-
+  
   solicitud = {
     numControl: "",
     emitio: "",
@@ -22,6 +22,21 @@ export class AdminstradorComponent implements OnInit {
     aportacion: "",
     descripcion: ""
 
+  }
+  usuario = {
+    "nombre": "",
+    "correo": "",
+    "pass": "",
+    "pass2": "",
+    "curp": "",
+    "noctrl": "",
+    "especialidad": "",
+    "semestre": "",
+    "area": "",
+    "turno": "",
+    "direccion": "",
+    "CTO": "30DCT0236O",
+    "grupo": ""
   }
   alumno = {
     "nombre": "",
@@ -54,7 +69,7 @@ export class AdminstradorComponent implements OnInit {
     this.app.logout = true;
   }
   si(){
-    Notiflix.Notify.info("yes");
+    
   }
   aceptar(op: any) {
     this.aceptado = op;
