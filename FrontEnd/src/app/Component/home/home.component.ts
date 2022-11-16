@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
     const email = {
       email: this.correo,
       asunto: this.datosCons.asunto,
+      datos:this.datosCons,
       tipo: "Constancia",
       numControl: this.noctrl,
       codigoPago: this.home.NoPago

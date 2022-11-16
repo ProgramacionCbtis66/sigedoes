@@ -191,9 +191,11 @@ export class AdminstradorComponent implements OnInit {
     }
   }
   obtenerDatos(numControl:any){
-    this.usuario.noctrl = numControl;
+    const dato = {
+      numeroCtrl:numControl
+    }
     console.log(this.usuario.noctrl);
-    this.admin.verInfo(this.usuario.noctrl).subscribe((res:any)=>{
+    this.userServicio.verInfo(dato).subscribe((res:any)=>{
       if(res.ok = "ok"){
         Notiflix.Notify.info("Bientos");
         console.log(res);

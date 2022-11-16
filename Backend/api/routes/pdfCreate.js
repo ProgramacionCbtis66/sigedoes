@@ -10,7 +10,6 @@ const convertir = require('./PDFformat/numlet');
 var alumno = "";
 
 function create(req, tipo) {
-
     ccn.query('select * from pdf where numControl like ?', [req.numControl],
         (err, rows, fields) => {
             if (!err) {
@@ -22,6 +21,7 @@ function create(req, tipo) {
                     let dia = convertir(fecha.getDate());
                     let mes = textomes(fecha.getMonth());
                     let year = convertir(fecha.getFullYear());
+                    console.log(fecha.getMonth()+ " |||||| "+fecha);
                     const contenido = {
                         asunto: [
 
@@ -41,7 +41,7 @@ function create(req, tipo) {
                                 table: {
                                     widths: [155, 'auto'],
                                     body: [
-                                        [{ qr: `${req.codigoPago}`, fit: 100, alignment: 'center' }, [{ text: "Firma Electrónica", style: Style.header },
+                                        [{ qr: `${JSON.stringify(req.datos)}`, fit: 154, alignment: 'center' }, [{ text: "Firma Electrónica", style: Style.header },
                                         {
                                             text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
                 Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT
@@ -54,7 +54,7 @@ function create(req, tipo) {
 
                            
 
-                            { text: " \n \n Director", style: Style.header },
+                            { text: " \n \n \n Director", style: Style.header },
                             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
 
 

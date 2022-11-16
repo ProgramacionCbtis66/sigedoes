@@ -47,4 +47,7 @@ obtenerDatos(nopago:any):Observable<any>{
 subirEmitido(datosRegistro:any):Observable<any>{
   return this.http.post(`${this.URL}/insize/SubirRegistro`,datosRegistro);
 }
+verInfo(numControl:any):Observable<any>{
+  return this.http.post(`${this.URL}/insize/verInfo`,numControl);
+}
 }

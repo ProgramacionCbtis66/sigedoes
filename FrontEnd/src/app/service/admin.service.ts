@@ -20,9 +20,6 @@ export class AdminService {
   enviarSolicitud(solicitud:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/solicitud`,solicitud);
   }
-  verInfo(user:any){
-    return this.http.post(`${this.URL}/admin/solicitud`,user);
-  }
 
 
 }

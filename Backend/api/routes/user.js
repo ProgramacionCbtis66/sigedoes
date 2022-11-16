@@ -198,6 +198,20 @@ router.post('/SubirRegistro',(req,res)=>{
         } 
     });
 });
+
+router.post('/verInfo',(req,res)=>{
+    const {numeroCtrl} = req.body;
+    console.log(numeroCtrl);
+    ccn.query('SELECT * from alumno where numControl = ?',[numeroCtrl],
+    (err,rows,fields)=>{
+        if(!err){
+            res.json({ok:"ok"});
+        }else{
+            res.json({err:"err"});
+        }
+    });
+});
+
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);
