@@ -23,11 +23,12 @@ export class AdminstradorComponent implements OnInit {
     descripcion: ""
 
   }
+  dato = {
+    numControl:""
+  }
   usuario = {
     "nombre": "",
     "correo": "",
-    "pass": "",
-    "pass2": "",
     "curp": "",
     "noctrl": "",
     "especialidad": "",
@@ -188,5 +189,15 @@ export class AdminstradorComponent implements OnInit {
     }else{
         alert("Número de pago no disponible");
     }
+  }
+  obtenerDatos(numControl:any){
+    this.admin.verInfo(numControl).subscribe((res:any)=>{
+      if(res.ok = "ok"){
+        Notiflix.Notify.info("Bientos");
+        console.log(res);
+      }else if(res.err = "err"){
+        Notiflix.Notify.info("Mal");
+      }
+    });
   }
 }
