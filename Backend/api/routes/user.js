@@ -201,11 +201,10 @@ router.post('/SubirRegistro',(req,res)=>{
 
 router.post('/verInfo',(req,res)=>{
     const {numeroCtrl} = req.body;
-    console.log(numeroCtrl);
     ccn.query('SELECT * from alumno where numControl = ?',[numeroCtrl],
     (err,rows,fields)=>{
         if(!err){
-            res.json({ok:"ok"});
+            res.json({ok:"ok",data:rows[0]});
         }else{
             res.json({err:"err"});
         }
