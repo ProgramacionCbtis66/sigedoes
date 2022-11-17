@@ -1,0 +1,25 @@
+.col-md-6 {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rojo{
+    background-color: #FEB0A3;
+}
+
+
+
+.c1{
+    background-color: #E8E7D4;
+}
+
+.c2{
+    background-color: #D4D1BD;
+}
+
+.mr{
+    margin-right: 20px !important;
+}
+
