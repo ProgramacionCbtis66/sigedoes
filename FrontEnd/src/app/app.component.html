@@ -32,16 +32,20 @@
       </a>
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-        <li class="ps-2 d-flex">
-          <a routerLink="perfil">
+        <li class="ps-2">
+          <a class="d-flex d-inline-flex" routerLink="perfil">
             <i class="fa fa-cogs" aria-hidden="true"></i>
-            <p class="text-wrap text-color-3G ps-2 px-2" style="font-size: 10px;font-weight: bold;">{{usuario}}</p>
+            <p class="text-wrap text-color-3G ps-2 px-2" style="font-size: 8px;font-weight: bold;">{{usuario}}</p>
           </a>
         </li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><button class="dropdown-item " (click)="salir()">Salir</button></li>
+        <li>
+          <button class="dropdown-item" (click)="salir()">
+            <i class="fa-solid fa-right-from-bracket "></i>
+          Salir
+        </button></li>
       </ul>
     </div>
     <div class="p-4"></div>
