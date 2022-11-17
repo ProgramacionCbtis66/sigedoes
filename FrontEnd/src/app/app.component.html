@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-sm bg-3g bg-gradient navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm bg-3g bg-gradient navbar-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="home" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="37">
@@ -25,21 +25,28 @@
     </div>
     <div class="dropdown-center d-flex d-inline-flex" *ngIf="!mostrar || logout">
       <p class="text-wrap text-color-3G pt-2" style="font-size: 10px;font-weight: bold;">{{usuario}}</p>
-      <a class="btn dropdown-toggle text-color-3G" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
-         <i class="fa fa-user-circle" aria-hidden="true"></i>
+
+      <a class="badge rounded-pill text-color-3G" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+        <i class="fa fa-user-circle h4" aria-hidden="true"></i>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <p class="text-wrap text-color-3G" style="font-size: 10px;font-weight: bold;">{{usuario}}</p>
+
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+        <li class="ps-2 d-flex">
+          <a routerLink="perfil">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <p class="text-wrap text-color-3G ps-2 px-2" style="font-size: 10px;font-weight: bold;">{{usuario}}</p>
+          </a>
         </li>
-        <li><hr class="dropdown-divider"></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
         <li><button class="dropdown-item " (click)="salir()">Salir</button></li>
       </ul>
     </div>
-      <div class="p-4"></div>
-      <div class="p-2"></div>
-    </div>
+    <div class="p-4"></div>
+    <div class="p-2"></div>
+  </div>
 </nav>
 
 <div class="container-fluid">
@@ -62,4 +69,3 @@
   </div>
 
 </div>
-

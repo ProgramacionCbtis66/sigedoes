@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
-  {path:"perfil", component: PerfilComponent, canActivate:[AuthGuard]},
+  {path:"perfil", component: PerfilComponent},
 
   {path:"**", component: Error404Component },
 
