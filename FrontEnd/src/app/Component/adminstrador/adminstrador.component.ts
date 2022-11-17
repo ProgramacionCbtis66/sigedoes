@@ -51,7 +51,15 @@ export class AdminstradorComponent implements OnInit {
   }
   nc : any;
   datos: any;
-  aceptado: any;
+  aceptado = {
+    alta:1,
+    op:"",
+    tipo:"",
+    noctrl:"",
+    baja:3,
+    email:"",
+    nombre:""
+  }
   verificado = false;
   numero: string = "";
 
@@ -74,24 +82,29 @@ export class AdminstradorComponent implements OnInit {
   si(){
 
   }
-  aceptar(op: any) {
-    this.aceptado = op;
-    this.aceptado.op = 1;
+  aceptar() {
+    
+    this.aceptado.op = "1";
     this.aceptado.tipo = "validacion";
+    this.aceptado.noctrl = this.usuario.noctrl;
+    this.aceptado.email = this.usuario.correo;
+    this.aceptado.nombre = this.usuario.nombre;
+    console.log("enviando");
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
-      Notiflix.Notify.success(res);
-      this.CorreoAcpetacion(op);
+      /*Notiflix.Notify.success(res);
+      this.CorreoAcpetacion(this.aceptado);*/
       this.ngOnInit();
     });
   }
-  Noaceptado(op: any) {
-    this.aceptado = op;
-    this.aceptado.op = 3;
+  Noaceptado() {
+    this.aceptado.op = "3";
     this.aceptado.tipo = "validacion";
-
+    this.aceptado.noctrl = this.usuario.noctrl;
+    this.aceptado.email = this.usuario.correo;
+    this.aceptado.nombre = this.usuario.nombre;
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
-      this.CorreoAcpetacion(op);
+      /*this.CorreoAcpetacion(this.aceptado);*/
       this.ngOnInit();
     });
   }
@@ -202,11 +215,19 @@ export class AdminstradorComponent implements OnInit {
     this.userServicio.verInfo(dato).subscribe((res:any)=>{
       if(res.ok = "ok"){
         const datos = res.data
-        console.log(datos);
         this.usuario.nombre = datos.nombre;
+        this.usuario.correo = datos.correo;
+        this.usuario.direccion = datos.direccion;
+        this.usuario.curp = datos.CURP;
+        this.usuario.area = datos.area;
+        this.usuario.especialidad = datos.especialidad;
+        this.usuario.grupo = datos.grupo;
+        this.usuario.semestre = datos.grado;
+        this.usuario.turno = datos.turno;
+        
         }
       else if(res.err = "err"){
-        Notiflix.Notify.info("Mal");
+        Notiflix.Notify.info("Error, Intente De Nuevo");
       }
     });
   }

@@ -26,6 +26,7 @@ Emailrouter.post("/envioSolicitud", (req, res) => {
 });
 
 function enviarCorreo(email, res) {
+  
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -77,8 +78,9 @@ function MailOptions(tipo, email) {
       };
       return mailOptions2;
     case "validacion":
+      
       const validacion =
-        email.op == 1
+        email.alta == 1
           ? `Aceptado sus datos son: </h3> <br><h5>Nombre: ${email.nombre}   Usuario: ${email.numControl}   contraseña: ${email.password}</h5>`
           : "Rechazado </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>";
       const mailOptions3 = {
@@ -87,6 +89,7 @@ function MailOptions(tipo, email) {
         subject: `"Aceptaciono Rechazo"`,
         html: `<h3>Estimado Usuario se le noifica que usted ha sido ${validacion}`,
       };
+      
       return mailOptions3;
 
     case "numPago":

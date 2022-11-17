@@ -287,8 +287,12 @@
           </div>
           <div class="modal-footer">
             <div class="h5">
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptado" 
+              class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="Noaceptado()">Rechazar</button>
+            </div>
+            <div class="h5">
               <button class="btn btn-success fa fa-check-circle" data-bs-toggle="modal" data-bs-target="#aceptado" 
-              class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="aceptar(1)" disabled>
+              class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="aceptar()">
                Verificar</button>
             </div>
             <!--<td class="text-center "> <a data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i

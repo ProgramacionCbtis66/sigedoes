@@ -99,7 +99,7 @@ router.post('/datosUser', (req, res) => {
 
 router.post('/usuarioAceptado', (req, res) => {
     const alumno = req.body;
-    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.numControl],
+    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.noctrl],
         (err, rows, fields) => {
             if (!err) {
                 if(alumno.op==1) res.json("Aceptado");
