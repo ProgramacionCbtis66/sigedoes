@@ -12,10 +12,13 @@ import { AuthService } from '../../service/auth.service';
     styleUrls: ['./perfil.component.css']
   })
   export class PerfilComponent implements OnInit {
-
+    perfilInfo = {
+      "alumno":"Juan",
+      curp:""
+    }
     datos : any;
     constructor(private app: AppComponent, private Auth:AuthService, private userService:UsuarioService) { }
-
+    
     ngOnInit(): void {
       if (this.Auth.isAuth() )
       {

@@ -31,10 +31,16 @@
             <table class="table table-border border border-dark rounded">
                 
                 <tbody>
+
                     <tr>
+                        <!-- <th class="c1">Alumno</th> -->
+                        <!-- <td class="c1 text-center">{{datos.nombre}}</td> -->
                         <th class="c1">Alumno</th>
-                        <td class="c1 text-center">{{datos.nombre}}</td>
+                        <td class="c1 text-center">
+                        <input [(ngModel)]="perfilInfo.alumno" class="border border-0 c1"  type="text" placeholder="dx"> 
+                        </td>
                     </tr>
+
                     <tr>
                         <th class="c2">CURP</th>
                         <td class="c2 text-center">{{datos.CURP}}</td>
