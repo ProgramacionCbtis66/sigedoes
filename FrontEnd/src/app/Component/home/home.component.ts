@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { SendEmailService } from '../../service/send-email.service';
+import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
     "numcontrol": ""
   }
 
-  constructor(private auth: AuthService, private user: UsuarioService, private email: SendEmailService) { }
+  constructor(private app: AppComponent, private auth: AuthService, private user: UsuarioService, private email: SendEmailService) { }
   home = {
     NoPago: "",
     numControl: ""
@@ -75,19 +76,12 @@ export class HomeComponent implements OnInit {
           this.especialidad = this.datos.especialidad;
           this.datosCons.periodo = this.datos.Esc_Periodo;
           this.datosCons.claveIns = this.datos.CTO;
-
+          this.app.usuario =  this.datos.nombre;
         }
       });
-
     }
-
-    Notiflix.Notify.info("Bienvenido ");
   }
-  public name() {
-
-  }
-  
-   mostrartipo(){
+    mostrartipo(){
     this.paso2 = true;
    }
    actualizar(){
@@ -111,7 +105,7 @@ export class HomeComponent implements OnInit {
       numControl: this.noctrl,
       codigoPago: this.home.NoPago
     }
-    
+
     this.email.envioConstancia(email).subscribe((res: any) => {
       if (res == "Correcto") {
         Notiflix.Notify.success("Correo Enviado Con Éxito");
@@ -123,13 +117,13 @@ export class HomeComponent implements OnInit {
         "emitio":res.emitio,
         "fecha":res.nombre,
         "CodPago":this.home.NoPago
-      } 
+      }
       console
         this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
-         
-        });   
+
+        });
    });
-   
+
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
       if (res.msg == "ok") {
         this.datosCons.asunto = "";
@@ -146,10 +140,6 @@ export class HomeComponent implements OnInit {
 
 
   }
-  carga() {
-
-  }
-  
   comprobar() {
     this.datosCons.asunto = this.valortipo.tipo;
       this.datosCons.asunto = this.valortipo.tipo;
@@ -159,7 +149,7 @@ export class HomeComponent implements OnInit {
       this.datosCons.turno = this.turno;
       this.datosCons.nombre = this.alumno;
       this.datosCons.matricula = this.noctrl;
-    
+
     if (this.home.NoPago != null && this.home.NoPago != undefined && this.home.NoPago != "") {
       this.home.numControl = this.noctrl;
       Notiflix.Loading.standard("Revisando Código");
@@ -168,7 +158,7 @@ export class HomeComponent implements OnInit {
         if (res.valido != "" && res.valido != null && res.valido != undefined) {
           this.paso2 = true;
           Notiflix.Loading.remove();
-          
+
         } else {
           Notiflix.Loading.remove();
           Notiflix.Notify.info("El Número No Es Valido");

@@ -13,7 +13,7 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./adminstrador.component.css']
 })
 export class AdminstradorComponent implements OnInit {
-  
+
   solicitud = {
     numControl: "",
     emitio: "",
@@ -64,13 +64,15 @@ export class AdminstradorComponent implements OnInit {
   ngOnInit(): void {
     this.userServicio.UsuariosNoReg().subscribe((res: any) => {
       this.datos = JSON.parse(res.data);
+
     });
+    this.app.usuario = this.auth.decodifica().nombre;
     this.app.home = false;
     this.app.iflogin= false;
     this.app.logout = true;
   }
   si(){
-    
+
   }
   aceptar(op: any) {
     this.aceptado = op;
@@ -119,6 +121,7 @@ export class AdminstradorComponent implements OnInit {
         this.alumno.escuela = datos.Esc_nombre;
         this.alumno.numControl = datos.numControl;
         this.verificado = true;
+
       } else { this.verificado = false }
     });
   }
