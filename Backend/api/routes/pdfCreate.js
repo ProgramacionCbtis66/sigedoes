@@ -34,7 +34,7 @@ function create(req, tipo) {
                             { text: " ", style: Style.header },
                             { text: `Con Matrícula se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: 352100002-16, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment: 'justify' },
 
-                            { text: `Se extiende la presente peticion del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes.toLowerCase()} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
+                            { text: `Se extiende la presente peticion del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
                             {
                                 layout: 'noBorders',
@@ -88,19 +88,7 @@ function create(req, tipo) {
 
 }
 function textomes(mes) {
-    switch (mes) {
-        case 1: return "ENERO";
-        case 2: return "FEBRERO";
-        case 3: return "MARZO";
-        case 4: return "ABRIL";
-        case 5: return "MAYO";
-        case 6: return "JUNIO";
-        case 7: return "JULIO";
-        case 8: return "AGOSTO";
-        case 9: return "SEPTIEMBRE";
-        case 10: return "OCTUBRE";
-        case 11: return "NOVIMBRE";
-        case 12: return "DICIEMBRE";
-    }
+    const month = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Augosto","Septiembre","Octubre","Noviembre","Deciembre"];
+    return month[mes];
 }
 module.exports = create;
