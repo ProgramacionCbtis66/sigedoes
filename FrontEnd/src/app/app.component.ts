@@ -48,6 +48,7 @@ export class AppComponent implements OnInit{
     this.titulo.setTitle(this.title);
     if(this.auth.isAuth()){
       this.mostrar = false;
+      this.iflogin = true;
       this.logout =true;
       const user = this.auth.decodifica();
       this.foto = '.././assets/img/' + user["nombre"] + '.jpg';

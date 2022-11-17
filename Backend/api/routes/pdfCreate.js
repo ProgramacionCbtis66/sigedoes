@@ -54,7 +54,7 @@ function create(req, tipo) {
 
                            
 
-                            { text: " \n \n \n Director", style: Style.header },
+                            { text: "Director", style: Style.header },
                             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
 
 
