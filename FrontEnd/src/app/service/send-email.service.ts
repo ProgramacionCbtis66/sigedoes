@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SendEmailService {
-  private URL = environment.HTTPS;
+  //private URL = environment.HTTPS;
+  private URL = "http://localhost:8000";
   constructor(private http:HttpClient) { }
 
   enviarCorreo(email:any):Observable<any>{

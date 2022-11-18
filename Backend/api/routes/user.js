@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const { json } = require('stream/consumers');
 const router = express.Router();
 
 const ccn = require('../connection/connection');
@@ -99,7 +100,7 @@ router.post('/datosUser', (req, res) => {
 
 router.post('/usuarioAceptado', (req, res) => {
     const alumno = req.body;
-    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.noctrl],
+    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op,alumno.numControl],
         (err, rows, fields) => {
             if (!err) {
                 if(alumno.op==1) res.json("Aceptado");
@@ -211,6 +212,20 @@ router.post('/verInfo',(req,res)=>{
     });
 });
 
+router.post('/getContra',(req,res)=>{
+    const {numcontrol} = req.body;
+    ccn.query('Select password from usuario where userName = ?',[numcontrol],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.length > 0){
+                let datos = JSON.stringify(rows[0].password);
+                let dato = JSON.parse(datos);
+                let contraseña = JSON.stringify(dato);
+                res.json({contra:contraseña});
+            }
+        }
+    });
+});
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);

@@ -37,7 +37,8 @@ export class AdminstradorComponent implements OnInit {
     "turno": "",
     "direccion": "",
     "CTO": "30DCT0236O",
-    "grupo": ""
+    "grupo": "",
+    "pass":""
   }
   alumno = {
     "nombre": "",
@@ -51,15 +52,7 @@ export class AdminstradorComponent implements OnInit {
   }
   nc : any;
   datos: any;
-  aceptado = {
-    alta:1,
-    op:"",
-    tipo:"",
-    noctrl:"",
-    baja:3,
-    email:"",
-    nombre:""
-  }
+  aceptado : any;
   verificado = false;
   numero: string = "";
 
@@ -82,36 +75,36 @@ export class AdminstradorComponent implements OnInit {
   si(){
 
   }
-  aceptar() {
-    
-    this.aceptado.op = "1";
+  aceptar(op: any) {
+    this.aceptado = op;
+    this.aceptado.op = 1;
     this.aceptado.tipo = "validacion";
-    this.aceptado.noctrl = this.usuario.noctrl;
-    this.aceptado.email = this.usuario.correo;
+    this.aceptado.numControl = this.usuario.noctrl;
+    this.aceptado.correo = this.usuario.correo;
     this.aceptado.nombre = this.usuario.nombre;
-    console.log("enviando");
+    this.aceptado.password = this.usuario.pass;
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
-      /*Notiflix.Notify.success(res);
-      this.CorreoAcpetacion(this.aceptado);*/
+      Notiflix.Notify.success(res);
+      this.CorreoAcpetacion(op);
+      
       this.ngOnInit();
     });
   }
-  Noaceptado() {
-    this.aceptado.op = "3";
+  Noaceptado(op: any) {
+    this.aceptado = op;
+    this.aceptado.op = 3;
     this.aceptado.tipo = "validacion";
-    this.aceptado.noctrl = this.usuario.noctrl;
-    this.aceptado.email = this.usuario.correo;
-    this.aceptado.nombre = this.usuario.nombre;
+    this.aceptado.numControl = this.usuario.noctrl;
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
-      /*this.CorreoAcpetacion(this.aceptado);*/
+      //this.CorreoAcpetacion(op);
       this.ngOnInit();
     });
   }
 
   CorreoAcpetacion(correo: any) {
     this.email.correoAcpetacion(correo).subscribe((res: any) => {
-      Notiflix.Notify.info(res);
+      Notiflix.Notify.info("Correo Enviado");
     });
   }
 
@@ -121,7 +114,6 @@ export class AdminstradorComponent implements OnInit {
     const numcontrol = {
       numcontrol: this.nc
     }
-    console.log(numcontrol.numcontrol);
     this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
       if (res.data != "" && res.data != null) {
         const datos = JSON.parse(res.data);
@@ -211,7 +203,6 @@ export class AdminstradorComponent implements OnInit {
       numeroCtrl:numControl
     }
     this.usuario.noctrl = numControl;
-    console.log(this.usuario.noctrl);
     this.userServicio.verInfo(dato).subscribe((res:any)=>{
       if(res.ok = "ok"){
         const datos = res.data
@@ -224,7 +215,12 @@ export class AdminstradorComponent implements OnInit {
         this.usuario.grupo = datos.grupo;
         this.usuario.semestre = datos.grado;
         this.usuario.turno = datos.turno;
-        
+        const noctrl = {
+          numcontrol:numControl
+        }
+        this.userServicio.getContra(noctrl).subscribe((res:any)=>{
+          this.usuario.pass = res.contra;
+        });
         }
       else if(res.err = "err"){
         Notiflix.Notify.info("Error, Intente De Nuevo");

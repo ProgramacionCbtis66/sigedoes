@@ -17,7 +17,7 @@
         <div class="card-header justify-content-center">
           <p class="h5 text-center fw-light text-secondary">
             <i class="fa fa-address-card" aria-hidden="true"></i>
-            Solicitudes de usuarios
+            Solicitudes de usuarios para acceder
           </p>
         </div>
         <div class="card-body">
@@ -36,13 +36,12 @@
               </thead>
               <tbody class="table-group-divider">
                 <tr *ngFor="let dato of datos; let reg = index ">
-                  <td><input class="border border-0 " [(ngModel)]="dato.numControl"></td>
+                  <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
                   <td>{{dato.nombre}}</td>
                   <td>{{dato.grado}}</td>
                   <td>{{dato.grupo}}</td>
                   <td>{{dato.especialidad}}</td>
-                  <td class="text-center "> <a data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)" data-bs-target="#aceptado" class="badge bg-success" disabled><i
-                        class="fa fa-check-circle" aria-hidden="true"></i></a>
+                  <td class="text-center "> <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)" data-bs-target="#aceptado" class="badge bg-success">Ver</button>
                     
                   </td>
                 </tr>
@@ -286,7 +285,7 @@
     
           </div>
           <div class="modal-footer">
-            <div class="h5">
+            <!--<div class="h5">
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptado" 
               class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="Noaceptado()">Rechazar</button>
             </div>
@@ -294,7 +293,16 @@
               <button class="btn btn-success fa fa-check-circle" data-bs-toggle="modal" data-bs-target="#aceptado" 
               class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="aceptar()">
                Verificar</button>
-            </div>
+            </div>-->
+
+            <td class="text-center "> 
+              <a (click)="aceptar(dato)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado" disabled> 
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+              </a> |
+              <a (click)="Noaceptado(dato)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado" disabled>
+                <i class="fa-solid fa-circle-xmark"></i>
+              </a>
+            </td>
             <!--<td class="text-center "> <a data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i
               class="fa fa-check-circle" aria-hidden="true"></i></a>
             </td>-->

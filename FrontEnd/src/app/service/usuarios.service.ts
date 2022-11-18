@@ -9,8 +9,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private URL = environment.HTTPS;
-  
+  //private URL = environment.HTTPS;
+  private URL = "http://localhost:8000";
+
   constructor(private http:HttpClient) { }
 
 
@@ -50,5 +51,8 @@ subirEmitido(datosRegistro:any):Observable<any>{
 }
 verInfo(numControl:any):Observable<any>{
   return this.http.post(`${this.URL}/insize/verInfo`,numControl);
+}
+getContra(numControl:any):Observable<any>{
+  return this.http.post(`${this.URL}/insize/getContra`,numControl);
 }
 }
