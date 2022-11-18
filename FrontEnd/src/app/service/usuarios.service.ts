@@ -55,4 +55,7 @@ verInfo(numControl:any):Observable<any>{
 getContra(numControl:any):Observable<any>{
   return this.http.post(`${this.URL}/insize/getContra`,numControl);
 }
+modificarPerfil(datos:any):Observable<any>{
+  return this.http.post(`${this.URL}/insize/modifyProfile`,datos);
+}
 }

@@ -82,16 +82,13 @@ router.post('/registro',(req,res)=>{
 
 router.post('/datosUser', (req, res) => {
     const numControl = req.body.numcontrol;
-
     ccn.query('select * from pdf where numControl = ?', [numControl.toString()],
         (err, rows, fields) => {
             if (!err) {
-               
                 if (rows.length > 0) {
                     let datos = JSON.stringify(rows[0]);
                     let dato = JSON.parse(datos);
                     let data = JSON.stringify(dato);
-                    
                     res.json({ data });
                 } else { res.json({ Error: "no hay datos" }) }
             } else { res.json({ Error: "En base de datos" }); }
@@ -223,6 +220,26 @@ router.post('/getContra',(req,res)=>{
                 let contraseña = JSON.stringify(dato);
                 res.json({contra:contraseña});
             }
+        }
+    });
+});
+
+/*  alumno: 'Juan Pedro',
+  curp: 'LOLJ060610',
+  numControl: '123',
+  especialidad: 'Programacion',
+  grado: 'TERCER',
+  grupo: 'G',
+  correo: 'juampiter830@gmail.com',
+  turno: 'Matutino'
+  set activo = 0 where codigoPago = ?
+  */
+router.post('/modifyProfile',(req,res)=>{
+    const {alumno,curp,numControl,especialidad,grado,grupo,correo,turno} = req.body;
+    ccn.query('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?',[alumno,especialidad,curp,grado,grupo,correo,turno,numControl],
+    (err,rows,fields)=>{
+        if(!err){
+            res.json({ok:"ok"});
         }
     });
 });

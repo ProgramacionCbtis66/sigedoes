@@ -48,7 +48,7 @@
                         <th class="c1">Numero de control</th>
                         <!-- <td class="c1 text-center">{{datos.numControl}}</td> -->
                         <td class="c1 text-center">
-                            <input [(ngModel)]="perfilInfo.numControl" class="border border-0 c1"  type="text" placeholder="dx">
+                            <input [(ngModel)]="perfilInfo.numControl" class="border border-0 c1"  type="text" placeholder="dx" disabled>
                         </td>
                     </tr>
                     <tr>
@@ -88,6 +88,9 @@
                     </tr>
                 </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-danger ps-5 pe-5" (click)="recarga()">Actualizar</button>
+                </div>
             </div>
         </div>
     </div>
