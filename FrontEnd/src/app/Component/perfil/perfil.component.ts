@@ -14,8 +14,15 @@ import { AuthService } from '../../service/auth.service';
   export class PerfilComponent implements OnInit {
 
     perfilInfo = {
-      alumno:"Juan",
-      curp:""
+      alumno: "",
+      curp: "",
+      numControl: "",
+      especialidad: "",
+      grado: "",
+      grupo: "",
+      correo: "",
+      turno: ""
+
     }
     datos : any;
     constructor(private app: AppComponent, private Auth:AuthService, private userService:UsuarioService) { }
