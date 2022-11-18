@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -9,7 +10,8 @@ import decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class AdminService {
-  private URL = "http://localhost:8000";
+  private URL = environment.HTTPS;
+
   constructor(private http:HttpClient) { }
 
   listUser():Observable<any>{

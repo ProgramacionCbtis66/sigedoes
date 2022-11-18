@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  HTTPS : "https://backendconstancias.herokuapp.com"
 };

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SendEmailService {
-  private URL = "http://localhost:8000";
+  private URL = environment.HTTPS;
   constructor(private http:HttpClient) { }
 
   enviarCorreo(email:any):Observable<any>{
