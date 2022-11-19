@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AdminService {
-  //private URL = environment.HTTPS;
-  private URL = "http://localhost:8000";
+  private URL = environment.HTTPS;
+
   constructor(private http:HttpClient) { }
 
   listUser():Observable<any>{
