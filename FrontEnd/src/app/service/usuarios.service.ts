@@ -58,4 +58,10 @@ getContra(numControl:any):Observable<any>{
 modificarPerfil(datos:any):Observable<any>{
   return this.http.post(`${this.URL}/insize/modifyProfile`,datos);
 }
+datosEsc():Observable<any>{
+  return this.http.get(`${this.URL}/insize/GetdatosEsc`);
+}
+guardarDatosEsc(escuela:any){
+  return this.http.post(`${this.URL}/insize/guardarDatosEsc`,escuela);
+}
 }

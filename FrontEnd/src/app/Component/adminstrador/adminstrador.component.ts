@@ -26,6 +26,15 @@ export class AdminstradorComponent implements OnInit {
   dato = {
     numControl:""
   }
+  datosEsc = {
+    nomEscuela:"",
+    CTO:"",
+    direccionEsc:"",
+    correoEsc:"",
+    telefEsc:"",
+    nomDirec:"",
+    periodo:""
+  }
   usuario = {
     "nombre": "",
     "correo": "",
@@ -225,6 +234,25 @@ export class AdminstradorComponent implements OnInit {
       else if(res.err = "err"){
         Notiflix.Notify.info("Error, Intente De Nuevo");
       }
+    });
+  }
+  obtenerdatEsc(){
+    this.userServicio.datosEsc().subscribe((res:any)=>{
+      const datos = JSON.parse(res.data);
+      this.datosEsc.CTO = datos.CTO;
+      this.datosEsc.correoEsc = datos.Esc_correo;
+      this.datosEsc.direccionEsc = datos.Esc_direccion;
+      this.datosEsc.nomDirec = datos.Esc_Director;
+      this.datosEsc.nomEscuela = datos.Esc_nombre;
+      this.datosEsc.periodo = datos.Esc_Periodo;
+      this.datosEsc.telefEsc = datos.Esc_telefono;
+    });
+  }
+  guardCambios(){
+    Notiflix.Loading.standard("Guardando");
+    this.userServicio.guardarDatosEsc(this.datosEsc).subscribe((res:any)=>{
+        Notiflix.Loading.remove();
+        Notiflix.Notify.info(res.ok);
     });
   }
 }

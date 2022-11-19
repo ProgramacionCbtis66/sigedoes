@@ -224,16 +224,6 @@ router.post('/getContra',(req,res)=>{
     });
 });
 
-/*  alumno: 'Juan Pedro',
-  curp: 'LOLJ060610',
-  numControl: '123',
-  especialidad: 'Programacion',
-  grado: 'TERCER',
-  grupo: 'G',
-  correo: 'juampiter830@gmail.com',
-  turno: 'Matutino'
-  set activo = 0 where codigoPago = ?
-  */
 router.post('/modifyProfile',(req,res)=>{
     const {alumno,curp,numControl,especialidad,grado,grupo,correo,turno} = req.body;
     ccn.query('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?',[alumno,especialidad,curp,grado,grupo,correo,turno,numControl],
@@ -243,6 +233,34 @@ router.post('/modifyProfile',(req,res)=>{
         }
     });
 });
+
+router.get('/GetdatosEsc',(req,res)=>{
+    ccn.query('SELECT * from escuela',
+    (err,rows,fields)=>{
+        if(!err){
+            res.send({data: JSON.stringify(rows[0])});
+        }else{
+            res.send({err:"err"});
+        }
+    });
+});
+
+router.post('/guardarDatosEsc',(req,res)=>{
+    const {nomEscuela,CTO,direccionEsc,correoEsc,telefEsc,nomDirec,periodo} = req.body;
+    ccn.query('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?',[CTO,nomEscuela,direccionEsc,correoEsc,telefEsc,periodo,nomDirec],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.json({ok:"Se Han Modificado Los Datos"});
+            }else{
+                res.json({ok:"No Se Ha Cambiado Nada"})
+            }
+        }else{
+            res.json({ok:"Ha Ocurrido Un Error Al Modificar"});
+        }
+    });
+});
+
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);

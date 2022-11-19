@@ -54,25 +54,17 @@
     <div class="col-lg-6">
       <div class="row g-0 pb-3">
         <div class="card">
-          <div class="card-header row">
-          <div class="col-lg-3">
-            
-          </div>
-          <div class="col-lg-6">
-            <p class="h5 text-center fw-light text-secondary">
+          <div class="card-header"style="height: 3rem;">
+            <p class="h5 fw-light text-center text-secondary">
               <i class="fa fa-address-card" aria-hidden="true"></i>
               Solicitud de Pago de Servicio
-            </p>
-          </div>
-          <div class="col-lg-3 d-flex ">
-            <button class="btn btn-success "data-bs-toggle="modal" data-bs-target="#infoEscu">Datos Escuela</button>
-          </div>
-          <div>      
-        </div>
-          </div>
+              <button type="button" class="ms-5 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos De La Escuela</button>
+            </p>          
+          </div> 
+  
           <div class="card-body ">
             <div class="row ">
-
+              
               <div class="col-8">
                 <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
                 <div class="input-group">
@@ -321,22 +313,71 @@
         
       </div>
     </div>
-
+<!--Modificar la info de la escuela-->
 <div class="modal fade" id="infoEscu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="d-flex">
-          <p class="h4 text-center fw-success text-secondary">
-              Solicitud de Pago de Servicio
-          </p>  
+        <div class="h3 text-success fw-light">
+          Datos De La Escuela
         </div>
       </div>
 
       <div class="modal-body">
-        <div class="">
-          
+        <div class="row">
+          <div class="col-lg-6 border-end border-2 border-warning">
+            <div class="border-bottom text-center mt-2 azul">
+              <div class="pb-1 pt-1">Nombre De La Escuela</div>
+            </div>
+            <div class="border-bottom text-center mt-2 rojo">
+              <div class="pb-1 pt-1">CTO</div>
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <div class="pb-1 pt-1">Dirección De La Escuela</div>
+            </div>
+            <div class="border-bottom text-center mt-2 rojo">
+              <div class="pb-1 pt-1">Correo De La Escuela</div>
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <div class="pb-1 pt-1">Teléfono De La Escuela</div>
+            </div>
+            <div class="border-bottom text-center mt-2 rojo"> 
+              <div class="pb-1 pt-1">Nombre Del Director</div>
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <div class="pb-1 pt-1">Periodo</div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="border-bottom text-center mt-2 azul">
+              <input class="pb-1 pt-1 azul border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.nomEscuela">
+            </div>
+            <div class="border-bottom text-center mt-2 rojo">
+              <input class="pb-1 pt-1 rojo border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.CTO">
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <input class="pb-1 pt-1 azul border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.direccionEsc">
+            </div> 
+            <div class="border-bottom text-center mt-2 rojo">
+              <input class="pb-1 pt-1 rojo border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.correoEsc">
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <input class="pb-1 pt-1 azul border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.telefEsc">
+            </div>
+            <div class="border-bottom text-center mt-2 rojo">
+              <input class="pb-1 pt-1 rojo border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.nomDirec">
+            </div>
+            <div class="border-bottom text-center mt-2 azul">
+              <input class="pb-1 pt-1 azul border-0 input-group-text-center text-center" [(ngModel)]="datosEsc.periodo">
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
+                  data-bs-target="#infoEscu">Guardar Cambios</button>
       </div>
     </div>
   </div>
