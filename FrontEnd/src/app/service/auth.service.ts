@@ -12,8 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  //private URL = environment.HTTPS;
-  private URL = "http://localhost:8000";
+  private URL = environment.HTTPS;
+   
   estatus: boolean = true;
 
 

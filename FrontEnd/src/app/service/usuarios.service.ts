@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UsuarioService {
-  //private URL = environment.HTTPS;
-  private URL = "http://localhost:8000";
+  private URL = environment.HTTPS;
+   
 
   constructor(private http:HttpClient) { }
 

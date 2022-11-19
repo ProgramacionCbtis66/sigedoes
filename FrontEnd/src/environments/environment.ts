@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  //HTTPS : "https://backendconstancias.herokuapp.com"
+  HTTPS : "https://backendconstancias.herokuapp.com"
 };
 
 /*
