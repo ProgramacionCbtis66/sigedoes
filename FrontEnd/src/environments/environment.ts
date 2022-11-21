@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   HTTPS : "https://backendconstancias.herokuapp.com"
+  //HTTPS: "http://localhost:8000"
 };
 
 /*
