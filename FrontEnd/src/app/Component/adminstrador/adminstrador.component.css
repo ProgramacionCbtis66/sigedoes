@@ -15,8 +15,13 @@
   border-radius:6px
 }
 .azul{
-  background-color: cadetblue;
+  background-color: #7DB9EB;
 }
-.rojo{
-  background-color: mediumpurple;
+.azulclaro{
+  background-color: #8EE3EC;
+ 
 }
+.palla{
+  margin-left: 65px;
+}
+
