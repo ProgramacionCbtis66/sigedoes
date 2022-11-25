@@ -332,10 +332,31 @@
             <div class="col-lg-8">
               <table class="table border border-dark rounded mb-2">
                 <tr class="">
-                  <th class="ps-3 azulclaro">Nombre</th>
-                  <th class="pe-3 azulclaro">
+                  <th class="ps-3 c1">Nombre</th>
+                  <th class="pe-3 c1  ">
                     <div class="text-center">
-                      <input class="border border-0 azulclaro" [(ngModel)]="datosEsc.nomEscuela">
+                      <input class="border border-0 c1" [(ngModel)]="datosEsc.nomEscuela">
+                    </div>
+                  </th>
+                </tr> 
+              </table> 
+
+              <table class="table border rounded border-dark mb-2">
+                <tr>
+                  <th class="ps-4 c2">CTO</th>
+                  <th class="pe-3 c2">
+                  <div class="text-center">
+                    <input class="palla border border-0 c2" [(ngModel)]="datosEsc.CTO">
+                  </div></th>
+                </tr>
+              </table>
+
+              <table class="table border border-dark rounded mb-2">
+                <tr class="">
+                  <th class="ps-3 c1">Direc. Escuela</th>
+                  <th class="pe-3 c1">
+                    <div class="text-center">
+                      <input class="border border-0 c1" [(ngModel)]="datosEsc.direccionEsc">
                     </div>
                   </th>
                 </tr> 
@@ -343,20 +364,20 @@
 
               <table class="table border rounded border-dark mb-2">
                 <tr>
-                  <th class="ps-4 azul">CTO</th>
-                  <th class="pe-3 azul">
+                  <th class="ps-3 c2">Correo Esc</th>
+                  <th class="pe-3 c2">
                   <div class="text-center">
-                    <input class="palla border border-0 azul" [(ngModel)]="datosEsc.CTO">
+                    <input class="ms-5 border border-0 c2" [(ngModel)]="datosEsc.correoEsc">
                   </div></th>
                 </tr>
               </table>
 
               <table class="table border border-dark rounded mb-2">
                 <tr class="">
-                  <th class="ps-3 azulclaro">Direc. Escuela</th>
-                  <th class="pe-3 azulclaro">
+                  <th class="ps-3 c1">Telefono Esc</th>
+                  <th class="pe-3 c1">
                     <div class="text-center">
-                      <input class="border border-0 azulclaro" [(ngModel)]="datosEsc.direccionEsc">
+                      <input class="border border-0 c1" [(ngModel)]="datosEsc.telefEsc">
                     </div>
                   </th>
                 </tr> 
@@ -364,41 +385,20 @@
 
               <table class="table border rounded border-dark mb-2">
                 <tr>
-                  <th class="ps-3 azul">Correo Esc</th>
-                  <th class="pe-3 azul">
+                  <th class="ps-3 c2">Nombre Direc</th>
+                  <th class="pe-3 c2">
                   <div class="text-center">
-                    <input class="ms-5 border border-0 azul" [(ngModel)]="datosEsc.correoEsc">
+                    <input class="border border-0 c2" [(ngModel)]="datosEsc.nomDirec">
                   </div></th>
                 </tr>
               </table>
 
               <table class="table border border-dark rounded mb-2">
                 <tr class="">
-                  <th class="ps-3 azulclaro">Telefono Esc</th>
-                  <th class="pe-3 azulclaro">
+                  <th class="ps-3 c1">Periodo</th>
+                  <th class="pe-3 c1">
                     <div class="text-center">
-                      <input class="border border-0 azulclaro" [(ngModel)]="datosEsc.telefEsc">
-                    </div>
-                  </th>
-                </tr> 
-              </table>
-
-              <table class="table border rounded border-dark mb-2">
-                <tr>
-                  <th class="ps-3 azul">Nombre Direc</th>
-                  <th class="pe-3 azul">
-                  <div class="text-center">
-                    <input class="border border-0 azul" [(ngModel)]="datosEsc.nomDirec">
-                  </div></th>
-                </tr>
-              </table>
-
-              <table class="table border border-dark rounded mb-2">
-                <tr class="">
-                  <th class="ps-3 azulclaro">Periodo</th>
-                  <th class="pe-3 azulclaro">
-                    <div class="text-center">
-                      <input class="ms-5 border border-0 azulclaro" [(ngModel)]="datosEsc.periodo">
+                      <input class="ms-5 border border-0 c1" [(ngModel)]="datosEsc.periodo">
                     </div>
                   </th>
                 </tr> 
