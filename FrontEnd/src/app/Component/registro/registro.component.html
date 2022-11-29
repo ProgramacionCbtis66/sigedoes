@@ -32,8 +32,8 @@
             </div>
             <!--Nombre-->
             <div class="input-group mb-3 px-3 mt-2">
-              <span class="input-group-text" id="basic-addon1">Name</span>
-              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
+              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre Completo Empezando Con Mayúscula"
                 aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <!--Correo Institucional-->
@@ -53,6 +53,7 @@
               <span class="input-group-text" id="basic-addon1">Curp</span>
               <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp"
                 aria-label="Username" aria-describedby="basic-addon1">
+              <span class="input-group-text" id="basic-addon1"><a class="link-dark" href="https://www.gob.mx/curp/">Consulta Tu Curp</a></span>
             </div>
             <!--Especialidad y Semestre-->
             <div class="row d-flex mb-3">
@@ -117,7 +118,7 @@
               <span class="input-group-text" id="basic-addon1">#</span>
               <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control"
                 aria-label="Username" aria-describedby="basic-addon1" value="">
-              <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
+              <span class="input-group-text" id="basic-addon1">!IMPORTANTE</span>
             </div>
             <!--contraseña y Repetir Contra-->
             <div class="input-group mb-3 px-3">
