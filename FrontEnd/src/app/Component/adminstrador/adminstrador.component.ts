@@ -274,5 +274,34 @@ export class AdminstradorComponent implements OnInit {
         Notiflix.Loading.remove();
         Notiflix.Notify.info(res.ok);
     });
+    this.userServicio.guardarClavesEsp(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Loading.remove();
+      Notiflix.Notify.info(res.ok);
+    });
+  }
+  progactu(){
+    this.userServicio.guardarClavesEspProg(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Notify.info(res.ok);
+    });
+  }
+  contaActu(){
+    this.userServicio.guardarClavesEspconta(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Notify.info(res.ok);
+    });
+  }
+  ElectricidadActu(){
+    this.userServicio.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Notify.info(res.ok);
+    });
+  }
+  AlimentosActu(){
+    this.userServicio.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Notify.info(res.ok);
+    });
+  }
+  SoporteActu(){
+    this.userServicio.guardarClavesEspSoporte(this.clavesEsp).subscribe((res:any)=>{
+      Notiflix.Notify.info(res.ok);
+    });
   }
 }

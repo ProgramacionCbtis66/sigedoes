@@ -31,9 +31,9 @@ function create(req, tipo) {
                             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
                             { text: " ", style: Style.header },
-                            { text: `Con Matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cveEsp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment: 'justify' },
+                            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cveEsp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment: 'justify' },
 
-                            { text: `Se extiende la presente peticion del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
+                            { text: `Se extiende la presente petición del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
                             {
                                 layout: 'noBorders',

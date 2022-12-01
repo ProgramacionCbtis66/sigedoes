@@ -70,4 +70,19 @@ guardarClavesEsp(claves:any){
 optenerClavesEsp(){
   return this.http.get(`${this.URL}/insize/optenerClavesEsp`);
 }
+guardarClavesEspProg(prog:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEspProg`,prog);
+}
+guardarClavesEspconta(conta:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEspconta`,conta);
+}
+guardarClavesEspElectricidad(electricidad:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEspElectricidad`,electricidad);
+}
+guardarClavesEspAlimentos(alimentos:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEspAlimentos`,alimentos);
+}
+guardarClavesEspSoporte(soporte:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEspSoporte`,soporte);
+}
 }

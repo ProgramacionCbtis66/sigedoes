@@ -410,7 +410,10 @@
           </div>
           
         </div>
-        
+        <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
+                  data-bs-target="#infoEscu">Guardar Cambios</button>
+      </div>
       <div class="h3 text-success fw-light mb-3 mt-2">
         Claves De Especialidad
       </div>
@@ -418,16 +421,20 @@
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
+        <div class="d-flex">
           <table class="table border border-dark rounded mb-2">
-              <tr class="">
-                <th class="ps-3 c1">Programación</th>
-                <th class="c1">
-                  <div class="text-center">
-                    <input class="border border-0 c1 ms-4" [(ngModel)]="clavesEsp.programacion">
-                  </div>
-                </th>
-              </tr> 
-          </table> 
+                <tr class="">
+                  <th class="ps-3 c1">Programación</th>
+                  <th class="c1">
+                    <div class="text-center">
+                      <input class="border border-0 c1 ms-4" [(ngModel)]="clavesEsp.programacion">
+                    </div>
+                  </th>
+                </tr> 
+            </table>
+            <button type="button" (click)="progactu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+        </div>
+        <div class="d-flex">
           <table class="table border border-dark rounded mb-2">
               <tr class="">
                 <th class="ps-3 c1">Contabilidad</th>
@@ -438,6 +445,9 @@
                 </th>
               </tr> 
           </table> 
+          <button type="button" (click)="contaActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+        </div>
+        <div class="d-flex">
           <table class="table border border-dark rounded mb-2">
               <tr class="">
                 <th class="ps-3 c1">Electricidad</th>
@@ -448,6 +458,9 @@
                 </th>
               </tr> 
           </table> 
+          <button type="button" (click)="ElectricidadActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+        </div>
+        <div class="d-flex">
           <table class="table border border-dark rounded mb-2">
               <tr class="">
                 <th class="ps-3 c1">Prod. Ind. Alimentos</th>
@@ -458,6 +471,9 @@
                 </th>
               </tr> 
           </table> 
+          <button type="button" (click)="AlimentosActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+        </div>
+        <div class="d-flex">
           <table class="table border border-dark rounded mb-2">
               <tr class="">
                 <th class="ps-3 c1">S.P de E. de Computo</th>
@@ -468,14 +484,13 @@
                 </th>
               </tr> 
           </table> 
+          <button type="button" (click)="SoporteActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+        </div>
         </div>
       </div>
-      </div>
-      
-
       <div class="modal-footer">
-        <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
-                  data-bs-target="#infoEscu">Guardar Cambios</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cerrar</button>
+      </div>
       </div>
     </div>
   </div>

@@ -271,6 +271,66 @@ router.get('/optenerClavesEsp',(req,res)=>{
         }
     });
 });
+router.post('/guardarClavesEspProg',(req,res)=>{
+    const {programacion} = req.body;
+    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1',[programacion],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.send({ok:"Clave De Programación Modificada"});
+            }
+        }
+    });
+});
+
+router.post('/guardarClavesEspconta',(req,res)=>{
+    const {contabilidad} = req.body;
+    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2',[contabilidad],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.send({ok:"Clave De Contabilidad Modificada"});
+            }
+        }
+    });
+});
+
+router.post('/guardarClavesEspElectricidad',(req,res)=>{
+    const {electricidad} = req.body;
+    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3',[electricidad],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.send({ok:"Clave De Electricidad Modificada"});
+            }
+        }
+    });
+});
+
+router.post('/guardarClavesEspAlimentos',(req,res)=>{
+    const {alimentos} = req.body;
+    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5',[alimentos],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.send({ok:"Clave De Alimentos Modificada"});
+            }
+        }
+    });
+});
+
+router.post('/guardarClavesEspSoporte',(req,res)=>{
+    const {soporte} = req.body;
+    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6',[soporte],
+    (err,rows,fields)=>{
+        if(!err){
+            if(rows.affectedRows > 0){
+            res.send({ok:"Clave De Soporte Modificada"});
+            }
+        }
+    });
+});
+
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);
