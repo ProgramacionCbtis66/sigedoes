@@ -34,8 +34,8 @@ function enviarCorreo(email, res) {
     port: 465,
     secure: true,
     auth: {
-      user: "jorgecortescbtis66@gmail.com",
-      pass: "ibwchrluddbkxjea",
+      user: "centrobtis66@gmail.com",
+      pass: "agpxcvadnqottqhd",
     },
   });
   
