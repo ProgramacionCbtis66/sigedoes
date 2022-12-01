@@ -309,10 +309,12 @@
               class="fa fa-check-circle" aria-hidden="true"></i></a>
             </td>-->
         </div>
-        </div>
-        
       </div>
+        
     </div>
+  </div>
+  
+
 <!--Modificar la info de la escuela-->
 <div class="modal fade" id="infoEscu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -408,7 +410,68 @@
           </div>
           
         </div>
+        
+      <div class="h3 text-success fw-light mb-3 mt-2">
+        Claves De Especialidad
       </div>
+      <p class="border"></p>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <table class="table border border-dark rounded mb-2">
+              <tr class="">
+                <th class="ps-3 c1">Programación</th>
+                <th class="c1">
+                  <div class="text-center">
+                    <input class="border border-0 c1 ms-4" [(ngModel)]="clavesEsp.programacion">
+                  </div>
+                </th>
+              </tr> 
+          </table> 
+          <table class="table border border-dark rounded mb-2">
+              <tr class="">
+                <th class="ps-3 c1">Contabilidad</th>
+                <th class="c1">
+                  <div class="text-center">
+                    <input class="border border-0 c1 ms-5" [(ngModel)]="clavesEsp.contabilidad">
+                  </div>
+                </th>
+              </tr> 
+          </table> 
+          <table class="table border border-dark rounded mb-2">
+              <tr class="">
+                <th class="ps-3 c1">Electricidad</th>
+                <th class="c1">
+                  <div class="text-center ms-3">
+                    <input class="border border-0 c1 ms-5" [(ngModel)]="clavesEsp.electricidad">
+                  </div>
+                </th>
+              </tr> 
+          </table> 
+          <table class="table border border-dark rounded mb-2">
+              <tr class="">
+                <th class="ps-3 c1">Prod. Ind. Alimentos</th>
+                <th class="pe-3 c1  ">
+                  <div class="text-center ms-1">
+                    <input class="border border-0 c1" [(ngModel)]="clavesEsp.alimentos">
+                  </div>
+                </th>
+              </tr> 
+          </table> 
+          <table class="table border border-dark rounded mb-2">
+              <tr class="">
+                <th class="ps-3 c1">S.P de E. de Computo</th>
+                <th class="pe-3 c1  ">
+                  <div class="text-center">
+                    <input class="border border-0 c1" [(ngModel)]="clavesEsp.soporte">
+                  </div>
+                </th>
+              </tr> 
+          </table> 
+        </div>
+      </div>
+      </div>
+      
 
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
@@ -417,3 +480,4 @@
     </div>
   </div>
 </div>
+

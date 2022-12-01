@@ -261,6 +261,16 @@ router.post('/guardarDatosEsc',(req,res)=>{
     });
 });
 
+router.get('/optenerClavesEsp',(req,res)=>{
+    ccn.query('SELECT * from cbeEsp',
+    (err,rows,fields)=>{
+        if(!err){
+            res.send({programacion: JSON.stringify(rows[0]),contabilidad: JSON.stringify(rows[1]),electricidad: JSON.stringify(rows[2]),alimentos: JSON.stringify(rows[3]),soporte: JSON.stringify(rows[4])});
+        }else{
+            res.send({err:"err"});
+        }
+    });
+});
 function VerificarToken(req, res, next) {
     if (!req.headers.authorization) return res.status(401).json('No authorization');
     const token = req.headers.authorization.substr(7);

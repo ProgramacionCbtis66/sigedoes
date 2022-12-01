@@ -35,6 +35,13 @@ export class AdminstradorComponent implements OnInit {
     nomDirec:"",
     periodo:""
   }
+  clavesEsp = {
+    programacion:"",
+    contabilidad:"",
+    soporte:"",
+    electricidad:"",
+    alimentos:""
+  }
   usuario = {
     "nombre": "",
     "correo": "",
@@ -246,6 +253,19 @@ export class AdminstradorComponent implements OnInit {
       this.datosEsc.nomEscuela = datos.Esc_nombre;
       this.datosEsc.periodo = datos.Esc_Periodo;
       this.datosEsc.telefEsc = datos.Esc_telefono;
+    });
+    this.userServicio.optenerClavesEsp().subscribe((res:any)=>{
+      const prog = JSON.parse(res.programacion);
+      const conta = JSON.parse(res.contabilidad);
+      const electricidad = JSON.parse(res.electricidad);
+      const alimentos = JSON.parse(res.alimentos);
+      const soporte = JSON.parse(res.soporte);
+      this.clavesEsp.programacion = prog.Clave;
+      this.clavesEsp.contabilidad = conta.Clave;
+      this.clavesEsp.electricidad = electricidad.Clave;
+      this.clavesEsp.alimentos = alimentos.Clave;
+      this.clavesEsp.soporte = soporte.Clave;
+
     });
   }
   guardCambios(){

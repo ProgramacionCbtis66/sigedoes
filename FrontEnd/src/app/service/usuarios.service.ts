@@ -64,4 +64,10 @@ datosEsc():Observable<any>{
 guardarDatosEsc(escuela:any){
   return this.http.post(`${this.URL}/insize/guardarDatosEsc`,escuela);
 }
+guardarClavesEsp(claves:any){
+  return this.http.post(`${this.URL}/insize/guardarClavesEsp`,claves);
+}
+optenerClavesEsp(){
+  return this.http.get(`${this.URL}/insize/optenerClavesEsp`);
+}
 }
