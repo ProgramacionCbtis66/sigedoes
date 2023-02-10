@@ -20,7 +20,7 @@ function create(req, tipo) {
                     let dia = convertir(fecha.getDate());
                     let mes = textomes(fecha.getMonth());
                     let year = convertir(fecha.getFullYear());
-                    
+                    console.log(alumno);
                     const contenido = {
                         asunto: [
 
@@ -31,7 +31,7 @@ function create(req, tipo) {
                             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
                             { text: " ", style: Style.header },
-                            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) es esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cveEsp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del 29 de Agosto al 13 de Diciembre del 2022. \n \n `, style: Style.normal, alignment: 'justify' },
+                            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cbeesp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del ${alumno.Esc_Periodo}. \n \n `, style: Style.normal, alignment: 'justify' },
 
                             { text: `Se extiende la presente petición del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
@@ -87,7 +87,7 @@ function create(req, tipo) {
 
 }
 function textomes(mes) {
-    const month = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Augosto","Septiembre","Octubre","Noviembre","Deciembre"];
+    const month = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
     return month[mes];
 }
 module.exports = create;

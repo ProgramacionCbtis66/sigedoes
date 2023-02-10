@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class AppComponent implements OnInit{
   usuario= "";
+  dato = "Configuracion";
   logout =true;
   home=true;
   title = 'Constancias';

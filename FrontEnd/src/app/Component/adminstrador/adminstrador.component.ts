@@ -20,12 +20,13 @@ export class AdminstradorComponent implements OnInit {
     codigoPago: "",
     fechaSolicitud: new Date().toLocaleDateString('en-CA'),
     aportacion: "",
-    descripcion: ""
+    descripcion: "Pago Realizado Con Éxito",  
 
   }
   dato = {
     numControl:""
   }
+  
   datosEsc = {
     nomEscuela:"",
     CTO:"",

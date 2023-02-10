@@ -33,6 +33,7 @@ export class OlvidePassComponent implements OnInit {
                 Notiflix.Loading.remove();
                     this.enviarCorreo.enviarUserContra(decode(res.usuario)).subscribe((res:any)=>{
                         Notiflix.Notify.success("Correo enviado Satisfactoriamente")
+                    this.correo.correo = "";
                     });
 
             }else{

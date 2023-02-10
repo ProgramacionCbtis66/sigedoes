@@ -56,7 +56,7 @@ console
 
 router.post('/registro',(req,res)=>{
     const {nombre,correo,pass,pass2,curp,noctrl,especialidad,semestre,area,turno,direccion,CTO,grupo} = req.body;
-    const horario = "si";
+    const horario = "7:00 - 15:00";
     const alta = 0; 
     const rol = "user";
         //Subir datos a la tabla usuario
