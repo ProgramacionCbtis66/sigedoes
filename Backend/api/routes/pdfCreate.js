@@ -14,13 +14,21 @@ function create(req, tipo) {
         (err, rows, fields) => {
             if (!err) {
                 if (rows.length > 0) {
+                    
                     let alumnos = JSON.stringify(rows[0]);
                     alumno = JSON.parse(alumnos);
                     const fecha = new Date();
                     let dia = convertir(fecha.getDate());
                     let mes = textomes(fecha.getMonth());
                     let year = convertir(fecha.getFullYear());
-                    console.log(alumno);
+                    
+                    let horario = "";
+                    if (alumno.turno == 'Matutino'){
+                        horario = "7:00 - 15:00";
+                    }else if(alumno.turno == 'Vespertino'){
+                        horario = "15:00 - 20:00";
+                    }
+                    
                     const contenido = {
                         asunto: [
 
@@ -31,7 +39,7 @@ function create(req, tipo) {
                             { text: ` ${alumno.nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
                             { text: " ", style: Style.header },
-                            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cbeesp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${alumno.horario} Durante el periodo del ${alumno.Esc_Periodo}. \n \n `, style: Style.normal, alignment: 'justify' },
+                            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cbeesp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${horario   } durante el periodo del ${alumno.Esc_Periodo}. \n \n `, style: Style.normal, alignment: 'justify' },
 
                             { text: `Se extiende la presente petición del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 
