@@ -24,7 +24,7 @@ export class AuthService {
     return this.http.post(`${this.URL}/insize/login`, user);
   }
 
-  public registro(usuario:any){
+  public registro(usuario:any): Observable<any>{
     return this.http.post(`${this.URL}/insize/registro`,usuario);
   }
 
