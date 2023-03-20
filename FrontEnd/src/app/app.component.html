@@ -3,9 +3,6 @@
     <a class="navbar-brand" routerLink="home" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="37">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item" id="idhome" *ngIf="!mostrar && home">
@@ -23,19 +20,15 @@
         </li>
       </ul>
     </div>
-    <div class="dropdown-center d-flex d-inline-flex" *ngIf="!mostrar || logout">
-      
-
-      <a class="me-5 badge rounded-pill text-color-3G" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
+    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row" *ngIf="!mostrar || logout">
+      <a class="badge rounded-pill text-color-3G" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-user-circle h4" aria-hidden="true"></i>
       </a>
-
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+      <ul class="dropdown-menu dropdown-menu-end">
         <li class="ps-2">
-          <a class="d-flex d-inline-flex" routerLink="perfil">
+          <a class="d-flex d-inline-flex text-decoration-none" routerLink="perfil">
             <i class="fa fa-cogs" aria-hidden="true"></i>
-            <p class="text-wrap text-color-3G ps-2 px-2" style="font-size: 8px;font-weight: bold;">{{usuario}}</p>
+            <p class="text-color-3G ps-2 px-2">{{usuario}}</p>
           </a>
         </li>
         <li>
@@ -48,8 +41,9 @@
         </button></li>
       </ul>
     </div>
-    <div class="p-4"></div>
-    <div class="p-2"></div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 </nav>
 
