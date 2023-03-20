@@ -20,28 +20,28 @@ export class AdminstradorComponent implements OnInit {
     codigoPago: "",
     fechaSolicitud: new Date().toLocaleDateString('en-CA'),
     aportacion: "",
-    descripcion: "Pago Realizado Con Éxito",  
+    descripcion: "Pago Realizado Con Éxito",
 
   }
   dato = {
-    numControl:""
+    numControl: ""
   }
-  
+
   datosEsc = {
-    nomEscuela:"",
-    CTO:"",
-    direccionEsc:"",
-    correoEsc:"",
-    telefEsc:"",
-    nomDirec:"",
-    periodo:""
+    nomEscuela: "",
+    CTO: "",
+    direccionEsc: "",
+    correoEsc: "",
+    telefEsc: "",
+    nomDirec: "",
+    periodo: ""
   }
   clavesEsp = {
-    programacion:"",
-    contabilidad:"",
-    soporte:"",
-    electricidad:"",
-    alimentos:""
+    programacion: "",
+    contabilidad: "",
+    soporte: "",
+    electricidad: "",
+    alimentos: ""
   }
   usuario = {
     "nombre": "",
@@ -55,7 +55,7 @@ export class AdminstradorComponent implements OnInit {
     "direccion": "",
     "CTO": "30DCT0236O",
     "grupo": "",
-    "pass":""
+    "pass": ""
   }
   alumno = {
     "nombre": "",
@@ -67,14 +67,14 @@ export class AdminstradorComponent implements OnInit {
     "escuela": "",
     "numControl": ""
   }
-  nc : any;
+  nc: any;
   datos: any;
-  aceptado : any;
+  aceptado: any;
   verificado = false;
   numero: string = "";
 
   constructor(private userServicio: UsuarioService,
-    private app : AppComponent,
+    private app: AppComponent,
     private email: SendEmailService,
     private admin: AdminService,
     private auth: AuthService) { }
@@ -86,10 +86,10 @@ export class AdminstradorComponent implements OnInit {
     });
     this.app.usuario = this.auth.decodifica().nombre;
     this.app.home = false;
-    this.app.iflogin= false;
+    this.app.iflogin = false;
     this.app.logout = true;
   }
-  si(){
+  si() {
 
   }
   aceptar(op: any) {
@@ -103,7 +103,7 @@ export class AdminstradorComponent implements OnInit {
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.success(res);
       this.CorreoAcpetacion(op);
-      
+
       this.ngOnInit();
     });
   }
@@ -131,26 +131,26 @@ export class AdminstradorComponent implements OnInit {
     const numcontrol = {
       numcontrol: this.nc
     }
-    if(this.nc == null || this.nc == ""){
+    if (this.nc == null || this.nc == "") {
       Notiflix.Notify.failure("No se ha ingresado un número de control");
     }
     else {
-    this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
-      if (res.data != "" && res.data != null) {
-        const datos = JSON.parse(res.data);
-        this.alumno.nombre = datos.nombre;
-        this.alumno.correo = datos.correo;
-        this.alumno.grado = datos.grado;
-        this.alumno.grupo = datos.grupo;
-        this.alumno.especialidad = datos.especialidad;
-        this.alumno.turno = datos.turno;
-        this.alumno.escuela = datos.Esc_nombre;
-        this.alumno.numControl = datos.numControl;
-        this.verificado = true;
+      this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
+        if (res.data != "" && res.data != null) {
+          const datos = JSON.parse(res.data);
+          this.alumno.nombre = datos.nombre;
+          this.alumno.correo = datos.correo;
+          this.alumno.grado = datos.grado;
+          this.alumno.grupo = datos.grupo;
+          this.alumno.especialidad = datos.especialidad;
+          this.alumno.turno = datos.turno;
+          this.alumno.escuela = datos.Esc_nombre;
+          this.alumno.numControl = datos.numControl;
+          this.verificado = true;
 
-      } else { this.verificado = false }
-    });
-  }
+        } else { this.verificado = false }
+      });
+    }
   }
 
   GenerarCodigoPago() {
@@ -162,7 +162,7 @@ export class AdminstradorComponent implements OnInit {
     this.userServicio.verificaNoPago(numPago).subscribe((res: any) => {
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
-      }else{this.GenerarCodigoPago();}
+      } else { this.GenerarCodigoPago(); }
     });
   }
 
@@ -216,17 +216,17 @@ export class AdminstradorComponent implements OnInit {
       this.alumno.turno = "";
       this.alumno.escuela = "";
       this.alumno.numControl = "";
-    }else{
-        alert("Número de pago no disponible");
+    } else {
+      alert("Número de pago no disponible");
     }
   }
-  obtenerDatos(numControl:any){
+  obtenerDatos(numControl: any) {
     const dato = {
-      numeroCtrl:numControl
+      numeroCtrl: numControl
     }
     this.usuario.noctrl = numControl;
-    this.userServicio.verInfo(dato).subscribe((res:any)=>{
-      if(res.ok = "ok"){
+    this.userServicio.verInfo(dato).subscribe((res: any) => {
+      if (res.ok = "ok") {
         const datos = res.data
         this.usuario.nombre = datos.nombre;
         this.usuario.correo = datos.correo;
@@ -238,19 +238,19 @@ export class AdminstradorComponent implements OnInit {
         this.usuario.semestre = datos.grado;
         this.usuario.turno = datos.turno;
         const noctrl = {
-          numcontrol:numControl
+          numcontrol: numControl
         }
-        this.userServicio.getContra(noctrl).subscribe((res:any)=>{
+        this.userServicio.getContra(noctrl).subscribe((res: any) => {
           this.usuario.pass = res.contra;
         });
-        }
-      else if(res.err = "err"){
+      }
+      else if (res.err = "err") {
         Notiflix.Notify.info("Error, Intente De Nuevo");
       }
     });
   }
-  obtenerdatEsc(){
-    this.userServicio.datosEsc().subscribe((res:any)=>{
+  obtenerdatEsc() {
+    this.userServicio.datosEsc().subscribe((res: any) => {
       const datos = JSON.parse(res.data);
       this.datosEsc.CTO = datos.CTO;
       this.datosEsc.correoEsc = datos.Esc_correo;
@@ -260,53 +260,54 @@ export class AdminstradorComponent implements OnInit {
       this.datosEsc.periodo = datos.Esc_Periodo;
       this.datosEsc.telefEsc = datos.Esc_telefono;
     });
-    this.userServicio.optenerClavesEsp().subscribe((res:any)=>{
-      const prog = JSON.parse(res.programacion);
-      const conta = JSON.parse(res.contabilidad);
-      const electricidad = JSON.parse(res.electricidad);
-      const alimentos = JSON.parse(res.alimentos);
-      const soporte = JSON.parse(res.soporte);
-      this.clavesEsp.programacion = prog.Clave;
-      this.clavesEsp.contabilidad = conta.Clave;
-      this.clavesEsp.electricidad = electricidad.Clave;
-      this.clavesEsp.alimentos = alimentos.Clave;
-      this.clavesEsp.soporte = soporte.Clave;
-
+    this.userServicio.optenerClavesEsp().subscribe((res: any) => {
+      if (res.programacion != undefined && res.contabilidad != undefined && res.electricidad != undefined && res.alimentos != undefined && res.soporte != undefined) {
+        const prog = JSON.parse(res.programacion);
+        const conta = JSON.parse(res.contabilidad);
+        const electricidad = JSON.parse(res.electricidad);
+        const alimentos = JSON.parse(res.alimentos);
+        const soporte = JSON.parse(res.soporte);
+        this.clavesEsp.programacion = prog.Clave;
+        this.clavesEsp.contabilidad = conta.Clave;
+        this.clavesEsp.electricidad = electricidad.Clave;
+        this.clavesEsp.alimentos = alimentos.Clave;
+        this.clavesEsp.soporte = soporte.Clave;
+      }
     });
   }
-  guardCambios(){
+  guardCambios() {
     Notiflix.Loading.standard("Guardando");
-    this.userServicio.guardarDatosEsc(this.datosEsc).subscribe((res:any)=>{
-        Notiflix.Loading.remove();
-        Notiflix.Notify.info(res.ok);
+    this.userServicio.guardarDatosEsc(this.datosEsc).subscribe((res: any) => {
+      Notiflix.Loading.remove();
+      Notiflix.Notify.info(res.ok);
     });
-    this.userServicio.guardarClavesEsp(this.clavesEsp).subscribe((res:any)=>{
+    this.userServicio.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Loading.remove();
       Notiflix.Notify.info(res.ok);
     });
   }
-  progactu(){
-    this.userServicio.guardarClavesEspProg(this.clavesEsp).subscribe((res:any)=>{
+  progactu() {
+    this.userServicio.guardarClavesEspProg(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
-  contaActu(){
-    this.userServicio.guardarClavesEspconta(this.clavesEsp).subscribe((res:any)=>{
+  contaActu() {
+    this.userServicio.guardarClavesEspconta(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
-  ElectricidadActu(){
-    this.userServicio.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res:any)=>{
+  ElectricidadActu() {
+    this.userServicio.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
-  AlimentosActu(){
-    this.userServicio.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res:any)=>{
+  AlimentosActu() {
+    this.userServicio.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
-  SoporteActu(){
-    this.userServicio.guardarClavesEspSoporte(this.clavesEsp).subscribe((res:any)=>{
+  SoporteActu() {
+    this.userServicio.guardarClavesEspSoporte(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }

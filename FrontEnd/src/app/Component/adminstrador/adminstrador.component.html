@@ -41,8 +41,9 @@
                   <td>{{dato.grado}}</td>
                   <td>{{dato.grupo}}</td>
                   <td>{{dato.especialidad}}</td>
-                  <td class="text-center "> <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)" data-bs-target="#aceptado" class="badge bg-success">Ver</button>
-                    
+                  <td class="text-center "> <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)"
+                      data-bs-target="#aceptado" class="badge bg-success">Ver</button>
+
                   </td>
                 </tr>
               </tbody>
@@ -54,17 +55,18 @@
     <div class="col-lg-6">
       <div class="row g-0 pb-3">
         <div class="card">
-          <div class="card-header"style="height: 3rem;">
+          <div class="card-header" style="height: 3rem;">
             <p class="h5 fw-light text-center text-secondary">
               <i class="fa fa-address-card" aria-hidden="true"></i>
               Solicitud de Pago de Servicio
-              <button type="button" class="ms-5 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos De La Escuela</button>
-            </p>          
-          </div> 
-  
+              <button type="button" class="ms-5 btn btn-success btn-sm" data-bs-toggle="modal"
+                data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos De La Escuela</button>
+            </p>
+          </div>
+
           <div class="card-body ">
             <div class="row ">
-              
+
               <div class="col-8">
                 <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
                 <div class="input-group">
@@ -86,7 +88,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Nombre</div>
                   <input [(ngModel)]="alumno.nombre" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="Nombre">
+                    placeholder="Nombre" disabled>
                 </div>
               </div>
               <div class="col-3">
@@ -94,7 +96,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Grado</div>
                   <input [(ngModel)]="alumno.grado" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="Grado">
+                    placeholder="Grado" disabled>
                 </div>
               </div>
               <div class="col-3">
@@ -102,7 +104,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Grupo</div>
                   <input [(ngModel)]="alumno.grupo" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="Grupo">
+                    placeholder="Grupo" disabled>
                 </div>
               </div>
             </div>
@@ -113,7 +115,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Correo</div>
                   <input [(ngModel)]="alumno.correo" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="correo">
+                    placeholder="correo" disabled>
                 </div>
               </div>
               <div class="col-5">
@@ -121,7 +123,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Especilidad</div>
                   <input [(ngModel)]="alumno.especialidad" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="Especilidad">
+                    placeholder="Especilidad" disabled>
                 </div>
               </div>
               <div class="col-3">
@@ -129,7 +131,7 @@
                 <div class="input-group">
                   <div class="input-group-text">Turno</div>
                   <input [(ngModel)]="alumno.turno" type="text" class="form-control" id="autoSizingInputGroup"
-                    placeholder="turno">
+                    placeholder="turno" disabled>
                 </div>
               </div>
             </div>
@@ -188,8 +190,7 @@
             <label class="visually-hidden" for="autoSizingInputGroup">Costo</label>
             <div class="input-group">
               <div class="input-group-text"> $ :</div>
-              <input [(ngModel)]="solicitud.aportacion" type="number" class="form-control" id="autoSizingInputGroup"
-                >
+              <input [(ngModel)]="solicitud.aportacion" type="number" class="form-control" id="autoSizingInputGroup">
             </div>
           </div>
         </div>
@@ -202,15 +203,16 @@
                 placeholder="Descripción del pago">
                 </textarea>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar Solicitud</a>
+        <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar
+          Solicitud</a>
       </div>
     </div>
-  </div>      
+  </div>
 </div>
 
 <!--Modal datos-->
@@ -223,71 +225,71 @@
         </div>
       </div>
       <div class="modal-body">
-            <!--Nombre-->
-            <div class="input-group mb-3 px-3 mt-2">
-              <span class="input-group-text" id="basic-addon1">Name</span>
-              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+        <!--Nombre-->
+        <div class="input-group mb-3 px-3 mt-2">
+          <span class="input-group-text" id="basic-addon1">Name</span>
+          <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+            aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <!--Correo Institucional-->
+        <div class="input-group mb-3 px-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional"
+            aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <!--Direccion-->
+        <div class="input-group mb-3 px-3">
+          <span class="input-group-text" id="basic-addon1">D</span>
+          <input [(ngModel)]="usuario.direccion" type="text" class="form-control" placeholder="Ingrese Su Dirección"
+            aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <!--Curp-->
+        <div class="input-group mb-3 px-3">
+          <span class="input-group-text" id="basic-addon1">Curp</span>
+          <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp"
+            aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <!--Especialidad y Semestre-->
+        <div class="row d-flex mb-3">
+          <div class="col-sm-5">
+            <div class="input-group px-3">
+              <span class="input-group-text">Especialidad:</span>
+              <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Ingrese Su Curp"
                 aria-label="Username" aria-describedby="basic-addon1">
             </div>
-            <!--Correo Institucional-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">@</span>
-              <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Direccion-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">D</span>
-              <input [(ngModel)]="usuario.direccion" type="text" class="form-control" placeholder="Ingrese Su Dirección"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Curp-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">Curp</span>
-              <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Especialidad y Semestre-->
-            <div class="row d-flex mb-3">
-              <div class="col-sm-5">
-                <div class="input-group px-3">
-                  <span class="input-group-text">Especialidad:</span>
-                  <input [(ngModel)]="usuario.especialidad" type="text" class="form-control" placeholder="Ingrese Su Curp"
-                aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-              </div>
-              <div class="col-sm-7 d-flex">
-                <div class="input-group px-3">
-                  <span class="input-group-text" id="basic-addon1">Sem.</span>
-                  <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
-                </div>
-              
-              
-                <div class="input-group px-3">
-                  <span class="input-group-text" id="basic-addon1">Grupo</span>
-                  <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
-                </div>
-              </div>
-            </div>
-            <!--Area y Turno-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">Área</span>
-              <input type="text" [(ngModel)]="usuario.area" class="form-control">
-
-              <span class="input-group-text" id="basic-addon1">Turno</span>
-              <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
-            </div>
-            <!--No Control-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">#</span>
-              <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control"
-                aria-label="Username" aria-describedby="basic-addon1" value="">
-              <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
-            </div>
-    
           </div>
-          <div class="modal-footer">
-            <!--<div class="h5">
+          <div class="col-sm-7 d-flex">
+            <div class="input-group px-3">
+              <span class="input-group-text" id="basic-addon1">Sem.</span>
+              <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
+            </div>
+
+
+            <div class="input-group px-3">
+              <span class="input-group-text" id="basic-addon1">Grupo</span>
+              <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
+            </div>
+          </div>
+        </div>
+        <!--Area y Turno-->
+        <div class="input-group mb-3 px-3">
+          <span class="input-group-text" id="basic-addon1">Área</span>
+          <input type="text" [(ngModel)]="usuario.area" class="form-control">
+
+          <span class="input-group-text" id="basic-addon1">Turno</span>
+          <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
+        </div>
+        <!--No Control-->
+        <div class="input-group mb-3 px-3">
+          <span class="input-group-text" id="basic-addon1">#</span>
+          <input [(ngModel)]="usuario.noctrl" type="text" class="form-control" placeholder="Numero de Control"
+            aria-label="Username" aria-describedby="basic-addon1" value="">
+          <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <!--<div class="h5">
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptado" 
               class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="Noaceptado()">Rechazar</button>
             </div>
@@ -297,23 +299,25 @@
                Verificar</button>
             </div>-->
 
-            <td class="text-center "> 
-              <a (click)="aceptar(dato)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado" disabled> 
-                <i class="fa fa-check-circle" aria-hidden="true"></i>
-              </a> |
-              <a (click)="Noaceptado(dato)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado" disabled>
-                <i class="fa-solid fa-circle-xmark"></i>
-              </a>
-            </td>
-            <!--<td class="text-center "> <a data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i
+        <td class="text-center ">
+          <a (click)="aceptar(dato)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
+            disabled>
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </a> |
+          <a (click)="Noaceptado(dato)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
+            disabled>
+            <i class="fa-solid fa-circle-xmark"></i>
+          </a>
+        </td>
+        <!--<td class="text-center "> <a data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i
               class="fa fa-check-circle" aria-hidden="true"></i></a>
             </td>-->
-        </div>
       </div>
-        
     </div>
+
   </div>
-  
+</div>
+
 
 <!--Modificar la info de la escuela-->
 <div class="modal fade" id="infoEscu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -329,170 +333,162 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-2">
-              
+
             </div>
-            <div class="col-lg-8">
-              <table class="table border border-dark rounded mb-2">
+            <div class="col-lg-8 d-flex shadow p-3 mb-5 bg-body-tertiary c1 bg-gradient">
+              <table class="table shadow p-3 mb-5 bg-body-tertiary  mb-2">
                 <tr class="">
-                  <th class="ps-3 c1">Nombre</th>
-                  <th class="pe-3 c1  ">
-                    <div class="text-center">
-                      <input class="border border-0 c1" [(ngModel)]="datosEsc.nomEscuela">
+                  <th class=" c1  ">
+                    <div class="form-floating">
+                      <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2" placeholder="name@example.com"[(ngModel)]="datosEsc.nomEscuela" style="height: 110px">
+                      </textarea>
+                      <label for="floatingTextarea2">Nombre de la Escuela</label>
                     </div>
                   </th>
-                </tr> 
-              </table> 
-
-              <table class="table border rounded border-dark mb-2">
-                <tr>
-                  <th class="ps-4 c2">CTO</th>
-                  <th class="pe-3 c2">
-                  <div class="text-center">
-                    <input class="palla border border-0 c2" [(ngModel)]="datosEsc.CTO">
-                  </div></th>
                 </tr>
-              </table>
-
-              <table class="table border border-dark rounded mb-2">
-                <tr class="">
-                  <th class="ps-3 c1">Direc. Escuela</th>
-                  <th class="pe-3 c1">
-                    <div class="text-center">
-                      <input class="border border-0 c1" [(ngModel)]="datosEsc.direccionEsc">
-                    </div>
-                  </th>
-                </tr> 
-              </table>
-
-              <table class="table border rounded border-dark mb-2">
+                
                 <tr>
-                  <th class="ps-3 c2">Correo Esc</th>
-                  <th class="pe-3 c2">
-                  <div class="text-center">
-                    <input class="ms-5 border border-0 c2" [(ngModel)]="datosEsc.correoEsc">
-                  </div></th>
-                </tr>
-              </table>
-
-              <table class="table border border-dark rounded mb-2">
-                <tr class="">
-                  <th class="ps-3 c1">Telefono Esc</th>
-                  <th class="pe-3 c1">
-                    <div class="text-center">
-                      <input class="border border-0 c1" [(ngModel)]="datosEsc.telefEsc">
+                  <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.CTO">
+                        <label for="floatingInput">CTO </label>
+                      </div>
+                  </th>
+               </tr>
+               <tr>
+                  <th class="c1">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.direccionEsc">
+                      <label for="floatingInput">Dirección de la Escuela</label>
                     </div>
                   </th>
-                </tr> 
-              </table>
+               </tr>
 
-              <table class="table border rounded border-dark mb-2">
-                <tr>
-                  <th class="ps-3 c2">Nombre Direc</th>
-                  <th class="pe-3 c2">
-                  <div class="text-center">
-                    <input class="border border-0 c2" [(ngModel)]="datosEsc.nomDirec">
-                  </div></th>
-                </tr>
-              </table>
-
-              <table class="table border border-dark rounded mb-2">
                 <tr class="">
-                  <th class="ps-3 c1">Periodo</th>
-                  <th class="pe-3 c1">
-                    <div class="text-center">
-                      <input class="ms-5 border border-0 c1" [(ngModel)]="datosEsc.periodo">
+                  <th class=" c2">
+                    <div class="form-floating">
+                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.correoEsc">
+                      <label for="floatingInput">Correo de la Escuela</label>
                     </div>
                   </th>
-                </tr> 
+                </tr>
+
+                <tr class="">
+                  <th class="c1">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.telefEsc">
+                      <label for="floatingInput">Dirección de la Escuela</label>
+                    </div>
+                  </th>
+                </tr>
+
+                <tr class="">
+                  <th class="c2">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.nomDirec">
+                      <label for="floatingInput">Director de la Escuela</label>
+                    </div>
+                  </th>
+                </tr>
+                
+                <tr class="">
+                  <th class="c1">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.periodo">
+                      <label for="floatingInput">Periodo Escolar</label>
+                    </div>
+                  </th>
+                </tr>
               </table>
 
             </div>
           </div>
-          
+
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
-                  data-bs-target="#infoEscu">Guardar Cambios</button>
-      </div>
-      <div class="h3 text-success fw-light mb-3 mt-2">
-        Claves De Especialidad
-      </div>
-      <p class="border"></p>
-      <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-        <div class="d-flex">
-          <table class="table border border-dark rounded mb-2">
+          <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
+            data-bs-target="#infoEscu">Guardar Cambios</button>
+        </div>
+        <div class="h3 text-success fw-light mb-3 mt-2">
+          Claves De Especialidad
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8">
+            <div class="d-flex shadow p-3 mb-5 bg-body-tertiary c1 bg-gradient">
+              <table class="table shadow p-3 mb-5 bg-body-tertiary  mb-2">
                 <tr class="">
                   <th class="ps-3 c1">Programación</th>
                   <th class="c1">
                     <div class="text-center">
-                      <input class="border border-0 c1 ms-4" [(ngModel)]="clavesEsp.programacion">
+                      <input class="border border-light c1" [(ngModel)]="clavesEsp.programacion">
                     </div>
                   </th>
-                </tr> 
-            </table>
-            <button type="button" (click)="progactu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
+                  <th class="c1 text-center  pt-2">
+                    <button type="button" (click)="progactu()"
+                      class="btn btn-outline-success mb-2">Actualizar</button>
+                  </th>
+                </tr>
+
+                <tr class="">
+                  <th class="ps-3 c2">Contabilidad</th>
+                  <th class="c2">
+                    <div class="text-center">
+                      <input class="border border-light c2" [(ngModel)]="clavesEsp.contabilidad">
+                    </div>
+                  </th>
+                  <th class="c2 text-center  pt-2">
+                    <button type="button" (click)="contaActu()"
+                    class="btn btn-outline-primary mb-2">Actualizar</button>
+                  </th>
+                </tr>
+                <tr class="">
+                  <th class="ps-3 c1">Electricidad</th>
+                  <th class="c1">
+                    <div class="text-center">
+                      <input class="border border-light c1" [(ngModel)]="clavesEsp.electricidad">
+                    </div>
+                  </th>
+                  <th class="c1 text-center  pt-2">
+                    <button type="button" (click)="ElectricidadActu()"
+                    class="btn btn-outline-success mb-2">Actualizar</button>
+                  </th>
+                </tr>
+                <tr class="">
+                  <th class="ps-3 c2">Prod. Ind. Alimentos</th>
+                  <th class="c2  ">
+                    <div class="text-center">
+                      <input class="border border-light c2" [(ngModel)]="clavesEsp.alimentos">
+                    </div>
+                  </th>
+                  <th class="c2 text-center  pt-2">
+                    <button type="button" (click)="AlimentosActu()"
+                    class="btn btn-outline-primary mb-2">Actualizar</button>
+                  </th>
+                </tr>
+                <tr class="">
+                  <th class="ps-3 c1">S.P de E. de Computo</th>
+                  <th class=" c1  ">
+                    <div class="text-center">
+                      <input class="border border-bottom border-light c1" [(ngModel)]="clavesEsp.soporte">
+                    </div>
+                  </th>
+                  <th class="c1 text-center pt-2">
+                    <button type="button" (click)="SoporteActu()"
+                    class="btn btn-outline-success mb-2">Actualizar</button>
+                  </th>
+                </tr>
+              </table>
+            </div>
+          
+          </div>
+          <div class="col-lg-2"></div>
         </div>
-        <div class="d-flex">
-          <table class="table border border-dark rounded mb-2">
-              <tr class="">
-                <th class="ps-3 c2">Contabilidad</th>
-                <th class="c2">
-                  <div class="text-center">
-                    <input class="border border-0 c2 ms-5" [(ngModel)]="clavesEsp.contabilidad">
-                  </div>
-                </th>
-              </tr> 
-          </table> 
-          <button type="button" (click)="contaActu()" class="btn btn-outline-primary ms-2 mb-2">Actualizar</button> 
+        <div class="modal-footer">
+          <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cerrar</button>
         </div>
-        <div class="d-flex">
-          <table class="table border border-dark rounded mb-2">
-              <tr class="">
-                <th class="ps-3 c1">Electricidad</th>
-                <th class="c1">
-                  <div class="text-center ms-3">
-                    <input class="border border-0 c1 ms-5" [(ngModel)]="clavesEsp.electricidad">
-                  </div>
-                </th>
-              </tr> 
-          </table> 
-          <button type="button" (click)="ElectricidadActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
-        </div>
-        <div class="d-flex">
-          <table class="table border border-dark rounded mb-2">
-              <tr class="">
-                <th class="ps-3 c2">Prod. Ind. Alimentos</th>
-                <th class="pe-3 c2  ">
-                  <div class="text-center ms-1">
-                    <input class="border border-0 c2" [(ngModel)]="clavesEsp.alimentos">
-                  </div>
-                </th>
-              </tr> 
-          </table> 
-          <button type="button" (click)="AlimentosActu()" class="btn btn-outline-primary ms-2 mb-2">Actualizar</button> 
-        </div>
-        <div class="d-flex">
-          <table class="table border border-dark rounded mb-2">
-              <tr class="">
-                <th class="ps-3 c1">S.P de E. de Computo</th>
-                <th class="pe-3 c1  ">
-                  <div class="text-center">
-                    <input class="border border-0 c1" [(ngModel)]="clavesEsp.soporte">
-                  </div>
-                </th>
-              </tr> 
-          </table> 
-          <button type="button" (click)="SoporteActu()" class="btn btn-outline-success ms-2 mb-2">Actualizar</button> 
-        </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cerrar</button>
-      </div>
       </div>
     </div>
   </div>
 </div>
-
