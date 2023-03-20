@@ -20,6 +20,12 @@
         </li>
       </ul>
     </div>
+    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row text-white-50" *ngIf="registro">
+      <button class="dropdown-item nav-link " (click)="salir()">
+        <i class="fa-solid fa-right-from-bracket "></i>
+      Salir
+    </button>
+    </div>
     <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row" *ngIf="!mostrar || logout">
       <a class="badge rounded-pill text-color-3G mt-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-user-circle h4" aria-hidden="true"></i>

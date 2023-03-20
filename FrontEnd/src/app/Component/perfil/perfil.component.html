@@ -1,86 +1,101 @@
-<div class="col-md-6 d-flex justify-content-between">
-    <img src="../../../assets/sep.png" alt="DGETI" width="200" height="70" class="m-1 mt-4 mr">
+<div class="row d-flex justify-content-center mt-5">
+    <div class="col-2"></div>
+    <div class="col-md-8">
+        <div class="border border-danger rounded p-2 mx-auto border-3">
+            <div class="d-flex justify-content-between pb-2">
+                <div class="col">
+                    <img src="../../../assets/sep.png" alt="DGETI" width="180" height="90" class="img-fluid mt-3">
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <img src="../../../assets/DGETI.png" alt="DGETI" width="280" height="90" class="img-fluid mt-2">
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <img src="../../../assets/logoCBTIS-removebg.png" alt="DGETI" width="120" height="90" class="img-fluid">
+                </div>
+            </div>
 
-    <img src="../../../assets/DGETI.png" alt="DGETI" width="280" height="90" class="m-1 mt-3 mr">
+            <div class="text-center rounded border border-dark text-success d-flex flex-column">
+                <div>
+                    <h4 class="text-center fw-light">Centro de Bachillerato Tecnológico Industrial y de Servicios No.66
+                    </h4>
+                </div>
+                <div>
+                    <h5 class="text-center fw-light">"Agustín de Iturbide" </h5>
+                </div>
+                <div>
+                    <h5 class="text-center fw-light"> Clave: 30DCTO2360</h5>
+                </div>
+            </div>
+            <div class="">
+                <table class="table table-border border border-dark rounded ">
 
-    <img src="../../../assets/logoCBTIS-removebg.png" alt="DGETI" width="120" height="100" class="m-1 mt-3 mr">
-</div>
+                    <tbody>
 
-<div class="row border border-danger rounded p-2 w-50 mx-auto border-3">
-     
-        <div class="text-center rounded border border-dark text-success d-flex flex-column">
-            <div><h4 class="text-center fw-light">Centro de Bachillerato Tecnológico Industrial y de Servicios No.66 </h4></div>
-            <div><h5 class="text-center fw-light">"Agustín de Iturbide" </h5></div>
-            <div><h5 class="text-center fw-light"> Clave: 30DCTO2360</h5></div>
-        </div>
-        <div class="col-6 col-sm">
-            <table class="table table-border border border-dark rounded ">
+                        <tr>
+                            <th class="c1">Alumno</th>
+                            <td class="c1 text-center">
+                                <input [(ngModel)]="perfilInfo.alumno" class="border border-0 c1" type="text"
+                                    placeholder="xd" disabled>
+                            </td>
+                        </tr>
 
-                <tbody>
+                        <tr>
+                            <th class="c2">CURP</th>
+                            <td class="c2 text-center">
+                                <input [(ngModel)]="perfilInfo.curp" class="border border-0 c2" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th class="c1">Alumno</th>
-                        <td class="c1 text-center">
-                            <input [(ngModel)]="perfilInfo.alumno" class="border border-0 c1" type="text"
-                                placeholder="xd" disabled>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th class="c2">CURP</th>
-                        <td class="c2 text-center">
-                            <input [(ngModel)]="perfilInfo.curp" class="border border-0 c2" type="text" placeholder="dx"
-                                disabled>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th class="c1">Numero de control</th>
-                        <td class="c1 text-center">
-                            <input [(ngModel)]="perfilInfo.numControl" class="border border-0 c1" type="text"
-                                placeholder="dx" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="c2">Especialidad</th>
-                        <td class="c2 text-center">
-                            <input [(ngModel)]="perfilInfo.especialidad" class="border border-0 c2" type="text"
-                                placeholder="dx" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="c1">Grado</th>
-                        <td class="c1 text-center">
-                            <input [(ngModel)]="perfilInfo.grado" class="border border-0 c1" type="text"
-                                placeholder="dx" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="c2">Grupo</th>
-                        <td class="c2 text-center">
-                            <input [(ngModel)]="perfilInfo.grupo" class="border border-0 c2" type="text"
-                                placeholder="dx" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="c1">Correo</th>
-                        <td class="c1 text-center">
-                            <input [(ngModel)]="perfilInfo.correo" class="border border-0 c1" type="text"
-                                placeholder="dx" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="c2">Turno</th>
-                        <td class="c2 text-center">
-                            <input [(ngModel)]="perfilInfo.turno" class="border border-0 c2" type="text"
-                                placeholder="xd" disabled>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="d-flex justify-content-center">
-                <!-- <button type="button" class="btn btn-danger ps-5 pe-5" (click)="recarga()">Actualizar</button> -->
+                        <tr>
+                            <th class="c1">Numero de control</th>
+                            <td class="c1 text-center">
+                                <input [(ngModel)]="perfilInfo.numControl" class="border border-0 c1" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="c2">Especialidad</th>
+                            <td class="c2 text-center">
+                                <input [(ngModel)]="perfilInfo.especialidad" class="border border-0 c2" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="c1">Grado</th>
+                            <td class="c1 text-center">
+                                <input [(ngModel)]="perfilInfo.grado" class="border border-0 c1" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="c2">Grupo</th>
+                            <td class="c2 text-center">
+                                <input [(ngModel)]="perfilInfo.grupo" class="border border-0 c2" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="c1">Correo</th>
+                            <td class="c1 text-center">
+                                <input [(ngModel)]="perfilInfo.correo" class="border border-0 c1" type="text"
+                                    placeholder="dx" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="c2">Turno</th>
+                            <td class="c2 text-center">
+                                <input [(ngModel)]="perfilInfo.turno" class="border border-0 c2" type="text"
+                                    placeholder="xd" disabled>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <!-- <button type="button" class="btn btn-danger ps-5 pe-5" (click)="recarga()">Actualizar</button> -->
+                </div>
             </div>
         </div>
- 
+    </div>
+    <div class="col-2"></div>
 </div>
