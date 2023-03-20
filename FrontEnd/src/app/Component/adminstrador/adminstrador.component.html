@@ -59,7 +59,7 @@
             <p class="h5 fw-light text-center text-secondary">
               <i class="fa fa-address-card" aria-hidden="true"></i>
               Solicitud de Pago de Servicio
-              <button type="button" class="ms-5 btn btn-success btn-sm" data-bs-toggle="modal"
+              <button type="button" class="ms-5 btn btn-3GB bg-gradient btn-sm" data-bs-toggle="modal"
                 data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos De La Escuela</button>
             </p>
           </div>
@@ -76,7 +76,7 @@
                 </div>
               </div>
               <div class="d-grid gap-2 col-4 mx-auto">
-                <a name="" id="" class="btn btn-primary " (click)="verificar()" role="button">Verificar</a>
+                <a name="" id="" class="btn btn-3GB bg-gradient" (click)="verificar()" role="button">Verificar</a>
               </div>
 
             </div>
@@ -167,7 +167,7 @@
 
 
 
-<!-- Modal -->
+<!-- Modal de Generador de Código de Pago-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -319,7 +319,7 @@
 </div>
 
 
-<!--Modificar la info de la escuela-->
+<!-- Modal para Modificar la información de la escuela-->
 <div class="modal fade" id="infoEscu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -327,16 +327,16 @@
         <div class="h3 text-success fw-light">
           Datos De La Escuela
         </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
         <div class="container">
           <div class="row">
             <div class="col-lg-2">
-
             </div>
-            <div class="col-lg-8 d-flex shadow p-3 mb-5 bg-body-tertiary c1 bg-gradient">
-              <table class="table shadow p-3 mb-5 bg-body-tertiary  mb-2">
+            <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+              <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
                 <tr class="">
                   <th class=" c1  ">
                     <div class="form-floating">
@@ -406,7 +406,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-lg btn-primary" (click)="guardCambios()" data-bs-toggle="modal"
+          <button type="button" class="btn btn-lg btn-3GB bg-gradient" (click)="guardCambios()" data-bs-toggle="modal"
             data-bs-target="#infoEscu">Guardar Cambios</button>
         </div>
         <div class="h3 text-success fw-light mb-3 mt-2">
@@ -416,8 +416,8 @@
         <div class="row">
           <div class="col-lg-2"></div>
           <div class="col-lg-8">
-            <div class="d-flex shadow p-3 mb-5 bg-body-tertiary c1 bg-gradient">
-              <table class="table shadow p-3 mb-5 bg-body-tertiary  mb-2">
+            <div class="d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+              <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
                 <tr class="">
                   <th class="ps-3 c1">Programación</th>
                   <th class="c1">
@@ -486,7 +486,7 @@
           <div class="col-lg-2"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Cerrar</button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket pe-3"></i>Cerrar</button>
         </div>
       </div>
     </div>
