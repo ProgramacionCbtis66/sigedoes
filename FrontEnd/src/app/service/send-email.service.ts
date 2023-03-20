@@ -22,7 +22,7 @@ export class SendEmailService {
     return this.http.post(`${this.URL}/email/forgotPassword`,email);
   }
 
-  correoAcpetacion(email:any){
+  correoAcpetacion(email:any):Observable<any>{
     return this.http.post(`${this.URL}/email/correoAcpetacion`,email);
   }
 
