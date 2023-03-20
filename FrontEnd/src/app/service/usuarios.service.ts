@@ -16,12 +16,10 @@ export class UsuarioService {
 
 
   forgotPassword(email:any):Observable<any>{
-    console.log(email);
     return this.http.post(`${this.URL}/insize/forgotPassword`,email);
   }
 
   datosUser(numcontrol:any):Observable<any>{
-    console.log(numcontrol);
     return this.http.post(`${this.URL}/insize/datosUser`,numcontrol);
   }
 
