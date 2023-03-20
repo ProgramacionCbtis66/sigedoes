@@ -131,6 +131,10 @@ export class AdminstradorComponent implements OnInit {
     const numcontrol = {
       numcontrol: this.nc
     }
+    if(this.nc == null || this.nc == ""){
+      Notiflix.Notify.failure("No se ha ingresado un número de control");
+    }
+    else {
     this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
       if (res.data != "" && res.data != null) {
         const datos = JSON.parse(res.data);
@@ -146,6 +150,7 @@ export class AdminstradorComponent implements OnInit {
 
       } else { this.verificado = false }
     });
+  }
   }
 
   GenerarCodigoPago() {
