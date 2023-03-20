@@ -324,12 +324,9 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="h3 text-success fw-light">
-          Datos De La Escuela
-        </div>
+        <h3 class="text-success fw-light">Datos De La Escuela</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
       <div class="modal-body">
         <div class="container">
           <div class="row">
@@ -340,34 +337,38 @@
                 <tr class="">
                   <th class=" c1  ">
                     <div class="form-floating">
-                      <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2" placeholder="name@example.com"[(ngModel)]="datosEsc.nomEscuela" style="height: 110px">
+                      <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2"
+                        placeholder="name@example.com" [(ngModel)]="datosEsc.nomEscuela" style="height: 110px">
                       </textarea>
                       <label for="floatingTextarea2">Nombre de la Escuela</label>
                     </div>
                   </th>
                 </tr>
-                
+
                 <tr>
                   <th class=" c2">
-                      <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.CTO">
-                        <label for="floatingInput">CTO </label>
-                      </div>
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.CTO">
+                      <label for="floatingInput">CTO </label>
+                    </div>
                   </th>
-               </tr>
-               <tr>
+                </tr>
+                <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.direccionEsc">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.direccionEsc">
                       <label for="floatingInput">Dirección de la Escuela</label>
                     </div>
                   </th>
-               </tr>
+                </tr>
 
                 <tr class="">
                   <th class=" c2">
                     <div class="form-floating">
-                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.correoEsc">
+                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.correoEsc">
                       <label for="floatingInput">Correo de la Escuela</label>
                     </div>
                   </th>
@@ -376,7 +377,8 @@
                 <tr class="">
                   <th class="c1">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.telefEsc">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.telefEsc">
                       <label for="floatingInput">Dirección de la Escuela</label>
                     </div>
                   </th>
@@ -385,30 +387,36 @@
                 <tr class="">
                   <th class="c2">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.nomDirec">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.nomDirec">
                       <label for="floatingInput">Director de la Escuela</label>
                     </div>
                   </th>
                 </tr>
-                
+
                 <tr class="">
                   <th class="c1">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="datosEsc.periodo">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="datosEsc.periodo">
                       <label for="floatingInput">Periodo Escolar</label>
                     </div>
                   </th>
                 </tr>
+                <tr>
+                  <th class="c1">
+                    <div class="">
+                      <button type="button" class="btn btn-lg btn-3GB bg-gradient" (click)="guardCambios()"
+                        data-bs-toggle="modal" data-bs-target="#infoEscu">Guardar Cambios</button>
+                    </div>
+                  </th>
+                </tr>
               </table>
-
             </div>
           </div>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-lg btn-3GB bg-gradient" (click)="guardCambios()" data-bs-toggle="modal"
-            data-bs-target="#infoEscu">Guardar Cambios</button>
-        </div>
+        <hr>
         <div class="h3 text-success fw-light mb-3 mt-2">
           Claves De Especialidad
         </div>
@@ -426,8 +434,7 @@
                     </div>
                   </th>
                   <th class="c1 text-center  pt-2">
-                    <button type="button" (click)="progactu()"
-                      class="btn btn-outline-success mb-2">Actualizar</button>
+                    <button type="button" (click)="progactu()" class="btn btn-outline-success mb-2">Actualizar</button>
                   </th>
                 </tr>
 
@@ -439,8 +446,7 @@
                     </div>
                   </th>
                   <th class="c2 text-center  pt-2">
-                    <button type="button" (click)="contaActu()"
-                    class="btn btn-outline-primary mb-2">Actualizar</button>
+                    <button type="button" (click)="contaActu()" class="btn btn-outline-primary mb-2">Actualizar</button>
                   </th>
                 </tr>
                 <tr class="">
@@ -452,7 +458,7 @@
                   </th>
                   <th class="c1 text-center  pt-2">
                     <button type="button" (click)="ElectricidadActu()"
-                    class="btn btn-outline-success mb-2">Actualizar</button>
+                      class="btn btn-outline-success mb-2">Actualizar</button>
                   </th>
                 </tr>
                 <tr class="">
@@ -464,7 +470,7 @@
                   </th>
                   <th class="c2 text-center  pt-2">
                     <button type="button" (click)="AlimentosActu()"
-                    class="btn btn-outline-primary mb-2">Actualizar</button>
+                      class="btn btn-outline-primary mb-2">Actualizar</button>
                   </th>
                 </tr>
                 <tr class="">
@@ -476,17 +482,17 @@
                   </th>
                   <th class="c1 text-center pt-2">
                     <button type="button" (click)="SoporteActu()"
-                    class="btn btn-outline-success mb-2">Actualizar</button>
+                      class="btn btn-outline-success mb-2">Actualizar</button>
                   </th>
                 </tr>
               </table>
             </div>
-          
           </div>
           <div class="col-lg-2"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket pe-3"></i>Cerrar</button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><i
+              class="fa-solid fa-right-from-bracket pe-3"></i>Cerrar</button>
         </div>
       </div>
     </div>
