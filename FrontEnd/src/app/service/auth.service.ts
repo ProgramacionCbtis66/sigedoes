@@ -16,6 +16,7 @@ export class AuthService {
    
   estatus: boolean = true;
 
+  
 
   constructor(private http: HttpClient,
     private jwt: JwtHelperService) { }
@@ -32,7 +33,7 @@ export class AuthService {
     const token = localStorage.getItem("color");
     if (token !== null && token !== "" && !this.tokeExpired()) {
 
-      if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "udefined") {
+      if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
         this.estatus = true;
         return false;
       } else {

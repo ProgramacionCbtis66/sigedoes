@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
           }else{
             this.router.navigate(['/home']);
           }
+          
         } else if (res.Error == "Usuario y contraseña incorrecta") {
           Notiflix.Loading.remove();
           Notiflix.Notify.warning(res.Error);

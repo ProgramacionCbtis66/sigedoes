@@ -10,18 +10,22 @@ import { AuthService } from '../service/auth.service';
 export class AuthLogin implements CanActivate {
 
 
-  constructor(private authService: AuthService,
-    private router: Router) { }
 
+  constructor(private authService: AuthService,
+   
+
+    private router: Router) { }
+   
 
   canActivate(): boolean {
+    
    if (!this.authService.isAuth()) {
       return true;
     } else{
         if(this.authService.decodifica().rol!="Admin") {
-      return false;
+          return false;
     }else{
-      return true;
+      return false;
     }
     }
   }
