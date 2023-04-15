@@ -5,7 +5,19 @@ const cors = require('cors');
 
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
-app.use(cors({origin: "*" }));
+
+const allowedOrigins = ['http://localhost:4200'];
+app.use(cors({
+    origin: (origin, callback)=> {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+          console.log("dominio permitido");
+        callback(null, true);
+      } else {
+        callback(new Error('Este dominio no esta permitido'));
+      }
+    }
+  }));
+// app.use(cors({origin: "*" }));
 
 //ruteo
 
