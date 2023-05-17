@@ -304,7 +304,7 @@
             disabled>
             <i class="fa fa-check-circle" aria-hidden="true"></i>
           </a> |
-          <a (click)="Noaceptado(dato)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
+          <a type="button" data-bs-toggle="modal" data-bs-target="#noaceptado"  class="badge bg-danger" 
             disabled>
             <i class="fa-solid fa-circle-xmark"></i>
           </a>
@@ -494,6 +494,25 @@
           <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><i
               class="fa-solid fa-right-from-bracket pe-3"></i>Cerrar</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal para mostrar el porque no fué aceptado-->
+<div class="modal fade" id="noaceptado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-danger text-center h3">Mensaje de rechazo</div>
+        <div class="text-center">
+          <input class="" [(ngModel)]="mensaje.mensaje">
+        </div>
+      </div>
+      <div class="modal-footer" >
+        <button (click)="Noaceptado(dato)" data-bs-toggle="modal" data-bs-target="#infoEscu" data-bs-toggle="modal" data-bs-target="#noaceptado" >
+          Enviar
+        </button>
       </div>
     </div>
   </div>
