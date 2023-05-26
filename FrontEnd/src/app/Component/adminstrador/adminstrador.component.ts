@@ -13,9 +13,7 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./adminstrador.component.css']
 })
 export class AdminstradorComponent implements OnInit {
-  mensaje = {
-    mensaje:""
-  }
+
   solicitud = {
     numControl: "",
     emitio: "",
@@ -112,13 +110,11 @@ export class AdminstradorComponent implements OnInit {
   Noaceptado(op: any) {
     this.aceptado = op;
     this.aceptado.op = 3;
-    this.aceptado.dato = this.mensaje.mensaje;
     this.aceptado.tipo = "validacion";
-    this.aceptado.correo = this.usuario.correo;
     this.aceptado.numControl = this.usuario.noctrl;
     this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
-      this.CorreoAcpetacion(op);
+      //this.CorreoAcpetacion(op);
       this.ngOnInit();
     });
   }
