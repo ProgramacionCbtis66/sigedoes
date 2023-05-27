@@ -15,7 +15,7 @@ app.use(cors({
       } else {
         callback(new Error('Este dominio no esta permitido'));
       }
-    }
+    } 
   }));
 // app.use(cors({origin: "*" }));
 
