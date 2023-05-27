@@ -1,0 +1,21 @@
+<div class="container mt-3">
+    <h1 class="text-center text-success mb-4">Módulo Para Realizar Su Registro</h1>
+    <div>
+        <div class="m-0 row justify-content-center">
+                <div class="col-auto justify-content-center" style="width:80%">
+                    <div class="form-floating mb-3">
+                    <input [(ngModel)]="nombre" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Nombre</label>
+                </div>
+                <div class="form-floating">
+                    <input [(ngModel)]="contra" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>    
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-outline-danger btn-lg" (click)="Ingresar()">Registrarse</button>    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

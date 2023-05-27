@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 export class UsuarioService {
   private URL = environment.HTTPS;
 
-
   constructor(private http: HttpClient) { }
 
 
