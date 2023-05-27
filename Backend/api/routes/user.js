@@ -1,6 +1,5 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { json } = require('stream/consumers');
 const router = express.Router();
 
 const ccn = require('../connection/connection');
@@ -31,7 +30,7 @@ router.post('/login', (req, res) => {
     const { nombre, pass } = req.body;
     ccn.query('select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1', [nombre, pass],
         (err, rows, fields) => {
-console
+
             if (!err) {
                 if (rows.length > 0) {
 
@@ -39,7 +38,7 @@ console
                     let dato = JSON.parse(datos);
                     dato.exp = Date.now() / 1000 + (parseInt(dato.exp));
                     let data = JSON.stringify(dato);
-
+                    console.log(data);
                     const token = jwt.sign(data, 'stil');
 
 
