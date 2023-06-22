@@ -37,6 +37,4 @@ app.use(function(req, res, next) {
 });
 
 
-const envioEmail = 
-
-module.exports = app;
+const envioEmail = module.exports = app;

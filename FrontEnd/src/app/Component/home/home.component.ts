@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
 
     this.email.envioConstancia(email).subscribe((res: any) => {
       if (res == "Correcto") {
-        Notiflix.Notify.success("Correo Enviado Con Éxito");
+        Notiflix.Notify.success("Constancia Enviada A Su Correo Con Éxito");
       }
     });
     this.user.obtenerDatos(this.home).subscribe((res:any)=>{
@@ -118,7 +118,6 @@ export class HomeComponent implements OnInit {
         "fecha":res.nombre,
         "CodPago":this.home.NoPago
       }
-      console
         this.user.subirEmitido(this.datosRegistro).subscribe((res:any)=>{
 
         });
@@ -135,6 +134,7 @@ export class HomeComponent implements OnInit {
         this.datosCons.matricula = "";
         this.home.NoPago = "";
         this.tabla = false;
+        this.paso2 = false;
       }
     });
 
