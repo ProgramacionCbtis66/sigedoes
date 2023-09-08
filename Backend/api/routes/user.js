@@ -107,235 +107,195 @@ peticion.get('/listaUserNoReg',async(req, res) => {
     } catch (error) {
         res.json('');
     }
-
-    ccn.query('select usuario.password as password, alumno.nombre as nombre, alumno.numControl as numControl,alumno.correo as correo, alumno.grado as grado, alumno.grupo as grupo, alumno.turno as turno, alumno.especialidad as especialidad from alumno join usuario on alumno.numControl = usuario.numControl where alta = 0',
-        (err, rows, fields) => {
-            if (!err) {
-                res.send({ data: JSON.stringify(rows) });
-            } else {
-                res.json('');
-            }
-        });
 });
 
 peticion.post('/NoPago', async (req, res) => {
     const { NoPago, numControl } = req.body;
    
     try {
-        const noPago = ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
+        const noPago = await ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
         if(rows.length > 0) {
             res.json({ valido: "Aceptado" });
         }
     } catch (error) {
         res.json({ Error: "Número Invalido" });
     }
-
-    ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl],
-        (err, rows, fields) => {
-            if (!err) {
-                 if(rows.length > 0) {
-                    res.json({ valido: "Aceptado" });
-                } else {
-                    res.json({ Error: "Número Invalido" });
-                }
-            }
-        });
-
 });
 
 peticion.post('/verificaNoPago', async(req, res) => {
     const { numPago } = req.body;
-
-    ccn.query('SELECT codigoPago from solicitud where codigoPago like ?', [numPago],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.length <= 0) {
-                    res.json({ valido: "Aceptado" });
-                } else {
-                    res.json({ Error: "Número Invalido" });
-                }
-            }
-        });
-
+    try {
+        const verificaNoPago = await ccn.query('SELECT codigoPago from solicitud where codigoPago like ?', [numPago]);
+        if (rows.length <= 0) {
+            res.json({ valido: "Aceptado" });
+        } 
+    } catch (error) {
+        res.json({ Error: "Número Invalido" });
+    }
 });
 
-peticion.post('/NoPagoDesactivo', (req, res) => {
+peticion.post('/NoPagoDesactivo', async(req, res) => {
     const codpag = req.body;
-    ccn.query('UPDATE solicitud set activo = 0 where codigoPago = ?', [codpag.NoPago],
-        (err, rows, fields) => {
-            if (!err) {
-                res.json({ msg: "ok" });
-
-            } else {
-                res.json({ Error: "Error" })
-            }
-        });
+    try {
+        const NopagoDesc = await ccn.query('UPDATE solicitud set activo = 0 where codigoPago = ?', [codpag.NoPago]);
+        res.json({ msg: "ok" });
+    } catch (error) {
+        res.json({ Error: "Error" })
+    }
 });
 
-peticion.post('/ObtenerDatosPago', (req, res) => {
+peticion.post('/ObtenerDatosPago', async(req, res) => {
     const NoPago = req.body;
-    ccn.query('SELECT * from solicitud where codigoPago = ?', [NoPago.NoPago],
-        (err, rows, fields) => {
-            if (!err) {
-                let datos = JSON.stringify(rows[0].emitio);
-                let dato = JSON.parse(datos);
-                let data = JSON.stringify(dato);
+    try {
+        const ObDatosPag = await  ccn.query('SELECT * from solicitud where codigoPago = ?', [NoPago.NoPago]);
+        let datos = JSON.stringify(rows[0].emitio);
+        let dato = JSON.parse(datos);
+        let data = JSON.stringify(dato);
 
-                let datoos = JSON.stringify(rows[0].fechaSolicitud);
-                let datoo = JSON.parse(datoos);
-                let dataa = JSON.stringify(datoo);
-                res.json({ "nombre": dataa, "emitio": data });
-            } else {
-                res.json({ err: "err" });
-            }
-
-        });
+        let datoos = JSON.stringify(rows[0].fechaSolicitud);
+        let datoo = JSON.parse(datoos);
+        let dataa = JSON.stringify(datoo);
+        res.json({ "nombre": dataa, "emitio": data });
+    } catch (error) {
+        res.json({ err: "err" });
+    }
 });
 
-peticion.post('/SubirRegistro', (req, res) => {
+peticion.post('/SubirRegistro', async(req, res) => {
     const { NoCtrl, emitio, fecha, CodPago } = req.body;
-    ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)', [NoCtrl, emitio, fecha, CodPago],
-        (err, rows, fields) => {
-            if (!err) {
-                res.json({ ok: "ok" })
-            } else {
-                res.json({ err: "err" })
-            }
-        });
+    try {
+        const SubirRegistro = await  ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)', [NoCtrl, emitio, fecha, CodPago]);
+        res.json({ ok: "ok" })
+    } catch (error) {
+        res.json({ err: "err" })
+    }
 });
 
-peticion.post('/verInfo', (req, res) => {
+peticion.post('/verInfo', async (req, res) => {
     const { numeroCtrl } = req.body;
-    ccn.query('SELECT * from alumno where numControl = ?', [numeroCtrl],
-        (err, rows, fields) => {
-            if (!err) {
-                res.json({ ok: "ok", data: rows[0] });
-            } else {
-                res.json({ err: "err" });
-            }
-        });
+    try {
+        const verInfo = await ccn.query('SELECT * from alumno where numControl = ?', [numeroCtrl]);
+        res.json({ ok: "ok", data: rows[0] });
+    } catch (error) {
+        res.json({ err: "err" });
+    }
 });
 
-peticion.post('/getContra', (req, res) => {
+peticion.post('/getContra', async(req, res) => {
     const { numcontrol } = req.body;
-    ccn.query('Select password from usuario where userName = ?', [numcontrol],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.length > 0) {
-                    let datos = JSON.stringify(rows[0].password);
-                    let dato = JSON.parse(datos);
-                    let contraseña = JSON.stringify(dato);
-                    res.json({ contra: contraseña });
-                }
-            }
-        });
+    try {
+        const contra = await ccn.query('Select password from usuario where userName = ?', [numcontrol]);
+        if (rows.length > 0) {
+            let datos = JSON.stringify(rows[0].password);
+            let dato = JSON.parse(datos);
+            let contraseña = JSON.stringify(dato);
+            res.json({ contra: contraseña });
+        }
+    } catch (error) {
+        //no tiene otra sentencia aparte del res.json del if
+    }
 });
 
-peticion.post('/modifyProfile', (req, res) => {
+peticion.post('/modifyProfile', async(req, res) => {
     const { alumno, curp, numControl, especialidad, grado, grupo, correo, turno } = req.body;
-    ccn.query('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?', [alumno, especialidad, curp, grado, grupo, correo, turno, numControl],
-        (err, rows, fields) => {
-            if (!err) {
-                res.json({ ok: "ok" });
-            }
-        });
+try {
+    const ModProfile = await ccn.query('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?', [alumno, especialidad, curp, grado, grupo, correo, turno, numControl]);
+    res.json({ ok: "ok" });
+} catch (error) {
+    // no tiene otra sentencia aparte del res.json
+}
 });
 
-peticion.get('/GetdatosEsc', (req, res) => {
-    ccn.query('SELECT * from escuela',
-        (err, rows, fields) => {
-            if (!err) {
-                res.send({ data: JSON.stringify(rows[0]) });
-            } else {
-                res.send({ err: "err" });
-            }
-        });
+peticion.get('/GetdatosEsc', async(req, res) => {
+    try {
+        const datosEsc = await ccn.query('SELECT * from escuela');
+        res.send({ data: JSON.stringify(rows[0]) });
+    } catch (error) {
+        res.send({ err: "err" });
+    }
 });
 
-peticion.post('/guardarDatosEsc', (req, res) => {
+peticion.post('/guardarDatosEsc', async(req, res) => {
     const { nomEscuela, CTO, direccionEsc, correoEsc, telefEsc, nomDirec, periodo } = req.body;
-    ccn.query('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?', [CTO, nomEscuela, direccionEsc, correoEsc, telefEsc, periodo, nomDirec],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.json({ ok: "Se Han Modificado Los Datos" });
-                } else {
-                    res.json({ ok: "No Se Ha Cambiado Nada" })
-                }
-            } else {
-                res.json({ ok: "Ha Ocurrido Un Error Al Modificar" });
-            }
-        });
+    try {
+        const guardarDatos = await  ccn.query('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?', [CTO, nomEscuela, direccionEsc, correoEsc, telefEsc, periodo, nomDirec]);
+        if (rows.affectedRows > 0) {
+            res.json({ ok: "Se Han Modificado Los Datos" });
+        } else {
+            res.json({ ok: "No Se Ha Cambiado Nada" })
+        }
+    } catch (error) {
+        res.json({ ok: "Ha Ocurrido Un Error Al Modificar" });
+    }
 });
 
-peticion.get('/optenerClavesEsp', (req, res) => {
-    ccn.query('SELECT * from cbeEsp',
-        (err, rows, fields) => {
-            if (!err) {
-                res.send({ programacion: JSON.stringify(rows[0]), contabilidad: JSON.stringify(rows[1]), electricidad: JSON.stringify(rows[2]), alimentos: JSON.stringify(rows[3]), soporte: JSON.stringify(rows[4]) });
-            } else {
-                res.send({ err: "err" });
-            }
-        });
+peticion.get('/optenerClavesEsp', async(req, res) => {
+    try {
+        const claves = await ccn.query('SELECT * from cbeEsp');
+        res.send({ programacion: JSON.stringify(rows[0]), contabilidad: JSON.stringify(rows[1]), electricidad: JSON.stringify(rows[2]), alimentos: JSON.stringify(rows[3]), soporte: JSON.stringify(rows[4]) });
+    } catch (error) {
+        res.send({ err: "err" });
+    }
 });
-peticion.post('/guardarClavesEspProg', (req, res) => {
+
+peticion.post('/guardarClavesEspProg', async(req, res) => {
     const { programacion } = req.body;
-    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1', [programacion],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.send({ ok: "Clave De Programación Modificada" });
-                }
-            }
-        });
+    try {
+        const gClavesProg = await ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1', [programacion]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Programación Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    }
 });
 
-peticion.post('/guardarClavesEspconta', (req, res) => {
+peticion.post('/guardarClavesEspconta', async(req, res) => {
     const { contabilidad } = req.body;
-    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2', [contabilidad],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.send({ ok: "Clave De Contabilidad Modificada" });
-                }
-            }
-        });
+    try {
+        const gClavesConta = await ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2', [contabilidad]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Contabilidad Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    }
 });
 
-peticion.post('/guardarClavesEspElectricidad', (req, res) => {
+peticion.post('/guardarClavesEspElectricidad', async(req, res) => {
     const { electricidad } = req.body;
-    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3', [electricidad],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.send({ ok: "Clave De Electricidad Modificada" });
-                }
-            }
-        });
+    try {
+        const gClavesElec = await ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3', [electricidad]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Electricidad Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    }
 });
 
-peticion.post('/guardarClavesEspAlimentos', (req, res) => {
+peticion.post('/guardarClavesEspAlimentos', async(req, res) => {
     const { alimentos } = req.body;
-    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5', [alimentos],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.send({ ok: "Clave De Alimentos Modificada" });
-                }
-            }
-        });
+    try {
+        const gClavesAli = await ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5', [alimentos]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Alimentos Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    }
 });
 
-peticion.post('/guardarClavesEspSoporte', (req, res) => {
+peticion.post('/guardarClavesEspSoporte', async(req, res) => {
     const { soporte } = req.body;
-    ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6', [soporte],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.send({ ok: "Clave De Soporte Modificada" });
-                }
-            }
-        });
+    try {
+        const gClavesSop = await ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6', [soporte]); 
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Soporte Modificada" });
+        }
+    } catch (error) {
+        //No Sentencia
+    }
 });
 
 function VerificarToken(req, res, next) {
