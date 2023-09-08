@@ -73,7 +73,7 @@ peticion.post('/datosUser', async (req, res) => {
     const numControl = req.body.numcontrol;
     const sql = 'select * from pdf where numControl = ?';
     try {
-        const [datos] = await ccn.quey(sql,[numControl.toString()]);
+        const [datos] = await ccn.query(sql,[numControl.toString()]);
         //cosnt [datosUser]= conexion.execute();
         if(rows.length > 0){
             let datos = JSON.stringify(rows[0]);
