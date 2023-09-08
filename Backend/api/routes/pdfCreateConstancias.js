@@ -25,7 +25,7 @@ const datoAlumno = async (req, tipo) => {
     }
 }
 
-async function create(req, tipo) {
+async function createConstancias(req, tipo) {
     alumno = await datoAlumno(req, tipo);
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
@@ -91,4 +91,4 @@ function textomes(mes) {
     const month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     return month[mes];
 }
-module.exports = create;
+module.exports = createConstancias;
