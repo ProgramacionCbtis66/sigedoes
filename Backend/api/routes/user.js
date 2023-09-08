@@ -23,6 +23,8 @@ router.post('/forgotPassword', async (req, res) => {
 
     } catch (error) {
         res.json({ Error: error });
+    }finally{
+        conexion.end();
     }
 
 
@@ -46,6 +48,8 @@ router.post('/login', async (req, res) => {
         }
     } catch (error) {
         res.json({ Error: error });
+    } finally {
+        conexion.end();
     }
 });
 
