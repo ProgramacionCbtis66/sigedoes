@@ -7,21 +7,22 @@ const mysql = require('mysql2');
     database:'bfmihnzdrggg76jcdc3z',
     password : 'YYaQhsg5IcdpHWq7Smo2'
 }); */
- 
-const ccn = mysql.createConnection({
-    host:'localhost',
-    port:'3306',
-    user:'root',
-    database:'constancias',
-    password:'juanito'
-});
- 
-ccn.connect (err=>{
-    if (err){
-        console.log("no connection error: " + err);
-    }else{
-        console.log("Bd Connect");
+
+const ccn = async () => {
+    try {
+        return await mysql.createConnection({
+            host: 'localhost',
+            port: '3306',
+            user: 'root',
+            database: 'constancias',
+            password: 'juanito'
+        });
+    } catch (error) {
+        console.error('Error al conectar con la base de datos:', error.message);
+        throw error;
     }
-});
+}
+
+
 
 module.exports = ccn;
