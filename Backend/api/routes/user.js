@@ -1,10 +1,10 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const router = express.Router();
+const peticion = express.peticion();
 
 const ccn = require('../connection/connection');
 
-router.post('/forgotPassword', async (req, res) => {
+peticion.post('/forgotPassword', async (req, res) => {
     const correo = req.body.correo;
     const sql = 'select * from forgotpassword where correo like ?';
     const conexion = await ccn();
@@ -30,7 +30,7 @@ router.post('/forgotPassword', async (req, res) => {
 
 });
 
-router.post('/login', async (req, res) => {
+peticion.post('/login', async (req, res) => {
     const { nombre, pass } = req.body;
     let sql = 'select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1';
     const conexion = await ccn();
@@ -53,49 +53,56 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/registro', (req, res) => {
+peticion.post('/registro', async (req, res) => {
     const { nombre, correo, pass, pass2, curp, noctrl, especialidad, semestre, area, turno, direccion, CTO, grupo } = req.body;
     const horario = "7:00 - 15:00";
     const alta = 0;
     const rol = "user";
     //Subir datos a la tabla usuario
-    ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)', [noctrl, noctrl, pass2, rol, 600, nombre], (err, rows, fields) => {
-        if (!err) {
+    try {
+        const consulta1 = await ccn.query('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)', [noctrl, noctrl, pass2, rol, 600, nombre]);
+        const consulta2 = await ccn.query('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [noctrl, nombre, direccion, especialidad, area, semestre, grupo, turno, horario, CTO, correo, alta, curp]);
 
-        }
-    });
-
-    //Subir los datos a la tabla Alumno
-    ccn.query('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [noctrl, nombre, direccion, especialidad, area, semestre, grupo, turno, horario, CTO, correo, alta, curp],
-
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.affectedRows > 0) {
-                    res.json({ Aceptado: "Datos Aceptados" });
-                } else {
-                    res.json({ Error: "Los Datos No Fueron Aceptados" });
-                }
-            }
-        });
+        res.json({ Aceptado: "Datos Aceptados" });
+    } catch (error) {
+        res.json({ Error: "Los Datos No Fueron Aceptados" });
+    }
 });
 
-router.post('/datosUser', (req, res) => {
+peticion.post('/datosUser', async (req, res) => {
     const numControl = req.body.numcontrol;
-    ccn.query('select * from pdf where numControl = ?', [numControl.toString()],
-        (err, rows, fields) => {
-            if (!err) {
-                if (rows.length > 0) {
-                    let datos = JSON.stringify(rows[0]);
-                    let dato = JSON.parse(datos);
-                    let data = JSON.stringify(dato);
-                    res.json({ data });
-                } else { res.json({ Error: "no hay datos" }) }
-            } else { res.json({ Error: "En base de datos" }); }
-        });
+    const sql = 'select * from pdf where numControl = ?';
+    try {
+        const [datos] = await ccn.quey(sql,[numControl.toString()]);
+        //cosnt [datosUser]= conexion.execute();
+        if(rows.length > 0){
+            let datos = JSON.stringify(rows[0]);
+            let dato = JSON.parse(datos);
+            let data = JSON.stringify(dato);
+            res.json({ data });
+        }else{ 
+            res.json({ Error: "no hay datos" })
+        }
+    } catch (error) {
+        res.json({ Error: "En base de datos" });
+    }
+
 });
 
-router.post('/usuarioAceptado', (req, res) => {
+peticion.post('/usuarioAceptado', async (req, res) => {
     const alumno = req.body;
+    try {
+        const entrar = await ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op, alumno.numControl]);
+        if (!err) {
+            if (alumno.op == 1) res.json("Aceptado");
+            if (alumno.op == 3) res.json("Rechazado");
+        }else{
+            res.json("error en la cunsulta");
+        }
+    } catch (error) {
+       
+    }
+
     ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op, alumno.numControl],
         (err, rows, fields) => {
             if (!err) {
@@ -107,7 +114,13 @@ router.post('/usuarioAceptado', (req, res) => {
         });
 });
 
-router.get('/listaUserNoReg', (req, res) => {
+peticion.get('/listaUserNoReg',async(req, res) => {
+    try {
+        const listaUser = await ccn.query('select usuario.password as password, alumno.nombre as nombre, alumno.numControl as numControl,alumno.correo as correo, alumno.grado as grado, alumno.grupo as grupo, alumno.turno as turno, alumno.especialidad as especialidad from alumno join usuario on alumno.numControl = usuario.numControl where alta = 0');
+        res.send({ data: JSON.stringify(rows) });
+    } catch (error) {
+        res.json('');
+    }
 
     ccn.query('select usuario.password as password, alumno.nombre as nombre, alumno.numControl as numControl,alumno.correo as correo, alumno.grado as grado, alumno.grupo as grupo, alumno.turno as turno, alumno.especialidad as especialidad from alumno join usuario on alumno.numControl = usuario.numControl where alta = 0',
         (err, rows, fields) => {
@@ -119,13 +132,22 @@ router.get('/listaUserNoReg', (req, res) => {
         });
 });
 
-router.post('/NoPago', (req, res) => {
+peticion.post('/NoPago', async (req, res) => {
     const { NoPago, numControl } = req.body;
+   
+    try {
+        const noPago =   ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
+        if(rows.length > 0) {
+            res.json({ valido: "Aceptado" });
+        }
+    } catch (error) {
+        res.json({ Error: "Número Invalido" });
+    }
 
     ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl],
         (err, rows, fields) => {
             if (!err) {
-                if (rows.length > 0) {
+                 if(rows.length > 0) {
                     res.json({ valido: "Aceptado" });
                 } else {
                     res.json({ Error: "Número Invalido" });
@@ -135,7 +157,7 @@ router.post('/NoPago', (req, res) => {
 
 });
 
-router.post('/verificaNoPago', (req, res) => {
+peticion.post('/verificaNoPago', async(req, res) => {
     const { numPago } = req.body;
 
     ccn.query('SELECT codigoPago from solicitud where codigoPago like ?', [numPago],
@@ -151,7 +173,7 @@ router.post('/verificaNoPago', (req, res) => {
 
 });
 
-router.post('/NoPagoDesactivo', (req, res) => {
+peticion.post('/NoPagoDesactivo', (req, res) => {
     const codpag = req.body;
     ccn.query('UPDATE solicitud set activo = 0 where codigoPago = ?', [codpag.NoPago],
         (err, rows, fields) => {
@@ -164,7 +186,7 @@ router.post('/NoPagoDesactivo', (req, res) => {
         });
 });
 
-router.post('/ObtenerDatosPago', (req, res) => {
+peticion.post('/ObtenerDatosPago', (req, res) => {
     const NoPago = req.body;
     ccn.query('SELECT * from solicitud where codigoPago = ?', [NoPago.NoPago],
         (err, rows, fields) => {
@@ -184,7 +206,7 @@ router.post('/ObtenerDatosPago', (req, res) => {
         });
 });
 
-router.post('/SubirRegistro', (req, res) => {
+peticion.post('/SubirRegistro', (req, res) => {
     const { NoCtrl, emitio, fecha, CodPago } = req.body;
     ccn.query('INSERT INTO emitidas (NoCtrl,emitio,fecha,CodPago) VALUES (?,?,?,?)', [NoCtrl, emitio, fecha, CodPago],
         (err, rows, fields) => {
@@ -196,7 +218,7 @@ router.post('/SubirRegistro', (req, res) => {
         });
 });
 
-router.post('/verInfo', (req, res) => {
+peticion.post('/verInfo', (req, res) => {
     const { numeroCtrl } = req.body;
     ccn.query('SELECT * from alumno where numControl = ?', [numeroCtrl],
         (err, rows, fields) => {
@@ -208,7 +230,7 @@ router.post('/verInfo', (req, res) => {
         });
 });
 
-router.post('/getContra', (req, res) => {
+peticion.post('/getContra', (req, res) => {
     const { numcontrol } = req.body;
     ccn.query('Select password from usuario where userName = ?', [numcontrol],
         (err, rows, fields) => {
@@ -223,7 +245,7 @@ router.post('/getContra', (req, res) => {
         });
 });
 
-router.post('/modifyProfile', (req, res) => {
+peticion.post('/modifyProfile', (req, res) => {
     const { alumno, curp, numControl, especialidad, grado, grupo, correo, turno } = req.body;
     ccn.query('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?', [alumno, especialidad, curp, grado, grupo, correo, turno, numControl],
         (err, rows, fields) => {
@@ -233,7 +255,7 @@ router.post('/modifyProfile', (req, res) => {
         });
 });
 
-router.get('/GetdatosEsc', (req, res) => {
+peticion.get('/GetdatosEsc', (req, res) => {
     ccn.query('SELECT * from escuela',
         (err, rows, fields) => {
             if (!err) {
@@ -244,7 +266,7 @@ router.get('/GetdatosEsc', (req, res) => {
         });
 });
 
-router.post('/guardarDatosEsc', (req, res) => {
+peticion.post('/guardarDatosEsc', (req, res) => {
     const { nomEscuela, CTO, direccionEsc, correoEsc, telefEsc, nomDirec, periodo } = req.body;
     ccn.query('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?', [CTO, nomEscuela, direccionEsc, correoEsc, telefEsc, periodo, nomDirec],
         (err, rows, fields) => {
@@ -260,7 +282,7 @@ router.post('/guardarDatosEsc', (req, res) => {
         });
 });
 
-router.get('/optenerClavesEsp', (req, res) => {
+peticion.get('/optenerClavesEsp', (req, res) => {
     ccn.query('SELECT * from cbeEsp',
         (err, rows, fields) => {
             if (!err) {
@@ -270,7 +292,7 @@ router.get('/optenerClavesEsp', (req, res) => {
             }
         });
 });
-router.post('/guardarClavesEspProg', (req, res) => {
+peticion.post('/guardarClavesEspProg', (req, res) => {
     const { programacion } = req.body;
     ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1', [programacion],
         (err, rows, fields) => {
@@ -282,7 +304,7 @@ router.post('/guardarClavesEspProg', (req, res) => {
         });
 });
 
-router.post('/guardarClavesEspconta', (req, res) => {
+peticion.post('/guardarClavesEspconta', (req, res) => {
     const { contabilidad } = req.body;
     ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2', [contabilidad],
         (err, rows, fields) => {
@@ -294,7 +316,7 @@ router.post('/guardarClavesEspconta', (req, res) => {
         });
 });
 
-router.post('/guardarClavesEspElectricidad', (req, res) => {
+peticion.post('/guardarClavesEspElectricidad', (req, res) => {
     const { electricidad } = req.body;
     ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3', [electricidad],
         (err, rows, fields) => {
@@ -306,7 +328,7 @@ router.post('/guardarClavesEspElectricidad', (req, res) => {
         });
 });
 
-router.post('/guardarClavesEspAlimentos', (req, res) => {
+peticion.post('/guardarClavesEspAlimentos', (req, res) => {
     const { alimentos } = req.body;
     ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5', [alimentos],
         (err, rows, fields) => {
@@ -318,7 +340,7 @@ router.post('/guardarClavesEspAlimentos', (req, res) => {
         });
 });
 
-router.post('/guardarClavesEspSoporte', (req, res) => {
+peticion.post('/guardarClavesEspSoporte', (req, res) => {
     const { soporte } = req.body;
     ccn.query('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6', [soporte],
         (err, rows, fields) => {
@@ -345,4 +367,4 @@ function VerificarToken(req, res, next) {
 }
 
 
-module.exports = router;
+module.exports = peticion;
