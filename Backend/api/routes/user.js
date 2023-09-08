@@ -93,25 +93,11 @@ peticion.post('/usuarioAceptado', async (req, res) => {
     const alumno = req.body;
     try {
         const entrar = await ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op, alumno.numControl]);
-        if (!err) {
             if (alumno.op == 1) res.json("Aceptado");
             if (alumno.op == 3) res.json("Rechazado");
-        }else{
-            res.json("error en la cunsulta");
-        }
     } catch (error) {
-       
+        res.json("error en la consulta");
     }
-
-    ccn.query('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op, alumno.numControl],
-        (err, rows, fields) => {
-            if (!err) {
-                if (alumno.op == 1) res.json("Aceptado");
-                if (alumno.op == 3) res.json("Rechazado");
-            } else {
-                res.json("error en la cunsulta");
-            }
-        });
 });
 
 peticion.get('/listaUserNoReg',async(req, res) => {
@@ -136,7 +122,7 @@ peticion.post('/NoPago', async (req, res) => {
     const { NoPago, numControl } = req.body;
    
     try {
-        const noPago =   ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
+        const noPago = ccn.query('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
         if(rows.length > 0) {
             res.json({ valido: "Aceptado" });
         }
