@@ -1,11 +1,11 @@
 const express = require("express");
 const Emailrouter = express.Router();
 const nodemailer = require("nodemailer");
-const create = require("./pdfCreate");
+const createConstancias = require("./pdfcreateConstancias");
 
 Emailrouter.post("/enviar-constancia", (req, res) => {
   const email = req.body;
-  create(email, email.tipo);
+  createConstancias(email, email.tipo);
   enviarCorreo(email, res);
 });
 
