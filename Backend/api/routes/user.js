@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const peticion = express.peticion();
+const peticion = express.Router();
 
 const ccn = require('../connection/connection');
 
@@ -32,7 +32,8 @@ peticion.post('/forgotPassword', async (req, res) => {
 
 peticion.post('/login', async (req, res) => {
     const { nombre, pass } = req.body;
-    let sql = 'select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1';
+    //let sql = 'select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1';
+    let sql = 'CALL login(?,?)';
     const conexion = await ccn();
     try {
         const [registros] = await conexion.execute(sql, [nombre, pass]);
