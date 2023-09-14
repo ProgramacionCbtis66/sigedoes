@@ -14,8 +14,8 @@ const ccn = async () => {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            database: 'constancias',
-            password: 'juanito'
+            database: 'sigedoes',
+            password: '123456'
         });
     } catch (error) {
         console.error('Error al conectar con la base de datos:', error.message);
