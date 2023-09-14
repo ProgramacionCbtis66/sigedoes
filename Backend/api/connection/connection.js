@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 /* const ccn = mysql.createConnection({
     host: 'bfmihnzdrggg76jcdc3z-mysql.services.clever-cloud.com',

@@ -33,25 +33,29 @@ peticion.post('/forgotPassword', async (req, res) => {
 
 peticion.post('/login', async (req, res) => {
     const { nombre, pass } = req.body;
-    //let sql = 'select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1';
-    let sql = 'CALL login(?,?)';
+    //let sql = `select usuario.exp, alumno.nombre as nombre, usuario.rol as rol, usuario.numControl as numControl from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl like ? and usuario.password = ? and alumno.alta = 1`;
+    let sql = `CALL login(?,?)`;
+    var usuario = '';
     const conexion = await ccn();
     try {
-        const [registros] = await conexion.execute(sql, [nombre, pass]);
-        if (registros.length > 0) {
-            let datos = JSON.stringify(rows[0]);
-            let dato = JSON.parse(datos);
-            dato.exp = Date.now() / 1000 + (parseInt(dato.exp));
-            let data = JSON.stringify(dato);
-            const token = jwt.sign(data, 'MA@L', {expiresIn:'20m'});
-            res.json({ token });
-        } else {
-            res.json({ Error: "Usuario y contraseña incorrecta" });
-        }
+        const [registros] = await conexion.execute(sql,[nombre,pass]);
+        usuario = registros;
     } catch (error) {
+        console.log(error);
         res.json({ Error: error });
     } finally {
         conexion.end();
+    }
+    if (usuario.length > 0) {
+        var datos = JSON.stringify(usuario[0][0]);
+        var dato = JSON.parse(datos);
+  
+        let data = JSON.stringify(dato);
+        console.log(dato);
+        const token = jwt.sign(dato, 'MA@L', {  expiresIn :'20m'});
+        res.json({ token });
+    } else {
+        res.json({ Error: "Usuario y contraseña incorrecta" });
     }
 });
 
