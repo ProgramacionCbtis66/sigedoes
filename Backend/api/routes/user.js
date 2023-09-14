@@ -354,19 +354,6 @@ peticion.post('/guardarClavesEspSoporte', async (req, res) => {
     }
 });
 
-function VerificarToken(req, res, next) {
-    if (!req.headers.authorization) return res.status(401).json('No authorization');
-    const token = req.headers.authorization.substr(7);
-
-    if (token !== '') {
-        const conent = jwt.verify(token, 'stil');
-        req.data = conent;
-        console.log(req.data);
-        next();
-    } else {
-        res.status(401).json('Token Vacio');
-    }
-}
 
 
 module.exports = peticion;
