@@ -15,7 +15,7 @@ peticion.post('/forgotPassword', async (req, res) => {
             let dato = JSON.parse(datos);
             dato.tipo = "forgotPassword";
             let data = JSON.stringify(dato);
-            const usuario = jwt.sign(data, 'stil');
+            const usuario = jwt.sign(data, 'MA@L', {expiresIn:'20m'});
             res.json({ usuario });
         } else {
             res.json({ Error: "Correo invalido" });
@@ -26,6 +26,7 @@ peticion.post('/forgotPassword', async (req, res) => {
     } finally {
         conexion.end();
     }
+
 
 
 });
