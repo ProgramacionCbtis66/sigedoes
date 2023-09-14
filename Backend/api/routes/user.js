@@ -43,7 +43,7 @@ peticion.post('/login', async (req, res) => {
             let dato = JSON.parse(datos);
             dato.exp = Date.now() / 1000 + (parseInt(dato.exp));
             let data = JSON.stringify(dato);
-            const token = jwt.sign(data, 'MA@L');
+            const token = jwt.sign(data, 'MA@L', {expiresIn:'20m'});
             res.json({ token });
         } else {
             res.json({ Error: "Usuario y contraseña incorrecta" });
