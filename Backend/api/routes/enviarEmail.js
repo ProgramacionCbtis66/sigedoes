@@ -16,38 +16,38 @@ Emailrouter.post("/forgotPassword", (req, res) => {
 
 Emailrouter.post("/correoAcpetacion", (req, res) => {
   const email = req.body;
-  
+
   enviarCorreo(email, res);
-  
+
 });
 
 Emailrouter.post("/envioSolicitud", (req, res) => {
   const email = req.body;
   enviarCorreo(email, res);
-  
+
 });
 
 function enviarCorreo(email, res) {
-  
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
       user: "juampiter830@gmail.com",
-      pass: "cnwlexkgzgmxfekv",  
+      pass: "cnwlexkgzgmxfekv",
     },
   });
-  
+
   const mailOptions = new MailOptions(email.tipo, email);
 
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions,  (error, info)=> {
     if (error) {
       console.log(error);
       res.send("error");
     } else {
       console.log("Correo Enviado: " + info.response);
-      res.send({msg:"Correo enviado satisfactoriamente"});
+      res.send({ msg: "Correo enviado satisfactoriamente" });
     }
   });
   res.json("Correcto");
@@ -80,20 +80,18 @@ function MailOptions(tipo, email) {
       };
       return mailOptions2;
     case "validacion":
-      
       const validacion =
         email.op == 1
           ? `Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}  , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
-          : "Rechazado, </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>";
+          : `Rechazado, </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>`;
       const mailOptions3 = {
         from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
         to: `"${email.correo}"`,
         subject: `"Aceptacion o Rechazo"`,
         html: `<h3>Estimado Usuario se le notifica que usted ha sido ${validacion}`,
       };
-      
-      return mailOptions3;
 
+      return mailOptions3;
     case "numPago":
       const mailOptions4 = {
         from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
@@ -102,6 +100,14 @@ function MailOptions(tipo, email) {
         html: `<h3>Estimado Usuario se le envía su código de pago :  ${email.numPago}`,
       };
       return mailOptions4;
+    case "boleta":
+      const mailOptions5 = {
+        from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+        to: `"${email.correo}"`,
+        subject: `"Boleta de calificaciones"`,
+        html: `<h3>Estimado Usuario se le envía su boleta de calificaciones del semestre :  ${email.semestre} del periodo escolar ${email.periodo} grupo ${email.grupo}`,
+      };
+      return mailOptions5;
   }
 }
 
