@@ -1,28 +1,18 @@
-CREATE DATABASE  IF NOT EXISTS `constancias` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `constancias`;
+CREATE DATABASE  IF NOT EXISTS `sigedoes` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `sigedoes`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: localhost    Database: constancias
+-- Host: localhost    Database: sigedoes
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
- SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
- SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
- SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
- SET @OLD_TIME_ZONE=@@TIME_ZONE */;
- SET TIME_ZONE='+00:00' */;
- SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
- SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
- SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
- SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Temporary view structure for view `pdf`
 --
 
 DROP TABLE IF EXISTS `pdf`;
- DROP VIEW IF EXISTS `pdf`*/;
+
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
  CREATE VIEW `pdf` AS SELECT 
@@ -50,7 +40,7 @@ SET character_set_client = @saved_cs_client;
 --
 
 DROP TABLE IF EXISTS `forgotpassword`;
- DROP VIEW IF EXISTS `forgotpassword`*/;
+
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
  CREATE VIEW `forgotpassword` AS SELECT 
@@ -97,11 +87,11 @@ SET character_set_client = @saved_cs_client;
  SET collation_connection      = @saved_col_connection ;
 
 --
--- Dumping events for database 'constancias'
+-- Dumping events for database 'sigedoes'
 --
 
 --
--- Dumping routines for database 'constancias'
+-- Dumping routines for database 'sigedoes'
 --
  SET TIME_ZONE=@OLD_TIME_ZONE ;
 
