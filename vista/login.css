@@ -1,0 +1,124 @@
+h1{
+    color: #450b19;
+}
+
+  .singup-2 {
+    color: #450b19;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: 1.5em;
+  }
+  
+  .card-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    flex-direction: column;
+    gap: 35px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 16px 16px 32px #450b44,
+          -16px -16px 32px #fff;
+    border-radius: 70px;
+    
+    
+  }
+  
+  .inputBox-2,
+  .inputBox1-2 {
+    position: relative;
+    width: 600px;
+  }
+  
+  .inputBox-2 input,
+  .inputBox1-2 input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: #450b19;
+    font-size: 1em;
+    background: transparent;
+    border-left: 2px solid #450b19;
+    border-bottom: 2px solid #450b19;
+    transition: 0.1s;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .inputBox-2 span,
+  .inputBox1-2 span {
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-4px);
+    margin-left: 10px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: #450b19;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+    border-radius: 8px;
+  }
+  
+  .inputBox-2 input:valid~span,
+  .inputBox-2 input:focus~span {
+    transform: translateX(400px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #450b19;
+    letter-spacing: 0.2em;
+    color: #fff;
+    border: 2px;
+  }
+  
+  .inputBox1-2 input:valid~span,
+  .inputBox1-2 input:focus~span {
+    transform: translateX(500px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #450b19;
+    letter-spacing: 0.2em;
+    color: #fff;
+    border: 2px;
+  }
+  
+  .inputBox-2 input:valid,
+  .inputBox-2 input:focus,
+  .inputBox1-2 input:valid,
+  .inputBox1-2 input:focus {
+    border: 2px solid #450b19;
+    border-radius: 8px;
+  }
+  
+  .enter-2 {
+    height: 45px;
+    width: 110px;
+    border-radius: 5px;
+    border: 2px solid #450b19;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 3em;
+    
+  }
+  
+  .enter-2:hover {
+    background-color: rgb(45, 0, 0);
+    color: white;
+  }
+  .generalizador{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: 100px;
+  
+  }
