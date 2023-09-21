@@ -1,5 +1,5 @@
 .singup-2 {
-    color: #450b19;
+    color: #450b44;
     text-transform: uppercase;
     letter-spacing: 2px;
     display: block;
@@ -13,7 +13,7 @@
     align-items: center;
     min-height: 400px;
     flex-direction: column;
-    gap: 35px;
+    gap: 10px;
     border-radius: 15px;
     background: #fff;
     box-shadow: 16px 16px 32px #450b44,
@@ -25,7 +25,7 @@
   
   .enter-2 {
     height: 45px;
-    width: 110px;
+    width: 220px;
     border-radius: 5px;
     border: 2px solid #450b44;
     cursor: pointer;
@@ -39,11 +39,17 @@
   }
   
   .enter-2:hover {
-    background-color: rgb(45, 0, 0);
+    background-color: rgb(45, 0, 44);
     color: white;
   }
 
   .noTeSepares{
     margin-left: 0px;
     margin-right: 0px;
+  }
+  carta-3{
+    box-shadow: 16px 16px 32px #450b44,
+         -16px -16px 32px #fff;
+         border-radius: 50%;
+
   }
