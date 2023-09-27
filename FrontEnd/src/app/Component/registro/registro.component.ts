@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
@@ -9,6 +9,7 @@ import * as Notiflix from 'notiflix';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
@@ -48,7 +49,8 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  constructor(private auth: AuthService, private router: Router, private app: AppComponent) { app.registro = true; app.iflogin = false; }
+  constructor(private auth: AuthService, private router: Router, private app: AppComponent) 
+  { app.registro.next(true); app.iflogin.next(false); }
 
   ngOnInit(): void { }
 

@@ -3,6 +3,8 @@ const Emailrouter = express.Router();
 const nodemailer = require("nodemailer");
 const createConstancias = require("./pdfcreateConstancias");
 
+const verifica = require("./verificaToken");
+
 Emailrouter.post("/enviar-constancia", (req, res) => {
   const email = req.body;
   createConstancias(email, email.tipo);

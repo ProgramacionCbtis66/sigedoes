@@ -39,7 +39,10 @@ import { PerfilComponent } from './Component/perfil/perfil.component';
   providers:[
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     Title,
-    JwtHelperService],
+    JwtHelperService,
+    
+  ],
+    
 
   bootstrap: [AppComponent]
 })

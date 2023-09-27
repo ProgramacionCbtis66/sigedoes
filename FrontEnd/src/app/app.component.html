@@ -5,28 +5,28 @@
     </a>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
-        <li class="nav-item" id="idhome" *ngIf="!mostrar && home">
+        <li class="nav-item" id="idhome" *ngIf="!mostrar.value && home.value">
           <a class="nav-link" routerLink="home" (click)="visibleLoginRegistro()">Home</a>
         </li>
-        <li *ngIf="mostrar && iflogin" class="nav-item" id="idlogin">
+        <li *ngIf="mostrar.value && iflogin.value" class="nav-item" id="idlogin">
           <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Login</a>
         </li>
 
-        <li class="nav-item" *ngIf="Administrador">
+        <li class="nav-item" *ngIf="Administrador.value">
           <a class="nav-link" routerLink="admin" id="idregistro">Administrador</a>
         </li>
-        <li class="nav-item" *ngIf="registro">
+        <li class="nav-item" *ngIf="registro.value">
           <a class="nav-link" routerLink="registro">Registro</a>
         </li>
       </ul>
     </div>
-    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row text-white-50" *ngIf="registro">
+    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row text-white-50" *ngIf="registro.value">
       <button class="dropdown-item nav-link " (click)="salir()">
         <i class="fa-solid fa-right-from-bracket "></i>
       Salir
     </button>
     </div>
-    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row" *ngIf="!mostrar || logout">
+    <div class="dropdown ms-auto ms-md-0 me-3 me-lg-4 d-flex flex-row" *ngIf="!mostrar.value || logout.value">
       <a class="badge rounded-pill text-color-3G mt-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-user-circle h4" aria-hidden="true"></i>
       </a>

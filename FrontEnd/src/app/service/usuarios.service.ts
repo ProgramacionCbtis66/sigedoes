@@ -10,22 +10,16 @@ import { environment } from 'src/environments/environment';
 })
 export class UsuarioService {
   private URL = environment.HTTPS;
+  private usr = environment.autorization;
 
-  constructor(private http: HttpClient) { }
-
-
-  forgotPassword(email: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/forgotPassword`, email);
-  }
+  constructor(private http: HttpClient) {
+    this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
+   }
 
   datosUser(numcontrol: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/datosUser`, numcontrol);
+    console.log(numcontrol);
+    return this.http.post(`${this.URL}/insize/datosUser`, numcontrol, this.usr);
   }
-
-  usuarioAceptado(numcontrol: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/usuarioAceptado`, numcontrol);
-  }
-
   UsuariosNoReg(): Observable<any> {
     return this.http.get(`${this.URL}/insize/listaUserNoReg`);
   }
@@ -64,8 +58,8 @@ export class UsuarioService {
   guardarClavesEsp(claves: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/guardarClavesEsp`, claves);
   }
-  optenerClavesEsp(): Observable<any> {
-    return this.http.get(`${this.URL}/insize/optenerClavesEsp`);
+  getClavesEsp(): Observable<any> {
+    return this.http.get(`${this.URL}/insize/getClavesEsp`);
   }
   guardarClavesEspProg(prog: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/guardarClavesEspProg`, prog);
@@ -81,5 +75,9 @@ export class UsuarioService {
   }
   guardarClavesEspSoporte(soporte: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/guardarClavesEspSoporte`, soporte);
+  }
+
+  registrarClaves(claves: any): Observable<any> {
+    return this.http.post(`${this.URL}/insize/registrarClaves`, claves, this.usr);
   }
 }

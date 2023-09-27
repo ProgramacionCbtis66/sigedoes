@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
 import * as Notiflix from 'notiflix';
-import { AppComponent } from 'src/app/app.component';
-import { AuthService } from 'src/app/service/auth.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
-import { UsuarioService } from 'src/app/service/usuarios.service';
 import decode from 'jwt-decode';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-olvide-pass',
@@ -19,7 +15,7 @@ export class OlvidePassComponent implements OnInit {
     "correo":""
   }
 
-  constructor(private userService: UsuarioService, private enviarCorreo: SendEmailService) { }
+  constructor(private auth: AuthService, private enviarCorreo: SendEmailService) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +24,7 @@ export class OlvidePassComponent implements OnInit {
   public enviar(){
     if(this.correo.correo != null && this.correo.correo != undefined && this.correo.correo != ""){
       Notiflix.Loading.standard("Accesando");
-        this.userService.forgotPassword(this.correo).subscribe((res: any)=>{
+        this.auth.olvContra(this.correo).subscribe((res: any)=>{
             if(res.usuario !== null && res.usuario !== undefined){
                 Notiflix.Loading.remove();
                     this.enviarCorreo.enviarUserContra(decode(res.usuario)).subscribe((res:any)=>{

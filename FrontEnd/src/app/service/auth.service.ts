@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -12,27 +12,38 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private URL = environment.HTTPS;
-   
-  estatus: boolean = true;
+  private ruta = environment.HTTPS;
+  public estatus: boolean = true;
 
-  
+  private _usuarioLogeadoSubject = new BehaviorSubject<boolean>(false);
+  private _adminSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient,
-    private jwt: JwtHelperService) { }
+  constructor(private http: HttpClient, private jwt: JwtHelperService) { }
 
-  public login(user: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/login`, user);
+  get usuarioLogeado(): BehaviorSubject<boolean> {
+    if (this.decodifica() && this.tokeExpired()) {
+      this._usuarioLogeadoSubject.next(true);
+    } else {
+      this._usuarioLogeadoSubject.next(false);
+    }
+    return this._usuarioLogeadoSubject;
   }
 
-  public registro(usuario:any): Observable<any>{
-    return this.http.post(`${this.URL}/insize/registro`,usuario);
+  public acceso(usuario: any): Observable<any> {
+    return this.http.post(`${this.ruta}/auth/acceso`, usuario);
   }
 
-  isAuth(): boolean {
+  public registro(usuario: any): Observable<any> {
+    return this.http.post(`${this.ruta}/auth/registro`, usuario);
+  }
+
+  public olvContra(correo: any): Observable<any> {
+    return this.http.post(`${this.ruta}/auth/recuperarContraseña`, correo);
+  }
+
+  public isAuth(): boolean {
     const token = localStorage.getItem("color");
     if (token !== null && token !== "" && !this.tokeExpired()) {
-
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
         this.estatus = true;
         return false;
@@ -43,18 +54,26 @@ export class AuthService {
     } return false;
   }
 
-  decodifica(): any {
+  public decodifica(): any {
     return decode(localStorage.getItem("color"));
   }
 
-  tokeExpired(): boolean {
+  public tokeExpired(): boolean {
     const tokenDecode = this.decodifica();
-    var tiempo = (tokenDecode.exp - Date.now() / 1000 ) ;
+    var tiempo = (tokenDecode.exp - Date.now() / 1000);
     if (tiempo < 0) {
-       localStorage.clear();
-       return true;
+      localStorage.clear();
+      return true;
     } else {
       return false;
+    }
+  }
+
+  public userToken(token:any, kill ? : string ): void {
+    if (kill) {
+      localStorage.clear();
+    } else {
+      localStorage.setItem('token', token);
     }
   }
 

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as Notiflix from 'notiflix';
 import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { AppComponent } from 'src/app/app.component';
+import { firstValueFrom } from 'rxjs';
+import { Token } from '@angular/compiler';
 
 
 @Component({
   selector: 'app-adminstrador',
   templateUrl: './adminstrador.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./adminstrador.component.css']
 })
 export class AdminstradorComponent implements OnInit {
@@ -18,13 +21,12 @@ export class AdminstradorComponent implements OnInit {
     numControl: "",
     emitio: "",
     codigoPago: "",
-    fechaSolicitud: new Date().toLocaleDateString('en-CA'),
+    fechaSolicitud: new Date().toLocaleDateString('en-us'),
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
-
   }
-  dato = {
-    numControl: ""
+  data = {
+    "numcontrol": ""
   }
 
   datosEsc = {
@@ -79,15 +81,21 @@ export class AdminstradorComponent implements OnInit {
     private admin: AdminService,
     private auth: AuthService) { }
 
-  ngOnInit(): void {
-    this.userServicio.UsuariosNoReg().subscribe((res: any) => {
-      this.datos = JSON.parse(res.data);
+  async ngOnInit() {
 
-    });
-    this.app.usuario = this.auth.decodifica().nombre;
-    this.app.home = false;
-    this.app.iflogin = false;
-    this.app.logout = true;
+    let token = this.auth.decodifica();
+      this.data.numcontrol = token.numControl;
+      this.app.usuario =  token.nombre;
+    try {
+      const res = await firstValueFrom(this.userServicio.datosUser(this.data));
+      this.datos = JSON.parse(res.data);
+      this.app.usuario = this.auth.decodifica().nombre;
+      this.app.home.next(false);
+      this.app.iflogin.next(false);
+      this.app.logout.next(true);
+    } catch (error) {
+      console.log(error);
+    }
   }
   si() {
 
@@ -100,10 +108,9 @@ export class AdminstradorComponent implements OnInit {
     this.aceptado.correo = this.usuario.correo;
     this.aceptado.nombre = this.usuario.nombre;
     this.aceptado.password = this.usuario.pass;
-    this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
+    this.admin.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.success(res);
       this.CorreoAcpetacion(op);
-
       this.ngOnInit();
     });
   }
@@ -112,7 +119,7 @@ export class AdminstradorComponent implements OnInit {
     this.aceptado.op = 3;
     this.aceptado.tipo = "validacion";
     this.aceptado.numControl = this.usuario.noctrl;
-    this.userServicio.usuarioAceptado(this.aceptado).subscribe((res: any) => {
+    this.admin.usuarioAceptado(this.aceptado).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
       //this.CorreoAcpetacion(op);
       this.ngOnInit();
@@ -221,11 +228,9 @@ export class AdminstradorComponent implements OnInit {
     }
   }
   obtenerDatos(numControl: any) {
-    const dato = {
-      numeroCtrl: numControl
-    }
+    this.data.numcontrol = numControl;
     this.usuario.noctrl = numControl;
-    this.userServicio.verInfo(dato).subscribe((res: any) => {
+    this.userServicio.verInfo(this.data).subscribe((res: any) => {
       if (res.ok = "ok") {
         const datos = res.data
         this.usuario.nombre = datos.nombre;
@@ -260,7 +265,7 @@ export class AdminstradorComponent implements OnInit {
       this.datosEsc.periodo = datos.Esc_Periodo;
       this.datosEsc.telefEsc = datos.Esc_telefono;
     });
-    this.userServicio.optenerClavesEsp().subscribe((res: any) => {
+    this.userServicio.getClavesEsp().subscribe((res: any) => {
       if (res.programacion != undefined && res.contabilidad != undefined && res.electricidad != undefined && res.alimentos != undefined && res.soporte != undefined) {
         const prog = JSON.parse(res.programacion);
         const conta = JSON.parse(res.contabilidad);

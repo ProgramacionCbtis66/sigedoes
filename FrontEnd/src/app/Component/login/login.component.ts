@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
     "pass": ""
   };
 
-  constructor(private auth: AuthService, private router: Router, private app: AppComponent) {app.registro=false ;}
+  constructor(private auth: AuthService, private router: Router, private app: AppComponent) {app.registro.next(false) ;}
 
   ngOnInit(): void {
-    this.app.logout=false;
+    this.app.logout.next(false);
   }
   forgotPassword(){
     this.router.navigate(['forgotPassword']);
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   Acceso() {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       Notiflix.Loading.standard("Accesando");
-      this.auth.login(this.usuario).subscribe((res: any) => {
+      this.auth.acceso(this.usuario).subscribe((res: any) => {
         if (res.token !== null && res.token != undefined) {
           localStorage.setItem('color', res.token);
 
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
 
           Notiflix.Loading.remove();
           if(this.auth.decodifica().rol =="Admin"){
-            this.app.Administrador=true;
-            this.app.mostrar=true;
+            this.app.Administrador.next(true);
+            this.app.mostrar.next(false);
             this.router.navigate(['/admin']);
           }else{
             this.router.navigate(['/home']);

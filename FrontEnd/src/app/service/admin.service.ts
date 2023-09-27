@@ -21,6 +21,10 @@ export class AdminService {
   enviarSolicitud(solicitud:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/solicitud`,solicitud);
   }
+  
+  usuarioAceptado(numcontrol: any): Observable<any> {
+    return this.http.post(`${this.URL}/insize/usuarioAceptado`, numcontrol);
+  }
 
 
 }

@@ -1,4 +1,3 @@
-'use strict';
 const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
@@ -91,4 +90,5 @@ function textomes(mes) {
     const month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     return month[mes];
 }
+
 module.exports = createConstancias;

@@ -19,22 +19,19 @@ app.use(cors({
   }));
 // app.use(cors({origin: "*" }));
 
-//ruteo
 
+
+//ruteo auth
+const authRouter = require('./api/routes/auth');
+app.use('/auth', authRouter);
+//ruteo usuario
 const userRouter = require('./api/routes/user');
 app.use('/insize', userRouter);
-
  // correo
  const emailSend = require('./api/routes/enviarEmail');
  app.use('/email', emailSend);
-
+//adminstrador
 const adminRouter = require('./api/routes/admin');
 app.use('/admin', adminRouter);
-
-
-app.use(function(req, res, next) {
-    next(createError(404));
-});
-
 
 const envioEmail = module.exports = app;
