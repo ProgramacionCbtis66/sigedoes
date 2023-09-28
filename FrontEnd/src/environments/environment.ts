@@ -16,6 +16,7 @@ export const environment = {
     })
   },
   proyecto:"Sistema de Gestión de Servicios Escolares",
+  titulo:"SIGESE"
 };
 
 /*

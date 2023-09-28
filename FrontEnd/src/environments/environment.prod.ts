@@ -10,5 +10,6 @@ export const environment = {
       'authorization': 'Bearer ' + localStorage.getItem('color')
     })
   },
-  proyecto:"Sistema para la emisión de Constancias de EstudiosSistema para la emisión de Constancias de Estudios",
+  proyecto:"Sistema de Gestión de Servicios Escolares",
+  titulo:"SIGESE"
 };

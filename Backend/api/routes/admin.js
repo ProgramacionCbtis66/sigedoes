@@ -76,7 +76,7 @@ administrador.post('/guardarDatosEsc',verifica, async (req, res) => {
         conexion.end();
     }
 });
-peticion.get('/GetdatosEsc',verifica, async (req, res) => {
+administrador.get('/GetdatosEsc',verifica, async (req, res) => {
     const conexion = await ccn();
     try {
         const datosEsc = await conexion.execute('SELECT * from escuela');

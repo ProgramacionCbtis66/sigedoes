@@ -15,7 +15,8 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
   titulo = "Inicio de Sesión";
-  logoCbtis = '.././assets/img/foto.jpg';
+  logoCbtis = '.././assets/img/inicio.png';
+  forgotimg = '.././assets/img/forgotP.jpg';
   usuario = {
     "nombre": "",
     "pass": ""
