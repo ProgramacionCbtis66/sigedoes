@@ -16,38 +16,54 @@
 <body class="bg-success " style="--bs-bg-opacity: .3;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center color-sigedoes">
                 <h1 class="display-6">SIGEDOES</h1>
-                <h2 class="display-6">Sistema de Gestion de Servicios Escolares</h2>
+                <h2 class="display-6">Sistema de Gestión de Servícios Escolares</h2>
             </div>
         </div>
         <div class="row d-flex justify-content-center px-4">
             <div class="col-xl-10 col-lg-11 col-md-9">
-                <div class="card shadow-lg">
-                    <div class="card-body text-bg-secondary ">
+                <div class="card shadow-lg border-success ">
+                    <div class="card-body text-bg-success ">
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
-                                <h1>hola</h1>
-                            </div>
                             <div class="col-lg-6">
-                                <div class="card-2 px-4">
-                                    <a class="singup-2">Bienvenido</a>
-                                    <div class="inputBox-1">
-                                        <input type="text" required="required">
-                                        <span>Correo</span>
+                                <div class="card-2 px-4 ">
+                                    <div class="">
+                                        <h1 class="h4 color-sigedoes">Bienvenido a!</h1>
                                     </div>
-                                    <div class="inputBox-2">
-                                        <input type="text" required="required">
-                                        <span>Numero de Control</span>
+                                    <div class="inputBox-2 ">
+                                        <input [(ngModel)]="usuario.nombre" type="text" required="required">
+                                        <span> Usuario </span>
                                     </div>
-                                    <div class="inputBox-3">
-                                        <input type="password" required="required">
+                                    <div class="inputBox-3 ">
+                                        <input [(ngModel)]="usuario.pass" type="password" required="required">
                                         <span>Contraseña</span>
                                     </div>
-                                    <div class="generalizador">
-                                        <div><button class="enter-2">Ingresar</button></div>
-                                        <div><button class="enter-2">Registrarse</button></div>
+                                    <div class=" text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <button class="enter-2 me-3" (click)="Acceso()">Ingresar</button>
+                                            <button class="enter-2 ms-3" (click)="registrarse()">Registrarse</button>
+                                        </div>
+                                        <div class="pt-3">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img class="img-fluid" src="forgotP.jpg" alt="" width="90px">
+                                                </div>
+                                                <div class="col-8 mt-4 text-start">
+                                                    <a class="link-success link-offset-1 link-opacity-50-hover" (click)="forgotPassword()">
+                                                        ¿Olvidó su contraseña?
+                                                    </a>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
                                     </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
+                                <div class="d-flex justify-content-center">
+                                    <img src="inicio.png" alt="" width="500px">
                                 </div>
                             </div>
                         </div>
