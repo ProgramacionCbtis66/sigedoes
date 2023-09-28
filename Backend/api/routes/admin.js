@@ -5,6 +5,20 @@ const ccn = require('../connection/connection');
 
 const verifica= require('./verificaToken');
 
+administrador.post('/verificaNoPago', verifica,async (req, res) => {
+    const { numPago } = req.body;
+    const conexion = await ccn();
+    try {
+        const verificaNoPago = await conexion.execute('SELECT codigoPago from solicitud where codigoPago like ?', [numPago]);
+        if (rows.length <= 0) {
+            res.json({ valido: "Aceptado" });
+        }
+    } catch (error) {
+        res.json({ Error: "Número Invalido" });
+    } finally {
+        conexion.end();
+    }
+});
 
 administrador.post('/solicitud', verifica, async (req,res)=>{
     const serv = req.body;
@@ -62,7 +76,100 @@ administrador.post('/guardarDatosEsc',verifica, async (req, res) => {
         conexion.end();
     }
 });
+peticion.get('/GetdatosEsc',verifica, async (req, res) => {
+    const conexion = await ccn();
+    try {
+        const datosEsc = await conexion.execute('SELECT * from escuela');
+        res.send({ data: JSON.stringify(rows[0]) });
+    } catch (error) {
+        res.send({ err: "err" });
+    } finally {
+        conexion.end();
+    }
+});
 
+administrador.get('/getClavesEsp',verifica, async (req, res) => {
+    try {
+        const claves = await ccn.query('SELECT * from cbeEsp');
+        res.send({ programacion: JSON.stringify(rows[0]), contabilidad: JSON.stringify(rows[1]), electricidad: JSON.stringify(rows[2]), alimentos: JSON.stringify(rows[3]), soporte: JSON.stringify(rows[4]) });
+    } catch (error) {
+        res.send({ err: "err" });
+    } finally {
+        conexion.end();
+    }
+});
+
+administrador.post('/guardarClavesEspProg',verifica, async (req, res) => {
+    const { programacion } = req.body;
+    const conexion = await ccn();
+    try {
+        const gClavesProg = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1', [programacion]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Programación Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    } finally {
+        conexion.end();
+    }
+});
+
+administrador.post('/guardarClavesEspconta',verifica, async (req, res) => {
+    const { contabilidad } = req.body;
+    const conexion = await ccn();
+    try {
+        const gClavesConta = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2', [contabilidad]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Contabilidad Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    }
+});
+
+administrador.post('/guardarClavesEspElectricidad',verifica, async (req, res) => {
+    const { electricidad } = req.body;
+    const conexion = await ccn();
+    try {
+        const gClavesElec = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3', [electricidad]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Electricidad Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    } finally {
+        conexion.end();
+    }
+});
+administrador.post('/guardarClavesEspAlimentos',verifica, async (req, res) => {
+    const { alimentos } = req.body;
+    const conexion = await ccn();
+    try {
+        const gClavesAli = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5', [alimentos]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Alimentos Modificada" });
+        }
+    } catch (error) {
+        //No sentencia
+    } finally {
+        conexion.end();
+    }
+});
+
+administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
+    const { soporte } = req.body;
+    const conexion = await ccn();
+    try {
+        const gClavesSop = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6', [soporte]);
+        if (rows.affectedRows > 0) {
+            res.send({ ok: "Clave De Soporte Modificada" });
+        }
+    } catch (error) {
+        //No Sentencia
+    } finally {
+        conexion.end();
+    }
+});
 
 
 module.exports = administrador;

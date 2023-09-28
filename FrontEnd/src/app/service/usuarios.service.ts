@@ -27,9 +27,7 @@ export class UsuarioService {
   NoPago(datos: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/NoPago`, datos);
   }
-  verificaNoPago(datos: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/verificaNoPago`, datos);
-  }
+ 
   NoPagoDesactivo(noPago: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/NoPagoDesactivo`, noPago);
   }
@@ -52,32 +50,5 @@ export class UsuarioService {
   datosEsc(): Observable<any> {
     return this.http.get(`${this.URL}/insize/GetdatosEsc`);
   }
-  guardarDatosEsc(escuela: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarDatosEsc`, escuela);
-  }
-  guardarClavesEsp(claves: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEsp`, claves);
-  }
-  getClavesEsp(): Observable<any> {
-    return this.http.get(`${this.URL}/insize/getClavesEsp`);
-  }
-  guardarClavesEspProg(prog: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEspProg`, prog);
-  }
-  guardarClavesEspconta(conta: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEspconta`, conta);
-  }
-  guardarClavesEspElectricidad(electricidad: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEspElectricidad`, electricidad);
-  }
-  guardarClavesEspAlimentos(alimentos: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEspAlimentos`, alimentos);
-  }
-  guardarClavesEspSoporte(soporte: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/guardarClavesEspSoporte`, soporte);
-  }
 
-  registrarClaves(claves: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/registrarClaves`, claves, this.usr);
-  }
 }

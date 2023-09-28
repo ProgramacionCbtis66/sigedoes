@@ -6,7 +6,7 @@ import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { AppComponent } from 'src/app/app.component';
 import { firstValueFrom } from 'rxjs';
-import { Token } from '@angular/compiler';
+
 
 
 @Component({
@@ -166,7 +166,7 @@ export class AdminstradorComponent implements OnInit {
       numPago: this.generateRandomString(12),
       numcontrol: this.nc
     }
-    this.userServicio.verificaNoPago(numPago).subscribe((res: any) => {
+    this.admin.verificaNoPago(numPago).subscribe((res: any) => {
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
       } else { this.GenerarCodigoPago(); }
@@ -265,7 +265,7 @@ export class AdminstradorComponent implements OnInit {
       this.datosEsc.periodo = datos.Esc_Periodo;
       this.datosEsc.telefEsc = datos.Esc_telefono;
     });
-    this.userServicio.getClavesEsp().subscribe((res: any) => {
+    this.admin.getClavesEsp().subscribe((res: any) => {
       if (res.programacion != undefined && res.contabilidad != undefined && res.electricidad != undefined && res.alimentos != undefined && res.soporte != undefined) {
         const prog = JSON.parse(res.programacion);
         const conta = JSON.parse(res.contabilidad);
@@ -282,37 +282,37 @@ export class AdminstradorComponent implements OnInit {
   }
   guardCambios() {
     Notiflix.Loading.standard("Guardando");
-    this.userServicio.guardarDatosEsc(this.datosEsc).subscribe((res: any) => {
+    this.admin.guardarDatosEsc(this.datosEsc).subscribe((res: any) => {
       Notiflix.Loading.remove();
       Notiflix.Notify.info(res.ok);
     });
-    this.userServicio.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Loading.remove();
       Notiflix.Notify.info(res.ok);
     });
   }
   progactu() {
-    this.userServicio.guardarClavesEspProg(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEspProg(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   contaActu() {
-    this.userServicio.guardarClavesEspconta(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEspconta(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   ElectricidadActu() {
-    this.userServicio.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   AlimentosActu() {
-    this.userServicio.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   SoporteActu() {
-    this.userServicio.guardarClavesEspSoporte(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEspSoporte(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }

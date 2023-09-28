@@ -14,7 +14,8 @@ export const environment = {
       'Content-Type': 'application/json',
       'authorization': 'Bearer ' + localStorage.getItem('color')
     })
-  }
+  },
+  proyecto:"Sistema de Gestión de Servicios Escolares",
 };
 
 /*

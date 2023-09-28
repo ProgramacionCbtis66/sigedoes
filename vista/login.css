@@ -25,17 +25,17 @@ h1 {
   border-radius: 70px;
 }
 
+.inputBox-1,
 .inputBox-2,
-.inputBox1-2,
-.imputBox-3
+.inputBox-3
 {
   position: relative;
   width: 100%;
 }
 
+.inputBox-1 input,
 .inputBox-2 input,
-.inputBox1-2 input,
-.imputBox-3 input {
+.inputBox-3 input {
   width: 100%;
   padding: 10px;
   outline: none;
@@ -49,9 +49,9 @@ h1 {
   border-bottom-left-radius: 8px;
 }
 
+.inputBox-1 span,
 .inputBox-2 span,
-.inputBox1-2 span,
-.imputBox-3 span {
+.inputBox-3 span {
   margin-top: 5px;
   position: absolute;
   left: 0;
@@ -68,9 +68,9 @@ h1 {
 }
 
 @media  (min-width: 500px) {
-  .inputBox-3 input:valid ~ span,
-  .inputBox-3 input:focus ~ span {
-    transform: translateX(400px) translateY(-15px);
+  .inputBox-1 input:valid ~ span,
+  .inputBox-1 input:focus ~ span {
+    transform: translateX(280%) translateY(-15px);
     font-size: 0.8em;
     padding: 5px 10px;
     background: #450b19;
@@ -78,12 +78,11 @@ h1 {
     color: #fff;
     border: 2px;
   }
-  }
-
+}
 @media  (min-width: 500px) {
 .inputBox-2 input:valid ~ span,
 .inputBox-2 input:focus ~ span {
-  transform: translateX(250%) translateY(-15px);
+  transform: translateX(130%) translateY(-15px);
   font-size: 0.8em;
   padding: 5px 10px;
   background: #450b19;
@@ -92,11 +91,10 @@ h1 {
   border: 2px;
 }
 }
-
 @media  (min-width: 500px) {
-  .inputBox1-2 input:valid ~ span,
-  .inputBox1-2 input:focus ~ span {
-    transform: translateX(425%) translateY(-15px);
+  .inputBox-3 input:valid ~ span,
+  .inputBox-3 input:focus ~ span {
+    transform: translateX(205%) translateY(-15px);
     font-size: 0.8em;
     padding: 5px 10px;
     background: #450b19;
@@ -104,13 +102,20 @@ h1 {
     color: #fff;
     border: 2px;
   }
-}
+  }
 
+.inputBox-1 input:valid,
+.inputBox-1 input:focus,
 .inputBox-2 input:valid,
 .inputBox-2 input:focus,
-.inputBox1-2 input:valid,
-.inputBox1-2 input:focus,
-. {
+.inputBox-3 input:valid,
+.inputBox-3 input:focus {
+  border-bottom: 2px solid #450b19;
+  border-left: 2px solid #450b19;
+
+}
+.className {
+  /* Your CSS styles here */
   border: 2px solid #450b19;
   border-radius: 8px;
 }

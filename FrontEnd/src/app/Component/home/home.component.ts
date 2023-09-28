@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     fecha: '',
     CodPago: '',
   };
-  paso3 = false;
   valortipo = {
     tipo: '',
   };
@@ -62,6 +61,7 @@ export class HomeComponent implements OnInit {
     private user: UsuarioService,
     private email: SendEmailService
   ) {}
+  
   ngOnInit(): void {
     if (this.auth.isAuth()) {
       this.dato.numcontrol = this.auth.decodifica().numControl;
@@ -84,15 +84,13 @@ export class HomeComponent implements OnInit {
       });
     }
   }
-  mostrartipo() {
-    this.paso2 = true;
-  }
+
   actualizar() {
     this.datosCons.asunto = this.valortipo.tipo;
   }
   veridatos() {
     this.datosCons.asunto = this.valortipo.tipo;
-    if (
+    if(
       this.datosCons.asunto != '' &&
       this.datosCons.nombre != '' &&
       this.datosCons.semestre != '' &&

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -15,11 +16,11 @@ export class LoginComponent implements OnInit {
 
   titulo = "Inicio de Sesión";
   logoCbtis = '.././assets/img/foto.jpg';
-  juan = "";
   usuario = {
     "nombre": "",
     "pass": ""
   };
+  public proyecto :string  = environment.proyecto;
 
   constructor(private auth: AuthService, private router: Router, private app: AppComponent) {app.registro.next(false) ;}
 
