@@ -10,11 +10,13 @@ import { PerfilComponent } from './Component/perfil/perfil.component';
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 import { AuthGuardAdmin } from './guards/auth.guard.admin';
+import { DocenteComponent } from './Component/docente/docente.component';
 
 
 const routes: Routes = [
   {path:"", redirectTo: "home", pathMatch:"full"},
   {path:"admin",component: AdminstradorComponent,canActivate:[AuthGuardAdmin]},
+  {path:"docente",component:DocenteComponent,canActivate:[AuthGuardAdmin]},
   {path:"home", component: HomeComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},

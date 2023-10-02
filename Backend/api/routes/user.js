@@ -43,8 +43,6 @@ peticion.post('/NoPago', verifica, async (req, res) => {
     }
 });
 
-
-
 peticion.post('/NoPagoDesactivo',verifica, async (req, res) => {
     const codpag = req.body;
     const conexion = await ccn();

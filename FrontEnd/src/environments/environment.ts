@@ -8,7 +8,7 @@ import { HttpHeaders } from "@angular/common/http";
 export const environment = {
   production: false,
   //HTTPS : "https://backendconstancias.herokuapp.com"
-  HTTPS: "http://localhost:8000",
+  HTTPS: "http://192.168.0.26:8000",
   autorization: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

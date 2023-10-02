@@ -17,7 +17,6 @@ export class UsuarioService {
    }
 
   datosUser(numcontrol: any): Observable<any> {
-    console.log(numcontrol);
     return this.http.post(`${this.URL}/insize/datosUser`, numcontrol, this.usr);
   }
   UsuariosNoReg(): Observable<any> {

@@ -4,8 +4,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
-import { AppComponent } from 'src/app/app.component';
-import { firstValueFrom } from 'rxjs';
+import { NavegacionService } from 'src/app/service/navegacion.service';
 
 
 
@@ -76,26 +75,23 @@ export class AdminstradorComponent implements OnInit {
   numero: string = "";
 
   constructor(private userServicio: UsuarioService,
-    private app: AppComponent,
+    private nav: NavegacionService,
     private email: SendEmailService,
     private admin: AdminService,
-    private auth: AuthService) { }
+    private auth: AuthService) {
+      this.nav._usuario =  this.auth.decodifica().nombre;
+     }
 
-  async ngOnInit() {
-
+  ngOnInit() {
     let token = this.auth.decodifica();
       this.data.numcontrol = token.numControl;
-      this.app.usuario =  token.nombre;
-    try {
-      const res = await firstValueFrom(this.userServicio.datosUser(this.data));
-      this.datos = JSON.parse(res.data);
-      this.app.usuario = this.auth.decodifica().nombre;
-      this.app.home.next(false);
-      this.app.iflogin.next(false);
-      this.app.logout.next(true);
-    } catch (error) {
-      console.log(error);
-    }
+      
+      //const res = await firstValueFrom(this.userServicio.datosUser(this.data));
+      this.userServicio.datosUser(this.data).subscribe((res: any) => {
+        if (res != '' && res != undefined) {
+          this.datos = JSON.parse(res.data);
+        }
+      });
   }
   si() {
 

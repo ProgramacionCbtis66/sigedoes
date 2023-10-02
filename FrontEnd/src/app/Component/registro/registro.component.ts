@@ -1,76 +1,49 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
+import { Docente } from './modelo/ClaseDocente';
+import { Usuario } from './modelo/CalseUsuario';
 import * as Notiflix from 'notiflix';
+import { environment } from 'src/environments/environment';
+import { NavegacionService } from 'src/app/service/navegacion.service';
 
 
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
+  public proyecto: string = environment.proyecto;
   registrarse = 'Registrarse';
-  informacion = 'Info';
+  informacion = '  Info';
   infografia: string = '.././assets/img/infografiaa.png';
-  usuario = {
-    "nombre": "",
-    "correo": "",
-    "pass": "",
-    "pass2": "",
-    "curp": "",
-    "noctrl": "",
-    "especialidad": "",
-    "semestre": "",
-    "area": "",
-    "turno": "",
-    "direccion": "",
-    "CTO": "30DCT0236O",
-    "grupo": ""
-  }
-  datanecesario = {
-    "numControl": "",
-    "nombre": "",
-    "direccion": "",
-    "especialidad": "",
-    "area": "",
-    "grado": "",
-    "grupo": "",
-    "turno": "",
-    "horario": "",
-    "CTO": "",
-    "correo": "",
-    "alta": "0",
-    "CURP": "",
+  usuario: Usuario = new Usuario();
+  docente: Docente = new Docente();
+  tipoUsuario: string = "";
 
-  }
+  constructor(private auth: AuthService, private router: Router, private nav: NavegacionService) {  }
 
-  constructor(private auth: AuthService, private router: Router, private app: AppComponent) 
-  { app.registro.next(true); app.iflogin.next(false); }
+  ngOnInit(): void {this.nav._logout= false;}
 
-  ngOnInit(): void { }
-
-  area(){
-    switch(this.usuario.especialidad){
-      case "Programacion" : case "Electricidad" : case "Soporte" :
-        this.usuario.area = "Físico Matemático"; break;
+  public area(): void {
+    switch (this.usuario._especialidad) {
+      case "Programacion": case "Electricidad": case "Soporte":
+        this.usuario._area = "Físico Matemático"; break;
       case "Contabilidad":
-        this.usuario.area = "Económico Administrativo"; break;
+        this.usuario._area = "Económico Administrativo"; break;
       case "Alimentos":
-          this.usuario.area = "Químico Biológico"; break;
+        this.usuario._area = "Químico Biológico"; break;
     }
-    alert(this.usuario.area);
+    alert(this.usuario._area);
   }
-
-  Registro() { 
-    let contra = this.usuario.pass2;
-    let contra2 = this.usuario.pass;
+  public Registro(): void {
+    let contra = this.usuario._pass2;
+    let contra2 = this.usuario._pass;
     if (contra == contra2) {
-      if (this.usuario.correo !== "" && this.usuario.pass !== "" && this.usuario.pass2 !== "" && this.usuario.curp !== "" && this.usuario.noctrl !== "" && this.usuario.especialidad !== "" && this.usuario.semestre !== "" && this.usuario.area !== "" && this.usuario.turno !== "" && this.usuario.grupo != "") {
+      if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario._especialidad !== "" && this.usuario._semestre !== "" && this.usuario._area !== "" && this.usuario._turno !== "" && this.usuario._grupo != "") {
         Notiflix.Loading.standard("Validando");
         this.auth.registro(this.usuario).subscribe((res: any) => {
           if (res.Aceptado == "Datos Aceptados") {
@@ -89,15 +62,22 @@ export class RegistroComponent implements OnInit {
       Notiflix.Notify.failure("Las contraseñas no coinciden");
     }
   }
-  
-  areaa(){
-    if(this.usuario.especialidad == "Programacion" || this.usuario.especialidad == "Soporte Y Mantenimieto Equipo De Computo" || this.usuario.especialidad == "Electricidad"){
-      this.usuario.area = "Físico Matemático";
-    }else if(this.usuario.especialidad == "Contabilidad"){
-      this.usuario.area = "Económico Administrativo";
-    }else if(this.usuario.especialidad == "Producción Industrial De Alimentos"){
-      this.usuario.area = "Químico Biológico";
+  public tipousuario(event: any): void {
+    this.tipoUsuario = event.target.value;
+    if (this.tipoUsuario == "Alumno") {
+      this.registrarse = "Registro de Alumno";
+      this.informacion = "  Info";
+      this.infografia = ".././assets/img/infografiaa.png";
+    } else if (this.tipoUsuario == "Docente") {
+      this.registrarse = "Registro de Docente";
+      this.informacion = "  Info";
+      this.infografia = ".././assets/img/infografiaa.png";
+    } else if (this.tipoUsuario == "Administrativo") {
+      this.registrarse = "Registro de Administrativo";
+      this.informacion = "  Info";
+      this.infografia = ".././assets/img/infografiaa.png";
     }
   }
+
 }
 

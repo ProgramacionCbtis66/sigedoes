@@ -16,6 +16,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 import { PerfilComponent } from './Component/perfil/perfil.component';
+import { DocenteComponent } from './Component/docente/docente.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PerfilComponent } from './Component/perfil/perfil.component';
     Error404Component,
     OlvidePassComponent,
     AdminstradorComponent,
-    PerfilComponent
+    PerfilComponent,
+    DocenteComponent
   ],
   imports: [
     BrowserModule,

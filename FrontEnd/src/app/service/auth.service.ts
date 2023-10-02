@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 
@@ -29,8 +30,16 @@ export class AuthService {
     return this._usuarioLogeadoSubject;
   }
 
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error:', error);
+    const status = error.status;
+    console.error(`Status: ${status}`);
+    return throwError(()=>error);
+  }
+
   public acceso(usuario: any): Observable<any> {
-    return this.http.post(`${this.ruta}/auth/acceso`, usuario);
+    return this.http.post(`${this.ruta}/auth/acceso`, usuario).pipe(
+      catchError(this.handleError));
   }
 
   public registro(usuario: any): Observable<any> {
@@ -69,7 +78,7 @@ export class AuthService {
     }
   }
 
-  public userToken(token:any, kill ? : string ): void {
+  public userToken(token: any, kill?: string): void {
     if (kill) {
       localStorage.clear();
     } else {

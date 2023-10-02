@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { SendEmailService } from '../../service/send-email.service';
-import { AppComponent } from 'src/app/app.component';
+import { firstValueFrom } from 'rxjs';
+import { NavegacionService } from 'src/app/service/navegacion.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   paso2 = false;
-  alumno: any;
+  alumno = "";
   curp: any;
   correo: any;
   noctrl: any;
@@ -20,7 +21,18 @@ export class HomeComponent implements OnInit {
   semestre: any;
   area: any;
   turno: any;
-  datos: any;
+  datos= {
+    nombre:'',
+    CURP:'',
+    correo:'',
+    numControl:'',
+    grado:'',
+    area:'',
+    turno:'',
+    especialidad:'',
+    Esc_Periodo:'',
+    CTO:''
+  };
   tabla = false;
   datoo: any;
   boton = false;
@@ -55,33 +67,31 @@ export class HomeComponent implements OnInit {
     NoPago: '',
     numControl: '',
   };
+
   constructor(
-    private app: AppComponent,
+    private nav: NavegacionService,
     private auth: AuthService,
     private user: UsuarioService,
-    private email: SendEmailService
-  ) {}
+    private email: SendEmailService,
+
+  ) {
+    this.nav._usuario = this.auth.decodifica().nombre;
+  }
   
-  ngOnInit(): void {
-    if (this.auth.isAuth()) {
+  async ngOnInit() {
+    if (this.auth.isAuth() && this.alumno == "") {
       this.dato.numcontrol = this.auth.decodifica().numControl;
-      console.log('Accesando2');
-      this.user.datosUser(this.dato).subscribe((res: any) => {
+      try {
+        const res = await firstValueFrom (this.user.datosUser(this.dato));
         if (res != '' && res != undefined) {
           this.datos = JSON.parse(res.data);
-          this.alumno = this.datos.nombre;
-          this.curp = this.datos.CURP;
-          this.correo = this.datos.correo;
-          this.noctrl = this.datos.numControl;
-          this.semestre = this.datos.grado;
-          this.area = this.datos.area;
-          this.turno = this.datos.turno;
-          this.especialidad = this.datos.especialidad;
-          this.datosCons.periodo = this.datos.Esc_Periodo;
-          this.datosCons.claveIns = this.datos.CTO;
-          this.app.usuario = this.datos.nombre;
+          console.log(this.datos);
         }
-      });
+      } catch (error) {
+        console.error(error);
+      }
+      this.nav._usuario = this.datos.nombre;
+      this.alumno = this.datos.nombre;
     }
   }
 

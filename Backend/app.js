@@ -6,18 +6,26 @@ const cors = require('cors');
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
 
-const allowedOrigins = ['http://localhost:4200'];
+const allowedOrigins = ['http://192.168.0.26:4200'];
 app.use(cors({
     origin: (origin, callback)=> {
+      console.log(origin);
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
           console.log("dominio permitido");
         callback(null, true);
       } else {
-        callback(new Error('Este dominio no esta permitido'));
+        callback(new Error("Este dominio no esta permitido"));
       }
     } 
   }));
-// app.use(cors({origin: "*" }));
+// Manejo de errores CORS personalizado
+app.use((err, req, res, next) => {
+    if (err.name === 'Este dominio no esta permitido') {
+        res.status(403).json({ error: err.message });
+    } else {
+        next();
+    }
+});
 
 
 
