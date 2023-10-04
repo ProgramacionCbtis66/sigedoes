@@ -7,6 +7,32 @@
     font-size: x-large;
   }
 
+.singup-3 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    font-weight: bold;
+    font-size: x-large;
+  }
+
+  .singup-4 {
+    color: #450b44;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    font-weight: bold;
+    font-size: large;
+  }
+
+.bg-color-1{
+  background-color: #450b19;
+}
+
+.border-color-1{
+  border-color: #450b44;
+}
+
 .card-2 {
     display: flex;
     justify-content: center;
