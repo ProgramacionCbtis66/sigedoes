@@ -37,15 +37,8 @@ export class HomeComponent implements OnInit {
   datoo: any;
   boton = false;
   emitidas: any;
-  datosRegistro = {
-    NoCtrl: '',
-    emitio: '',
-    fecha: '',
-    CodPago: '',
-  };
-  valortipo = {
-    tipo: '',
-  };
+
+  valortipo = "";
   datosCons = {
     asunto: '',
     nombre: '',
@@ -85,7 +78,6 @@ export class HomeComponent implements OnInit {
         const res = await firstValueFrom (this.user.datosUser(this.dato));
         if (res != '' && res != undefined) {
           this.datos = JSON.parse(res.data);
-          console.log(this.datos);
         }
       } catch (error) {
         console.error(error);
@@ -96,10 +88,10 @@ export class HomeComponent implements OnInit {
   }
 
   actualizar() {
-    this.datosCons.asunto = this.valortipo.tipo;
+    this.datosCons.asunto = this.valortipo;
   }
   veridatos() {
-    this.datosCons.asunto = this.valortipo.tipo;
+    this.datosCons.asunto = this.valortipo;
     if(
       this.datosCons.asunto != '' &&
       this.datosCons.nombre != '' &&
@@ -135,13 +127,13 @@ export class HomeComponent implements OnInit {
       }
     });
     this.user.obtenerDatos(this.home).subscribe((res: any) => {
-      this.datosRegistro = {
+      const datosRegistro = {
         NoCtrl: this.dato.numcontrol,
         emitio: res.emitio,
         fecha: res.nombre,
         CodPago: this.home.NoPago,
       };
-      this.user.subirEmitido(this.datosRegistro).subscribe((res: any) => {});
+      this.user.subirEmitido(datosRegistro).subscribe((res: any) => {});
     });
 
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
@@ -160,8 +152,8 @@ export class HomeComponent implements OnInit {
     });
   }
   comprobar() {
-    this.datosCons.asunto = this.valortipo.tipo;
-    this.datosCons.asunto = this.valortipo.tipo;
+    this.datosCons.asunto = this.valortipo;
+    this.datosCons.asunto = this.valortipo;
     this.datosCons.semestre = this.semestre;
     this.datosCons.especialidad = this.especialidad;
     this.datosCons.area = this.area;

@@ -7,10 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class NavegacionService {
 
   private logout = new BehaviorSubject<boolean>(true);
-  private home = new BehaviorSubject<boolean>(true)
+  private home = new BehaviorSubject<boolean>(false)
   private mostrar = new BehaviorSubject<boolean>(true);
   private registro = new BehaviorSubject<boolean>(false);
-  private iflogin = new BehaviorSubject<boolean>(true);
+  private iflogin = new BehaviorSubject<boolean>(false);
   private Administrador = new BehaviorSubject<boolean>(false);
   private  docente = new BehaviorSubject<boolean>(false);
   private usuario = new BehaviorSubject<string>("");
@@ -34,4 +34,16 @@ export class NavegacionService {
   set _docente(value: boolean) {this.docente.next(value);}
   
   constructor() { }
+
+  salir(): void {
+    this._mostrar=false;
+    this._registro= false;
+    this._iflogin=true;
+    this._Administrador= false;
+    this._docente=false;
+    this._logout=false;
+    this._home=false;
+    this._usuario="";
+    localStorage.clear();
+  }
 }

@@ -6,13 +6,10 @@ if (typeof window !== 'undefined' && !window.Promise) {
 }
 require('core-js/es/object/values');
 
-var fetchUrl = function (url, headers) {
+var fetchUrl = function (url) {
 	return new Promise(function (resolve, reject) {
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', url, true);
-		for (var headerName in headers) {
-			xhr.setRequestHeader(headerName, headers[headerName]);
-		}
 		xhr.responseType = 'arraybuffer';
 
 		xhr.onreadystatechange = function () {
@@ -56,22 +53,17 @@ function URLBrowserResolver(fs) {
 	this.resolving = {};
 }
 
-URLBrowserResolver.prototype.resolve = function (url, headers) {
+URLBrowserResolver.prototype.resolve = function (url) {
 	if (!this.resolving[url]) {
 		var _this = this;
 		this.resolving[url] = new Promise(function (resolve, reject) {
 			if (url.toLowerCase().indexOf('https://') === 0 || url.toLowerCase().indexOf('http://') === 0) {
-				if (_this.fs.existsSync(url)) {
-					// url was downloaded earlier
+				fetchUrl(url).then(function (buffer) {
+					_this.fs.writeFileSync(url, buffer);
 					resolve();
-				} else {
-					fetchUrl(url, headers).then(function (buffer) {
-						_this.fs.writeFileSync(url, buffer);
-						resolve();
-					}, function (result) {
-						reject(result);
-					});
-				}
+				}, function (result) {
+					reject(result);
+				});
 			} else {
 				// cannot be resolved
 				resolve();

@@ -15,9 +15,15 @@ var isNumber = require('./helpers').isNumber;
 var isBoolean = require('./helpers').isBoolean;
 var isArray = require('./helpers').isArray;
 var isUndefined = require('./helpers').isUndefined;
-var isPattern = require('./helpers').isPattern;
-var getPattern = require('./helpers').getPattern;
-var SVGtoPDF = require('./3rd-party/svg-to-pdfkit');
+
+var getSvgToPDF = function () {
+	try {
+		// optional dependency to support svg nodes
+		return require('svg-to-pdfkit');
+	} catch (e) {
+		throw new Error('Please install svg-to-pdfkit to enable svg nodes');
+	}
+};
 
 var findFont = function (fonts, requiredFonts, defaultFont) {
 	for (var i = 0; i < requiredFonts.length; i++) {
@@ -90,16 +96,8 @@ function PdfPrinter(fontDescriptors) {
  *	],
  *	styles: {
  *		header: { fontSize: 30, bold: true }
- *	},
- *	patterns: {
- *		stripe45d: {
- *			boundingBox: [1, 1, 4, 4],
- *			xStep: 3,
- *			yStep: 3,
- *			pattern: '1 w 0 1 m 4 5 l s 2 0 m 5 3 l s'
- *		}
  *	}
- * };
+ * }
  *
  * var pdfKitDoc = printer.createPdfKitDocument(docDefinition);
  *
@@ -128,11 +126,11 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 		fontLayoutCache: isBoolean(options.fontLayoutCache) ? options.fontLayoutCache : true,
 		bufferPages: options.bufferPages || false,
 		autoFirstPage: false,
-		info: createMetadata(docDefinition),
 		font: null
 	};
 
 	this.pdfKitDoc = PdfKitEngine.createPdfDocument(pdfOptions);
+	setMetadata(docDefinition, this.pdfKitDoc);
 
 	this.fontProvider = new FontProvider(this.fontDescriptors, this.pdfKitDoc);
 
@@ -159,9 +157,7 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 		this.pdfKitDoc.options.size = [pageSize.width, pageHeight];
 	}
 
-	var patterns = createPatterns(docDefinition.patterns || {}, this.pdfKitDoc);
-
-	renderPages(pages, this.fontProvider, this.pdfKitDoc, patterns, options.progressCallback);
+	renderPages(pages, this.fontProvider, this.pdfKitDoc, options.progressCallback);
 
 	if (options.autoPrint) {
 		var printActionRef = this.pdfKitDoc.ref({
@@ -175,7 +171,7 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 	return this.pdfKitDoc;
 };
 
-function createMetadata(docDefinition) {
+function setMetadata(docDefinition, pdfKitDoc) {
 	// PDF standard has these properties reserved: Title, Author, Subject, Keywords,
 	// Creator, Producer, CreationDate, ModDate, Trapped.
 	// To keep the pdfmake api consistent, the info field are defined lowercase.
@@ -191,21 +187,18 @@ function createMetadata(docDefinition) {
 		return key.replace(/\s+/g, '');
 	}
 
-	var info = {
-		Producer: 'pdfmake',
-		Creator: 'pdfmake'
-	};
+	pdfKitDoc.info.Producer = 'pdfmake';
+	pdfKitDoc.info.Creator = 'pdfmake';
 
 	if (docDefinition.info) {
 		for (var key in docDefinition.info) {
 			var value = docDefinition.info[key];
 			if (value) {
 				key = standardizePropertyKey(key);
-				info[key] = value;
+				pdfKitDoc.info[key] = value;
 			}
 		}
 	}
-	return info;
 }
 
 function calculatePageHeight(pages, margins) {
@@ -215,11 +208,7 @@ function calculatePageHeight(pages, margins) {
 		} else if (item.item._height) {
 			return item.item._height;
 		} else if (item.type === 'vector') {
-			if (typeof item.item.y1 !== 'undefined') {
-				return item.item.y1 > item.item.y2 ? item.item.y1 : item.item.y2;
-			} else {
-				return item.item.h;
-			}
+			return item.item.y1 > item.item.y2 ? item.item.y1 : item.item.y2;
 		} else {
 			// TODO: add support for next item types
 			return 0;
@@ -366,7 +355,7 @@ function updatePageOrientationInOptions(currentPage, pdfKitDoc) {
 	}
 }
 
-function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback) {
+function renderPages(pages, fontProvider, pdfKitDoc, progressCallback) {
 	pdfKitDoc._pdfMakePages = pages;
 	pdfKitDoc.addPage();
 
@@ -392,10 +381,10 @@ function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback)
 			var item = page.items[ii];
 			switch (item.type) {
 				case 'vector':
-					renderVector(item.item, patterns, pdfKitDoc);
+					renderVector(item.item, pdfKitDoc);
 					break;
 				case 'line':
-					renderLine(item.item, item.item.x, item.item.y, patterns, pdfKitDoc);
+					renderLine(item.item, item.item.x, item.item.y, pdfKitDoc);
 					break;
 				case 'image':
 					renderImage(item.item, item.item.x, item.item.y, pdfKitDoc);
@@ -438,7 +427,7 @@ function offsetText(y, inline) {
 	return newY;
 }
 
-function renderLine(line, x, y, patterns, pdfKitDoc) {
+function renderLine(line, x, y, pdfKitDoc) {
 	function preparePageNodeRefLine(_pageNodeRef, inline) {
 		var newWidth;
 		var diffWidth;
@@ -476,7 +465,7 @@ function renderLine(line, x, y, patterns, pdfKitDoc) {
 	var ascenderHeight = line.getAscenderHeight();
 	var descent = lineHeight - ascenderHeight;
 
-	textDecorator.drawBackground(line, x, y, patterns, pdfKitDoc);
+	textDecorator.drawBackground(line, x, y, pdfKitDoc);
 
 	//TODO: line.optimizeInlines();
 	for (var i = 0, l = line.inlines.length; i < l; i++) {
@@ -550,7 +539,7 @@ function renderWatermark(page, pdfKitDoc) {
 	pdfKitDoc.restore();
 }
 
-function renderVector(vector, patterns, pdfKitDoc) {
+function renderVector(vector, pdfKitDoc) {
 	//TODO: pdf optimization (there's no need to write all properties everytime)
 	pdfKitDoc.lineWidth(vector.lineWidth || 1);
 	if (vector.dash) {
@@ -622,10 +611,6 @@ function renderVector(vector, patterns, pdfKitDoc) {
 		vector.color = gradient;
 	}
 
-	if (isPattern(vector.color)) {
-		vector.color = getPattern(vector.color, patterns);
-	}
-
 	var fillOpacity = isNumber(vector.fillOpacity) ? vector.fillOpacity : 1;
 	var strokeOpacity = isNumber(vector.strokeOpacity) ? vector.strokeOpacity : 1;
 
@@ -684,7 +669,7 @@ function renderSVG(svg, x, y, pdfKitDoc, fontProvider) {
 		return fontFile;
 	};
 
-	SVGtoPDF(pdfKitDoc, svg.svg, svg.x, svg.y, options);
+	getSvgToPDF()(pdfKitDoc, svg.svg, svg.x, svg.y, options);
 }
 
 function beginClip(rect, pdfKitDoc) {
@@ -695,15 +680,6 @@ function beginClip(rect, pdfKitDoc) {
 
 function endClip(pdfKitDoc) {
 	pdfKitDoc.restore();
-}
-
-function createPatterns(patternDefinitions, pdfKitDoc) {
-	var patterns = {};
-	Object.keys(patternDefinitions).forEach(function (p) {
-		var pattern = patternDefinitions[p];
-		patterns[p] = pdfKitDoc.pattern(pattern.boundingBox, pattern.xStep, pattern.yStep, pattern.pattern, pattern.colored);
-	});
-	return patterns;
 }
 
 module.exports = PdfPrinter;

@@ -5,6 +5,7 @@ import decode from 'jwt-decode';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { NavegacionService } from './navegacion.service';
 
 
 
@@ -19,7 +20,10 @@ export class AuthService {
   private _usuarioLogeadoSubject = new BehaviorSubject<boolean>(false);
   private _adminSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private jwt: JwtHelperService) { }
+  constructor(private http: HttpClient, 
+    private jwt: JwtHelperService,
+    private nav: NavegacionService
+    ) { }
 
   get usuarioLogeado(): BehaviorSubject<boolean> {
     if (this.decodifica() && this.tokeExpired()) {
@@ -55,12 +59,22 @@ export class AuthService {
     if (token !== null && token !== "" && !this.tokeExpired()) {
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
         this.estatus = true;
+        this.nav._mostrar=true;
+        this.nav._iflogin=true;
+        this.nav._logout=false;
         return false;
       } else {
         this.estatus = false;
+        this.nav._mostrar=true;
+        this.nav._iflogin=false;
+        this.nav._logout=true;
         return true;
       }
-    } return false;
+    } 
+    this.nav._mostrar=true;
+    this.nav._iflogin=true;
+    this.nav._logout=false;
+    return false;
   }
 
   public decodifica(): any {

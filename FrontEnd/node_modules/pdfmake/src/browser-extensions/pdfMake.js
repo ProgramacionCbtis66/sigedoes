@@ -24,26 +24,13 @@ function Document(docDefinition, tableLayouts, fonts, vfs) {
 
 function canCreatePdf() {
 	// Ensure the browser provides the level of support needed
-	try {
-		var arr = new Uint8Array(1)
-		var proto = { foo: function () { return 42 } }
-		Object.setPrototypeOf(proto, Uint8Array.prototype)
-		Object.setPrototypeOf(arr, proto)
-		return arr.foo() === 42
-	} catch (e) {
-		return false
+	if (!Object.keys || typeof Uint16Array === 'undefined') {
+		return false;
 	}
+	return true;
 }
 
 Document.prototype._createDoc = function (options, cb) {
-	var getExtendedUrl = function (url) {
-		if (typeof url === 'object') {
-			return { url: url.url, headers: url.headers };
-		}
-
-		return { url: url, headers: {} };
-	};
-
 	options = options || {};
 	if (this.tableLayouts) {
 		options.tableLayouts = this.tableLayouts;
@@ -66,48 +53,16 @@ Document.prototype._createDoc = function (options, cb) {
 	for (var font in this.fonts) {
 		if (this.fonts.hasOwnProperty(font)) {
 			if (this.fonts[font].normal) {
-				if (Array.isArray(this.fonts[font].normal)) { // TrueType Collection
-					var url = getExtendedUrl(this.fonts[font].normal[0]);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].normal[0] = url.url;
-				} else {
-					var url = getExtendedUrl(this.fonts[font].normal);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].normal = url.url;
-				}
+				urlResolver.resolve(this.fonts[font].normal);
 			}
 			if (this.fonts[font].bold) {
-				if (Array.isArray(this.fonts[font].bold)) { // TrueType Collection
-					var url = getExtendedUrl(this.fonts[font].bold[0]);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].bold[0] = url.url;
-				} else {
-					var url = getExtendedUrl(this.fonts[font].bold);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].bold = url.url;
-				}
+				urlResolver.resolve(this.fonts[font].bold);
 			}
 			if (this.fonts[font].italics) {
-				if (Array.isArray(this.fonts[font].italics)) { // TrueType Collection
-					var url = getExtendedUrl(this.fonts[font].italics[0]);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].italics[0] = url.url;
-				} else {
-					var url = getExtendedUrl(this.fonts[font].italics);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].italics = url.url;
-				}
+				urlResolver.resolve(this.fonts[font].italics);
 			}
 			if (this.fonts[font].bolditalics) {
-				if (Array.isArray(this.fonts[font].bolditalics)) { // TrueType Collection
-					var url = getExtendedUrl(this.fonts[font].bolditalics[0]);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].bolditalics[0] = url.url;
-				} else {
-					var url = getExtendedUrl(this.fonts[font].bolditalics);
-					urlResolver.resolve(url.url, url.headers);
-					this.fonts[font].bolditalics = url.url;
-				}
+				urlResolver.resolve(this.fonts[font].bolditalics);
 			}
 		}
 	}
@@ -115,9 +70,7 @@ Document.prototype._createDoc = function (options, cb) {
 	if (this.docDefinition.images) {
 		for (var image in this.docDefinition.images) {
 			if (this.docDefinition.images.hasOwnProperty(image)) {
-				var url = getExtendedUrl(this.docDefinition.images[image]);
-				urlResolver.resolve(url.url, url.headers);
-				this.docDefinition.images[image] = url.url;
+				urlResolver.resolve(this.docDefinition.images[image]);
 			}
 		}
 	}
