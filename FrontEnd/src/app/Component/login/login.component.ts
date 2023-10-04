@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/service/auth.service';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment';
@@ -57,9 +56,9 @@ export class LoginComponent implements OnInit {
                 this.nav._docente=true;
                 this.nav._mostrar=true;
                 this.nav._home = false;
-                this.router.navigate(['/docente']);
+                this.router.navigate(['/homeDocente']);
               }
-              this.router.navigate(['/home']);
+              this.router.navigate(['/homeAlumno']);
             }
           } else if (res.Error == "Usuario y contraseña incorrecta") {
             Notiflix.Loading.remove();

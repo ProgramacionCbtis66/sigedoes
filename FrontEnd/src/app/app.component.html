@@ -11,13 +11,13 @@
       <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Inicio de sesión</a>
     </li>
     <li class="nav-item" id="idhome" *ngIf="nav._mostrar  && nav._home ">
-      <a class="nav-link" routerLink="home" (click)="visibleLoginRegistro()">Home</a>
+      <a class="nav-link" routerLink="homeAlumno" (click)="visibleLoginRegistro()">Alumno</a>
     </li>
     <li class="nav-item" *ngIf="nav._Administrador ">
       <a class="nav-link" routerLink="admin" id="idregistro">Administrador</a>
     </li>
     <li class="nav-item" *ngIf="nav._docente ">
-      <a class="nav-link" routerLink="docente" id="idregistro">Docente</a>
+      <a class="nav-link" routerLink="homeDocente" id="idregistro">Docente</a>
     </li>
     <li class="nav-item" *ngIf="nav._registro">
       <a class="nav-link" routerLink="registro">Registro</a>
@@ -32,17 +32,17 @@
     </div>
   </div>
   <!-- usuario -->
-  <div class="dropdown pe-2" *ngIf="nav._usuario!==''">
+  <div class=" dropdown pe-2" *ngIf="nav._usuario!==''">
     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
       <img src="{{logo}}" alt="Profile" class="rounded-circle" width="20px">
-      <span class="d-none d-md-block dropdown-toggle ps-2">El Usuario:{{nav._usuario}}</span>
+      <span class="d-none d-md-block dropdown-toggle ps-2 text-white-50">{{nav._usuario}}</span>
     </a>
     <!-- <a class="badge rounded-pill text-color-3G" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="fa fa-user-circle fs-4" aria-hidden="true"></i>
     </a> -->
-    <ul class="dropdown-menu dropdown-menu-end profile">
+    <ul class="dropdown-menu dropdown-menu-end">
       <li class="ps-2 text-center" >
-        <p class="text-color-3G ps-2 px-2 f3">el Usuario{{nav._usuario}}</p>
+        <p class="text-color-3G ps-2 px-2 f3">{{nav._usuario}}</p>
         <!-- <a class="d-flex text-center" routerLink="perfil">
           <p class="text-color-3G ps-2 px-2">el Usuario{{nav._usuario}}</p>
         </a> -->
@@ -70,7 +70,7 @@
     <router-outlet></router-outlet>
   </div>
   <!-- pie de página -->
-  <div class="row pt-2">
+  <div class="row pt-0">
     <footer class="py-4 bg-light mt-auto">
       <div class="container-fluid px-2">
         <div class="d-flex align-items-center justify-content-between small">
@@ -84,6 +84,7 @@
             <a href=""><i class="bi bi-facebook"></i></a>
             <a class="pe-2 ps-2" href=""><i class="bi bi-instagram"></i></a>
             <a class="pe-2 " href=""> <i class="bi bi-tiktok"></i></a>
+            <a class="pe-2 " href=""> <i class="bi bi-whatsapp"></i></a>
           </div>
           <div>
             <a href="#">Privacy Policy</a>

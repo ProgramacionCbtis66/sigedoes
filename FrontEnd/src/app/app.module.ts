@@ -14,9 +14,10 @@ import { Error404Component } from './Component/error404/error404.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
-import { AdminstradorComponent } from './Component/adminstrador/adminstrador.component';
 import { PerfilComponent } from './Component/perfil/perfil.component';
 import { DocenteComponent } from './Component/docente/docente.component';
+import { AlumnoComponent } from './Component/home/alumno/alumno.component';
+import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 
 
 @NgModule({
@@ -27,9 +28,10 @@ import { DocenteComponent } from './Component/docente/docente.component';
     RegistroComponent,
     Error404Component,
     OlvidePassComponent,
-    AdminstradorComponent,
     PerfilComponent,
-    DocenteComponent
+    DocenteComponent,
+    AlumnoComponent,
+    AdministrativoComponent
   ],
   imports: [
     BrowserModule,

@@ -9,10 +9,10 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 
 
 @Component({
-  selector: 'app-adminstrador',
-  templateUrl: './adminstrador.component.html',
+  selector: 'app-administrativo',
+  templateUrl: './administrativo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./adminstrador.component.css']
+  styleUrls: ['./administrativo.component.css']
 })
 export class AdminstradorComponent implements OnInit {
 

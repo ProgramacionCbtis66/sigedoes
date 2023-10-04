@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-6 mt-2">
+      <div class="card mb-2 bg-color-1">
+        <div class="row">
+          <div class="d-flex justify-content-center p-1">
+            <h4 class="singup-3 m-2">{{nombre}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card border-color-1">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="container-fluid">
+                <div class="row justify-content-center">
+                  <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
+                    <div class="d-flex justify-content-center mb-2">
+                      <div class="card border-color-1">
+                        <img class="card-img-top" src="./erik.jpeg" alt="foto-de-perfil">
+                        <div class="col card-body">
+                          <h4 class="card-title d-flex justify-content-center">
+                            
+                            <a class="btn btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                              <i class="bi bi-twitter-x fs-2"></i>
+                            </a>
+                            <i class="bi bi-facebook fs-2 ps-2 text-primary"></i>
+                            <i class="bi bi-instagram fs-2 ps-2 "></i>
+                            <i class="bi bi-whatsapp fs-2 ps-2 text-success"></i>
+
+
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <p>Información del Docente</p>
+              <div class="">
+                <table class="table table-bordered table-responsive border-color-1 m-0">
+                  <tr>
+                    <th scope="col">Docente:</th>
+                    <th>{{datosDocente.nombre}}</th>
+                  </tr>
+                  <tr>
+                    <th>NO.CONTROL</th>
+                    <td>{{datosDocente.numControl}}</td>
+                  </tr>
+                  <tr>
+                    <th>CURP</th>
+                    <td>{{datosDocente.curp}}</td>
+                  </tr>
+                  <tr>
+                    <th>ESPECIALIDAD</th>
+                    <td>{{datosDocente.especialidad}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
