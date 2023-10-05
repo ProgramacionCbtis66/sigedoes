@@ -1,12 +1,73 @@
 <div class="row">
-  <div class="col-lg-1"></div>
   <div class="col-lg-10 ">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-12 pt-2">
-        <div class="mb-1 text-center display-6 fw-light">{{proyecto}}</div>
+        <div class="mb-1 text-center display-6 fw-light fs-3">{{proyecto}}</div>
       </div>
       <div class="row">
         <!--Parte Izquierda Del Sistema-->
+        <div class="col-md-5 mt-2">
+          <div class="card mb-2 bg-color-1">
+            <div class="row">
+              <div class="d-flex justify-content-center p-1">
+                <h4 class="singup-3 m-2"></h4>
+              </div>
+            </div>
+          </div>
+          <div class="card border-color-1">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-5 p-0">
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
+                      <div class="card border-color-1">
+                        <div class="row">
+                          <div class="col-12 text-center">
+
+                            <img [src]="foto" class="rounded" alt="..." class="pt-4">
+                            <div class="input-group">
+                              <input #fileInput type="file" class="form-control form-control-sm" accept="image/*" (change)="cargarFoto($event)" hidden >
+                            </div>
+                            <button (click)="activarInput()" class="mt-3">
+                              <i class="bi bi-camera-fill"></i>
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <p>INFORMACION DE EL ALUMNO</p>
+                  <div class="">
+                    <table class="table table-bordered table-responsive border-color-1 m-0">
+                      <tr>
+                        <th scope="col">twitter</th>
+                        <th><i class="bi bi-twitter-x fs-4"></i></th>
+                      </tr>
+                      <tr>
+                        <th>NO.CONTROL</th>
+                        <td><i class="bi bi-facebook fs-4"></i></td>
+                      </tr>
+                      <tr>
+                        <th>CURP</th>
+                        <td><i class="bi bi-instagram fs-4"></i></td>
+                      </tr>
+                      <tr>
+                        <th>ESPECIALIDAD</th>
+                        <td><i class="bi bi-whatsapp fs-4"></i></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Parte Derecha Del Sistema-->
         <div class="col-lg-7">
           <div class="d-flex text-success border-2 border-bottom border-success">
             <h4><i class="fa-solid fa-right-to-bracket"></i></h4>
@@ -16,7 +77,7 @@
           <div class="border border-secondary rounded mt-1">
             <!--Introduccion-->
             <div class="border-botom border-secondary border-bottom">
-              <h3 class="text-success fw-light ps-4">Ingrese sus datos para el registro</h3>
+              <p class="text-success fw-light fs-3 ps-4">Ingrese sus datos para el registro</p>
             </div>
             <!--Nombre-->
             <div class="input-group mb-3 px-3 mt-2">
@@ -160,15 +221,6 @@
             </div>
           </div>
 
-        </div>
-        <!--Parte Derecha Del Sistema-->
-        <div class="col-lg-5">
-          <div class="d-flex text-success border-2 border-bottom border-success">
-            <h4><i class="fa-solid fa-right-to-bracket"></i>{{informacion}}</h4>
-          </div>
-          <div class="d-flex justify-content-center pt-1 pb-1">
-            <img src="{{infografia}}" class="img-fluid  ">
-          </div>
         </div>
       </div>
       <div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {  Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { Docente } from './modelo/ClaseDocente';
@@ -6,6 +6,7 @@ import { Usuario } from './modelo/CalseUsuario';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { NavegacionService } from 'src/app/service/navegacion.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -17,14 +18,20 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 })
 export class RegistroComponent implements OnInit {
   public proyecto: string = environment.proyecto;
+  foto: any = ".././assets/img/Admin.jpg";
   registrarse = 'Registrarse';
   informacion = '  Info';
   infografia: string = '.././assets/img/infografiaa.png';
   usuario: Usuario = new Usuario();
   docente: Docente = new Docente();
   tipoUsuario: string = "";
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
-  constructor(private auth: AuthService, private router: Router, private nav: NavegacionService) {  }
+  constructor(private auth: AuthService, 
+    private router: Router, 
+    private nav: NavegacionService,
+    private sanitizer: DomSanitizer
+    ) {  }
 
   ngOnInit(): void {this.nav._logout= false;}
 
@@ -79,5 +86,72 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  cargarFoto(event: any): void {
+    const archivo = event.target.files[0];
+    this.extraerBase64(archivo).then((imagenBase64: any) => {
+
+      const foto64 = imagenBase64.base;
+
+      this.redimensionarImagen(foto64, 110, 90).then((imagenRedimensionada: any) => {
+        this.foto = imagenRedimensionada.base;
+      }).catch((error: any) => {
+        console.error('Error al redimensionar la imagen', error);
+      });
+    }).catch((error: any) => {
+      console.error('Error al extraer la imagen en base64', error);
+    });
+  }
+  
+  activarInput() {
+    this.fileInput.nativeElement.click();
+  }
+
+  extraerBase64 = async (foto: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL(foto);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL(foto);
+      reader.onload = () => {
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = error => {
+        reject('Error al leer la imagen');
+      };
+    } catch (e) {
+      reject('Error inesperado al procesar la imagen'); // Devolver un valor de error en caso de excepción
+    }
+  });
+
+  redimensionarImagen = (foto: any, anchoDeseado: number, altoDeseado: number) => new Promise((resolve, reject) => {
+    try {
+      const img = new Image();
+  
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+        canvas.width = anchoDeseado;
+        canvas.height = altoDeseado;
+        ctx.drawImage(img, 0, 0, anchoDeseado, altoDeseado);
+        const imagenRedimensionadaBase64 = canvas.toDataURL('image/jpeg'); // Cambiar el formato si es necesario
+        resolve({ base: imagenRedimensionadaBase64 });
+      };
+  
+      img.onerror = () => {
+        console.error('Error al cargar la imagen');
+        reject('Error al cargar la imagen');
+      };
+  
+      img.src = foto; // Ya tenemos la imagen en formato base64 aquí, no es necesario crear un objeto URL
+    } catch (e) {
+      console.error('Error inesperado al procesar la imagen');
+      reject('Error inesperado al procesar la imagen');
+    }
+  });
+  
+  
+  
 }
 

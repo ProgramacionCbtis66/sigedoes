@@ -18,6 +18,7 @@ import { PerfilComponent } from './Component/perfil/perfil.component';
 import { DocenteComponent } from './Component/docente/docente.component';
 import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AdministrativoComponent } from './Component/home/administrativo/adminis
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    DragDropModule,
 
   ],
   providers:[
