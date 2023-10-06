@@ -12,12 +12,14 @@ import { AuthGuardAdmin } from './guards/auth.guard.admin';
 import { DocenteComponent } from './Component/docente/docente.component';
 import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
+import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 
 
 const routes: Routes = [
   {path:"", redirectTo: "homeAlumno", pathMatch:"full"},
   {path:"admin",component: AdministrativoComponent,canActivate:[AuthGuardAdmin]},
   {path:"homeAlumno", component: AlumnoComponent, canActivate:[AuthGuard]},
+  {path:"Alumnoconstancia", component: ConstanciasComponent, canActivate:[AuthGuard]},
   {path:"homeDocente", component: DocenteComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
