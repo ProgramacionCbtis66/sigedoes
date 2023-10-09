@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public fecha = new Date().getFullYear();
   public dato: string = "Configuracion";
   public foto: string = "";
-  public logo: string = '.././assets/img/logocl.png';
+  public logo: string = '.././assets/img/logored.png';
   public title: string = environment.proyecto;
   public usuario: string  =  "";
   
