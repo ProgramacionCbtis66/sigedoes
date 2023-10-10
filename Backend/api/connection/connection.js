@@ -1,13 +1,5 @@
 const mysql = require('mysql2/promise');
 
-/* const ccn = mysql.createConnection({
-    host: 'bfmihnzdrggg76jcdc3z-mysql.services.clever-cloud.com',
-    port: '3306',
-    user: 'ur83fxsyk4fqawtn',
-    database:'bfmihnzdrggg76jcdc3z',
-    password : 'YYaQhsg5IcdpHWq7Smo2'
-}); */
-
 const ccn = async () => {
     try {
         return await mysql.createConnection({
@@ -22,7 +14,5 @@ const ccn = async () => {
         throw error;
     }
 }
-
-
 
 module.exports = ccn;
