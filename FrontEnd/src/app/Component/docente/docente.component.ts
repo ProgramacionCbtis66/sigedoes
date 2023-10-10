@@ -12,7 +12,7 @@ export class DocenteComponent implements OnInit {
   constructor(private nav:NavegacionService) { }
 
   ngOnInit(): void {
-    this.nav._mostrar=false;
+    this.nav._homeAlumno=false;
   }
 
 }

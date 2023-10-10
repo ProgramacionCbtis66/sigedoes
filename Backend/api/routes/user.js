@@ -7,8 +7,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 peticion.post('/datosUser', verifica, async (req, res) => {
-    const numControl = req.body.numcontrol;
-    console.log(numControl);
+    const numControl = req.body.numControl;
     const sql = 'select * from pdf where numControl = ?';
     try {
         const conexion = await ccn();
@@ -24,6 +23,7 @@ peticion.post('/datosUser', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
+        console.log(error);
         res.json({ Error: "En base de datos" });
     }  
 });

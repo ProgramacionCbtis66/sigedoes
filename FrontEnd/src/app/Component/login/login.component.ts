@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
      }
 
   ngOnInit(): void {  }
-  public forgotPassword(): void { this.router.navigate(['forgotPassword']); }
   public registrarse(): void { this.router.navigate(['registro']); }
   public Acceso(): void {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
@@ -38,23 +37,24 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('color', res.token);
             if (this.auth.isAuth()) {
               this.nav._iflogin= false;
-              this.nav._mostrar= true;
+              
+              this.nav._homeAlumno= true;
               this.nav._logout= true;
             } else {
-              this.nav._mostrar = false;
+              this.nav._homeAlumno = false;
               this.nav._iflogin = true;
               this.nav._logout = true;
             }
             Notiflix.Loading.remove();
             if (this.auth.decodifica().rol == "Admin") {
               this.nav._Administrador=true;
-              this.nav._mostrar=true;
+              this.nav._homeAlumno=true;
               this.nav._home = false;
               this.router.navigate(['/admin']);
             } else {
               if (this.auth.decodifica().rol == "Docente") {
                 this.nav._docente=true;
-                this.nav._mostrar=true;
+                this.nav._homeAlumno=true;
                 this.nav._home = false;
                 this.router.navigate(['/homeDocente']);
               }

@@ -47,9 +47,6 @@ peticion.post('/acceso', async (req, res) => {
     if (usuario[0][0] !== undefined && usuario.length >0) {
         var datos = JSON.stringify(usuario[0][0]);
         var dato = JSON.parse(datos);
-  
-        let data = JSON.stringify(dato);
-        console.log(dato);
         const token = jwt.sign(dato, 'MA@L', {  expiresIn :'20m'});
         res.json({ token });
     } else {

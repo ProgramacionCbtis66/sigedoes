@@ -59,19 +59,19 @@ export class AuthService {
     if (token !== null && token !== "" && !this.tokeExpired()) {
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
         this.estatus = true;
-        this.nav._mostrar=true;
+        this.nav._homeAlumno=false;
         this.nav._iflogin=true;
         this.nav._logout=false;
         return false;
       } else {
         this.estatus = false;
-        this.nav._mostrar=true;
+        this.nav._homeAlumno=true;
         this.nav._iflogin=false;
         this.nav._logout=true;
         return true;
       }
     } 
-    this.nav._mostrar=true;
+    this.nav._homeAlumno=false;
     this.nav._iflogin=true;
     this.nav._logout=false;
     return false;

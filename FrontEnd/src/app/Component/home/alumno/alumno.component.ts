@@ -22,7 +22,7 @@ export class AlumnoComponent implements OnInit {
   especialidad: any;
   semestre: any;
   area: any;
-  turno: any;
+  turno: string = '';
   datos= {
     nombre:'',
     CURP:'',
@@ -33,8 +33,10 @@ export class AlumnoComponent implements OnInit {
     turno:'',
     especialidad:'',
     Esc_Periodo:'',
-    CTO:''
+    CTO:'',
+    foto: ''
   };
+
   tabla = false;
   datoo: any;
   boton = false;
@@ -54,9 +56,6 @@ export class AlumnoComponent implements OnInit {
     horario: '7:00 AM - 14:00 PM',
     periodo: '',
   };
-  dato = {
-    numcontrol: '',
-  };
 
   home = {
     NoPago: '',
@@ -75,9 +74,13 @@ export class AlumnoComponent implements OnInit {
   
   async ngOnInit() {
     if (this.auth.isAuth() && this.nombre == "") {
-      this.dato.numcontrol = this.auth.decodifica().numControl;
+      this.datos.numControl = this.auth.decodifica().numControl;
+      const numControl = {
+        numControl: this.datos.numControl
+      };
       try {
-        const res = await firstValueFrom (this.user.datosUser(this.dato));
+        console.log(numControl);
+        const res = await firstValueFrom (this.user.datosUser(numControl));
         if (res != '' && res != undefined) {
           this.datos = JSON.parse(res.data);
         }
@@ -86,6 +89,12 @@ export class AlumnoComponent implements OnInit {
       }
       this.nav._usuario = this.datos.nombre;
       this.nombre = this.datos.nombre;
+      try {
+        this.nav._foto = this.datos.foto;
+      } catch (error) {
+        this.nav._foto = 'sinfoto';
+      }
+      
     }
   }
 
@@ -130,7 +139,7 @@ export class AlumnoComponent implements OnInit {
     });
     this.user.obtenerDatos(this.home).subscribe((res: any) => {
       const datosRegistro = {
-        NoCtrl: this.dato.numcontrol,
+        NoCtrl: this.datos.numControl,
         emitio: res.emitio,
         fecha: res.nombre,
         CodPago: this.home.NoPago,
