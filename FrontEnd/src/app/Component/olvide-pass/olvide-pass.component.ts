@@ -3,6 +3,7 @@ import * as Notiflix from 'notiflix';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import decode from 'jwt-decode';
 import { AuthService } from 'src/app/service/auth.service';
+import { NavegacionService } from 'src/app/service/navegacion.service';
 
 @Component({
   selector: 'app-olvide-pass',
@@ -15,7 +16,12 @@ export class OlvidePassComponent implements OnInit {
     "correo":""
   }
 
-  constructor(private auth: AuthService, private enviarCorreo: SendEmailService) { }
+  constructor(private auth: AuthService, 
+    private enviarCorreo: SendEmailService,
+    private nav: NavegacionService
+    ) {
+    this.nav._forgotpass = true;
+   }
 
   ngOnInit(): void {
   }

@@ -31,9 +31,9 @@ export class RegistroComponent implements OnInit {
     private router: Router, 
     private nav: NavegacionService,
     private sanitizer: DomSanitizer
-    ) {  }
+    ) { this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false; }
 
-  ngOnInit(): void {this.nav._logout= false;}
+  ngOnInit(): void {}
 
   public area(): void {
     switch (this.usuario._especialidad) {

@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
     this.titulo.setTitle(this.title);
     if (this.auth.isAuth()) {
       const user = this.auth.decodifica();
-      this.foto = '.././assets/img/' + user["nombre"] + '.jpg';
+      this.foto = user["foto"];
       this.usuario = user["nombre"];
-      if (user.rol == "Admin") { this.nav._Administrador=true; }
-      if (user.rol == 'user') { this.nav._home=true; }
+      if (user.rol == "Admin") { this.nav._Administrador=true; } 
+      if (user.rol == 'user') { this.nav._homeAlumno=true; }
       if (user.rol == 'Docente') { this.nav._docente=true; }
     }
   }
