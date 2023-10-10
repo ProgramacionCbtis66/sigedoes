@@ -1,6 +1,7 @@
-h1 {
-  color: #450b19;
+.bg-Red{
+ background-color: #450b19;
 }
+
 
 .color-sigedoes {
   color: #450b19;
@@ -15,6 +16,17 @@ h1 {
   font-size: x-large;
   margin-top: 1.5em;
 }
+.card-body {
+  background-color: #450b19;
+}
+
+.fg{
+  background-color: #d8cbb8;
+}
+
+.border-none{
+  border: none;
+}
 
 .card-2 {
   display: flex;
@@ -24,7 +36,7 @@ h1 {
   flex-direction: column;
   gap: 35px;
   border-radius: 15px;
-  background: #fff;
+  background-color: #fff;
   box-shadow: 16px 16px 32px #450b44, -16px -16px 32px #fff;
   border-radius: 70px;
 }
