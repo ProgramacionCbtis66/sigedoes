@@ -1,5 +1,4 @@
-.border-999{
-    border-color: black;
-    border-width: 2px;
+.borde-999{
     border-radius: 999px;
+    overflow: hidden;
 }
