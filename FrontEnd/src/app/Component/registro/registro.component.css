@@ -1,10 +1,77 @@
-header{
-    font-family: 'Times New Roman', Times, serif;
+.singup-2 {
+    color: rgb(142, 55, 63);
+    letter-spacing: 2px;
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+.singup-3 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    display: block;
+    font-weight:lighter;
+    font-size: 18px;
+  }
+
+  .singup-4 {
+    color:rgb(142, 55, 63);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    font-weight: bold;
+    font-size: large;
+  }
+
+.bg-color-1{
+  background-color: rgb(142, 55, 63);
 }
-.vrd-3g{
-    background-color: #13322B;
+
+.border-color-1{
+  border-color: rgb(142, 55, 63);
 }
-.infografia{
-    width: 530px;
+
+.card-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 16px 16px 32px rgb(142, 55, 63),
+          -16px -16px 32px #fff;
+  }
+  
+  .enter-2 {
+    height: 45px;
+    width: 220px;
+    border-radius: 5px;
+    border: 2px solid rgb(142, 55, 63);
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 3em;
     
-}
+  }
+  
+  .enter-2:hover {
+    background-color: rgb(142, 55, 63);
+    color: white;
+  }
+
+  .noTeSepares{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  carta-3{
+    box-shadow: 16px 16px 32px rgb(142, 55, 63)
+         -16px -16px 32px #fff;
+         border-radius: 50%;
+
+  }

@@ -18,11 +18,9 @@ export class AuthService {
   public estatus: boolean = true;
 
   private _usuarioLogeadoSubject = new BehaviorSubject<boolean>(false);
-  private _adminSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, 
     private jwt: JwtHelperService,
-    private nav: NavegacionService
     ) { }
 
   get usuarioLogeado(): BehaviorSubject<boolean> {
@@ -58,23 +56,13 @@ export class AuthService {
     const token = localStorage.getItem("color");
     if (token !== null && token !== "" && !this.tokeExpired()) {
       if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
-        this.estatus = true;
-        this.nav._homeAlumno=false;
-        this.nav._iflogin=true;
-        this.nav._logout=false;
         return false;
       } else {
-        this.estatus = false;
-        this.nav._homeAlumno=true;
-        this.nav._iflogin=false;
-        this.nav._logout=true;
         return true;
       }
-    } 
-    this.nav._homeAlumno=false;
-    this.nav._iflogin=true;
-    this.nav._logout=false;
-    return false;
+    }else{
+      return false;
+    }
   }
 
   public decodifica(): any {

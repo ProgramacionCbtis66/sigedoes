@@ -8,7 +8,7 @@ export class NavegacionService {
 
   private logout = new BehaviorSubject<boolean>(true);
   private home = new BehaviorSubject<boolean>(false)
-  private homeAlumno = new BehaviorSubject<boolean>(true);
+  private homeAlumno = new BehaviorSubject<boolean>(false);
   private registro = new BehaviorSubject<boolean>(false);
   private iflogin = new BehaviorSubject<boolean>(false);
   private Administrador = new BehaviorSubject<boolean>(false);
@@ -47,6 +47,8 @@ export class NavegacionService {
     this._iflogin=true;
     this._Administrador= false;
     this._docente=false;
+    this._foto="";
+    this._forgotpass=false;
     this._logout=false;
     this._home=false;
     this._usuario="";

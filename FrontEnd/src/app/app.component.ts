@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public fecha = new Date().getFullYear();
   public dato: string = "Configuracion";
   public foto: string = "";
-  public logo: string = '.././assets/img/logored.png';
+  public logo: string = '.././assets/img/logoredbck.png';
   public title: string = environment.proyecto;
   public usuario: string  =  "";
   
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.titulo.setTitle(this.title);
+    this.titulo.setTitle("SIGESE");
     if (this.auth.isAuth()) {
       const user = this.auth.decodifica();
       this.foto = user["foto"];

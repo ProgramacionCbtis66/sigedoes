@@ -19,7 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class RegistroComponent implements OnInit {
   public proyecto: string = environment.proyecto;
   foto: any = ".././assets/img/Admin.jpg";
-  registrarse = 'Registrarse';
+  registrarse = 'Registro';
   informacion = '  Info';
   infografia: string = '.././assets/img/infografiaa.png';
   usuario: Usuario = new Usuario();

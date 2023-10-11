@@ -1,104 +1,102 @@
 <!-- barra de navegación -->
-<nav class="navbar navbar-expand-sm bg-sigese bg-gradient navbar-dark pe-3" aria-label="breadcrumb">
+<nav class="navbar navbar-expand-lg bg-nav-sigese bg-gradient text-color-sigese pe-3" aria-label="breadcrumb">
   <div class="container-fluid">
     <!-- Logo de la aplicación -->
     <a class="navbar-brand " routerLink="homeAlumno" (click)="visibleLoginRegistro()">
-      <img src="{{logo}}" width="95">
+      <img src="{{logo}}" width="85" class="text-color-sigese">
     </a>
-
     <!-- Links de la barra de navegación -->
-    <ul class="navbar-nav ">
+    <ul class="navbar-nav">
       <li *ngIf="nav._iflogin " class="nav-item" id="idlogin">
-        <a class="nav-link" routerLink="login" (click)="visibleLoginRegistro()">Inicio de sesión</a>
+        <a class="nav-link">Inicio de sesión</a>
       </li>
       <li class="nav-item" id="idhome" *ngIf="nav._homeAlumno">
-        <a class="nav-link" routerLink="homeAlumno" (click)="visibleLoginRegistro()">Alumno</a>
+        <a class="nav-link">Alumno</a>
       </li>
       <li class="nav-item" *ngIf="nav._Administrador ">
-        <a class="nav-link" routerLink="admin" id="idregistro">Administrador</a>
+        <a class="nav-link" id="idregistro">Administrador</a>
       </li>
       <li class="nav-item" *ngIf="nav._docente ">
-        <a class="nav-link" routerLink="homeDocente" id="idregistro">Docente</a>
+        <a class="nav-link" id="idregistro">Docente</a>
       </li>
       <li class="nav-item" *ngIf="nav._registro">
-        <a class="nav-link" routerLink="registro">Registro</a>
+        <a class="nav-link" >Registro</a>
       </li>
-    </ul>
-    <!-- fin de barra de navegacion -->
-
+    </ul> <!-- fin de links de la barra de navegación -->
     <!-- boton de despliegue en modo celular -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- boton de regresar -->
-    <div class="collapse navbar-collapse mb-2 mt-2" 
-      id="navbarSupportedContent">
-      <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.280rem, 0);"
-        (click)="salir()">
-        <i class="bi bi-door-open-fill"></i>
-        Regresar
-      </a>
-    </div>
-    
-    <!-- usuario -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="dropdown pe-2" *ngIf="nav._usuario!==''">
-        <a class="nav-item d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img [src]="foto" alt="Profile" class="rounded-circle" width="20px">
-          <span class="d-none d-md-block dropdown-toggle ps-2 text-white-50">{{nav._usuario}}</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li class="ps-2 text-center">
-            <p class="text-color-sigese ps-2 px-2 f3">{{nav._usuario}}</p>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <button class="dropdown-item" (click)="salir()">
-              <i class="fa-solid fa-right-from-bracket "></i>
-              Salir ok
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- fin de usuario -->
-    
+    <!-- inicia el collapse -->
+    <div class="collapse navbar-collapse mb-2 mt-2" id="navbarSupportedContent">
+      
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- barra de navegacion derecha -->
+        <li class="nav-item d-flex justify-content-end">
+          <!-- boton de regresar -->
+          <a class="icon-link icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.280rem, 0);"
+            (click)="salir()" *ngIf="nav._registro">
+            <i class="bi bi-door-open-fill"></i>
+            Regresar
+          </a> <!-- fin de boton de regresar -->
+           <!-- usuario -->
+          <div class="dropdown pe-2" *ngIf="nav._usuario!==''">
+            <a class="nav-item d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <img [src]="foto" alt="Profile" class="rounded-circle" width="20px">
+              <span class="d-none d-md-block dropdown-toggle ps-2 text-white-50">{{nav._usuario}}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="ps-2 text-center">
+                <p class="text-color-sigese ps-2 px-2 f3">{{nav._usuario}}</p>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <button class="dropdown-item" (click)="salir()">
+                  <i class="fa-solid fa-right-from-bracket "></i>
+                  Salir ok
+                </button>
+              </li>
+            </ul>
+          </div> <!-- fin de usuario -->
+        </li>
+      </ul><!-- fin de barra de navegacion -->
+     
+      
+    </div> <!-- fin del collapse -->
   </div> <!-- fin de container-fluid  -->
-</nav>
-
-<div class="container-fluid bg-success" style="--bs-bg-opacity: .3;">
+</nav> <!-- fin de barra de navegación -->
+<div class="container-fluid bg-sigese-fondo ">
   <!-- contenindo de la aplicación -->
   <div class="row">
     <router-outlet></router-outlet>
   </div>
-  <!-- pie de página -->
-  <div class="row pt-0">
-    <footer class="py-4 bg-light mt-auto">
-      <div class="container-fluid px-2">
-        <div class="d-flex align-items-center justify-content-between small">
-          <div class="text-muted">
-            Copyright &copy;
-            {{proyecto}}
-            CBTis66 {{fecha}}
-          </div>
-          <div class="d-flex align-items-center">
-            <a class="pe-2 ps-2" href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a class="pe-2 ps-2" href=""><i class="bi bi-instagram"></i></a>
-            <a class="pe-2 " href=""> <i class="bi bi-tiktok"></i></a>
-            <a class="pe-2 " href=""> <i class="bi bi-whatsapp"></i></a>
-          </div>
-          <div>
-            <a href="#">Privacy Policy</a>
-            &middot;
-            <a href="#">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
 </div>
+<!-- pie de página -->
+<footer d="footer" class="footer py-3">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-between small">
+      <div class="text-muted">
+        Copyright &copy;
+        {{proyecto}}
+        CBTis66 {{fecha}}
+      </div>
+      <div class="d-flex align-items-center">
+        <a class="pe-2 ps-2" href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a class="pe-2 ps-2" href=""><i class="bi bi-instagram"></i></a>
+        <a class="pe-2 " href=""> <i class="bi bi-tiktok"></i></a>
+        <a class="pe-2 " href=""> <i class="bi bi-whatsapp"></i></a>
+      </div>
+      <div>
+        <a href="#">Privacy Policy</a>
+        &middot;
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer> <!-- fin de pie de página -->
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>

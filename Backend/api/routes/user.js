@@ -11,6 +11,7 @@ peticion.post('/datosUser', verifica, async (req, res) => {
     const sql = 'select * from pdf where numControl = ?';
     try {
         const conexion = await ccn();
+        console.log(numControl);
         const [registros] = await conexion.execute(sql, [numControl]);
         if (registros.length > 0) {
             let datos = JSON.stringify(registros[0]);

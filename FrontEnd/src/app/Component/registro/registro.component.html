@@ -9,8 +9,9 @@
         <div class="col-md-5 mt-2">
           <div class="card mb-2 bg-color-1">
             <div class="row">
-              <div class="d-flex justify-content-center p-1">
-                <h4 class="singup-3 m-2"></h4>
+              <div class="d-flex justify-content-center">
+                <p class="singup-3 mt-2"><i class="fa-solid fa-right-to-bracket"></i></p>
+                <p class="singup-3 ms-4 mt-2">{{registrarse}}</p>
               </div>
             </div>
           </div>
@@ -37,7 +38,7 @@
                   </div>
                 </div>
                 <div class="col-lg-7">
-                  <p>INFORMACION DE EL ALUMNO</p>
+                  <p class="text-center fw-light fs-5">Información del alumno</p>
                   <div class="">
                     <table class="table table-bordered table-responsive border-color-1 m-0">
                       <tr>
@@ -64,16 +65,12 @@
           </div>
         </div>
         <!--Parte Derecha Del Sistema-->
-        <div class="col-lg-7">
-          <div class="d-flex text-success border-2 border-bottom border-success">
-            <h4><i class="fa-solid fa-right-to-bracket"></i></h4>
-            <h4 class="px-2">{{registrarse}}</h4>
-          </div>
+        <div class="col-lg-7 mb-2">
           <!--Caja De Información-->
           <div class="border border-secondary rounded mt-1">
             <!--Introduccion-->
-            <div class="border-botom border-secondary border-bottom">
-              <p class="text-success fw-light fs-3 ps-4">Ingrese sus datos para el registro 4</p>
+            <div class="border-botom bg-color-1 border-bottom">
+              <p class="singup-3 ps-4 pt-2 text-center">Ingrese sus datos para el registro</p>
             </div>
             <!--Nombre-->
             <div class="input-group mb-3 px-3 mt-2">
@@ -201,7 +198,7 @@
             <!--Registro-->
 
             <div class="d-flex justify-content-center mb-2">
-              <button class="btn bg-success rounded btn-lg text-white" type="button"
+              <button class="btn bg-secondary rounded btn-lg text-white" type="button"
                 (click)='Registro()'>{{registrarse}}</button>
 
             </div>

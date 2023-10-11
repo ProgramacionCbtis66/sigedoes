@@ -6,6 +6,7 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 
+
 @Component({
   selector: 'app-administrativo',
   templateUrl: './administrativo.component.html',
@@ -20,10 +21,10 @@ export class AdministrativoComponent implements OnInit {
     fechaSolicitud: new Date().toLocaleDateString('en-us'),
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
-  }
+  };
   data = {
-    "numcontrol": ""
-  }
+    "numControl": ""
+  };
 
   datosEsc = {
     nomEscuela: "",
@@ -33,14 +34,14 @@ export class AdministrativoComponent implements OnInit {
     telefEsc: "",
     nomDirec: "",
     periodo: ""
-  }
+  };
   clavesEsp = {
     programacion: "",
     contabilidad: "",
     soporte: "",
     electricidad: "",
     alimentos: ""
-  }
+  };
   usuario = {
     "nombre": "",
     "correo": "",
@@ -54,7 +55,7 @@ export class AdministrativoComponent implements OnInit {
     "CTO": "30DCT0236O",
     "grupo": "",
     "pass": ""
-  }
+  };
   alumno = {
     "nombre": "",
     "grado": "",
@@ -64,7 +65,7 @@ export class AdministrativoComponent implements OnInit {
     "turno": "",
     "escuela": "",
     "numControl": ""
-  }
+  };
   nc: any;
   datos: any;
   aceptado: any;
@@ -76,22 +77,21 @@ export class AdministrativoComponent implements OnInit {
     private email: SendEmailService,
     private admin: AdminService,
     private auth: AuthService) {
-      this.nav._usuario =  this.auth.decodifica().nombre;
-     }
+    this.nav._usuario = this.auth.decodifica().nombre;
+  }
 
   ngOnInit() {
     let token = this.auth.decodifica();
-      this.data.numcontrol = token.numControl;
-      
-      //const res = await firstValueFrom(this.userServicio.datosUser(this.data));
-      this.userServicio.datosUser(this.data).subscribe((res: any) => {
-        if (res != '' && res != undefined) {
-          this.datos = JSON.parse(res.data);
-        }
-      });
+    this.data.numControl = token.numControl;
+
+    //const res = await firstValueFrom(this.userServicio.datosUser(this.data));
+    this.userServicio.datosUser(this.data).subscribe((res: any) => {
+      if (res != '' && res != undefined) {
+        this.datos = JSON.parse(res.data);
+      }
+    });
   }
   si() {
-
   }
   aceptar(op: any) {
     this.aceptado = op;
@@ -130,7 +130,7 @@ export class AdministrativoComponent implements OnInit {
 
     const numcontrol = {
       numcontrol: this.nc
-    }
+    };
     if (this.nc == null || this.nc == "") {
       Notiflix.Notify.failure("No se ha ingresado un número de control");
     }
@@ -148,7 +148,7 @@ export class AdministrativoComponent implements OnInit {
           this.alumno.numControl = datos.numControl;
           this.verificado = true;
 
-        } else { this.verificado = false }
+        } else { this.verificado = false; }
       });
     }
   }
@@ -158,7 +158,7 @@ export class AdministrativoComponent implements OnInit {
     const numPago = {
       numPago: this.generateRandomString(12),
       numcontrol: this.nc
-    }
+    };
     this.admin.verificaNoPago(numPago).subscribe((res: any) => {
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
@@ -196,7 +196,7 @@ export class AdministrativoComponent implements OnInit {
         tipo: "numPago",
         correo: this.alumno.correo,
         numPago: this.solicitud.codigoPago
-      }
+      };
 
       this.email.envioSolicitud(Email).subscribe((res: any) => {
         if (res = "Correo enviado satisfactoriamente") {
@@ -221,11 +221,11 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   obtenerDatos(numControl: any) {
-    this.data.numcontrol = numControl;
+    this.data.numControl = numControl;
     this.usuario.noctrl = numControl;
     this.userServicio.verInfo(this.data).subscribe((res: any) => {
       if (res.ok = "ok") {
-        const datos = res.data
+        const datos = res.data;
         this.usuario.nombre = datos.nombre;
         this.usuario.correo = datos.correo;
         this.usuario.direccion = datos.direccion;
@@ -237,7 +237,7 @@ export class AdministrativoComponent implements OnInit {
         this.usuario.turno = datos.turno;
         const noctrl = {
           numcontrol: numControl
-        }
+        };
         this.userServicio.getContra(noctrl).subscribe((res: any) => {
           this.usuario.pass = res.contra;
         });
