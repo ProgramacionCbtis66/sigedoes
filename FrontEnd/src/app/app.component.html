@@ -5,7 +5,16 @@
     <a class="navbar-brand " routerLink="homeAlumno" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="85" class="text-color-sigese">
     </a>
-    <!-- Links de la barra de navegación -->
+    
+    <!-- boton de despliegue en modo celular -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- inicia el collapse -->
+    <div class="collapse navbar-collapse mb-2 mt-2" id="navbarSupportedContent">
+        <!-- Links de la barra de navegación -->
     <ul class="navbar-nav">
       <li *ngIf="nav._iflogin " class="nav-item" id="idlogin">
         <a class="nav-link">Inicio de sesión</a>
@@ -23,15 +32,6 @@
         <a class="nav-link" >Registro</a>
       </li>
     </ul> <!-- fin de links de la barra de navegación -->
-    <!-- boton de despliegue en modo celular -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- inicia el collapse -->
-    <div class="collapse navbar-collapse mb-2 mt-2" id="navbarSupportedContent">
-      
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- barra de navegacion derecha -->
         <li class="nav-item d-flex justify-content-end">
           <!-- boton de regresar -->
@@ -86,7 +86,7 @@
       <div class="d-flex align-items-center">
         <a class="pe-2 ps-2" href=""><i class="bi bi-twitter-x"></i></a>
         <a href=""><i class="bi bi-facebook"></i></a>
-        <a class="pe-2 ps-2" href=""><i class="bi bi-instagram"></i></a>
+        <a class="pe-2 ps-2" href="https://instagram.com/sigese._?igshid=NzZlODBkYWE4Ng=="><i class="bi bi-instagram"></i></a>
         <a class="pe-2 " href=""> <i class="bi bi-tiktok"></i></a>
         <a class="pe-2 " href=""> <i class="bi bi-whatsapp"></i></a>
       </div>
