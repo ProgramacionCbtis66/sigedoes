@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
             if (res.token !== null && res.token != undefined) {
               localStorage.setItem('color', res.token);
               if (this.auth.isAuth()) {
-                Notiflix.Loading.remove();
-                Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().rol);
                 if (this.auth.decodifica().rol == "Admin") {
                   this.nav._Administrador = true;
                   this.nav._iflogin = false;

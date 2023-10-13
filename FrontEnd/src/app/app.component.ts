@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   public logo: string = '.././assets/img/logoredbck.png';
   public title: string = environment.proyecto;
   public usuario: string  =  "";
+  telefono = environment.telefono;
   
 
   constructor(private titulo: Title, 

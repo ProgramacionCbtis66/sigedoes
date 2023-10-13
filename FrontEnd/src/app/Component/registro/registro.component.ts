@@ -18,7 +18,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RegistroComponent implements OnInit {
   public proyecto: string = environment.proyecto;
-  foto: any = ".././assets/img/Admin.jpg";
+  foto: any = ".././assets/img/tufoto.png";
   registrarse = 'Registro';
   informacion = '  Info';
   infografia: string = '.././assets/img/infografiaa.png';
@@ -92,7 +92,7 @@ export class RegistroComponent implements OnInit {
 
       const foto64 = imagenBase64.base;
 
-      this.redimensionarImagen(foto64, 110, 90).then((imagenRedimensionada: any) => {
+      this.redimensionarImagen(foto64, 110, 110).then((imagenRedimensionada: any) => {
         this.foto = imagenRedimensionada.base;
       }).catch((error: any) => {
         console.error('Error al redimensionar la imagen', error);
