@@ -16,7 +16,7 @@ export class NavegacionService {
   private forgotpass = new BehaviorSubject<boolean>(false);
   private foto = new BehaviorSubject<any>("");
   private usuario = new BehaviorSubject<string>("");
- 
+  private orientacionEdu = new BehaviorSubject<boolean>(false);
 
   get _foto(): any {return this.foto.getValue();}
   set _foto(value: any) {this.foto.next(value);}
@@ -38,6 +38,8 @@ export class NavegacionService {
   set _Administrador(value: boolean) {this.Administrador.next(value);}
   get _docente(): boolean {return this.docente.getValue();}
   set _docente(value: boolean) {this.docente.next(value);}
+  get _orientacionEdu():any { return this.orientacionEdu.getValue(); }
+  set _orientacionEdu(value:boolean) { this.orientacionEdu.next(value);} 
   
   constructor() { }
 
