@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   public Acceso(): void {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       try {
-        Notiflix.Loading.standard("Accesando");
+        
         this.auth.acceso(this.usuario).subscribe(
           (res: any) => {
             if (res.token !== null && res.token != undefined) {
@@ -54,23 +54,23 @@ export class LoginComponent implements OnInit {
                 }
 
               } else if (res.Error == "Usuario y contraseña incorrecta") {
-                Notiflix.Loading.remove();
+                 
                 Notiflix.Notify.warning(res.Error);
               } else {
-                Notiflix.Loading.remove();
+                
                 Notiflix.Notify.failure(res.Error);
               }
             }
           },
           (error) => {
             // Manejar el error aquí
-            Notiflix.Loading.remove();
+            
             Notiflix.Notify.failure("Error : " + "APi rechaza la peticion por dominio no autorizado");
             console.error(error); // Puedes mostrar el error en la consola o en la interfaz de usuario
           }
         );
       } catch (error) {
-        Notiflix.Loading.remove();
+        
         Notiflix.Notify.failure("Error : " + "APi rechaza la peticion por dominio no autorizado");
       }
 

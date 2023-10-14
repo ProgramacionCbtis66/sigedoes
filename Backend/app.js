@@ -6,7 +6,7 @@ const cors = require('cors');
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
 
-const allowedOrigins = ['http://192.168.0.26'];
+const allowedOrigins = ['http://localhost'];
 app.use(cors({
     origin: (origin, callback)=> {
       console.log(origin);

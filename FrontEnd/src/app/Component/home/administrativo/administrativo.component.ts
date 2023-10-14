@@ -83,8 +83,6 @@ export class AdministrativoComponent implements OnInit {
   ngOnInit() {
     let token = this.auth.decodifica();
     this.data.numControl = token.numControl;
-
-    //const res = await firstValueFrom(this.userServicio.datosUser(this.data));
     this.userServicio.datosUser(this.data).subscribe((res: any) => {
       if (res != '' && res != undefined) {
         this.datos = JSON.parse(res.data);

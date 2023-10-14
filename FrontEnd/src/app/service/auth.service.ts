@@ -2,10 +2,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { NavegacionService } from './navegacion.service';
+ 
 
 
 
@@ -17,21 +17,13 @@ export class AuthService {
   private ruta = environment.HTTPS;
   public estatus: boolean = true;
 
-  private _usuarioLogeadoSubject = new BehaviorSubject<boolean>(false);
+  
 
   constructor(private http: HttpClient, 
     private jwt: JwtHelperService,
     ) { }
 
-  get usuarioLogeado(): BehaviorSubject<boolean> {
-    if (this.decodifica() && this.tokeExpired()) {
-      this._usuarioLogeadoSubject.next(true);
-    } else {
-      this._usuarioLogeadoSubject.next(false);
-    }
-    return this._usuarioLogeadoSubject;
-  }
-
+   
   private handleError(error: HttpErrorResponse) {
     console.error('Error:', error);
     const status = error.status;
