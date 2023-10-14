@@ -20,6 +20,7 @@ import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
+import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ConstanciasComponent } from './Component/home/alumno/constancias/consta
     DocenteComponent,
     AlumnoComponent,
     AdministrativoComponent,
-    ConstanciasComponent
+    ConstanciasComponent,
+    OrientacionEducativaComponent
   ],
   imports: [
     BrowserModule,
