@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +13,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isAuth()) {
-      if(this.authService.decodifica().rol!="Admin") return true;
+      if(this.authService.decodifica().rol!="CO") return true;
       else return false;
     } else {
       this.router.navigate(['login']);

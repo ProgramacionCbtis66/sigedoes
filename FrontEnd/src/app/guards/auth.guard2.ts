@@ -22,7 +22,7 @@ export class AuthLogin implements CanActivate {
    if (!this.authService.isAuth()) {
       return true;
     } else{
-        if(this.authService.decodifica().rol!="Admin") {
+        if(this.authService.decodifica().rol!="CO") {
           return false;
     }else{
       return false;

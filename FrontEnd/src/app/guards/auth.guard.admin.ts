@@ -18,11 +18,11 @@ export class AuthGuardAdmin implements CanActivate {
   canActivate(): boolean {
       if (this.auth.isAuth()) {
           this.token = this.auth.decodifica();
-        if (this.token.rol == "Admin"){
+        if (this.token.rol == "CO"){
             return true;
         } else {
           if (this.auth.isAuth()){
-              this.router.navigate(['Home']);
+              this.router.navigate(['homeAlumno']);
               return true;
           }else{
               return false;
