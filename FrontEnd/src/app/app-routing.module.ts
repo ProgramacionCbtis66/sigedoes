@@ -13,6 +13,7 @@ import { DocenteComponent } from './Component/docente/docente.component';
 import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
+import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
   {path:"perfil", component: PerfilComponent},
+  {path:"orientacionEdu", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
 
   {path:"**", component: Error404Component },
 
