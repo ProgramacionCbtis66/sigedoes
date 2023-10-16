@@ -116,6 +116,17 @@ h1 {
   }
   }
 
+@media (max-width: 499px){
+  .inputBox-1 input:valid ~ span,
+  .inputBox-1 input:focus ~ span,
+  .inputBox-2 input:valid ~ span,
+  .inputBox-2 input:focus ~ span,
+  .inputBox-3 input:valid ~ span,
+  .inputBox-3 input:focus ~ span{
+    opacity: 0%;
+  }
+}  
+
 .inputBox-1 input:valid,
 .inputBox-1 input:focus,
 .inputBox-2 input:valid,
