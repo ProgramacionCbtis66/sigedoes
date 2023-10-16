@@ -9,7 +9,6 @@ app.use(bodypaser.json());
 const allowedOrigins = ['http://localhost'];
 app.use(cors({
     origin: (origin, callback)=> {
-      console.log(origin);
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
           console.log("dominio permitido");
         callback(null, true);
@@ -41,5 +40,8 @@ app.use('/insize', userRouter);
 //adminstrador
 const adminRouter = require('./api/routes/admin');
 app.use('/admin', adminRouter);
+//docente
+const docenteRouter = require('./api/routes/docente');
+app.use('/docente', docenteRouter);
 
-const envioEmail = module.exports = app;
+module.exports = app;

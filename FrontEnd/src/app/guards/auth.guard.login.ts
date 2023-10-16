@@ -14,20 +14,16 @@ export class AuthLogin implements CanActivate {
   constructor(private authService: AuthService,
    
 
-    private router: Router) { }
+  private router: Router) { }
    
 
   canActivate(): boolean {
-    
    if (!this.authService.isAuth()) {
       return true;
-    } else{
-        if(this.authService.decodifica().rol!="CO") {
-          return false;
     }else{
       return false;
     }
-    }
   }
+
 }
 

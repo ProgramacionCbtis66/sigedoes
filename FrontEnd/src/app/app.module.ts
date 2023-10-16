@@ -4,7 +4,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Component/login/login.component';
-import { HomeComponent } from './Component/home/home.component';
 import { RegistroComponent } from './Component/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,7 +14,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { OlvidePassComponent } from './Component/olvide-pass/olvide-pass.component';
 import { PerfilComponent } from './Component/perfil/perfil.component';
-import { DocenteComponent } from './Component/docente/docente.component';
+import { DocenteComponent } from './Component/home/docente/docente.component';
 import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -27,7 +26,6 @@ import { OrientacionEducativaComponent } from './Component/home/orientacion-educ
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     RegistroComponent,
     Error404Component,
     OlvidePassComponent,

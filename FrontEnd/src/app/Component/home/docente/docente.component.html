@@ -3,7 +3,7 @@
       <div class="card mb-2 bg-color-1">
         <div class="row">
           <div class="d-flex justify-content-center p-1">
-            <h4 class="singup-3 m-2">{{nombre}}</h4>
+            <h4 class="singup-3 m-2">{{datosDocente._nombre}}{{datosDocente._apellidoP}}</h4>
           </div>
         </div>
       </div>
@@ -42,19 +42,19 @@
                 <table class="table table-bordered table-responsive border-color-1 m-0">
                   <tr>
                     <th scope="col">Docente:</th>
-                    <th>{{datosDocente.nombre}}</th>
+                    <th>{{datosDocente._nombre}}</th>
                   </tr>
                   <tr>
                     <th>NO.CONTROL</th>
-                    <td>{{datosDocente.numControl}}</td>
+                    <td>{{datosDocente._numControl}}</td>
                   </tr>
                   <tr>
                     <th>CURP</th>
-                    <td>{{datosDocente.curp}}</td>
+                    <td>{{datosDocente._CURP}}</td>
                   </tr>
                   <tr>
-                    <th>ESPECIALIDAD</th>
-                    <td>{{datosDocente.especialidad}}</td>
+                    <th>Grado Academico</th>
+                    <td>{{datosDocente._gradoAcademico}}</td>
                   </tr>
                 </table>
               </div>

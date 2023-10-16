@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router,  UrlTree } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 @Injectable({
@@ -11,12 +11,31 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService,
     private router: Router) { }
 
-  canActivate(): boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot
+  ): boolean |UrlTree {
+    const activatedRoute = route.routeConfig?.path;
     if (this.authService.isAuth()) {
-      if(this.authService.decodifica().rol!="CO") return true;
-      else return false;
+      
+      if(this.authService.decodifica().rol=="AL"){
+        if(activatedRoute=="Alumnoconstancia" || activatedRoute=="homeAlumno"){ return true;}
+        else { this.router.navigate(['/homeAlumno']);}
+      } 
+      if(this.authService.decodifica().rol=="DO"){
+        if(activatedRoute=="homeDocente") {return true;}
+        else {this.router.navigate(['/homeDocente']);}
+      } 
+      if(this.authService.decodifica().rol=="CO"){
+        if(activatedRoute=="admin") {return true;}
+        else { this.router.navigate(['/admin']);}
+      }
+      if(this.authService.decodifica().rol=="OD"){
+        if(activatedRoute=="orientacionEdu") {return true;}
+        else { this.router.navigate(['/orientacionEdu']);}
+      }
+      return false;
     } else {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
       return false;
     }
   }
