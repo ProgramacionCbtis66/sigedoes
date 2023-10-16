@@ -31,7 +31,7 @@ export class DocenteComponent implements OnInit {
     const numControl = {
       numControl: this.datosDocente._numControl
     };
-    
+
     try {
       const res = await  firstValueFrom(this.docente.datosDocente(numControl));
       if (res != '' && res != undefined) {
@@ -52,6 +52,7 @@ export class DocenteComponent implements OnInit {
       
     }
     
+ 
   }
 
   ngOnInit(): void {

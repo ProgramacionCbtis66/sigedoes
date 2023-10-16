@@ -31,43 +31,43 @@ export class LoginComponent implements OnInit {
   public Acceso(): void {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       try {
-        
         this.auth.acceso(this.usuario).subscribe(
           (res: any) => {
             if (res.token !== null && res.token != undefined) {
-              localStorage.setItem('color', res.token);
-              Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoPaterno + " " + this.auth.decodifica().apellidoMaterno+" "+this.auth.decodifica().rol);
-              if (this.auth.isAuth()) {
-                if (this.auth.decodifica().rol == "CO") {
-                  this.nav._Administrador = true;
-                  this.nav._iflogin = false;
-                  this.router.navigate(['/admin']);
-                }
-                if (this.auth.decodifica().rol == "DO") {
-                  this.nav._docente = true;
-                  this.nav._iflogin = false;
-                  this.router.navigate(['/homeDocente']);
-                }
-                if (this.auth.decodifica().rol == "AL") {
-                  this.nav._homeAlumno = true;
-                  this.nav._iflogin = false;
-                  this.router.navigate(['/homeAlumno']);
-                }
-
-              } else if (res.Error == "Usuario y contraseña incorrecta") {
-                 
-                Notiflix.Notify.warning(res.Error);
-              } else {
+                localStorage.setItem('color', res.token);
+                Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM+" "+this.auth.decodifica().rol);
                 
-                Notiflix.Notify.failure(res.Error);
-              }
+                if (this.auth.isAuth()) {
+                  if (this.auth.decodifica().rol == "CO") {
+                    this.nav._Administrador = true;
+                    this.nav._iflogin = false;
+                    this.router.navigate(['/admin']);
+                  }
+                  if (this.auth.decodifica().rol == "DO") {
+                    this.nav._docente = true;
+                    this.nav._iflogin = false;
+                    this.router.navigate(['/homeDocente']);
+                  }
+                  if (this.auth.decodifica().rol == "AL") {
+                    this.nav._homeAlumno = true;
+                    this.nav._iflogin = false;
+                    this.router.navigate(['/homeAlumno']);
+                  }
+
+                } else if (res.Error == "Usuario y contraseña incorrecta") {
+                  
+                  Notiflix.Notify.warning(res.Error);
+                } else {
+                  
+                  Notiflix.Notify.failure(res.Error);
+                }
+            }
+            if(res.Error != undefined && res.Error != null && res.Error != ""){
+              Notiflix.Notify.failure(res.Error);
             }
           },
           (error) => {
-            // Manejar el error aquí
-            
             Notiflix.Notify.failure("Error : " + "APi rechaza la peticion por dominio no autorizado");
-            console.error(error); // Puedes mostrar el error en la consola o en la interfaz de usuario
           }
         );
       } catch (error) {

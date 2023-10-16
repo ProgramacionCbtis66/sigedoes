@@ -32,24 +32,28 @@ peticion.post('/recuperarContraseña', async (req, res) => {
 
 peticion.post('/acceso', async (req, res) => {
     const { nombre, pass } = req.body;
+    
     let sql = `CALL login(?,?)`;
     var usuario = '';
     const conexion = await ccn();
     try {
         const [registros] = await conexion.execute(sql,[nombre,pass]);
         usuario = registros;
+       
     } catch (error) {
         console.log(error);
         res.json({ Error: error });
     } finally {
        await conexion.end();
     }
+   
     if (usuario[0][0] !== undefined && usuario.length >0) {
         var datos = JSON.stringify(usuario[0][0]);
         var dato = JSON.parse(datos);
         const token = jwt.sign(dato, 'MA@L', {  expiresIn :'20m'});
         res.json({ token });
     } else {
+        console.log("Usuario y contraseña incorrecta");
         res.json({ Error: "Usuario y contraseña incorrecta" });
     }
 });

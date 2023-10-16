@@ -69,7 +69,7 @@ export class AlumnoComponent implements OnInit {
     private email: SendEmailService,
 
   ) {
-    this.nav._usuario = this.auth.decodifica().nombre;
+    this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
   }
   
   async ngOnInit() {

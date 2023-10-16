@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { NavegacionService } from 'src/app/service/navegacion.service';
 
 @Component({
   selector: 'app-orientacion-educativa',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrientacionEducativaComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private nav: NavegacionService,
+    private auth: AuthService
+  ) { 
+    this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+  }
 
   ngOnInit(): void {
   }
