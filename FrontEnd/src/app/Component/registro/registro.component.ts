@@ -2,12 +2,13 @@ import {  Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { Docente } from 'src/app/Modelo/Docente';
-import { Usuario } from 'src/app/Modelo/CalseUsuario';
+import { Administrativo } from 'src/app/Modelo/Administrativo';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { NavegacionService } from 'src/app/service/navegacion.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UsuarioService } from 'src/app/service/usuarios.service';
+import { Alumno } from 'src/app/Modelo/Alumno';
 
 
 
@@ -23,9 +24,9 @@ export class RegistroComponent implements OnInit {
   registrarse = 'Registro';
   informacion = '  Info';
   infografia: string = '.././assets/img/infografiaa.png';
-  usuario: Usuario = new Usuario();
+  alumno: Alumno = new Alumno();
   docente: Docente = new Docente();
-  prueba = this.docente + this.usuario;
+  administrativo: Administrativo = new Administrativo();
   tipoUsuario: string = "";
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -35,21 +36,20 @@ export class RegistroComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private Base64 :UsuarioService
     ) { this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false;
-       console.log(this.docente + this.usuario)
     }
 
   ngOnInit(): void {}
 
   public area(): void {
-    switch (this.usuario._especialidad) {
+    switch (this.alumno._especialidad) {
       case "Programacion": case "Electricidad": case "Soporte":
-        this.usuario._area = "Físico Matemático"; break;
+        this.alumno._area = "Físico Matemático"; break;
       case "Contabilidad":
-        this.usuario._area = "Económico Administrativo"; break;
+        this.alumno._area = "Económico Administrativo"; break;
       case "Alimentos":
-        this.usuario._area = "Químico Biológico"; break;
+        this.alumno._area = "Químico Biológico"; break;
     }
-    alert(this.usuario._area);
+    alert(this.alumno._area);
   }
   public Registro(): void {
     let contra = this.usuario._pass2;

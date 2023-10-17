@@ -13,7 +13,7 @@ export class Usuario {
     private CTO:string;
     private grupo:string;
     private rol:string;
-    private foto:string;
+    private foto:Blob;
     
     constructor() {
         this.nombre = "";
@@ -24,42 +24,45 @@ export class Usuario {
         this.pass2 = "";
         this.curp = "";
         this.numControl = "";
-        this.especialidad = "";
-        this.semestre = "";
-        this.area = "";
+        
         this.turno = "";
         this.direccion = "";
         this.CTO = "30DCT0236O";
         this.grupo = "";
+        this.rol = "";
+        this.foto = new Blob();
     }
 
     get _nombre(){return this.nombre;}
+    get _apellidoP(){return this.apellidoP;}
+    get _apellidoM(){return this.apellidoM;}
     get _correo(){return this.correo;}
     get _pass(){return this.pass;}
     get _pass2(){return this.pass2;}
     get _curp(){return this.curp;}
-    get _noctrl(){return this.noctrl;}
-    get _especialidad(){return this.especialidad;}
-    get _semestre(){return this.semestre;}
-    get _area(){return this.area;}
+    get _numControl(){return this.numControl;}
     get _turno(){return this.turno;}
     get _direccion(){return this.direccion;}
     get _CTO(){return this.CTO;}
     get _grupo(){return this.grupo;}
     get _rol(){return this.rol;}
+    get _foto(){return this.foto;}
 
     set _nombre(nombre:string){this.nombre = nombre;}
+    set _apellidoP(apellidoP:string){this.apellidoP = apellidoP;}
+    set _apellidoM(apellidoM:string){this.apellidoM = apellidoM;}
+
     set _correo(correo:string){this.correo = correo;}
     set _pass(pass:string){this.pass = pass;}
     set _pass2(pass2:string){this.pass2 = pass2;}
     set _curp(curp:string){this.curp = curp;}
-    set _noctrl(noctrl:string){this.noctrl = noctrl;}
-    set _especialidad(especialidad:string){this.especialidad = especialidad;}
-    set _semestre(semestre:string){this.semestre = semestre;}
-    set _area(area:string){this.area = area;}
+    set _numControl(numControl:string){this.numControl = numControl;}
     set _turno(turno:string){this.turno = turno;}
     set _direccion(direccion:string){this.direccion = direccion;}
     set _CTO(CTO:string){this.CTO = CTO;}
     set _grupo(grupo:string){this.grupo = grupo;}
     set _rol(rol:string){this.rol = rol;}
+    set _foto(foto:Blob){this.foto = foto;}
+
+
 }
