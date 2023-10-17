@@ -570,7 +570,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`%` PROCEDURE `login`(IN `dato1` varchar(14), IN `dato2` varchar(14))
+CREATE   PROCEDURE `login`(IN `dato1` varchar(14), IN `dato2` varchar(14))
 BEGIN
 select usuario.nombre as nombre,usuario.apellidoP as apellidoP, usuario.apellidoM as apellidoM, usuario.rol as rol, usuario.numControl as numControl 
 from usuario  
@@ -594,7 +594,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `forgotpassword` AS select `alumno`.`nombre` AS `nombre`,`alumno`.`numControl` AS `numControl`,`usuario`.`password` AS `password`,`alumno`.`correo` AS `correo` from (`usuario` join `alumno` on((`usuario`.`numControl` like `alumno`.`numControl`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -612,7 +612,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `listausernoreg` AS select `usuario`.`password` AS `password`,`alumno`.`nombre` AS `nombre`,`alumno`.`numControl` AS `numControl`,`alumno`.`correo` AS `correo`,`alumno`.`grado` AS `grado`,`alumno`.`grupo` AS `grupo`,`alumno`.`turno` AS `turno`,`alumno`.`especialidad` AS `especialidad` from (`alumno` join `usuario` on((`alumno`.`numControl` = `usuario`.`numControl`))) where (`alumno`.`alta` = 0) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -630,7 +630,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `pdf` AS select `alumno`.`numControl` AS `numControl`,`alumno`.`nombre` AS `nombre`,`alumno`.`direccion` AS `direccion`,`alumno`.`especialidad` AS `especialidad`,`alumno`.`area` AS `area`,`alumno`.`grado` AS `grado`,`alumno`.`grupo` AS `grupo`,`alumno`.`turno` AS `turno`,`alumno`.`horario` AS `horario`,`alumno`.`CTO` AS `CTO`,`escuela`.`Esc_nombre` AS `Esc_nombre`,`escuela`.`Esc_direccion` AS `Esc_direccion`,`escuela`.`Esc_correo` AS `Esc_correo`,`escuela`.`Esc_Director` AS `Esc_Director`,`escuela`.`Esc_telefono` AS `Esc_telefono`,`alumno`.`CURP` AS `CURP`,`alumno`.`correo` AS `correo`,`alumno`.`foto` AS `foto` from (`escuela` join `alumno` on((`escuela`.`CTO` = `alumno`.`CTO`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;

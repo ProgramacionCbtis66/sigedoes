@@ -1,79 +1,120 @@
 <div class="row">
-    <div class="col-md-6 mt-2">
-      <div class="card mb-2 bg-color-1">
-        <div class="row">
-          <div class="d-flex justify-content-center p-1">
-            <h4 class="singup-3 m-2">{{datosDocente._nombre}}{{datosDocente._apellidoP}}</h4>
-          </div>
+  <div class="col-md-6 mt-2">
+    <div class="card mb-2 bg-color-1">
+      <div class="row">
+        <div class="d-flex justify-content-center p-1">
+          <h4 class="singup-3 m-2">{{datosDocente._nombre}} {{datosDocente._apellidoP}}</h4>
         </div>
       </div>
-      <div class="card border-color-1">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="container-fluid">
-                <div class="row justify-content-center">
-                  <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
-                    <div class="d-flex justify-content-center mb-2">
-                      <div class="card border-color-1">
-                        <img class="card-img-top" src="./erik.jpeg" alt="foto-de-perfil">
-                        <div class="col card-body">
-                          <h4 class="card-title d-flex justify-content-center">
-                            
-                            <a class="btn btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                              <i class="bi bi-twitter-x fs-2"></i>
-                            </a>
-                            <i class="bi bi-facebook fs-2 ps-2 text-primary"></i>
-                            <i class="bi bi-instagram fs-2 ps-2 "></i>
-                            <i class="bi bi-whatsapp fs-2 ps-2 text-success"></i>
+    </div>
+    <div class="card border-color-1">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="container-fluid">
+              <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
+                  <div class="d-flex justify-content-center mb-2">
+                    <div class="card border-color-1">
+                      <img class="card-img-top" src="./erik.jpeg" alt="foto-de-perfil">
+                      <div class="col card-body">
+                        <h4 class="card-title d-flex justify-content-center">
+
+                          <a class="btn btn-sm"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            <i class="bi bi-twitter-x fs-2"></i>
+                          </a>
+                          <i class="bi bi-facebook fs-2 ps-2 text-primary"></i>
+                          <i class="bi bi-instagram fs-2 ps-2 "></i>
+                          <i class="bi bi-whatsapp fs-2 ps-2 text-success"></i>
 
 
-                          </h4>
-                        </div>
+                        </h4>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-8">
-              <p>Información del Docente</p>
-              <div class="">
-                <table class="table table-bordered table-responsive border-color-1 m-0">
-                  <tr>
-                    <th scope="col">Docente:</th>
-                    <th>{{datosDocente._nombre}}</th>
-                  </tr>
-                  <tr>
-                    <th>NO.CONTROL</th>
-                    <td>{{datosDocente._numControl}}</td>
-                  </tr>
-                  <tr>
-                    <th>CURP</th>
-                    <td>{{datosDocente._CURP}}</td>
-                  </tr>
-                  <tr>
-                    <th>Grado Academico</th>
-                    <td>{{datosDocente._gradoAcademico}}</td>
-                  </tr>
-                </table>
-              </div>
+          </div>
+          <div class="col-lg-8">
+            <p>Información del Docente</p>
+            <div class="">
+              <table class="table table-bordered table-responsive border-color-1 m-0">
+                <tr>
+                  <th scope="col">Docente:</th>
+                  <th>{{datosDocente._nombre}}</th>
+                </tr>
+                <tr>
+                  <th>NO.CONTROL</th>
+                  <td>{{datosDocente._numControl}}</td>
+                </tr>
+                <tr>
+                  <th>CURP</th>
+                  <td>{{datosDocente._CURP}}</td>
+                </tr>
+                <tr>
+                  <th>Grado Academico</th>
+                  <td>{{datosDocente._gradoAcademico}}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-6 mt-3">
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+  </div>
+  <div class="col-6 mt-2">
+    <!--Modulo globales-->
+    <div class="accordion mb-2" id="accordionGlobales">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseGlobales" aria-expanded="false" aria-controls="collapseGlobales"
+            style="height: 3rem;">
+            <p class="fs-6 fw-light text-center text-secondary mt-3">
+              <i class="bi bi-card-checklist"></i>
               Registro de alumnos a globales
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <table class="table">
+            </p>
+          </button>
+        </h2>
+        <div id="collapseGlobales" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">BUSCAR</button>
+            </form>
+            <div class="my-4">
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Turno</option>
+                <option value="1">Matutino</option>
+                <option value="2">Vespertino</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Especialidad</option>
+                <option value="1">Alimentos</option>
+                <option value="2">Contabilidad</option>
+                <option value="3">Electricidad</option>
+                <option value="4">Programacion</option>
+                <option value="5">Soporte</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Grado</option>
+                <option value="1">Primero</option>
+                <option value="2">Segundo</option>
+                <option value="3">Tercero</option>
+                <option value="4">Cuarto</option>
+                <option value="5">Quinto</option>
+                <option value="6">Sexto</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Periodo</option>
+                <option value="1">Periodo 1</option>
+                <option value="2">Periodo 2</option>
+              </select>
+
+            </div>
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">NC</th>
@@ -85,10 +126,77 @@
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
-              </table>
-            </div>
+            </table>
           </div>
         </div>
       </div>
     </div>
+    <!-- modulo Recursa-->
+    <div class="accordion mb2" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseRecursa" aria-expanded="false" aria-controls="collapseRecursa"
+            style="height: 3rem;">
+            <p class="fs-6 fw-light text-center text-secondary mt-3">
+              <i class="bi bi-card-checklist"></i>
+              Registro de alumnos a recursamiento
+            </p>
+          </button>
+        </h2>
+        <div id="collapseRecursa" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">BUSCAR</button>
+            </form>
+            <div class="my-4">
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Turno</option>
+                <option value="1">Matutino</option>
+                <option value="2">Vespertino</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Especialidad</option>
+                <option value="1">Alimentos</option>
+                <option value="2">Contabilidad</option>
+                <option value="3">Electricidad</option>
+                <option value="4">Programacion</option>
+                <option value="5">Soporte</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Grado</option>
+                <option value="1">Primero</option>
+                <option value="2">Segundo</option>
+                <option value="3">Tercero</option>
+                <option value="4">Cuarto</option>
+                <option value="5">Quinto</option>
+                <option value="6">Sexto</option>
+              </select>
+              <select class="form-select-sm" aria-label="Default select example">
+                <option selected>Periodo</option>
+                <option value="1">Periodo 1</option>
+                <option value="2">Periodo 2</option>
+              </select>
+
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">NC</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Grado</th>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Especialidad</th>
+                  <th scope="col">Periodo escolar</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
