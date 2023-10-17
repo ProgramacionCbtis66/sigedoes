@@ -1,8 +1,8 @@
 import {  Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
-import { Docente } from './modelo/ClaseDocente';
-import { Usuario } from './modelo/CalseUsuario';
+import { Docente } from 'src/app/Modelo/Docente';
+import { Usuario } from 'src/app/Modelo/CalseUsuario';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { NavegacionService } from 'src/app/service/navegacion.service';
@@ -25,6 +25,7 @@ export class RegistroComponent implements OnInit {
   infografia: string = '.././assets/img/infografiaa.png';
   usuario: Usuario = new Usuario();
   docente: Docente = new Docente();
+  prueba = this.docente + this.usuario;
   tipoUsuario: string = "";
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -33,7 +34,9 @@ export class RegistroComponent implements OnInit {
     private nav: NavegacionService,
     private sanitizer: DomSanitizer,
     private Base64 :UsuarioService
-    ) { this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false; }
+    ) { this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false;
+       console.log(this.docente + this.usuario)
+    }
 
   ngOnInit(): void {}
 
@@ -53,9 +56,11 @@ export class RegistroComponent implements OnInit {
     let contra2 = this.usuario._pass;
     if (contra == contra2) {
       if(this.tipoUsuario == "Docente"){
-        if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== ""){
-          this.usuario
+        if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario && this.docente._CEDULA !=="" && this.docente._fechaInicio !== null && this.docente._gradoAcademico !=="")
+        {
+
         }
+
       }
       if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario._especialidad !== "" && this.usuario._semestre !== "" && this.usuario._area !== "" && this.usuario._turno !== "" && this.usuario._grupo != "") {
         Notiflix.Loading.standard("Validando");

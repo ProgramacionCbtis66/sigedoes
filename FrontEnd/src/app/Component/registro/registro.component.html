@@ -177,8 +177,15 @@
               </div>
             </div>
             <div *ngIf="tipoUsuario == 'Docente'">
-              <div class="row">
-                
+              <div class="row d-flex mb-3">
+                <div class="col-sm-5">
+                <div class="input-group mb-3 px-3 mt-2">
+                  <span class="input-group-text" id="basic-addon1">Cédula</span>
+                  <input [(ngModel)]="docente._CEDULA" type="text" class="form-control"
+                    placeholder="cédula profesional" aria-label="Username"
+                    aria-describedby="basic-addon1">
+                </div>
+                </div>
               </div>
             </div>
             <div *ngIf="tipoUsuario != ''">
