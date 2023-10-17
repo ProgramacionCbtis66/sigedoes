@@ -52,19 +52,19 @@ export class RegistroComponent implements OnInit {
     alert(this.alumno._area);
   }
   public Registro(): void {
-    let contra = this.usuario._pass2;
-    let contra2 = this.usuario._pass;
+    let contra = this.alumno._pass2;
+    let contra2 = this.alumno._pass;
     if (contra == contra2) {
       if(this.tipoUsuario == "Docente"){
-        if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario && this.docente._CEDULA !=="" && this.docente._fechaInicio !== null && this.docente._gradoAcademico !=="")
+        if (this.alumno._correo !== "" && this.alumno._pass !== "" && this.alumno._pass2 !== "" && this.alumno._curp !== "" && this.alumno._numControl !== "" && this.alumno && this.docente._CEDULA !=="" && this.docente._fechaInicio !== null && this.docente._gradoAcademico !=="")
         {
 
         }
 
       }
-      if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario._especialidad !== "" && this.usuario._semestre !== "" && this.usuario._area !== "" && this.usuario._turno !== "" && this.usuario._grupo != "") {
+      if (this.alumno._correo !== "" && this.alumno._pass !== "" && this.alumno._pass2 !== "" && this.alumno._curp !== "" && this.alumno._numControl !== "" && this.alumno._especialidad !== "" && this.alumno._semestre !== "" && this.alumno._area !== "" && this.alumno._turno !== "" && this.alumno._grupo != "") {
         Notiflix.Loading.standard("Validando");
-        this.auth.registro(this.usuario).subscribe((res: any) => {
+        this.auth.registro(this.alumno).subscribe((res: any) => {
           if (res.Aceptado == "Datos Aceptados") {
             Notiflix.Loading.remove();
             Notiflix.Notify.info("Registro de datos en verificación");
