@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -12,7 +13,7 @@ export class UsuarioService {
   private URL = environment.HTTPS;
   private usr = environment.autorization;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private sanitizer:DomSanitizer ) {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
    }
 

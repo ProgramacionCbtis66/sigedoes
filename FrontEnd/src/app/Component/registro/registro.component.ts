@@ -52,6 +52,11 @@ export class RegistroComponent implements OnInit {
     let contra = this.usuario._pass2;
     let contra2 = this.usuario._pass;
     if (contra == contra2) {
+      if(this.tipoUsuario == "Docente"){
+        if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== ""){
+          this.usuario
+        }
+      }
       if (this.usuario._correo !== "" && this.usuario._pass !== "" && this.usuario._pass2 !== "" && this.usuario._curp !== "" && this.usuario._noctrl !== "" && this.usuario._especialidad !== "" && this.usuario._semestre !== "" && this.usuario._area !== "" && this.usuario._turno !== "" && this.usuario._grupo != "") {
         Notiflix.Loading.standard("Validando");
         this.auth.registro(this.usuario).subscribe((res: any) => {

@@ -42,7 +42,9 @@ docente.post('/modifyProfile',verifica, async (req, res) => {
     }
 });
 
-
+docente.post('/registroDocente',async(req,res)=>{
+    const {numControl,nombre,apellidoP,apellidoM,CURP,CEDULA,fechaInicio,foto,gradoAcademico,correo}= req.body;
+})
 
 
 

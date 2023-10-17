@@ -17,5 +17,9 @@ export class DocenteService {
   datosDocente(numControl: any): Observable<any> {
     return this.http.post(`${this.URL}/docente/datosDocente`, numControl, this.usr);
   }
+
+  registroDocente(datosDocente: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/registroDocente`,datosDocente);
+  }
   
 }
