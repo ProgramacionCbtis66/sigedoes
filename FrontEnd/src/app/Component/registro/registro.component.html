@@ -6,7 +6,7 @@
       </div>
       <div class="row">
         <!--Parte Izquierda Del Sistema-->
-        <div class="col-md-5 mt-2">
+        <div class="col-md-3 mt-2">
           <div class="mb-2 bg-color-1">
             <div class="row">
               <div class="d-flex justify-content-center">
@@ -18,7 +18,7 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-12">
                   <div class="row d-flex justify-content-center">
                     <div class="card text-center">
                       <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*"
@@ -46,7 +46,35 @@
           </div>
         </div>
         <!--Parte Derecha Del Sistema-->
-
+        <div class="col-md-9 mt-1">
+          <!-- contenedor principal -->
+          <div class="border border-secundary mt-1">
+            <!-- Encabezado de columna -->
+            <div class="border-bottom bg-color-1 ">
+              <p class="singup-3 ps-4 pt-2 text-center">
+                Ingrese sus datos para el registro
+              </p>
+            </div>
+            <div class="container">
+              <!-- formulario para los alumnos -->
+              <div class="row " *ngIf = "tipoUsuario == 'Alumno'" >
+                hola alumnos
+              </div>
+              <!-- Formulario docente -->
+              <div class="row d-flex" *ngIf = "tipoUsuario == 'Docente'" >
+                hola docente
+              </div>
+              <!-- Formulario control escolar -->
+              <div class="row d-flex" *ngIf = "tipoUsuario == 'CE'" >
+                hola control escolar
+              </div>
+                <!-- Formulario orientacion educativa -->
+              <div class="row d-flex" *ngIf = "tipoUsuario == 'OE'" >
+                hola orientacion educativa
+              </div>
+              </div>
+          </div>
+        </div>
       </div>
       <div>
       </div>

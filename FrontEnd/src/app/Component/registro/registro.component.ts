@@ -91,8 +91,12 @@ export class RegistroComponent implements OnInit {
       this.registrarse = "Registro de Docente";
       this.informacion = "  Info";
       this.infografia = ".././assets/img/infografiaa.png";
-    } else if (this.tipoUsuario == "Administrativo") {
-      this.registrarse = "Registro de Administrativo";
+    } else if (this.tipoUsuario == "CE") {
+      this.registrarse = "Registro de Control Escolar";
+      this.informacion = "  Info";
+      this.infografia = ".././assets/img/infografiaa.png";
+    } else if (this.tipoUsuario == "OE") {
+      this.registrarse = "Registro de Orientacion Educativa";
       this.informacion = "  Info";
       this.infografia = ".././assets/img/infografiaa.png";
     }
