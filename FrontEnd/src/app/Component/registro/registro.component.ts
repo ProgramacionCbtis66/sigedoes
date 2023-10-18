@@ -99,6 +99,10 @@ export class RegistroComponent implements OnInit {
       this.registrarse = "Registro de Orientacion Educativa";
       this.informacion = "  Info";
       this.infografia = ".././assets/img/infografiaa.png";
+    } else {
+      this.registrarse = "REGISTRO";
+      this.informacion = "  Info";
+      this.infografia = ".././assets/img/infografiaa.png";
     }
   }
 
@@ -108,7 +112,7 @@ export class RegistroComponent implements OnInit {
 
       const foto64 = imagenBase64.base;
 
-      this.Base64.redimensionarImagen(foto64, 110, 110).then((imagenRedimensionada: any) => {
+      this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
         this.foto = imagenRedimensionada.base;
       }).catch((error: any) => {
         console.error('Error al redimensionar la imagen', error);
