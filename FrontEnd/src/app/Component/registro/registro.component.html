@@ -60,126 +60,125 @@
               <div class="row" *ngIf="tipoUsuario == 'Alumno'">
                 <!--Nombre-->
                 <div class="col-md-4">
-                  <label for="nombre" class="form-label ps-2 tm" >Nombre</label>
-                  <input [(ngModel)]="alumno._nombre" type="text" class="form-control tm"
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="nombre">
+                  <label for="nombre" class="form-label ps-2 tm">Nombre</label>
+                  <input [(ngModel)]="alumno._nombre" type="text" class="form-control tm" id="nombre" #nombre
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="nombre" (keypress)="valida($event)">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
-                  <label for="ap" class="form-label ps-2 tm" >Apellido Paterno</label>
-                  <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="ap" >
+                  <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
+                  <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
-                  <label for="am" class="form-label ps-2 tm" >Apellido Materno</label>
-                  <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="am">
+                  <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
+                  <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
-                  <label for="fn" class="form-label ps-2 tm" >Fecha de nacimiento</label>
-                  <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm"
-                    placeholder="Fecha de nacimiento"  id="fn">
+                  <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
+                  <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
+                    placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
-                  <label for="correo" class="form-label ps-2 tm" >Correo electrónico</label>
-                  <input [(ngModel)]="alumno._correo" type="email" class="form-control tm"
-                    placeholder="Correo electrónico"  id="correo">
+                  <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
+                  <input [(ngModel)]="alumno._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
-                  <label for="curp" class="form-label ps-2 tm" >CURP</label>
-                  <input [(ngModel)]="alumno._curp" type="text" class="form-control tm"
-                    placeholder="CURP" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <label for="curp" class="form-label ps-2 tm">CURP</label>
+                  <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
-                  <label for="dir" class="form-label ps-2 tm" >Dirección</label>
-                  <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm"
-                    placeholder="Dirección"  id="dir">
+                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
+                    placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
-                  <label for="tel" class="form-label ps-2 tm" >Teléfono</label>
-                  <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm"
-                    placeholder="Teléfono"  id="tel">
+                  <label for="tel" class="form-label ps-2 tm">Teléfono</label>
+                  <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
-                  <label for="fb" class="form-label ps-2 tm" >Facebook</label>
-                  <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm"
-                    placeholder="Facebook"  id="fb">
+                  <label for="fb" class="form-label ps-2 tm">Facebook</label>
+                  <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
-                  <label for="tw" class="form-label ps-2 tm" >Twitter</label>
-                  <input [(ngModel)]="alumno._twitter" type="text" class="form-control tm"
-                    placeholder="Twitter"  id="tw">
+                  <label for="tw" class="form-label ps-2 tm">Twitter</label>
+                  <input [(ngModel)]="alumno._twitter" type="text" class="form-control tm" placeholder="Twitter"
+                    id="tw">
                 </div>
                 <!-- instagram -->
                 <div class="col-md-3">
-                  <label for="ig" class="form-label ps-2 tm" >Instagram</label>
-                  <input [(ngModel)]="alumno._instagram" type="text" class="form-control tm"
-                    placeholder="Instagram"  id="ig">
+                  <label for="ig" class="form-label ps-2 tm">Instagram</label>
+                  <input [(ngModel)]="alumno._instagram" type="text" class="form-control tm" placeholder="Instagram"
+                    id="ig">
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
-                 <!--Especialidad-->
-                 <div class="row mb-3">
-                  <div class="col-sm-7">
-                    <div class="input-group">
-                      <span class="input-group-text tm">Especialidad:</span>
-                      <select id="especialidad" [(ngModel)]="alumno._especialidad" class="form-select tm">
-                        <option (click)='area()' value="Programacion">Programación</option>
-                        <option (click)='area()' value="Electricidad">Electricidad</option>
-                        <option (click)='area()' value="Contabilidad">Contabilidad</option>
-                        <option (click)='area()' value="Producción Industrial De Alimentos">Producción Industrial De
-                          Alimentos</option>
-                        <option (click)='area()' value="Soporte Y Mantenimieto Equipo De Computo">Soporte Y Mantenimieto
-                          Equipo De Computo</option>
-                      </select>
-                    </div>
+                <!--Especialidad-->
+                <div class="col-md-5 col-lg-6">
+                  <div class="input-group">
+                    <span class="input-group-text tm">Especialidad:</span>
+                    <select id="especialidad" [(ngModel)]="alumno._especialidad" class="form-select tm"
+                      (change)="area()">
+                      <option value="Programación">Programación</option>
+                      <option value="Electricidad">Electricidad</option>
+                      <option value="Contabilidad">Contabilidad</option>
+                      <option value="Producción Industrial De Alimentos">Producción Industrial De
+                        Alimentos</option>
+                      <option value="Soporte Y Mantenimieto Equipo De Computo">Soporte Y Mantenimieto
+                        Equipo De Computo</option>
+                    </select>
                   </div>
-                  <div class="col-sm-5 d-flex">
-                    <div class="input-group">
-                      <span class="input-group-text tm" id="basic-addon1">Sem.</span>
-                      <select id="input-group-text" [(ngModel)]="alumno._semestre" class="form-select tm">
-                        <option value="PRIMER">°1</option>
-                        <option value="SEGUNDO">°2</option>
-                        <option value="TERCER">°3</option>
-                        <option value="CUARTO">°4</option>
-                        <option value="QUINTO">°5</option>
-                        <option value="SEXTO">°6</option>
-                      </select>
-                    </div>
-  
-  
-                    <div class="input-group px-1">
-                      <span class="input-group-text tm" id="basic-addon1">Grupo</span>
-                      <select id="input-group-text" [(ngModel)]="alumno._grupo" class="form-select tm">
-                        <option value="A">"A"</option>
-                        <option value="B">"B"</option>
-                        <option value="C">"C"</option>
-                        <option value="D">"D"</option>
-                        <option value="E">"E"</option>
-                        <option value="F">"F"</option>
-                        <option value="G">"G"</option>
-                        <option value="H">"H"</option>
-                        <option value="I">"I"</option>
-                        <option value="J">"J"</option>
-                        <option value="K">"K"</option>
-                      </select>
-                    </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <span class="input-group-text tm">grado</span>
+                    <select id="semestre" [(ngModel)]="alumno._semestre" class="form-select tm">
+                      <option value="PRIMER">°1</option>
+                      <option value="SEGUNDO">°2</option>
+                      <option value="TERCER">°3</option>
+                      <option value="CUARTO">°4</option>
+                      <option value="QUINTO">°5</option>
+                      <option value="SEXTO">°6</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="input-group">
+                    <span class="input-group-text tm" id="basic-addon1">Grupo</span>
+                    <select id="grupo" [(ngModel)]="alumno._grupo" class="form-select tm">
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                      <option value="H">H</option>
+                      <option value="I">I</option>
+                      <option value="J">J</option>
+                      <option value="K">K</option>
+                    </select>
                   </div>
                 </div>
                 <!--Area y Turno-->
                 <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm" id="basic-addon1">Área</span>
-                  <input type="text" [(ngModel)]="alumno._area" class="form-select tm" disabled>
-  
-                  <span class="input-group-text tm" id="basic-addon1">Turno</span>
+                  <span class="input-group-text tm" >Área</span>
+                  <input type="text" [(ngModel)]="alumno._area" class="form-control tm" disabled>
+
+                  <span class="input-group-text tm" >Turno</span>
                   <select id="input-group-text" [(ngModel)]="alumno._turno" class="form-select tm">
                     <option value="Matutino">Matutino</option>
                     <option value="Vespertino">Vespertino</option>
@@ -187,92 +186,156 @@
                 </div>
                 <!--No Control-->
                 <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm" id="basic-addon1">#</span>
-                  <input [(ngModel)]="alumno._numControl" type="text" class="form-control tm" placeholder="Numero de Control"
-                    aria-label="Username" aria-describedby="basic-addon1" value="">
-                  <span class="input-group-text tm" id="basic-addon1">!IMPORTANTE</span>
+                  <span class="input-group-text tm" >#</span>
+                  <input [(ngModel)]="alumno._numControl" type="text" class="form-control tm"
+                    placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
+                  <span class="input-group-text tm" >!IMPORTANTE</span>
                 </div>
               </div>
               <!-- Formulario docente -->
               <div class="row" *ngIf="tipoUsuario == 'Docente'">
                 <!--Nombre-->
                 <div class="col-md-4">
-                  <label for="nombre" class="form-label ps-2" style="font-size: small;">Nombre</label>
-                  <input [(ngModel)]="docente._nombre" type="text" class="form-control text-sm"
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="nombre">
+                  <label for="nombre" class="form-label ps-2 tm">Nombre</label>
+                  <input [(ngModel)]="docente._nombre" type="text" class="form-control tm" id="nombre" #nombre
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="nombre" (keypress)="valida($event)">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
-                  <label for="ap" class="form-label ps-2" style="font-size: small;">Apellido Paterno</label>
-                  <input [(ngModel)]="docente._apellidoP" type="text" class="form-control"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="ap" >
+                  <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
+                  <input [(ngModel)]="docente._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
-                  <label for="am" class="form-label ps-2" style="font-size: small;">Apellido Materno</label>
-                  <input [(ngModel)]="docente._apellidoM" type="text" class="form-control"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="am">
+                  <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
+                  <input [(ngModel)]="docente._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
-                  <label for="fn" class="form-label ps-2" style="font-size: small;">Fecha de nacimiento</label>
-                  <input [(ngModel)]="docente._fechaNac" type="date" class="form-control"
-                    placeholder="Fecha de nacimiento" style="font-size: small;" id="fn">
+                  <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
+                  <input [(ngModel)]="docente._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
+                    placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
-                  <label for="correo" class="form-label ps-2" style="font-size: small;">Correo electrónico</label>
-                  <input [(ngModel)]="docente._correo" type="email" class="form-control"
-                    placeholder="Correo electrónico" style="font-size: small;" id="correo">
+                  <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
+                  <input [(ngModel)]="docente._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
-                  <label for="curp" class="form-label ps-2" style="font-size: small;">CURP</label>
-                  <input [(ngModel)]="docente._curp" type="text" class="form-control"
-                    placeholder="CURP" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <label for="curp" class="form-label ps-2 tm">CURP</label>
+                  <input [(ngModel)]="docente._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
-                  <label for="dir" class="form-label ps-2" style="font-size: small;">Dirección</label>
-                  <input [(ngModel)]="docente._direccion" type="text area" class="form-control"
-                    placeholder="Dirección" style="font-size: small;" id="dir">
+                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <input [(ngModel)]="docente._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
+                    placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
-                  <label for="tel" class="form-label ps-2" style="font-size: small;">Teléfono</label>
-                  <input [(ngModel)]="docente._telefono" type="text" class="form-control"
-                    placeholder="Teléfono" style="font-size: small;" id="tel">
+                  <label for="tel" class="form-label ps-2 tm">Teléfono</label>
+                  <input [(ngModel)]="docente._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
-                  <label for="fb" class="form-label ps-2" style="font-size: small;">Facebook</label>
-                  <input [(ngModel)]="docente._facebook" type="text" class="form-control"
-                    placeholder="Facebook" style="font-size: small;" id="fb">
+                  <label for="fb" class="form-label ps-2 tm">Facebook</label>
+                  <input [(ngModel)]="docente._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
-                  <label for="tw" class="form-label ps-2" style="font-size: small;">Twitter</label>
-                  <input [(ngModel)]="docente._twitter" type="text" class="form-control"
-                    placeholder="Twitter" style="font-size: small;" id="tw">
+                  <label for="tw" class="form-label ps-2 tm">Twitter</label>
+                  <input [(ngModel)]="docente._twitter" type="text" class="form-control tm" placeholder="Twitter"
+                    id="tw">
                 </div>
                 <!-- instagram -->
                 <div class="col-md-3">
-                  <div class="input-group">
-                    <span class="input-group-text" style="font-size: small;"><i class="bi bi-instagram"></i></span>
-                    <input [(ngModel)]="docente._instagram" type="text" class="form-control"
-                      placeholder="Instagram" style="font-size: small;" id="ig">
-                  </div>
+                  <label for="ig" class="form-label ps-2 tm">Instagram</label>
+                  <input [(ngModel)]="docente._instagram" type="text" class="form-control tm" placeholder="Instagram"
+                    id="ig">
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
               </div>
-              <!-- Formulario control escolar -->
-              <div class="row d-flex" *ngIf="tipoUsuario == 'CE'">
-                hola control escolar
+              <!-- Formulario control escolar y Orientacion Educativa -->
+              <div class="row d-flex" *ngIf="tipoUsuario == 'CE' || tipoUsuario=='OE'">
+                <!--Nombre-->
+                <div class="col-md-4">
+                  <label for="nombre" class="form-label ps-2 tm">Nombre</label>
+                  <input [(ngModel)]="administrativo._nombre" type="text" class="form-control tm" id="nombre" #nombre
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="nombre" (keypress)="valida($event)">
+                </div>
+                <!--Apellido Paterno-->
+                <div class="col-md-4">
+                  <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
+                  <input [(ngModel)]="administrativo._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="ap">
+                </div>
+                <!--Apellido Materno-->
+                <div class="col-md-4">
+                  <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
+                  <input [(ngModel)]="administrativo._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
+                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    id="am">
+                </div>
+                <!--Fecha de nacimiento-->
+                <div class="col-md-6">
+                  <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
+                  <input [(ngModel)]="administrativo._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
+                    placeholder="Fecha de nacimiento" id="fn">
+                </div>
+                <!-- correo electrónico -->
+                <div class="col-md-6">
+                  <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
+                  <input [(ngModel)]="administrativo._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <p id="validaCorreo" class="tm"></p>
+                </div>
+                <!-- CURP -->
+                <div class="col-md-4">
+                  <label for="curp" class="form-label ps-2 tm">CURP</label>
+                  <input [(ngModel)]="administrativo._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                </div>
+                <!-- dirección -->
+                <div class="col-md-8">
+                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <input [(ngModel)]="administrativo._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
+                    placeholder="Dirección" id="dir">
+                </div>
+                <!-- telefono -->
+                <div class="col-md-3">
+                  <label for="tel" class="form-label ps-2 tm">Teléfono</label>
+                  <input [(ngModel)]="administrativo._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
+                </div>
+                <!-- facebook -->
+                <div class="col-md-3">
+                  <label for="fb" class="form-label ps-2 tm">Facebook</label>
+                  <input [(ngModel)]="administrativo._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
+                </div>
+                <!-- twitter -->
+                <div class="col-md-3">
+                  <label for="tw" class="form-label ps-2 tm">Twitter</label>
+                  <input [(ngModel)]="administrativo._twitter" type="text" class="form-control tm" placeholder="Twitter"
+                    id="tw">
+                </div>
+                <!-- instagram -->
+                <div class="col-md-3">
+                  <label for="ig" class="form-label ps-2 tm">Instagram</label>
+                  <input [(ngModel)]="administrativo._instagram" type="text" class="form-control tm" placeholder="Instagram"
+                    id="ig">
+                </div>
               </div>
-              <!-- Formulario orientacion educativa -->
-              <div class="row d-flex" *ngIf="tipoUsuario == 'OE'">
-                hola orientacion educativa
+              <!-- boton de registro -->
+              <div class="d-flex justify-content-center mt-2 mb-2" *ngIf="tipoUsuario!=''">
+                <button class="btn bg-secondary rounded btn-lg text-white" type="button"
+                  (click)='Registro()'>{{registrarse}}</button>
               </div>
             </div>
           </div>

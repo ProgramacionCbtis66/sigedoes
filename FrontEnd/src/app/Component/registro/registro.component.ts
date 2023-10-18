@@ -6,9 +6,10 @@ import { Administrativo } from 'src/app/Modelo/Administrativo';
 import * as Notiflix from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { NavegacionService } from 'src/app/service/navegacion.service';
-import { DomSanitizer } from '@angular/platform-browser';
+ 
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { Alumno } from 'src/app/Modelo/Alumno';
+
 
 
 
@@ -29,27 +30,27 @@ export class RegistroComponent implements OnInit {
   administrativo: Administrativo = new Administrativo();
   tipoUsuario: string = "";
   @ViewChild('fileInput') fileInput!: ElementRef;
-
+ 
   constructor(private auth: AuthService, 
     private router: Router, 
     private nav: NavegacionService,
-    private sanitizer: DomSanitizer,
-    private Base64 :UsuarioService
-    ) { this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false;
+    private Base64 :UsuarioService,
+   ) 
+    { 
+      this.nav._logout= false;this.nav._registro=true; this.nav._iflogin=false;
     }
 
   ngOnInit(): void {}
 
   public area(): void {
     switch (this.alumno._especialidad) {
-      case "Programacion": case "Electricidad": case "Soporte":
+      case "Programación": case "Electricidad": case "Producción Industrial De Alimentos":
         this.alumno._area = "Físico Matemático"; break;
       case "Contabilidad":
         this.alumno._area = "Económico Administrativo"; break;
       case "Alimentos":
         this.alumno._area = "Químico Biológico"; break;
     }
-    alert(this.alumno._area);
   }
   public Registro(): void {
     let contra = this.alumno._pass2;
@@ -125,5 +126,85 @@ export class RegistroComponent implements OnInit {
   activarInput() {
     this.fileInput.nativeElement.click();
   }
+
+  valida(evt:any){
+   
+    const input = evt.target.id;
+    var code = (evt.which) ? evt.which : evt.keyCode;
+
+    if( input=="nombre" || input=="ap" || input=="am" )
+    {
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=65 && code<=90 || code>=97 && code<=122 || code==32) { // is a letter.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    if(input=="telefono"){
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=48 && code<=57) { // is a number.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    if(input=="curp"){
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=65 && code<=90 || code>=48 && code<=57) { // is a letter.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    if(input=="numControl"){
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=48 && code<=57) { // is a number.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    if(input=="correo"){
+      const valor = evt.target.value;
+      const emailRegex = /^[a-z0-9.]+@cbtis66\.edu\.m$/;
+      const validaCorreo = document.getElementById('validaCorreo');
+      if(!emailRegex.test(valor)){
+        if(validaCorreo) {
+          validaCorreo.innerHTML = 'Correo invalido';
+          validaCorreo.style.visibility = 'visible';
+          validaCorreo.style.color = 'red';
+        }
+      }else{
+        if(validaCorreo) {
+          validaCorreo.innerHTML = 'Correo valido';
+          validaCorreo.style.visibility = 'visible';
+          validaCorreo.style.color = 'green';
+        }
+      }
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=65 && code<=90 || code>=97 && code<=122 || code==46 || code==64 || code>=48 && code<=57) { // is a letter.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    if(input=="direccion"){
+      if(code==8) { // backspace.
+        return true;
+      } else if(code>=65 && code<=90 || code>=97 && code<=122 || code==32 || code>=48 && code<=57 || code==35) { // is a letter.
+        return true;
+      } else{ // other keys.
+        return false;
+      }
+    }
+    return false;
+  }
+  
 }
 
