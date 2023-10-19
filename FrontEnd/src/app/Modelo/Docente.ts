@@ -2,11 +2,8 @@ import { Usuario } from "./CalseUsuario";
 
 export class Docente extends Usuario{
          
- 
-         
         private RFC: string;
         private CEDULA: string;
-         
         private gradoAcademico: string;
       
 
@@ -15,8 +12,6 @@ export class Docente extends Usuario{
             super();
             this.RFC = "";
             this.CEDULA = "";
-             
-             
             this.gradoAcademico = "";
         }
       

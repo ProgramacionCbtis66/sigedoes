@@ -195,20 +195,21 @@
                     placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
                   <span class="input-group-text tm">!IMPORTANTE</span>
                 </div>
-              </div>
-              <!-- pass -->
-              <div class="col-md-6 pt-3">
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm">Contraseña</span>
-                  <input type="text" [(ngModel)]="alumno._pass" class="form-control tm" id="pass">
+                <!-- pass -->
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Contraseña</span>
+                    <input type="text" [(ngModel)]="alumno._pass" class="form-control tm" id="pass">
+                  </div>
+                </div>
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Confirmar</span>
+                    <input type="text" [(ngModel)]="alumno._pass2" class="form-control tm" id="pass2">
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6 pt-3">
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm">Confirmar</span>
-                  <input type="text" [(ngModel)]="alumno._pass2" class="form-control tm" id="pass2">
-                </div>
-              </div>
+
               <!-- Formulario docente -->
               <div class="row" *ngIf="tipoUsuario == 'Docente'">
                 <!--Nombre-->

@@ -25,11 +25,11 @@ export class AuthGuard implements CanActivate {
         if(activatedRoute=="homeDocente") {return true;}
         else {this.router.navigate(['/homeDocente']);}
       } 
-      if(this.authService.decodifica().rol=="CO"){
-        if(activatedRoute=="admin") {return true;}
-        else { this.router.navigate(['/admin']);}
+      if(this.authService.decodifica().rol=="CE"){
+        if(activatedRoute=="controlEscolar") {return true;}
+        else { this.router.navigate(['/controlEscolar']);}
       }
-      if(this.authService.decodifica().rol=="OD"){
+      if(this.authService.decodifica().rol=="OE"){
         if(activatedRoute=="orientacionEdu") {return true;}
         else { this.router.navigate(['/orientacionEdu']);}
       }

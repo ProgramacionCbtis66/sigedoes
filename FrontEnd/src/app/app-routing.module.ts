@@ -19,10 +19,10 @@ import { OrientacionEducativaComponent } from './Component/home/orientacion-educ
 
 const routes: Routes = [
   {path:"", redirectTo: "homeAlumno", pathMatch:"full"},
-  {path:"admin",component: AdministrativoComponent,canActivate:[AuthGuard]},
+  {path:"controlEscolar",component: AdministrativoComponent,canActivate:[AuthGuard]},
   {path:"homeAlumno", component: AlumnoComponent, canActivate:[AuthGuard]},
   {path:"Alumnoconstancia", component: ConstanciasComponent, canActivate:[AuthGuard]},
-  {path:"orientacionEdu", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
+  {path:"orientacionEducativa", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
   {path:"homeDocente", component: DocenteComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},

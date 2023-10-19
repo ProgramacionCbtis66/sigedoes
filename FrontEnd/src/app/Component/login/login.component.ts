@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
                 Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM+" "+this.auth.decodifica().rol);
                 
                 if (this.auth.isAuth()) {
-                  if (this.auth.decodifica().rol == "CO") {
+                  if (this.auth.decodifica().rol == "CE") {
                     this.nav._Administrador = true;
                     this.nav._iflogin = false;
-                    this.router.navigate(['/admin']);
+                    this.router.navigate(['/controlEscolar']);
                   }
                   if (this.auth.decodifica().rol == "DO") {
                     this.nav._docente = true;
@@ -52,6 +52,11 @@ export class LoginComponent implements OnInit {
                     this.nav._homeAlumno = true;
                     this.nav._iflogin = false;
                     this.router.navigate(['/homeAlumno']);
+                  }
+                  if(this.auth.decodifica().rol == "OE"){
+                    this.nav._iflogin = false;
+                    this.nav._orientacionEdu = true;
+                    this.router.navigate(['/orientacionEducativa']);
                   }
 
                 } else if (res.Error == "Usuario y contraseña incorrecta") {

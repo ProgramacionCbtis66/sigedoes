@@ -53,8 +53,9 @@ export class RegistroComponent implements OnInit {
   }
   public Registro(): void {
       if (this.tipoUsuario == "Docente") {
-        if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && this.docente._correo !== "" && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== "" && this.docente._numControl !== "" && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
+        if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && this.docente._correo !== "" && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== ""  && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
           this.docente._tipoUsuario = "Docente";
+          this.docente._numControl = this.docente._correo;
           if(this.docente._pass === this.docente._pass2){
             Notiflix.Loading.standard("Validando");
             this.auth.registro(this.docente).subscribe((res: any) => {
@@ -95,8 +96,9 @@ export class RegistroComponent implements OnInit {
         Notiflix.Notify.failure("Faltan Datos");
       }
       } else if (this.administrativo._nombre != "" && this.administrativo._apellidoP != "" && this.administrativo._apellidoM != "" && this.administrativo._correo != "" && this.administrativo._curp != "" && this.administrativo._departamento != "" && this.administrativo._direccion != "" && this.administrativo._foto != null && this.administrativo._nivelOperativo != "" && this.administrativo._departamento != "") {
+        this.administrativo._numControl = this.administrativo._correo;
         if(this.administrativo._pass === this.administrativo._pass2){
-        this.administrativo._tipoUsuario = "Administrativo";
+        this.administrativo._tipoUsuario = this.tipoUsuario;
         Notiflix.Loading.standard("Validando");
         this.auth.registro(this.administrativo).subscribe((res: any) => {
           if (res.Aceptado == "Datos Aceptados") {
@@ -175,7 +177,7 @@ export class RegistroComponent implements OnInit {
         return false;
       }
     }
-    if (input == "telefono") {
+    if (input == "tel") {
       if (code == 8) { // backspace.
         return true;
       } else if (code >= 48 && code <= 57) { // is a number.
