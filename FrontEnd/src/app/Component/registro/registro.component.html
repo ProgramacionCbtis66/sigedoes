@@ -68,49 +68,53 @@
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
-                  <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="ap">
+                  <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
-                  <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="am">
+                  <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
-                  <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
-                    placeholder="Fecha de nacimiento" id="fn">
+                  <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm" id="fn"
+                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
-                  <input [(ngModel)]="alumno._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <input [(ngModel)]="alumno._correo" type="email" class="form-control tm" (keyup)="valida($event)"
+                    (change)="valida($event)" placeholder="Correo electrónico" id="correo">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
-                  <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
+                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
-                  <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
-                    placeholder="Dirección" id="dir">
+                  <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm"
+                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
-                  <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
+                  <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono"
+                    (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
-                  <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
+                  <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm" placeholder="Facebook"
+                    (keypress)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
@@ -175,10 +179,10 @@
                 </div>
                 <!--Area y Turno-->
                 <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm" >Área</span>
+                  <span class="input-group-text tm">Área</span>
                   <input type="text" [(ngModel)]="alumno._area" class="form-control tm" disabled>
 
-                  <span class="input-group-text tm" >Turno</span>
+                  <span class="input-group-text tm">Turno</span>
                   <select id="input-group-text" [(ngModel)]="alumno._turno" class="form-select tm">
                     <option value="Matutino">Matutino</option>
                     <option value="Vespertino">Vespertino</option>
@@ -186,10 +190,23 @@
                 </div>
                 <!--No Control-->
                 <div class="input-group mb-3 px-3">
-                  <span class="input-group-text tm" >#</span>
+                  <span class="input-group-text tm">#</span>
                   <input [(ngModel)]="alumno._numControl" type="text" class="form-control tm"
                     placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
-                  <span class="input-group-text tm" >!IMPORTANTE</span>
+                  <span class="input-group-text tm">!IMPORTANTE</span>
+                </div>
+              </div>
+              <!-- pass -->
+              <div class="col-md-6 pt-3">
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text tm">Contraseña</span>
+                  <input type="text" [(ngModel)]="alumno._pass" class="form-control tm" id="pass">
+                </div>
+              </div>
+              <div class="col-md-6 pt-3">
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text tm">Confirmar</span>
+                  <input type="text" [(ngModel)]="alumno._pass2" class="form-control tm" id="pass2">
                 </div>
               </div>
               <!-- Formulario docente -->
@@ -204,49 +221,53 @@
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
-                  <input [(ngModel)]="docente._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="ap">
+                  <input [(ngModel)]="docente._apellidoP" type="text" class="form-control tm" id="ap"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
-                  <input [(ngModel)]="docente._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="am">
+                  <input [(ngModel)]="docente._apellidoM" type="text" class="form-control tm" id="am"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
-                  <input [(ngModel)]="docente._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
-                    placeholder="Fecha de nacimiento" id="fn">
+                  <input [(ngModel)]="docente._fechaNac" type="date" class="form-control tm" id="fn"
+                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
-                  <input [(ngModel)]="docente._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <input [(ngModel)]="docente._correo" type="email" class="form-control tm" (keyup)="valida($event)"
+                    (change)="valida($event)" placeholder="Correo electrónico" id="correo">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
-                  <input [(ngModel)]="docente._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <input [(ngModel)]="docente._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
+                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
-                  <input [(ngModel)]="docente._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
-                    placeholder="Dirección" id="dir">
+                  <input [(ngModel)]="docente._direccion" type="text area" class="form-control tm"
+                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
-                  <input [(ngModel)]="docente._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
+                  <input [(ngModel)]="docente._telefono" type="text" class="form-control tm" placeholder="Teléfono"
+                    (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
-                  <input [(ngModel)]="docente._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
+                  <input [(ngModel)]="docente._facebook" type="text" class="form-control tm" placeholder="Facebook"
+                    (keypress)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
@@ -262,6 +283,38 @@
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
+                <!-- RFC -->
+                <div class="col-md-4">
+                  <label for="rfc" class="form-label ps-2 tm">RFC</label>
+                  <input [(ngModel)]="docente._RFC" type="text" class="form-control tm" placeholder="RFC" id="rfc"
+                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="rfc">
+                </div>
+                <!-- Grado Academico -->
+                <div class="col-md-4">
+                  <label for="grado" class="form-label ps-2 tm">Grado Academico</label>
+                  <input [(ngModel)]="docente._gradoAcademico" type="text" class="form-control tm"
+                    placeholder="Grado Academico" id="grado" id="grado">
+                </div>
+                <!-- Cedula profesional -->
+                <div class="col-md-4">
+                  <label for="cedula" class="form-label ps-2 tm">Cedula profesional</label>
+                  <input [(ngModel)]="docente._CEDULA" type="text" class="form-control tm"
+                    placeholder="Cedula profesional" id="cedula" style="font-size: small;text-transform: uppercase;"
+                    id="cedula">
+                </div>
+                <!-- pass -->
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Contraseña</span>
+                    <input type="text" [(ngModel)]="docente._pass" class="form-control tm" id="pass">
+                  </div>
+                </div>
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Confirmar</span>
+                    <input type="text" [(ngModel)]="docente._pass2" class="form-control tm" id="pass2">
+                  </div>
+                </div>
               </div>
               <!-- Formulario control escolar y Orientacion Educativa -->
               <div class="row d-flex" *ngIf="tipoUsuario == 'CE' || tipoUsuario=='OE'">
@@ -275,49 +328,53 @@
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
-                  <input [(ngModel)]="administrativo._apellidoP" type="text" class="form-control tm" id="ap" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="ap">
+                  <input [(ngModel)]="administrativo._apellidoP" type="text" class="form-control tm" id="ap"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
-                  <input [(ngModel)]="administrativo._apellidoM" type="text" class="form-control tm" id="am" (keypress)="valida($event)"
-                    placeholder="Apellido empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="am">
+                  <input [(ngModel)]="administrativo._apellidoM" type="text" class="form-control tm" id="am"
+                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    style="font-size: small;text-transform: uppercase;" id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
-                  <input [(ngModel)]="administrativo._fechaNac" type="date" class="form-control tm" id="fn" (keypress)="valida($event)"
-                    placeholder="Fecha de nacimiento" id="fn">
+                  <input [(ngModel)]="administrativo._fechaNac" type="date" class="form-control tm" id="fn"
+                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
-                  <input [(ngModel)]="administrativo._correo" type="email" class="form-control tm" (keypress)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                  <input [(ngModel)]="administrativo._correo" type="email" class="form-control tm"
+                    (keyup)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
-                  <input [(ngModel)]="administrativo._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <input [(ngModel)]="administrativo._curp" type="text" class="form-control tm" placeholder="CURP"
+                    id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
-                  <input [(ngModel)]="administrativo._direccion" type="text area" class="form-control tm" (keypress)="valida($event)"
-                    placeholder="Dirección" id="dir">
+                  <input [(ngModel)]="administrativo._direccion" type="text area" class="form-control tm"
+                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
-                  <input [(ngModel)]="administrativo._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel">
+                  <input [(ngModel)]="administrativo._telefono" type="text" class="form-control tm"
+                    placeholder="Teléfono" (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
-                  <input [(ngModel)]="administrativo._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb">
+                  <input [(ngModel)]="administrativo._facebook" type="text" class="form-control tm"
+                    placeholder="Facebook" (keypress)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
@@ -328,10 +385,44 @@
                 <!-- instagram -->
                 <div class="col-md-3">
                   <label for="ig" class="form-label ps-2 tm">Instagram</label>
-                  <input [(ngModel)]="administrativo._instagram" type="text" class="form-control tm" placeholder="Instagram"
-                    id="ig">
+                  <input [(ngModel)]="administrativo._instagram" type="text" class="form-control tm"
+                    placeholder="Instagram" id="ig">
+                </div>
+                <!-- division -->
+                <hr class="border border-danger border-1 opacity-50 mt-2">
+                <!-- turno -->
+                <div class="col-md-4">
+                  <label for="turno" class="form-label ps-2 tm">Turno</label>
+                  <select id="turno" [(ngModel)]="administrativo._turno" class="form-select tm">
+                    <option value="Matutino">Matutino</option>
+                    <option value="Vespertino">Vespertino</option>
+                  </select>
+                </div>
+                <!-- nivel operativo -->
+                <div class="col-md-3">
+                  <label for="nivel" class="form-label ps-2 tm">Nivel Operativo</label>
+                  <input id="nivel" [(ngModel)]="administrativo._nivelOperativo" class="form-control tm">
+                </div>
+                <!-- Departamento -->
+                <div class="col-md-5">
+                  <label for="departamento" class="form-label ps-2 tm">Departamento</label>
+                  <input id="departamento" [(ngModel)]="administrativo._departamento" class="form-control tm">
+                </div>
+                <!-- pass -->
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Contraseña</span>
+                    <input type="text" [(ngModel)]="administrativo._pass" class="form-control tm" id="pass">
+                  </div>
+                </div>
+                <div class="col-md-6 pt-3">
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text tm">Confirmar</span>
+                    <input type="text" [(ngModel)]="administrativo._pass2" class="form-control tm" id="pass2">
+                  </div>
                 </div>
               </div>
+
               <!-- boton de registro -->
               <div class="d-flex justify-content-center mt-2 mb-2" *ngIf="tipoUsuario!=''">
                 <button class="btn bg-secondary rounded btn-lg text-white" type="button"

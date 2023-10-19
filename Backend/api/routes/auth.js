@@ -14,7 +14,7 @@ peticion.post('/recuperarContraseña', async (req, res) => {
             let dato = JSON.parse(datos);
             dato.tipo = "forgotPassword";
             let data = JSON.stringify(dato);
-            const usuario = jwt.sign(data, 'MA@L', {expiresIn:'20m'});
+            const usuario = jwt.sign(data, 'MA@L', { expiresIn: '20m' });
             res.json({ usuario });
         } else {
             res.json({ Error: "Correo invalido" });
@@ -32,25 +32,25 @@ peticion.post('/recuperarContraseña', async (req, res) => {
 
 peticion.post('/acceso', async (req, res) => {
     const { nombre, pass } = req.body;
-    
+
     let sql = `CALL login(?,?)`;
     var usuario = '';
     const conexion = await ccn();
     try {
-        const [registros] = await conexion.execute(sql,[nombre,pass]);
+        const [registros] = await conexion.execute(sql, [nombre, pass]);
         usuario = registros;
-       
+
     } catch (error) {
         console.log(error);
         res.json({ Error: error });
     } finally {
-       await conexion.end();
+        await conexion.end();
     }
-   
-    if (usuario[0][0] !== undefined && usuario.length >0) {
+
+    if (usuario[0][0] !== undefined && usuario.length > 0) {
         var datos = JSON.stringify(usuario[0][0]);
         var dato = JSON.parse(datos);
-        const token = jwt.sign(dato, 'MA@L', {  expiresIn :'20m'});
+        const token = jwt.sign(dato, 'MA@L', { expiresIn: '20m' });
         res.json({ token });
     } else {
         console.log("Usuario y contraseña incorrecta");
@@ -59,22 +59,83 @@ peticion.post('/acceso', async (req, res) => {
 });
 
 peticion.post('/registro', async (req, res) => {
-    const { nombre, correo, pass, pass2, curp, noctrl, especialidad, semestre, area, turno, direccion, CTO, grupo } = req.body;
+    const datos = req.body;
     const horario = "7:00 - 15:00";
     const alta = 0;
     const rol = "user";
-    //Subir datos a la tabla usuario
+    
     try {
         const conexion = await ccn();
-        const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre) VALUES (?, ?, ?, ?, ?, ?)', [noctrl, noctrl, pass2, rol, 600, nombre]);
-        const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,nombre,direccion,especialidad,area,grado,grupo,turno,horario,CTO,correo,alta,CURP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [noctrl, nombre, direccion, especialidad, area, semestre, grupo, turno, horario, CTO, correo, alta, curp]);
-
-        res.json({ Aceptado: "Datos Aceptados" });
+        //Subir datos a la tabla usuario
+        const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre,apellidoP,apellidoM,foto) VALUES (?, ?, ?, ?, ?, ?,?,?,?)',
+            [datos.numControl,
+            datos.numControl,
+            datos.pass,
+            datos.rol,
+                600,
+            datos.nombre,
+            datos.apellidoP,
+            datos.apellidoM,
+            datos.foto]);
+        //Subir datos a la tabla alumno
+        if (datos.tipoUsuario == "Alumno") {
+            const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,direccion,especialidad,area,grado,grupo,turno,CTO,correo,alta,CURP,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [
+                    datos.numControl,
+                    datos.direccion,
+                    datos.especialidad,
+                    datos.area,
+                    datos.grado,
+                    datos.grupo,
+                    datos.turno,
+                    datos.CTO,
+                    datos.correo,
+                    0,
+                    datos.CURP,
+                    datos.facebook,
+                    datos.instagram,
+                    datos.twitter
+                ]);
+        }
+        //Subir datos a la tabla profesor
+        if (datos.tipoUsuario == "Docente") {
+            const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,telefono,RFC,CURP,CEDULA,fechaNac,correo,foto,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [
+                    datos.numControl,
+                    datos.direccion,
+                    datos.gradoAcademico,
+                    datos.telefono,
+                    datos.RFC,
+                    datos.CURP,
+                    datos.CEDULA,
+                    datos.fechaNac,
+                    datos.correo,
+                    datos.foto,
+                    datos.facebook,
+                    datos.instagram,
+                    datos.twitter
+                ]);
+        }
+        //Subir datos a la tabla administrativo
+        if( datos.tipoUsuario == "CE" || datos.tipoUsuario=="OE"){
+            const consulta4 = await conexion.execute('INSERT INTO adminstrativo (numControl, direccion, telefono, departamento, turno, correo, CURP,foto,nivelOperativo) VALUES (?,?,?,?,?,?,?,?)',
+            [
+                datos.numControl,
+                datos.direccion,
+                datos.telefono,
+                datos.departamento,
+                datos.turno,
+                datos.correo,
+                datos.CURP,
+                datos.foto,
+                datos.nivelOperativo
+            ]);
+        }
+        res.json({ Aceptado: "Datos Guardados" });
     } catch (error) {
-        res.json({ Error: "Los Datos No Fueron Aceptados" });
-    } finally {
+        res.json({ Error: "Los Datos No Fueron Registrados" });
+    } 
         conexion.end();
-    }
 });
 
 module.exports = peticion;

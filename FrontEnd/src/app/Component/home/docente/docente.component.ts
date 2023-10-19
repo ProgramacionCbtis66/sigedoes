@@ -40,9 +40,8 @@ export class DocenteComponent implements OnInit {
         this.datosDocente._nombre = registro.nombre;
         this.datosDocente._apellidoP = registro.apellidoP;
         this.datosDocente._apellidoM = registro.apellidoM;
-        this.datosDocente._fechaInicio = registro.fechaInicio;
         this.datosDocente._correo = registro.correo;
-        this.datosDocente._CURP = registro.CURP;
+        this.datosDocente._curp = registro.CURP;
         this.datosDocente._CEDULA = registro.CEDULA;
         this.datosDocente._RFC = registro.RFC;
         this.datosDocente._gradoAcademico = registro.gradoAcademico;

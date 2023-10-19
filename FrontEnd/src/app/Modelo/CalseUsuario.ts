@@ -1,5 +1,5 @@
 export class Usuario {
-
+    private tipoUsuario: string;
     private nombre:string;
     private apellidoP: string;
     private apellidoM: string;
@@ -21,6 +21,7 @@ export class Usuario {
     private foto:Blob;
     
     constructor() {
+        this.tipoUsuario = "";
         this.nombre = "";
         this.apellidoP = "";
         this.apellidoM = "";
@@ -42,6 +43,7 @@ export class Usuario {
         this.foto = new Blob();
     }
 
+    get _tipoUsuario(){return this.tipoUsuario;}
     get _nombre(){return this.nombre;}
     get _apellidoP(){return this.apellidoP;}
     get _apellidoM(){return this.apellidoM;}
@@ -62,6 +64,7 @@ export class Usuario {
     get _rol(){return this.rol;}
     get _foto(){return this.foto;}
 
+    set _tipoUsuario(tipoUsuario:string){this.tipoUsuario = tipoUsuario;}
     set _nombre(nombre:string){this.nombre = nombre;}
     set _apellidoP(apellidoP:string){this.apellidoP = apellidoP;}
     set _apellidoM(apellidoM:string){this.apellidoM = apellidoM;}
