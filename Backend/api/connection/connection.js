@@ -6,7 +6,7 @@ const ccn = async () => {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            database: 'sigese',
+            database: 'sigedoes',
             password: '123456'
         });
     } catch (error) {
