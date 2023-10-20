@@ -23,8 +23,7 @@ export class RegistroComponent implements OnInit {
   public proyecto: string = environment.proyecto;
   foto: any = ".././assets/img/tufoto.png";
   registrarse = 'Registro';
-  informacion = '  Info';
-  infografia: string = '.././assets/img/infografiaa.png';
+  informacion = 'Info';
   alumno: Alumno = new Alumno();
   docente: Docente = new Docente();
   administrativo: Administrativo = new Administrativo();
@@ -37,6 +36,7 @@ export class RegistroComponent implements OnInit {
     private Base64: UsuarioService,
   ) {
     this.nav._logout = false; this.nav._registro = true; this.nav._iflogin = false;
+    
   }
 
   ngOnInit(): void { }
@@ -55,19 +55,22 @@ export class RegistroComponent implements OnInit {
       if (this.tipoUsuario == "Docente") {
         if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && this.docente._correo !== "" && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== ""  && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
           this.docente._tipoUsuario = "Docente";
+          this.docente._rol="DO";
           this.docente._numControl = this.docente._correo;
+          this.docente._foto = this.foto;
           if(this.docente._pass === this.docente._pass2){
             Notiflix.Loading.standard("Validando");
             this.auth.registro(this.docente).subscribe((res: any) => {
-              if (res.Aceptado == "Datos Aceptados") {
+              if (res.Aceptado == "Datos Guardados") {
                 Notiflix.Loading.remove();
-                Notiflix.Notify.info("Registro de datos en verificación");
+                Notiflix.Notify.info("Registro de datos en verificación por el administrador");
                 this.router.navigate(['/login']);
-              } else if (res.Error == "Los Datos No Fueron Aceptados") {
+              } else if (res.Error == "Los Datos No Fueron Registrados") {
                 Notiflix.Loading.remove();
                 Notiflix.Notify.failure(res.Error);
               }
             });
+            Notiflix.Loading.remove();
         }else{
           Notiflix.Notify.failure("Las contraseñas no coinciden");
         }
@@ -78,13 +81,15 @@ export class RegistroComponent implements OnInit {
         if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && this.alumno._correo != "" && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._semestre != "" && this.alumno._area != "" && this.alumno._foto != null) {
           if(this.alumno._pass === this.alumno._pass2){
           this.alumno._tipoUsuario = "Alumno";
+          this.alumno._rol="AL";
+          this.docente._foto = this.foto;
           Notiflix.Loading.standard("Validando");
           this.auth.registro(this.alumno).subscribe((res: any) => {
-            if (res.Aceptado == "Datos Aceptados") {
+            if (res.Aceptado == "Datos Guardados") {
               Notiflix.Loading.remove();
               Notiflix.Notify.info("Registro de datos en verificación");
               this.router.navigate(['/login']);
-            } else if (res.Error == "Los Datos No Fueron Aceptados") {
+            } else if (res.Error == "Los Datos No Fueron Registrados") {
               Notiflix.Loading.remove();
               Notiflix.Notify.failure(res.Error);
             }
@@ -97,17 +102,19 @@ export class RegistroComponent implements OnInit {
       }
       } else if (this.administrativo._nombre != "" && this.administrativo._apellidoP != "" && this.administrativo._apellidoM != "" && this.administrativo._correo != "" && this.administrativo._curp != "" && this.administrativo._departamento != "" && this.administrativo._direccion != "" && this.administrativo._foto != null && this.administrativo._nivelOperativo != "" && this.administrativo._departamento != "") {
         this.administrativo._numControl = this.administrativo._correo;
+        this.administrativo._rol=this.tipoUsuario;
+        this.administrativo._foto = this.foto;
         if(this.administrativo._pass === this.administrativo._pass2){
         this.administrativo._tipoUsuario = this.tipoUsuario;
         Notiflix.Loading.standard("Validando");
         this.auth.registro(this.administrativo).subscribe((res: any) => {
-          if (res.Aceptado == "Datos Aceptados") {
+          if (res.Aceptado == "Datos Guardados") {
             Notiflix.Loading.remove();
             Notiflix.Notify.info("Registro de datos en verificación");
             this.router.navigate(['/login']);
-          } else if (res.Error == "Los Datos No Fueron Aceptados") {
+          } else if (res.Error == "Los Datos No Fueron Registrados") {
             Notiflix.Loading.remove();
-            Notiflix.Notify.failure(res.Error);
+            Notiflix.Notify.failure(res.mensaje);
           }
         });
       }else{
@@ -123,23 +130,23 @@ export class RegistroComponent implements OnInit {
     if (this.tipoUsuario == "Alumno") {
       this.registrarse = "Registro de Alumno";
       this.informacion = "  Info";
-      this.infografia = ".././assets/img/infografiaa.png";
+ 
     } else if (this.tipoUsuario == "Docente") {
       this.registrarse = "Registro de Docente";
       this.informacion = "  Info";
-      this.infografia = ".././assets/img/infografiaa.png";
+      
     } else if (this.tipoUsuario == "CE") {
       this.registrarse = "Registro de Control Escolar";
       this.informacion = "  Info";
-      this.infografia = ".././assets/img/infografiaa.png";
+      
     } else if (this.tipoUsuario == "OE") {
       this.registrarse = "Registro de Orientacion Educativa";
       this.informacion = "  Info";
-      this.infografia = ".././assets/img/infografiaa.png";
+      
     } else {
       this.registrarse = "REGISTRO";
       this.informacion = "  Info";
-      this.infografia = ".././assets/img/infografiaa.png";
+      
     }
   }
 

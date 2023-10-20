@@ -59,13 +59,15 @@ peticion.post('/acceso', async (req, res) => {
 });
 
 peticion.post('/registro', async (req, res) => {
-    const datos = req.body;
-    console.log("ya estoy en registro");
+    const datos = (req.body);
+    if(datos.foto == undefined)datos.foto = null;
     try {
         const conexion = await ccn();
         //Subir datos a la tabla usuario
+        
         const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre,apellidoP,apellidoM,foto,correo) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?)',
-            [datos.numControl,
+            [
+            datos.numControl,
             datos.numControl,
             datos.pass,
             datos.rol,
@@ -76,6 +78,7 @@ peticion.post('/registro', async (req, res) => {
             datos.foto,
             datos.correo
         ]);
+        console.log(datos.tipoUsuario);
         //Subir datos a la tabla alumno
         if (datos.tipoUsuario == "Alumno") {
             const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,direccion,especialidad,area,grado,grupo,turno,CTO,alta,CURP,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -96,15 +99,14 @@ peticion.post('/registro', async (req, res) => {
                 ]);
         }
         //Subir datos a la tabla profesor
-        if (datos.tipoUsuario == "Docente") {
-            const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,telefono,RFC,CURP,CEDULA,fechaNac,foto,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [
-                    datos.numControl,
+        if (datos.tipoUsuario == 'Docente') {
+            const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,gradoAcademico,telefono,RFC,CURP,CEDULA,fechaNac,foto,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [   datos.numControl,
                     datos.direccion,
                     datos.gradoAcademico,
                     datos.telefono,
                     datos.RFC,
-                    datos.CURP,
+                    datos.curp,
                     datos.CEDULA,
                     datos.fechaNac,
                     datos.foto,
@@ -115,23 +117,25 @@ peticion.post('/registro', async (req, res) => {
         }
         //Subir datos a la tabla administrativo
         if( datos.tipoUsuario == "CE" || datos.tipoUsuario == "OE"){
-            const consulta4 = await conexion.execute('INSERT INTO adminstrativo (numControl, direccion, telefono, departamento, turno, CURP,foto,nivelOperativo) VALUES (?,?,?,?,?,?,?)',
+         
+            const consulta4 = await conexion.execute('INSERT INTO administrativo (numControl, direccion, telefono, departamento, turno, CURP,foto,nivelOperativo) VALUES (?,?,?,?,?,?,?,?)',
             [
                 datos.numControl,
                 datos.direccion,
                 datos.telefono,
                 datos.departamento,
                 datos.turno,
-                datos.CURP,
+                datos.curp,
                 datos.foto,
                 datos.nivelOperativo
             ]);
         }
         res.json({ Aceptado: "Datos Guardados" });
     } catch (error) {
-        res.json({ Error: "Los Datos No Fueron Registrados" });
-    } 
-        conexion.end();
+        console.log(error);
+        const errorMessage = error.toString();
+        res.json({ Error: "Los Datos No Fueron Registrados", mensaje: errorMessage });
+    }
 });
 
 module.exports = peticion;
