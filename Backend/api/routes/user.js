@@ -8,7 +8,11 @@ const verifica = require('./verificaToken');
 
 peticion.post('/datosUser', verifica, async (req, res) => {
     const numControl = req.body.numControl;
-    const sql = 'select * from pdf where numControl = ?';
+    const rol = req.body.rol;
+    if(rol == "AL"){const sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where numControl = ?';}
+    if(rol == "DO"){const sql = 'select * from usuario join docente on usuario.numControl = docuente.numControl where numControl = ?';}
+    if(rol == "CE"){const sql = 'select * from usuario join administrativo on usuario.numControl = administrativo.numControl where numControl = ?';}
+    if(rol == "OD"){const sql = 'select * from usuario join administrativo on usuario.numControl = administrativo.numControl where numControl = ?';}
     try {
         const conexion = await ccn();
         console.log(numControl);
