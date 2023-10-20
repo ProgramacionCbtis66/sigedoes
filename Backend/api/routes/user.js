@@ -29,6 +29,11 @@ peticion.post('/datosUser', verifica, async (req, res) => {
     }  
 });
 
+peticion.post('/solictudAcceso', verifica, async (req, res) => {
+    
+    
+});
+
 peticion.post('/NoPago', verifica, async (req, res) => {
     const { NoPago, numControl } = req.body;
     const conexion = await ccn();

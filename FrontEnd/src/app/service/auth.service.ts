@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   private ruta = environment.HTTPS;
+  private usr = environment.autorization;
   public estatus: boolean = true;
 
   
@@ -38,6 +39,10 @@ export class AuthService {
 
   public registro(usuario: any): Observable<any> {
     return this.http.post(`${this.ruta}/auth/registro`, usuario);
+  }
+
+  public solicitudAcceso(solicitud: any): Observable<any> {
+    return this.http.post(`${this.ruta}/auth/solicitudAcceso`, solicitud,this.usr);
   }
 
   public olvContra(correo: any): Observable<any> {

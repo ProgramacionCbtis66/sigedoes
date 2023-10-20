@@ -13,7 +13,7 @@
               <div class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseSolicitud" aria-expanded="false" aria-controls="collapseSolicitud"
-                  style="height: 3rem;">
+                  style="height: 3rem;" (click)="cargaSoliciudAceeso()">
                   <p class="fs-6 fw-light text-center text-secondary mt-3">
                     <i class="bi bi-person-vcard"></i>
                     Solicitudes de usuarios para acceder al sistema
@@ -22,35 +22,64 @@
               </div>
               <div id="collapseSolicitud" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitud">
                 <div class="accordion-body">
-                  <!-- ngfor en un table -->
+                  <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          Solicitudes de usuarios para acceder al sistema - Docentes
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          <!-- ngfor en un table -->
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th scope="col">NC</th>
+                          <th scope="col">Solicitud</th>
+                          <th scope="col">foto</th>
                           <th scope="col">Nombre</th>
-                          <th scope="col">Grado</th>
-                          <th scope="col">Grupo</th>
                           <th scope="col">Especialidad</th>
                           <th class="text-center">Acciones</th>
                         </tr>
                       </thead>
                       <tbody class="table-group-divider">
-                        <tr *ngFor="let dato of datos; let reg = index ">
+                        <tr *ngFor="let dato of datosDocente; let reg = index ">
                           <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
-                          <td>{{dato.nombre}}</td>
-                          <td>{{dato.grado}}</td>
-                          <td>{{dato.grupo}}</td>
-                          <td>{{dato.especialidad}}</td>
+                          <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
+                          <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
+                          <td>{{dato.gradoAcademico}}</td>
                           <td class="text-center "> <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)"
                               data-bs-target="#aceptado" class="badge bg-success">Ver</button>
-
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <!-- fin ngfor -->
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Accordion Item #2
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Accordion Item #3
+                        </button>
+                      </h2>
+                      <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,16 +135,7 @@
                         </tr>
                       </thead>
                       <tbody class="table-group-divider">
-                        <tr *ngFor="let dato of datos; let reg = index ">
-                          <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
-                          <td>{{dato.nombre}}</td>
-                          <td>{{dato.grado}}</td>
-                          <td>{{dato.grupo}}</td>
-                          <td>{{dato.especialidad}}</td>
-                          <td class="text-center "> <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl)"
-                              data-bs-target="#aceptado" class="badge bg-success">Ver</button>
-                          </td>
-                        </tr>
+                        <!-- aqui programar datos -->
                       </tbody>
                     </table>
                   </div>

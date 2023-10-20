@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const peticion = express.Router();
 const ccn = require('../connection/connection');
+const verifica = require('./verificaToken');
 
 peticion.post('/recuperarContraseña', async (req, res) => {
     const correo = req.body.correo;
@@ -135,6 +136,41 @@ peticion.post('/registro', async (req, res) => {
         console.log(error);
         const errorMessage = error.toString();
         res.json({ Error: "Los Datos No Fueron Registrados", mensaje: errorMessage });
+    }
+});
+
+peticion.post('/solicitudAcceso',verifica ,async (req, res) => {
+    
+    const conexion = await ccn();
+    try {
+
+        
+
+        const [registroDocente] = await conexion.execute('SELECT * FROM usuario JOIN docente ON usuario.numControl = docente.numControl WHERE alta = 0');
+        let datosDocente = JSON.stringify(registroDocente[0]);
+        let registroDocentes = JSON.parse(datosDocente);
+
+    
+
+        const [registroAlumno] = await conexion.execute('SELECT * FROM usuario JOIN alumno ON usuario.numControl = alumno.numControl WHERE alta = 0');
+
+        if(registroAlumno[0]!=undefined){
+            let datosAlumno = JSON.stringify(registroAlumno[0]);
+            let registroAlumnos = JSON.parse(datosAlumno);
+        } else{ registroAlumnos = {vacio:"sin datos"};}
+
+        const [registroAdministrativo] = await conexion.execute('SELECT * FROM usuario JOIN administrativo ON usuario.numControl = administrativo.numControl WHERE alta = 0');
+        let datosAdministrativo = JSON.stringify(registroAdministrativo[0]);
+        let registroAdministrativos = JSON.parse(datosAdministrativo);
+
+        console.log(registroAlumnos);
+
+        res.json({  registroAlumnos, registroDocentes,   registroAdministrativos });
+
+
+    } catch (error) {
+        const errorMessage = error.toString();
+        res.json({ Error: errorMessage });
     }
 });
 

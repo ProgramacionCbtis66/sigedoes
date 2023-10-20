@@ -67,7 +67,12 @@ export class AdministrativoComponent implements OnInit {
     "numControl": ""
   };
   nc: any;
+
+  datosAlumno: any;
+  datosDocente: any;
   datos: any;
+  datosAdmisnitrativo: any;
+
   aceptado: any;
   verificado = false;
   numero: string = "";
@@ -81,15 +86,27 @@ export class AdministrativoComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+  }
+
+  cargaSoliciudAceeso() {
     let token = this.auth.decodifica();
     this.data.numControl = token.numControl;
-    this.userServicio.datosUser(this.data).subscribe((res: any) => {
-      if (res != '' && res != undefined) {
-        this.datos = JSON.parse(res.data);
-      }
-    });
-  }
-  si() {
+    
+    this.auth.solicitudAcceso(this.data).subscribe((res: any) => {
+      console.log(res.registroDocentes);
+       console.log(res.registroAlumnos.vacio);
+      console.log(res.registroAdministrativos);
+
+        if (res.registroAlumnos.vacio !=="sin datos" ) this.datosAlumno = JSON.parse(res.registroAlumnos);
+        this.datosDocente =  res.registroDocentes; 
+        this.datosAdmisnitrativo = JSON.parse(res.registroAdministrativos);
+
+    }, (err: any) => {
+      Notiflix.Notify.failure("Error, Intente De Nuevo"+ err);
+    }
+    
+    );
   }
   aceptar(op: any) {
     this.aceptado = op;
@@ -218,6 +235,7 @@ export class AdministrativoComponent implements OnInit {
       alert("Número de pago no disponible");
     }
   }
+
   obtenerDatos(numControl: any) {
     this.data.numControl = numControl;
     this.usuario.noctrl = numControl;

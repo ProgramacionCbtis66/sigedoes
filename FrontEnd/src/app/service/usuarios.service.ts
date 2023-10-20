@@ -20,6 +20,7 @@ export class UsuarioService {
   datosUser(numcontrol: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/datosUser`, numcontrol, this.usr);
   }
+ 
   UsuariosNoReg(): Observable<any> {
     return this.http.get(`${this.URL}/insize/listaUserNoReg`);
   }
