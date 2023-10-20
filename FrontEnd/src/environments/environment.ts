@@ -15,8 +15,8 @@ export const environment = {
       'authorization': 'Bearer ' + localStorage.getItem('color')
     })
   },
-  proyecto:"Sistema de Gestión de Servicios Escolares",
-  titulo:"SIGESE",
+  proyecto:"Sistema de Gestión de Documentos Escolares",
+  titulo:"SIGEDOES",
   telefono:"522741154955"
 };
 
