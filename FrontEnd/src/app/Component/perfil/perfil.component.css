@@ -1,25 +1,70 @@
-.col-md-6 {
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.borde-999 {
+    border-radius: 999px;
+    overflow: hidden;
 }
 
-.rojo{
-    background-color: #FEB0A3;
+.color-1 {
+    background-color: rgb(142, 55, 63);
 }
 
+.enter-1 {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #450b44;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 3em;
 
-
-.c1{
-    background-color: #E8E7D4;
 }
 
-.c2{
-    background-color: #D4D1BD;
+.enter-1:hover {
+    background-color: rgb(45, 0, 44);
+    color: white;
 }
 
-.mr{
-    margin-right: 20px !important;
+.enter-2 {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #450b44;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 3em;
+
 }
 
+.enter-2:hover {
+    background-color: rgb(45, 0, 44);
+    color: white;
+}
+
+.enter-3 {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background-color: #450b44;
+    color: white;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 3em;
+
+}
+
+.enter-3:hover {
+    background-color: transparent;
+    border: 2px solid #450b44;
+    color: #450b44;
+}

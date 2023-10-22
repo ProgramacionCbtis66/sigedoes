@@ -26,7 +26,7 @@
         <a class="nav-link pe-auto" id="idregistro">Administrador</a>
       </li>
       <li class="nav-item" *ngIf="nav._docente">
-        <a class="nav-link pe-auto">Docente</a>
+        <a class="nav-link pe-auto" routerLink="/homeDocente">Docente</a>
       </li>
       <li class="nav-item" *ngIf="nav._registro">
         <a class="nav-link pe-auto" >Registro</a>
@@ -34,12 +34,15 @@
       <li class="nav-item" *ngIf="nav._orientacionEdu">
         <a class="nav-link pe-auto" >Orientacion Educativa</a>
       </li>
+      <li class="nav-item" *ngIf="nav._perfil">
+        <a class="nav-link pe-auto" >Perfil de Usuario</a>
+      </li>
     </ul> <!-- fin de links de la barra de navegación -->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- barra de navegacion derecha -->
         <li class="nav-item d-flex justify-content-end">
           <!-- boton de regresar -->
           <a class="icon-link icon-link-hover pe-auto" style="--bs-icon-link-transform: translate3d(0, -.280rem, 0);"
-            (click)="salir()" *ngIf="nav._registro">
+            (click)="salir()" *ngIf="nav._regresar">
             <i class="bi bi-door-open-fill"></i>
             Regresar
           </a> <!-- fin de boton de regresar -->
@@ -55,6 +58,12 @@
               </li>
               <li>
                 <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/perfil">
+                  <i class="bi bi-gear-fill"></i>
+                  Perfil
+                </a>
               </li>
               <li>
                 <button class="dropdown-item" (click)="salir()">

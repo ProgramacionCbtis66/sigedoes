@@ -9,20 +9,19 @@ const verifica = require('./verificaToken');
 peticion.post('/datosUser', verifica, async (req, res) => {
     const numControl = req.body.numControl;
     const rol = req.body.rol;
-    if(rol == "AL"){const sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where numControl = ?';}
-    if(rol == "DO"){const sql = 'select * from usuario join docente on usuario.numControl = docuente.numControl where numControl = ?';}
-    if(rol == "CE"){const sql = 'select * from usuario join administrativo on usuario.numControl = administrativo.numControl where numControl = ?';}
-    if(rol == "OD"){const sql = 'select * from usuario join administrativo on usuario.numControl = administrativo.numControl where numControl = ?';}
+    let sql = "";
+    if(rol == "AL"){sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?';}
+    if(rol == "DO"){sql = 'select * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?';}
+    if(rol == "CE" || rol == "OE"){sql = "select * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?";}
     try {
         const conexion = await ccn();
-        console.log(numControl);
         const [registros] = await conexion.execute(sql, [numControl]);
         if (registros.length > 0) {
+            if(registros[0].foto!==null) {registros[0].foto = registros[0].foto.toString('utf-8');}
             let datos = JSON.stringify(registros[0]);
             let dato = JSON.parse(datos);
             let data = JSON.stringify(dato);
-            console.log(dato);
-            res.json({ data });
+            res.json({ dato });
         } else {
             res.json({ Error: "no hay datos" })
         }

@@ -46,7 +46,6 @@ export class DocenteComponent implements OnInit {
         this.datosDocente._RFC = registro.RFC;
         this.datosDocente._gradoAcademico = registro.gradoAcademico;
         this.datosDocente._foto = registro.foto;
-        console.log(this.datosDocente);
       }
     } catch (error) {
       

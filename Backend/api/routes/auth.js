@@ -34,13 +34,14 @@ peticion.post('/recuperarContraseña', async (req, res) => {
 peticion.post('/acceso', async (req, res) => {
     const { nombre, pass } = req.body;
 
-    let sql = `CALL login(?,?)`;
+    let sql = `select nombre, apellidoP, apellidoM,  rol,  numControl 
+    from usuario  
+    where numControl = ? and password = ? and alta = 1`;
     var usuario = '';
     const conexion = await ccn();
     try {
         const [registros] = await conexion.execute(sql, [nombre, pass]);
         usuario = registros;
-
     } catch (error) {
         console.log(error);
         res.json({ Error: error });
@@ -48,10 +49,11 @@ peticion.post('/acceso', async (req, res) => {
         await conexion.end();
     }
 
-    if (usuario[0][0] !== undefined && usuario.length > 0) {
-        var datos = JSON.stringify(usuario[0][0]);
+    if (usuario[0] !== undefined && usuario.length > 0) {
+        var datos = JSON.stringify(usuario[0]);
         var dato = JSON.parse(datos);
         const token = jwt.sign(dato, 'MA@L', { expiresIn: '20m' });
+        console.log("Usuario y contraseña correcta");
         res.json({ token });
     } else {
         console.log("Usuario y contraseña incorrecta");
@@ -66,13 +68,12 @@ peticion.post('/registro', async (req, res) => {
         const conexion = await ccn();
         //Subir datos a la tabla usuario
         
-        const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, exp, nombre,apellidoP,apellidoM,foto,correo) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?)',
+        const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, nombre,apellidoP,apellidoM,foto,correo) VALUES (?, ?, ?, ?, ?,?,?,?,?)',
             [
             datos.numControl,
             datos.numControl,
             datos.pass,
             datos.rol,
-                600,
             datos.nombre,
             datos.apellidoP,
             datos.apellidoM,

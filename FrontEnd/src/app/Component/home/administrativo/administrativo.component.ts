@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -86,7 +87,7 @@ export class AdministrativoComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.auth.isAuth() ? null: this.nav.salir();
   }
 
   cargaSoliciudAceeso() {

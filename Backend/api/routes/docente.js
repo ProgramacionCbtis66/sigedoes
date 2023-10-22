@@ -7,7 +7,7 @@ const verifica = require('./verificaToken');
 
 docente.post('/datosDocente', verifica, async (req, res) => {
     const numControl = req.body.numControl;
-
+    console.log("ya esta en el backend");
     const sql = 'select * from queryDocente where numControl = ?';
     try {
         const conexion = await ccn();
@@ -41,11 +41,5 @@ docente.post('/modifyProfile',verifica, async (req, res) => {
         conexion.end();
     }
 });
-
-docente.post('/registroDocente',async(req,res)=>{
-    const {numControl,nombre,apellidoP,apellidoM,CURP,CEDULA,fechaInicio,foto,gradoAcademico,correo}= req.body;
-})
-
-
 
 module.exports = docente;

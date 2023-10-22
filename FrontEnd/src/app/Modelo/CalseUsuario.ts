@@ -18,7 +18,8 @@ export class Usuario {
     private CTO:string;
     private grupo:string;
     private rol:string;
-    private foto:Blob;
+    private foto:Blob | string;
+    private imageUrl: any;
     
     constructor() {
         this.tipoUsuario = "";
@@ -40,7 +41,8 @@ export class Usuario {
         this.CTO = "30DCT0236O";
         this.grupo = "";
         this.rol = "";
-        this.foto = new Blob();
+        this.foto = "";
+        this.imageUrl = "";
     }
 
     get _tipoUsuario(){return this.tipoUsuario;}
@@ -63,6 +65,7 @@ export class Usuario {
     get _grupo(){return this.grupo;}
     get _rol(){return this.rol;}
     get _foto(){return this.foto;}
+    get _imageUrl(){return this.imageUrl;}
 
     set _tipoUsuario(tipoUsuario:string){this.tipoUsuario = tipoUsuario;}
     set _nombre(nombre:string){this.nombre = nombre;}
@@ -83,5 +86,6 @@ export class Usuario {
     set _CTO(CTO:string){this.CTO = CTO;}
     set _grupo(grupo:string){this.grupo = grupo;}
     set _rol(rol:string){this.rol = rol;}
-    set _foto(foto:Blob){this.foto = foto;}
+    set _foto(foto:Blob | string){this.foto = foto;}
+    set _imageUrl(imageUrl:any){this.imageUrl = imageUrl;}
 }

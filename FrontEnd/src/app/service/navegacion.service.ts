@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -17,6 +18,8 @@ export class NavegacionService {
   private foto = new BehaviorSubject<any>("");
   private usuario = new BehaviorSubject<string>("");
   private orientacionEdu = new BehaviorSubject<boolean>(false);
+  private perfil = new BehaviorSubject<boolean>(false);
+  private regresar = new BehaviorSubject<boolean>(false);
 
   get _foto(): any {return this.foto.getValue();}
   set _foto(value: any) {this.foto.next(value);}
@@ -40,10 +43,17 @@ export class NavegacionService {
   set _docente(value: boolean) {this.docente.next(value);}
   get _orientacionEdu():any { return this.orientacionEdu.getValue(); }
   set _orientacionEdu(value:boolean) { this.orientacionEdu.next(value);} 
+  get _perfil():any { return this.perfil.getValue(); }
+  set _perfil(value:boolean) { this.perfil.next(value);}
+  get _regresar():any { return this.regresar.getValue(); }
+  set _regresar(value:boolean) { this.regresar.next(value);}
+
   
-  constructor() { }
+  constructor(private routerLink:Router) { }
 
   salir(): void {
+    this._perfil=false;
+    this._regresar=false;
     this._homeAlumno=false;
     this._registro= false;
     this._iflogin=true;
@@ -55,5 +65,6 @@ export class NavegacionService {
     this._home=false;
     this._usuario="";
     localStorage.clear();
+    this.routerLink.navigate(['/']);
   }
 }

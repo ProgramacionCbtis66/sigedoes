@@ -97,4 +97,24 @@ export class UsuarioService {
     }
   });
 
+ async convertBlobToBase64(blob: Blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        resolve(base64String);
+      };
+  
+      reader.onerror = () => {
+        reject("Error al convertir el Blob en Base64.");
+      };
+  
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  
+  
+
 }
