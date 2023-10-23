@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `sigedoes` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE  */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `sigedoes`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sigedoes
@@ -31,7 +29,7 @@ CREATE TABLE `acreditadoglobales` (
   `idSolicitud` int NOT NULL,
   `acreditado` tinyint NOT NULL,
   PRIMARY KEY (`idacreditadoGlobal`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +54,7 @@ CREATE TABLE `acreditadorecursa` (
   `numControl` varchar(14) NOT NULL,
   `idperiodoEscolar` varchar(30) NOT NULL,
   PRIMARY KEY (`idacreditadoRecursa`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +82,7 @@ CREATE TABLE `administrativo` (
   `CURP` varchar(20) NOT NULL,
   `nivelOperativo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`numControl`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +120,7 @@ CREATE TABLE `alumno` (
   `instagram` varchar(45) DEFAULT NULL,
   `horario` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`numControl`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +146,7 @@ CREATE TABLE `asiglobalum` (
   `materia` varchar(30) NOT NULL,
   `idperiodoEscolar` varchar(30) NOT NULL,
   PRIMARY KEY (`idasigloba`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +173,7 @@ CREATE TABLE `asiglobd` (
   `hora` date NOT NULL,
   `docente` varchar(30) NOT NULL,
   PRIMARY KEY (`idasiglobd`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +198,7 @@ CREATE TABLE `asigrecuralumno` (
   `materia` varchar(30) NOT NULL,
   `idperiodoEscolar` varchar(30) NOT NULL,
   PRIMARY KEY (`idasigrecuralumno`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +225,7 @@ CREATE TABLE `asigrecurdoc` (
   `Hora` date NOT NULL,
   `Docente` varchar(30) NOT NULL,
   PRIMARY KEY (`idasigrecurdoc`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +257,7 @@ CREATE TABLE `docente` (
   `twitter` varchar(45) DEFAULT NULL,
   `fechaNac` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`numControl`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +286,7 @@ CREATE TABLE `escuela` (
   `Esc_Director` varchar(45) NOT NULL,
   `Esc_Periodo` varchar(45) NOT NULL,
   PRIMARY KEY (`CTO`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +329,7 @@ CREATE TABLE `globales` (
   `materia` varchar(45) NOT NULL,
   `idperiodoEscolar` varchar(430) NOT NULL,
   PRIMARY KEY (`idglobales`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +376,7 @@ CREATE TABLE `mantenimiento` (
   `fecha_fin` date NOT NULL,
   `idUser` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -456,7 +454,7 @@ CREATE TABLE `recursa` (
   `materia` varchar(100) NOT NULL,
   `idperiodoEscolar` varchar(30) NOT NULL,
   PRIMARY KEY (`idrecursa`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +479,7 @@ CREATE TABLE `registro` (
   `admin` varchar(14) NOT NULL,
   `fecha_registro` date NOT NULL,
   PRIMARY KEY (`idregistro`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,7 +509,7 @@ CREATE TABLE `solicitud` (
   `activo` int NOT NULL,
   PRIMARY KEY (`idSolicitud`),
   UNIQUE KEY `codigoPago_UNIQUE` (`codigoPago`)
-)   AUTO_INCREMENT=20;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -544,7 +542,7 @@ CREATE TABLE `usuario` (
   `alta` int DEFAULT '0',
   `correo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`numControl`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -570,7 +568,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  =  */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -596,7 +594,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      =  */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `forgotpassword` AS select `usuario`.`nombre` AS `nombre`,`usuario`.`apellidoP` AS `apellidoP`,`usuario`.`apellidoM` AS `apellidoM`,`usuario`.`numControl` AS `numControl`,`usuario`.`password` AS `password`,`usuario`.`correo` AS `correo` from `usuario` */;
@@ -614,7 +612,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      =  */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `listausernoreg` AS select `usuario`.`password` AS `password`,`usuario`.`nombre` AS `nombre`,`usuario`.`apellidoP` AS `apellidoP`,`usuario`.`numControl` AS `numControl`,`usuario`.`apellidoM` AS `apellidoM`,`usuario`.`correo` AS `correo`,`alumno`.`grado` AS `grado`,`alumno`.`grupo` AS `grupo`,`alumno`.`turno` AS `turno`,`alumno`.`especialidad` AS `especialidad`,`usuario`.`rol` AS `rol` from (`usuario` join `alumno` on((`alumno`.`numControl` = `usuario`.`numControl`))) where (`usuario`.`alta` = 0) */;
@@ -632,7 +630,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      =  */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `pdf` AS select `alumno`.`numControl` AS `numControl`,`usuario`.`nombre` AS `nombre`,`usuario`.`apellidoP` AS `apellidoP`,`usuario`.`apellidoM` AS `apellidoM`,`alumno`.`direccion` AS `direccion`,`alumno`.`especialidad` AS `especialidad`,`alumno`.`area` AS `area`,`alumno`.`grado` AS `grado`,`alumno`.`grupo` AS `grupo`,`alumno`.`turno` AS `turno`,`alumno`.`horario` AS `horario`,`alumno`.`CTO` AS `CTO`,`escuela`.`Esc_nombre` AS `Esc_nombre`,`escuela`.`Esc_direccion` AS `Esc_direccion`,`escuela`.`Esc_correo` AS `Esc_correo`,`escuela`.`Esc_Director` AS `Esc_Director`,`escuela`.`Esc_telefono` AS `Esc_telefono`,`alumno`.`CURP` AS `CURP`,`usuario`.`correo` AS `correo`,`usuario`.`foto` AS `foto` from ((`alumno` join `escuela` on((`escuela`.`CTO` = `alumno`.`CTO`))) join `usuario` on((`usuario`.`numControl` = `alumno`.`numControl`))) */;
@@ -650,7 +648,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      =  */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `querydocente` AS select `usuario`.`nombre` AS `nombre`,`usuario`.`apellidoP` AS `apellidoP`,`usuario`.`apellidoM` AS `apellidoM`,`docente`.`numControl` AS `numControl`,`docente`.`gradoAcademico` AS `gradoAcademico`,`docente`.`telefono` AS `telefono`,`docente`.`RFC` AS `RFC`,`docente`.`CURP` AS `CURP`,`docente`.`CEDULA` AS `CEDULA`,`usuario`.`correo` AS `correo`,`usuario`.`foto` AS `foto` from (`usuario` join `docente` on((`usuario`.`numControl` = `docente`.`numControl`))) */;
@@ -667,4 +665,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-22 21:06:54
+-- Dump completed on 2023-10-23  1:43:34

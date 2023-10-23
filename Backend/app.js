@@ -6,7 +6,7 @@ const cors = require('cors');
 app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
 
-const allowedOrigins = ['http://localhost'];
+const allowedOrigins = ['https://pruebasescolarestb.000webhostapp.com'];
 app.use(cors({
     origin: (origin, callback)=> {
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
