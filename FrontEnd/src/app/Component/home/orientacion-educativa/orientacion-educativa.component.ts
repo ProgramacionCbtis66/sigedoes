@@ -14,6 +14,7 @@ export class OrientacionEducativaComponent implements OnInit {
     private auth: AuthService
   ) { 
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._foto = this.auth.decodifica().foto;
   }
 
   ngOnInit(): void {

@@ -1,16 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { AuthService } from '../../service/auth.service';
 import * as Notiflix from 'notiflix';
 import { NavegacionService } from 'src/app/service/navegacion.service';
-import { Alumno } from 'src/app/Modelo/Alumno';
-import { Docente } from 'src/app/Modelo/Docente';
-import { Administrativo } from 'src/app/Modelo/Administrativo';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
  
-
-
-
 
 @Component({
   selector: 'app-perfil',
@@ -20,19 +13,16 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class PerfilComponent implements OnInit {
 
   perfil: any = {};
-  perfilAlumnoInfo: Alumno = new Alumno();
-  perfilDocentesInfo: Docente = new Docente();
-  perfilAdministrativo: Administrativo = new Administrativo();
-  imageUrl: SafeUrl | undefined | null |string = null;
-
+   
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   constructor(private nav: NavegacionService,
     private auth: AuthService,
-    private sanitizer: DomSanitizer,
-    private userService: UsuarioService) {
+    private userService: UsuarioService,
+    private Base64: UsuarioService
+  ) {
     this.nav._perfil = true;
-
-
+    this.nav._foto = this.auth.decodifica().foto;
   }
 
   ngOnInit(): void {
@@ -42,84 +32,84 @@ export class PerfilComponent implements OnInit {
         numControl: this.auth.decodifica().numControl,
         rol: this.auth.decodifica().rol
       }
-
-      if (datos.rol == "AL") {
-        this.userService.datosUser(datos).subscribe((res: any) => {
-          if ((res.data).nombre != "") {
-            this.nav._usuario = (res.data).nombre + " " + (res.data).apellidoP + " " + (res.data).apellidoM;
-            this.perfilAlumnoInfo._nombre = (res.data).nombre + " " + (res.data).apellidoP + " " + (res.data).apellidoM;
-            this.perfilAlumnoInfo._direccion = (res.data).direccion;
-            this.perfilAlumnoInfo._correo = (res.data).correo;
-            this.perfilAlumnoInfo._curp = (res.data).CURP;
-            this.perfilAlumnoInfo._especialidad = (res.data).especialidad;
-            this.perfilAlumnoInfo._numControl = (res.data).numControl;
-            this.perfilAlumnoInfo._semestre = (res.data).grado;
-            this.perfilAlumnoInfo._grupo = (res.data).grupo;
-            this.perfilAlumnoInfo._turno = (res.data).turno;
-            this.perfilAlumnoInfo._telefono = (res.data).telefono;
-            this.perfilAlumnoInfo._foto = (res.data).foto;
-            this.perfilAlumnoInfo._facebook = (res.data).facebook;
-            this.perfilAlumnoInfo._instagram = (res.data).instagram;
-            this.perfilAlumnoInfo._twitter = (res.data).twitter;
-          }
-        });
-        this.perfil = this.perfilAlumnoInfo;
-      }
-      if (datos.rol == "DO") {
-        this.userService.datosUser(datos).subscribe((res: any) => {
-          if (res.dato != "" && res.dato != undefined) {
-            this.nav._usuario = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
-            this.perfilDocentesInfo._nombre = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
-            this.perfilDocentesInfo._numControl = (res.dato).numControl;
-            this.perfilDocentesInfo._direccion = (res.dato).direccion;
-            this.perfilDocentesInfo._gradoAcademico = (res.dato).gradoAcademico;
-            this.perfilDocentesInfo._telefono = (res.dato).telefono;
-            this.perfilDocentesInfo._RFC = (res.dato).RFC;
-            this.perfilDocentesInfo._curp = (res.dato).CURP;
-            this.perfilDocentesInfo._CEDULA = (res.dato).CEDULA;
-            this.perfilDocentesInfo._foto = (res.dato).foto;
-            this.perfilDocentesInfo._facebook = (res.dato).facebook;
-            this.perfilDocentesInfo._instagram = (res.dato).instagram;
-            this.perfilDocentesInfo._twitter = (res.dato).twitter;
-            this.perfilDocentesInfo._fechaNac = (res.dato).fechaNac;
-          }
-        });
-        this.perfil = this.perfilDocentesInfo;
-
-      }
-      if (datos.rol == "CE" || datos.rol == "OE") {
-        this.userService.datosUser(datos).subscribe((res: any) => {
-          if ((res.dato).nombre != undefined) {
-            this.nav._usuario = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
-            this.perfilAdministrativo._nombre = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
-            this.perfilAdministrativo._numControl = (res.dato).numControl;
-            this.perfilAdministrativo._direccion = (res.dato).direccion;
-            this.perfilAdministrativo._telefono = (res.dato).telefono;
-            this.perfilAdministrativo._departamento = (res.dato).departamento;
-            this.perfilAdministrativo._turno = (res.dato).turno;
-            this.perfilAdministrativo._curp = (res.dato).CURP;
-            this.perfilAdministrativo._imageUrl = (res.dato).foto
-            this.perfilAdministrativo._foto = (res.dato).foto;
-            this.perfilAdministrativo._nivelOperativo = (res.dato).nivelOperativo;
-            this.perfilAdministrativo._facebook = (res.dato).facebook;
-            this.perfilAdministrativo._instagram = (res.dato).instagram;
-            this.perfilAdministrativo._twitter = (res.dato).twitter;
-          }
-        });
-        this.perfil = this.perfilAdministrativo;
-      }
-    } else {
-      this.nav.salir();
+      this.userService.datosUser(datos).subscribe((res: any) => {
+        if (res.dato != "" && res.dato != undefined) {
+          res.dato.nombre = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
+          this.nav._usuario = res.dato.nombre;
+          if (res.dato.foto == null) { res.dato.foto = ".././assets/img/tufoto.png"; }
+          this.perfil = res.dato;
+        }
+      });
     }
   }
   recarga() {
-
-    this.userService.modificarPerfil(this.perfilAlumnoInfo).subscribe((res: any) => {
+    this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
       if (res.ok == "ok") {
         Notiflix.Notify.info("Datos Cambiados");
       }
     });
   }
+  validar(event: any) {
 
+    //validar contraseña segura con expresiones regulares
+    const controName = event.target.id;
+    if (controName == "pass") {
+      let pass = event.target.value;
+      let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%#*?&])([A-Za-z\d$@$!%#*?&]|[^ ]){8,15}$/;
+      //que singinica cada caracter
+      // ^: inicio de la cadena
+      // (?=.*[a-z]): al menos una letra minuscula
+      // (?=.*[A-Z]): al menos una letra mayuscula
+      // (?=.*\d): al menos un numero
+      // (?=.*[$@$!%*?&]): al menos un caracter especial
+      // ([A-Za-z\d$@$!%*?&]|[^ ]){8,15}: de 8 a 15 caracteres sin espacios
+      // $: fin de la cadena
+      if (regex.test(pass)) {
+        //escribir en la etiqueta con id alidandoPass la palabra "valida"
+        document.getElementById('validandoPass')!.innerHTML = "Valida";
+        //cambiar el color de la etiqueta a verde
+        document.getElementById('validandoPass')!.style.color = "green";
+      } else {
+        //escribir en la etiqueta con id alidandoPass la palabra "invalida"
+        document.getElementById('validandoPass')!.innerHTML = "Invalida";
+        //cambiar el color de la etiqueta a rojo
+        document.getElementById('validandoPass')!.style.color = "red";
+      }
+    }
+    if (controName == "pass2") {
+      //valor del formulario pass2
+      let pass = document.getElementById('pass') as HTMLInputElement;
+
+      const pass2 = event.target.value;
+      if (pass.value == pass2) {
+        document.getElementById('validandoPass2')!.innerHTML = "Coinciden";
+        document.getElementById('validandoPass2')!.style.color = "green";
+      } else {
+        document.getElementById('validandoPass2')!.innerHTML = "No Coinciden";
+        document.getElementById('validandoPass2')!.style.color = "red";
+      }
+    }
+  }
+
+  activarInput() {
+    this.fileInput.nativeElement.click();
+
+  }
+
+  cargarFoto(event: any): void {
+    const archivo = event.target.files[0];
+    this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
+
+      const foto64 = imagenBase64.base;
+
+      this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
+        this.perfil.foto = imagenRedimensionada.base;
+      }).catch((error: any) => {
+        console.error('Error al redimensionar la imagen', error);
+      });
+    }).catch((error: any) => {
+      console.error('Error al extraer la imagen en base64', error);
+    });
+  }
 
 }

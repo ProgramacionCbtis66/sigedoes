@@ -84,6 +84,8 @@ export class AdministrativoComponent implements OnInit {
     private admin: AdminService,
     private auth: AuthService) {
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._foto = this.auth.decodifica().foto;
+    this.nav._perfil = false;
   }
 
   ngOnInit() {

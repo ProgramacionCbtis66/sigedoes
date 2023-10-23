@@ -67,9 +67,9 @@ export class AlumnoComponent implements OnInit {
     private auth: AuthService,
     private user: UsuarioService,
     private email: SendEmailService,
-
   ) {
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._foto = this.auth.decodifica().foto;
   }
   
   async ngOnInit() {

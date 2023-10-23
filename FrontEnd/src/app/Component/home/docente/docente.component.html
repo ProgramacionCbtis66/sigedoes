@@ -3,7 +3,7 @@
     <div class="card mb-2 bg-color-1">
       <div class="row">
         <div class="d-flex justify-content-center p-1">
-          <h4 class="singup-3 m-2">{{datosDocente._nombre}} {{datosDocente._apellidoP}}</h4>
+          <p class="singup-3 m-2 fs-5">{{datosDocente._nombre+ " " +datosDocente._apellidoP+ " " +datosDocente._apellidoM}}</p>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
                 <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
                   <div class="d-flex justify-content-center mb-2">
                     <div class="card border-color-1">
-                      <img class="card-img-top" src="./erik.jpeg" alt="foto-de-perfil">
+                      <img class="card-img-top" src="{{datosDocente._foto}}" width="90" alt="foto-de-perfil">
                       <div class="col card-body">
                         <h4 class="card-title d-flex justify-content-center">
 

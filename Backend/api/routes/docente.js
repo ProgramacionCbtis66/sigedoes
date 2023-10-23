@@ -7,17 +7,17 @@ const verifica = require('./verificaToken');
 
 docente.post('/datosDocente', verifica, async (req, res) => {
     const numControl = req.body.numControl;
-    console.log("ya esta en el backend");
+ 
     const sql = 'select * from queryDocente where numControl = ?';
     try {
         const conexion = await ccn();
         console.log(numControl);
         const [registros] = await conexion.execute(sql, [numControl]);
         if (registros.length > 0) {
+            if(registros[0].foto!==null) {registros[0].foto = registros[0].foto.toString('utf-8');}
             let datos = JSON.stringify(registros[0]);
-            let dato = JSON.parse(datos);
-            let data = JSON.stringify(dato);
-            console.log(datos);
+            let data = JSON.parse(datos);
+            console.log(registros[0].foto);
             res.json({ data });
         } else {
             res.json({ Error: "no hay datos" })

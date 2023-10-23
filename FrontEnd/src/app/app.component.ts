@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
   public proyecto = environment.proyecto;
   public fecha = new Date().getFullYear();
   public dato: string = "Configuracion";
-  public foto: string = "";
   public logo: string = '.././assets/img/logoredwhite.png';
   public title: string = environment.proyecto;
   public usuario: string  =  "";
   telefono = environment.telefono;
+  foto = "";
   
 
   constructor(private titulo: Title, 
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.titulo.setTitle("SIGESE");
+    this.titulo.setTitle("SIGEDOES");
     if (this.auth.isAuth()) {
       const user = this.auth.decodifica();
       this.foto = user["foto"];

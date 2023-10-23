@@ -36,7 +36,7 @@ export class DocenteComponent implements OnInit {
     try {
       const res = await  firstValueFrom(this.docente.datosDocente(numControl));
       if (res != '' && res != undefined) {
-        const registro = JSON.parse(res.data);
+        const registro = res.data;
         this.datosDocente._nombre = registro.nombre;
         this.datosDocente._apellidoP = registro.apellidoP;
         this.datosDocente._apellidoM = registro.apellidoM;
@@ -45,7 +45,12 @@ export class DocenteComponent implements OnInit {
         this.datosDocente._CEDULA = registro.CEDULA;
         this.datosDocente._RFC = registro.RFC;
         this.datosDocente._gradoAcademico = registro.gradoAcademico;
+        if(registro.foto == null || registro.foto == undefined || registro.foto == ""){
+            this.datosDocente._foto = ".././assets/img/tufoto.png";
+        }else{
         this.datosDocente._foto = registro.foto;
+        }
+        this.nav._foto = this.datosDocente._foto;
       }
     } catch (error) {
       

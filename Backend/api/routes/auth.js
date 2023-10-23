@@ -33,8 +33,7 @@ peticion.post('/recuperarContraseña', async (req, res) => {
 
 peticion.post('/acceso', async (req, res) => {
     const { nombre, pass } = req.body;
-
-    let sql = `select nombre, apellidoP, apellidoM,  rol,  numControl 
+    let sql = `select nombre, apellidoP, apellidoM,  rol,  numControl , foto
     from usuario  
     where numControl = ? and password = ? and alta = 1`;
     var usuario = '';
@@ -50,6 +49,10 @@ peticion.post('/acceso', async (req, res) => {
     }
 
     if (usuario[0] !== undefined && usuario.length > 0) {
+        if(usuario[0].foto == null) {usuario[0].foto = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
+    }else{
+        usuario[0].foto = usuario[0].foto.toString();
+    }
         var datos = JSON.stringify(usuario[0]);
         var dato = JSON.parse(datos);
         const token = jwt.sign(dato, 'MA@L', { expiresIn: '20m' });

@@ -20,7 +20,7 @@ peticion.post('/datosUser', verifica, async (req, res) => {
             if(registros[0].foto!==null) {registros[0].foto = registros[0].foto.toString('utf-8');}
             let datos = JSON.stringify(registros[0]);
             let dato = JSON.parse(datos);
-            let data = JSON.stringify(dato);
+            
             res.json({ dato });
         } else {
             res.json({ Error: "no hay datos" })
@@ -141,9 +141,5 @@ peticion.post('/modifyProfile',verifica, async (req, res) => {
         conexion.end();
     }
 });
-
-
-
-
 
 module.exports = peticion;
