@@ -43,9 +43,10 @@ export class PerfilComponent implements OnInit {
     }
   }
   recarga() {
+    this.perfil.nombre = this.auth.decodifica().nombre;
     this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
       if (res.ok == "ok") {
-        Notiflix.Notify.info("Datos Cambiados");
+        Notiflix.Notify.info("Datos Actualizados");
       }
     });
   }

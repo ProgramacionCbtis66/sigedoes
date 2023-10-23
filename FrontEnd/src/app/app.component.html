@@ -5,7 +5,7 @@
     <a class="navbar-brand " routerLink="homeAlumno" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="85" class="text-color-sigese">
     </a>
-    
+
     <!-- boton de despliegue en modo celular -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,39 +14,39 @@
 
     <!-- inicia el collapse -->
     <div class="collapse navbar-collapse mb-2 mt-2" id="navbarSupportedContent">
-        <!-- Links de la barra de navegación -->
-    <ul class="navbar-nav">
-      <li *ngIf="nav._iflogin " class="nav-item" id="idlogin">
-        <a class="nav-link">Inicio de sesión</a>
-      </li>
-      <li class="nav-item" id="idhome" *ngIf="nav._homeAlumno">
-        <a class="nav-link pe-auto">Alumno</a>
-      </li>
-      <li class="nav-item" *ngIf="nav._Administrador ">
-        <a class="nav-link pe-auto" id="idregistro">Administrador</a>
-      </li>
-      <li class="nav-item" *ngIf="nav._docente">
-        <a class="nav-link pe-auto" >Docente</a>
-      </li>
-      <li class="nav-item" *ngIf="nav._registro">
-        <a class="nav-link pe-auto" >Registro</a>
-      </li>
-      <li class="nav-item" *ngIf="nav._orientacionEdu">
-        <a class="nav-link pe-auto" >Orientacion Educativa</a>
-      </li>
-      <li class="nav-item" *ngIf="nav._perfil">
-        <a class="nav-link pe-auto" >Perfil de Usuario</a>
-      </li>
-    </ul> <!-- fin de links de la barra de navegación -->
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- barra de navegacion derecha -->
-        <li class="nav-item d-flex justify-content-end">
+      <!-- Links de la barra de navegación -->
+      <ul class="navbar-nav">
+        <li *ngIf="nav._iflogin " class="nav-item" id="idlogin">
+          <a class="nav-link">Inicio de sesión</a>
+        </li>
+        <li class="nav-item" id="idhome" *ngIf="nav._homeAlumno">
+          <a class="nav-link pe-auto">Alumno</a>
+        </li>
+        <li class="nav-item" *ngIf="nav._Administrador ">
+          <a class="nav-link pe-auto" id="idregistro">Administrador</a>
+        </li>
+        <li class="nav-item" *ngIf="nav._docente">
+          <a class="nav-link pe-auto">Docente</a>
+        </li>
+        <li class="nav-item" *ngIf="nav._registro">
+          <a class="nav-link pe-auto">Registro</a>
+        </li>
+        <li class="nav-item" *ngIf="nav._orientacionEdu">
+          <a class="nav-link pe-auto">Orientacion Educativa</a>
+        </li>
+        <li class="nav-item" *ngIf="nav._perfil">
+          <a class="nav-link pe-auto">Perfil de Usuario</a>
+        </li>
+      </ul> <!-- fin de links de la barra de navegación -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- barra de navegacion derecha -->
+        <li class="nav-item">
           <!-- boton de regresar -->
           <a class="icon-link icon-link-hover pe-auto" style="--bs-icon-link-transform: translate3d(0, -.280rem, 0);"
             (click)="salir()" *ngIf="nav._regresar">
             <i class="bi bi-door-open-fill"></i>
             Regresar
           </a> <!-- fin de boton de regresar -->
-           <!-- usuario -->
+          <!-- usuario -->
           <div class="dropdown pe-2" *ngIf="nav._usuario!==''">
             <a class="nav-item d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
               <img [src]="nav._foto" alt="Profile" class="rounded-circle" width="20px">
@@ -68,15 +68,15 @@
               <li>
                 <button class="dropdown-item" (click)="salir()">
                   <i class="fa-solid fa-right-from-bracket "></i>
-                  Salir ok
+                  Salir
                 </button>
               </li>
             </ul>
           </div> <!-- fin de usuario -->
         </li>
       </ul><!-- fin de barra de navegacion -->
-     
-      
+
+
     </div> <!-- fin del collapse -->
   </div> <!-- fin de container-fluid  -->
 </nav> <!-- fin de barra de navegación -->
@@ -96,9 +96,11 @@
         CBTis66 {{fecha}}
       </div>
       <div class="d-flex align-items-center">
-        <a class="pe-2 ps-2" href="https://x.com/SIGESE_?t=pCBh7EzPXLt_2_1Z26R2Og&s=08"><i class="bi bi-twitter-x"></i></a>
+        <a class="pe-2 ps-2" href="https://x.com/SIGESE_?t=pCBh7EzPXLt_2_1Z26R2Og&s=08"><i
+            class="bi bi-twitter-x"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61552537973427"><i class="bi bi-facebook"></i></a>
-        <a class="pe-2 ps-2" href="https://instagram.com/sigese._?igshid=NzZlODBkYWE4Ng=="><i class="bi bi-instagram"></i></a>
+        <a class="pe-2 ps-2" href="https://instagram.com/sigese._?igshid=NzZlODBkYWE4Ng=="><i
+            class="bi bi-instagram"></i></a>
         <a class="pe-2 " href="https://www.tiktok.com/@sigese_?_t=8gREEUPy1u1&_r=1"> <i class="bi bi-tiktok"></i></a>
         <a class="pe-2 " href="https://wa.me/{{telefono}}"> <i class="bi bi-whatsapp"></i></a>
       </div>

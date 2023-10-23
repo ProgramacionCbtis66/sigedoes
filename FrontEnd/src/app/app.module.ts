@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import * as Notiflix from 'notiflix';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,16 +43,24 @@ import { OrientacionEducativaComponent } from './Component/home/orientacion-educ
     FormsModule,
     HttpClientModule,
     DragDropModule,
-
   ],
   providers:[
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     Title,
     JwtHelperService,
-    
   ],
     
 
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){
+    Notiflix.Notify.init({
+      position: 'center-top', // Cambia la posición a la esquina superior izquierda
+      distance:'15px',
+      fontSize:'15px',
+      width:'380px',
+      timeout: 1700,
+    });
+  }
+}

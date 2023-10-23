@@ -130,10 +130,21 @@ peticion.post('/getContra', verifica, async (req, res) => {
 });
 
 peticion.post('/modifyProfile',verifica, async (req, res) => {
-    const { alumno, curp, numControl, especialidad, grado, grupo, correo, turno } = req.body;
+    const usr = req.body;
     const conexion = await ccn();
+    let sql = "";
+    let rol = "";
     try {
-        const ModProfile = await conexion.execute('UPDATE alumno set nombre = ?, especialidad = ?, CURP = ?, grado = ?, grupo = ?, correo = ?, turno = ? where numControl = ?', [alumno, especialidad, curp, grado, grupo, correo, turno, numControl]);
+        if(usuario.rol == "AL") rol = "alumno";
+        if(usuario.rol == "DO") rol = "docente";
+        if(usuario.rol == "CE" || usuario.rol == "OE") rol = "administrativo";
+            sql = `UPDATE usuario as u join ${rol} as x on u.numControl = AL.numControl 
+                   set u.foto = ${usr.foto},
+                       u.password = ${usr.password},
+                       x.direccion = ${usr.direccion},
+                       x.telefono = ${usr.telefono},
+                   where u.numControl = ${usr.numControl}`;
+        const ModProfile = await conexion.execute(sql);
         res.json({ ok: "ok" });
     } catch (error) {
         // no tiene otra sentencia aparte del res.json

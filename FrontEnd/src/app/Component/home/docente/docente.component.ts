@@ -26,7 +26,6 @@ export class DocenteComponent implements OnInit {
     
    }
 
-
   async datos(){
     this.datosDocente._numControl = this.auth.decodifica().numControl;
     const numControl = {
@@ -55,8 +54,6 @@ export class DocenteComponent implements OnInit {
     } catch (error) {
       
     }
-    
- 
   }
 
   ngOnInit(): void {

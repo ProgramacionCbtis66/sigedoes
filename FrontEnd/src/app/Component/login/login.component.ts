@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
           (res: any) => {
             if (res.token !== null && res.token != undefined) {
                 localStorage.setItem('color', res.token);
-                Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM+" "+this.auth.decodifica().rol);
+                Notiflix.Notify.success("Bienvenido " + this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM);
                 
                 if (this.auth.isAuth()) {
                   if (this.auth.decodifica().rol == "CE") {
