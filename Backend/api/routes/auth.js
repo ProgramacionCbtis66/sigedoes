@@ -83,7 +83,7 @@ peticion.post('/registro', async (req, res) => {
             datos.foto,
             datos.correo
         ]);
-        console.log(datos.tipoUsuario);
+
         //Subir datos a la tabla alumno
         if (datos.tipoUsuario == "Alumno") {
             const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,direccion,especialidad,area,grado,grupo,turno,CTO,alta,CURP,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',

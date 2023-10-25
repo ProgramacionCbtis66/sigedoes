@@ -23,7 +23,6 @@ export class DocenteComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre+" "+this.auth.decodifica().apellidoP+" "+this.auth.decodifica().apellidoM;
     this.nav._docente = true;
     this.datos();
-    
    }
 
   async datos(){

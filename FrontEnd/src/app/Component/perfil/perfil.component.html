@@ -21,8 +21,10 @@
         <div class="card">
             <div class="card-header color-1">
                 <div class="d-flex justify-content-between">
-                    <div class=" "><p class="fs-5 pt-2 text-white">Mi Perfil</p></div>
-                    <div class=" "><button class="enter-2 mt-2" type="button">Guardar</button></div>   
+                    <div class=" ">
+                        <p class="fs-5 pt-2 text-white">Mi Perfil</p>
+                    </div>
+                    <div class=" "><button class="enter-2 mt-2" type="button">Guardar</button></div>
                 </div>
             </div>
             <div class="col px-3">
@@ -32,7 +34,7 @@
                     <h5 class="m-0">Nombre de Usuario:</h5>
                     <div class="row row-cols-2">
                         <div class="col-8">
-                            <p class="m-0">{{perfil.usuario}}</p>
+                            <p class="m-0">{{perfil.nombre}}</p>
                         </div>
                         <div class="col-4 text-end">
                             <button class="enter-2">Editar</button>
@@ -46,7 +48,13 @@
                 <div class="container mb-2">
                     <div class="row row-cols-2">
                         <div class="col-8">
-                            <p>???</p>
+                            <div class="" *ngIf="perfil.rol=='AL'">
+                                <p class="fs-6 ">Espacialidad: <B>{{perfil.especialidad}}</B></p>
+                                <p class="fs-6 ">Grado y grupo: <B>{{perfil.grado+" "+perfil.grupo}}</B></p>
+                                <p class="fs-6 ">Turno : <B>{{perfil.turno}}</B></p>
+                            </div>
+                            
+
                         </div>
                         <div class="col-4 text-end">
                             <button class="enter-2">Editar</button>
