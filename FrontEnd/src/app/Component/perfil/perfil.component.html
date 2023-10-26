@@ -10,9 +10,6 @@
                         <img [src]="perfil.foto" class="borde-999" width="110">
                     </a>
                 </div>
-                <div class="card-body text-center p-2">
-                    <h4 class="card-title">{{perfil.nombre}}</h4>
-                </div>
             </div>
         </div>
     </div>
@@ -53,8 +50,21 @@
                                 <p class="fs-6 ">Grado y grupo: <B>{{perfil.grado+" "+perfil.grupo}}</B></p>
                                 <p class="fs-6 ">Turno : <B>{{perfil.turno}}</B></p>
                             </div>
-                            
-
+                            <div class="" *ngIf="perfil.rol=='DO'">
+                                <p class="fs-6 ">RFC: <B>{{perfil.RFC}}</B></p>
+                                <p class="fs-6 ">Grado Académico: <B>{{perfil.gradoAcademico}}</B></p>
+                                <p class="fs-6 ">Teléfono : <B>{{perfil.telefono}}</B></p>
+                                <p class="fs-6 ">RFC : <B>{{perfil.RFC}}</B></p>
+                                <p class="fs-6 ">CURP : <B>{{perfil.CURP}}</B></p>
+                            </div>
+                            <div class="" *ngIf="perfil.rol=='OE' || perfil.rol=='CE'">
+                                <p class="fs-6 ">RFC: <B>{{perfil.RFC}}</B></p>
+                                <p class="fs-6 ">Departamento : <B>{{perfil.departamento}}</B></p>
+                                <p class="fs-6 ">Teléfono : <B>{{perfil.telefono}}</B></p>
+                                <p class="fs-6 ">CURP : <B>{{perfil.CURP}}</B></p>
+                                <p class="fs-6 ">NIVEL OPERATIVO : <B>{{perfil.nivelOperativo}}</B></p>
+                                <p class="fs-6 ">TURNO : <B>{{perfil.turno}}</B></p>
+                            </div>
                         </div>
                         <div class="col-4 text-end">
                             <button class="enter-2">Editar</button>

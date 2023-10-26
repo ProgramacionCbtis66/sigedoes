@@ -5,8 +5,8 @@ const ccn = async () => {
         return await mysql.createConnection({
             host: 'localhost',
             port: '3306',
-            user: 'id20481947_sigedoes',
-            database: 'id20481947_sigedoes',
+            user: 'sigedoes',
+            database: 'sigedoes',
             password: 'E1f2_g3h4'
         });
     } catch (error) {
