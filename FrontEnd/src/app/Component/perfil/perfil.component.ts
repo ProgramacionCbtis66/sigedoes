@@ -38,20 +38,27 @@ export class PerfilComponent implements OnInit {
           this.nav._usuario = res.dato.nombre;
           if (res.dato.foto == null) { res.dato.foto = ".././assets/img/tufoto.png"; }
           this.perfil = res.dato;
+          this.perfil.pass1 = res.dato.password;
+          this.perfil.pass2 = res.dato.password;
         }
       });
     }
   }
-  recarga() {
-    this.perfil.nombre = this.auth.decodifica().nombre;
-    this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
-      if (res.ok == "ok") {
-        Notiflix.Notify.info("Datos Actualizados");
-      }
-    });
+  guardarCambios() {
+    if(this.perfil.pass1==this.perfil.pass2 && this.perfil.pass1!=undefined && this.perfil.pass2!=undefined){
+      this.perfil.nombre = this.auth.decodifica().nombre;
+      this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
+        if (res.datos != "" && res.datos != undefined) {
+          Notiflix.Notify.info("Datos Actualizados");
+          this.perfil = res.dato;
+          this.perfil.pass1 = res.dato.password;
+          this.perfil.pass2 = res.dato.password;
+        }
+      });
+    }
   }
   validar(event: any) {
-
+     
     //validar contraseña segura con expresiones regulares
     const controName = event.target.id;
     if (controName == "pass") {

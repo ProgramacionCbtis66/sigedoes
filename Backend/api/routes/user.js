@@ -134,20 +134,24 @@ peticion.post('/modifyProfile',verifica, async (req, res) => {
     const conexion = await ccn();
     let sql = "";
     let rol = "";
+    console.log(usr);
     try {
-        if(usuario.rol == "AL") rol = "alumno";
-        if(usuario.rol == "DO") rol = "docente";
-        if(usuario.rol == "CE" || usuario.rol == "OE") rol = "administrativo";
-            sql = `UPDATE usuario as u join ${rol} as x on u.numControl = AL.numControl 
+        if(usr.rol == "AL") rol = "alumno";
+        if(usr.rol == "DO") rol = "docente";
+        if(usr.rol == "CE" || usr.rol == "OE") rol = "administrativo";
+            sql = `UPDATE usuario as u join ${rol} as x on u.numControl = x.numControl 
                    set u.foto = ${usr.foto},
-                       u.password = ${usr.password},
+                       u.password = ${usr.pass1},
                        x.direccion = ${usr.direccion},
                        x.telefono = ${usr.telefono},
                    where u.numControl = ${usr.numControl}`;
         const ModProfile = await conexion.execute(sql);
-        res.json({ ok: "ok" });
+        if(ModProfile[0].foto!=null) ModProfile[0].foto = ModProfile[0].foto.toString('utf-8');
+        let datos = JSON.stringify(ModProfile[0]);
+        let dato = JSON.parse(datos);
+        res.json({ dato });
     } catch (error) {
-        // no tiene otra sentencia aparte del res.json
+        console.log(error);
     }finally{
         conexion.end();
     }

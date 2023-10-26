@@ -21,7 +21,7 @@
                     <div class=" ">
                         <p class="fs-5 pt-2 text-white">Mi Perfil</p>
                     </div>
-                    <div class=" "><button class="enter-2 mt-2" type="button">Guardar</button></div>
+                    <div class=" "><button class="enter-2 mt-2" type="button" (click)="guardarCambios()">Guardar Cambios</button></div>
                 </div>
             </div>
             <div class="col px-3">
@@ -77,14 +77,14 @@
                 <div class="container mb-2">
                     <div class="row">
                         <div class="col-lg-4 mb-2">
-                            <input type="text" [(ngModel)]="perfil.pass1" id="pass" class="fs-6 form-control"
-                                placeholder="Nueva Contraseña" (keyup)="validar($event)">
+                            <input type="password" [(ngModel)]="perfil.pass1" id="pass" class="fs-6 form-control"
+                                placeholder="Nueva Contraseña"  (keyup)="validar($event)">
                             <span id="validandoPass"></span>
                         </div>
                         <div class="col-lg-8 mb-2">
                             <div class="row">
                                 <div class="col-lg-6 mb-2">
-                                    <input type="text" [(ngModel)]="perfil.pass2" id="pass2" class="fs-6 form-control"
+                                    <input type="password" [(ngModel)]="perfil.pass2" id="pass2" class="fs-6 form-control"
                                         placeholder="Confirmar Contraseña" (keyup)="validar($event)">
                                     <span id="validandoPass2"></span>
                                 </div>
