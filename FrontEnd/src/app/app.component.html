@@ -20,7 +20,7 @@
           <a class="nav-link">Inicio de sesión</a>
         </li>
         <li class="nav-item" id="idhome" *ngIf="nav._homeAlumno">
-          <a class="nav-link pe-auto">Alumno</a>
+          <a class="nav-link pe-auto" [routerLink]="['/homeAlumno']" >Alumno</a>
         </li>
         <li class="nav-item" *ngIf="nav._Administrador ">
           <a class="nav-link pe-auto" id="idregistro">Administrador</a>
