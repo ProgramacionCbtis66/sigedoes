@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 export class AlumnoComponent implements OnInit {
   proyecto = environment.proyecto;
   paso2 = false;
-  nombre = "";
+
   curp: any;
   correo: any;
   noctrl: any;
@@ -23,20 +23,7 @@ export class AlumnoComponent implements OnInit {
   semestre: any;
   area: any;
   turno: string = '';
-  datos= {
-    nombre:'',
-    CURP:'',
-    correo:'',
-    numControl:'',
-    grado:'',
-    area:'',
-    turno:'',
-    especialidad:'',
-    Esc_Periodo:'',
-    CTO:'',
-    foto: ''
-  };
-
+  datos: any = {};
   tabla = false;
   datoo: any;
   boton = false;
@@ -68,34 +55,34 @@ export class AlumnoComponent implements OnInit {
     private user: UsuarioService,
     private email: SendEmailService,
   ) {
-    this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._homeAlumno = true;
+    this.nav._perfil=false;
   }
-  
+
   async ngOnInit() {
-    if (this.auth.isAuth() && this.nombre == "") {
-      this.datos.numControl = this.auth.decodifica().numControl;
+    if (this.auth.isAuth()) {
       const numControl = {
-        numControl: this.datos.numControl
+        numControl: this.auth.decodifica().numControl,
+        rol: this.auth.decodifica().rol
       };
       try {
         console.log(numControl);
-        const res = await firstValueFrom (this.user.datosUser(numControl));
+        const res = await firstValueFrom(this.user.datosUser(numControl));
         if (res != '' && res != undefined) {
-          this.datos = JSON.parse(res.data);
+          this.datos = res.dato;
         }
       } catch (error) {
         console.error(error);
       }
-      this.nav._usuario = this.datos.nombre;
-      this.nombre = this.datos.nombre;
-      try {
+      this.datos.nombre = this.datos.nombre + ' ' + this.datos.apellidoP + ' ' + this.datos.apellidoM;
+      if (this.datos.foto != null) {
         this.nav._foto = this.datos.foto;
-      } catch (error) {
-        this.nav._foto = 'sinfoto';
+      } else {
+        this.nav._foto = '.././assets/img/tufoto.png';
+        this.datos.foto = '.././assets/img/tufoto.png';
       }
-      
     }
   }
 
@@ -104,7 +91,7 @@ export class AlumnoComponent implements OnInit {
   }
   veridatos() {
     this.datosCons.asunto = this.valortipo;
-    if(
+    if (
       this.datosCons.asunto != '' &&
       this.datosCons.alumno != '' &&
       this.datosCons.semestre != '' &&
@@ -145,7 +132,7 @@ export class AlumnoComponent implements OnInit {
         fecha: res.nombre,
         CodPago: this.home.NoPago,
       };
-      this.user.subirEmitido(datosRegistro).subscribe((res: any) => {});
+      this.user.subirEmitido(datosRegistro).subscribe((res: any) => { });
     });
 
     this.user.NoPagoDesactivo(this.home).subscribe((res: any) => {
@@ -170,8 +157,8 @@ export class AlumnoComponent implements OnInit {
     this.datosCons.especialidad = this.especialidad;
     this.datosCons.area = this.area;
     this.datosCons.turno = this.turno;
-    this.datosCons.alumno = this.nombre;
-    this.datosCons.matricula = this.noctrl;
+    this.datosCons.alumno = this.datos.nombre;
+    this.datosCons.matricula = this.datos.numControl;
 
     if (
       this.home.NoPago != null &&
