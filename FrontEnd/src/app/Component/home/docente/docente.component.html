@@ -16,9 +16,9 @@
                 <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
                   <div class="d-flex justify-content-center mb-2">
                     <div class="card border-color-1">
-                      <img class="card-img-top" src="{{datosDocente._foto}}" width="90" alt="foto-de-perfil">
-                      <div class="col card-body">
-                        <h4 class="card-title d-flex justify-content-center">
+                      <img class="card-img-top p-2" src="{{datosDocente._foto}}" width="90" alt="foto-de-perfil">
+                      <div class="col card-body py-2">
+                        <h4 class="card-title d-flex justify-content-center m-0 p-0">
 
                           <a class="btn btn-sm"
                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
@@ -81,69 +81,29 @@
         </h2>
         <div id="collapseGlobales" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <form class="d-flex" role="search">
+            <form class="d-flex mb-2" role="search">
               <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">BUSCAR</button>
             </form>
-            <div class="row d-flex my-4">
-              <div class="col-6">
-                <div class="row d-flex mx-0 mb-1">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Turno</option>
-                    <option value="1">Matutino</option>
-                    <option value="2">Vespertino</option>
-                  </select>
-                </div>
-                <div class="row d-flex m-0">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Especialidad</option>
-                    <option value="1">Alimentos</option>
-                    <option value="2">Contabilidad</option>
-                    <option value="3">Electricidad</option>
-                    <option value="4">Programacion</option>
-                    <option value="5">Soporte</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="row d-flex mx-0 mb-1">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Grado</option>
-                    <option value="1">Primero</option>
-                    <option value="2">Segundo</option>
-                    <option value="3">Tercero</option>
-                    <option value="4">Cuarto</option>
-                    <option value="5">Quinto</option>
-                    <option value="6">Sexto</option>
-                  </select>
-                </div>
-                <div class="row d-flex m-0">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Periodo</option>
-                    <option value="1">Periodo 1</option>
-                    <option value="2">Periodo 2</option>
-                  </select>
-                </div>
-              </div>
-
+            <div class="container p-0">
+              <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
+                <thead>
+                  <tr>
+                    <th scope="col">NC</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Materia</th>
+                    <th scope="col">Periodo escolar</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+              </table>
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">NC</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Materia</th>
-                  <th scope="col">Periodo escolar</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-            </table>
           </div>
         </div>
       </div>
     </div>
     <!-- modulo Recursa-->
-    <div class="accordion mb2" id="accordionExample">
+    <div class="accordion mb-2" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -157,52 +117,23 @@
         </h2>
         <div id="collapseRecursa" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <form class="d-flex" role="search">
+            <form class="d-flex mb-2" role="search">
               <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">BUSCAR</button>
             </form>
-            <div class="row d-flex my-4">
-              <div class="col-6">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Turno</option>
-                  <option value="1">Matutino</option>
-                  <option value="2">Vespertino</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Especialidad</option>
-                  <option value="1">Alimentos</option>
-                  <option value="2">Contabilidad</option>
-                  <option value="3">Electricidad</option>
-                  <option value="4">Programacion</option>
-                  <option value="5">Soporte</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Grado</option>
-                  <option value="1">Primero</option>
-                  <option value="2">Segundo</option>
-                  <option value="3">Tercero</option>
-                  <option value="4">Cuarto</option>
-                  <option value="5">Quinto</option>
-                  <option value="6">Sexto</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Periodo</option>
-                  <option value="1">Periodo 1</option>
-                  <option value="2">Periodo 2</option>
-                </select>
-              </div>
+            <div class="container p-0">
+              <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
+                <thead>
+                  <tr>
+                    <th scope="col">NC</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Materia</th>
+                    <th scope="col">Periodo escolar</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+              </table>
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">NC</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Materia</th>
-                  <th scope="col">Periodo escolar</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-            </table>
           </div>
         </div>
       </div>
