@@ -129,7 +129,7 @@ peticion.post('/getContra', verifica, async (req, res) => {
     }
 });
 
-peticion.post('/modifyProfile',verifica, async (req, res) => {
+peticion.post('/modificarPerfil',verifica, async (req, res) => {
     const usr = req.body;
     const conexion = await ccn();
     let sql = "";
@@ -144,6 +144,10 @@ peticion.post('/modifyProfile',verifica, async (req, res) => {
                        u.password = ${usr.pass1},
                        x.direccion = ${usr.direccion},
                        x.telefono = ${usr.telefono},
+                       x.facebook = ${usr.facebook},
+                       x.twitter = ${usr.twitter},
+                       x.whatsapp = ${usr.whatsapp},
+                       x.instagram = ${usr.instagram}
                    where u.numControl = ${usr.numControl}`;
         const ModProfile = await conexion.execute(sql);
         if(ModProfile[0].foto!=null) ModProfile[0].foto = ModProfile[0].foto.toString('utf-8');
