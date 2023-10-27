@@ -8,7 +8,7 @@ const verifica = require('./verificaToken');
 docente.post('/datosDocente', verifica, async (req, res) => {
     const numControl = req.body.numControl;
  
-    const sql = 'select * from queryDocente where numControl = ?';
+    const sql = 'select * from querydocente where numControl = ?';
     try {
         const conexion = await ccn();
         console.log(numControl);
