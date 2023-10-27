@@ -52,11 +52,13 @@ export class RegistroComponent implements OnInit {
     }
   }
   public Registro(): void {
+ 
       if (this.tipoUsuario == "Docente") {
         if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && this.docente._correo !== "" && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== ""  && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
           this.docente._tipoUsuario = "Docente";
           this.docente._rol="DO";
           this.docente._numControl = this.docente._correo;
+          
           this.docente._foto = this.foto;
           if(this.docente._pass === this.docente._pass2){
             Notiflix.Loading.standard("Validando");
@@ -78,11 +80,11 @@ export class RegistroComponent implements OnInit {
           Notiflix.Notify.failure("Faltan Datos");
         }
       } else if (this.tipoUsuario == "Alumno") {
-        if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && this.alumno._correo != "" && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._semestre != "" && this.alumno._area != "" && this.alumno._foto != null) {
+        if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && this.alumno._correo != "" && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._grado != "" && this.alumno._area != "" && this.alumno._foto != null) {
           if(this.alumno._pass === this.alumno._pass2){
           this.alumno._tipoUsuario = "Alumno";
           this.alumno._rol="AL";
-          this.docente._foto = this.foto;
+          this.alumno._foto = this.foto;
           Notiflix.Loading.standard("Validando");
           this.auth.registro(this.alumno).subscribe((res: any) => {
             if (res.Aceptado == "Datos Guardados") {

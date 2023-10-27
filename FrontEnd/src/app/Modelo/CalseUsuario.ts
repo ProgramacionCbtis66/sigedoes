@@ -16,7 +16,7 @@ export class Usuario {
     private direccion:string;
     private telefono:string;
     private CTO:string;
-    private grupo:string;
+   
     private rol:string;
     private foto:Blob | any;
     private imageUrl: any;
@@ -39,7 +39,7 @@ export class Usuario {
         this.direccion = "";
         this.telefono = "";
         this.CTO = "30DCT0236O";
-        this.grupo = "";
+         
         this.rol = "";
         this.foto = new Blob();
         this.imageUrl = "";
@@ -62,7 +62,7 @@ export class Usuario {
     get _direccion(){return this.direccion;}
     get _telefono(){return this.telefono;}
     get _CTO(){return this.CTO;}
-    get _grupo(){return this.grupo;}
+   
     get _rol(){return this.rol;}
     get _foto(){return this.foto;}
     get _imageUrl(){return this.imageUrl;}
@@ -84,7 +84,7 @@ export class Usuario {
     set _direccion(direccion:string){this.direccion = direccion;}
     set _telefono(telefono:string){this.telefono = telefono;}
     set _CTO(CTO:string){this.CTO = CTO;}
-    set _grupo(grupo:string){this.grupo = grupo;}
+ 
     set _rol(rol:string){this.rol = rol;}
     set _foto(foto:Blob | any){this.foto = foto;}
     set _imageUrl(imageUrl:any){this.imageUrl = imageUrl;}
