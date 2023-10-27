@@ -85,6 +85,7 @@ export class RegistroComponent implements OnInit {
           this.alumno._tipoUsuario = "Alumno";
           this.alumno._rol="AL";
           this.alumno._foto = this.foto;
+          this.alumno._horario = "1";
           Notiflix.Loading.standard("Validando");
           this.auth.registro(this.alumno).subscribe((res: any) => {
             if (res.Aceptado == "Datos Guardados") {
