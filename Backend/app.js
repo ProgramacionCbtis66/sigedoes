@@ -14,6 +14,7 @@ app.use(cors({
           console.log("dominio permitido");
         callback(null, true);
       } else {
+        console.log("Dominio no permitido");
         callback(new Error("Este dominio no esta permitido"));
       }
     } 
