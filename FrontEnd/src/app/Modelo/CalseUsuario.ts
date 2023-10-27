@@ -18,7 +18,7 @@ export class Usuario {
     private CTO:string;
     private grupo:string;
     private rol:string;
-    private foto:Blob | string;
+    private foto:Blob | any;
     private imageUrl: any;
     
     constructor() {
@@ -41,7 +41,7 @@ export class Usuario {
         this.CTO = "30DCT0236O";
         this.grupo = "";
         this.rol = "";
-        this.foto = "";
+        this.foto = new Blob();
         this.imageUrl = "";
     }
 
@@ -86,6 +86,6 @@ export class Usuario {
     set _CTO(CTO:string){this.CTO = CTO;}
     set _grupo(grupo:string){this.grupo = grupo;}
     set _rol(rol:string){this.rol = rol;}
-    set _foto(foto:Blob | string){this.foto = foto;}
+    set _foto(foto:Blob | any){this.foto = foto;}
     set _imageUrl(imageUrl:any){this.imageUrl = imageUrl;}
 }

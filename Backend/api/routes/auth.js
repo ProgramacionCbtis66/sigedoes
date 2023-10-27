@@ -86,21 +86,24 @@ peticion.post('/registro', async (req, res) => {
 
         //Subir datos a la tabla alumno
         if (datos.tipoUsuario == "Alumno") {
-            const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,direccion,especialidad,area,grado,grupo,turno,CTO,alta,CURP,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,fechaNac,direccion,telefono,especialidad,area,grado,grupo,turno,CTO,correo,CURP,facebook,twitter,instagram,horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?. ?)',
                 [
                     datos.numControl,
+                    datos.fechaNac,
                     datos.direccion,
+                    datos.telefono,
                     datos.especialidad,
                     datos.area,
                     datos.grado,
                     datos.grupo,
                     datos.turno,
                     datos.CTO,
-                    0,
-                    datos.CURP,
+                    datos.correo,
+                    datos.curp,
                     datos.facebook,
+                    datos.twitter,
                     datos.instagram,
-                    datos.twitter
+                    datos.horario
                 ]);
         }
         //Subir datos a la tabla profesor
