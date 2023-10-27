@@ -63,27 +63,27 @@
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
                   <input [(ngModel)]="alumno._nombre" type="text" class="form-control tm" id="nombre" #nombre
                     placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="nombre" (keypress)="valida($event)">
+                    id="nombre" (keyup)="valida($event)">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap"
-                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
                     style="font-size: small;text-transform: uppercase;" id="ap">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am"
-                    (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
+                    (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
                     style="font-size: small;text-transform: uppercase;" id="am">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
                   <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm" id="fn"
-                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
+                    (keyup)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
@@ -96,25 +96,25 @@
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
                   <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
-                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                    (keyup)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm"
-                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
+                    (keyup)="valida($event)" placeholder="Dirección" id="dir">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
                   <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono"
-                    (keypress)="valida($event)" id="tel">
+                    (keyup)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
                   <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm" placeholder="Facebook"
-                    (keypress)="valida($event)" id="fb">
+                    (keyup)="valida($event)" id="fb">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
@@ -149,7 +149,7 @@
                 <div class="col-md-3">
                   <div class="input-group">
                     <span class="input-group-text tm">grado</span>
-                    <select id="semestre" [(ngModel)]="alumno._semestre" class="form-select tm">
+                    <select id="semestre" [(ngModel)]="alumno._grado" class="form-select tm">
                       <option value="PRIMER">°1</option>
                       <option value="SEGUNDO">°2</option>
                       <option value="TERCER">°3</option>
