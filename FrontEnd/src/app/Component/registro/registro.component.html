@@ -108,7 +108,7 @@
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
                   <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono"
-                    (keyup)="valida($event)" id="tel">
+                    (keypress)="valida($event)" id="tel">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">

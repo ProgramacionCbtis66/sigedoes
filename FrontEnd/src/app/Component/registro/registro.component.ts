@@ -176,6 +176,9 @@ export class RegistroComponent implements OnInit {
   valida(evt: any) {
 
     const input = evt.target.id;
+    //longitud maxima de cada input
+    const valor = evt.target.value;
+    
     var code = (evt.which) ? evt.which : evt.keyCode;
 
     if (input == "nombre" || input == "ap" || input == "am") {
@@ -190,7 +193,7 @@ export class RegistroComponent implements OnInit {
     if (input == "tel") {
       if (code == 8) { // backspace.
         return true;
-      } else if (code >= 48 && code <= 57) { // is a number.
+      } else if (code >= 48 && code <= 57 && valor.length<10 ) { // is a number.
         return true;
       } else { // other keys.
         return false;
