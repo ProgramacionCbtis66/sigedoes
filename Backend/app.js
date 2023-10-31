@@ -45,5 +45,8 @@ app.use('/admin', adminRouter);
 //docente
 const docenteRouter = require('./api/routes/docente');
 app.use('/docente', docenteRouter);
+//Pagos Mercado Pago
+const paymentRouter = require('./api/routes/payment.routes');
+app.use('/pagos', paymentRouter);
 
 module.exports = app;

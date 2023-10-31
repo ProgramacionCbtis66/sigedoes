@@ -63,70 +63,70 @@
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
                   <input [(ngModel)]="alumno._nombre" type="text" class="form-control tm" id="nombre" #nombre
                     placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="nombre" (keyup)="valida($event)">
+                    id="nombre" (keyup)="valida($event)" autocomplete="off">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap"
                     (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="ap">
+                    style="font-size: small;text-transform: uppercase;" id="ap" autocomplete="off">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am"
                     (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="am">
+                    style="font-size: small;text-transform: uppercase;" id="am" autocomplete="off">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
                   <input [(ngModel)]="alumno._fechaNac" type="date" class="form-control tm" id="fn"
-                    (keyup)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
+                    (keyup)="valida($event)" placeholder="Fecha de nacimiento" id="fn" autocomplete="off">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
                   <input [(ngModel)]="alumno._correo" type="email" class="form-control tm" (keyup)="valida($event)"
-                    (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                    (change)="valida($event)" placeholder="Correo electrónico" id="correo" autocomplete="off">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
                   <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
-                    (keyup)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                    (keyup)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp" autocomplete="off">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm"
-                    (keyup)="valida($event)" placeholder="Dirección" id="dir">
+                    (keyup)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
                   <input [(ngModel)]="alumno._telefono" type="text" class="form-control tm" placeholder="Teléfono"
-                    (keypress)="valida($event)" id="tel">
+                    (keypress)="valida($event)" id="tel" autocomplete="off">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
                   <input [(ngModel)]="alumno._facebook" type="text" class="form-control tm" placeholder="Facebook"
-                    (keyup)="valida($event)" id="fb">
+                    (keyup)="valida($event)" id="fb" autocomplete="off">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
                   <label for="tw" class="form-label ps-2 tm">Twitter</label>
                   <input [(ngModel)]="alumno._twitter" type="text" class="form-control tm" placeholder="Twitter"
-                    id="tw">
+                    id="tw" autocomplete="off">
                 </div>
                 <!-- instagram -->
                 <div class="col-md-3">
                   <label for="ig" class="form-label ps-2 tm">Instagram</label>
                   <input [(ngModel)]="alumno._instagram" type="text" class="form-control tm" placeholder="Instagram"
-                    id="ig">
+                    id="ig" autocomplete="off">
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
@@ -192,128 +192,121 @@
                 <div class="input-group mb-3 px-3">
                   <span class="input-group-text tm">#</span>
                   <input [(ngModel)]="alumno._numControl" type="text" class="form-control tm"
-                    placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
+                    placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="" autocomplete="off">
                   <span class="input-group-text tm">!IMPORTANTE</span>
                 </div>
                 <!-- pass -->
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Contraseña</span>
-                    <input type="text" [(ngModel)]="alumno._pass" class="form-control tm" id="pass">
+                    <input type="text" [(ngModel)]="alumno._pass" class="form-control tm" id="pass" autocomplete="off">
                   </div>
                 </div>
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Confirmar</span>
-                    <input type="text" [(ngModel)]="alumno._pass2" class="form-control tm" id="pass2">
+                    <input type="text" [(ngModel)]="alumno._pass2" class="form-control tm" id="pass2" autocomplete="off">
                   </div>
                 </div>
               </div>
-
               <!-- Formulario docente -->
               <div class="row" *ngIf="tipoUsuario == 'Docente'">
                 <!--Nombre-->
                 <div class="col-md-4">
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
                   <input [(ngModel)]="docente._nombre" type="text" class="form-control tm" id="nombre" #nombre
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="nombre" (keypress)="valida($event)">
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="nombre" (keypress)="valida($event)" autocomplete="off">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="docente._apellidoP" type="text" class="form-control tm" id="ap"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="ap">
+                    style="font-size: small;text-transform: uppercase;" id="ap" autocomplete="off">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="docente._apellidoM" type="text" class="form-control tm" id="am"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="am">
+                    style="font-size: small;text-transform: uppercase;" id="am" autocomplete="off">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
                   <input [(ngModel)]="docente._fechaNac" type="date" class="form-control tm" id="fn"
-                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
+                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn" autocomplete="off">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
                   <input [(ngModel)]="docente._correo" type="email" class="form-control tm" (keyup)="valida($event)"
-                    (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                    (change)="valida($event)" placeholder="Correo electrónico" id="correo" autocomplete="off">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
-                  <input [(ngModel)]="docente._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
-                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <input [(ngModel)]="docente._curp" type="text" class="form-control tm" placeholder="CURP" id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp" autocomplete="off">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="docente._direccion" type="text area" class="form-control tm"
-                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
+                    (keypress)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
-                  <input [(ngModel)]="docente._telefono" type="text" class="form-control tm" placeholder="Teléfono"
-                    (keypress)="valida($event)" id="tel">
+                  <input [(ngModel)]="docente._telefono" type="text" class="form-control tm" placeholder="Teléfono" (keypress)="valida($event)" id="tel" autocomplete="off">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
-                  <input [(ngModel)]="docente._facebook" type="text" class="form-control tm" placeholder="Facebook"
-                    (keypress)="valida($event)" id="fb">
+                  <input [(ngModel)]="docente._facebook" type="text" class="form-control tm" placeholder="Facebook" (keypress)="valida($event)" id="fb" autocomplete="off">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
                   <label for="tw" class="form-label ps-2 tm">Twitter</label>
                   <input [(ngModel)]="docente._twitter" type="text" class="form-control tm" placeholder="Twitter"
-                    id="tw">
+                    id="tw" autocomplete="off">
                 </div>
                 <!-- instagram -->
                 <div class="col-md-3">
                   <label for="ig" class="form-label ps-2 tm">Instagram</label>
                   <input [(ngModel)]="docente._instagram" type="text" class="form-control tm" placeholder="Instagram"
-                    id="ig">
+                    id="ig" autocomplete="off">
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
                 <!-- RFC -->
                 <div class="col-md-4">
                   <label for="rfc" class="form-label ps-2 tm">RFC</label>
-                  <input [(ngModel)]="docente._RFC" type="text" class="form-control tm" placeholder="RFC" id="rfc"
-                    (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="rfc">
+                  <input [(ngModel)]="docente._RFC" type="text" class="form-control tm" placeholder="RFC" id="rfc" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="rfc" autocomplete="off">
                 </div>
                 <!-- Grado Academico -->
                 <div class="col-md-4">
                   <label for="grado" class="form-label ps-2 tm">Grado Academico</label>
                   <input [(ngModel)]="docente._gradoAcademico" type="text" class="form-control tm"
-                    placeholder="Grado Academico" id="grado" id="grado">
+                    placeholder="Grado Academico" id="grado" id="grado" autocomplete="off">
                 </div>
                 <!-- Cedula profesional -->
                 <div class="col-md-4">
                   <label for="cedula" class="form-label ps-2 tm">Cedula profesional</label>
                   <input [(ngModel)]="docente._CEDULA" type="text" class="form-control tm"
-                    placeholder="Cedula profesional" id="cedula" style="font-size: small;text-transform: uppercase;"
-                    id="cedula">
+                    placeholder="Cedula profesional" id="cedula" style="font-size: small;text-transform: uppercase;" id="cedula" autocomplete="off">
                 </div>
                 <!-- pass -->
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Contraseña</span>
-                    <input type="text" [(ngModel)]="docente._pass" class="form-control tm" id="pass">
+                    <input type="text" [(ngModel)]="docente._pass" class="form-control tm" id="pass" autocomplete="off">
                   </div>
                 </div>
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Confirmar</span>
-                    <input type="text" [(ngModel)]="docente._pass2" class="form-control tm" id="pass2">
+                    <input type="text" [(ngModel)]="docente._pass2" class="form-control tm" id="pass2" autocomplete="off">
                   </div>
                 </div>
               </div>
@@ -322,72 +315,68 @@
                 <!--Nombre-->
                 <div class="col-md-4">
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
-                  <input [(ngModel)]="administrativo._nombre" type="text" class="form-control tm" id="nombre" #nombre
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
-                    id="nombre" (keypress)="valida($event)">
+                  <input [(ngModel)]="administrativo._nombre" type="text" class="form-control tm" id="nombre" #nombre placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="nombre" (keypress)="valida($event)" autocomplete="off">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="administrativo._apellidoP" type="text" class="form-control tm" id="ap"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="ap">
+                    style="font-size: small;text-transform: uppercase;" id="ap" autocomplete="off">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="administrativo._apellidoM" type="text" class="form-control tm" id="am"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="am">
+                    style="font-size: small;text-transform: uppercase;" id="am" autocomplete="off">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
                   <label for="fn" class="form-label ps-2 tm">Fecha de nacimiento</label>
                   <input [(ngModel)]="administrativo._fechaNac" type="date" class="form-control tm" id="fn"
-                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn">
+                    (keypress)="valida($event)" placeholder="Fecha de nacimiento" id="fn" autocomplete="off">
                 </div>
                 <!-- correo electrónico -->
                 <div class="col-md-6">
                   <label for="correo" class="form-label ps-2 tm">Correo electrónico</label>
                   <input [(ngModel)]="administrativo._correo" type="email" class="form-control tm"
-                    (keyup)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo">
+                    (keyup)="valida($event)" (change)="valida($event)" placeholder="Correo electrónico" id="correo" autocomplete="off">
                   <p id="validaCorreo" class="tm"></p>
                 </div>
                 <!-- CURP -->
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
-                  <input [(ngModel)]="administrativo._curp" type="text" class="form-control tm" placeholder="CURP"
-                    id="curp" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp">
+                  <input [(ngModel)]="administrativo._curp" type="text" class="form-control tm" placeholder="CURP" (keypress)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp" autocomplete="off">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
                   <label for="dir" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="administrativo._direccion" type="text area" class="form-control tm"
-                    (keypress)="valida($event)" placeholder="Dirección" id="dir">
+                    (keypress)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
                   <label for="tel" class="form-label ps-2 tm">Teléfono</label>
                   <input [(ngModel)]="administrativo._telefono" type="text" class="form-control tm"
-                    placeholder="Teléfono" (keypress)="valida($event)" id="tel">
+                    placeholder="Teléfono" (keypress)="valida($event)" id="tel" autocomplete="off">
                 </div>
                 <!-- facebook -->
                 <div class="col-md-3">
                   <label for="fb" class="form-label ps-2 tm">Facebook</label>
                   <input [(ngModel)]="administrativo._facebook" type="text" class="form-control tm"
-                    placeholder="Facebook" (keypress)="valida($event)" id="fb">
+                    placeholder="Facebook" (keypress)="valida($event)" id="fb" autocomplete="off">
                 </div>
                 <!-- twitter -->
                 <div class="col-md-3">
                   <label for="tw" class="form-label ps-2 tm">Twitter</label>
-                  <input [(ngModel)]="administrativo._twitter" type="text" class="form-control tm" placeholder="Twitter"
-                    id="tw">
+                  <input [(ngModel)]="administrativo._twitter" type="text" class="form-control tm" placeholder="Twitter" id="tw" autocomplete="off">
                 </div>
                 <!-- instagram -->
                 <div class="col-md-3">
                   <label for="ig" class="form-label ps-2 tm">Instagram</label>
                   <input [(ngModel)]="administrativo._instagram" type="text" class="form-control tm"
-                    placeholder="Instagram" id="ig">
+                    placeholder="Instagram" id="ig" autocomplete="off">
                 </div>
                 <!-- division -->
                 <hr class="border border-danger border-1 opacity-50 mt-2">
@@ -402,28 +391,27 @@
                 <!-- nivel operativo -->
                 <div class="col-md-3">
                   <label for="nivel" class="form-label ps-2 tm">Nivel Operativo</label>
-                  <input id="nivel" [(ngModel)]="administrativo._nivelOperativo" class="form-control tm">
+                  <input id="nivel" [(ngModel)]="administrativo._nivelOperativo" class="form-control tm" autocomplete="off">
                 </div>
                 <!-- Departamento -->
                 <div class="col-md-5">
                   <label for="departamento" class="form-label ps-2 tm">Departamento</label>
-                  <input id="departamento" [(ngModel)]="administrativo._departamento" class="form-control tm">
+                  <input id="departamento" [(ngModel)]="administrativo._departamento" class="form-control tm" autocomplete="off">
                 </div>
                 <!-- pass -->
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Contraseña</span>
-                    <input type="text" [(ngModel)]="administrativo._pass" class="form-control tm" id="pass">
+                    <input type="text" [(ngModel)]="administrativo._pass" class="form-control tm" id="pass" autocomplete="off">
                   </div>
                 </div>
                 <div class="col-md-6 pt-3">
                   <div class="input-group mb-3 px-3">
                     <span class="input-group-text tm">Confirmar</span>
-                    <input type="text" [(ngModel)]="administrativo._pass2" class="form-control tm" id="pass2">
+                    <input type="text" [(ngModel)]="administrativo._pass2" class="form-control tm" id="pass2" autocomplete="off">
                   </div>
                 </div>
               </div>
-
               <!-- boton de registro -->
               <div class="d-flex justify-content-center mt-2 mb-2" *ngIf="tipoUsuario!=''">
                 <button class="btn bg-secondary rounded btn-lg text-white" type="button"
