@@ -4,7 +4,8 @@
     <div class="card mb-2 bg-color-1">
       <div class="row">
         <div class="d-flex justify-content-center p-1">
-          <p class="singup-3 m-2 fs-5">{{datosDocente._nombre+ " " +datosDocente._apellidoP+ " " +datosDocente._apellidoM}}</p>
+          <p class="singup-3 m-2 fs-5">{{datosDocente._nombre+ " " +datosDocente._apellidoP+ " "
+            +datosDocente._apellidoM}}</p>
         </div>
       </div>
     </div>
@@ -65,10 +66,8 @@
   </div>
   <!-- Lado derecho -->
   <div class="col-md-8 mt-2">
-    
-    <!--Modulo globales-->
-    
 
+    <!--Modulo globales-->
     <div class="accordion mb-2" id="accordionGlobales">
       <div class="accordion-item">
         <h2 class="accordion-header">
@@ -82,11 +81,16 @@
           </button>
         </h2>
         <div id="collapseGlobales" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <!-- REgistro de alumnos Globales -->
           <div class="accordion-body">
-            <form class="d-flex mb-2" role="search">
-              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">BUSCAR</button>
-            </form>
+            <!-- buscar alumno -->
+            <div class="d-flex mb-3">
+              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
+                [(ngModel)]="numControlAlumnoGlobal">
+              <button (click)="buscarAlumno($event)" class="btn btn-outline-success" type="submit"
+                id="global">BUSCAR</button>
+            </div>
+            <!-- Alumno agregado -->
             <div class="container p-0">
               <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
                 <thead>
@@ -98,6 +102,25 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
+                <tbody>
+                  <tr *ngFor="let alumno of alumnosGlobales">
+                    <td>{{alumno.numControl}}</td>
+                    <td>{{alumno.nombre+" "+alumno.apellidoP+" "+alumno.apellidoM}}</td>
+                    <td>
+                      <select class="form-select form-select-sm" aria-label="Small select example">
+                        <option selected>Selecionar materia</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </td>
+                    <td>{{alumno._periodoEscolar}}</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger"
+                        (click)="eliminarAlumno(alumno.numControl,'global')">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
@@ -119,10 +142,12 @@
         </h2>
         <div id="collapseRecursa" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <form class="d-flex mb-2" role="search">
-              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">BUSCAR</button>
-            </form>
+            <div class="d-flex mb-3">
+              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
+                [(ngModel)]="numControlAlumnoRecursa">
+              <button (click)="buscarAlumno($event)" class="btn btn-outline-success" type="submit"
+                id="recursa">BUSCAR</button>
+            </div>
             <div class="container p-0">
               <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
                 <thead>
@@ -134,14 +159,33 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
+                <tbody>
+                  <tr *ngFor="let alumno of alumnosRecursas">
+                    <td>{{alumno.numControl}}</td>
+                    <td>{{alumno.nombre+" "+alumno.apellidoP+" "+alumno.apellidoM}}</td>
+                    <td>
+                      <select class="form-select form-select-sm" aria-label="Small select example">
+                        <option selected>Selecionar materia</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </td>
+                    <td>{{alumno._periodoEscolar}}</td>
+                    <td>
+                      <button class="btn btn-sm btn-danger"
+                        (click)="eliminarAlumno(alumno.numControl,'recursa')">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
-   
+
+
 
   </div>
 </div>

@@ -40,7 +40,7 @@ export class UsuarioService {
     return this.http.post(`${this.URL}/insize/SubirRegistro`, datosRegistro);
   }
   verInfo(numControl: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/verInfo`, numControl);
+    return this.http.post(`${this.URL}/insize/verInfo`, numControl,this.usr);
   }
   getContra(numControl: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/getContra`, numControl);
