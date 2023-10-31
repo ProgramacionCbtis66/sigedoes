@@ -19,6 +19,7 @@ export class DocenteComponent implements OnInit {
   protected numControlAlumnoRecursa : string = "";
   protected alumnosGlobales: any = [];
   protected alumnosRecursas: any = [];
+  protected materias: any = [];
   protected proyecto = environment.proyecto;
   protected datosDocente = new Docente();
   constructor(
@@ -116,5 +117,10 @@ export class DocenteComponent implements OnInit {
        if(array == "global"){this.alumnosGlobales = this.alumnosGlobales.filter((item:any)=> item.numControl != alumno);}
        if(array == "recursa"){this.alumnosRecursas = this.alumnosRecursas.filter((item:any)=> item.numControl != alumno);}
   }
+
+ async datosMateria(){
+    
+     const datos = await firstValueFrom(this.)
+ }
 
 }

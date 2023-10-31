@@ -1,68 +1,6 @@
 <div class="row">
   <!-- Lado izquierdo -->
   <div class="col-md-4 mt-2">
-    <div class="card mb-2 bg-color-1">
-      <div class="row">
-        <div class="d-flex justify-content-center p-1">
-          <p class="singup-3 m-2 fs-5">{{datosDocente._nombre+ " " +datosDocente._apellidoP+ " "
-            +datosDocente._apellidoM}}</p>
-        </div>
-      </div>
-    </div>
-    <div class="card border-color-1">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="container-fluid">
-              <div class="row justify-content-center">
-                <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
-                  <div class="d-flex justify-content-center mb-2">
-                    <div class="card border-color-1">
-                      <img class="card-img-top p-2" src="{{datosDocente._foto}}" width="90" alt="foto-de-perfil">
-                      <div class="col card-body py-2">
-                        <h4 class="card-title d-flex justify-content-center m-0 p-0">
-
-                          <a class="btn btn-sm"
-                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                            <i class="bi bi-twitter-x fs-2"></i>
-                          </a>
-                          <i class="bi bi-facebook fs-2 ps-2 text-primary"></i>
-                          <i class="bi bi-instagram fs-2 ps-2 "></i>
-                          <i class="bi bi-whatsapp fs-2 ps-2 text-success"></i>
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <p>Información del Docente</p>
-            <div class="">
-              <table class="table table-bordered table-responsive border-color-1 m-0">
-                <tr>
-                  <th scope="col">Docente:</th>
-                  <th>{{datosDocente._nombre}}</th>
-                </tr>
-                <tr>
-                  <th>NO.CONTROL</th>
-                  <td>{{datosDocente._numControl}}</td>
-                </tr>
-                <tr>
-                  <th>CURP</th>
-                  <td>{{datosDocente._curp}}</td>
-                </tr>
-                <tr>
-                  <th>Grado Academico</th>
-                  <td>{{datosDocente._gradoAcademico}}</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <!-- Lado derecho -->
   <div class="col-md-8 mt-2">
@@ -80,7 +18,7 @@
             </p>
           </button>
         </h2>
-        <div id="collapseGlobales" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div id="collapseGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <!-- REgistro de alumnos Globales -->
           <div class="accordion-body">
             <!-- buscar alumno -->
@@ -140,7 +78,7 @@
             </p>
           </button>
         </h2>
-        <div id="collapseRecursa" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div id="collapseRecursa" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="d-flex mb-3">
               <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
