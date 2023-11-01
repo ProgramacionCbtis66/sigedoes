@@ -98,12 +98,12 @@ peticion.post('/SubirRegistro',verifica, async (req, res) => {
     }
 });
 
-peticion.post('/verInfo', async (req, res) => {
-    const { numeroCtrl } = req.body;
-    console.log(numeroCtrl);
+peticion.post('/verInfo',verifica, async (req, res) => {
+    const { numControl } = req.body;
+    console.log(numControl);
     const conexion = await ccn();
     try {
-        const[registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numeroCtrl]);
+        const[registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numControl]);
         let datos = JSON.stringify(registros[0]);
         let data = JSON.parse(datos);
         console.log(data)

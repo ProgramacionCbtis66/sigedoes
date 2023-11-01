@@ -84,8 +84,10 @@ docente.post('/datosPeriodoEscolar', verifica, async (req, res) => {
 
 docente.post('/validandoTablaGR', verifica, async (req, res) => {
     const { periodo, materia, numControl, control } = req.body;
+    
+    console.log(periodo, materia, numControl);
     if (control == "global") {
-        return res.json( {data:buscaGlobales(periodo, materia, numControl)})    
+        return res.json( {data:buscaGlobales(periodo, materia, numControl)})
     } else {
         if(buscaRecursa(periodo, materia, numControl)){
             return res.json({data: true});
@@ -101,11 +103,16 @@ docente.post('/validandoTablaGR', verifica, async (req, res) => {
 
 async function buscaRecursaenGlobales(periodo, materia, numControl) {
     const sql = 'select * from globales where idperiodoescolar = ? and idMateria = ? and alumnoNumControl = ?';
+    console.log(periodo, materia, numControl);
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);
-        if (registros.length > 0 && (registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2)){
-            return true;
+        if (registros.length > 0 ){
+            if(registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2){
+                return true;
+            }else{
+            return false;
+            }
         } else {
             return false;
         }
@@ -116,7 +123,8 @@ async function buscaRecursaenGlobales(periodo, materia, numControl) {
     }
 }
 async function buscaGlobales(periodo, materia, numControl) {
-    const sql = 'select * from globales where idperiodoescolar = ? and idMateria = ? and numControl = ?';
+    const sql = 'select * from globales where idperiodoescolar = ? and idMateria = ? and alumnoNumControl = ?';
+    console.log(periodo, materia, numControl);
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);

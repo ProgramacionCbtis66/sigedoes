@@ -91,13 +91,13 @@ export class DocenteComponent implements OnInit {
             Notiflix.Notify.warning("Alumno ya esta en la lista de Global con la materia " + res.data.materia + " en el periodo " + res.data.periodo)+ " con el estatus " + res.data.estatus;
           return true;
         }else{
+          
           return false;
         }
       });
     }else{
       this.docente.validandoTablaGR(datos).subscribe((res: any) => {
         if (res.status == 200) {
-            Notiflix.Notify.warning(res.mensaje);
           return true;
         }else{
           return false;
@@ -108,42 +108,47 @@ export class DocenteComponent implements OnInit {
   }
 
   async buscarAlumno(evento: any) {
-    let encontrado;
-    let numeroCtrl = {};
+    let encontrado, listaEncontrado;
+    let numeroCtrl:any = {};
     if (evento.target.id == "global") {
-      const numeroCtrl = {
+       numeroCtrl = {
         numControl: this.numControlAlumnoGlobal,
         materia: this.materiaGlobal,
         periodo: this.periodoGlobal,
         control: "global"
       };
-      encontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
+      listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
       encontrado = this.validandotabla(numeroCtrl);
+      
     }
     if (evento.target.id == "recursa") {
-      const numeroCtrl = {
+      numeroCtrl = {
         numControl: this.numControlAlumnoRecursa,
         materia: this.materiaRecursa,
         periodo: this.periodoRecursa,
         control: "recursa"
       };
-      encontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
+      listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
       encontrado = this.validandotabla(numeroCtrl);
     }
     //buscar en el array alumnosGlobales un nombre
 
-    if (!encontrado) {
+    if (!listaEncontrado) {
+      if(!encontrado){
+       
       try {
         const respuesta = await firstValueFrom(this.alumno.verInfo(numeroCtrl));
+
         if (respuesta.data != '' && respuesta.data != undefined) {
           if (evento.target.id == "global") this.alumnosGlobales.push(respuesta.data);
           if (evento.target.id == "recursa") this.alumnosRecursas.push(respuesta.data);
         } else {
-          Notiflix.Notify.failure("Alumno no encontrado");
+          Notiflix.Notify.failure("Alumno no encontrado en tabla de alumnos");
         }
       } catch (error) {
         console.log(error);
       }
+    }
     } else {
       Notiflix.Notify.warning("Alumno ya esta en la lista");
     }
