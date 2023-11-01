@@ -43,10 +43,14 @@ docente.post('/modifyProfile', verifica, async (req, res) => {
 });
 
 docente.post('/datosMateria', verifica, async (req, res) => {
-    const sql = 'select * from materias';
+    const { periodo } = req.body;
+    const sqlperiodo = 'select periodo from periodoescolar where idperiodoescolar = ?';
+    const sql = 'select * from materias where periodo = ?';
     try {
         const conexion = await ccn();
-        const [registros] = await conexion.execute(sql);
+        const [xperiodo] = await conexion.execute(sqlperiodo, [periodo]);
+        console.log(xperiodo[0].periodo);
+        const [registros] = await conexion.execute(sql, [xperiodo[0].periodo]);
         if (registros.length > 0) {
             let datos = JSON.stringify(registros);
             let data = JSON.parse(datos);
@@ -83,40 +87,61 @@ docente.post('/datosPeriodoEscolar', verifica, async (req, res) => {
 });
 
 docente.post('/validandoTablaGR', verifica, async (req, res) => {
-    const { periodo, materia, numControl, control } = req.body;
-    
-    console.log(periodo, materia, numControl);
+    const { periodo, materia, numControl, control, tipo } = req.body;
+
+    console.log(periodo, materia, control , tipo, " 1   validandoTablaGR");
     if (control == "global") {
-        return res.json( {data:buscaGlobales(periodo, materia, numControl)})
+        if (await buscaGlobales(periodo, materia, numControl)) {
+            return res.json({ data: true });
+        } else {
+            return res.json({ data: false });
+        }
     } else {
-        if(buscaRecursa(periodo, materia, numControl)){
-            return res.json({data: true});
-        }else{
-           if(buscaRecursaenGlobales(periodo, materia, numControl)){
-            return res.json({data: false});
-           }else{
-            return res.json({data: true});
-           }
+        if (tipo == "BASICA" || tipo == "PROPEDEUTICA") {
+            console.log("2  busca en recursa")
+            if (await buscaRecursa(periodo, materia, numControl)) {
+                console.log("4 si hay datos en buscaRecursa");
+                return res.json({ data: true });
+            } else {
+                console.log("5 entra a buscaRecursaenGlobales");
+                if (await buscaRecursaenGlobales(periodo, materia, numControl)) {
+                    console.log("7 si hay datos en buscaRecursaenGlobales");
+                    return res.json({ data: true });
+                } else {
+                    console.log("7 no hay datos en buscaRecursaenGlobales");
+                    return res.json({ data: false});
+                }
+            }
+        } else {
+            console.log("profesional")
+            if (await buscaRecursa(periodo, materia, numControl)) {
+                return res.json({ data: false });
+            } else {
+                console.log("REGRESA EL VALOR VERDADERO PARA QUE LO AGREGUEN A LA TABLA")
+                return res.json({ data: true });
+            }
         }
     }
 });
 
 async function buscaRecursaenGlobales(periodo, materia, numControl) {
     const sql = 'select * from globales where idperiodoescolar = ? and idMateria = ? and alumnoNumControl = ?';
-    console.log(periodo, materia, numControl);
+
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);
-        if (registros.length > 0 ){
-            if(registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2){
+        if (registros.length > 0) {
+            if (registros[0].estado == 3 || registros[0].estado == 4 || registros[0].estado == 5) {
+                console.log("6 si hay datos en buscaRecursaenGlobales");
                 return true;
-            }else{
-            return false;
+            } else {
+                console.log("6 no hay datos en buscaRecursaenGlobales");
+                return false;
             }
         } else {
             return false;
         }
-        await conexion.end();
+
     } catch (error) {
         console.log(error);
         return false;
@@ -145,11 +170,13 @@ async function buscaRecursa(periodo, materia, numControl) {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);
         if (registros.length > 0) {
+            console.log(" 3   si hay datos en busca Recursas");
             return true;
         } else {
+            console.log("3   no hay datos en busca Recursas");
             return false;
         }
-        await conexion.end();
+
     } catch (error) {
         console.log(error);
         return false;

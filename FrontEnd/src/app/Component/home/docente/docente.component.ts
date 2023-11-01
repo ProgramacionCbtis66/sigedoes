@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DocenteComponent implements OnInit {
   protected nombre: string = "Docente";
+  protected encontrado = false;
   protected materiaRecursa: any;
   protected periodoRecursa: any;
   protected materiaGlobal: any;
@@ -37,7 +38,6 @@ export class DocenteComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
     this.datos();
-    this.datosMateria()
     this.datosPeridoEscolar()
   }
 
@@ -84,74 +84,76 @@ export class DocenteComponent implements OnInit {
     return false;
   }
 
-  validandotabla(datos: any): boolean {
-    if (datos.control == "global") {
-      this.docente.validandoTablaGR(datos).subscribe((res: any) => {
-        if (res.status == 200 && res.data) {
-            Notiflix.Notify.warning("Alumno ya esta en la lista de Global con la materia " + res.data.materia + " en el periodo " + res.data.periodo)+ " con el estatus " + res.data.estatus;
-          return true;
-        }else{
-          
-          return false;
-        }
-      });
-    }else{
-      this.docente.validandoTablaGR(datos).subscribe((res: any) => {
-        if (res.status == 200) {
-          return true;
-        }else{
-          return false;
-        }
-      });
-    }
-    return false;
-  }
 
   async buscarAlumno(evento: any) {
-    let encontrado, listaEncontrado;
-    let numeroCtrl:any = {};
-    if (evento.target.id == "global") {
-       numeroCtrl = {
-        numControl: this.numControlAlumnoGlobal,
-        materia: this.materiaGlobal,
-        periodo: this.periodoGlobal,
-        control: "global"
-      };
-      listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
-      encontrado = this.validandotabla(numeroCtrl);
-      
-    }
-    if (evento.target.id == "recursa") {
-      numeroCtrl = {
-        numControl: this.numControlAlumnoRecursa,
-        materia: this.materiaRecursa,
-        periodo: this.periodoRecursa,
-        control: "recursa"
-      };
-      listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
-      encontrado = this.validandotabla(numeroCtrl);
-    }
-    //buscar en el array alumnosGlobales un nombre
+    alert(evento.target.id)
+    if (this.verificaCamposMP()) {
+      let  listaEncontrado;
+      let numeroCtrl: any = {};
+      if (evento.target.id == "global") {
+        const lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
+        numeroCtrl = {
+          numControl: this.numControlAlumnoGlobal,
+          materia: this.materiaGlobal,
+          tipo: lamateria[0].tipo,
+          periodo: this.periodoGlobal,
+          control: "global"
+        };
+        listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
+        const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
+        this.encontrado = !res.data;
 
-    if (!listaEncontrado) {
-      if(!encontrado){
-       
-      try {
-        const respuesta = await firstValueFrom(this.alumno.verInfo(numeroCtrl));
-
-        if (respuesta.data != '' && respuesta.data != undefined) {
-          if (evento.target.id == "global") this.alumnosGlobales.push(respuesta.data);
-          if (evento.target.id == "recursa") this.alumnosRecursas.push(respuesta.data);
-        } else {
-          Notiflix.Notify.failure("Alumno no encontrado en tabla de alumnos");
-        }
-      } catch (error) {
-        console.log(error);
       }
-    }
+      if (evento.target.id == "recursa") {
+        const lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
+        numeroCtrl = {
+          numControl: this.numControlAlumnoRecursa,
+          materia: this.materiaRecursa,
+          tipo: lamateria[0].tipo,
+          periodo: this.periodoRecursa,
+          control: "recursa"
+        };
+        alert(lamateria[0].tipo)
+        listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
+        const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
+        this.encontrado = res.data;
+      }
+      //buscar en el array alumnosGlobales un nombre
+      alert(listaEncontrado + " " + this.encontrado)
+      if (!listaEncontrado) {
+        if (this.encontrado) {
+          try {
+            const respuesta = await firstValueFrom(this.alumno.verInfo(numeroCtrl));
+            if (respuesta.data != '' && respuesta.data != undefined) {
+              if (evento.target.id == "global") this.alumnosGlobales.push(respuesta.data);
+              if (evento.target.id == "recursa") this.alumnosRecursas.push(respuesta.data);
+            } else {
+              Notiflix.Notify.failure("Alumno no encontrado en tabla de alumnos");
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      } else {
+        Notiflix.Notify.warning("Alumno ya esta en la lista de recursa o esta en lista de globales vigente ");
+      }
     } else {
-      Notiflix.Notify.warning("Alumno ya esta en la lista");
+      Notiflix.Notify.warning("Llena todos los campos");
     }
+  }
+
+  verificaCamposMP(): boolean {
+    if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined) {
+      document.getElementById("selectGlobalesP")?.setAttribute("disabled", "true");
+      document.getElementById("selectGlobalesM")?.setAttribute("disabled", "true");
+      return true;
+    }
+    if (this.numControlAlumnoRecursa !== '' && this.materiaRecursa !== undefined && this.periodoRecursa !== undefined) {
+      document.getElementById("selectRecursasP")?.setAttribute("disabled", "true");
+      document.getElementById("selectRecursasM")?.setAttribute("disabled", "true");
+      return true;
+    }
+    return false;
   }
 
   eliminarAlumno(alumno: any, array: any) {
@@ -159,8 +161,16 @@ export class DocenteComponent implements OnInit {
     if (array == "recursa") { this.alumnosRecursas = this.alumnosRecursas.filter((item: any) => item.numControl != alumno); }
   }
 
-  async datosMateria() {
-    const datos = await firstValueFrom(this.docente.datosMateria(""));
+  async datosMateria(event: any) {
+    const control = event.target.id
+    var datos: any = "";
+    if (control == "selectRecursasP") {
+      datos = await firstValueFrom(this.docente.datosMateria(this.periodoRecursa));
+    } else {
+      datos = await firstValueFrom(this.docente.datosMateria(this.periodoGlobal));
+    }
+
+
     if (datos.data != '' && datos.data != undefined) {
       this.materias = datos.data;
       this.materiasG = this.materias.filter((item: any) => item.tipo == "BASICA");

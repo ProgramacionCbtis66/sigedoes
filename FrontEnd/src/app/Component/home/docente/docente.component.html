@@ -10,7 +10,7 @@
     <div class="accordion mb-2" id="accordionGlobales">
       <div class="accordion-item">
         <!-- cabecera del accordion -->
-        <h2 class="accordion-header">
+        <h2 class="accordion-header d-flex">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapseGlobales" aria-expanded="false" aria-controls="collapseGlobales"
             style="height: 3rem;">
@@ -18,7 +18,11 @@
               <i class="bi bi-card-checklist"></i>
               Registro de alumnos a globales
             </p>
+            <button (click)="enviarGlobales($event)" class="btn btn-outline-success btn-sm ms-auto" type="submit"
+            id="tbnglobal">Registrar recursas</button>
           </button>
+          <!-- Guarda los alumnos capturados -->
+         
         </h2>
         <div id="collapseGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <!-- REgistro de alumnos Globales -->
@@ -29,22 +33,18 @@
                 [(ngModel)]="numControlAlumnoGlobal">
               <button (click)="buscarAlumno($event)" class="btn btn-outline-success" type="submit"
                 id="global">Buscar</button>
+              <!-- periodo -->
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoGlobal" (change)="datosMateria($event)" id="selectGlobalesP" >
+                <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
+                  periodo.periodoescolar}}
+                </option>
+              </select>
               <!-- Materia -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaGlobal">
-                <option selected>Selecionar materia</option>
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaGlobal" id="selectGlobalesM" >
                 <option *ngFor="let materia of materiasG" [value]="materia.idMateria">{{ materia.descripcion }}
                 </option>
               </select>
-              <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoGlobal">
-                <option selected>Periodo escolar</option>
-                <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperidoescolar">{{
-                  periodo.idperidoescolar }}
-                </option>
-              </select>
-              <!-- Guarda los alumnos capturados -->
-              <button (click)="enviarGlobales($event)" class="btn btn-outline-success btn-sm" type="submit"
-                id="tbnglobal">Enviar</button>
+              
             </div>
             <!-- Alumno agregado -->
             <div class="row">
@@ -53,8 +53,7 @@
                   <tr>
                     <th scope="col">NC</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Materia</th>
-                    <th scope="col">Periodo escolar</th>
+                    
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -62,12 +61,7 @@
                   <tr *ngFor="let alumno of alumnosGlobales">
                     <td>{{alumno.numControl}}</td>
                     <td>{{alumno.nombre+" "+alumno.apellidoP+" "+alumno.apellidoM}}</td>
-                    <td>
-                      {{materiaGlobal}}
-                    </td>
-                    <td>
-                      {{periodoGlobal}}
-                    </td>
+                    
                     <td>
                       <button class="btn btn-sm btn-danger"
                         (click)="eliminarAlumno(alumno.numControl,'global')">Eliminar</button>
@@ -92,7 +86,11 @@
               <i class="bi bi-card-checklist"></i>
               Registro de alumnos a recursamiento
             </p>
+            <!-- Guarda los alumnos capturados Recursa-->
+          <button (click)="enviarRecursa($event)" class="btn btn-outline-success btn-sm ms-auto" type="submit"
+          id="tbnrecursa">Registrar Recursas  </button>
           </button>
+          
         </h2>
         <!-- Cuerpo del accordion   -->
         <div id="collapseRecursa" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -102,22 +100,18 @@
                 [(ngModel)]="numControlAlumnoRecursa">
               <button (click)="buscarAlumno($event)" class="btn btn-outline-success btn-sm" type="submit"
                 id="recursa">Bucar</button>
+                <!-- periodo -->
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoRecursa" id="selectRecursasP" (change)="datosMateria($event)">
+                <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
+                  periodo.periodoescolar }}
+                </option>
+              </select>
               <!-- Materia -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaRecursa">
-                <option selected>Selecionar materia</option>
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaRecursa" id="selectRecursasM" >
                 <option *ngFor="let materia of materias" [value]="materia.idMateria">{{ materia.descripcion }}
                 </option>
               </select>
-              <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoRecursa">
-                <option selected>Periodo escolar</option>
-                <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperidoescolar">{{
-                  periodo.idperidoescolar }}
-                </option>
-              </select>
-              <!-- Guarda los alumnos capturados Recursa-->
-              <button (click)="enviarRecursa($event)" class="btn btn-outline-success btn-sm" type="submit"
-                id="tbnrecursa">Enviar</button>
+              
             </div>
             <div class="row">
               <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
@@ -125,8 +119,6 @@
                   <tr>
                     <th scope="col">NC</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Materia</th>
-                    <th scope="col">Periodo escolar</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -134,12 +126,6 @@
                   <tr *ngFor="let alumno of alumnosRecursas">
                     <td>{{alumno.numControl}}</td>
                     <td>{{alumno.nombre+" "+alumno.apellidoP+" "+alumno.apellidoM}}</td>
-                    <td>
-                      {{materiaRecursa}}
-                    </td>
-                    <td>
-                      {{periodoRecursa}}
-                    </td>
                     <td>
                       <button class="btn btn-sm btn-danger"
                         (click)="eliminarAlumno(alumno.numControl,'recursa')">Eliminar</button>

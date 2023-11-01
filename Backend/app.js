@@ -11,7 +11,7 @@ const allowedOrigins = ['https://sigedoes.onrender.com',
 app.use(cors({
     origin: (origin, callback)=> {
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-          console.log("dominio permitido");
+           
         callback(null, true);
       } else {
         console.log("Dominio no permitido");

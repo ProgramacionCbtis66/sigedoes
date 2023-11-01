@@ -23,7 +23,7 @@ export class DocenteService {
   }
   
   datosMateria(numControl:any): Observable<any> {
-    return this.http.post(`${this.URL}/docente/datosMateria`, numControl,this.usr);
+    return this.http.post(`${this.URL}/docente/datosMateria`, {periodo:numControl},this.usr);
   }
 
   datosPeriodoEscolar(numControl:any): Observable<any> {
