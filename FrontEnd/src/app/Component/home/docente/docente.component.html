@@ -1,9 +1,10 @@
 <div class="row">
-  <!-- Lado izquierdo -->
+  <!-- Lado izquierdo
   <div class="col-md-4 mt-2">
   </div>
+   -->
   <!-- Lado derecho -->
-  <div class="col-md-8 mt-2">
+  <div class="col-md-12 mt-2">
 
     <!--Modulo globales-->
     <div class="accordion mb-2" id="accordionGlobales">
@@ -29,7 +30,7 @@
                 id="global">BUSCAR</button>
             </div>
             <!-- Alumno agregado -->
-            <div class="container p-0">
+            <div class="row">
               <table class="table table-sm table-responsive table-bordered border-color-1 m-0">
                 <thead>
                   <tr>
@@ -47,12 +48,18 @@
                     <td>
                       <select class="form-select form-select-sm" aria-label="Small select example">
                         <option selected>Selecionar materia</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option *ngFor="let materia of materias" [value]="materia.idMateria">{{ materia.descripcion }}
+                        </option>
                       </select>
                     </td>
-                    <td>{{alumno._periodoEscolar}}</td>
+                    <td>
+                      <select class="form-select form-select-sm" aria-label="Small select example" >
+                        <option selected>Periodo escolar</option>
+                    
+                        <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperidoescolar">{{ periodo.idperidoescolar }}
+                        </option>
+                      </select>
+                    </td>
                     <td>
                       <button class="btn btn-sm btn-danger"
                         (click)="eliminarAlumno(alumno.numControl,'global')">Eliminar</button>
@@ -122,8 +129,5 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </div>

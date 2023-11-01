@@ -20,6 +20,7 @@ export class DocenteComponent implements OnInit {
   protected alumnosGlobales: any = [];
   protected alumnosRecursas: any = [];
   protected materias: any = [];
+  protected periodoEscolar: any = [];
   protected proyecto = environment.proyecto;
   protected datosDocente = new Docente();
   constructor(
@@ -31,6 +32,8 @@ export class DocenteComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
     this.datos();
+    this.datosMateria()
+    this.datosPeridoEscolar()
   }
 
   async datos() {
@@ -119,8 +122,17 @@ export class DocenteComponent implements OnInit {
   }
 
  async datosMateria(){
-    
-     const datos = await firstValueFrom(this.)
+     const datos = await firstValueFrom(this.docente.datosMateria(""));
+     if(datos.data != '' && datos.data != undefined){
+       this.materias = datos.data;
+     }
+ }
+
+ async datosPeridoEscolar(){
+    const datos = await firstValueFrom(this.docente.datosPeriodoEscolar(""));
+    if(datos.data != '' && datos.data != undefined){
+      this.periodoEscolar = datos.data;
+    }
  }
 
 }

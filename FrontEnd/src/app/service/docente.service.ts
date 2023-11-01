@@ -22,4 +22,11 @@ export class DocenteService {
     return this.http.post(`${this.URL}/docente/registroDocente`,datosDocente);
   }
   
+  datosMateria(numControl:any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/datosMateria`, numControl,this.usr);
+  }
+
+  datosPeriodoEscolar(numControl:any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/datosPeriodoEscolar`,numControl, this.usr);
+  }
 }

@@ -42,4 +42,44 @@ docente.post('/modifyProfile',verifica, async (req, res) => {
     }
 });
 
+docente.post('/datosMateria', verifica, async (req, res) => {
+    const sql = 'select * from materias';
+    try {
+        const conexion = await ccn();
+        const [registros] = await conexion.execute(sql);
+        if (registros.length > 0) {
+            let datos = JSON.stringify(registros);
+            let data = JSON.parse(datos);
+            res.json({ data });
+        } else {
+            res.json({ Error: "no hay datos" })
+        }
+        await conexion.end();
+    } catch (error) {
+        console.log(error);
+        res.json({ Error: "En base de datos" });
+    }
+});
+
+docente.post('/datosPeriodoEscolar', verifica, async (req, res) => {
+    
+    
+    const sql = 'select * from periodoescolar';
+    try {
+        const conexion = await ccn();
+        const [registros] = await conexion.execute(sql);
+        if (registros.length > 0) {
+            let datos = JSON.stringify(registros);
+            let data = JSON.parse(datos);
+            res.json({ data });
+        } else {
+            res.json({ Error: "no hay datos" })
+        }
+        await conexion.end();
+    } catch (error) {
+        console.log(error);
+        res.json({ Error: "En base de datos" });
+    }
+});
+
 module.exports = docente;
