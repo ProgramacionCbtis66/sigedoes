@@ -15,11 +15,16 @@ import { environment } from 'src/environments/environment';
 })
 export class DocenteComponent implements OnInit {
   protected nombre: string = "Docente";
+  protected materiaRecursa: any;
+  protected periodoRecursa: any;
+  protected materiaGlobal: any;
+  protected periodoGlobal: any;
   protected numControlAlumnoGlobal: string = "";
-  protected numControlAlumnoRecursa : string = "";
+  protected numControlAlumnoRecursa: string = "";
   protected alumnosGlobales: any = [];
   protected alumnosRecursas: any = [];
   protected materias: any = [];
+  protected materiasG: any = [];
   protected periodoEscolar: any = [];
   protected proyecto = environment.proyecto;
   protected datosDocente = new Docente();
@@ -70,7 +75,7 @@ export class DocenteComponent implements OnInit {
 
   }
 
-  validandoLlenado(datos:any, numcontrol:any):boolean{
+  validandoLlenado(datos: any, numcontrol: any): boolean {
     for (let alumno of datos) {
       if (alumno.numControl == numcontrol) {
         return true;
@@ -79,35 +84,63 @@ export class DocenteComponent implements OnInit {
     return false;
   }
 
-  async buscarAlumno(evento : any) {
+  validandotabla(datos: any): boolean {
+    if (datos.control == "global") {
+      this.docente.validandoTablaGR(datos).subscribe((res: any) => {
+        if (res.status == 200 && res.data) {
+            Notiflix.Notify.warning("Alumno ya esta en la lista de Global con la materia " + res.data.materia + " en el periodo " + res.data.periodo)+ " con el estatus " + res.data.estatus;
+          return true;
+        }else{
+          return false;
+        }
+      });
+    }else{
+      this.docente.validandoTablaGR(datos).subscribe((res: any) => {
+        if (res.status == 200) {
+            Notiflix.Notify.warning(res.mensaje);
+          return true;
+        }else{
+          return false;
+        }
+      });
+    }
+    return false;
+  }
+
+  async buscarAlumno(evento: any) {
     let encontrado;
     let numeroCtrl = {};
-    if(evento.target.id=="global"){encontrado = this.validandoLlenado( this.alumnosGlobales,this.numControlAlumnoGlobal);
-      numeroCtrl = {
-        numeroCtrl: this.numControlAlumnoGlobal
+    if (evento.target.id == "global") {
+      const numeroCtrl = {
+        numControl: this.numControlAlumnoGlobal,
+        materia: this.materiaGlobal,
+        periodo: this.periodoGlobal,
+        control: "global"
       };
+      encontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
+      encontrado = this.validandotabla(numeroCtrl);
     }
-    if(evento.target.id=="recursa"){encontrado = this.validandoLlenado( this.alumnosRecursas, this.numControlAlumnoRecursa);
-      numeroCtrl = {
-        numeroCtrl: this.numControlAlumnoRecursa
+    if (evento.target.id == "recursa") {
+      const numeroCtrl = {
+        numControl: this.numControlAlumnoRecursa,
+        materia: this.materiaRecursa,
+        periodo: this.periodoRecursa,
+        control: "recursa"
       };
+      encontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
+      encontrado = this.validandotabla(numeroCtrl);
     }
     //buscar en el array alumnosGlobales un nombre
-    
+
     if (!encontrado) {
-      
       try {
         const respuesta = await firstValueFrom(this.alumno.verInfo(numeroCtrl));
-
         if (respuesta.data != '' && respuesta.data != undefined) {
-
-          if(evento.target.id=="global") this.alumnosGlobales.push(respuesta.data);
-          if(evento.target.id=="recursa") this.alumnosRecursas.push(respuesta.data);
-
+          if (evento.target.id == "global") this.alumnosGlobales.push(respuesta.data);
+          if (evento.target.id == "recursa") this.alumnosRecursas.push(respuesta.data);
         } else {
           Notiflix.Notify.failure("Alumno no encontrado");
         }
-
       } catch (error) {
         console.log(error);
       }
@@ -117,22 +150,74 @@ export class DocenteComponent implements OnInit {
   }
 
   eliminarAlumno(alumno: any, array: any) {
-       if(array == "global"){this.alumnosGlobales = this.alumnosGlobales.filter((item:any)=> item.numControl != alumno);}
-       if(array == "recursa"){this.alumnosRecursas = this.alumnosRecursas.filter((item:any)=> item.numControl != alumno);}
+    if (array == "global") { this.alumnosGlobales = this.alumnosGlobales.filter((item: any) => item.numControl != alumno); }
+    if (array == "recursa") { this.alumnosRecursas = this.alumnosRecursas.filter((item: any) => item.numControl != alumno); }
   }
 
- async datosMateria(){
-     const datos = await firstValueFrom(this.docente.datosMateria(""));
-     if(datos.data != '' && datos.data != undefined){
-       this.materias = datos.data;
-     }
- }
+  async datosMateria() {
+    const datos = await firstValueFrom(this.docente.datosMateria(""));
+    if (datos.data != '' && datos.data != undefined) {
+      this.materias = datos.data;
+      this.materiasG = this.materias.filter((item: any) => item.tipo == "BASICA");
+    }
+  }
 
- async datosPeridoEscolar(){
+  async datosPeridoEscolar() {
     const datos = await firstValueFrom(this.docente.datosPeriodoEscolar(""));
-    if(datos.data != '' && datos.data != undefined){
+    if (datos.data != '' && datos.data != undefined) {
       this.periodoEscolar = datos.data;
     }
- }
+  }
+
+  enviarRecursa(event: any) {
+    Notiflix.Loading.pulse('Enviando alumnos a recursar...');
+    if (this.alumnosRecursas.length > 0) {
+      let datos = {
+        alumnos: this.alumnosRecursas,
+        materia: this.materiaRecursa,
+        periodo: this.periodoRecursa,
+        docente: this.auth.decodifica().numControl
+      }
+      this.docente.enviarRecursa(datos).subscribe((res: any) => {
+        if (res.status == 200) {
+          Notiflix.Loading.remove();
+          Notiflix.Notify.success("Alumnos enviados a recursar");
+          this.alumnosRecursas = [];
+        } else {
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure("Algo salio mal");
+        }
+      });
+    } else {
+      Notiflix.Loading.remove();
+      Notiflix.Notify.warning("No hay alumnos en la lista");
+    }
+  }
+
+  enviarGlobales(event: any) {
+    Notiflix.Loading.pulse('Enviando alumnos a Global...');
+    if (this.alumnosGlobales.length > 0) {
+      let datos = {
+        alumnos: this.alumnosGlobales,
+        materia: this.materiaGlobal,
+        periodo: this.periodoGlobal,
+        docente: this.auth.decodifica().numControl
+      }
+
+      this.docente.enviarRecursa(datos).subscribe((res: any) => {
+        if (res.status == 200) {
+          Notiflix.Loading.remove();
+          Notiflix.Notify.success("Alumnos enviados a recursar");
+          this.alumnosGlobales = [];
+        } else {
+          Notiflix.Loading.remove();
+          Notiflix.Notify.failure("Algo salio mal");
+        }
+      });
+    } else {
+      Notiflix.Loading.remove();
+      Notiflix.Notify.warning("No hay alumnos en la lista");
+    }
+  }
 
 }
