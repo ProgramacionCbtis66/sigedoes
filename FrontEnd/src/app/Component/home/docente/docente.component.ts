@@ -86,7 +86,7 @@ export class DocenteComponent implements OnInit {
 
 
   async buscarAlumno(evento: any) {
-    alert(evento.target.id)
+    
     if (this.verificaCamposMP()) {
       let  listaEncontrado;
       let numeroCtrl: any = {};
@@ -102,7 +102,6 @@ export class DocenteComponent implements OnInit {
         listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
         this.encontrado = !res.data;
-
       }
       if (evento.target.id == "recursa") {
         const lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
@@ -113,13 +112,13 @@ export class DocenteComponent implements OnInit {
           periodo: this.periodoRecursa,
           control: "recursa"
         };
-        alert(lamateria[0].tipo)
+         
         listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
         this.encontrado = res.data;
       }
       //buscar en el array alumnosGlobales un nombre
-      alert(listaEncontrado + " " + this.encontrado)
+     
       if (!listaEncontrado) {
         if (this.encontrado) {
           try {
