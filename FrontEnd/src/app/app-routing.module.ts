@@ -15,7 +15,7 @@ import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
-import { JutificantesComponent } from './Component/home/alumno/jutificantes/jutificantes.component';
+import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
 
 
 const routes: Routes = [
