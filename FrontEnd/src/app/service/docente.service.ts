@@ -37,4 +37,22 @@ export class DocenteService {
   validandoTablaGR(numControl: any): Observable<any> {
     return this.http.post(`${this.URL}/docente/validandoTablaGR`,numControl, this.usr);
   }
+
+  ListaAlumnosGlobalesAsignados(datos: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/ListaAlumnosGlobalesAsignados`,datos, this.usr);
+  }
+
+  ListaAlumnosRecursasAsignados(datos: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/ListaAlumnosRecursasAsignados`,datos, this.usr);
+  }
+
+  enviarCalificacionesGlobales(datos: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/enviarCalificacionesGlobales`,datos, this.usr);
+  }
+
+  enviarCalificacionesRecursas(datos: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/enviarCalificacionesRecursas`,datos, this.usr);
+  }
+
+
 }

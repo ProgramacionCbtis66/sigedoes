@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Notiflix from 'notiflix';
-import { firstValueFrom} from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Docente } from 'src/app/Modelo/Docente';
 import { AuthService } from 'src/app/service/auth.service';
 import { DocenteService } from 'src/app/service/docente.service';
@@ -30,6 +30,8 @@ export class DocenteComponent implements OnInit {
   protected materias: any = [];
   protected materiasG: any = [];
   protected periodoEscolar: any = [];
+  protected ListaAlumnosGlobales: any = [];
+  protected ListaAlumnosRecursas: any = [];
   protected proyecto = environment.proyecto;
   protected datosDocente = new Docente();
   constructor(
@@ -42,7 +44,7 @@ export class DocenteComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
     this.datos();
-    this.datosPeridoEscolar()
+    this.datosPeridoEscolar();
   }
 
   async datos() {
@@ -90,12 +92,12 @@ export class DocenteComponent implements OnInit {
 
 
   async buscarAlumno(evento: any) {
-    
+
     if (this.verificaCamposMP()) {
-      let  listaEncontrado;
+      let listaEncontrado;
       let numeroCtrl: any = {};
-      
-      
+
+
       if (evento.target.id == "global") {
         const lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
         numeroCtrl = {
@@ -109,7 +111,7 @@ export class DocenteComponent implements OnInit {
         listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
         this.encontrado = !res.data;
-        if(res.data) Notiflix.Notify.warning(res.mensaje);
+        if (res.data) Notiflix.Notify.warning(res.mensaje);
       }
       if (evento.target.id == "recursa") {
         const lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
@@ -121,14 +123,14 @@ export class DocenteComponent implements OnInit {
           control: "recursa",
           dmateria: lamateria[0].descripcion
         };
-         
+
         listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
         this.encontrado = !res.data;
-        if(res.data) Notiflix.Notify.warning(res.mensaje);
+        if (res.data) Notiflix.Notify.warning(res.mensaje);
       }
       //buscar en el array alumnosGlobales un nombre
-     
+
       if (!listaEncontrado) {
         if (this.encontrado) {
           try {
@@ -166,7 +168,7 @@ export class DocenteComponent implements OnInit {
 
   verificaCamposMP(): boolean {
     if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined) {
-       this.disableGlobal = true;
+      this.disableGlobal = true;
       return true;
     }
     if (this.numControlAlumnoRecursa !== '' && this.materiaRecursa !== undefined && this.periodoRecursa !== undefined) {
@@ -209,15 +211,15 @@ export class DocenteComponent implements OnInit {
       interval: 3000
     } as any);
     if (this.alumnosRecursas.length > 0) {
-       
-       
+
+
       let datos = {
         alumnos: this.alumnosRecursas,
         materia: this.materiaRecursa,
         periodo: this.periodoRecursa,
         docente: this.auth.decodifica().numControl,
         tipo: "recursa",
-         
+
       }
       this.docente.enviarRG(datos).subscribe((res: any) => {
         if (res.data) {
@@ -226,7 +228,7 @@ export class DocenteComponent implements OnInit {
           this.alumnosRecursas = [];
           //recargar pagina
           this.location.go(this.location.path());
-           
+
         } else {
           Notiflix.Loading.remove();
           Notiflix.Notify.failure("Algo salio mal");
@@ -243,7 +245,7 @@ export class DocenteComponent implements OnInit {
       interval: 2000
     } as any);
     if (this.alumnosGlobales.length > 0) {
-       
+
 
       let datos = {
         alumnos: this.alumnosGlobales,
@@ -266,6 +268,78 @@ export class DocenteComponent implements OnInit {
     } else {
       Notiflix.Loading.remove();
       Notiflix.Notify.warning("No hay alumnos en la lista");
+    }
+  }
+
+  async cargarAlumnosGlobalesAsignados() {
+    if (this.ListaAlumnosGlobales.length <= 0 || this.ListaAlumnosGlobales == undefined) {
+      try {
+        const res = await firstValueFrom(this.docente.ListaAlumnosGlobalesAsignados({ docenteDni: this.auth.decodifica().numControl }));
+        if (res.data != undefined && res.data != '') {
+          this.ListaAlumnosGlobales = res.data;
+        } else {
+          Notiflix.Notify.warning("No hay alumnos asignados");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  async enviarCalificacionesGlobales(idglobales: any, idasiglobd: any, calificacion: any) {
+    if (calificacion != undefined && calificacion != '') {
+      const filtro = this.ListaAlumnosGlobales.filter((item: any) => item.idasiglobd == idasiglobd);
+      try {
+        const res = await firstValueFrom(this.docente.enviarCalificacionesGlobales(filtro[0]));
+        if (res.data) {
+          Notiflix.Notify.success("Calificaciones enviadas");
+          //borrar de la lista
+          this.ListaAlumnosGlobales = this.ListaAlumnosGlobales.filter((item: any) => item.idasiglobd != idasiglobd);
+        } else {
+          Notiflix.Notify.warning(res.mensaje);
+        }
+      } catch (error) {
+        Notiflix.Notify.warning("error al enviar calificaciones");
+        console.log(error);
+      }
+    } else {
+      Notiflix.Notify.warning("Asigne una calificacion");
+    }
+  }
+
+  async cargarAlumnosRecursasAsignados() {
+    if (this.alumnosRecursas.length <= 0 || this.alumnosRecursas == undefined) {
+      try {
+        const res = await firstValueFrom(this.docente.ListaAlumnosRecursasAsignados({ docenteDni: this.auth.decodifica().numControl }));
+        if (res.data != undefined && res.data != '') {
+          this.alumnosRecursas = res.data;
+        } else {
+          Notiflix.Notify.warning("No hay alumnos asignados");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  async enviarCalificacionesRecursas(idrecursa: any, idasigrecursa: any, calificacion: any) {
+    if (calificacion != undefined && calificacion != '') {
+      const filtro = this.ListaAlumnosRecursas.filter((item: any) => item.idrecursa == idrecursa);
+      try {
+        const res = await firstValueFrom(this.docente.enviarCalificacionesGlobales(filtro[0]));
+        if (res.data) {
+          Notiflix.Notify.success("Calificaciones enviadas");
+          //borrar de la lista
+          this.ListaAlumnosRecursas = this.ListaAlumnosRecursas.filter((item: any) => item.idasigrecursa != idasigrecursa);
+        } else {
+          Notiflix.Notify.warning(res.mensaje);
+        }
+      } catch (error) {
+        Notiflix.Notify.warning("error al enviar calificaciones");
+        console.log(error);
+      }
+    } else {
+      Notiflix.Notify.warning("Asigne una calificacion");
     }
   }
 
