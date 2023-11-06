@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import * as Notiflix from 'notiflix';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom} from 'rxjs';
 import { Docente } from 'src/app/Modelo/Docente';
 import { AuthService } from 'src/app/service/auth.service';
 import { DocenteService } from 'src/app/service/docente.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { environment } from 'src/environments/environment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-docente',
@@ -15,6 +16,8 @@ import { environment } from 'src/environments/environment';
 })
 export class DocenteComponent implements OnInit {
   protected nombre: string = "Docente";
+  protected disableGlobal: boolean = false;
+  protected disableRecursa: boolean = false;
   protected encontrado = false;
   protected materiaRecursa: any;
   protected periodoRecursa: any;
@@ -34,6 +37,7 @@ export class DocenteComponent implements OnInit {
     private docente: DocenteService,
     private auth: AuthService,
     private alumno: UsuarioService,
+    private location: Location,
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
@@ -90,6 +94,8 @@ export class DocenteComponent implements OnInit {
     if (this.verificaCamposMP()) {
       let  listaEncontrado;
       let numeroCtrl: any = {};
+      
+      
       if (evento.target.id == "global") {
         const lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
         numeroCtrl = {
@@ -97,11 +103,13 @@ export class DocenteComponent implements OnInit {
           materia: this.materiaGlobal,
           tipo: lamateria[0].tipo,
           periodo: this.periodoGlobal,
-          control: "global"
+          control: "global",
+          dmateria: lamateria[0].descripcion
         };
         listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
         this.encontrado = !res.data;
+        if(res.data) Notiflix.Notify.warning(res.mensaje);
       }
       if (evento.target.id == "recursa") {
         const lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
@@ -110,12 +118,14 @@ export class DocenteComponent implements OnInit {
           materia: this.materiaRecursa,
           tipo: lamateria[0].tipo,
           periodo: this.periodoRecursa,
-          control: "recursa"
+          control: "recursa",
+          dmateria: lamateria[0].descripcion
         };
          
         listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
-        this.encontrado = res.data;
+        this.encontrado = !res.data;
+        if(res.data) Notiflix.Notify.warning(res.mensaje);
       }
       //buscar en el array alumnosGlobales un nombre
      
@@ -139,17 +149,28 @@ export class DocenteComponent implements OnInit {
     } else {
       Notiflix.Notify.warning("Llena todos los campos");
     }
+    this.limpiarCampos();
+  }
+
+  limpiarCampos() {
+    this.numControlAlumnoGlobal = "";
+    this.numControlAlumnoRecursa = "";
+    this.materiaGlobal = undefined;
+    this.materiaRecursa = undefined;
+    this.periodoGlobal = undefined;
+    this.periodoRecursa = undefined;
+    this.disableGlobal = false;
+    this.disableRecursa = false;
+    this.encontrado = false;
   }
 
   verificaCamposMP(): boolean {
     if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined) {
-      document.getElementById("selectGlobalesP")?.setAttribute("disabled", "true");
-      document.getElementById("selectGlobalesM")?.setAttribute("disabled", "true");
+       this.disableGlobal = true;
       return true;
     }
     if (this.numControlAlumnoRecursa !== '' && this.materiaRecursa !== undefined && this.periodoRecursa !== undefined) {
-      document.getElementById("selectRecursasP")?.setAttribute("disabled", "true");
-      document.getElementById("selectRecursasM")?.setAttribute("disabled", "true");
+      this.disableRecursa = true;
       return true;
     }
     return false;
@@ -184,19 +205,28 @@ export class DocenteComponent implements OnInit {
   }
 
   enviarRecursa(event: any) {
-    Notiflix.Loading.pulse('Enviando alumnos a recursar...');
+    Notiflix.Loading.pulse('Enviando alumnos a recursar...', {
+      interval: 3000
+    } as any);
     if (this.alumnosRecursas.length > 0) {
+       
+       
       let datos = {
         alumnos: this.alumnosRecursas,
         materia: this.materiaRecursa,
         periodo: this.periodoRecursa,
-        docente: this.auth.decodifica().numControl
+        docente: this.auth.decodifica().numControl,
+        tipo: "recursa",
+         
       }
-      this.docente.enviarRecursa(datos).subscribe((res: any) => {
-        if (res.status == 200) {
+      this.docente.enviarRG(datos).subscribe((res: any) => {
+        if (res.data) {
           Notiflix.Loading.remove();
           Notiflix.Notify.success("Alumnos enviados a recursar");
           this.alumnosRecursas = [];
+          //recargar pagina
+          this.location.go(this.location.path());
+           
         } else {
           Notiflix.Loading.remove();
           Notiflix.Notify.failure("Algo salio mal");
@@ -209,17 +239,22 @@ export class DocenteComponent implements OnInit {
   }
 
   enviarGlobales(event: any) {
-    Notiflix.Loading.pulse('Enviando alumnos a Global...');
+    Notiflix.Loading.pulse('Enviando alumnos a Global...', {
+      interval: 2000
+    } as any);
     if (this.alumnosGlobales.length > 0) {
+       
+
       let datos = {
         alumnos: this.alumnosGlobales,
         materia: this.materiaGlobal,
         periodo: this.periodoGlobal,
-        docente: this.auth.decodifica().numControl
+        docente: this.auth.decodifica().numControl,
+        tipo: "global",
       }
 
-      this.docente.enviarRecursa(datos).subscribe((res: any) => {
-        if (res.status == 200) {
+      this.docente.enviarRG(datos).subscribe((res: any) => {
+        if (res.data) {
           Notiflix.Loading.remove();
           Notiflix.Notify.success("Alumnos enviados a recursar");
           this.alumnosGlobales = [];

@@ -30,8 +30,8 @@ export class DocenteService {
     return this.http.post(`${this.URL}/docente/datosPeriodoEscolar`,numControl, this.usr);
   }
 
-  enviarRecursa(datosRecursa: any): Observable<any> {
-      return this.http.post(`${this.URL}/docente/enviarRecursa`,datosRecursa, this.usr);
+  enviarRG(datos: any): Observable<any> {
+      return this.http.post(`${this.URL}/docente/enviarGR`,datos, this.usr);
   }
 
   validandoTablaGR(numControl: any): Observable<any> {

@@ -30,17 +30,17 @@
             <!-- buscar alumno  y datos para captura -->
             <div class="d-flex justify-content-between mb-3">
               <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
-                [(ngModel)]="numControlAlumnoGlobal">
+                [(ngModel)]="numControlAlumnoGlobal" [disabled]="disableGlobal">
               <button (click)="buscarAlumno($event)" class="btn btn-outline-success" type="submit"
                 id="global">Buscar</button>
               <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoGlobal" (change)="datosMateria($event)" id="selectGlobalesP" >
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoGlobal" (change)="datosMateria($event)" id="selectGlobalesP" [disabled]="disableGlobal" >
                 <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
                   periodo.periodoescolar}}
                 </option>
               </select>
               <!-- Materia -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaGlobal" id="selectGlobalesM" >
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaGlobal" id="selectGlobalesM" [disabled]="disableGlobal">
                 <option *ngFor="let materia of materiasG" [value]="materia.idMateria">{{ materia.descripcion }}
                 </option>
               </select>
@@ -97,17 +97,17 @@
           <div class="accordion-body">
             <div class="d-flex justify-content-between mb-3">
               <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
-                [(ngModel)]="numControlAlumnoRecursa">
+                [(ngModel)]="numControlAlumnoRecursa" [disabled]="disableRecursa">
               <button (click)="buscarAlumno($event)" class="btn btn-outline-success btn-sm" type="submit"
                 id="recursa">Bucar</button>
                 <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoRecursa" id="selectRecursasP" (change)="datosMateria($event)">
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoRecursa" id="selectRecursasP" (change)="datosMateria($event)" [disabled]="disableRecursa">
                 <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
                   periodo.periodoescolar }}
                 </option>
               </select>
               <!-- Materia -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaRecursa" id="selectRecursasM" >
+              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaRecursa" id="selectRecursasM" [disabled]="disableRecursa">
                 <option *ngFor="let materia of materias" [value]="materia.idMateria">{{ materia.descripcion }}
                 </option>
               </select>
