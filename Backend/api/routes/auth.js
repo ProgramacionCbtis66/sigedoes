@@ -147,7 +147,7 @@ peticion.post('/registro', async (req, res) => {
     }
 });
 
-peticion.post('/solicitudAcceso',verifica ,async (req, res) => {
+peticion.post('/solicitudAcceso',verifica ,async (res, req) => {
     
     const conexion = await ccn();
     try {
@@ -161,17 +161,16 @@ peticion.post('/solicitudAcceso',verifica ,async (req, res) => {
     
 
         const [registroAlumno] = await conexion.execute('SELECT * FROM usuario JOIN alumno ON usuario.numControl = alumno.numControl WHERE alta = 0');
-
-        if(registroAlumno[0]!=undefined){
             let datosAlumno = JSON.stringify(registroAlumno[0]);
             let registroAlumnos = JSON.parse(datosAlumno);
-        } else{ registroAlumnos = {vacio:"sin datos"};}
+
+         
 
         const [registroAdministrativo] = await conexion.execute('SELECT * FROM usuario JOIN administrativo ON usuario.numControl = administrativo.numControl WHERE alta = 0');
         let datosAdministrativo = JSON.stringify(registroAdministrativo[0]);
         let registroAdministrativos = JSON.parse(datosAdministrativo);
 
-        console.log(registroAlumnos);
+         
 
         res.json({  registroAlumnos, registroDocentes,   registroAdministrativos });
 

@@ -23,9 +23,7 @@ export class AdministrativoComponent implements OnInit {
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
   };
-  data = {
-    "numControl": ""
-  };
+ 
 
   datosEsc = {
     nomEscuela: "",
@@ -57,24 +55,15 @@ export class AdministrativoComponent implements OnInit {
     "grupo": "",
     "pass": ""
   };
-  alumno = {
-    "nombre": "",
-    "grado": "",
-    "grupo": "",
-    "especialidad": "",
-    "correo": "",
-    "turno": "",
-    "escuela": "",
-    "numControl": ""
-  };
-  nc: any;
+  alumno : any = [];
+  nc: any = [];
 
-  datosAlumno: any;
-  datosDocente: any;
-  datos: any;
-  datosAdmisnitrativo: any;
+  datosAlumno: any=[];
+  datosDocente: any=[];
+  datos: any = [];
+  datosAdmisnitrativo: any=[];
 
-  aceptado: any;
+  aceptado: any=[];
   verificado = false;
   numero: string = "";
 
@@ -93,18 +82,16 @@ export class AdministrativoComponent implements OnInit {
   }
 
   cargaSoliciudAceeso() {
-    let token = this.auth.decodifica();
-    this.data.numControl = token.numControl;
+    let numControl = this.auth.decodifica().numControl;
+   
     
-    this.auth.solicitudAcceso(this.data).subscribe((res: any) => {
-      console.log(res.registroDocentes);
-       console.log(res.registroAlumnos.vacio);
-      console.log(res.registroAdministrativos);
+    this.auth.solicitudAcceso({numControl:numControl}).subscribe((res: any) => {
+      
 
         if (res.registroAlumnos.vacio !=="sin datos" ) this.datosAlumno = JSON.parse(res.registroAlumnos);
-        this.datosDocente =  res.registroDocentes; 
-        this.datosAdmisnitrativo = JSON.parse(res.registroAdministrativos);
-
+        this.datosDocente. push(res.registroDocentes); 
+        this.datosAdmisnitrativo.push(res.registroAdministrativos);
+        this.datosAlumno.push(res.registroAlumnos);
     }, (err: any) => {
       Notiflix.Notify.failure("Error, Intente De Nuevo"+ err);
     }
@@ -155,15 +142,7 @@ export class AdministrativoComponent implements OnInit {
     else {
       this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
         if (res.data != "" && res.data != null) {
-          const datos = JSON.parse(res.data);
-          this.alumno.nombre = datos.nombre;
-          this.alumno.correo = datos.correo;
-          this.alumno.grado = datos.grado;
-          this.alumno.grupo = datos.grupo;
-          this.alumno.especialidad = datos.especialidad;
-          this.alumno.turno = datos.turno;
-          this.alumno.escuela = datos.Esc_nombre;
-          this.alumno.numControl = datos.numControl;
+          this.alumno = JSON.parse(res.data);
           this.verificado = true;
 
         } else { this.verificado = false; }
@@ -240,9 +219,9 @@ export class AdministrativoComponent implements OnInit {
   }
 
   obtenerDatos(numControl: any) {
-    this.data.numControl = numControl;
+    
     this.usuario.noctrl = numControl;
-    this.userServicio.verInfo(this.data).subscribe((res: any) => {
+    this.userServicio.verInfo({numControl:numControl}).subscribe((res: any) => {
       if (res.ok = "ok") {
         const datos = res.data;
         this.usuario.nombre = datos.nombre;
