@@ -135,30 +135,36 @@ peticion.post('/getContra', verifica, async (req, res) => {
 
 peticion.post('/modificarPerfil',verifica, async (req, res) => {
     const usr = req.body;
+     
     const conexion = await ccn();
-    let sql = "";
+    let sql = "", sql2 = "", sql3 = "";
     let rol = "";
-    console.log(usr);
+    
+    if(usr.direccion == null) usr.direccion = "";
+    if(usr.telefono == null) usr.telefono = "";
+    if(usr.facebook == null) usr.facebook = "";
+    if(usr.twitter == null) usr.twitter = "";
+    if(usr.instagram == null) usr.instagram = "";
+    if(usr.foto == ".././assets/img/tufoto.png") usr.foto = null;
+
     try {
         if(usr.rol == "AL") rol = "alumno";
         if(usr.rol == "DO") rol = "docente";
         if(usr.rol == "CE" || usr.rol == "OE") rol = "administrativo";
-            sql = `UPDATE usuario as u join ${rol} as x on u.numControl = x.numControl 
-                   set u.foto = ${usr.foto},
-                       u.password = ${usr.pass1},
-                       x.direccion = ${usr.direccion},
-                       x.telefono = ${usr.telefono},
-                       x.facebook = ${usr.facebook},
-                       x.twitter = ${usr.twitter},
-                       x.whatsapp = ${usr.whatsapp},
-                       x.instagram = ${usr.instagram}
-                   where u.numControl = ${usr.numControl}`;
-        const ModProfile = await conexion.execute(sql);
-        if(ModProfile[0].foto!=null) ModProfile[0].foto = ModProfile[0].foto.toString('utf-8');
-        let datos = JSON.stringify(ModProfile[0]);
-        let dato = JSON.parse(datos);
-        res.json({ dato });
+        
+        sql = `UPDATE usuario as u set u.foto = ?, u.password = ? where u.numControl = ?`;
+        sql2 = `UPDATE  ${rol} as x set x.direccion = ?, x.telefono = ?,x.facebook = ?, x.twitter = ?, x.instagram = ? where x.numControl = ?`;
+        
+
+        const updateUsuario = await conexion.execute(sql,[usr.foto,usr.pass1,usr.numControl]);
+        const update = await conexion.execute(sql2,[usr.direccion,usr.telefono,usr.facebook,usr.twitter,usr.instagram,usr.numControl]);
+      
+
+         
+            res.json({  valida: true });
+        
     } catch (error) {
+        res.json({ valida:false });
         console.log(error);
     }finally{
         conexion.end();

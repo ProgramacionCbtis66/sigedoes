@@ -18,7 +18,7 @@ import { PerfilComponent } from './Component/perfil/perfil.component';
 import { DocenteComponent } from './Component/home/docente/docente.component';
 import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
 import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
@@ -44,7 +44,6 @@ import { JutificantesComponent } from './Component/home/alumno/justificantes/jut
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DragDropModule,
   ],
   providers:[
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

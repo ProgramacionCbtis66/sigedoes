@@ -46,6 +46,7 @@ export class UsuarioService {
     return this.http.post(`${this.URL}/insize/getContra`, numControl);
   }
   modificarPerfil(datos: any): Observable<any> {
+    
     return this.http.post(`${this.URL}/insize/modificarPerfil`, datos, this.usr);
   }
   datosEsc(): Observable<any> {

@@ -34,8 +34,8 @@ export class PerfilComponent implements OnInit {
       }
       this.userService.datosUser(datos).subscribe((res: any) => {
         if (res.dato != "" && res.dato != undefined) {
-          res.dato.nombre = (res.dato).nombre + " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
-          this.nav._usuario = res.dato.nombre;
+          res.dato.nombre = (res.dato).nombre;
+          this.nav._usuario = res.dato.nombre+ " " + (res.dato).apellidoP + " " + (res.dato).apellidoM;
           if (res.dato.foto == null) { res.dato.foto = ".././assets/img/tufoto.png"; }
           this.perfil = res.dato;
           this.perfil.pass1 = res.dato.password;
@@ -48,13 +48,15 @@ export class PerfilComponent implements OnInit {
     if(this.perfil.pass1==this.perfil.pass2 && this.perfil.pass1!=undefined && this.perfil.pass2!=undefined){
       this.perfil.nombre = this.auth.decodifica().nombre;
       this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
-        if (res.datos != "" && res.datos != undefined) {
+        if (res.valida) {
           Notiflix.Notify.info("Datos Actualizados");
-          this.perfil = res.dato;
-          this.perfil.pass1 = res.dato.password;
-          this.perfil.pass2 = res.dato.password;
+          this.ngOnInit();
+        }else{
+          Notiflix.Notify.failure("Error al actualizar datos");
         }
       });
+    }else{
+      Notiflix.Notify.failure("Las contraseñas no coinciden");
     }
   }
   validar(event: any) {
