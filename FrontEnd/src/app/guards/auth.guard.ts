@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuth()) {
       
       if(this.authService.decodifica().rol=="AL"){
-        if(activatedRoute=="Alumnoconstancia" || activatedRoute=="homeAlumno"){ return true;}
+        if(activatedRoute=="Alumnoconstancia" || activatedRoute=="homeAlumno" || activatedRoute=="justificante"){ return true;}
         else { this.router.navigate(['/homeAlumno']);}
       } 
       if(this.authService.decodifica().rol=="DO"){

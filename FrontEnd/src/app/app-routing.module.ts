@@ -15,12 +15,14 @@ import { AlumnoComponent } from './Component/home/alumno/alumno.component';
 import { AdministrativoComponent } from './Component/home/administrativo/administrativo.component';
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
+import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
 
 
 const routes: Routes = [
   {path:"", redirectTo: "homeAlumno", pathMatch:"full"},
   {path:"controlEscolar",component: AdministrativoComponent,canActivate:[AuthGuard]},
   {path:"homeAlumno", component: AlumnoComponent, canActivate:[AuthGuard]},
+  {path:"justificante", component: JutificantesComponent, canActivate:[AuthGuard]},
   {path:"Alumnoconstancia", component: ConstanciasComponent, canActivate:[AuthGuard]},
   {path:"orientacionEducativa", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
   {path:"homeDocente", component: DocenteComponent, canActivate:[AuthGuard]},
