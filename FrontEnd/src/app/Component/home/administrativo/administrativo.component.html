@@ -5,33 +5,114 @@
   <div class="container-fluid">
     <div class="row d-flex">
       <!-- Lado izquierdo -->
-        <!-- modulo para validar solicitudes de usuarios -->
-        <div class="col-lg-6 accordion" id="accordionSolicitud">
-          <div class="accordion-item mb-2">
-            <div class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseSolicitud" aria-expanded="false" aria-controls="collapseSolicitud"
-                style="height: 3rem;" (click)="cargaSoliciudAceeso()">
-                <p class="fs-6 fw-light text-center text-secondary mt-3">
-                  <i class="bi bi-person-vcard"></i>
-                  Solicitudes de usuarios para acceder al sistema
-                </p>
-              </button>
-            </div>
-            <div id="collapseSolicitud" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitud">
-              <div class="accordion-body">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
+      <!-- modulo para validar solicitudes de usuarios -->
+      <div class="col-lg-6 accordion" id="accordionSolicitud">
+        <div class="accordion-item mb-2">
+          <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseSolicitud" aria-expanded="false" aria-controls="collapseSolicitud"
+              style="height: 3rem;" (click)="cargaSoliciudAceeso()">
+              <p class="fs-6 fw-light text-center text-secondary mt-3">
+                <i class="bi bi-person-vcard"></i>
+                Solicitudes de usuarios para acceder al sistema
+              </p>
+            </button>
+          </div>
+          <div id="collapseSolicitud" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitud">
+            <div class="accordion-body">
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      Solicitudes de usuarios para acceder al sistema - Docentes
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <!-- ngfor en un table de solicitud de docentes -->
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Solicitud</th>
+                              <th scope="col">foto</th>
+                              <th scope="col">Nombre</th>
+                              <th scope="col">Especialidad</th>
+                              <th class="text-center">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-group-divider">
+                            <tr *ngFor="let dato of datosDocente; let reg = index ">
+                              <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
+                              <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
+                              <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
+                              <td>{{dato.gradoAcademico}}</td>
+                              <td class="text-center ">
+                                <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl, dato.rol)"
+                                  data-bs-target="#aceptado" class="badge bg-success">Ver</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- fin ngfor -->
+                    </div>
+                  </div>
                   <div class="accordion-item">
                     <h2 class="accordion-header">
                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Solicitudes de usuarios para acceder al sistema - Docentes
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Solicitudes de usuarios para acceder al sistema - Alumnos
                       </button>
                     </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
                       data-bs-parent="#accordionFlushExample">
                       <div class="accordion-body">
-                        <!-- ngfor en un table -->
+                        <!-- ngfor en un table de solicitud de Alumnos -->
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Solicitud</th>
+                                <th scope="col">foto</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Cargo</th>
+                                <th class="text-center">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr *ngFor="let dato of datosAlumno; let reg = index ">
+                                <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
+                                <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
+                                <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
+                                <td>{{dato.departamento}}</td>
+                                <td>{{dato.nivelOperativo}}</td>
+                                <td class="text-center ">
+                                  <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl, dato.rol)"
+                                    data-bs-target="#aceptado" class="badge bg-success">Ver</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- fin ngfor -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Solicitud de usuarios para acceder al sistema - Administrativo
+                      </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                      data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <!-- ngfor en un table de solicitud de administrativos -->
                         <div class="table-responsive">
                           <table class="table">
                             <thead>
@@ -44,13 +125,13 @@
                               </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                              <tr *ngFor="let dato of datosDocente; let reg = index ">
+                              <tr *ngFor="let dato of datosAdmisnitrativo; let reg = index ">
                                 <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
                                 <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
                                 <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
                                 <td>{{dato.gradoAcademico}}</td>
                                 <td class="text-center "> <button data-bs-toggle="modal"
-                                    (click)="obtenerDatos(dato.numControl)" data-bs-target="#aceptado"
+                                    (click)="obtenerDatos(dato.numControl, dato.rol)" data-bs-target="#aceptado"
                                     class="badge bg-success">Ver</button>
                                 </td>
                               </tr>
@@ -60,228 +141,194 @@
                         <!-- fin ngfor -->
                       </div>
                     </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                          Solicitudes de usuarios para acceder al sistema - Alumnos
-                        </button>
-                      </h2>
-                      <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                          demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body.
-                          Let's imagine this being filled with some actual content.</div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseThree" aria-expanded="false"
-                          aria-controls="flush-collapseThree">
-                          Solicitud de usuarios para acceder al sistema - Administrativo
-                        </button>
-                      </h2>
-                      <div id="flush-collapseThree" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                          demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body.
-                          Nothing more exciting happening here in terms of content, but just filling up the space to
-                          make it look, at least at first glance, a bit more representative of how this would look in a
-                          real-world application.</div>
-                      </div>
-                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- modulo para carga de globales -->
-          <div class="accordion mb-2" id="accordionGlobales">
-            <div class="accordion-item">
-              <div class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseGlobales" aria-expanded="false" aria-controls="collapseGlobales"
-                  style="height: 3rem;">
-                  <p class="fs-6 fw-light text-center text-secondary mt-3">
-                    <i class="fa fa-address-card" aria-hidden="true"></i>
-                    Carga de alumnos a Globales
-                  </p>
-                </button>
-              </div>
-              <div id="collapseGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionGlobales">
-                <div class="accordion-body">
-                  <!-- ngfor en un formulario para filtrar  -->
-
-                  <!-- fin ngfor -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- modulo para carga de Recursa -->
-          <div class="accordion mb-2" id="accordionRecursa">
-            <div class="accordion-item">
-              <div class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseRecursa" aria-expanded="false" aria-controls="collapseRecursa"
-                  style="height: 3rem;">
-                  <p class="fs-6 fw-light text-center text-secondary mt-3">
-                    <i class="fa fa-address-card" aria-hidden="true"></i>
-                    Carga de alumnos a Recursa
-                  </p>
-                </button>
-              </div>
-              <div id="collapseRecursa" class="accordion-collapse collapse" data-bs-parent="#accordionRecursa">
-                <div class="accordion-body">
-                  <!-- ngfor en un table -->
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">NC</th>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Grado</th>
-                          <th scope="col">Grupo</th>
-                          <th scope="col">Especialidad</th>
-                          <th class="text-center">Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody class="table-group-divider">
-                        <!-- aqui programar datos -->
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- fin ngfor -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Fin lado izquierdo -->
-        <!-- Lado derecho -->
-        <!-- modulo para generar codigo de pago -->
-          <div class="col-lg-6 mb-2">
+        <!-- modulo para carga de globales -->
+        <div class="accordion mb-2" id="accordionGlobales">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseGlobales" aria-expanded="false" aria-controls="collapseGlobales"
+                style="height: 3rem;">
+                <p class="fs-6 fw-light text-center text-secondary mt-3">
+                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                  Carga de alumnos a Globales
+                </p>
+              </button>
+            </div>
+            <div id="collapseGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionGlobales">
+              <div class="accordion-body">
+                <!-- ngfor en un formulario para filtrar  -->
 
-            <div class="accordion" id="accordionPago">
-              <div class="accordion-item">
-                <div class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsePago" aria-expanded="false" aria-controls="collapsePago"
-                    style="height: 3rem;">
-                    <p class="fs-6 fw-light text-center text-secondary mt-3">
-                      <i class="fa fa-address-card" aria-hidden="true"></i>
-                      Solicitud de Pago de Servicio
-                    </p>
-                    <button class="badge bg-sigese text-wrap ms-auto" data-bs-toggle="modal" style="height: 2rem;"
-                      data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos de la Escuela</button>
-                  </button>
+                <!-- fin ngfor -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modulo para carga de Recursa -->
+        <div class="accordion mb-2" id="accordionRecursa">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseRecursa" aria-expanded="false" aria-controls="collapseRecursa"
+                style="height: 3rem;">
+                <p class="fs-6 fw-light text-center text-secondary mt-3">
+                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                  Carga de alumnos a Recursa
+                </p>
+              </button>
+            </div>
+            <div id="collapseRecursa" class="accordion-collapse collapse" data-bs-parent="#accordionRecursa">
+              <div class="accordion-body">
+                <!-- ngfor en un table -->
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">NC</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Grado</th>
+                        <th scope="col">Grupo</th>
+                        <th scope="col">Especialidad</th>
+                        <th class="text-center">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                      <!-- aqui programar datos -->
+                    </tbody>
+                  </table>
                 </div>
-                <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago" style="">
-                  <div class="accordion-body">
-                    <div class="row ">
+                <!-- fin ngfor -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin lado izquierdo -->
+      <!-- Lado derecho -->
+      <!-- modulo para generar codigo de pago -->
+      <div class="col-lg-6 mb-2">
 
-                      <div class="col-8">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Solicitante :</div>
-                          <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Número de Control" required>
-                        </div>
-                      </div>
-                      <div class="d-grid gap-2 col-4 mx-auto">
-                        <a name="" id="" class="btn btn-3GB bg-gradient" (click)="verificar()"
-                          role="button">Verificar</a>
-                      </div>
+        <div class="accordion" id="accordionPago">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsePago" aria-expanded="false" aria-controls="collapsePago" style="height: 3rem;">
+                <p class="fs-6 fw-light text-center text-secondary mt-3">
+                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                  Solicitud de Pago de Servicio
+                </p>
+                <button class="badge bg-sigese text-wrap ms-auto" data-bs-toggle="modal" style="height: 2rem;"
+                  data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos de la Escuela</button>
+              </button>
+            </div>
+            <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago" style="">
+              <div class="accordion-body">
+                <div class="row ">
 
+                  <div class="col-8">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Solicitante :</div>
+                      <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Número de Control" required>
                     </div>
-                    <div class="row mt-2">
-                      <div class="col-6">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Nombre</div>
-                          <input [(ngModel)]="alumno.nombre" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Nombre" disabled>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Grado</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Grado</div>
-                          <input [(ngModel)]="alumno.grado" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Grado" disabled>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Grupo</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Grupo</div>
-                          <input [(ngModel)]="alumno.grupo" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Grupo" disabled>
-                        </div>
-                      </div>
+                  </div>
+                  <div class="d-grid gap-2 col-4 mx-auto">
+                    <a name="" id="" class="btn btn-3GB bg-gradient" (click)="verificar()" role="button">Verificar</a>
+                  </div>
+
+                </div>
+                <div class="row mt-2">
+                  <div class="col-6">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Nombre</div>
+                      <input [(ngModel)]="alumno.nombre" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Nombre" disabled>
                     </div>
-                    <div class="row mt-2">
-                      <div class="col-4">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Correo</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Correo</div>
-                          <input [(ngModel)]="alumno.correo" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="correo" disabled>
-                        </div>
-                      </div>
-                      <div class="col-5">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Especilidad</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Especilidad</div>
-                          <input [(ngModel)]="alumno.especialidad" type="text" class="form-control"
-                            id="autoSizingInputGroup" placeholder="Especilidad" disabled>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Turno</label>
-                        <div class="input-group">
-                          <div class="input-group-text">Turno</div>
-                          <input [(ngModel)]="alumno.turno" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="turno" disabled>
-                        </div>
-                      </div>
+                  </div>
+                  <div class="col-3">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Grado</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Grado</div>
+                      <input [(ngModel)]="alumno.grado" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Grado" disabled>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Grupo</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Grupo</div>
+                      <input [(ngModel)]="alumno.grupo" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Grupo" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-4">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Correo</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Correo</div>
+                      <input [(ngModel)]="alumno.correo" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="correo" disabled>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Especilidad</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Especilidad</div>
+                      <input [(ngModel)]="alumno.especialidad" type="text" class="form-control"
+                        id="autoSizingInputGroup" placeholder="Especilidad" disabled>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Turno</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Turno</div>
+                      <input [(ngModel)]="alumno.turno" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="turno" disabled>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
 
-            <div class="accordion" id="accordionGCP" *ngIf="verificado">
-              <div class="accordion-item">
-                <div class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseGCP" aria-expanded="false" aria-controls="collapseGCP"
-                    style="height: 2.5rem;">
-                    <p class="fs-6 fw-light text-center text-secondary mt-3">
-                      <i class="fa fa-address-card" aria-hidden="true"></i>
-                      Generador de Código de Pago
-                    </p>
-                  </button>
-                </div>
-                <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP" style="">
-                  <div class="accordion-body">
-                    <div class="row">
-                      <div
-                        class="col-12 bg-light rounded-8 bg-gradient align-baseline d-flex justify-content-center py-4">
-                        <button type="button" class="btn btn-success btn-3g " data-bs-toggle="modal"
-                          style="height: 2.5rem;" data-bs-target="#exampleModal">
-                          Generar Código
-                          <i class="fa fa-qrcode" aria-hidden="true"></i>
-                        </button>
-                      </div>
-                    </div>
+        <div class="accordion" id="accordionGCP" *ngIf="verificado">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseGCP" aria-expanded="false" aria-controls="collapseGCP" style="height: 2.5rem;">
+                <p class="fs-6 fw-light text-center text-secondary mt-3">
+                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                  Generador de Código de Pago
+                </p>
+              </button>
+            </div>
+            <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP" style="">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-12 bg-light rounded-8 bg-gradient align-baseline d-flex justify-content-center py-4">
+                    <button type="button" class="btn btn-success btn-3g " data-bs-toggle="modal" style="height: 2.5rem;"
+                      data-bs-target="#exampleModal">
+                      Generar Código
+                      <i class="fa fa-qrcode" aria-hidden="true"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-        </div> <!-- Fin del modulo para generar CP -->
-        <!-- Fin lado derecho -->
+          </div>
+        </div>
+      </div> <!-- Fin del modulo para generar CP -->
+      <!-- Fin lado derecho -->
     </div>
 
     <!-- Modal de Generador de Código de Pago-->
@@ -333,7 +380,7 @@
       </div>
     </div>
 
-    <!--Modal dato del Alumno-->
+    <!--Modal dato del Alumno docente administrativo-->
     <div class="modal fade" id="aceptado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -618,3 +665,5 @@
         </div>
       </div>
     </div>
+  </div>
+</div>

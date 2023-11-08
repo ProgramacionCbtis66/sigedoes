@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import * as Notiflix from 'notiflix';
+import { firstValueFrom } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
@@ -23,7 +23,7 @@ export class AdministrativoComponent implements OnInit {
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
   };
- 
+
 
   datosEsc = {
     nomEscuela: "",
@@ -41,29 +41,16 @@ export class AdministrativoComponent implements OnInit {
     electricidad: "",
     alimentos: ""
   };
-  usuario = {
-    "nombre": "",
-    "correo": "",
-    "curp": "",
-    "noctrl": "",
-    "especialidad": "",
-    "semestre": "",
-    "area": "",
-    "turno": "",
-    "direccion": "",
-    "CTO": "30DCT0236O",
-    "grupo": "",
-    "pass": ""
-  };
-  alumno : any = [];
+  usuario : any = [];
+  alumno: any = [];
   nc: any = [];
 
-  datosAlumno: any=[];
-  datosDocente: any=[];
+  datosAlumno: any = [];
+  datosDocente: any = [];
   datos: any = [];
-  datosAdmisnitrativo: any=[];
+  datosAdmisnitrativo: any = [];
 
-  aceptado: any=[];
+  aceptado: any = [];
   verificado = false;
   numero: string = "";
 
@@ -72,31 +59,31 @@ export class AdministrativoComponent implements OnInit {
     private email: SendEmailService,
     private admin: AdminService,
     private auth: AuthService) {
-    this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._perfil = false;
   }
 
   ngOnInit() {
-    this.auth.isAuth() ? null: this.nav.salir();
+    this.auth.isAuth() ? null : this.nav.salir();
   }
 
-  cargaSoliciudAceeso() {
+  async cargaSoliciudAceeso() {
     let numControl = this.auth.decodifica().numControl;
-   
-    
-    this.auth.solicitudAcceso({numControl:numControl}).subscribe((res: any) => {
-      
-
-        if (res.registroAlumnos.vacio !=="sin datos" ) this.datosAlumno = JSON.parse(res.registroAlumnos);
-        this.datosDocente. push(res.registroDocentes); 
-        this.datosAdmisnitrativo.push(res.registroAdministrativos);
-        this.datosAlumno.push(res.registroAlumnos);
-    }, (err: any) => {
-      Notiflix.Notify.failure("Error, Intente De Nuevo"+ err);
+    console.log(numControl);
+    try {
+      const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl: numControl }));
+      if (res.validar) {
+        if (res.docentes.length!=0) this.datosDocente = [res.docentes];
+        if (res.administrativos.length!=0) this.datosAdmisnitrativo=[res.administrativos];
+        if (res.alumnos.length!=0) this.datosAlumno=[res.alumnos];
+      }
+      else {
+        Notiflix.Notify.failure("Error, Intente De Nuevo " + res.err);
+      }
+    } catch (error) {
+      Notiflix.Notify.failure("Error, Intente De Nuevo " + error);
     }
-    
-    );
   }
   aceptar(op: any) {
     this.aceptado = op;
@@ -218,33 +205,18 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  obtenerDatos(numControl: any) {
-    
-    this.usuario.noctrl = numControl;
-    this.userServicio.verInfo({numControl:numControl}).subscribe((res: any) => {
-      if (res.ok = "ok") {
-        const datos = res.data;
-        this.usuario.nombre = datos.nombre;
-        this.usuario.correo = datos.correo;
-        this.usuario.direccion = datos.direccion;
-        this.usuario.curp = datos.CURP;
-        this.usuario.area = datos.area;
-        this.usuario.especialidad = datos.especialidad;
-        this.usuario.grupo = datos.grupo;
-        this.usuario.semestre = datos.grado;
-        this.usuario.turno = datos.turno;
-        const noctrl = {
-          numcontrol: numControl
-        };
-        this.userServicio.getContra(noctrl).subscribe((res: any) => {
-          this.usuario.pass = res.contra;
-        });
-      }
-      else if (res.err = "err") {
-        Notiflix.Notify.info("Error, Intente De Nuevo");
+  obtenerDatos(numControl: any, rol: any) {
+  
+    this.userServicio.verInfo({ numControl: numControl, rol: rol }).subscribe((res: any) => {
+      console.log(res);
+      if (res.verificado) {
+        this.usuario = res.data;
+      } else {
+        Notiflix.Notify.failure("Error, Intente De Nuevo ");
       }
     });
   }
+
   obtenerdatEsc() {
     this.userServicio.datosEsc().subscribe((res: any) => {
       const datos = JSON.parse(res.data);

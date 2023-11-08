@@ -99,16 +99,28 @@ peticion.post('/SubirRegistro',verifica, async (req, res) => {
 });
 
 peticion.post('/verInfo',verifica, async (req, res) => {
-    const { numControl } = req.body;
-    console.log(numControl);
+    const { numControl, rol } = req.body;
+     
     const conexion = await ccn();
     try {
-        const[registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numControl]);
+        if(rol == "AL"){
+            var[registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numControl]);
+        }
+        if(rol == "DO"){
+            var[registros] = await conexion.execute('SELECT * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?', [numControl]);
+        }
+        if(rol == "CE" || rol == "OE"){
+            var[registros] = await conexion.execute('SELECT * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?', [numControl]);
+        }
+        if(registros.length > 0){
         let datos = JSON.stringify(registros[0]);
-        let data = JSON.parse(datos);
-        console.log(data)
-        res.json({data});
+        var data = JSON.parse(datos);
+        }else{
+            var data = ""
+        };
+        res.json({data: data, verificado: true});
     } catch (error) {
+        console.log(error);
         res.json({ err: "err" });
     }finally{
         conexion.end();

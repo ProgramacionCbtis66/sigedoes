@@ -49,10 +49,11 @@ peticion.post('/acceso', async (req, res) => {
     }
 
     if (usuario[0] !== undefined && usuario.length > 0) {
-        if(usuario[0].foto == null) {usuario[0].foto = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
-    }else{
-        usuario[0].foto = usuario[0].foto.toString();
-    }
+        if (usuario[0].foto == null) {
+            usuario[0].foto = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
+        } else {
+            usuario[0].foto = usuario[0].foto.toString();
+        }
         var datos = JSON.stringify(usuario[0]);
         var dato = JSON.parse(datos);
         const token = jwt.sign(dato, 'MA@L', { expiresIn: '20m' });
@@ -66,27 +67,27 @@ peticion.post('/acceso', async (req, res) => {
 
 peticion.post('/registro', async (req, res) => {
     const datos = (req.body);
-    if(datos.foto == undefined)datos.foto = null;
+    if (datos.foto == undefined) datos.foto = null;
     try {
         const conexion = await ccn();
         //Subir datos a la tabla usuario
-        
+
         const consulta1 = await conexion.execute('INSERT INTO usuario (userName, numControl, password, rol, nombre,apellidoP,apellidoM,foto,correo) VALUES (?, ?, ?, ?, ?,?,?,?,?)',
             [
-            datos.numControl,
-            datos.numControl,
-            datos.pass,
-            datos.rol,
-            datos.nombre,
-            datos.apellidoP,
-            datos.apellidoM,
-            datos.foto,
-            datos.correo
-        ]);
+                datos.numControl,
+                datos.numControl,
+                datos.pass,
+                datos.rol,
+                datos.nombre,
+                datos.apellidoP,
+                datos.apellidoM,
+                datos.foto,
+                datos.correo
+            ]);
 
         //Subir datos a la tabla alumno
         if (datos.tipoUsuario == "Alumno") {
-             
+
             const consulta2 = await conexion.execute('INSERT INTO alumno (numControl,fechaNac,direccion,telefono,especialidad,area,grado,grupo,turno,CTO,correo,CURP,facebook,twitter,instagram,horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [
                     datos.numControl,
@@ -110,34 +111,34 @@ peticion.post('/registro', async (req, res) => {
         //Subir datos a la tabla profesor
         if (datos.tipoUsuario == 'Docente') {
             const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,gradoAcademico,telefono,RFC,CURP,CEDULA,fechaNac,foto,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [   datos.numControl,
-                    datos.direccion,
-                    datos.gradoAcademico,
-                    datos.telefono,
-                    datos.RFC,
-                    datos.curp,
-                    datos.CEDULA,
-                    datos.fechaNac,
-                    datos.foto,
-                    datos.facebook,
-                    datos.instagram,
-                    datos.twitter
+                [datos.numControl,
+                datos.direccion,
+                datos.gradoAcademico,
+                datos.telefono,
+                datos.RFC,
+                datos.curp,
+                datos.CEDULA,
+                datos.fechaNac,
+                datos.foto,
+                datos.facebook,
+                datos.instagram,
+                datos.twitter
                 ]);
         }
         //Subir datos a la tabla administrativo
-        if( datos.tipoUsuario == "CE" || datos.tipoUsuario == "OE"){
-         
+        if (datos.tipoUsuario == "CE" || datos.tipoUsuario == "OE") {
+
             const consulta4 = await conexion.execute('INSERT INTO administrativo (numControl, direccion, telefono, departamento, turno, CURP,foto,nivelOperativo) VALUES (?,?,?,?,?,?,?,?)',
-            [
-                datos.numControl,
-                datos.direccion,
-                datos.telefono,
-                datos.departamento,
-                datos.turno,
-                datos.curp,
-                datos.foto,
-                datos.nivelOperativo
-            ]);
+                [
+                    datos.numControl,
+                    datos.direccion,
+                    datos.telefono,
+                    datos.departamento,
+                    datos.turno,
+                    datos.curp,
+                    datos.foto,
+                    datos.nivelOperativo
+                ]);
         }
         res.json({ Aceptado: "Datos Guardados" });
     } catch (error) {
@@ -147,38 +148,45 @@ peticion.post('/registro', async (req, res) => {
     }
 });
 
-peticion.post('/solicitudAcceso',verifica ,async (res, req) => {
-    
+peticion.post('/solicitudAcceso', verifica, async (req, res) => {
+    const datos = (req.body);
+     
     const conexion = await ccn();
     try {
 
-        
-
         const [registroDocente] = await conexion.execute('SELECT * FROM usuario JOIN docente ON usuario.numControl = docente.numControl WHERE alta = 0');
-        let datosDocente = JSON.stringify(registroDocente[0]);
-        let registroDocentes = JSON.parse(datosDocente);
-
-    
+        if (registroDocente.length == 0) var registroDocentes = [];
+        else {
+            if(registroDocente[0].foto!==null) {registroDocente[0].foto = registroDocente[0].foto.toString('utf-8');}
+            let datosDocente = JSON.stringify(registroDocente[0]);
+            var registroDocentes = JSON.parse(datosDocente);
+        }
 
         const [registroAlumno] = await conexion.execute('SELECT * FROM usuario JOIN alumno ON usuario.numControl = alumno.numControl WHERE alta = 0');
-            let datosAlumno = JSON.stringify(registroAlumno[0]);
-            let registroAlumnos = JSON.parse(datosAlumno);
 
-         
+        if (registroAlumno.length == 0) var registroAlumnos = [];
+        else {
+            if(registroAlumno[0].foto!==null) {registroAlumno[0].foto = registroAlumno[0].foto.toString('utf-8');}
+            let datosAlumno = JSON.stringify(registroAlumno[0]);
+            var registroAlumnos = JSON.parse(datosAlumno);
+        }
 
         const [registroAdministrativo] = await conexion.execute('SELECT * FROM usuario JOIN administrativo ON usuario.numControl = administrativo.numControl WHERE alta = 0');
-        let datosAdministrativo = JSON.stringify(registroAdministrativo[0]);
-        let registroAdministrativos = JSON.parse(datosAdministrativo);
+        if (registroAdministrativo.length == 0) { var registroAdministrativos = []; }
+        else {
+            if(registroAdministrativo[0].foto!==null) {registroAdministrativo[0].foto = registroAdministrativo[0].foto.toString('utf-8');}
+            var datosAdministrativo = JSON.stringify(registroAdministrativo[0]);
+            var registroAdministrativos = JSON.parse(datosAdministrativo);
+        }
 
-         
-
-        res.json({  registroAlumnos, registroDocentes,   registroAdministrativos });
-
+        res.json({ validar: true, alumnos: registroAlumnos, docentes: registroDocentes, administrativos: registroAdministrativos });
 
     } catch (error) {
         const errorMessage = error.toString();
-        res.json({ Error: errorMessage });
+        console.log(errorMessage);
+        res.json({ validar: false, mensaje: errorMessage });
     }
+
 });
 
 module.exports = peticion;
