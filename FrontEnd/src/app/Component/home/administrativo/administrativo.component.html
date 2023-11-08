@@ -64,7 +64,7 @@
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                           data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                          Accordion Item #2
+                          Solicitudes de usuarios para acceder al sistema - Alumnos
                         </button>
                       </h2>
                       <div id="flush-collapseTwo" class="accordion-collapse collapse"
@@ -79,7 +79,7 @@
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                           data-bs-target="#flush-collapseThree" aria-expanded="false"
                           aria-controls="flush-collapseThree">
-                          Accordion Item #3
+                          Solicitud de usuarios para acceder al sistema - Administrativo
                         </button>
                       </h2>
                       <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -289,7 +289,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Generador de Código del {{alumno.escuela}}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Generador de Código del {{alumno.Esc_nombre}}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -417,12 +417,12 @@
                  Verificar</button>
               </div>-->
 
-            <td class="text-center ">
-              <a (click)="aceptar(data)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
+            <td class="text-center">
+              <a (click)="aceptar(datos)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
               </a> |
-              <a (click)="Noaceptado(data)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="Noaceptado(datos)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa-solid fa-circle-xmark"></i>
               </a>
