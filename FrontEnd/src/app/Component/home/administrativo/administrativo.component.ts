@@ -86,14 +86,8 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   aceptar(op: any) {
-    this.aceptado = op;
-    this.aceptado.op = 1;
-    this.aceptado.tipo = "validacion";
-    this.aceptado.numControl = this.usuario.noctrl;
-    this.aceptado.correo = this.usuario.correo;
-    this.aceptado.nombre = this.usuario.nombre;
-    this.aceptado.password = this.usuario.pass;
-    this.admin.usuarioAceptado(this.aceptado).subscribe((res: any) => {
+    this.usuario.op = 1;
+    this.admin.usuarioAceptado(this.usuario).subscribe((res: any) => {
       Notiflix.Notify.success(res);
       this.CorreoAcpetacion(op);
       this.ngOnInit();
@@ -215,7 +209,7 @@ export class AdministrativoComponent implements OnInit {
         if(res.data.rol=="AL") this.usuario.rol = "Alumno";
         if(res.data.rol=="DO") this.usuario.rol = "Docente";
         if(res.data.rol=="CE") this.usuario.rol = "Control Escolar";
-        if(res.data.rol=="OE") this.usuario.rol = "Orinetación Educativa";
+        if(res.data.rol=="OE") this.usuario.rol = "Orientación Educativa";
       } else {
         Notiflix.Notify.failure("Error, Intente De Nuevo ");
       }

@@ -10,18 +10,18 @@ peticion.post('/datosUser', verifica, async (req, res) => {
     const numControl = req.body.numControl;
     const rol = req.body.rol;
     let sql = "";
-    
-    if(rol == "AL"){sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?';}
-    if(rol == "DO"){sql = 'select * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?';}
-    if(rol == "CE" || rol == "OE"){sql = "select * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?";}
+
+    if (rol == "AL") { sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?'; }
+    if (rol == "DO") { sql = 'select * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?'; }
+    if (rol == "CE" || rol == "OE") { sql = "select * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?"; }
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [numControl]);
         if (registros.length > 0) {
-            if(registros[0].foto!==null) {registros[0].foto = registros[0].foto.toString('utf-8');}
+            if (registros[0].foto !== null) { registros[0].foto = registros[0].foto.toString('utf-8'); }
             let datos = JSON.stringify(registros[0]);
             let dato = JSON.parse(datos);
-            
+
             res.json({ dato });
         } else {
             res.json({ Error: "no hay datos" })
@@ -30,12 +30,12 @@ peticion.post('/datosUser', verifica, async (req, res) => {
     } catch (error) {
         console.log(error);
         res.json({ Error: "En base de datos" });
-    }  
+    }
 });
 
 peticion.post('/solictudAcceso', verifica, async (req, res) => {
-    
-    
+
+
 });
 
 peticion.post('/NoPago', verifica, async (req, res) => {
@@ -53,7 +53,7 @@ peticion.post('/NoPago', verifica, async (req, res) => {
     }
 });
 
-peticion.post('/NoPagoDesactivo',verifica, async (req, res) => {
+peticion.post('/NoPagoDesactivo', verifica, async (req, res) => {
     const codpag = req.body;
     const conexion = await ccn();
     try {
@@ -81,12 +81,12 @@ peticion.post('/ObtenerDatosPago', async (req, res) => {
         res.json({ "nombre": dataa, "emitio": data });
     } catch (error) {
         res.json({ err: "err" });
-    }finally    {
+    } finally {
         conexion.end();
     }
 });
 
-peticion.post('/SubirRegistro',verifica, async (req, res) => {
+peticion.post('/SubirRegistro', verifica, async (req, res) => {
     const { NoCtrl, emitio, fecha, CodPago } = req.body;
     const conexion = await ccn();
     try {
@@ -94,36 +94,37 @@ peticion.post('/SubirRegistro',verifica, async (req, res) => {
         res.json({ ok: "ok" })
     } catch (error) {
         res.json({ err: "err" })
-    }finally{
+    } finally {
         conexion.end();
     }
 });
 
-peticion.post('/verInfo',verifica, async (req, res) => {
+peticion.post('/verInfo', verifica, async (req, res) => {
     const { numControl, rol } = req.body;
-     
+
     const conexion = await ccn();
     try {
-        if(rol == "AL"){
-            var[registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numControl]);
+        if (rol == "AL") {
+            var [registros] = await conexion.execute('SELECT * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?', [numControl]);
         }
-        if(rol == "DO"){
-            var[registros] = await conexion.execute('SELECT * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?', [numControl]);
+        if (rol == "DO") {
+            var [registros] = await conexion.execute('SELECT * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?', [numControl]);
         }
-        if(rol == "CE" || rol == "OE"){
-            var[registros] = await conexion.execute('SELECT * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?', [numControl]);
+        if (rol == "CE" || rol == "OE") {
+            var [registros] = await conexion.execute('SELECT * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?', [numControl]);
         }
-        if(registros.length > 0){
-        let datos = JSON.stringify(registros[0]);
-        var data = JSON.parse(datos);
-        }else{
+        if (registros.length > 0) {
+            if (registros[0].foto !== null) { registros[0].foto = registros[0].foto.toString('utf-8'); }
+            let datos = JSON.stringify(registros[0]);
+            var data = JSON.parse(datos);
+        } else {
             var data = ""
         };
-        res.json({data: data, verificado: true});
+        res.json({ data: data, verificado: true });
     } catch (error) {
         console.log(error);
         res.json({ err: "err" });
-    }finally{
+    } finally {
         conexion.end();
     }
 });
@@ -141,45 +142,45 @@ peticion.post('/getContra', verifica, async (req, res) => {
         }
     } catch (error) {
         //no tiene otra sentencia aparte del res.json del if
-    }finally{
+    } finally {
         conexion.end();
     }
 });
 
-peticion.post('/modificarPerfil',verifica, async (req, res) => {
+peticion.post('/modificarPerfil', verifica, async (req, res) => {
     const usr = req.body;
-     
+
     const conexion = await ccn();
     let sql = "", sql2 = "", sql3 = "";
     let rol = "";
-    
-    if(usr.direccion == null) usr.direccion = "";
-    if(usr.telefono == null) usr.telefono = "";
-    if(usr.facebook == null) usr.facebook = "";
-    if(usr.twitter == null) usr.twitter = "";
-    if(usr.instagram == null) usr.instagram = "";
-    if(usr.foto == ".././assets/img/tufoto.png") usr.foto = null;
+
+    if (usr.direccion == null) usr.direccion = "";
+    if (usr.telefono == null) usr.telefono = "";
+    if (usr.facebook == null) usr.facebook = "";
+    if (usr.twitter == null) usr.twitter = "";
+    if (usr.instagram == null) usr.instagram = "";
+    if (usr.foto == ".././assets/img/tufoto.png") usr.foto = null;
 
     try {
-        if(usr.rol == "AL") rol = "alumno";
-        if(usr.rol == "DO") rol = "docente";
-        if(usr.rol == "CE" || usr.rol == "OE") rol = "administrativo";
-        
+        if (usr.rol == "AL") rol = "alumno";
+        if (usr.rol == "DO") rol = "docente";
+        if (usr.rol == "CE" || usr.rol == "OE") rol = "administrativo";
+
         sql = `UPDATE usuario as u set u.foto = ?, u.password = ? where u.numControl = ?`;
         sql2 = `UPDATE  ${rol} as x set x.direccion = ?, x.telefono = ?,x.facebook = ?, x.twitter = ?, x.instagram = ? where x.numControl = ?`;
-        
 
-        const updateUsuario = await conexion.execute(sql,[usr.foto,usr.pass1,usr.numControl]);
-        const update = await conexion.execute(sql2,[usr.direccion,usr.telefono,usr.facebook,usr.twitter,usr.instagram,usr.numControl]);
-      
 
-         
-            res.json({  valida: true });
-        
+        const updateUsuario = await conexion.execute(sql, [usr.foto, usr.pass1, usr.numControl]);
+        const update = await conexion.execute(sql2, [usr.direccion, usr.telefono, usr.facebook, usr.twitter, usr.instagram, usr.numControl]);
+
+
+
+        res.json({ valida: true });
+
     } catch (error) {
-        res.json({ valida:false });
+        res.json({ valida: false });
         console.log(error);
-    }finally{
+    } finally {
         conexion.end();
     }
 });

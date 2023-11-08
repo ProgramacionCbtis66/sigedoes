@@ -23,7 +23,7 @@ export class AdminService {
   }
   
   usuarioAceptado(numcontrol: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/usuarioAceptado`, numcontrol);
+    return this.http.post(`${this.URL}/admin/usuarioAceptado`, numcontrol, this.usr);
   }
 
   guardarDatosEsc(escuela: any): Observable<any> {

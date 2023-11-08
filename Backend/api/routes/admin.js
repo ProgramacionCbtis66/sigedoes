@@ -37,12 +37,16 @@ administrador.post('/solicitud', verifica, async (req,res)=>{
 });
 
 administrador.post('/usuarioAceptado', verifica, async (req, res) => {
-    const alumno = req.body;
+    const usuario = req.body;
+
     try {
         const conexion = await ccn();
-        const entrar = await conexion.execute('UPDATE alumno SET alta = ? WHERE numControl like ?', [alumno.op, alumno.numControl]);
-        if (alumno.op == 1) res.json("Aceptado");
-        if (alumno.op == 3) res.json("Rechazado");
+        if(usuario.rol=="Alumno") var entrar = await conexion.execute('UPDATE alumno SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
+        if(usuario.rol=="Docente") var entrar = await conexion.execute('UPDATE docente SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
+        if(usuario.rol=="Control Escolar" || usuario.rol=="Orientación Educativa" ) var entrar = await conexion.execute('UPDATE administrativo SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
+
+        if (usuario.op == 1) res.json("Aceptado");
+        res.send("usuario aceptado");
     } catch (error) {
         res.json("error en la consulta");
     } finally {

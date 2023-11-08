@@ -390,101 +390,98 @@
             </div>
           </div>
           <div class="modal-body">
-            <!-- rol -->
-            <div class="input-group mb-3 px-3 mt-2">
-              <span class="input-group-text" id="basic-addon1">Tipo de Usuario</span>
-              <input [(ngModel)]="usuario.rol" type="text" class="form-control" placeholder="Tipo de Usuario"
-                aria-label="Tipo de Usuario" aria-describedby="basic-addon1">
-            </div>
-            <!--Nombre-->
-            <div class="input-group mb-3 px-3 mt-2">
-              <span class="input-group-text" id="basic-addon1">Name</span>
-              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Correo Institucional-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">@</span>
-              <input [(ngModel)]="usuario.correo" type="text" class="form-control" placeholder="Correo Institucional"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Direccion-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">D</span>
-              <input [(ngModel)]="usuario.direccion" type="text" class="form-control" placeholder="Ingrese Su Dirección"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--Curp-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">Curp</span>
-              <input [(ngModel)]="usuario.CURP" type="text" class="form-control" placeholder="Ingrese Su Curp"
-                aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <div *ngIf="usuario.rol=='AL'">
-              <!--Especialidad y Semestre-->
-              <div class="row d-flex mb-3">
-                <div class="col-sm-5">
-                  <div class="input-group px-3">
-                    <span class="input-group-text">Especialidad:</span>
-                    <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
-                      placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
+
+            <div class="row">
+              <!-- Lado Izquierdo -->
+              <div class="col-md-4 text-center">
+                  <img [src]="usuario.foto" class="img-fluid" width="200" alt="image desc">
+              </div>
+              <!-- lado derecho -->
+              <div class="col-md-8">
+                <!-- rol -->
+                <div class="input-group mb-3 px-3 mt-2">
+                  <span class="input-group-text" id="basic-addon1">Tipo de Usuario</span>
+                  <input [(ngModel)]="usuario.rol" type="text" class="form-control" placeholder="Tipo de Usuario"
+                    aria-label="Tipo de Usuario" aria-describedby="basic-addon1">
+                </div>
+                <!--Nombre-->
+                <div class="input-group mb-3 px-3 mt-2">
+                  <span class="input-group-text" id="basic-addon1">Name</span>
+                  <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+                    aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <!--Correo Institucional-->
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <input [(ngModel)]="usuario.correo" type="text" class="form-control"
+                    placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <!--Direccion-->
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text" id="basic-addon1">D</span>
+                  <input [(ngModel)]="usuario.direccion" type="text" class="form-control"
+                    placeholder="Ingrese Su Dirección" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <!--Curp-->
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text" id="basic-addon1">Curp</span>
+                  <input [(ngModel)]="usuario.CURP" type="text" class="form-control" placeholder="Ingrese Su Curp"
+                    aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="usuario.rol=='AL'">
+                  <!--Especialidad y Semestre-->
+                  <div class="row d-flex mb-3">
+                    <div class="col-sm-5">
+                      <div class="input-group px-3">
+                        <span class="input-group-text">Especialidad:</span>
+                        <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
+                          placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                    </div>
+                    <div class="col-sm-7 d-flex">
+                      <div class="input-group px-3">
+                        <span class="input-group-text" id="basic-addon1">Sem.</span>
+                        <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
+                      </div>
+
+
+                      <div class="input-group px-3">
+                        <span class="input-group-text" id="basic-addon1">Grupo</span>
+                        <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <!--Area y Turno-->
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text" id="basic-addon1">Área</span>
+                    <input type="text" [(ngModel)]="usuario.area" class="form-control">
+
+                    <span class="input-group-text" id="basic-addon1">Turno</span>
+                    <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
                   </div>
                 </div>
-                <div class="col-sm-7 d-flex">
-                  <div class="input-group px-3">
-                    <span class="input-group-text" id="basic-addon1">Sem.</span>
-                    <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
-                  </div>
-
-
-                  <div class="input-group px-3">
-                    <span class="input-group-text" id="basic-addon1">Grupo</span>
-                    <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
-                  </div>
+                <!--No Control-->
+                <div class="input-group mb-3 px-3">
+                  <span class="input-group-text" id="basic-addon1">#</span>
+                  <input [(ngModel)]="usuario.numControl" type="text" class="form-control"
+                    placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
+                  <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
                 </div>
               </div>
-              <!--Area y Turno-->
-              <div class="input-group mb-3 px-3">
-                <span class="input-group-text" id="basic-addon1">Área</span>
-                <input type="text" [(ngModel)]="usuario.area" class="form-control">
-
-                <span class="input-group-text" id="basic-addon1">Turno</span>
-                <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
-              </div>
-            </div>
-            <!--No Control-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">#</span>
-              <input [(ngModel)]="usuario.numControl" type="text" class="form-control" placeholder="Numero de Control"
-                aria-label="Username" aria-describedby="basic-addon1" value="">
-              <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
             </div>
 
           </div>
           <div class="modal-footer">
-            <!--<div class="h5">
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptado" 
-                class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="Noaceptado()">Rechazar</button>
-              </div>
-              <div class="h5">
-                <button class="btn btn-success fa fa-check-circle" data-bs-toggle="modal" data-bs-target="#aceptado" 
-                class="badge bg-success p-2 ps-4 pe-4" aria-hidden="true" type="button" (click)="aceptar()">
-                 Verificar</button>
-              </div>-->
-
             <td class="text-center">
-              <a (click)="aceptar(datos)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="aceptar(usuario)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
               </a> |
-              <a (click)="Noaceptado(datos)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="Noaceptado(usuario)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa-solid fa-circle-xmark"></i>
               </a>
             </td>
-            <!--<td class="text-center "> <a data-bs-toggle="modal" data-bs-target="#aceptado" class="badge bg-success" disabled><i
-                class="fa fa-check-circle" aria-hidden="true"></i></a>
-              </td>-->
           </div>
         </div>
 
