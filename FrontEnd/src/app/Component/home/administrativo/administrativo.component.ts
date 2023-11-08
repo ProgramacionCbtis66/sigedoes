@@ -212,6 +212,10 @@ export class AdministrativoComponent implements OnInit {
       console.log(res);
       if (res.verificado) {
         this.usuario = res.data;
+        if(res.data.rol=="AL") this.usuario.rol = "Alumno";
+        if(res.data.rol=="DO") this.usuario.rol = "Docente";
+        if(res.data.rol=="CE") this.usuario.rol = "Control Escolar";
+        if(res.data.rol=="OE") this.usuario.rol = "Orinetación Educativa";
       } else {
         Notiflix.Notify.failure("Error, Intente De Nuevo ");
       }
