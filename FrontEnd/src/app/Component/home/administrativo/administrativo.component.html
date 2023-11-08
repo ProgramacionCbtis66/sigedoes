@@ -390,6 +390,12 @@
             </div>
           </div>
           <div class="modal-body">
+            <!-- rol -->
+            <div class="input-group mb-3 px-3 mt-2">
+              <span class="input-group-text" id="basic-addon1">Tipo de Usuario</span>
+              <input [(ngModel)]="usuario.rol" type="text" class="form-control" placeholder="Tipo de Usuario"
+                aria-label="Tipo de Usuario" aria-describedby="basic-addon1">
+            </div>
             <!--Nombre-->
             <div class="input-group mb-3 px-3 mt-2">
               <span class="input-group-text" id="basic-addon1">Name</span>
@@ -411,38 +417,40 @@
             <!--Curp-->
             <div class="input-group mb-3 px-3">
               <span class="input-group-text" id="basic-addon1">Curp</span>
-              <input [(ngModel)]="usuario.curp" type="text" class="form-control" placeholder="Ingrese Su Curp"
+              <input [(ngModel)]="usuario.CURP" type="text" class="form-control" placeholder="Ingrese Su Curp"
                 aria-label="Username" aria-describedby="basic-addon1">
             </div>
-            <!--Especialidad y Semestre-->
-            <div class="row d-flex mb-3">
-              <div class="col-sm-5">
-                <div class="input-group px-3">
-                  <span class="input-group-text">Especialidad:</span>
-                  <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
-                    placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
+            <div *ngIf="usuario.rol=='AL'">
+              <!--Especialidad y Semestre-->
+              <div class="row d-flex mb-3">
+                <div class="col-sm-5">
+                  <div class="input-group px-3">
+                    <span class="input-group-text">Especialidad:</span>
+                    <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
+                      placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+                <div class="col-sm-7 d-flex">
+                  <div class="input-group px-3">
+                    <span class="input-group-text" id="basic-addon1">Sem.</span>
+                    <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
+                  </div>
+
+
+                  <div class="input-group px-3">
+                    <span class="input-group-text" id="basic-addon1">Grupo</span>
+                    <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
+                  </div>
                 </div>
               </div>
-              <div class="col-sm-7 d-flex">
-                <div class="input-group px-3">
-                  <span class="input-group-text" id="basic-addon1">Sem.</span>
-                  <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
-                </div>
+              <!--Area y Turno-->
+              <div class="input-group mb-3 px-3">
+                <span class="input-group-text" id="basic-addon1">Área</span>
+                <input type="text" [(ngModel)]="usuario.area" class="form-control">
 
-
-                <div class="input-group px-3">
-                  <span class="input-group-text" id="basic-addon1">Grupo</span>
-                  <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
-                </div>
+                <span class="input-group-text" id="basic-addon1">Turno</span>
+                <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
               </div>
-            </div>
-            <!--Area y Turno-->
-            <div class="input-group mb-3 px-3">
-              <span class="input-group-text" id="basic-addon1">Área</span>
-              <input type="text" [(ngModel)]="usuario.area" class="form-control">
-
-              <span class="input-group-text" id="basic-addon1">Turno</span>
-              <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
             </div>
             <!--No Control-->
             <div class="input-group mb-3 px-3">
