@@ -9,9 +9,11 @@ administrador.post('/verificaNoPago', verifica,async (req, res) => {
     const { numPago } = req.body;
     const conexion = await ccn();
     try {
-        const verificaNoPago = await conexion.execute('SELECT codigoPago from solicitud where codigoPago like ?', [numPago]);
-        if (rows.length <= 0) {
+        const verificaNoPago = await conexion.execute('SELECT codigoPago from solicitud where codigoPago = ?', [numPago]);
+        if (verificaNoPago.length <= 0) {
             res.json({ valido: "Aceptado" });
+        }else{
+            res.json({ valido: "Rechazado" });
         }
     } catch (error) {
         res.json({ Error: "Número Invalido" });

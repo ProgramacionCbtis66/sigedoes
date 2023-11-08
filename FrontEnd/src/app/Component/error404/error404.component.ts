@@ -11,7 +11,7 @@ export class Error404Component implements OnInit {
   constructor(private router:Router) { }
 
 regresar(){
-   this.router.navigate (['home']);
+   this.router.navigate (['homeAlumno']);
 }
   ngOnInit(): void {
 }

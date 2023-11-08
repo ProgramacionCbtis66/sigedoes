@@ -15,7 +15,7 @@ export class AdminService {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
    }
    verificaNoPago(datos: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/verificaNoPago`, datos);
+    return this.http.post(`${this.URL}/admin/verificaNoPago`, datos, this.usr);
   }
 
   enviarSolicitud(solicitud:any):Observable<any>{

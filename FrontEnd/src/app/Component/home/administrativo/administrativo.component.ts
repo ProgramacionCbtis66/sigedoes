@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Notiflix from 'notiflix';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, generate } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
@@ -119,17 +119,17 @@ export class AdministrativoComponent implements OnInit {
 
 
   verificar() {
-
     const numcontrol = {
-      numcontrol: this.nc
+      numControl: this.nc,
+      rol:"AL"
     };
     if (this.nc == null || this.nc == "") {
       Notiflix.Notify.failure("No se ha ingresado un número de control");
     }
     else {
       this.userServicio.datosUser(numcontrol).subscribe((res: any) => {
-        if (res.data != "" && res.data != null) {
-          this.alumno = JSON.parse(res.data);
+        if (res.dato != "" && res.dato != null) {
+          this.alumno = res.dato;
           this.verificado = true;
 
         } else { this.verificado = false; }
@@ -138,15 +138,16 @@ export class AdministrativoComponent implements OnInit {
   }
 
   GenerarCodigoPago() {
-    this.numero = "";
+    this.numero = "hola";
     const numPago = {
       numPago: this.generateRandomString(12),
       numcontrol: this.nc
     };
     this.admin.verificaNoPago(numPago).subscribe((res: any) => {
+      console.log(res);
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
-      } else { this.GenerarCodigoPago(); }
+      } else { this.numero = this.generateRandomString(12); }
     });
   }
 

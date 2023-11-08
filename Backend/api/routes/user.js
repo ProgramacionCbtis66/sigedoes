@@ -10,6 +10,7 @@ peticion.post('/datosUser', verifica, async (req, res) => {
     const numControl = req.body.numControl;
     const rol = req.body.rol;
     let sql = "";
+    
     if(rol == "AL"){sql = 'select * from usuario join alumno on usuario.numControl = alumno.numControl where usuario.numControl = ?';}
     if(rol == "DO"){sql = 'select * from usuario join docente on usuario.numControl = docente.numControl where usuario.numControl = ?';}
     if(rol == "CE" || rol == "OE"){sql = "select * from usuario join administrativo on usuario.numControl = administrativo.numControl where usuario.numControl = ?";}
