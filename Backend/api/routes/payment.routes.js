@@ -3,7 +3,7 @@ const {createOrden, receiveWebhook, pendiente} = require('../controller/payment.
 const verificar = require('./verificaToken');
 
 const ordenPago = Router()
-ordenPago.post('/create-order', verificar, createOrden);
+ordenPago.post('/create-order', createOrden);
 
 ordenPago.get('/success',(req,res) => res.send('success'))
 

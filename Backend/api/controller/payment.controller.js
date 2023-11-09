@@ -2,7 +2,8 @@ const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
 
  const createOrden = async (req,res) => {
-    const {item} = req.body;
+    const item = req.body;
+    console.log(item);
     /*const item = [
         {
             title: "Pago Constancia",
@@ -40,9 +41,9 @@ const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
          notification_url: NOTIFICACION_URL+"/pagos/webhook",
     });
      
-    res.send(results.body.init_point)
+     res.json({web:results.body.init_point})
     };
- const receiveWebhook = async (req, res) => {
+    const receiveWebhook = async (req, res) => {
 
        const payment = req.query;
        console.log(payment);
@@ -69,7 +70,7 @@ const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
                 
                 console.log(datos);
             }
-            res.status(204).send('ok');
+            res.status(204).json({datos});
         } catch (error) {
             console.log(error);
             res.status(500).send('error',error);
