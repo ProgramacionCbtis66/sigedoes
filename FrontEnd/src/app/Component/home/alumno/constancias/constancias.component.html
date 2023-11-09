@@ -1,23 +1,24 @@
-<div class="card border border-white">
+<div class="card border border-white mt-4">
     <div class="container">
-      <div class="d-flex justify-content-center mb-2">
+      <div class="d-flex justify-content-center mt-4">
         <div class="card border border-white px-3">
           <div class="text-success">
             <p class="text-center fw-light fs-4">
               Bienvenido al {{proyecto}}
             </p>
-            <p class="text-center fw-light fs-5">Alumna (o) : {{ nombre }}</p>
+            <p class="text-center fw-light fs-5">Alumna (o) : {{ datos.nombreCompleto }}</p>
           </div>
         </div>
       </div>
   
       <div class="row">
         <!--Lado Izquierdo-->
-        <div class="col-md-6 mt-2">
+        <div class="col-lg-6 mt-2 d-flex justify-content-center">
+        <div class="col-lg-12 col-md-6">
             <div class="card mb-2 bg-color-1">
               <div class="row">
                 <div class="d-flex justify-content-center p-1">
-                  <h4 class="singup-3 m-2">{{nombre}}</h4>
+                  <h4 class="singup-3 m-2">{{ datos.nombreCompleto }}</h4>
                 </div>
               </div>
             </div>
@@ -30,7 +31,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
                           <div class="d-flex justify-content-center mb-2">
                             <div class="card border-color-1">
-                              <img class="card-img-top" src="./erik.jpeg" alt="foto-de-perfil">
+                              <img class="card-img-top" [src]="usr.foto" alt="foto-de-perfil">
                               <div class="col card-body">
                                 <h4 class="card-title d-flex justify-content-center">
                                   
@@ -60,7 +61,7 @@
                       <table class="table table-bordered table-responsive border-color-1 m-0">
                         <tr>
                           <th scope="col">ALUMNO:</th>
-                          <th>{{datos.nombre}}</th>
+                          <th>{{datos.nombreCompleto}}</th>
                         </tr>
                         <tr>
                           <th>NO.CONTROL</th>
@@ -80,7 +81,8 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+        </div>
   
         <!--Lado Derecho-->
        
@@ -189,7 +191,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -212,7 +214,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-control">
-                  <p>Nombre : {{ nombre }}</p>
+                  <p>Nombre : {{ usr.nombre }}</p>
                 </div>
                 <div class="form-control">
                   <p>Asunto: {{ datosCons.asunto }}</p>
@@ -310,4 +312,3 @@
   
       </div>
     </div>
-

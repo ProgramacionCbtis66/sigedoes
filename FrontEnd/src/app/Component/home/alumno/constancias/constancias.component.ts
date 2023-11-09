@@ -16,35 +16,18 @@ export class ConstanciasComponent implements OnInit {
 
   proyecto = environment.proyecto;
   paso2 = false;
-  nombre = "";
-  curp: any;
-  correo: any;
-  noctrl: any;
-  especialidad: any;
-  semestre: any;
-  area: any;
-  turno: any;
-  datos= {
-    nombre:'',
-    CURP:'',
-    correo:'',
-    numControl:'',
-    grado:'',
-    area:'',
-    turno:'',
-    especialidad:'',
-    Esc_Periodo:'',
-    CTO:''
-  };
+  usr: any = {};
+  dato: any;
+  datos: any = [];
   tabla = false;
-  datoo: any;
+  dato2: any;
   boton = false;
   emitidas: any;
 
   valortipo = "";
   datosCons = {
     asunto: '',
-    alumno: this.datos.nombre,
+    alumno: 'this.datos.nombre',
     matricula: '',
     claveIns: '',
     semestre: '',
@@ -55,14 +38,18 @@ export class ConstanciasComponent implements OnInit {
     horario: '7:00 AM - 14:00 PM',
     periodo: '',
   };
-  dato = {
-    numcontrol: '',
-  };
 
   home = {
     NoPago: '',
     numControl: '',
   };
+  correo: any;
+  noctrl: any;
+  semestre!: string;
+  especialidad!: string;
+  area!: string;
+  turno!: string;
+  nombre!: string;
 
   constructor(
     private nav: NavegacionService,
@@ -71,23 +58,58 @@ export class ConstanciasComponent implements OnInit {
     private email: SendEmailService,
 
   ) {
-    this.nav._usuario = this.auth.decodifica().nombre;
+    this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+    this.nav._foto = this.auth.decodifica().foto;
   }
   
   async ngOnInit() {
-    if (this.auth.isAuth() && this.nombre == "") {
-      this.dato.numcontrol = this.auth.decodifica().numControl;
+    if (this.auth.isAuth()){
+      const numControl = {
+        numControl: this.auth.decodifica().numControl,
+        rol: this.auth.decodifica().rol
+      };
       try {
-        const res = await firstValueFrom (this.user.datosUser(this.dato));
+        const res = await firstValueFrom (this.user.datosUser(numControl));
         if (res != '' && res != undefined) {
-          this.datos = JSON.parse(res.data);
+          this.datos = res.dato;
+          this.datos.nombreCompleto = res.dato.nombre + " " + res.dato.apellidoP + " " + res.dato.apellidoM;
         }
       } catch (error) {
         console.error(error);
       }
-      this.nav._usuario = this.datos.nombre;
-      this.nombre = this.datos.nombre;
+
+      this.nav._usuario = this.usr.nombre;
+
+      if (this.usr.foto != null) {
+        this.nav._foto = this.usr.foto;
+      } else {
+        this.nav._foto = '.././assets/img/tufoto.png';
+        this.usr.foto = '.././assets/img/tufoto.png';
+      }
+
     }
+    /*if (this.auth.isAuth()) {
+      const numControl = {
+        numControl: this.auth.decodifica().numControl,
+        rol: this.auth.decodifica().rol
+      };
+      try {
+        console.log(numControl);
+        const res = await firstValueFrom(this.user.datosUser(numControl));
+        if (res != '' && res != undefined) {
+          this.datos = res.dato;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      this.datos.nombre = this.datos.nombre + ' ' + this.datos.apellidoP + ' ' + this.datos.apellidoM;
+      if (this.datos.foto != null) {
+        this.nav._foto = this.datos.foto;
+      } else {
+        this.nav._foto = '.././assets/img/tufoto.png';
+        this.datos.foto = '.././assets/img/tufoto.png';
+      }
+    }*/
   }
 
   actualizar() {
@@ -131,7 +153,7 @@ export class ConstanciasComponent implements OnInit {
     });
     this.user.obtenerDatos(this.home).subscribe((res: any) => {
       const datosRegistro = {
-        NoCtrl: this.dato.numcontrol,
+        NoCtrl: this.dato.numControl,
         emitio: res.emitio,
         fecha: res.nombre,
         CodPago: this.home.NoPago,
