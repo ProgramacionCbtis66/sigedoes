@@ -39,98 +39,62 @@
         <div class="card">
             <div class="card-header color-1">
                 <div class="d-flex justify-content-between">
-                    <div class=" ">
+                    <div class="">
                         <p class="fs-5 pt-2 text-white">Mi Perfil</p>
                     </div>
-                    <div class=" "><button class="enter-2 mt-2" type="button" (click)="guardarCambios()">Guardar Cambios</button></div>
+                    <div class=""><button class="enter-2 mt-2" type="button" (click)="guardarCambios()">Guardar Cambios</button></div>
                 </div>
             </div>
-            <div class="col px-3">
+            <div class="col px-3 mt-2">
                 <h4>Detalles de Perfil</h4>
 
                 <div class="container mb-2">
                     <h5 class="m-0">Usuario:</h5>
-                    <div class="row row-cols-2">
-                        <div class="col-8">
-                            <input type="text" class="form-control" [(ngModel)]="perfil.numControl" disabled>
-                            
-                        </div>
-                        <div class="col-4 text-end">
-                            
-                        </div>
-                    </div>
+                    <input type="text" class="form-control mb-2" [(ngModel)]="perfil.numControl" disabled>
+                    
                     <h5 class="m-0">Nombre:</h5>
-                    <div class="row row-cols-2">
-                        <div class="col-8">
-                             
-                            <p class="m-0">{{perfil.nombre+ " " + perfil.apellidoP + " " +perfil.apellidoM}}</p>
-                        </div>
-                        <div class="col-4 text-end">
-                             
-                        </div>
-                    </div>
+                    <p class="mb-4">{{perfil.nombre+ " " + perfil.apellidoP + " " +perfil.apellidoM}}</p>
                 </div>
 
             </div>
-            <div class="col px-3">
+            <div class="col px-3 mb-4">
                 <h4>Descripción</h4>
                 <div class="container mb-2">
-                    <div class="row row-cols-2">
-                        <div class="col-8">
-                            <div class="" *ngIf="perfil.rol=='AL'">
-                                <p class="fs-6 ">Espacialidad: <B>{{perfil.especialidad}}</B></p>
-                                <p class="fs-6 ">Grado y grupo: <B>{{perfil.grado+" "+perfil.grupo}}</B></p>
-                                <p class="fs-6 ">Turno : <B>{{perfil.turno}}</B></p>
-                            </div>
-                            <div class="" *ngIf="perfil.rol=='DO'">
-                                <p class="fs-6 ">RFC: <B>{{perfil.RFC}}</B></p>
-                                <p class="fs-6 ">Grado Académico: <B>{{perfil.gradoAcademico}}</B></p>
-                                <p class="fs-6 ">Teléfono : <B>{{perfil.telefono}}</B></p>
-                                <p class="fs-6 ">RFC : <B>{{perfil.RFC}}</B></p>
-                                <p class="fs-6 ">CURP : <B>{{perfil.CURP}}</B></p>
-                            </div>
-                            <div class="" *ngIf="perfil.rol=='OE' || perfil.rol=='CE'">
-                                <p class="fs-6 ">RFC: <B>{{perfil.RFC}}</B></p>
-                                <p class="fs-6 ">Departamento : <B>{{perfil.departamento}}</B></p>
-                                <p class="fs-6 ">Teléfono : <B>{{perfil.telefono}}</B></p>
-                                <p class="fs-6 ">CURP : <B>{{perfil.CURP}}</B></p>
-                                <p class="fs-6 ">NIVEL OPERATIVO : <B>{{perfil.nivelOperativo}}</B></p>
-                                <p class="fs-6 ">TURNO : <B>{{perfil.turno}}</B></p>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            
-                        </div>
+                    <div class="m-0" *ngIf="perfil.rol=='AL'">
+                        <p class="fs-6 m-0">Espacialidad: <B>{{perfil.especialidad}}</B></p>
+                        <p class="fs-6 m-0">Grado y grupo: <B>{{perfil.grado+" "+perfil.grupo}}</B></p>
+                        <p class="fs-6 m-0">Turno : <B>{{perfil.turno}}</B></p>
+                    </div>
+                    <div class="m-0" *ngIf="perfil.rol=='DO'">
+                        <p class="fs-6 m-0">RFC: <B>{{perfil.RFC}}</B></p>
+                        <p class="fs-6 m-0">Grado Académico: <B>{{perfil.gradoAcademico}}</B></p>
+                        <p class="fs-6 m-0">Teléfono : <B>{{perfil.telefono}}</B></p>
+                        <p class="fs-6 m-0">RFC : <B>{{perfil.RFC}}</B></p>
+                        <p class="fs-6 m-0">CURP : <B>{{perfil.CURP}}</B></p>
+                    </div>
+                    <div class="m-0" *ngIf="perfil.rol=='OE' || perfil.rol=='CE'">
+                        <p class="fs-6 m-0">RFC: <B>{{perfil.RFC}}</B></p>
+                        <p class="fs-6 m-0">Departamento : <B>{{perfil.departamento}}</B></p>
+                        <p class="fs-6 m-0">Teléfono : <B>{{perfil.telefono}}</B></p>
+                        <p class="fs-6 m-0">CURP : <B>{{perfil.CURP}}</B></p>
+                        <p class="fs-6 m-0">NIVEL OPERATIVO : <B>{{perfil.nivelOperativo}}</B></p>
+                        <p class="fs-6 m-0">TURNO : <B>{{perfil.turno}}</B></p>
                     </div>
                 </div>
             </div>
             <div class="col px-3">
-                <h5>Cambiar Contraseña</h5>
+                <h4>Cambiar Contraseña</h4>
                 <div class="container mb-2">
                     <div class="row">
-                        <div class="col-lg-4 mb-2">
+                        <div class="col-lg-6 mb-2">
                             <input type="password" [(ngModel)]="perfil.pass1" id="pass" class="fs-6 form-control"
                                 placeholder="Nueva Contraseña"  (keyup)="validar($event)">
                             <span id="validandoPass"></span>
                         </div>
-                        <div class="col-lg-8 mb-2">
-                            <div class="row">
-                                <div class="col-lg-6 mb-2">
-                                    <input type="password" [(ngModel)]="perfil.pass2" id="pass2" class="fs-6 form-control"
-                                        placeholder="Confirmar Contraseña" (keyup)="validar($event)">
-                                    <span id="validandoPass2"></span>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="row row-cols-2">
-                                        <div class="col">
-                                        
-                                        </div>
-                                        <div class="col">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 mb-2">
+                            <input type="password" [(ngModel)]="perfil.pass2" id="pass2" class="fs-6 form-control"
+                                placeholder="Confirmar Contraseña" (keyup)="validar($event)">
+                            <span id="validandoPass2"></span>
                         </div>
                     </div>
                 </div>

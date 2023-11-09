@@ -111,11 +111,28 @@
                 <h6 class="fw-light"> Comprobar Código De Pago</h6>
               </button>
             </div>
-            <div class="small d-flex justify-content-center mb-2">
-              <a class="text-decoration-none" href="" data-bs-toggle="modal" data-bs-target="#info">
+            <div class="d-flex justify-content-center">
+              <table class="table table-responsive border">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Monto</th>
+                    <th>Fecha Aprobada</th>
+                    <th>Orden ID</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="row justify-content-center mb-2">
+              <div class="card">
+                <img class="card-img-top" src="assets/img/mercadopago.jpg" (click)="crearOrden()" alt="">
+              </div>
+              <a class="text-decoration-none text-center" href="" data-bs-toggle="modal" data-bs-target="#info">
                 <h6 class="fw-light"> ¿No tienes código de pago? </h6>
               </a>
-              <img src="assets/img/mercadopago.jpg" (click)="crearOrden()" alt="">
             </div>
           </div>
           <div *ngIf="paso2" class="pt-4">
