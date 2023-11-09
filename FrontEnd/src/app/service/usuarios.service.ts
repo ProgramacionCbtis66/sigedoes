@@ -53,6 +53,10 @@ export class UsuarioService {
     return this.http.get(`${this.URL}/admin/GetdatosEsc`);
   }
 
+  pagoConstancias(item: any): Observable<any>{
+    return this.http.post(`${this.URL}/pagos/create-order`, item, this.usr);
+  }
+
   extraerBase64 = async (foto: any) => new Promise((resolve, reject) => {
     try {
       const unsafeImg = window.URL.createObjectURL(foto);

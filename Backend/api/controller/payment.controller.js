@@ -2,7 +2,8 @@ const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
 
  const createOrden = async (req,res) => {
-    const item = [
+    const {item} = req.body;
+    /*const item = [
         {
             title: "Pago Constancia",
             unit_price: 40,
@@ -21,7 +22,7 @@ const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
             currency_id: "MXN",
             quantity: 1,
         }
-    ];
+    ];*/
 
     mercadopago.configure({
           access_token: ACCESS_TOKEN,
@@ -29,7 +30,7 @@ const {ACCESS_TOKEN, NOTIFICACION_URL,PORT,HOST} = require('../../config.js');
     });
     const results = await mercadopago.preferences.create({
         items: [
-           item[2]
+           item
         ],
         back_urls:{
             success: HOST+PORT+"/pagos/success",
