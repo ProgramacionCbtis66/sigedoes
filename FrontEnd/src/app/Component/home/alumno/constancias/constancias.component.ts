@@ -86,7 +86,6 @@ export class ConstanciasComponent implements OnInit {
         this.nav._foto = '.././assets/img/tufoto.png';
         this.usr.foto = '.././assets/img/tufoto.png';
       }
-
     }
     /*if (this.auth.isAuth()) {
       const numControl = {

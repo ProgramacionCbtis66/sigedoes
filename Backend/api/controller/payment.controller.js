@@ -1,5 +1,6 @@
 const mercadopago = require('mercadopago');
-const { ACCESS_TOKEN, NOTIFICACION_URL, PORT, HOST } = require('../../config.js');
+const {ACCESS_TOKEN, NOTIFICACION_URL, PORT, HOST } = require('../../config.js');
+const ccn = require('../connection/connection');
 
 const createOrden = async (req, res) => {
     const item = req.body;
@@ -48,11 +49,13 @@ const receiveWebhook = async (req, res) => {
 
     const payment = req.query;
     console.log(payment);
+    const conexion = await ccn();
+    const sql = `insert into mercadopago (id, status, detalleStatus, description, monto, comisionMercadoPago, total, correo, urlNotificacion, fecha_aprobacion, payment_type, merchant_order_id) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
     try {
         if (payment.type === 'payment') {
             const data = await mercadopago.payment.findById(payment['data.id']);
 
-            const datos = [
+            const datos = 
                 {
                     id: data.body.id,
                     status: data.body.status,
@@ -64,12 +67,13 @@ const receiveWebhook = async (req, res) => {
                     correo: data.body.payer.email,
                     urlNotificacion: data.body.notification_url,
                     fecha_aprobacion: data.body.date_approved,
-                    external_reference: data.body.external_reference,
                     payment_type: data.body.payment_type_id,
                     merchant_order_id: data.body.order.id
-                }]
-
-            console.log(datos);
+                };
+                console.log(datos);
+            const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id]);
+            
+            
         }
         res.status(204).json({ msj:"ok" });
     } catch (error) {
