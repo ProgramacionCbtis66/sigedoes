@@ -7,14 +7,12 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 
-
 @Component({
   selector: 'app-administrativo',
   templateUrl: './administrativo.component.html',
   styleUrls: ['./administrativo.component.css']
 })
 export class AdministrativoComponent implements OnInit {
-
   solicitud = {
     numControl: "",
     emitio: "",
@@ -24,16 +22,8 @@ export class AdministrativoComponent implements OnInit {
     descripcion: "Pago Realizado Con Éxito",
   };
 
+  datosEsc :any = [];
 
-  datosEsc = {
-    nomEscuela: "",
-    CTO: "",
-    direccionEsc: "",
-    correoEsc: "",
-    telefEsc: "",
-    nomDirec: "",
-    periodo: ""
-  };
   clavesEsp = {
     programacion: "",
     contabilidad: "",
@@ -41,6 +31,7 @@ export class AdministrativoComponent implements OnInit {
     electricidad: "",
     alimentos: ""
   };
+
   usuario : any = [];
   alumno: any = [];
   nc: any = [];
@@ -63,11 +54,9 @@ export class AdministrativoComponent implements OnInit {
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._perfil = false;
   }
-
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
   }
-
   async cargaSoliciudAceeso() {
     try {
       const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl:  this.auth.decodifica().numControl}));
@@ -114,15 +103,12 @@ export class AdministrativoComponent implements OnInit {
     this.usuario = [];  
     this.cargaSoliciudAceeso();
   }
-
   CorreoAcpetacion(correo: any) {
     this.email.correoAcpetacion(correo).subscribe((res: any) => {
       Notiflix.Notify.info("Correo Enviado");
     });
     this.ngOnInit();
   }
-
-
   verificar() {
     const numcontrol = {
       numControl: this.nc,
@@ -142,7 +128,6 @@ export class AdministrativoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
   GenerarCodigoPago() {
     this.numero = "hola";
     const numPago = {
@@ -157,7 +142,6 @@ export class AdministrativoComponent implements OnInit {
     });
     this.ngOnInit();
   }
-
   generateRandomString(num: number) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$#@&';
     let result1 = '';
@@ -168,7 +152,6 @@ export class AdministrativoComponent implements OnInit {
 
     return result1;
   }
-
   enviarSolicitud() {
     if (this.numero !== "") {
       const admin = this.auth.decodifica();
@@ -212,7 +195,6 @@ export class AdministrativoComponent implements OnInit {
       alert("Número de pago no disponible");
     }
   }
-
   obtenerDatos(numControl: any, rol: any) {
   
     this.userServicio.verInfo({ numControl: numControl, rol: rol }).subscribe((res: any) => {
@@ -229,17 +211,9 @@ export class AdministrativoComponent implements OnInit {
     });
     this.ngOnInit();
   }
-
   obtenerdatEsc() {
     this.userServicio.datosEsc().subscribe((res: any) => {
-      const datos = JSON.parse(res.data);
-      this.datosEsc.CTO = datos.CTO;
-      this.datosEsc.correoEsc = datos.Esc_correo;
-      this.datosEsc.direccionEsc = datos.Esc_direccion;
-      this.datosEsc.nomDirec = datos.Esc_Director;
-      this.datosEsc.nomEscuela = datos.Esc_nombre;
-      this.datosEsc.periodo = datos.Esc_Periodo;
-      this.datosEsc.telefEsc = datos.Esc_telefono;
+      this.datosEsc = res.data;
     });
     this.admin.getClavesEsp().subscribe((res: any) => {
       if (res.programacion != undefined && res.contabilidad != undefined && res.electricidad != undefined && res.alimentos != undefined && res.soporte != undefined) {

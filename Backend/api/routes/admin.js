@@ -79,7 +79,7 @@ administrador.get('/GetdatosEsc',verifica, async (req, res) => {
     const conexion = await ccn();
     try {
         const datosEsc = await conexion.execute('SELECT * from escuela');
-        res.send({ data: JSON.stringify(rows[0]) });
+        res.send({ data: datosEsc });
     } catch (error) {
         res.send({ err: "err" });
     } finally {
