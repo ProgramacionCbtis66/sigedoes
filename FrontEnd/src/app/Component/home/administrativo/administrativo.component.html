@@ -475,11 +475,11 @@
           </div>
           <div class="modal-footer">
             <td class="text-center">
-              <a (click)="aceptar(usuario)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
               </a> |
-              <a (click)="Noaceptado(usuario)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="Noaceptado(usuario.numControl)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa-solid fa-circle-xmark"></i>
               </a>

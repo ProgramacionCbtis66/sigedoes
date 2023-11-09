@@ -69,14 +69,15 @@ export class AdministrativoComponent implements OnInit {
   }
 
   async cargaSoliciudAceeso() {
-    let numControl = this.auth.decodifica().numControl;
-    console.log(numControl);
     try {
-      const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl: numControl }));
+      const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl:  this.auth.decodifica().numControl}));
       if (res.validar) {
-        if (res.docentes.length!=0) this.datosDocente = [res.docentes];
-        if (res.administrativos.length!=0) this.datosAdmisnitrativo=[res.administrativos];
-        if (res.alumnos.length!=0) this.datosAlumno=[res.alumnos];
+        if (res.docentes.length!=0) this.datosDocente = res.docentes;
+        if (res.administrativos.length!=0) this.datosAdmisnitrativo=res.administrativos;
+        if (res.alumnos.length!=0) this.datosAlumno=res.alumnos;
+        
+        console.log(this.datosDocente);
+        console.log(res.docentes);
       }
       else {
         Notiflix.Notify.failure("Error, Intente De Nuevo " + res.err);
@@ -86,29 +87,39 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   aceptar(op: any) {
-    this.usuario.op = 1;
-    this.admin.usuarioAceptado(this.usuario).subscribe((res: any) => {
+    this.admin.usuarioAceptado({numControl:op}).subscribe((res: any) => {
       Notiflix.Notify.success(res);
-      this.CorreoAcpetacion(op);
+      //this.CorreoAcpetacion(op);
+      if(this.usuario.rol=="Alumno"){this.datosAlumno = [];}
+      if(this.usuario.rol=="Docente"){this.datosDocente = [];}
+      if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
+      if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
+      this.cargaSoliciudAceeso();
       this.ngOnInit();
     });
+   
+    
   }
   Noaceptado(op: any) {
-    this.aceptado = op;
-    this.aceptado.op = 3;
-    this.aceptado.tipo = "validacion";
-    this.aceptado.numControl = this.usuario.noctrl;
-    this.admin.usuarioAceptado(this.aceptado).subscribe((res: any) => {
+    this.admin.usuarioAceptado({numControl:op}).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
       //this.CorreoAcpetacion(op);
+      if(this.usuario.rol=="Alumno"){this.datosAlumno = [];}
+      if(this.usuario.rol=="Docente"){this.datosDocente = [];}
+      if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
+      if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
+      this.cargaSoliciudAceeso();
       this.ngOnInit();
     });
+    this.usuario = [];  
+    this.cargaSoliciudAceeso();
   }
 
   CorreoAcpetacion(correo: any) {
     this.email.correoAcpetacion(correo).subscribe((res: any) => {
       Notiflix.Notify.info("Correo Enviado");
     });
+    this.ngOnInit();
   }
 
 
@@ -128,6 +139,7 @@ export class AdministrativoComponent implements OnInit {
 
         } else { this.verificado = false; }
       });
+      this.ngOnInit();
     }
   }
 
@@ -143,6 +155,7 @@ export class AdministrativoComponent implements OnInit {
         this.numero = numPago.numPago;
       } else { this.numero = this.generateRandomString(12); }
     });
+    this.ngOnInit();
   }
 
   generateRandomString(num: number) {
@@ -214,6 +227,7 @@ export class AdministrativoComponent implements OnInit {
         Notiflix.Notify.failure("Error, Intente De Nuevo ");
       }
     });
+    this.ngOnInit();
   }
 
   obtenerdatEsc() {
@@ -241,6 +255,7 @@ export class AdministrativoComponent implements OnInit {
         this.clavesEsp.soporte = soporte.Clave;
       }
     });
+    this.ngOnInit();
   }
   guardCambios() {
     Notiflix.Loading.standard("Guardando");
@@ -252,6 +267,7 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Loading.remove();
       Notiflix.Notify.info(res.ok);
     });
+    this.ngOnInit();
   }
   progactu() {
     this.admin.guardarClavesEspProg(this.clavesEsp).subscribe((res: any) => {

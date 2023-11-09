@@ -157,29 +157,29 @@ peticion.post('/solicitudAcceso', verifica, async (req, res) => {
         const [registroDocente] = await conexion.execute('SELECT * FROM usuario JOIN docente ON usuario.numControl = docente.numControl WHERE alta = 0');
         if (registroDocente.length == 0) var registroDocentes = [];
         else {
-            if(registroDocente[0].foto!==null) {registroDocente[0].foto = registroDocente[0].foto.toString('utf-8');}
-            let datosDocente = JSON.stringify(registroDocente[0]);
-            var registroDocentes = JSON.parse(datosDocente);
+            for(let i = 0; i < registroDocente.length; i++){
+                if(registroDocente[i].foto!==null) {registroDocente[i].foto = registroDocente[i].foto.toString('utf-8');}
+            }
         }
 
         const [registroAlumno] = await conexion.execute('SELECT * FROM usuario JOIN alumno ON usuario.numControl = alumno.numControl WHERE alta = 0');
 
         if (registroAlumno.length == 0) var registroAlumnos = [];
         else {
-            if(registroAlumno[0].foto!==null) {registroAlumno[0].foto = registroAlumno[0].foto.toString('utf-8');}
-            let datosAlumno = JSON.stringify(registroAlumno[0]);
-            var registroAlumnos = JSON.parse(datosAlumno);
+            for(let i = 0; i < registroAlumno.length; i++){
+                if(registroAlumno[i].foto!==null) {registroAlumno[i].foto = registroAlumno[i].foto.toString('utf-8');}
+            }
         }
 
         const [registroAdministrativo] = await conexion.execute('SELECT * FROM usuario JOIN administrativo ON usuario.numControl = administrativo.numControl WHERE alta = 0');
         if (registroAdministrativo.length == 0) { var registroAdministrativos = []; }
         else {
-            if(registroAdministrativo[0].foto!==null) {registroAdministrativo[0].foto = registroAdministrativo[0].foto.toString('utf-8');}
-            var datosAdministrativo = JSON.stringify(registroAdministrativo[0]);
-            var registroAdministrativos = JSON.parse(datosAdministrativo);
+            for(let i = 0; i < registroAdministrativo.length; i++){
+                if(registroAdministrativo[i].foto!==null) {registroAdministrativo[i].foto = registroAdministrativo[i].foto.toString('utf-8');}
+            }
         }
-
-        res.json({ validar: true, alumnos: registroAlumnos, docentes: registroDocentes, administrativos: registroAdministrativos });
+        console.log(registroDocente.length)
+        res.json({ validar: true, alumnos: registroAlumno, docentes: registroDocente, administrativos: registroAdministrativo });
 
     } catch (error) {
         const errorMessage = error.toString();
