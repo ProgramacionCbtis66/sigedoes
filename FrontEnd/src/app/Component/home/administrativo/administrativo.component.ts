@@ -269,4 +269,12 @@ export class AdministrativoComponent implements OnInit {
     });
   }
 
+  /*
+  
+  modulo de asignacion de globales
+  
+  */
+
+  
+
 }

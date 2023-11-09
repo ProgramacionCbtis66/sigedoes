@@ -217,7 +217,10 @@ export class ConstanciasComponent implements OnInit {
     }
     try{
       const pago = await firstValueFrom(this.user.pagoConstancias(item));
-      console.log(pago);
-    } catch {}
+      console.log(pago.web);
+      window.location.href = pago.web;
+    } catch (error){
+      console.error(error);
+    }
   }
 }
