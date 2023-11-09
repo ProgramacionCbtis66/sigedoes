@@ -37,9 +37,9 @@
                           <thead>
                             <tr>
                               <th scope="col">Solicitud</th>
-                              <th scope="col">foto</th>
+                              <th scope="col">Foto</th>
                               <th scope="col">Nombre</th>
-                              <th scope="col">Especialidad</th>
+                              <th scope="col">Grado Academico</th>
                               <th class="text-center">Acciones</th>
                             </tr>
                           </thead>
@@ -49,7 +49,7 @@
                               <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
                               <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
                               <td>{{dato.gradoAcademico}}</td>
-                              <td class="text-center ">
+                              <td class="text-center">
                                 <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl, dato.rol)"
                                   data-bs-target="#aceptado" class="badge bg-success">Ver</button>
                               </td>
@@ -76,10 +76,10 @@
                             <thead>
                               <tr>
                                 <th scope="col">Solicitud</th>
-                                <th scope="col">foto</th>
+                                <th scope="col">Foto</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Departamento</th>
-                                <th scope="col">Cargo</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Grado y Grupo</th>
                                 <th class="text-center">Acciones</th>
                               </tr>
                             </thead>
@@ -88,8 +88,8 @@
                                 <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
                                 <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
                                 <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
-                                <td>{{dato.departamento}}</td>
-                                <td>{{dato.nivelOperativo}}</td>
+                                <td>{{dato.especialidad}}</td>
+                                <td>{{dato.grado+dato.grupo}}</td>
                                 <td class="text-center ">
                                   <button data-bs-toggle="modal" (click)="obtenerDatos(dato.numControl, dato.rol)"
                                     data-bs-target="#aceptado" class="badge bg-success">Ver</button>
@@ -120,7 +120,8 @@
                                 <th scope="col">Solicitud</th>
                                 <th scope="col">foto</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Especialidad</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Categoría</th>
                                 <th class="text-center">Acciones</th>
                               </tr>
                             </thead>
@@ -129,7 +130,8 @@
                                 <td><input class="border border-0" [(ngModel)]="dato.numControl"></td>
                                 <td><img [src]="dato.foto" alt="" width="50px" height="50px"></td>
                                 <td>{{dato.nombre+" "+dato.apellidoP+" "+ dato.apellidoM}}</td>
-                                <td>{{dato.gradoAcademico}}</td>
+                                <td>{{dato.departamento}}</td>
+                                <td>{{dato.nivelOperativo}}</td>
                                 <td class="text-center "> <button data-bs-toggle="modal"
                                     (click)="obtenerDatos(dato.numControl, dato.rol)" data-bs-target="#aceptado"
                                     class="badge bg-success">Ver</button>

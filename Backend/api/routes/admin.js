@@ -44,14 +44,11 @@ administrador.post('/usuarioAceptado', verifica, async (req, res) => {
         if(usuario.rol=="Alumno") var entrar = await conexion.execute('UPDATE alumno SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
         if(usuario.rol=="Docente") var entrar = await conexion.execute('UPDATE docente SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
         if(usuario.rol=="Control Escolar" || usuario.rol=="Orientación Educativa" ) var entrar = await conexion.execute('UPDATE administrativo SET alta = ? WHERE numControl = ?', [1, usuario.numControl]);
-
         if (usuario.op == 1) res.json("Aceptado");
         res.send("usuario aceptado");
     } catch (error) {
         res.json("error en la consulta");
-    } finally {
-        conexion.end();
-    }
+    } 
 });
 
 administrador.get('/listaUserNoReg', verifica, async (req, res) => {
