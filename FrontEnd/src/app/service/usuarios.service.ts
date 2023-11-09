@@ -50,7 +50,7 @@ export class UsuarioService {
     return this.http.post(`${this.URL}/insize/modificarPerfil`, datos, this.usr);
   }
   datosEsc(): Observable<any> {
-    return this.http.get(`${this.URL}/insize/GetdatosEsc`);
+    return this.http.get(`${this.URL}/admin/GetdatosEsc`);
   }
 
   extraerBase64 = async (foto: any) => new Promise((resolve, reject) => {
