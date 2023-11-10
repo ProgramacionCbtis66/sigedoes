@@ -36,7 +36,7 @@ const createOrden = async (req, res) => {
             item
         ],
         back_urls: {
-            success: HOST + PORT + "/pagos/success",
+            success: "https://sigedoes.onrender.com",
             failure: HOST + PORT + "/pagos/failure",
             pending: HOST + PORT + "/pagos/pending",
         },
