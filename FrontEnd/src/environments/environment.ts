@@ -7,7 +7,7 @@ import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
   production: false,
-  HTTPS: "https://backendsigedoes.onrender.com",
+  HTTPS: "http://localhost:3000",
   autorization: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
