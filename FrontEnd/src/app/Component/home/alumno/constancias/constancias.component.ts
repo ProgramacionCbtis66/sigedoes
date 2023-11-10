@@ -77,15 +77,6 @@ export class ConstanciasComponent implements OnInit {
       } catch (error) {
         console.error(error);
       }
-
-      this.nav._usuario = this.usr.nombre;
-
-      if (this.usr.foto != null) {
-        this.nav._foto = this.usr.foto;
-      } else {
-        this.nav._foto = '.././assets/img/tufoto.png';
-        this.usr.foto = '.././assets/img/tufoto.png';
-      }
     }
     /*if (this.auth.isAuth()) {
       const numControl = {
