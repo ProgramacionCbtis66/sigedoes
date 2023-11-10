@@ -1,18 +1,14 @@
 const mysql = require('mysql2/promise');
+const { DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD } = require('../../config');
 
 const ccn = async () => {
     try {
         return await mysql.createConnection({
-            // host: 'viaduct.proxy.rlwy.net',
-            // port: '13087',
-            // user: 'root',
-            // database: 'railway',
-            // password: '-F2Ce4eG4aB1Ff454hC2H5chhC3-5GbG'
-            host: 'localhost',
-            port: '3306',
-            user: 'root',
-            database: 'sigedoes',
-            password: '123456'
+            host: DB_HOST,
+            port: DB_PORT,
+            user: DB_USER,
+            database: DB_DATABASE,
+            password: DB_PASSWORD
         });
     } catch (error) {
         console.error('Error al conectar con la base de datos:', error.message);

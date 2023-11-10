@@ -2,9 +2,10 @@ const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN, NOTIFICACION_URL, PORT, HOST } = require('../../config.js');
 const ccn = require('../connection/connection');
 
+const pid="";
 const createOrden = async (req, res) => {
     const item = req.body;
-    console.log(item);
+    
     /*const item = [
         {
             title: "Pago Constancia",
@@ -41,6 +42,7 @@ const createOrden = async (req, res) => {
         },
         notification_url: NOTIFICACION_URL + "/pagos/webhook",
     });
+    console.log(results);
 
     res.json({ web: results.body.init_point })
 };
@@ -70,17 +72,21 @@ const receiveWebhook = async (req, res) => {
                     payment_type: data.body.payment_type_id,
                     merchant_order_id: data.body.order.id
                 };
-                console.log(datos);
+                this.pid = datos.id;
+                console.log(data);
             const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id]);
             
+            //const [solicitud] = await conexion.execute(`select * from solicitud where correo = ?`, [datos.correo]);
             
         }
-        res.status(204).json({ msj:"ok" });
+        res.status(204).json({ datos:"ok" });
     } catch (error) {
         console.log(error);
         res.status(500).send('error', error);
     }
 }
+
+
 
 const pendiente = async (req, res) => {
     console.log(req.body);
