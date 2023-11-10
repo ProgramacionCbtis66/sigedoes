@@ -35,7 +35,7 @@ const createOrden = async (req, res) => {
     });
     const results = await mercadopago.preferences.create({
         items: [item],
-        external_reference: req.body.numControl,
+        external_reference: numControl,
         back_urls: {
             success: HOST + PORT + "/pagos/success",
             failure: HOST + PORT + "/pagos/failure",
