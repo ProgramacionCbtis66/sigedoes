@@ -4,8 +4,10 @@ const ccn = require('../connection/connection');
 
 const pid="";
 const createOrden = async (req, res) => {
-    const item = req.body;
-    
+    const datos = req.body;
+    const item = datos[0];
+    const numControl = datos[1];
+    console.log(item);
     /*const item = [
         {
             title: "Pago Constancia",
@@ -32,19 +34,18 @@ const createOrden = async (req, res) => {
         // lo de arriba es indicador de donde va el api de mercado pago cuenta prueba
     });
     const results = await mercadopago.preferences.create({
-        items: [
-            item
-        ],
+        items: [item],
+        external_reference: req.body.numControl,
         back_urls: {
-            success: "https://sigedoes.onrender.com",
+            success: HOST + PORT + "/pagos/success",
             failure: HOST + PORT + "/pagos/failure",
             pending: HOST + PORT + "/pagos/pending",
         },
         notification_url: NOTIFICACION_URL + "/pagos/webhook",
     });
      
-
-    res.json({ web: results.body.init_point })
+    const paymentReference = results.body.id;
+    res.json({ web: results.body.init_point,  reference: paymentReference})
 };
 
 const receiveWebhook = async (req, res) => {
@@ -73,9 +74,11 @@ const receiveWebhook = async (req, res) => {
                     merchant_order_id: data.body.order.id
                 };
                 this.pid = datos.id;
-                
+                console.log(data);
             const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id]);
+            
             //const [solicitud] = await conexion.execute(`select * from solicitud where correo = ?`, [datos.correo]);
+            
         }
         res.status(204).json({ datos:"ok" });
     } catch (error) {

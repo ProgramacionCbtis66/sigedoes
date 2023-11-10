@@ -199,12 +199,16 @@ export class ConstanciasComponent implements OnInit {
   }
 
   async crearOrden(){
-    const item = {
-      title: "Pago Constancia Cbtis 66" + this.datos.nombreCompleto,
+    const item = [{
+      title: "Pago Constancia Cbtis 66 " + this.datos.nombreCompleto,
       unit_price: 40,
       currency_id: "MXN",
       quantity: 1,
-    }
+    },
+      {
+        numControl: this.datos.numControl,
+      }
+    ];
     try{
       const pago = await firstValueFrom(this.user.pagoConstancias(item));
       console.log(pago.web);
