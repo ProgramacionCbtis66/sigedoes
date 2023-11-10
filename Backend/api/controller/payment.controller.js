@@ -80,7 +80,7 @@ const receiveWebhook = async (req, res) => {
                 
             const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id, datos.numControl]);
             
-            //const [solicitud] = await conexion.execute(`select * from solicitud where correo = ?`, [datos.correo]);
+            const [solicitud] = await conexion.execute(`UPDATE solicitud SET codigoPago = ?, activo = 1 WHERE numControl = ?`, [datos.id, datos.numControl]);
             
         }
         res.status(204).json({ datos:"ok" });
