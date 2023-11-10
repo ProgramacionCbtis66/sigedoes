@@ -42,7 +42,7 @@ const createOrden = async (req, res) => {
         },
         notification_url: NOTIFICACION_URL + "/pagos/webhook",
     });
-    console.log(results);
+     
 
     res.json({ web: results.body.init_point })
 };
@@ -50,7 +50,7 @@ const createOrden = async (req, res) => {
 const receiveWebhook = async (req, res) => {
 
     const payment = req.query;
-    console.log(payment);
+    
     const conexion = await ccn();
     const sql = `insert into mercadopago (id, status, detalleStatus, description, monto, comisionMercadoPago, total, correo, urlNotificacion, fecha_aprobacion, payment_type, merchant_order_id) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
     try {
@@ -73,11 +73,9 @@ const receiveWebhook = async (req, res) => {
                     merchant_order_id: data.body.order.id
                 };
                 this.pid = datos.id;
-                console.log(data);
+                
             const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id]);
-            
             //const [solicitud] = await conexion.execute(`select * from solicitud where correo = ?`, [datos.correo]);
-            
         }
         res.status(204).json({ datos:"ok" });
     } catch (error) {
