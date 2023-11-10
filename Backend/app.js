@@ -7,7 +7,8 @@ app.use(bodypaser.urlencoded({extended:false}));
 app.use(bodypaser.json());
 
 const allowedOrigins = ['https://sigedoes.onrender.com',
-                        'http://localhost'];
+                        'http://localhost',
+                      'https://18.117.20.74'];
 app.use(cors({
     origin: (origin, callback)=> {
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
