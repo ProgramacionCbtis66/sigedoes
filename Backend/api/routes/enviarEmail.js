@@ -20,7 +20,7 @@ Emailrouter.post("/forgotPassword", (req, res) => {
 
 Emailrouter.post("/correoAcpetacion", (req, res) => {
   const email = req.body;
-
+  console.log(email.correo);
   enviarCorreo(email, res);
 
 });
