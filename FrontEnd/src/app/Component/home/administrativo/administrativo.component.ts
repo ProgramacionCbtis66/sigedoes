@@ -64,9 +64,6 @@ export class AdministrativoComponent implements OnInit {
         if (res.docentes.length!=0) this.datosDocente = res.docentes;
         if (res.administrativos.length!=0) this.datosAdmisnitrativo=res.administrativos;
         if (res.alumnos.length!=0) this.datosAlumno=res.alumnos;
-        
-        console.log(this.datosDocente);
-        console.log(res.docentes);
       }
       else {
         Notiflix.Notify.failure("Error, Intente De Nuevo " + res.err);
@@ -78,12 +75,12 @@ export class AdministrativoComponent implements OnInit {
   aceptar(op: any) {
     this.admin.usuarioAceptado({numControl:op}).subscribe((res: any) => {
       Notiflix.Notify.success(res);
-      //this.CorreoAcpetacion(op);
       if(this.usuario.rol=="Alumno"){this.datosAlumno = [];}
       if(this.usuario.rol=="Docente"){this.datosDocente = [];}
       if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
       if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
       this.cargaSoliciudAceeso();
+      this.CorreoAcpetacion(this.usuario.correo);
       this.ngOnInit();
     });
    
