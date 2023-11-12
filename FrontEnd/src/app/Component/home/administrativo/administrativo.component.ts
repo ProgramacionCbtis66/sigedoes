@@ -80,7 +80,7 @@ export class AdministrativoComponent implements OnInit {
       if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
       if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
       this.cargaSoliciudAceeso();
-      this.CorreoAcpetacion(this.usuario.correo);
+      this.CorreoAcpetacion(this.usuario);
       this.ngOnInit();
     });
    
@@ -100,8 +100,9 @@ export class AdministrativoComponent implements OnInit {
     this.usuario = [];  
     this.cargaSoliciudAceeso();
   }
-  CorreoAcpetacion(correo: any) {
-    this.email.correoAcpetacion(correo).subscribe((res: any) => {
+  CorreoAcpetacion(usuario: any) {
+    var nombre =  `${this.usuario.nombre} ${this.usuario.apellidoP} ${this.usuario.apellidoM}`;
+    this.email.correoAcpetacion({correo: usuario.correo, tipo:"validacion", op:1, nombre: nombre, numControl: usuario.numControl, password: usuario.password}).subscribe((res: any) => {
       Notiflix.Notify.info("Correo Enviado");
     });
     this.ngOnInit();
@@ -132,7 +133,7 @@ export class AdministrativoComponent implements OnInit {
       numcontrol: this.nc
     };
     this.admin.verificaNoPago(numPago).subscribe((res: any) => {
-      console.log(res);
+      
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
       } else { this.numero = this.generateRandomString(12); }
@@ -195,7 +196,7 @@ export class AdministrativoComponent implements OnInit {
   obtenerDatos(numControl: any, rol: any) {
   
     this.userServicio.verInfo({ numControl: numControl, rol: rol }).subscribe((res: any) => {
-      console.log(res);
+     
       if (res.verificado) {
         this.usuario = res.data;
         if(res.data.rol=="AL") this.usuario.rol = "Alumno";

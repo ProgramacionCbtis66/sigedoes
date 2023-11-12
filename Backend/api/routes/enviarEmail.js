@@ -18,9 +18,10 @@ Emailrouter.post("/forgotPassword", (req, res) => {
   enviarCorreo(email, res);
 });
 
-Emailrouter.post("/correoAcpetacion", (req, res) => {
+Emailrouter.post("/correoAcpetacion",verifica, (req, res) => {
+ 
   const email = req.body;
-  console.log("estoy el correo aceptacion" + email.correo);
+  
   enviarCorreo(email, res);
 
 });
@@ -88,7 +89,7 @@ function MailOptions(tipo, email) {
     case "validacion":
       const validacion =
         email.op == 1
-          ? `Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}  , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
+          ? `Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}   , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
           : `Rechazado, </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>`;
       const mailOptions3 = {
         from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,

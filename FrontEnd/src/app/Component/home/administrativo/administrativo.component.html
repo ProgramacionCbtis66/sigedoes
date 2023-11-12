@@ -228,7 +228,7 @@
                   data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos de la Escuela</button>
               </button>
             </div>
-            <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago" style="">
+            <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago"  >
               <div class="accordion-body">
                 <div class="row ">
 
@@ -314,7 +314,7 @@
                 </p>
               </button>
             </div>
-            <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP" style="">
+            <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP"  >
               <div class="accordion-body">
                 <div class="row">
                   <div class="col-12 bg-light rounded-8 bg-gradient align-baseline d-flex justify-content-center py-4">
@@ -414,7 +414,7 @@
                 </div>
                 <!--Correo Institucional-->
                 <div class="input-group mb-3 px-3">
-                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
                   <input [(ngModel)]="usuario.correo" type="text" class="form-control"
                     placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
@@ -473,7 +473,7 @@
           </div>
           <div class="modal-footer">
             <td class="text-center">
-              <a (click)="aceptar(f.numControl)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
+              <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
                 disabled>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
               </a> 
