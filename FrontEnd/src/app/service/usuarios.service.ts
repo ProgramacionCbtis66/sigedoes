@@ -26,35 +26,36 @@ export class UsuarioService {
   }
 
   NoPago(datos: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/NoPago`, datos);
+    return this.http.post(`${this.URL}/insize/NoPago`, datos, this.usr);
   }
  
   NoPagoDesactivo(noPago: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/NoPagoDesactivo`, noPago);
+    return this.http.post(`${this.URL}/insize/NoPagoDesactivo`, noPago, this.usr);
   }
 
   obtenerDatos(nopago: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/ObtenerDatosPago`, nopago);
+    return this.http.post(`${this.URL}/insize/ObtenerDatosPago`, nopago, this.usr);
   }
   subirEmitido(datosRegistro: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/SubirRegistro`, datosRegistro);
+    return this.http.post(`${this.URL}/insize/SubirRegistro`, datosRegistro, this.usr);
   }
   verInfo(numControl: any): Observable<any> {
     return this.http.post(`${this.URL}/insize/verInfo`, numControl,this.usr);
   }
   getContra(numControl: any): Observable<any> {
-    return this.http.post(`${this.URL}/insize/getContra`, numControl);
+    return this.http.post(`${this.URL}/insize/getContra`, numControl,this.usr);
   }
   modificarPerfil(datos: any): Observable<any> {
     
     return this.http.post(`${this.URL}/insize/modificarPerfil`, datos, this.usr);
   }
+  
   datosEsc(): Observable<any> {
     return this.http.get(`${this.URL}/admin/GetdatosEsc`);
   }
 
   pagoConstancias(item: any): Observable<any>{
-    return this.http.post(`${this.URL}/pagos/create-order`, item, this.usr);
+    return this.http.post(`${this.URL}/pagos/create-order-cosntancias`, item, this.usr);
   }
 
   extraerBase64 = async (foto: any) => new Promise((resolve, reject) => {

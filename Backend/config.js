@@ -11,7 +11,13 @@ const DB_PORT = process.env.DB_PORT;
 const DB_USER = process.env.DB_USER;
 const DB_DATABASE = process.env.DB_DATABASE;
 const DB_PASSWORD = process.env.DB_PASSWORD;
+const CLIENT_ID = process.env.client_id;
+const CLIENT_SECRET = process.env.client_secret;
+const REDIRECT_URL = process.env.redirect_url;
+const REFRESH_TOKEN = process.env.refresh_token;
 
  
 
-module.exports = { ACCESS_TOKEN, PUBLIC_KEY, NOTIFICACION_URL, PORT, HOST, DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD };
+module.exports = { ACCESS_TOKEN, PUBLIC_KEY, NOTIFICACION_URL, PORT,
+     HOST, DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD,
+      CLIENT_ID, CLIENT_SECRET, REDIRECT_URL, REFRESH_TOKEN};

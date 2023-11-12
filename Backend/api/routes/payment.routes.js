@@ -1,16 +1,16 @@
 const {Router} = require('express');
-const {createOrden, receiveWebhook, pendiente} = require('../controller/payment.controller');
+const {createOrdenConstancias, receiveWebhookConstancias, pendienteConstancias} = require('../controller/payment.controller');
 const verificar = require('./verificaToken');
 
 const ordenPago = Router()
-ordenPago.post('/create-order', createOrden);
+ordenPago.post('/create-order-cosntancias', createOrdenConstancias);
 
-ordenPago.get('/success',(req,res) => res.send('success'))
+ordenPago.get('/success-constancias',(req,res) => res.send('success'))
 
-ordenPago.get('/failure',(req,res) => res.send('failure'))
+ordenPago.get('/failure-constancias',(req,res) => res.send('failure'))
 
-ordenPago.post('/pending',pendiente);
+ordenPago.post('/pending-constancias',pendienteConstancias);
 
-ordenPago.post('/webhook',receiveWebhook);
+ordenPago.post('/webhook-constancias',receiveWebhookConstancias);
 
 module.exports = ordenPago;

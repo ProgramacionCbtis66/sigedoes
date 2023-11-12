@@ -1,11 +1,13 @@
 const express = require("express");
 const Emailrouter = express.Router();
 const nodemailer = require("nodemailer");
+
+
 const createConstancias = require("./pdfCreateConstancias");
 
 const verifica = require("./verificaToken");
 
-Emailrouter.post("/enviar-constancia", (req, res) => {
+Emailrouter.post("/enviar-constancia",verifica, (req, res) => {
   const email = req.body;
   createConstancias(email, email.tipo);
   enviarCorreo(email, res);
@@ -31,21 +33,23 @@ Emailrouter.post("/envioSolicitud", (req, res) => {
 
 function enviarCorreo(email, res) {
 
+
+  // Configuración del correo
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
-      user: "juampiter830@gmail.com",
-      pass: "cnwlexkgzgmxfekv",
+      user: "sigedoes@gmail.com",
+      pass: "jniqoqwspogvxrwy",
     },
   });
 
   const mailOptions = new MailOptions(email.tipo, email);
-
+ 
   transporter.sendMail(mailOptions,  (error, info)=> {
     if (error) {
-      console.log(error);
+      console.log("manejo de error: "+ error);
       res.send("error");
     } else {
       console.log("Correo Enviado: " + info.response);

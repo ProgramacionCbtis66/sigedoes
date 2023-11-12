@@ -68,7 +68,6 @@ export class AlumnoComponent implements OnInit {
         rol: this.auth.decodifica().rol
       };
       try {
-        console.log(numControl);
         const res = await firstValueFrom(this.user.datosUser(numControl));
         if (res != '' && res != undefined) {
           this.datos = res.dato;

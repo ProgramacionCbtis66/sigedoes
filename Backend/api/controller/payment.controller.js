@@ -3,10 +3,10 @@ const {ACCESS_TOKEN, NOTIFICACION_URL, PORT, HOST } = require('../../config.js')
 const ccn = require('../connection/connection');
 
  
-const createOrden = async (req, res) => {
+const createOrdenConstancias = async (req, res) => {
     const datos = req.body;
     const item = datos[0];
-    const numControl = datos[1].numControl;
+    const numControl = datos[1];
      
     /*const item = [
         {
@@ -35,31 +35,31 @@ const createOrden = async (req, res) => {
     });
     const results = await mercadopago.preferences.create({
         items: [item],
-        external_reference: numControl,
+        external_reference: numControl.numControl,
+        description:"7",
         back_urls: {
-            success: HOST + PORT + "/pagos/success",
-            failure: HOST + PORT + "/pagos/failure",
-            pending: HOST + PORT + "/pagos/pending",
+            success: HOST + PORT + "/pagos/success-constancias",
+            failure: HOST + PORT + "/pagos/failure-constancias",
+            pending: HOST + PORT + "/pagos/pending-constancias",
         },
-        notification_url: NOTIFICACION_URL + "/pagos/webhook",
+        notification_url: NOTIFICACION_URL + "/pagos/webhook-constancias",
     });
      
-    const paymentReference = results.body.id;
-    res.json({ web: results.body.init_point,  reference: paymentReference})
+    res.json({ web: results.body.init_point,  reference: results.body.id})
 };
 
-const receiveWebhook = async (req, res) => {
+const receiveWebhookConstancias = async (req, res) => {
 
     const payment = req.query;
     const numControl = req.body.external_reference;
-     
+    
      
     const conexion = await ccn();
     const sql = `insert into mercadopago (id, status, detalleStatus, description, monto, comisionMercadoPago, total, correo, urlNotificacion, fecha_aprobacion, payment_type, merchant_order_id, numControl) values (?,?,?,?,?,?,?,?,?,?,?,?,?)`;
     try {
         if (payment.type === 'payment') {
             const data = await mercadopago.payment.findById(payment['data.id']);
-             
+            
             const datos = 
                 {
                     id: data.body.id,
@@ -78,12 +78,11 @@ const receiveWebhook = async (req, res) => {
                 };
                 this.pid = datos.id;
                 
-            const [registros] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id, datos.numControl]);
-            
-            const [solicitud] = await conexion.execute(`UPDATE solicitud SET codigoPago = ?, activo = 1 WHERE numControl = ?`, [datos.id, datos.numControl]);
-            
-        }
-        res.status(204).json({ datos:"ok" });
+            const [MercadoPago] = await conexion.execute(sql, [datos.id, datos.status, datos.detalleStatus, datos.description, datos.monto, datos.comisionMercadoPago, datos.total, datos.correo, datos.urlNotificacion, datos.fecha_aprobacion, datos.payment_type, datos.merchant_order_id, datos.numControl]);
+
+            var [solicitud] = await conexion.execute(`insert into solicitud (numControl, codigoPago, fechaSolicitud, descripcion, aportacion, emitio, activo, idglobales, idrecursa) values (?,?,?,?,?,?,?,?,?)`, [datos.numControl, datos.id,datos.fecha_aprobacion,"Pago de constancia de estudios", datos.monto, "MERCADO PAGO", 1, 0, 0]); }
+        
+        res.status(204).send("ok");
     } catch (error) {
         console.log(error);
         res.status(500).send('error', error);
@@ -92,9 +91,9 @@ const receiveWebhook = async (req, res) => {
 
 
 
-const pendiente = async (req, res) => {
+const pendienteConstancias = async (req, res) => {
     console.log(req.body);
     res.send('pendiente');
 }
 
-module.exports = { createOrden, receiveWebhook, pendiente };
+module.exports = { createOrdenConstancias, receiveWebhookConstancias, pendienteConstancias };

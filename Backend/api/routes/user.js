@@ -41,10 +41,13 @@ peticion.post('/solictudAcceso', verifica, async (req, res) => {
 peticion.post('/NoPago', verifica, async (req, res) => {
     const { NoPago, numControl } = req.body;
     const conexion = await ccn();
+   
     try {
-        const noPago = await conexion.execute('SELECT codigoPago from solicitud where codigoPago like ? and numControl = ? and activo = 1', [NoPago, numControl]);
-        if (rows.length > 0) {
-            res.json({ valido: "Aceptado" });
+        const noPago = await conexion.execute('SELECT codigoPago from solicitud where codigoPago = ? and numControl = ? and activo = 1', [NoPago, numControl]);
+        const escuela = await conexion.execute('SELECT * from escuela');
+        
+        if (noPago.length > 0) {
+            res.json({ valido: "Aceptado" , escuela: escuela[0][0]});
         }
     } catch (error) {
         res.json({ Error: "Número Invalido" });
@@ -66,16 +69,16 @@ peticion.post('/NoPagoDesactivo', verifica, async (req, res) => {
     }
 });
 
-peticion.post('/ObtenerDatosPago', async (req, res) => {
+peticion.post('/ObtenerDatosPago',verifica, async (req, res) => {
     const NoPago = req.body;
     const conexion = await ccn();
     try {
         const ObDatosPag = await conexion.execute('SELECT * from solicitud where codigoPago = ?', [NoPago.NoPago]);
-        let datos = JSON.stringify(rows[0].emitio);
+        let datos = JSON.stringify(ObDatosPag[0].emitio);
         let dato = JSON.parse(datos);
         let data = JSON.stringify(dato);
 
-        let datoos = JSON.stringify(rows[0].fechaSolicitud);
+        let datoos = JSON.stringify(ObDatosPag[0].fechaSolicitud);
         let datoo = JSON.parse(datoos);
         let dataa = JSON.stringify(datoo);
         res.json({ "nombre": dataa, "emitio": data });
