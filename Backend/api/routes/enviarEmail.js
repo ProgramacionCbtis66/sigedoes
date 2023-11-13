@@ -7,10 +7,10 @@ const createConstancias = require("./pdfCreateConstancias");
 
 const verifica = require("./verificaToken");
 
-Emailrouter.post("/enviar-constancia",verifica, (req, res) => {
+Emailrouter.post("/enviar-constancia",verifica, async (req, res) => {
   const email = req.body;
-  createConstancias(email, email.tipo);
-  enviarCorreo(email, res);
+ await createConstancias(email,res, email.tipo);
+enviarCorreo(email, res);
 });
 
 Emailrouter.post("/forgotPassword", (req, res) => {
@@ -22,7 +22,7 @@ Emailrouter.post("/correoAcpetacion",verifica, (req, res) => {
  
   const email = req.body;
   
-  enviarCorreo(email, res);
+  enviarCorreo(email, res, null);
 
 });
 
@@ -45,7 +45,7 @@ function enviarCorreo(email, res) {
       pass: "jniqoqwspogvxrwy",
     },
   });
-
+   
   const mailOptions = new MailOptions(email.tipo, email);
  
   transporter.sendMail(mailOptions,  (error, info)=> {

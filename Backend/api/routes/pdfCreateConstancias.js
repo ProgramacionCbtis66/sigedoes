@@ -1,6 +1,7 @@
 const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
+const nodemailer = require("nodemailer");
 
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
@@ -26,13 +27,13 @@ const datoAlumno = async (req, tipo) => {
     }
 }
 
-async function createConstancias(req, tipo) {
+async function createConstancias(req,res, tipo) {
     alumno = await datoAlumno(req, tipo);
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
-     
+      
     let horario = "";
     if (alumno.turno == 'MATUTINO' || alumno.turno == 'Matutino') {
         horario = "7:00 - 15:00";
@@ -87,15 +88,29 @@ async function createConstancias(req, tipo) {
     }
     const printer = new pdf(Font);
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
+    let pdfContent = null;
     if (tipo == "Constancia") {
         pdfDoc.pipe(file.createWriteStream(`./api/assets/cl${req.numControl}cb66.pdf`));
+        // pdfDoc.on('data', (chunk) => {
+        //     if (pdfContent === null) {
+        //       pdfContent = chunk;
+        //     } else {
+        //       pdfContent = Buffer.concat([pdfContent, chunk]);
+        //     }
+        //   });
     }
+    // pdfDoc.on('end', () => {
+    //     if (tipo == "Constancia") {
+    //       // Aquí puedes utilizar la variable pdfContent como desees
+    //       console.log('Contenido del PDF: ', pdfContent);
+    //     }
+    //   });
     pdfDoc.end();
+    return pdfDoc;
 }
 
 function textomes(mes) {
     const month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     return month[mes];
 }
-
 module.exports = createConstancias;
