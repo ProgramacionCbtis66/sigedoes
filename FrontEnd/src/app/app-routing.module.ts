@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:"homeAlumno", component: AlumnoComponent, canActivate:[AuthGuard]},
   {path:"justificante", component: JutificantesComponent, canActivate:[AuthGuard]},
   {path:"Alumnoconstancia", component: ConstanciasComponent, canActivate:[AuthGuard]},
-  {path:"orientacionEducativa", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
+  {path:"orientacionEdu", component: OrientacionEducativaComponent, canActivate:[AuthGuard]},
   {path:"homeDocente", component: DocenteComponent, canActivate:[AuthGuard]},
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
