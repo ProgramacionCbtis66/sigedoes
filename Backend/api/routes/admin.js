@@ -60,11 +60,12 @@ administrador.get('/listaUserNoReg', verifica, async (req, res) => {
 });
 
 administrador.post('/guardarDatosEsc',verifica, async (req, res) => {
-    const { nomEscuela, CTO, direccionEsc, correoEsc, telefEsc, nomDirec, periodo } = req.body;
+    const { CTO, Esc_nombre, Esc_direccion, Esc_correo, Esc_telefono, Esc_Director, Esc_Periodo } = req.body;
     const conexion = await ccn();
     try {
-        const guardarDatos = await conexion.execute('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?', [CTO, nomEscuela, direccionEsc, correoEsc, telefEsc, periodo, nomDirec]);
-        if (rows.affectedRows > 0) {
+        const guardarDatos = await conexion.execute('UPDATE escuela set CTO = ?, Esc_nombre = ?, Esc_direccion = ?, Esc_correo = ?, Esc_telefono = ?,  Esc_Periodo = ?, Esc_Director = ?', [ CTO, Esc_nombre, Esc_direccion, Esc_correo, Esc_telefono, Esc_Director, Esc_Periodo]);
+        
+        if (guardarDatos[0].affectedRows >= 0) {
             res.json({ ok: "Se Han Modificado Los Datos" });
         } else {
             res.json({ ok: "No Se Ha Cambiado Nada" })
@@ -79,7 +80,9 @@ administrador.get('/GetdatosEsc',verifica, async (req, res) => {
     const conexion = await ccn();
     try {
         const datosEsc = await conexion.execute('SELECT * from escuela');
-        res.send({ data: datosEsc });
+        
+        if(datosEsc.length > 0) res.send({ data: JSON.parse( JSON.stringify(datosEsc[0][0]) )});
+        else res.send({data:""});
     } catch (error) {
         res.send({ err: "err" });
     } finally {
@@ -88,28 +91,36 @@ administrador.get('/GetdatosEsc',verifica, async (req, res) => {
 });
 
 administrador.get('/getClavesEsp',verifica, async (req, res) => {
+        const conexion = await ccn();
     try {
-        const claves = await ccn.query('SELECT * from cbeEsp');
-        res.send({ programacion: JSON.stringify(rows[0]), contabilidad: JSON.stringify(rows[1]), electricidad: JSON.stringify(rows[2]), alimentos: JSON.stringify(rows[3]), soporte: JSON.stringify(rows[4]) });
+        const claves = await conexion.execute('SELECT * from especialidad');
+        
+        if(claves.length > 0){
+        res.json({ programacion:claves[0][1], contabilidad: claves[0][4], electricidad: claves[0][0], alimentos:claves[0][3], soporte: claves[0][2] });
+        }else{
+            res.send({programacion:"", contabilidad:"", electricidad:"", alimentos:"", soporte:""});
+        }
     } catch (error) {
         res.send({ err: "err" });
-    } finally {
-        conexion.end();
     }
 });
 
-administrador.post('/guardarClavesEspProg',verifica, async (req, res) => {
-    const { programacion } = req.body;
+administrador.post('/guardarClavesEsp',verifica, async (req, res) => {
+    const { programacion, contabilidad, electricidad, alimentos, soporte } = req.body;
     const conexion = await ccn();
     try {
-        const gClavesProg = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 1', [programacion]);
-        if (rows.affectedRows > 0) {
-            res.send({ ok: "Clave De Programación Modificada" });
+        const gClavesProg = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 2', [programacion]);
+        const gClavesConta = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 5', [contabilidad]);
+        const gClavesElec = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 1', [electricidad]);
+        const gClavesAli = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 4', [alimentos]);
+        const gClavesSop = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 3', [soporte]);
+        if (gClavesProg.affectedRows > 0 && gClavesConta.affectedRows > 0 && gClavesElec.affectedRows > 0 && gClavesAli.affectedRows > 0 && gClavesSop.affectedRows > 0) {
+            res.send({ ok: "Claves Modificadas" });
         }
     } catch (error) {
-        //No sentencia
-    } finally {
-        conexion.end();
+        
+        res.send({ err: "err" });
+   
     }
 });
 
@@ -117,8 +128,8 @@ administrador.post('/guardarClavesEspconta',verifica, async (req, res) => {
     const { contabilidad } = req.body;
     const conexion = await ccn();
     try {
-        const gClavesConta = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 2', [contabilidad]);
-        if (rows.affectedRows > 0) {
+        const gClavesConta = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 5', [contabilidad]);
+        if (gClavesConta.affectedRows > 0) {
             res.send({ ok: "Clave De Contabilidad Modificada" });
         }
     } catch (error) {
@@ -130,28 +141,26 @@ administrador.post('/guardarClavesEspElectricidad',verifica, async (req, res) =>
     const { electricidad } = req.body;
     const conexion = await ccn();
     try {
-        const gClavesElec = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 3', [electricidad]);
-        if (rows.affectedRows > 0) {
+        const gClavesElec = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 1', [electricidad]);
+        if (gClavesElec.affectedRows > 0) {
             res.send({ ok: "Clave De Electricidad Modificada" });
         }
     } catch (error) {
         //No sentencia
-    } finally {
-        conexion.end();
+    
     }
 });
 administrador.post('/guardarClavesEspAlimentos',verifica, async (req, res) => {
     const { alimentos } = req.body;
     const conexion = await ccn();
     try {
-        const gClavesAli = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 5', [alimentos]);
-        if (rows.affectedRows > 0) {
+        const gClavesAli = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 4', [alimentos]);
+        if (gClavesAli.affectedRows > 0) {
             res.send({ ok: "Clave De Alimentos Modificada" });
         }
     } catch (error) {
         //No sentencia
-    } finally {
-        conexion.end();
+   
     }
 });
 
@@ -159,14 +168,13 @@ administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
     const { soporte } = req.body;
     const conexion = await ccn();
     try {
-        const gClavesSop = await conexion.execute('UPDATE cbeEsp set Clave = ? where idcbeEsp = 6', [soporte]);
-        if (rows.affectedRows > 0) {
+        const gClavesSop = await conexion.execute('UPDATE especialidad set clave = ? where idEspecialidad = 3', [soporte]);
+        if (gClavesSop.affectedRows > 0) {
             res.send({ ok: "Clave De Soporte Modificada" });
         }
     } catch (error) {
         //No Sentencia
-    } finally {
-        conexion.end();
+
     }
 });
 

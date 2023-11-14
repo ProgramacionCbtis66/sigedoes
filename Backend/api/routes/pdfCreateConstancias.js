@@ -13,7 +13,7 @@ var alumno = "";
 const datoAlumno = async (req, tipo) => {
         const conexion = await ccn();
     try {
-        const alumno = await conexion.execute('select * from pdf where numControl = ?', [req.numControl]);
+        const alumno = await conexion.execute(`select * from pdf where numControl = ?`, [req.numControl]);
         if (alumno.length > 0) {
             
             return JSON.parse(JSON.stringify(alumno[0][0]));
@@ -45,7 +45,7 @@ async function createConstancias(req,res, tipo) {
     
     var nombre = alumno.nombre + " " + alumno.apellidoP + " " + alumno.apellidoM;
     var periodoEscuela = alumno.Esc_Periodo;
-    
+    console.log(alumno.CTO);
     const contenido = {
         asunto: [
 
@@ -56,7 +56,7 @@ async function createConstancias(req,res, tipo) {
             { text: ` ${nombre}.`, style: Style.header, alignment: 'center', bold: true },
 
             { text: " ", style: Style.header },
-            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.cbeesp}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${horario} durante el periodo del ${periodoEscuela}. \n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.clave}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${horario} durante el periodo del ${periodoEscuela}. \n \n `, style: Style.normal, alignment: 'justify' },
 
             { text: `Se extiende la presente petición del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
 

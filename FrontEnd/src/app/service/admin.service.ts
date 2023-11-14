@@ -27,33 +27,37 @@ export class AdminService {
   }
 
   guardarDatosEsc(escuela: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarDatosEsc`, escuela);
+    return this.http.post(`${this.URL}/admin/guardarDatosEsc`, escuela, this.usr);
   }
   guardarClavesEsp(claves: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEsp`, claves);
+    return this.http.post(`${this.URL}/admin/guardarClavesEsp`, claves, this.usr);
+  }
+  datosEsc(): Observable<any> {
+    return this.http.get(`${this.URL}/admin/GetdatosEsc`, this.usr);
   }
   getClavesEsp(): Observable<any> {
-    return this.http.get(`${this.URL}/admin/getClavesEsp`);
+    return this.http.get(`${this.URL}/admin/getClavesEsp`, this.usr);
   }
   guardarClavesEspProg(prog: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEspProg`, prog);
+    return this.http.post(`${this.URL}/admin/guardarClavesEspProg`, prog, this.usr);
   }
   guardarClavesEspconta(conta: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEspconta`, conta);
+    return this.http.post(`${this.URL}/admin/guardarClavesEspconta`, conta, this.usr);
   }
   guardarClavesEspElectricidad(electricidad: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEspElectricidad`, electricidad);
+    return this.http.post(`${this.URL}/admin/guardarClavesEspElectricidad`, electricidad, this.usr);
   }
   guardarClavesEspAlimentos(alimentos: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEspAlimentos`, alimentos);
+    return this.http.post(`${this.URL}/admin/guardarClavesEspAlimentos`, alimentos, this.usr);
   }
   guardarClavesEspSoporte(soporte: any): Observable<any> {
-    return this.http.post(`${this.URL}/admin/guardarClavesEspSoporte`, soporte);
+    return this.http.post(`${this.URL}/admin/guardarClavesEspSoporte`, soporte, this.usr);
   }
 
   registrarClaves(claves: any): Observable<any> {
     return this.http.post(`${this.URL}/admin/registrarClaves`, claves, this.usr);
   }
+
 
 
 }

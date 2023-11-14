@@ -210,24 +210,26 @@ export class AdministrativoComponent implements OnInit {
     });
     this.ngOnInit();
   }
-  obtenerdatEsc() {
-    this.userServicio.datosEsc().subscribe((res: any) => {
-      this.datosEsc = res.data;
-    });
-    this.admin.getClavesEsp().subscribe((res: any) => {
-      if (res.programacion != undefined && res.contabilidad != undefined && res.electricidad != undefined && res.alimentos != undefined && res.soporte != undefined) {
-        const prog = JSON.parse(res.programacion);
-        const conta = JSON.parse(res.contabilidad);
-        const electricidad = JSON.parse(res.electricidad);
-        const alimentos = JSON.parse(res.alimentos);
-        const soporte = JSON.parse(res.soporte);
-        this.clavesEsp.programacion = prog.Clave;
-        this.clavesEsp.contabilidad = conta.Clave;
-        this.clavesEsp.electricidad = electricidad.Clave;
-        this.clavesEsp.alimentos = alimentos.Clave;
-        this.clavesEsp.soporte = soporte.Clave;
-      }
-    });
+
+  /*
+
+  modulo datos de la escuela y claves especiales
+
+  */
+
+ async obtenerdatEsc() {
+
+    const escuela = await firstValueFrom(this.admin.datosEsc());
+      this.datosEsc = escuela.data;
+    const claves = await firstValueFrom(this.admin.getClavesEsp());
+    if (claves != null) {
+      console.log(claves.alimentos.clave);
+      this.clavesEsp.programacion = claves.programacion.clave;
+      this.clavesEsp.contabilidad = claves.contabilidad.clave;
+      this.clavesEsp.electricidad = claves.electricidad.clave;
+      this.clavesEsp.alimentos = claves.alimentos.clave;
+      this.clavesEsp.soporte = claves.soporte.clave;
+    }
     this.ngOnInit();
   }
   guardCambios() {
@@ -236,37 +238,40 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Loading.remove();
       Notiflix.Notify.info(res.ok);
     });
-    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
-      Notiflix.Loading.remove();
-      Notiflix.Notify.info(res.ok);
-    });
+    // this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
+    //   Notiflix.Loading.remove();
+    //   Notiflix.Notify.info(res.ok);
+    // });
     this.ngOnInit();
   }
   progactu() {
-    this.admin.guardarClavesEspProg(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   contaActu() {
-    this.admin.guardarClavesEspconta(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   ElectricidadActu() {
-    this.admin.guardarClavesEspElectricidad(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   AlimentosActu() {
-    this.admin.guardarClavesEspAlimentos(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   SoporteActu() {
-    this.admin.guardarClavesEspSoporte(this.clavesEsp).subscribe((res: any) => {
+    this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
+
+
+
 
   /*
   
