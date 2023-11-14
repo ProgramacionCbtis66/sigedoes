@@ -8,7 +8,7 @@ app.use(bodypaser.json());
 
 const allowedOrigins = ['https://sigedoes.onrender.com',
                         'http://localhost',
-                      'https://18.117.20.74'];
+                    'http://sigedoes.cbtis66.edu.mx',];
 app.use(cors({
     origin: (origin, callback)=> {
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -28,7 +28,6 @@ app.use((err, req, res, next) => {
         next();
     }
 });
-
 
 
 //ruteo auth

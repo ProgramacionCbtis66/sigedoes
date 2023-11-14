@@ -77,7 +77,7 @@ async function createConstancias(req,res, tipo) {
             },
             { text: "Director", style: Style.header },
             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
-            { image: './api/assets/pieformato_23.png', width: 570, absolutePosition: { x: 5, y: 760 } },
+            { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
 
         ]
 
