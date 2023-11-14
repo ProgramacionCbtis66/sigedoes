@@ -41,8 +41,8 @@ function enviarCorreo(email, res) {
     port: 465,
     secure: true,
     auth: {
-      user: "sigedoes@gmail.com",
-      pass: "jniqoqwspogvxrwy",
+      user: "sigedoes@cbtis66.edu.mx",
+      pass: "wwkajnuwaejakxvy",
     },
   });
    
