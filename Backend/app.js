@@ -48,5 +48,8 @@ app.use('/docente', docenteRouter);
 //Pagos Mercado Pago
 const paymentRouter = require('./api/routes/payment.routes');
 app.use('/pagos', paymentRouter);
+//Justificantes
+const justificacionRouter = require('./api/routes/justificantes');
+app.use('/just', justificacionRouter);
 
 module.exports = app;
