@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                   if(this.auth.decodifica().rol == "OE"){
                     this.nav._iflogin = false;
                     this.nav._orientacionEdu = true;
-                    this.router.navigate(['/orientacionEducativa']);
+                    this.router.navigate(['/orientacionEdu']);
                   }
 
                 } else if (res.Error == "Usuario y contraseña incorrecta") {
