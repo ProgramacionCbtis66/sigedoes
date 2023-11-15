@@ -13,7 +13,7 @@ var alumno = "";
 const datoAlumno = async (req, tipo) => {
         const conexion = await ccn();
     try {
-        const alumno = await conexion.execute(`select * from pdf where numControl = ?`, [req.numControl]);
+        const alumno = await conexion.execute(`select * from pdfjustificantes where numControl = ?`, [req.numControl]);
         if (alumno.length > 0) {
             
             return JSON.parse(JSON.stringify(alumno[0][0]));
@@ -27,7 +27,7 @@ const datoAlumno = async (req, tipo) => {
     }
 }
 
-async function createConstancias(req,res, tipo) {
+async function createJustificante(req,res, tipo) {
     alumno = await datoAlumno(req, tipo);
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
@@ -91,20 +91,9 @@ async function createConstancias(req,res, tipo) {
     let pdfContent = null;
     if (tipo == "Constancia") {
         pdfDoc.pipe(file.createWriteStream(`./api/assets/cl${req.numControl}cb66.pdf`));
-        // pdfDoc.on('data', (chunk) => {
-        //     if (pdfContent === null) {
-        //       pdfContent = chunk;
-        //     } else {
-        //       pdfContent = Buffer.concat([pdfContent, chunk]);
-        //     }
-        //   });
+        
     }
-    // pdfDoc.on('end', () => {
-    //     if (tipo == "Constancia") {
-    //       // Aquí puedes utilizar la variable pdfContent como desees
-    //       console.log('Contenido del PDF: ', pdfContent);
-    //     }
-    //   });
+     
     pdfDoc.end();
     return pdfDoc;
 }
@@ -113,4 +102,4 @@ function textomes(mes) {
     const month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     return month[mes];
 }
-module.exports = createConstancias;
+module.exports = createJustificante;
