@@ -11,7 +11,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
                         aria-controls="panelsStayOpen-collapseOne">
-                        Tipo de Justificante
+                        Solitudes de Justificantes
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
@@ -19,13 +19,23 @@
                         
                         <table class="table table-responsive table-bordered">
                             <thead>
-                                <tr>
-                                    <td>Dato</td>
-                                    <td>Dato</td>
-                                    <td>Dato</td>
-                                    <td>Dato</td>
-                                    <td>Dato</td>
-                                    <td>Dato</td>
+                                <tr class="justify-content-center">
+                                    <td>Num-Control</td>
+                                    <td>Nombre</td>
+                                    <td>Especialidad</td>
+                                    <td>Grupo</td>
+                                    <td>Tipo</td>
+                                    <td>Turno</td>
+                                    <td>Acciones</td>
+                                </tr>
+                                <tr *ngFor="">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn btn-sm btn-danger"  >Acciones</button></td>
                                 </tr>
                             </thead>
                             <tbody></tbody>
