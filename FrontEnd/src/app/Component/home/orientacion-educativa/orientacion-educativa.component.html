@@ -39,14 +39,12 @@
                                     <td>{{solicitud.gado}}{{solicitud.grupo}}</td>
                                     <td>{{solicitud.turno}}</td>
                                     <td>
-                                        <button type="button">
-                                            <i class="bi bi-bookmark-check"></i>
-                                        </button>
-                                        <button type="button">
-                                            <i class="bi bi-bookmark-x"></i>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#versolicitud">
+                                            <span class="badge text-bg-info">
+                                                <i class="bi bi-eye"></i>
+                                            </span>
                                         </button>
                                     </td>
-
                                     <td><button class="btn btn-sm btn-danger"  >Acciones</button></td>
                                 </tr>
                             </tbody>
@@ -58,3 +56,42 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="versolicitudLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header text-center">
+                    <p class="fs-4 fw-lighter">Solicitud de Alumnons</p>
+                </div>
+                <div class="card-body">
+                    <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="basic-addon1">Nombre</span>
+                            <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" disabled>
+                            <span class="input-group-text" id="basic-addon1">Numero de control</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    Footer
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
