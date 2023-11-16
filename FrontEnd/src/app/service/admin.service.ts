@@ -13,6 +13,7 @@ export class AdminService {
   private usr = environment.autorization;
   constructor(private http:HttpClient) {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
+   
    }
    verificaNoPago(datos: any): Observable<any> {
     return this.http.post(`${this.URL}/admin/verificaNoPago`, datos, this.usr);
@@ -33,11 +34,15 @@ export class AdminService {
     return this.http.post(`${this.URL}/admin/guardarClavesEsp`, claves, this.usr);
   }
   datosEsc(): Observable<any> {
+   
     return this.http.get(`${this.URL}/admin/GetdatosEsc`, this.usr);
   }
   getClavesEsp(): Observable<any> {
     return this.http.get(`${this.URL}/admin/getClavesEsp`, this.usr);
   }
+
+
+
   guardarClavesEspProg(prog: any): Observable<any> {
     return this.http.post(`${this.URL}/admin/guardarClavesEspProg`, prog, this.usr);
   }

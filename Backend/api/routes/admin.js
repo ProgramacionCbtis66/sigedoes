@@ -105,6 +105,10 @@ administrador.get('/getClavesEsp',verifica, async (req, res) => {
     }
 });
 
+
+
+
+
 administrador.post('/guardarClavesEsp',verifica, async (req, res) => {
     const { programacion, contabilidad, electricidad, alimentos, soporte } = req.body;
     const conexion = await ccn();
