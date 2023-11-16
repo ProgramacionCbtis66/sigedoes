@@ -46,44 +46,85 @@ async function createJustificante(req,res, tipo) {
     var nombre = alumno.nombre + " " + alumno.apellidoP + " " + alumno.apellidoM;
     var periodoEscuela = alumno.Esc_Periodo;
     console.log(alumno.CTO);
-    const contenido = {
+    const justificante1 = {
         asunto: [
 
-            { image: './api/assets/texto-secretaria.png', width: 520 },
-            { text: `\n \n Asunto : Constancias de estudio e inscripción \n \n \n \n`, style: Style.normal, alignment: 'right', bold: true },
+            { image: './api/assets/Justificante SubSec.png', width: 520 },
+            { text: `\n \n TIERRA BLANCA. VER A ${dia.toLowerCase()} DE ${mes} DE ${año.toLowerCase}\n \n \n \n`, style: Style.normal, alignment: 'center', bold: true },
 
-            { text: "Por este conducto, se hace constar que, de acuerdo a los registros de la oficia de control escolar, la (el) alumna(o): \n \n \n ", style: Style.normal },
-            { text: ` ${nombre}.`, style: Style.header, alignment: 'center', bold: true },
+            { text: "\n \n \n JUSTIFICANTE DE INASISTENCIA: \n \n \n ", style: Style.normal, alignment: 'center', bold: true },
 
+            { text: `C.C. DOCENTES DEL GRUPO: "${alumnos.grado}"`, style: Style.header, alignment: 'right', bold: true },
+            { text: `ESPECIALIDAD: "${alumnos.especialidad}"`, style: Style.header, alignment: 'right', bold: true },
+            { text: `TURNO: "${alumnos.turno}"`, style: Style.header, alignment: 'right', bold: true },
+            { text: `P R E S E N T E S.-`, style: Style.header, alignment: 'right', bold: true },
             { text: " ", style: Style.header },
-            { text: `Con matrícula ${alumno.numControl} se encuentra legalmente inscrito(a) en esta institución educativa Clave: ${alumno.CTO}, y cursando el ${alumno.grado} SEMESTRE del Bachillerato Tecnológico en la especialidad de: ${alumno.especialidad}, Clave: ${alumno.clave}, Área: ${alumno.area}, Turno: ${alumno.turno}, con un horario de ${horario} durante el periodo del ${periodoEscuela}. \n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `${alumnos.nombre} ${alumnos.apellidoP} ${alumnos.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `${alumnos.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `dias(s) ${justificante.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
+            { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `academicas\n \n `, style: Style.normal, alignment: 'justify' },  
+            
+            { text: `\n \n \nATENTAMENTE\n \n \n`, style: Style.normal, alignment: 'center' },
 
-            { text: `Se extiende la presente petición del interesado para ${req.asunto}, en la Ciudad de Tierra Blanca, estado de Veracruz a los ${dia.toLowerCase()} dias del mes de ${mes} de ${year.toLowerCase()}. \n \n `, style: Style.normal },
-
-            {
-                layout: 'noBorders',
-                table: {
-                    widths: [155, 'auto'],
-                    body: [
-                        [{ qr: `${JSON.stringify(req.datos)}`, fit: 154, alignment: 'center' }, [{ text: "Firma Electrónica", style: Style.header },
-                        {
-                            text: `Q0 9E Sj cy MT Iw NU hW Wl JN Uj A1 fE pP Uk dF fE NP Ul RF U3 xE T0 1J Tk dV RV p8 MT
-                Mw MT c0 MD Aw MT E5 Nz Mw MD U2 Mz B8 TX w1 IG Rl IG Rp Y2 ll bW Jy ZS Bk ZS Ax OT
-                cy fF ZF Uk FD Ul Va fG 51 bG x8 bn Vs bA ==`, style: Style.electronica
-                        }]
-                        ]
-                    ]
-                }
-            },
-            { text: "Director", style: Style.header },
+            { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.header },
             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
+            { image: './api/assets/tabla justificantes', width: 570, absolutePosition: { x: 5, y: 760 } },
             { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
+            { image: './api/assets/', width: 570, absolutePosition: { x: 5, y: 760 } },
+            
+            
+            
 
         ]
+ const justificante2 = {
+            asunto: [
+    
+                { image: './api/assets/Justificante SubSec.png', width: 520 },
+                
+                { text: "\n \n JUSTIFICANTE DE INASISTENCIA POR HORAS: \n \n ", style: Style.normal, alignment: 'center', bold: true },
+                { text: `\n \n FECHA: ${dia.toLowerCase()} / ${mes} / ${año.toLowerCase}\n \n \n \n`, style: Style.normal, alignment: 'center', bold: true },
+    
+                { text: `C.C. DOCENTES DEL GRUPO: "${alumnos.grado}"`, style: Style.header, alignment: 'right', bold: true },
+                { text: `ESPECIALIDAD: "${alumnos.especialidad}"`, style: Style.header, alignment: 'right', bold: true },
+                { text: `TURNO: "${alumnos.turno}"`, style: Style.header, alignment: 'right', bold: true },
+                { text: `P R E S E N T E S.-`, style: Style.header, alignment: 'right', bold: true },
+                { text: " ", style: Style.header },
+                { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `${alumnos.nombre} ${alumnos.apellidoP} ${alumnos.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `${alumnos.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `dias(s) ${justificante.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
+                { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `academicas\n \n `, style: Style.normal, alignment: 'justify' },  
+                
+                { text: `\n \n \nATENTAMENTE\n \n \n`, style: Style.normal, alignment: 'center' },
+    
+                { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.header },
+                { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
+                { image: './api/assets/tbkhxz,vzm', width: 570, absolutePosition: { x: 5, y: 760 } },
+                { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
+                { image: './api/assets/', width: 570, absolutePosition: { x: 5, y: 760 } },
+                
+                
+                
+    
+            ]
+     if (){
+    }
+    const docDefinition = {
+        content: justificante1 ['asunto'],
+        style: Style
+    }
+     } 
 
     }
     const docDefinition = {
-        content: contenido['asunto'],
+        content: justificante2 ['asunto'],
         style: Style
     }
     const printer = new pdf(Font);
