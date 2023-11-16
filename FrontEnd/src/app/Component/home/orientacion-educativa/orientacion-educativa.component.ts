@@ -34,7 +34,11 @@ export class OrientacionEducativaComponent implements OnInit {
   async cargaSolicitudes(){
     try{
       let res = await firstValueFrom(this.just.ListaJustificantes());
-      this.justificantes = res;
+      this.justificantes = res.data;
+      this.justificantes.nombreCompleto = this.justificantes.nombre + " " + this.justificantes.apellidoP + " " + this.justificantes.apellidoM;
+      console.log(this.justificantes);
+    }catch(error){
+      console.log(error);
     }
   }
 }

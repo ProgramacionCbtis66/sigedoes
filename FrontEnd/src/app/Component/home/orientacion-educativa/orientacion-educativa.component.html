@@ -20,25 +20,36 @@
                         <table class="table table-responsive table-bordered">
                             <thead>
                                 <tr class="justify-content-center">
-                                    <td>Numero de Control</td>
-                                    <td>Nombre</td>
-                                    <td>Especialidad</td>
-                                    <td>Grupo</td>
-                                    <td>Tipo</td>
-                                    <td>Turno</td>
-                                    <td>Acciones</td>
-                                </tr>
-                                <tr *ngFor="">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="btn btn-sm btn-danger"  >Acciones</button></td>
+                                    <th>#</th>
+                                    <th>Numero de Control</th>
+                                    <th>Nombre</th>
+                                    <th>Especialidad</th>
+                                    <th>Grupo</th>
+                                    <th>Tipo</th>
+                                    <th>Turno</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <tr *ngFor = "let solicitud of justificantes; index as i">
+                                    <td><img [src]="solicitud.foto" alt="" width="50"></td>
+                                    <td>{{solicitud.numControl}}</td>
+                                    <td>{{solicitud.nombreCompleto}}</td>
+                                    <td>{{solicitud.especialidad}}</td>
+                                    <td>{{solicitud.gado}}{{solicitud.grupo}}</td>
+                                    <td>{{solicitud.turno}}</td>
+                                    <td>
+                                        <button type="button">
+                                            <i class="bi bi-bookmark-check"></i>
+                                        </button>
+                                        <button type="button">
+                                            <i class="bi bi-bookmark-x"></i>
+                                        </button>
+                                    </td>
+
+                                    <td><button class="btn btn-sm btn-danger"  >Acciones</button></td>
+                                </tr>
+                            </tbody>
                         </table>
 
                     </div>
