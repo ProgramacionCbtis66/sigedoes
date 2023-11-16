@@ -12,8 +12,8 @@ export class JustificanteService {
   
   constructor(private http: HttpClient){}
 
-  datosJustificantes(datosJust: any): Observable<any>{
-    return this.http.post(`${URL}/just/obtenerdatos`, datosJust, this.usr);
+  ListaJustificantes(): Observable<any>{
+    return this.http.get(`${URL}/just/obtenerdatos`, this.usr);
   }
 
   guardarJustificante(guardarJust: any): Observable<any>{
