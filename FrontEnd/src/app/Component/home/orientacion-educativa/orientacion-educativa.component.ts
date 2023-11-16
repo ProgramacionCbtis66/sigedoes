@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
+import { JustificanteService } from 'src/app/service/justificante.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 
@@ -11,10 +12,13 @@ import { UsuarioService } from 'src/app/service/usuarios.service';
 export class OrientacionEducativaComponent implements OnInit {
   protected nombre:string = "administrativo";
   protected justificantes: any;
+  protected alumno: any;
 
   constructor(
     private nav: NavegacionService,
     private auth: AuthService,
+    private just: JustificanteService,
+    private user: UsuarioService
     //private alumno: Justifi,
   ) { 
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
