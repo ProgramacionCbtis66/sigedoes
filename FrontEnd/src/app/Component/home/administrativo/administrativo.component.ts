@@ -40,6 +40,16 @@ export class AdministrativoComponent implements OnInit {
   datosDocente: any = [];
   datos: any = [];
   datosAdmisnitrativo: any = [];
+  globales:any = [];
+  asignarGlobales:any = {        
+    lugar: '',
+    hora: '',
+    fecha: '',
+    idglobales: 0,
+    status: 0,
+    docenteDni: ''
+  };
+  recargar=true;
 
   aceptado: any = [];
   verificado = false;
@@ -55,7 +65,7 @@ export class AdministrativoComponent implements OnInit {
     this.nav._perfil = false;
   }
   ngOnInit() {
-    this.auth.isAuth() ? null : this.nav.salir();
+    this.auth.isAuth() ? null : this.nav.salir();    
   }
   async cargaSoliciudAceeso() {
     try {
@@ -268,8 +278,39 @@ export class AdministrativoComponent implements OnInit {
     this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
+    
   }
+   getGlobales(){
+    this.admin.getMateriasGlobales().subscribe((res) => {
+      if(res.ok == "vacio"){
+        this.globales = [];
+      } else {      
+        this.globales = res.ok;                
+      }
+    });
+  }  
+  viewModalGlobal(dato:any){        
+      this.asignarGlobales.docenteDni = dato.docenteDni;
+      this.asignarGlobales.idglobales = dato.idglobales;            
+  }
+  subirRegistroGlobal(){
+    if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != ''){    
+      this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
+        if(res.ok == "ok"){
+          Notiflix.Notify.info("Recursa Acreditado");      
+          this.recargar = false;  
+          this.getGlobales();                
+          this.recargar = true;
+          this.asignarGlobales = {lugar: '', hora: '', fecha: '', idglobales: 0, status: 0, docenteDni: ''};
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      });
 
+    }else {
+      Notiflix.Notify.failure('Rellene Todos Los Campos');
+    }
+  }
 
 
 

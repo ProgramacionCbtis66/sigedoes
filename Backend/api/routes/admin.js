@@ -182,5 +182,42 @@ administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
     }
 });
 
+administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute('select idglobales,periodoescolar.periodo, periodoescolar,descripcion,semestre,tipo, docenteDni from globales,materias,periodoescolar where (globales.idMateria = materias.idMateria) and (globales.idperiodoescolar = periodoescolar.idperiodoescolar) and (estado = 0);');
+        if(row.length > 0){
+            res.send({ok:row});            
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }                 
+        
+    }catch(error){
+        console.log(error);
+    }finally{
+        conexion.end();
+    }
+});
+
+administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{        
+        const sql = `insert into asignaglobal (lugar, hora, fecha, idglobales, status, docenteDni) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idglobales}', '${data.status}', '${data.docenteDni}');`;
+        const [row] = await conexion.execute(sql);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        }else {
+            console.log("Error ");
+        }
+    }catch(error){
+        console.log(error);
+    }finally{
+        const sql = `UPDATE globales SET estado = '1' WHERE (idglobales = '${data.idglobales}');`;
+        conexion.execute(sql);
+        conexion.end();
+    }
+});
+
 
 module.exports = administrador;
