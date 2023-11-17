@@ -22,6 +22,7 @@ just.get('/obtenerdatos',verifica, async (req, res) => {
         });
         //if(registros[0].foto != null) {registros.foto = registros[0].foto = registros[0].foto.toString('utf-8');}
         //res.json({data: registros});
+        // Erik
         res.json({data: JSON.parse(JSON.stringify(registros))});
      }
      else {
