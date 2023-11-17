@@ -104,7 +104,7 @@ peticion.post('/SubirRegistro', verifica, async (req, res) => {
 
 peticion.post('/verInfo', verifica, async (req, res) => {
     const { numControl, rol } = req.body;
-
+    console.log(numControl, rol)
     const conexion = await ccn();
     try {
         if (rol == "AL") {
