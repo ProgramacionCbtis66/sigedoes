@@ -6,7 +6,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos',verifica, async (req, res) => { 
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.doctoref, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where j.estado = 0';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where j.estado = 0';
      try {
      const conexion = await ccn();
      const [registros] = await conexion.execute(sql);
