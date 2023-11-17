@@ -91,7 +91,7 @@ docente.post('/enviarGR', verifica, async (req, res) => {
     const mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Agrega un 0 adelante si es necesario
     const dia = ('0' + fechaActual.getDate()).slice(-2); // Agrega un 0 adelante si es necesario
     const año = fechaActual.getFullYear();
-
+     
     const fecha = `${dia}/${mes}/${año}`;
     if (tipo == "global") {
         for (let alumno of alumnos) {

@@ -99,14 +99,16 @@ export class DocenteComponent implements OnInit {
 
 
       if (evento.target.id == "global") {
-        const lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
+        var lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
+        console.log(lamateria[0].tipo);
         numeroCtrl = {
           numControl: this.numControlAlumnoGlobal,
           materia: this.materiaGlobal,
           tipo: lamateria[0].tipo,
           periodo: this.periodoGlobal,
           control: "global",
-          dmateria: lamateria[0].descripcion
+          dmateria: lamateria[0].descripcion,
+          rol: "AL"
         };
         listaEncontrado = this.validandoLlenado(this.alumnosGlobales, this.numControlAlumnoGlobal);
         const res = await firstValueFrom(this.docente.validandoTablaGR(numeroCtrl));
@@ -114,14 +116,15 @@ export class DocenteComponent implements OnInit {
         if (res.data) Notiflix.Notify.warning(res.mensaje);
       }
       if (evento.target.id == "recursa") {
-        const lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
+        var lamateria = this.materias.filter((item: any) => item.idMateria == this.materiaRecursa);
         numeroCtrl = {
           numControl: this.numControlAlumnoRecursa,
           materia: this.materiaRecursa,
           tipo: lamateria[0].tipo,
           periodo: this.periodoRecursa,
           control: "recursa",
-          dmateria: lamateria[0].descripcion
+          dmateria: lamateria[0].descripcion,
+          rol: "AL"
         };
 
         listaEncontrado = this.validandoLlenado(this.alumnosRecursas, this.numControlAlumnoRecursa);
@@ -136,8 +139,20 @@ export class DocenteComponent implements OnInit {
           try {
             const respuesta = await firstValueFrom(this.alumno.verInfo(numeroCtrl));
             if (respuesta.data != '' && respuesta.data != undefined) {
-              if (evento.target.id == "global") this.alumnosGlobales.push(respuesta.data);
-              if (evento.target.id == "recursa") this.alumnosRecursas.push(respuesta.data);
+              if (evento.target.id == "global") 
+              {
+                respuesta.data.materia=this.materiaGlobal;
+                respuesta.data.periodo =  this.periodoGlobal;
+                
+                this.alumnosGlobales.push(respuesta.data);
+                this.disableGlobal= true;
+              }
+              if (evento.target.id == "recursa"){
+                respuesta.data.materia =  this.materiaRecursa;
+                respuesta.data.periodo = this.periodoRecursa;
+                 this.alumnosRecursas.push(respuesta.data);
+                  this.disableRecursa= true;
+              }
             } else {
               Notiflix.Notify.failure("Alumno no encontrado en tabla de alumnos");
             }
@@ -161,8 +176,6 @@ export class DocenteComponent implements OnInit {
     this.materiaRecursa = undefined;
     this.periodoGlobal = undefined;
     this.periodoRecursa = undefined;
-    this.disableGlobal = false;
-    this.disableRecursa = false;
     this.encontrado = false;
   }
 
@@ -179,8 +192,13 @@ export class DocenteComponent implements OnInit {
   }
 
   eliminarAlumno(alumno: any, array: any) {
-    if (array == "global") { this.alumnosGlobales = this.alumnosGlobales.filter((item: any) => item.numControl != alumno); }
-    if (array == "recursa") { this.alumnosRecursas = this.alumnosRecursas.filter((item: any) => item.numControl != alumno); }
+    if (array == "global") { 
+      this.alumnosGlobales = this.alumnosGlobales.filter((item: any) => item.numControl != alumno); 
+      if(this.alumnosGlobales.length<=0) this.disableGlobal = false;
+    }
+    if (array == "recursa") { this.alumnosRecursas = this.alumnosRecursas.filter((item: any) => item.numControl != alumno); 
+      if(this.alumnosRecursas.length<=0) this.disableRecursa = false;
+  }
   }
 
   async datosMateria(event: any) {
@@ -238,6 +256,7 @@ export class DocenteComponent implements OnInit {
       Notiflix.Loading.remove();
       Notiflix.Notify.warning("No hay alumnos en la lista");
     }
+    this.disableRecursa = false;
   }
 
   enviarGlobales(event: any) {
@@ -245,20 +264,21 @@ export class DocenteComponent implements OnInit {
       interval: 2000
     } as any);
     if (this.alumnosGlobales.length > 0) {
-
+      
 
       let datos = {
         alumnos: this.alumnosGlobales,
-        materia: this.materiaGlobal,
-        periodo: this.periodoGlobal,
+        materia: this.alumnosGlobales[0].materia,
+        periodo: this.alumnosGlobales[0].periodo,
         docente: this.auth.decodifica().numControl,
         tipo: "global",
-      }
 
+      }
       this.docente.enviarRG(datos).subscribe((res: any) => {
         if (res.data) {
           Notiflix.Loading.remove();
           Notiflix.Notify.success("Alumnos enviados a recursar");
+          
           this.alumnosGlobales = [];
         } else {
           Notiflix.Loading.remove();
@@ -269,6 +289,7 @@ export class DocenteComponent implements OnInit {
       Notiflix.Loading.remove();
       Notiflix.Notify.warning("No hay alumnos en la lista");
     }
+    this.disableGlobal = false;
   }
 
   async cargarAlumnosGlobalesAsignados() {

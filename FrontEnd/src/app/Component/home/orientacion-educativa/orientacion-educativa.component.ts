@@ -39,10 +39,12 @@ export class OrientacionEducativaComponent implements OnInit {
       if(res.data.length > 0){
       this.justificantes = res.data;
       this.justificantes.nombreCompleto = this.justificantes.nombre + " " + this.justificantes.apellidoP + " " + this.justificantes.apellidoM;
+      console.log(this.justificantes);
       }
       else{
         this.justificantes = [];
       }
+
     }catch(error){
       console.log(error);
     }
