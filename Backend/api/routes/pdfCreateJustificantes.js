@@ -14,7 +14,7 @@ var docDefinition;
 const datoAlumno = async (req, tipo) => {
     const conexion = await ccn();
     try {
-        const alumno = await conexion.execute(`select * from pdfjustificantes where numControl = ?`, [req.numControl]);
+        const alumno = await conexion.execute(`select * from justificante where numControl = `, [req.numControl]);
         if (alumno.length > 0) {
 
             return JSON.parse(JSON.stringify(alumno[0][0]));
@@ -29,6 +29,7 @@ const datoAlumno = async (req, tipo) => {
 }
 
 async function createJustificante(req, res, tipo) {
+    const justificante = req.body;
     alumno = await datoAlumno(req, tipo);
     const fecha = new Date();
     let dia = convertir(fecha.getDate());
@@ -62,8 +63,9 @@ async function createJustificante(req, res, tipo) {
             { text: " ", style: Style.header },
             { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
             { text: `${alumnos.nombre} ${alumnos.apellidoP} ${alumnos.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `${alumnos.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `dias(s) ${justificante.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `${justificante.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `dias(s) ${justificante.fecha} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n \n `, style: Style.normal, alignment: 'justify' },
             { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
             { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
             { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
@@ -73,7 +75,7 @@ async function createJustificante(req, res, tipo) {
 
             { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.header },
             { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
-            { image: './api/assets/tabla justificantes', width: 570, absolutePosition: { x: 5, y: 760 } },
+            { image: './api/assets/tabla justificantes.png', width: 570, absolutePosition: { x: 5, y: 760 } },
             { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
             { image: './api/assets/', width: 570, absolutePosition: { x: 5, y: 760 } },
 
@@ -97,12 +99,17 @@ async function createJustificante(req, res, tipo) {
                 { text: " ", style: Style.header },
                 { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
                 { text: `${alumnos.nombre} ${alumnos.apellidoP} ${alumnos.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
-                { text: `${alumnos.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
-                { text: `dias(s) ${justificante.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `${justificante.fecha}, no asistio a clases de: ${justificante.horas1} a\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: ` ${justificante.horas2}hrs. el dia ${justificante.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
+                { text: `le pedimos sean tan amables de justificar las insistencias de la(s) hora(s) señalada(s) \n \n `, style: Style.normal, alignment: 'justify' },
                 { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
                 { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
                 { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
                 { text: `academicas\n \n `, style: Style.normal, alignment: 'justify' },
+
+                { text: `\n \n \nFIRMA DEL DOCENTE\n \n \n`, style: Style.normal, alignment: 'center' },
+
+                { text: `\n \n \n________________ ________________ ________________\n \n \n`, style: Style.normal, alignment: 'center' },
 
                 { text: `\n \n \nATENTAMENTE\n \n \n`, style: Style.normal, alignment: 'center' },
 
