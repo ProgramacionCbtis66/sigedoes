@@ -40,7 +40,9 @@ export class AdminService {
   getClavesEsp(): Observable<any> {
     return this.http.get(`${this.URL}/admin/getClavesEsp`, this.usr);
   }
-
+  getMateriasGlobales():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getMateriasGlobales`, this.usr);
+  }
 
 
   guardarClavesEspProg(prog: any): Observable<any> {
@@ -62,7 +64,9 @@ export class AdminService {
   registrarClaves(claves: any): Observable<any> {
     return this.http.post(`${this.URL}/admin/registrarClaves`, claves, this.usr);
   }
-
+  guardarAsignacionGlobal(data:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/AsignacionGlobal`, data, this.usr);
+  }
 
 
 }
