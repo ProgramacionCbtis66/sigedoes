@@ -27,19 +27,20 @@ export class OrientacionEducativaComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._orientacionEdu = true;
-    this.cargaSolicitudes();
+    this.obtenerDatos();
   }
 
   ngOnInit(): void {
+    //this.obtenerDatos();
   }
 
-  async cargaSolicitudes(){
+  async obtenerDatos(){
     try{
       let res = await firstValueFrom(this.just.ListaJustificantes());
       if(res.data.length > 0){
-      this.justificantes = res.data;
-      this.justificantes.nombreCompleto = this.justificantes.nombre + " " + this.justificantes.apellidoP + " " + this.justificantes.apellidoM;
-      console.log(this.justificantes);
+        this.justificantes = res.data;
+        //this.justificantes[0].nombreCompleto = this.justificantes[0].nombre + " " + this.justificantes[0].apellidoP + " " + this.justificantes[0].apellidoM;
+        console.log(this.justificantes);
       }
       else{
         this.justificantes = [];
