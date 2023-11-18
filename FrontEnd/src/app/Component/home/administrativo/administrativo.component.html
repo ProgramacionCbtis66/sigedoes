@@ -197,7 +197,7 @@
             <div class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseRecursa" aria-expanded="false" aria-controls="collapseRecursa"
-                style="height: 3rem;">
+                style="height: 3rem;" (click)="getRecursas()">
                 <p class="fs-6 fw-light text-center text-secondary mt-3">
                   <i class="fa fa-address-card" aria-hidden="true"></i>
                   Carga de alumnos a Recursa
@@ -211,16 +211,22 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">NC</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Grado</th>
-                        <th scope="col">Grupo</th>
-                        <th scope="col">Especialidad</th>
+                        <th scope="col">Periodo Escolar</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Semestre</th>
+                        <th scope="col">Tipo</th>                        
                         <th class="text-center">Acciones</th>
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                      <!-- aqui programar datos -->
+                      <tr *ngFor="let recursa of recursas; index as i">
+                        <td scope="col">{{recursa.periodoescolar}}</td>
+                        <td scope="col">{{recursa.descripcion}}</td>
+                        <td scope="col">{{recursa.semestre}}</td>
+                        <td scope="col">{{recursa.tipo}}</td>
+                        <td scope="col" class="text-center"><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa)">Ver</button></td>
+                        
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -694,7 +700,75 @@
     </div>
   </div>
 </div>
+<!--Modal Recursas-->
 <div id="modalGlobales" class="modal fade" role="dialog">
+  <div class="modal-dialog">    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Establer Datos Para Globales</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+              <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+
+                <tr>
+                  <th class=" c2">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="asignarGlobales.lugar">
+                      <label for="floatingInput">Salon </label>
+                    </div>
+                  </th>
+                </tr>
+                
+                <tr>
+                  <th class=" c2">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="asignarGlobales.fecha">
+                      <label for="floatingInput">Fecha </label>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <th class=" c2">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                        [(ngModel)]="asignarGlobales.hora">
+                      <label for="floatingInput">Hora </label>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <th class="c1">
+                    <div class="form-floating">
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">                        
+                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      </select>
+                      <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
+                    </div>
+                  </th>
+                </tr>                
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()">Enviar Registro</button>
+        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalRecursas" class="modal fade" role="dialog">
   <div class="modal-dialog">    
     <div class="modal-content">
       <div class="modal-header">
@@ -740,8 +814,8 @@
                 <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">                        
-                        <option *ngFor="let dato of maestrosGlobales"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDni">                        
+                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
                       </select>
                       <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
                     </div>
@@ -754,7 +828,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()">Enviar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroRecursa()">Enviar Registro</button>
         <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

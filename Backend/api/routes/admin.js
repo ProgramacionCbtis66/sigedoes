@@ -219,7 +219,7 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
     }
 });
 
-administrador.get('/getMaestrosGlobal', verifica, async(req,res) => {
+administrador.get('/getMaestros', verifica, async(req,res) => {
     conexion = await ccn();
     try{
         const [row] = await conexion.execute('select * from docente, usuario where userName = docente.numControl;');        
@@ -229,6 +229,22 @@ administrador.get('/getMaestrosGlobal', verifica, async(req,res) => {
     }catch(error){
 
     }finally{
+        conexion.end();
+    }
+});
+ 
+administrador.get('/getGlobales', verifica, async(req,res) => {
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute('select idrecursa,periodoescolar.periodo, periodoescolar,descripcion,semestre,tipo, docenteDni from recursas,materias,periodoescolar where (recursas.idMateria = materias.idMateria) and (recursas.idperiodoescolar = periodoescolar.idperiodoescolar) and (estado = 0);');        
+        if(row.length > 0){            
+            res.send({ok:row});                            
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});                 
+        }                   
+    } catch(error){
+        console.log(error);
+    } finally{
         conexion.end();
     }
 });
