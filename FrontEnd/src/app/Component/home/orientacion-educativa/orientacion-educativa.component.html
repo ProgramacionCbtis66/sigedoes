@@ -29,6 +29,7 @@
                                     <th>Turno</th>
                                     <th>Justificante por:</th>
                                     <th>Ver Dctos.</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,16 @@
                                             </span>
                                         </button>
                                     </td>
+                                    <td *ngIf="solicitud.estado == 0">
+                                        <span class="badge rounded-pill text-bg-info">Por Autorizar</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 1">
+                                        <span class="badge rounded-pill text-bg-success">Autorizado</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 2">
+                                        <span class="badge rounded-pill text-bg-danger">Rechazado</span>
+                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -144,6 +155,12 @@
                             </div>
                             <div class="col-12">
                                 <p>Attentamente: {{alumno.nombreTutor}}</p>
+                            </div>
+                            <div class="text-success"><hr class="border border-2 opacity-50">
+                            </div>
+                            <div class="col-12">
+                                <label for="" class="form-label">Observaciones de Orientacion Educativa</label>
+                                <textarea [(ngModel)]="alumno.observaciones" class="form-control" name="" id="" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
