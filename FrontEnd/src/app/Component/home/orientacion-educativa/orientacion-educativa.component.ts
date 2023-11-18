@@ -14,7 +14,7 @@ import { UsuarioService } from 'src/app/service/usuarios.service';
 export class OrientacionEducativaComponent implements OnInit {
   protected nombre:string = "administrativo";
   protected justificantes: any= [];
-  protected alumno: any;
+  protected alumno: any = [] ;
 
   constructor(
     private nav: NavegacionService,
@@ -22,7 +22,7 @@ export class OrientacionEducativaComponent implements OnInit {
     private just: JustificanteService,
     private user: UsuarioService,
     private admin: AdminService
-    //private alumno: Justifi,
+ 
   ) { 
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
@@ -39,8 +39,6 @@ export class OrientacionEducativaComponent implements OnInit {
       let res = await firstValueFrom(this.just.ListaJustificantes());
       if(res.data.length > 0){
         this.justificantes = res.data;
-        //this.justificantes[0].nombreCompleto = this.justificantes[0].nombre + " " + this.justificantes[0].apellidoP + " " + this.justificantes[0].apellidoM;
-        console.log(this.justificantes);
       }
       else{
         this.justificantes = [];
@@ -49,5 +47,13 @@ export class OrientacionEducativaComponent implements OnInit {
     }catch(error){
       console.log(error);
     }
+  }
+
+  revisarDocumentos(numControl: number){
+    //busar en el array de justificantes el id
+    const datosSolicitante =  this.justificantes.find((element: any) => element.numControl == numControl);
+    
+    this.alumno = datosSolicitante;
+    console.log(this.alumno);
   }
 }
