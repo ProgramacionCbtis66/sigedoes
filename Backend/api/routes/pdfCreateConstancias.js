@@ -1,14 +1,13 @@
 const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
-const nodemailer = require("nodemailer");
 
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
 const convertir = require('./PDFformat/numlet');
+const textomes = require('./PDFformat/textomes');
 
 var alumno = "";
-
 
 const datoAlumno = async (req, tipo) => {
         const conexion = await ccn();
@@ -109,8 +108,5 @@ async function createConstancias(req,res, tipo) {
     return pdfDoc;
 }
 
-function textomes(mes) {
-    const month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    return month[mes];
-}
+
 module.exports = createConstancias;
