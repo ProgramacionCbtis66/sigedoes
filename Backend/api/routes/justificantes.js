@@ -6,7 +6,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos',verifica, async (req, res) => { 
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado, j.idjustificante from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
@@ -50,6 +50,23 @@ just.post('/guardardatos',verifica, async (req, res) => {
         const resultado = await conexion.execute(sql, [datos.numControl, datos.motivo, datos.periodo, datos.inetutor, datos.cartatutor, datos.doctoref, datos.tipo, datos.fecha, 0]);
         if (resultado[0].affectedRows > 0) {
             res.json({status: 'Registrado'});
+        }
+        else {
+            res.json({status: 'error'});
+        }
+    }catch(err) {   
+        res.json({status: 'error'});
+    }
+})
+
+just.post('/aprobarJustificante',verifica, async (req, res) => {
+    const alumno = req.body;
+    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? where idjustificante = ?';
+    try {
+        const conexion = await ccn();
+        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.idjustificante]);
+        if (resultado[0].affectedRows > 0) {
+            res.json({status: 'Actualizado'});
         }
         else {
             res.json({status: 'error'});

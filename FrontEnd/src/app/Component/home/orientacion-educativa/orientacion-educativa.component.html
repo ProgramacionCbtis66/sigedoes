@@ -16,31 +16,29 @@
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
                     <div class="accordion-body overflow-x-auto">
-
-
                         <table class="table table-responsive table-bordered" *ngIf="justificantes.length > 0">
                             <thead>
                                 <tr class="justify-content-center">
-                                    <th>#</th>
-                                    <th>Numero de Control</th>
-                                    <th>Nombre</th>
-                                    <th>Especialidad</th>
-                                    <th>Grado</th>
-                                    <th>Turno</th>
-                                    <th>Justificante por:</th>
-                                    <th>Ver Dctos.</th>
-                                    <th>Estado</th>
+                                    <th class="text-md-2">#</th>
+                                    <th class="text-md-2">Numero de Control</th>
+                                    <th class="text-md-2">Nombre</th>
+                                    <th class="text-md-2">Especialidad</th>
+                                    <th class="text-md-2">Grado</th>
+                                    <th class="text-md-2">Turno</th>
+                                    <th class="text-md-2">Justificante por:</th>
+                                    <th class="text-md-2">Ver Dctos.</th>
+                                    <th class="text-md-2">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let solicitud of justificantes; index as i">
                                     <td class="text-center"><img [src]="solicitud.foto" alt="" width="50"></td>
-                                    <td>{{solicitud.numControl}}</td>
-                                    <td>{{solicitud.nombre}} {{solicitud.apellidoP}} {{solicitud.apellidoM}}</td>
-                                    <td>{{solicitud.especialidad}}</td>
-                                    <td>{{solicitud.grado}} {{solicitud.grupo}}</td>
-                                    <td>{{solicitud.turno}}</td>
-                                    <td>{{solicitud.tipo}}</td>
+                                    <td class="text-md-2">{{solicitud.numControl}}</td>
+                                    <td class="text-md-2">{{solicitud.nombre}} {{solicitud.apellidoP}} {{solicitud.apellidoM}}</td>
+                                    <td class="text-md-2">{{solicitud.especialidad}}</td>
+                                    <td class="text-md-2">{{solicitud.grado}} {{solicitud.grupo}}</td>
+                                    <td class="text-md-2">{{solicitud.turno}}</td>
+                                    <td class="text-md-2">{{solicitud.tipo}}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#versolicitud"
@@ -51,13 +49,13 @@
                                         </button>
                                     </td>
                                     <td *ngIf="solicitud.estado == 0">
-                                        <span class="badge rounded-pill text-bg-info">Por Autorizar</span>
+                                        <span class="badge fs-5 text-bg-info">Por Autorizar</span>
                                     </td>
                                     <td *ngIf="solicitud.estado == 1">
-                                        <span class="badge rounded-pill text-bg-success">Autorizado</span>
+                                        <span class="badge fs-5 text-bg-success">Autorizado</span>
                                     </td>
                                     <td *ngIf="solicitud.estado == 2">
-                                        <span class="badge rounded-pill text-bg-danger">Rechazado</span>
+                                        <span class="badge fs-5 text-bg-danger">Rechazado</span>
                                     </td>
                                     
                                 </tr>

@@ -18,7 +18,11 @@ export class JustificanteService {
     return this.http.get(`${this.URL}/just/obtenerdatos`, this.usr);
   }
 
-  guardarJustificante(guardarJust: any): Observable<any>{
-    return this.http.post(`${this.URL}/just/guardardatos`, guardarJust, this.usr);
+  aprobarJustificante(aprobarJust: any): Observable<any>{
+    return this.http.post(`${this.URL}/just/aprobarjustificante`, aprobarJust, this.usr);
+  }
+
+  rechazarJustificante(rechazarJust: any): Observable<any>{
+    return this.http.post(`${this.URL}/just/rechazarjustificante`, rechazarJust, this.usr);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Notiflix from 'notiflix';
 import { firstValueFrom } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -43,7 +44,6 @@ export class OrientacionEducativaComponent implements OnInit {
       else{
         this.justificantes = [];
       }
-
     }catch(error){
       console.log(error);
     }
@@ -55,5 +55,29 @@ export class OrientacionEducativaComponent implements OnInit {
     
     this.alumno = datosSolicitante;
     console.log(this.alumno);
+  }
+
+  async aprobarJustificante(){
+    try{
+      let res = await firstValueFrom(this.just.aprobarJustificante(this.alumno));
+      if(res.data){
+        Notiflix.Notify.success("Respuesta enviada al alumno");
+        this.obtenerDatos();
+      }
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  async rechazarJustificante(){
+    try{
+      let res = await firstValueFrom(this.just.rechazarJustificante(this.alumno));
+      if(res.data){
+        Notiflix.Notify.success("Respuesta enviada al alumno");
+        this.obtenerDatos();
+      }
+    }catch(error){
+      console.log(error);
+    }
   }
 }
