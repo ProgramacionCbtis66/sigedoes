@@ -41,6 +41,7 @@ export class AdministrativoComponent implements OnInit {
   datos: any = [];
   datosAdmisnitrativo: any = [];
   globales:any = [];
+  maestrosGlobales:any = [];
   asignarGlobales:any = {        
     lugar: '',
     hora: '',
@@ -283,17 +284,21 @@ export class AdministrativoComponent implements OnInit {
    getGlobales(){
     this.admin.getMateriasGlobales().subscribe((res) => {
       if(res.ok == "vacio"){
-        this.globales = [];
+        this.globales = [];        
       } else {      
-        this.globales = res.ok;                
+        this.globales = res.ok;                        
       }
     });
   }  
   viewModalGlobal(dato:any){        
       this.asignarGlobales.docenteDni = dato.docenteDni;
-      this.asignarGlobales.idglobales = dato.idglobales;            
+      this.asignarGlobales.idglobales = dato.idglobales;   
+      this.admin.getMaestrosGlobal().subscribe((res) => {
+        this.maestrosGlobales = res.ok;
+      });         
   }
   subirRegistroGlobal(){
+    
     if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != ''){    
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
         if(res.ok == "ok"){
@@ -310,6 +315,10 @@ export class AdministrativoComponent implements OnInit {
     }else {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }
+    
+  }  
+  setDNI(DNI:any){
+    this.asignarGlobales.docenteDni = DNI;
   }
 
 
