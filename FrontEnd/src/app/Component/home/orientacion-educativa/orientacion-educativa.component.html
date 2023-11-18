@@ -15,7 +15,7 @@
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+                    <div class="accordion-body overflow-x-auto">
                         
                         
                         <table class="table table-responsive table-bordered" *ngIf="justificantes.length > 0">
@@ -28,16 +28,16 @@
                                     <th>Nombre</th>
                                     <th>Especialidad</th>
                                     <th>Grupo</th>
-                                    <th>Tipo</th>
                                     <th>Turno</th>
+                                    <th>Tipo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor = "let solicitud of justificantes; index as i">
-                                    <td><img [src]="solicitud.foto" alt="" width="50"></td>
+                                    <td class="text-center"><img [src]="solicitud.foto" alt="" width="50"></td>
                                     <td>{{solicitud.numControl}}</td>
-                                    <td>{{solicitud.nombreCompleto}}</td>
+                                    <td>{{solicitud.nombre}} {{solicitud.apellidoP}} {{solicitud.apellidoM}}</td>
                                     <td>{{solicitud.especialidad}}</td>
                                     <td>{{solicitud.gado}}{{solicitud.grupo}}</td>
                                     <td>{{solicitud.turno}}</td>
