@@ -62,21 +62,19 @@ just.post('/guardardatos', verifica, async (req, res) => {
 just.post('/aprobarJustificante', verifica, async (req, res) => {
     const alumno = req.body;
     const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? where idjustificante = ?';
-
     try {
         const conexion = await ccn();
         const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.idjustificante]);
         if (resultado[0].affectedRows > 0) {
             if (alumno.estado == 1) {
-
-                res.json({ status: true });
+                res.json({ data: true });
             }
             else {
-                res.json({ status: false });
+                res.json({ data: false });
             }
         }
     } catch (err) {
-        res.json({ status: false });
+        res.json({ data: false });
     }
 })
 

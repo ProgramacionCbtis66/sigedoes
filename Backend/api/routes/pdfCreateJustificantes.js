@@ -9,7 +9,6 @@ const convertir = require('./PDFformat/numlet');
 const {textomes}= require('./PDFformat/textomes');
 
 var alumno = "";
-var just = null;
 var docDefinition;
 
 const datoAlumno = async (req, tipo) => {
@@ -50,18 +49,11 @@ async function createJustificante(req, res, tipo) {
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
 
-    let horario = "";
-    if (alumno.turno == 'MATUTINO' || alumno.turno == 'Matutino') {
-        horario = "7:00 - 15:00";
-        alumno.horario = "7:00 - 15:00";
-    } else if (alumno.turno == 'VESPERTINO' || alumno.turno == 'Vespertino') {
-        horario = "15:00 - 20:00";
-        alumno.horario = "15:00 - 20:00";
-    }
-
+  
     var nombre = alumno.nombre + " " + alumno.apellidoP + " " + alumno.apellidoM;
     var periodoEscuela = alumno.Esc_Periodo;
-    console.log(alumno.CTO);
+     
+
     const justificante1 = {
         asunto: [
 
@@ -134,8 +126,8 @@ async function createJustificante(req, res, tipo) {
 
         ]
     }
-
-    if (just.tipo == 0) {
+    console.log(justificante.tipo);
+    if (justificante.tipo == 0) {
         docDefinition = {
             content: justificante1['asunto'],
             //style: Style

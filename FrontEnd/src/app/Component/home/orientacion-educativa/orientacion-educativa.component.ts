@@ -62,6 +62,7 @@ export class OrientacionEducativaComponent implements OnInit {
       let res = await firstValueFrom(this.just.aprobarJustificante(this.alumno));
       if(res.data){
         Notiflix.Notify.success("Respuesta enviada al alumno");
+        let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
       }
     }catch(error){

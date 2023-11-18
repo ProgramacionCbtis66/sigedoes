@@ -25,4 +25,8 @@ export class JustificanteService {
   rechazarJustificante(rechazarJust: any): Observable<any>{
     return this.http.post(`${this.URL}/just/rechazarjustificante`, rechazarJust, this.usr);
   }
+
+  notificacion(email: any): Observable<any>{
+    return this.http.post(`${this.URL}/email/respuestaJustificante`, email, this.usr);
+  }
 }
