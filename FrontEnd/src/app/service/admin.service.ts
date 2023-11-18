@@ -43,6 +43,9 @@ export class AdminService {
   getMateriasGlobales():Observable<any>{
     return this.http.get(`${this.URL}/admin/getMateriasGlobales`, this.usr);
   }
+  getMaestrosGlobal():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getMaestrosGlobal`,this.usr);
+  }
 
 
   guardarClavesEspProg(prog: any): Observable<any> {

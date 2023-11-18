@@ -740,9 +740,10 @@
                 <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.docenteDni">
-                      <label for="floatingInput">Dni del docente que lo impartirá</label>
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">                        
+                        <option *ngFor="let dato of maestrosGlobales"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      </select>
+                      <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
                     </div>
                   </th>
                 </tr>                
