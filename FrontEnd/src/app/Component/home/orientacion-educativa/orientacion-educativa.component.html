@@ -29,6 +29,7 @@
                                     <th>Turno</th>
                                     <th>Justificante por:</th>
                                     <th>Ver Dctos.</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,7 +50,16 @@
                                             </span>
                                         </button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-danger">Acciones</button></td>
+                                    <td *ngIf="solicitud.estado == 0">
+                                        <span class="badge rounded-pill text-bg-info">Por Autorizar</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 1">
+                                        <span class="badge rounded-pill text-bg-success">Autorizado</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 2">
+                                        <span class="badge rounded-pill text-bg-danger">Rechazado</span>
+                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -89,8 +99,7 @@
                                 <div class="input-group mb-3 px-3 mt-2">
                                     <span class="input-group-text" id="basic-addon1">Numero de control</span>
                                     <input [(ngModel)]="alumno.numControl" type="text" class="form-control"
-                                        placeholder="Tipo de alumno" aria-label="Tipo de alumno"
-                                        aria-describedby="basic-addon1">
+                                        placeholder="Tipo de alumno" disabled>
                                 </div>
                                 <!--Nombre-->
                                 <div class=" mb-3 px-3 mt-2">
@@ -136,8 +145,22 @@
                         </div>
                         <div class="text-success"><hr class="border border-2 opacity-50"></div>
                         <div class="row">
-                            <div class="col-md-4">
-                               <p class="fs-6 fw-lighter"></p>
+                            <div class="col">
+                               <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'dias'">
+                                Por este conducto solicito a ustedes le sea(n) justificado(s) el/los dia(s): {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior le pedimos sean tan amables de justificar las inasistencias de la(s) fecha(s) señalada(s).
+                               </p>
+                               <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'horas'">
+                                Por este conducto solicito a ustedes le sea(n) justificada(s) la(s) hora(s): de {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior sean tan amables de justificar la(s) inasistencia(s) de la(s) hora(s) señalada(s).
+                               </p>
+                            </div>
+                            <div class="col-12">
+                                <p>Attentamente: {{alumno.nombreTutor}}</p>
+                            </div>
+                            <div class="text-success"><hr class="border border-2 opacity-50">
+                            </div>
+                            <div class="col-12">
+                                <label for="" class="form-label">Observaciones de Orientacion Educativa</label>
+                                <textarea [(ngModel)]="alumno.observaciones" class="form-control" name="" id="" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

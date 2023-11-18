@@ -6,7 +6,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos',verifica, async (req, res) => { 
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where j.estado = 0';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
@@ -15,6 +15,18 @@ just.get('/obtenerdatos',verifica, async (req, res) => {
         for (var i = 0; i < registros.length; i++) {
             if(registros[i].foto != null){
                 registros[i].foto = registros[i].foto = registros[i].foto.toString('utf-8');
+            }
+
+            if(registros[i].inetutor != null){
+                registros[i].inetutor = registros[i].inetutor = registros[i].inetutor.toString('utf-8');
+            }
+
+            if(registros[i].cartatutor != null){
+                registros[i].cartatutor = registros[i].cartatutor = registros[i].cartatutor.toString('utf-8');
+            }
+
+            if(registros[i].documentoreferencia != null){
+                registros[i].documentoreferencia = registros[i].documentoreferencia = registros[i].documentoreferencia.toString('utf-8');
             }
         }
         res.json({data: JSON.parse(JSON.stringify(registros))});
