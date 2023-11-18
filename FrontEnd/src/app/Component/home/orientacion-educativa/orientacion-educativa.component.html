@@ -16,39 +16,48 @@
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
                     <div class="accordion-body overflow-x-auto">
-                        
-                        
                         <table class="table table-responsive table-bordered" *ngIf="justificantes.length > 0">
                             <thead>
-
-                                
                                 <tr class="justify-content-center">
-                                    <th>#</th>
-                                    <th>Numero de Control</th>
-                                    <th>Nombre</th>
-                                    <th>Especialidad</th>
-                                    <th>Grupo</th>
-                                    <th>Turno</th>
-                                    <th>Tipo</th>
-                                    <th>Acciones</th>
+                                    <th class="text-md-2">#</th>
+                                    <th class="text-md-2">Numero de Control</th>
+                                    <th class="text-md-2">Nombre</th>
+                                    <th class="text-md-2">Especialidad</th>
+                                    <th class="text-md-2">Grado</th>
+                                    <th class="text-md-2">Turno</th>
+                                    <th class="text-md-2">Justificante por:</th>
+                                    <th class="text-md-2">Ver Dctos.</th>
+                                    <th class="text-md-2">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor = "let solicitud of justificantes; index as i">
+                                <tr *ngFor="let solicitud of justificantes; index as i">
                                     <td class="text-center"><img [src]="solicitud.foto" alt="" width="50"></td>
-                                    <td>{{solicitud.numControl}}</td>
-                                    <td>{{solicitud.nombre}} {{solicitud.apellidoP}} {{solicitud.apellidoM}}</td>
-                                    <td>{{solicitud.especialidad}}</td>
-                                    <td>{{solicitud.gado}}{{solicitud.grupo}}</td>
-                                    <td>{{solicitud.turno}}</td>
+                                    <td class="text-md-2">{{solicitud.numControl}}</td>
+                                    <td class="text-md-2">{{solicitud.nombre}} {{solicitud.apellidoP}} {{solicitud.apellidoM}}</td>
+                                    <td class="text-md-2">{{solicitud.especialidad}}</td>
+                                    <td class="text-md-2">{{solicitud.grado}} {{solicitud.grupo}}</td>
+                                    <td class="text-md-2">{{solicitud.turno}}</td>
+                                    <td class="text-md-2">{{solicitud.tipo}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#versolicitud">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#versolicitud"
+                                            (click)="revisarDocumentos(solicitud.numControl)">
                                             <span class="badge text-bg-info">
                                                 <i class="bi bi-eye"></i>
                                             </span>
                                         </button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-danger">Acciones</button></td>
+                                    <td *ngIf="solicitud.estado == 0">
+                                        <span class="badge fs-5 text-bg-info">Por Autorizar</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 1">
+                                        <span class="badge fs-5 text-bg-success">Autorizado</span>
+                                    </td>
+                                    <td *ngIf="solicitud.estado == 2">
+                                        <span class="badge fs-5 text-bg-danger">Rechazado</span>
+                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -61,40 +70,104 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="versolicitudLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="card">
-                <div class="card-header text-center">
-                    <p class="fs-4 fw-lighter">Solicitud de Alumnons</p>
-                </div>
-                <div class="card-body">
-                    <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
-                        <div class="input-group mb-2">
-                            <span class="input-group-text" id="basic-addon1">Nombre</span>
-                            <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" disabled>
-                            <span class="input-group-text" id="basic-addon1">Numero de control</span>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="versolicitudLabel">
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <p class="fs-4 fw-lighter">Solicitud de Alumno
+                            <b> {{alumno.nombre}}{{alumno.apellidoP}}{{alumno.apellidoM}} </b> con fecha de solicitud : {{alumno.fecha}} </p>
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <!-- Lado Izquierdo -->
+                            <div class="col-md-4 text-center">
+                                <img [src]="alumno.foto" class="img-fluid" width="200" alt="image desc">
+                            </div>
+                            <!-- lado derecho -->
+                            <div class="col-md-8">
+                                <!-- rol -->
+                                <div class="input-group mb-3 px-3 mt-2">
+                                    <span class="input-group-text" id="basic-addon1">Numero de control</span>
+                                    <input [(ngModel)]="alumno.numControl" type="text" class="form-control"
+                                        placeholder="Tipo de alumno" disabled>
+                                </div>
+                                <!--Nombre-->
+                                <div class=" mb-3 px-3 mt-2">
+                                    <label class="form-label" id="Nombre">Motivo</label>
+                                    <textarea [(ngModel)]="alumno.motivo" type="text" class="form-control"
+                                        rows="5"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text-success"><hr class="border border-2 opacity-50"></div>
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <p class="fs-6 fw-lighter">INE padre o tutor</p>
+                                    </div>
+                                  <div class="card-body">
+                                   <img [src]="alumno.inetutor" class="img-fluid">
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <p class="fs-6 fw-lighter">Documento de referencia</p>
+                                    </div>
+                                  <div class="card-body">
+                                   <img [src]="alumno.documentoreferencia" class="img-fluid">
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <p class="fs-6 fw-lighter">Carta padre, madre o tutor</p>
+                                    </div>
+                                  <div class="card-body">
+                                   <img [src]="alumno.cartatutor" class="img-fluid">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-success"><hr class="border border-2 opacity-50"></div>
+                        <div class="row">
+                            <div class="col">
+                               <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'dias'">
+                                Por este conducto solicito a ustedes le sea(n) justificado(s) el/los dia(s): {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior le pedimos sean tan amables de justificar las inasistencias de la(s) fecha(s) señalada(s).
+                               </p>
+                               <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'horas'">
+                                Por este conducto solicito a ustedes le sea(n) justificada(s) la(s) hora(s): de {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior sean tan amables de justificar la(s) inasistencia(s) de la(s) hora(s) señalada(s).
+                               </p>
+                            </div>
+                            <div class="col-12">
+                                <p>Attentamente: {{alumno.nombreTutor}}</p>
+                            </div>
+                            <div class="text-success"><hr class="border border-2 opacity-50">
+                            </div>
+                            <div class="col-12">
+                                <label for="" class="form-label">Observaciones de Orientacion Educativa</label>
+                                <textarea [(ngModel)]="alumno.observaciones" class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-muted">
-                    Footer
-                </div>
             </div>
-
-
-
-
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rechazar</button>
+                <button type="button" class="btn btn-primary">Autorizar</button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

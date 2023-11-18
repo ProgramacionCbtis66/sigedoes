@@ -1,7 +1,7 @@
 const ccn = require('../connection/connection');
 const pdf = require('pdfmake');
 const file = require('fs');
-const nodemailer = require("nodemailer");
+
 
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
@@ -15,7 +15,20 @@ var docDefinition;
 const datoAlumno = async (req, tipo) => {
     const conexion = await ccn();
     try {
-        const alumno = await conexion.execute(`select * from justificante where numControl = `, [req.numControl]);
+        const alumno = await conexion.execute(`select 
+        u.nombre,
+        u.apellidoP,
+        u.apellidoM,
+        a.tuno,
+        a.grado,
+        a.especialidad,
+        a.grupo,
+        a.CTO,
+        e.Esc_Periodo,
+        e.Esc_Director,
+        from usuario as u join alumno as a on u.numControl = a.numControl 
+                          join escuela as e on a.CTO = e.CTO
+        where numControl = `, [req.numControl]);
         if (alumno.length > 0) {
 
             return JSON.parse(JSON.stringify(alumno[0][0]));
