@@ -44,7 +44,7 @@ async function createConstancias(req,res, tipo) {
     
     var nombre = alumno.nombre + " " + alumno.apellidoP + " " + alumno.apellidoM;
     var periodoEscuela = alumno.Esc_Periodo;
-    console.log(alumno.CTO);
+   
     const contenido = {
         asunto: [
 
@@ -87,7 +87,7 @@ async function createConstancias(req,res, tipo) {
     }
     const printer = new pdf(Font);
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    let pdfContent = null;
+ 
     if (tipo == "Constancia") {
         pdfDoc.pipe(file.createWriteStream(`./api/assets/cl${req.numControl}cb66.pdf`));
         // pdfDoc.on('data', (chunk) => {

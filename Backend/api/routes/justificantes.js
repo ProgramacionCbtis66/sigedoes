@@ -6,7 +6,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos', verifica, async (req, res) => {
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado, j.idjustificante from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado, j.idjustificante, j.horas1, j.horas2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
@@ -61,10 +61,10 @@ just.post('/guardardatos', verifica, async (req, res) => {
 
 just.post('/aprobarJustificante', verifica, async (req, res) => {
     const alumno = req.body;
-    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? where idjustificante = ?';
-    try {
+    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? , horas1 = ?, horas2= ? where idjustificante = ?';
+  
         const conexion = await ccn();
-        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.idjustificante]);
+        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, "alumno.horas1", "alumno.horas2", alumno.idjustificante]);
         if (resultado[0].affectedRows > 0) {
             if (alumno.estado == 1) {
                 res.json({ data: true });
@@ -73,9 +73,6 @@ just.post('/aprobarJustificante', verifica, async (req, res) => {
                 res.json({ data: false });
             }
         }
-    } catch (err) {
-        res.json({ data: false });
-    }
 })
 
 

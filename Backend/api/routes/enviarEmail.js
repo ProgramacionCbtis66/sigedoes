@@ -39,7 +39,7 @@ Emailrouter.post("/respuestaJustificante", async (req, res) => {
   if(email.estado == 1){
   await creajustificante(email, res);
   email.tipo = "justificante";
-  enviarCorreo(email, res);
+     enviarCorreo(email, res);
   }else{
     enviarCorreo(email, res);
   }

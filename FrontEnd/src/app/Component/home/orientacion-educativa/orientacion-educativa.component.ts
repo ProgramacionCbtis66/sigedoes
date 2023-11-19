@@ -54,19 +54,23 @@ export class OrientacionEducativaComponent implements OnInit {
     const datosSolicitante =  this.justificantes.find((element: any) => element.numControl == numControl);
     
     this.alumno = datosSolicitante;
-    console.log(this.alumno);
+    
   }
 
-  async aprobarJustificante(){
+  async aprobarJustificante(op: number){
+    console.log(op);
     try{
+      this.alumno.estado=op;
       let res = await firstValueFrom(this.just.aprobarJustificante(this.alumno));
       if(res.data){
         Notiflix.Notify.success("Respuesta enviada al alumno");
+          this.alumno.asunto= "Envio de Justificante";
+          this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
         let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
       }
     }catch(error){
-      console.log(error);
+      console.log("error",error);
     }
   }
 

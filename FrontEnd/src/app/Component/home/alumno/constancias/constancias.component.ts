@@ -100,6 +100,7 @@ export class ConstanciasComponent implements OnInit {
           tipo: 'Constancia',
           numControl: this.auth.decodifica().numControl,
           codigoPago: this.home.NoPago,
+          correo: this.datos.correo,
       };
 
     this.email.envioConstancia(email).subscribe((res: any) => {

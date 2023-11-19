@@ -31,6 +31,7 @@ function enviarCorreo(email, res) {
 }
 
 function MailOptions(tipo, email) {
+     
     switch (tipo) {
         case "Constancia":
             const mailOptions = {
@@ -41,7 +42,7 @@ function MailOptions(tipo, email) {
                 attachments: [
                     {
                         filename: `cl${email.numControl}cb66.pdf`,
-                        path: `./api/assets/cl${email.numControl}cb66.pdf`,
+                        path: `./api/assets/just${email.numControl}cb66.pdf`,
                         cid: `${email.email}`,
                     },
                 ],
@@ -86,6 +87,7 @@ function MailOptions(tipo, email) {
             };
             return mailOptions5;
         case "justificante":
+           
             const mailOptions6 = {
                 from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
                 to: `"${email.correo}"`,
@@ -95,7 +97,7 @@ function MailOptions(tipo, email) {
                     {
                         filename: `cl${email.numControl}cb66.pdf`,
                         path: `./api/assets/just${email.numControl}cb66.pdf`,
-                        cid: `${email.email}`,
+                        cid: `${email.correo}`,
                     },
                 ],
             };
