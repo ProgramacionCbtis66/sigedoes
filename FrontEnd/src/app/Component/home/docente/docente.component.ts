@@ -100,7 +100,7 @@ export class DocenteComponent implements OnInit {
 
       if (evento.target.id == "global") {
         var lamateria = this.materiasG.filter((item: any) => item.idMateria == this.materiaGlobal);
-        console.log(lamateria[0].tipo);
+      
         numeroCtrl = {
           numControl: this.numControlAlumnoGlobal,
           materia: this.materiaGlobal,
@@ -143,15 +143,17 @@ export class DocenteComponent implements OnInit {
               {
                 respuesta.data.materia=this.materiaGlobal;
                 respuesta.data.periodo =  this.periodoGlobal;
-                
+
                 this.alumnosGlobales.push(respuesta.data);
+                this.numControlAlumnoGlobal = "";
                 this.disableGlobal= true;
               }
               if (evento.target.id == "recursa"){
                 respuesta.data.materia =  this.materiaRecursa;
                 respuesta.data.periodo = this.periodoRecursa;
                  this.alumnosRecursas.push(respuesta.data);
-                  this.disableRecursa= true;
+                 this.numControlAlumnoRecursa = "";
+                 this.disableRecursa= true;
               }
             } else {
               Notiflix.Notify.failure("Alumno no encontrado en tabla de alumnos");
@@ -166,7 +168,7 @@ export class DocenteComponent implements OnInit {
     } else {
       Notiflix.Notify.warning("Llena todos los campos");
     }
-    this.limpiarCampos();
+    
   }
 
   limpiarCampos() {
@@ -180,14 +182,19 @@ export class DocenteComponent implements OnInit {
   }
 
   verificaCamposMP(): boolean {
-    if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined) {
-      this.disableGlobal = true;
+    console.log(this.periodoGlobal);
+     
+    if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined ) {
+       
       return true;
     }
+ 
+ 
     if (this.numControlAlumnoRecursa !== '' && this.materiaRecursa !== undefined && this.periodoRecursa !== undefined) {
-      this.disableRecursa = true;
+       
       return true;
     }
+ 
     return false;
   }
 
@@ -277,7 +284,7 @@ export class DocenteComponent implements OnInit {
       this.docente.enviarRG(datos).subscribe((res: any) => {
         if (res.data) {
           Notiflix.Loading.remove();
-          Notiflix.Notify.success("Alumnos enviados a recursar");
+          Notiflix.Notify.success("Alumnos enviados a Global");
           
           this.alumnosGlobales = [];
         } else {
