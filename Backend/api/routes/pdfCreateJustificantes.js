@@ -26,7 +26,7 @@ const datoAlumno = async (numControl) => {
 
 async function createJustificante(req, res, tipo) {
     const just = req;
-    console.log(req.numControl);
+    console.log(just);
     alumno = await datoAlumno(just.numControl);
      
     const fecha = new Date();
@@ -47,7 +47,7 @@ async function createJustificante(req, res, tipo) {
             { text: `TURNO: "${just.turno}"`, style: Style.normal, alignment: 'right', bold: true },
             { text: `P R E S E N T E S.-`, style: Style.normal, alignment: 'right', bold: true  },
             { text: " ", style: Style.normal  },
-            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a: ${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :${just.razon}, no asistio a clases el (los) dias(s) ${just.fecha} del presente año. Por lo anterior le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n `, style: Style.normal, alignment: 'justify' },
+            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a: ${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :${just.razon}, no asistio a clases el (los) dias(s) ${fecha.getDate()} del presente año. Por lo anterior le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n `, style: Style.normal, alignment: 'justify' },
             { text: `     Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo mencion que el presente documento NO EXENTA al alumno de sus obligaciones academicas\n `, style: Style.normal, alignment: 'justify' },
 
             { text: `\n ATENTAMENTE. \n \n`, style: Style.normal, alignment: 'center' },
@@ -64,32 +64,30 @@ async function createJustificante(req, res, tipo) {
 
             { image: './api/assets/JustificanteSubSec.png', width: 520 },
 
-            { text: "\n \n JUSTIFICANTE DE INASISTENCIA POR HORAS: \n \n ", style: Style.normal, alignment: 'center', bold: true },
-            { text: `\n \n FECHA: ${dia.toLowerCase()} / ${mes} / ${year.toLowerCase}\n \n \n \n`, style: Style.normal, alignment: 'center', bold: true },
+            { text: "\n JUSTIFICANTE DE INASISTENCIA POR HORAS: \n ", style: Style.normal, alignment: 'center', bold: true },
+            { text: `FECHA: ${fecha.getDate()} de ${mes.toLowerCase()} de ${fecha.getFullYear()}. \n`, style: Style.normal, alignment: 'center', bold: true },
 
-            { text: `C.C. DOCENTES DEL GRUPO: "${just.grado}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `ESPECIALIDAD: "${just.especialidad}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `TURNO: "${just.turno}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `P R E S E N T E S.-`, style: Style.header, alignment: 'right', bold: true },
-            { text: " ", style: Style.header },
-            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `${just.fecha}, no asistio a clases de: ${just.horas1} a\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: ` ${just.horas2}hrs. el dia ${just.dias} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `le pedimos sean tan amables de justificar las insistencias de la(s) hora(s) señalada(s) \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
-            { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `academicas\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: ` \n C.C. DOCENTES DEL GRUPO: "${just.grado} ${just.grupo} "`, style: Style.normal, alignment: 'right', bold: true, fontSize: 11 },
+            { text: `ESPECIALIDAD: "${just.especialidad}"`, style: Style.normal, alignment: 'right', bold: true,fontSize: 11 },
+            { text: `TURNO: "${just.turno}"`, style: Style.normal, alignment: 'right', bold: true ,fontSize: 11 },
+            { text: `P R E S E N T E S.-`, style: Style.normal, alignment: 'right', bold: true,fontSize: 11  },
+            { text: " ", style: Style.normal,fontSize: 11  },
+            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a : ${just.nombre} quien por motivos de : ${just.motivo}, no asistio a clases de: ${just.horas1} a ${just.horas2} hrs. el dia ${fecha.getDate()} del presente año. Por lo anteriorle pedimos sean tan amables de justificar las insistencias de la(s) hora(s) señalada(s) \n `, style: Style.normal, alignment: 'justify' },
+            { text:[
+                {text:`    Cabe señalar que es `, style: Style.normal},
+                {text:`RESPONSABILIDAD DEL ALUMNO`, style: Style.normal, bold: true},
+                {text:` regularizarse en la entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo mencion que el presente documento `, style: Style.normal},
+                {text:`NO EXENTA`, style:Style.normal, bold:true},
+                {text:` al alumno de sus obligaciones academicas\n \n `, style: Style.normal, alignment: 'justify' },
+            ], alignment: 'justify' },
+            { text: ` \nFIRMA DEL DOCENTE\n \n`, style: Style.normal, alignment: 'center' },
 
-            { text: `\n \n \nFIRMA DEL DOCENTE\n \n \n`, style: Style.normal, alignment: 'center' },
+            { text: `\n ____________________      ____________________          ____________________\n `, style: Style.normal, alignment: 'center' },
 
-            { text: `\n \n \n________________ ________________ ________________\n \n \n`, style: Style.normal, alignment: 'center' },
-
-            { text: `\n \n \nATENTAMENTE\n \n \n`, style: Style.normal, alignment: 'center' },
+            { text: ` \nATENTAMENTE\n`, style: Style.normal, alignment: 'center' },
 
             { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.header },
-            { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
+            { text: `${just.nombreOE} \n \n `, style: Style.firma, alignment: "center" },
             { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
         ]
     }
@@ -99,6 +97,16 @@ async function createJustificante(req, res, tipo) {
     if (just.tipo == "dias") {
         docDefinition = {
             content: justificante1['asunto'],
+
+            permissions: {
+                printing: 'highResolution', //'lowResolution'
+                modifying: false,
+                copying: false,
+                annotating: true,
+                fillingForms: true,
+                contentAccessibility: true,
+                documentAssembly: true
+              }
             //style: Style
         }
     } else {

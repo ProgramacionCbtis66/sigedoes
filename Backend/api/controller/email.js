@@ -95,7 +95,7 @@ function MailOptions(tipo, email) {
                 html: `< h3 > Estimado Usuario se le envía su justificante: ${email.justificante}`,
                 attachments: [
                     {
-                        filename: `cl${email.numControl}cb66.pdf`,
+                        filename: `just${email.numControl}cb66.pdf`,
                         path: `./api/assets/just${email.numControl}cb66.pdf`,
                         cid: `${email.correo}`,
                     },

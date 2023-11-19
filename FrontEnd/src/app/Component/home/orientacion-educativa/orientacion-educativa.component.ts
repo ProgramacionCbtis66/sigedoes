@@ -66,6 +66,8 @@ export class OrientacionEducativaComponent implements OnInit {
         Notiflix.Notify.success("Respuesta enviada al alumno");
           this.alumno.asunto= "Envio de Justificante";
           this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
+          this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+          
         let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
       }
