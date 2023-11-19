@@ -27,7 +27,6 @@ function enviarCorreo(email, res) {
             res.send({ msg: "Correo enviado satisfactoriamente" });
         }
     });
-    res.json("Correcto");
 }
 
 function MailOptions(tipo, email) {
@@ -60,7 +59,7 @@ function MailOptions(tipo, email) {
         case "validacion":
             const validacion =
                 email.op == 1
-                    ? `Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}   , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
+                    ? `<h3> Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}   , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
                     : `Rechazado, </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>`;
             const mailOptions3 = {
                 from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
@@ -87,12 +86,12 @@ function MailOptions(tipo, email) {
             };
             return mailOptions5;
         case "justificante":
-           
-            const mailOptions6 = {
+           if(email.estado == 1){
+            var mailOptions6 = {
                 from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
                 to: `"${email.correo}"`,
                 subject: `"Justificante"`,
-                html: `< h3 > Estimado Usuario se le envía su justificante: ${email.justificante}`,
+                html: `<b>Estimado Usuario se le envía su justificante: ${email.justificante}`,
                 attachments: [
                     {
                         filename: `just${email.numControl}cb66.pdf`,
@@ -101,6 +100,15 @@ function MailOptions(tipo, email) {
                     },
                 ],
             };
+            return mailOptions6;
+        }else{
+            var mailOptions6 = {
+                from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
+                to: `"${email.correo}"`,
+                subject: `"Justificante"`,
+                html: `<h5> Estimado Usuario ${email.nombre} se le envía su ubservacion de la solicitud de su justificante: ${email.observaciones}</h5>`,
+            };
+        }
             return mailOptions6;
     }
 }

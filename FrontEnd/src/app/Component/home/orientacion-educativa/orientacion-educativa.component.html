@@ -177,11 +177,9 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" >
-              
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rechazar</button>
-                    <button type="button" class="btn btn-primary" (click)="aprobarJustificante(1)">Autorizar</button>
-               
+            <div class="modal-footer" *ngIf="alumno.estado==0" >
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="rechazarJustificante(2)">Rechazar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="aprobarJustificante(1)">Autorizar</button>
             </div>
         </div>
     </div>

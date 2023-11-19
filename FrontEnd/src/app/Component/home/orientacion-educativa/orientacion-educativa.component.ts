@@ -76,11 +76,16 @@ export class OrientacionEducativaComponent implements OnInit {
     }
   }
 
-  async rechazarJustificante(){
+  async rechazarJustificante(op: number){
     try{
+      this.alumno.estado=op;
       let res = await firstValueFrom(this.just.rechazarJustificante(this.alumno));
       if(res.data){
-        Notiflix.Notify.success("Respuesta enviada al alumno");
+        Notiflix.Notify.success("Enviando  CORREO respuesta enviada al alumno");
+        this.alumno.asunto= "Envio de Notificación de observaciones del Justificante";
+        this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
+        this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+        let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
       }
     }catch(error){

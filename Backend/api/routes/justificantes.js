@@ -6,6 +6,7 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos', verifica, async (req, res) => {
+    console.log('entro');
     const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado, j.idjustificante, j.horas1, j.horas2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
@@ -39,7 +40,7 @@ just.get('/obtenerdatos', verifica, async (req, res) => {
         console.log(err);
         res.json({ data: [] })
     }
-})
+});
 
 
 just.post('/guardardatos', verifica, async (req, res) => {
@@ -57,7 +58,7 @@ just.post('/guardardatos', verifica, async (req, res) => {
     } catch (err) {
         res.json({ status: 'error' });
     }
-})
+});
 
 just.post('/aprobarJustificante', verifica, async (req, res) => {
     const alumno = req.body;
@@ -74,7 +75,24 @@ just.post('/aprobarJustificante', verifica, async (req, res) => {
                 res.json({ data: false });
             }
         }
-})
+});
+
+just.post('/rechazarJustificante', verifica, async (req, res) => {
+    const alumno = req.body;
+    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? where idjustificante = ?';
+    try {
+        const conexion = await ccn();
+        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.idjustificante]);
+        if (resultado[0].affectedRows > 0) {
+            res.json({ data: true });
+        }
+        else {
+            res.json({ data: false });
+        }
+    } catch (err) {
+        res.json({ data: false });
+    }
+});
 
 
 module.exports = just;
