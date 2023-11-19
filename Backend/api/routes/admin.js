@@ -202,7 +202,7 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
     const data = req.body;
     const conexion = await ccn();
     try{        
-        let sql = `insert into asignaglobal (lugar, hora, fecha, idglobales, status, docenteDni) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idglobales}', '${data.status}', '${data.docenteDni}');`;
+        let sql = `insert into asignaglobal (lugar, hora, fecha, idglobales, status, docenteDni) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idglobales}', '0', '${data.docenteDni}');`;
         const [row] = await conexion.execute(sql);
         if(row.affectedRows > 0){
             sql = `UPDATE globales SET estado = '1' WHERE (idglobales = '${data.idglobales}');`;
@@ -249,5 +249,24 @@ administrador.get('/getGlobales', verifica, async(req,res) => {
     }
 });
 
+administrador.post('/guardarAsignacionRecursa', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const info = req.body;
+    try{        
+        const sql = `insert into asignarecursa (Lugar, hora, fecha, docenteDni, status, idrecursa) VALUES ('${info.lugar}', '${info.hora}', '${info.fecha}', '${info.docenteDni}', '0', '${info.idrecursa}');`;        
+        const [result] = await conexion.execute(sql);
+        if(result.affectedRows > 0){
+            const [lastresult] = await conexion.execute(`UPDATE recursas SET estado = '1' WHERE (idrecursa = '${info.idrecursa}')`);            
+            res.send({ok:'ok'});            
+        } else {
+            res.send({err:'err'});
+        }
+        
+    }catch(error){
+        
+    } finally{
+        conexion.end();
+    }
+});
 
 module.exports = administrador;

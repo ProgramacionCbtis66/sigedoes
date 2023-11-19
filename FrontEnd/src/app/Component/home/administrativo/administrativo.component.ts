@@ -42,17 +42,9 @@ export class AdministrativoComponent implements OnInit {
   datosAdmisnitrativo: any = [];
   globales:any = [];
   recursas:any = [];
-  asignarRecursas:any =[];
+  asignarRecursas:any ={};
   maestros:any = [];
-  asignarGlobales:any = {        
-    lugar: '',
-    hora: '',
-    fecha: '',
-    idglobales: 0,
-    status: 0,
-    docenteDni: ''
-  };
-  recargar=true;
+  asignarGlobales:any = {};  
 
   aceptado: any = [];
   verificado = false;
@@ -295,8 +287,7 @@ export class AdministrativoComponent implements OnInit {
   async viewModalGlobal(dato:any){            
     if(dato.idrecursa != null){            
       this.asignarRecursas.docenteDni = dato.docenteDni;
-      this.asignarRecursas.idglobales = dato.idglobales;   
-      
+      this.asignarRecursas.idrecursa = dato.idrecursa;           
     } else {      
       this.asignarGlobales.docenteDni = dato.docenteDni;
       this.asignarGlobales.idglobales = dato.idglobales;         
@@ -309,10 +300,8 @@ export class AdministrativoComponent implements OnInit {
     if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != ''){    
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
         if(res.ok == "ok"){
-          Notiflix.Notify.info("Recursa Acreditado");      
-          this.recargar = false;  
-          this.getGlobales();                
-          this.recargar = true;
+          Notiflix.Notify.info("Global Acreditado");                
+          this.getGlobales();                          
           this.asignarGlobales = {lugar: '', hora: '', fecha: '', idglobales: 0, status: 0, docenteDni: ''};
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
@@ -328,12 +317,30 @@ export class AdministrativoComponent implements OnInit {
     this.asignarGlobales.docenteDni = DNI;
   }
   async getRecursas(){
-    const r = await firstValueFrom(this.admin.getgetMateriasRecursa());
-    this.recursas = r.ok;
-    
+    const r = await firstValueFrom(this.admin.getMateriasRecursa());
+    if(r.ok == 'vacio'){
+      this.recursas = [];
+    } else {
+      this.recursas = r.ok;   
+    }
   }
   subirRegistroRecursa(){
-    
+    if(this.asignarRecursas.lugar != undefined && this.asignarRecursas.hora != undefined && this.asignarRecursas.fecha != undefined && this.asignarRecursas.docenteDni != undefined && this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != ''){    
+      this.admin.guardarAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
+        if(res.ok == 'ok'){
+          Notiflix.Notify.info("Recursa Acreditado");     
+          this.getRecursas();
+          this.asignarRecursas = {};
+        } else {
+          Notiflix.Notify.failure("Ha ocurrido Un Error");
+        }
+      });
+    } else {
+      Notiflix.Notify.failure("Rellene Todos Los Campos");
+    }
+  }
+  setDNIr(dni:any){
+    this.asignarRecursas.docenteDni = dni;    
   }
 
 
