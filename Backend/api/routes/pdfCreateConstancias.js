@@ -5,7 +5,7 @@ const file = require('fs');
 const Font = require('./PDFformat/fonts');
 const Style = require('./PDFformat/style');
 const convertir = require('./PDFformat/numlet');
-const textomes = require('./PDFformat/textomes');
+const {textomes} = require('./PDFformat/textomes');
 
 var alumno = "";
 

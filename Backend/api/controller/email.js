@@ -41,7 +41,7 @@ function MailOptions(tipo, email) {
                 attachments: [
                     {
                         filename: `cl${email.numControl}cb66.pdf`,
-                        path: `./api/assets/just${email.numControl}cb66.pdf`,
+                        path: `./api/assets/cl${email.numControl}cb66.pdf`,
                         cid: `${email.email}`,
                     },
                 ],
