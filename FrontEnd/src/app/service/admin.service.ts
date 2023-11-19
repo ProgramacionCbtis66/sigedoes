@@ -43,10 +43,15 @@ export class AdminService {
   getMateriasGlobales():Observable<any>{
     return this.http.get(`${this.URL}/admin/getMateriasGlobales`, this.usr);
   }
-  getMaestrosGlobal():Observable<any>{
-    return this.http.get(`${this.URL}/admin/getMaestrosGlobal`,this.usr);
+  getMaestros():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getMaestros`,this.usr);
   }
-
+  getgetMateriasRecursa():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getGlobales`, this.usr);
+  }
+  getMaestrosRecursa():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getMaestrosRecursa`, this.usr);
+  }
 
   guardarClavesEspProg(prog: any): Observable<any> {
     return this.http.post(`${this.URL}/admin/guardarClavesEspProg`, prog, this.usr);

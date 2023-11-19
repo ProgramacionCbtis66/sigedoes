@@ -41,7 +41,9 @@ export class AdministrativoComponent implements OnInit {
   datos: any = [];
   datosAdmisnitrativo: any = [];
   globales:any = [];
-  maestrosGlobales:any = [];
+  recursas:any = [];
+  asignarRecursas:any =[];
+  maestros:any = [];
   asignarGlobales:any = {        
     lugar: '',
     hora: '',
@@ -290,12 +292,17 @@ export class AdministrativoComponent implements OnInit {
       }
     });
   }  
-  viewModalGlobal(dato:any){        
+  async viewModalGlobal(dato:any){            
+    if(dato.idrecursa != null){            
+      this.asignarRecursas.docenteDni = dato.docenteDni;
+      this.asignarRecursas.idglobales = dato.idglobales;   
+      
+    } else {      
       this.asignarGlobales.docenteDni = dato.docenteDni;
-      this.asignarGlobales.idglobales = dato.idglobales;   
-      this.admin.getMaestrosGlobal().subscribe((res) => {
-        this.maestrosGlobales = res.ok;
-      });         
+      this.asignarGlobales.idglobales = dato.idglobales;         
+    }
+    const maestros = await firstValueFrom(this.admin.getMaestros());
+    this.maestros = maestros.ok;                                 
   }
   subirRegistroGlobal(){
     
@@ -319,6 +326,14 @@ export class AdministrativoComponent implements OnInit {
   }  
   setDNI(DNI:any){
     this.asignarGlobales.docenteDni = DNI;
+  }
+  async getRecursas(){
+    const r = await firstValueFrom(this.admin.getgetMateriasRecursa());
+    this.recursas = r.ok;
+    
+  }
+  subirRegistroRecursa(){
+    
   }
 
 
