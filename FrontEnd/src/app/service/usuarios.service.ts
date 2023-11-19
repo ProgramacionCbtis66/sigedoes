@@ -51,7 +51,6 @@ export class UsuarioService {
   }
   
 
-
   pagoConstancias(item: any): Observable<any>{
     return this.http.post(`${this.URL}/pagos/create-order-cosntancias`, item, this.usr);
   }
@@ -118,7 +117,6 @@ export class UsuarioService {
     });
   }
 
-  
   
 
 }
