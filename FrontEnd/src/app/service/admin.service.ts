@@ -46,7 +46,7 @@ export class AdminService {
   getMaestros():Observable<any>{
     return this.http.get(`${this.URL}/admin/getMaestros`,this.usr);
   }
-  getgetMateriasRecursa():Observable<any>{
+  getMateriasRecursa():Observable<any>{
     return this.http.get(`${this.URL}/admin/getGlobales`, this.usr);
   }
   getMaestrosRecursa():Observable<any>{
@@ -74,6 +74,9 @@ export class AdminService {
   }
   guardarAsignacionGlobal(data:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/AsignacionGlobal`, data, this.usr);
+  }
+  guardarAsignacionRecursa(data:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/guardarAsignacionRecursa`, data, this.usr);
   }
 
 

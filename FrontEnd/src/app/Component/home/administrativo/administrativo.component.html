@@ -175,7 +175,7 @@
                       <th scope="col">Asignar</th>                      
                     </tr>
                   </thead>
-                  <tbody class="table-group-divider" *ngIf="recargar">
+                  <tbody class="table-group-divider" >
                     <!-- aqui programar datos -->
                     <tr *ngFor="let dato of globales; index as i; first as idFirst">
                       <td scope="col">{{dato.periodoescolar}}</td>
@@ -787,7 +787,7 @@
                   <th class=" c2">
                     <div class="form-floating">
                       <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.lugar">
+                        [(ngModel)]="asignarRecursas.lugar">
                       <label for="floatingInput">Salon </label>
                     </div>
                   </th>
@@ -797,7 +797,7 @@
                   <th class=" c2">
                     <div class="form-floating">
                       <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.fecha">
+                        [(ngModel)]="asignarRecursas.fecha">
                       <label for="floatingInput">Fecha </label>
                     </div>
                   </th>
@@ -806,7 +806,7 @@
                   <th class=" c2">
                     <div class="form-floating">
                       <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.hora">
+                        [(ngModel)]="asignarRecursas.hora">
                       <label for="floatingInput">Hora </label>
                     </div>
                   </th>
@@ -815,7 +815,7 @@
                   <th class="c1">
                     <div class="form-floating">
                       <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDni">                        
-                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNIr(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
                       </select>
                       <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
                     </div>
