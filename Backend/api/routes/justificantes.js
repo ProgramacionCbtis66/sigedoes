@@ -64,7 +64,7 @@ just.post('/aprobarJustificante', verifica, async (req, res) => {
     const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? , horas1 = ?, horas2= ? where idjustificante = ?';
   
         const conexion = await ccn();
-        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, "alumno.horas1", "alumno.horas2", alumno.idjustificante]);
+        const resultado = await conexion.execute(sql1, [0, alumno.observaciones, alumno.fechaEstado, "alumno.horas1", "alumno.horas2", alumno.idjustificante]);
         if (resultado[0].affectedRows > 0) {
             if (alumno.estado == 1) {
                 res.json({ data: true });

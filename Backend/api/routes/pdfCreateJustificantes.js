@@ -38,31 +38,24 @@ async function createJustificante(req, res, tipo) {
         asunto: [
 
             { image: './api/assets/JustificanteSubSec.png', width: 520 },
-            { text: `\n \n TIERRA BLANCA. VER A ${dia.toLowerCase()} DE ${mes} DE ${year.toLowerCase}\n \n \n \n`, style: Style.normal, alignment: 'center', bold: true },
+            { text: `\n Tierra Blanca. Ver, a ${dia.toLowerCase()} de ${mes} de ${year.toLowerCase()}  \n `, style: Style.normal, alignment: 'center' },
 
-            { text: "\n \n \n JUSTIFICANTE DE INASISTENCIA: \n \n \n ", style: Style.normal, alignment: 'center', bold: true },
+            { text: `JUSTIFICANTE DE INASISTENCIA:`, style: Style.normal, alignment: 'center', bold: true, decoration: 'underline', decorationStyle: 'solid' },
 
-            { text: `C.C. DOCENTES DEL GRUPO: "${just.grado}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `ESPECIALIDAD: "${just.especialidad}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `TURNO: "${just.turno}"`, style: Style.header, alignment: 'right', bold: true },
-            { text: `P R E S E N T E S.-`, style: Style.header, alignment: 'right', bold: true },
-            { text: " ", style: Style.header },
-            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `${just.razon}, no asistio a clases el (los)\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `dias(s) ${just.fecha} del presente año. Por lo anterior\n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo`, style: Style.normal, alignment: 'justify' },
-            { text: `mencion que el presente documento NO EXENTA al alumno de sus obligaciones \n \n `, style: Style.normal, alignment: 'justify' },
-            { text: `academicas\n \n `, style: Style.normal, alignment: 'justify' },
+            { text: `\n C.C. DOCENTES DEL GRUPO: "${just.grado}${just.grupo}"`, style: Style.normal, alignment: 'right', bold: true },
+            { text: `ESPECIALIDAD: "${just.especialidad}"`, style: Style.normal, alignment: 'right', bold: true },
+            { text: `TURNO: "${just.turno}"`, style: Style.normal, alignment: 'right', bold: true },
+            { text: `P R E S E N T E S.-`, style: Style.normal, alignment: 'right', bold: true  },
+            { text: " ", style: Style.normal  },
+            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a: ${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :${just.razon}, no asistio a clases el (los) dias(s) ${just.fecha} del presente año. Por lo anterior le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n `, style: Style.normal, alignment: 'justify' },
+            { text: `     Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo mencion que el presente documento NO EXENTA al alumno de sus obligaciones academicas\n `, style: Style.normal, alignment: 'justify' },
 
-            { text: `\n \n \nATENTAMENTE\n \n \n`, style: Style.normal, alignment: 'center' },
-
-            { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.header },
-            { text: `${alumno.Esc_Director} \n \n `, style: Style.firma, alignment: "center" },
-            { image: './api/assets/tablajustificantes.png', width: 570, absolutePosition: { x: 5, y: 760 } },
-            { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 5, y: 760 } },
+            { text: `\n ATENTAMENTE. \n \n`, style: Style.normal, alignment: 'center' },
+            { text: "________________________________", style: Style.normal, alignment: 'center', bold: true },
+            { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.normal, alignment: 'center', bold: true },
+            { text: `${alumno.Esc_Director}`, style: Style.firma, alignment: "center" },
+            { image: './api/assets/tablajustificantes.png', width: 560, absolutePosition: { x: 12, y: 506 } },
+            { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 8, y: 765 } },
         ]
     }
 

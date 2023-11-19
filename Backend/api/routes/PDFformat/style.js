@@ -9,7 +9,7 @@ module.exports = {
     },
     normal: {
         color: "#000000",
-        fontSize: 13,
+        fontSize: 12,
         alignment: "justify",
         font: "Times",
         lineHeight: 1.5
