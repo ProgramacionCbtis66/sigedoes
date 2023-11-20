@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
@@ -44,6 +45,7 @@ export class ConstanciasComponent implements OnInit {
     private auth: AuthService,
     private user: UsuarioService,
     private email: SendEmailService,
+    private Link: Router,
 
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
@@ -65,13 +67,17 @@ export class ConstanciasComponent implements OnInit {
       } catch (error) {
         console.error(error);
       }
+    }else{
+      this.Link.navigate(['/']);
     }
   }
 
   actualizar() {
+     this.ngOnInit();
     this.constancia.asunto = this.valortipo;
   }
  async veridatos() {
+    this.ngOnInit();
     this.constancia.asunto = this.valortipo;
     if(
       this.constancia.asunto != '' &&
@@ -93,6 +99,7 @@ export class ConstanciasComponent implements OnInit {
     }
   }
   generarcons() {
+    this.ngOnInit();
       const email = {
           email: this.datos.correo,
           asunto: this.constancia.asunto,
@@ -134,6 +141,7 @@ export class ConstanciasComponent implements OnInit {
     });
   }
  async comprobar() {
+    this.ngOnInit();
     this.constancia.asunto = this.valortipo;
     this.constancia.asunto = this.valortipo;
     this.constancia.semestre = this.datos.grado;
@@ -166,6 +174,7 @@ export class ConstanciasComponent implements OnInit {
   }
 
   async crearOrden(){
+    this.ngOnInit();
     Notiflix.Loading.standard('Generando Orden de Pago');
     const item = [{
       title: "Pago Constancia",

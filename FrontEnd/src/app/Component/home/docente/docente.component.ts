@@ -8,6 +8,7 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-docente',
@@ -40,6 +41,7 @@ export class DocenteComponent implements OnInit {
     private auth: AuthService,
     private alumno: UsuarioService,
     private location: Location,
+    private Link: Router,
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
@@ -47,7 +49,10 @@ export class DocenteComponent implements OnInit {
     this.datosPeridoEscolar();
   }
 
+
+
   async datos() {
+    this.ngOnInit();
     this.datosDocente._numControl = this.auth.decodifica().numControl;
     const numControl = {
       numControl: this.datosDocente._numControl
@@ -78,10 +83,14 @@ export class DocenteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+if(!this.auth.isAuth()){
+    this.nav._iflogin = true;
+    this.Link.navigate(['/']);
+   }
   }
 
   validandoLlenado(datos: any, numcontrol: any): boolean {
+    this.ngOnInit();
     for (let alumno of datos) {
       if (alumno.numControl == numcontrol) {
         return true;
@@ -92,7 +101,7 @@ export class DocenteComponent implements OnInit {
 
 
   async buscarAlumno(evento: any) {
-
+    this.ngOnInit();
     if (this.verificaCamposMP()) {
       let listaEncontrado;
       let numeroCtrl: any = {};
@@ -172,6 +181,7 @@ export class DocenteComponent implements OnInit {
   }
 
   limpiarCampos() {
+    this.ngOnInit();
     this.numControlAlumnoGlobal = "";
     this.numControlAlumnoRecursa = "";
     this.materiaGlobal = undefined;
@@ -182,16 +192,11 @@ export class DocenteComponent implements OnInit {
   }
 
   verificaCamposMP(): boolean {
-    console.log(this.periodoGlobal);
-     
+    this.ngOnInit();
     if (this.numControlAlumnoGlobal !== '' && this.materiaGlobal !== undefined && this.periodoGlobal !== undefined ) {
-       
       return true;
     }
- 
- 
     if (this.numControlAlumnoRecursa !== '' && this.materiaRecursa !== undefined && this.periodoRecursa !== undefined) {
-       
       return true;
     }
  
@@ -199,6 +204,7 @@ export class DocenteComponent implements OnInit {
   }
 
   eliminarAlumno(alumno: any, array: any) {
+    this.ngOnInit();
     if (array == "global") { 
       this.alumnosGlobales = this.alumnosGlobales.filter((item: any) => item.numControl != alumno); 
       if(this.alumnosGlobales.length<=0) this.disableGlobal = false;
@@ -209,6 +215,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async datosMateria(event: any) {
+    this.ngOnInit();
     const control = event.target.id
     var datos: any = "";
     if (control == "selectRecursasP") {
@@ -225,6 +232,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async datosPeridoEscolar() {
+    this.ngOnInit();
     const datos = await firstValueFrom(this.docente.datosPeriodoEscolar(""));
     if (datos.data != '' && datos.data != undefined) {
       this.periodoEscolar = datos.data;
@@ -232,6 +240,7 @@ export class DocenteComponent implements OnInit {
   }
 
   enviarRecursa(event: any) {
+    this.ngOnInit();
     Notiflix.Loading.pulse('Enviando alumnos a recursar...', {
       interval: 3000
     } as any);
@@ -267,6 +276,7 @@ export class DocenteComponent implements OnInit {
   }
 
   enviarGlobales(event: any) {
+    this.ngOnInit();
     Notiflix.Loading.pulse('Enviando alumnos a Global...', {
       interval: 2000
     } as any);
@@ -300,6 +310,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async cargarAlumnosGlobalesAsignados() {
+    this.ngOnInit();
     if (this.ListaAlumnosGlobales.length <= 0 || this.ListaAlumnosGlobales == undefined) {
       try {
         const res = await firstValueFrom(this.docente.ListaAlumnosGlobalesAsignados({ docenteDni: this.auth.decodifica().numControl }));
@@ -315,6 +326,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async enviarCalificacionesGlobales(idglobales: any, idasiglobd: any, calificacion: any) {
+    this.ngOnInit();
     if (calificacion != undefined && calificacion != '') {
       const filtro = this.ListaAlumnosGlobales.filter((item: any) => item.idasiglobd == idasiglobd);
       try {
@@ -336,6 +348,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async cargarAlumnosRecursasAsignados() {
+    this.ngOnInit();
     if (this.alumnosRecursas.length <= 0 || this.alumnosRecursas == undefined) {
       try {
         const res = await firstValueFrom(this.docente.ListaAlumnosRecursasAsignados({ docenteDni: this.auth.decodifica().numControl }));
@@ -351,6 +364,7 @@ export class DocenteComponent implements OnInit {
   }
 
   async enviarCalificacionesRecursas(idrecursa: any, idasigrecursa: any, calificacion: any) {
+    this.ngOnInit();
     if (calificacion != undefined && calificacion != '') {
       const filtro = this.ListaAlumnosRecursas.filter((item: any) => item.idrecursa == idrecursa);
       try {

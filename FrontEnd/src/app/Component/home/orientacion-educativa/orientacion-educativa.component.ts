@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { firstValueFrom } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
@@ -22,7 +23,8 @@ export class OrientacionEducativaComponent implements OnInit {
     private auth: AuthService,
     private just: JustificanteService,
     private user: UsuarioService,
-    private admin: AdminService
+    private admin: AdminService,
+    private Link: Router
  
   ) { 
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
@@ -32,10 +34,14 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.obtenerDatos();
+   if(!this.auth.isAuth()){
+    this.nav._iflogin = true;
+    this.Link.navigate(['/']);
+   }
   }
 
   async obtenerDatos(){
+    this.ngOnInit()
     try{
       let res = await firstValueFrom(this.just.ListaJustificantes());
       if(res.data.length > 0){
@@ -50,6 +56,7 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   revisarDocumentos(numControl: number){
+    this.ngOnInit()
     //busar en el array de justificantes el id
     const datosSolicitante =  this.justificantes.find((element: any) => element.numControl == numControl);
     
@@ -58,7 +65,7 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   async aprobarJustificante(op: number){
-    console.log(op);
+    this.ngOnInit()
     try{
       this.alumno.estado=op;
       let res = await firstValueFrom(this.just.aprobarJustificante(this.alumno));
@@ -77,6 +84,7 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   async rechazarJustificante(op: number){
+    this.ngOnInit()
     try{
       this.alumno.estado=op;
       let res = await firstValueFrom(this.just.rechazarJustificante(this.alumno));

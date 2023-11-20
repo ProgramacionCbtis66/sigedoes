@@ -5,7 +5,7 @@ import decode from 'jwt-decode';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
- 
+
 
 
 
@@ -18,18 +18,18 @@ export class AuthService {
   private usr = environment.autorization;
   public estatus: boolean = true;
 
-  
 
-  constructor(private http: HttpClient, 
+
+  constructor(private http: HttpClient,
     private jwt: JwtHelperService,
-    ) { }
+  ) { }
 
-   
+
   private handleError(error: HttpErrorResponse) {
     console.error('Error:', error);
     const status = error.status;
     console.error(`Status: ${status}`);
-    return throwError(()=>error);
+    return throwError(() => error);
   }
 
   public acceso(usuario: any): Observable<any> {
@@ -42,7 +42,7 @@ export class AuthService {
   }
 
   public solicitudAcceso(solicitud: any): Observable<any> {
-    return this.http.post(`${this.ruta}/auth/solicitudAcceso`, solicitud,this.usr);
+    return this.http.post(`${this.ruta}/auth/solicitudAcceso`, solicitud, this.usr);
   }
 
   public olvContra(correo: any): Observable<any> {
@@ -51,13 +51,13 @@ export class AuthService {
 
   public isAuth(): boolean {
     const token = localStorage.getItem("color");
-    if (token !== null && token !== "" && !this.tokeExpired()) {
-      if (this.jwt.isTokenExpired(token) || localStorage.getItem("color") == "undefined") {
+    if (token !== null && token !== "" && !this.tokeExpired() && token !== undefined) {
+      if (this.jwt.isTokenExpired(token)) {
         return false;
       } else {
         return true;
       }
-    }else{
+    } else {
       return false;
     }
   }
