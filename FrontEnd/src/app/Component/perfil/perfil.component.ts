@@ -3,6 +3,7 @@ import { UsuarioService } from 'src/app/service/usuarios.service';
 import { AuthService } from '../../service/auth.service';
 import * as Notiflix from 'notiflix';
 import { NavegacionService } from 'src/app/service/navegacion.service';
+
  
 
 @Component({
@@ -19,11 +20,15 @@ export class PerfilComponent implements OnInit {
   constructor(private nav: NavegacionService,
     private auth: AuthService,
     private userService: UsuarioService,
-    private Base64: UsuarioService
+    private Base64: UsuarioService,
   ) {
     this.nav._perfil = true;
     this.nav._foto = this.auth.decodifica().foto;
   }
+
+  salir(): void {
+    if (!this.auth.isAuth()) {this.nav.salir();}
+    }
 
   ngOnInit(): void {
     if (this.auth.isAuth()) {
@@ -42,9 +47,13 @@ export class PerfilComponent implements OnInit {
           this.perfil.pass2 = res.dato.password;
         }
       });
+    }else{
+      this.nav.salir();
     }
+
   }
   guardarCambios() {
+    this.salir();
     if(this.perfil.pass1==this.perfil.pass2 && this.perfil.pass1!=undefined && this.perfil.pass2!=undefined){
       this.perfil.nombre = this.auth.decodifica().nombre;
       this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
@@ -60,7 +69,7 @@ export class PerfilComponent implements OnInit {
     }
   }
   validar(event: any) {
-     
+      this.salir();
     //validar contraseña segura con expresiones regulares
     const controName = event.target.id;
     if (controName == "pass") {
@@ -103,10 +112,10 @@ export class PerfilComponent implements OnInit {
 
   activarInput() {
     this.fileInput.nativeElement.click();
-
   }
 
   cargarFoto(event: any): void {
+    this.salir();
     const archivo = event.target.files[0];
     this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
 

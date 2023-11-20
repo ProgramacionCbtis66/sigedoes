@@ -20,6 +20,7 @@ export class NavegacionService {
   private orientacionEdu = new BehaviorSubject<boolean>(false);
   private perfil = new BehaviorSubject<boolean>(false);
   private regresar = new BehaviorSubject<boolean>(false);
+
   
 
   get _foto(): any {return this.foto.getValue();}
@@ -57,6 +58,7 @@ export class NavegacionService {
     this._regresar=false;
     this._homeAlumno=false;
     this._registro= false;
+    this._orientacionEdu=false;
     this._iflogin=true;
     this._Administrador= false;
     this._docente=false;
