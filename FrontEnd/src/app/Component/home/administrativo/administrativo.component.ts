@@ -288,26 +288,26 @@ export class AdministrativoComponent implements OnInit {
     if(dato.idrecursa != null){            
       this.asignarRecursas.docenteDni = dato.docenteDni;
       this.asignarRecursas.idrecursa = dato.idrecursa;           
-    } else {      
-      this.asignarGlobales.docenteDni = dato.docenteDni;
-      this.asignarGlobales.idglobales = dato.idglobales;         
+    } else {    
+      this.asignarGlobales = dato;         
+      console.log(this.asignarGlobales);    
     }
     const maestros = await firstValueFrom(this.admin.getMaestros());
     this.maestros = maestros.ok;                                 
   }
   subirRegistroGlobal(){
     
-    if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != ''){    
+    if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined){    
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
         if(res.ok == "ok"){
           Notiflix.Notify.info("Global Acreditado");                
           this.getGlobales();                          
-          this.asignarGlobales = {lugar: '', hora: '', fecha: '', idglobales: 0, status: 0, docenteDni: ''};
+          this.asignarGlobales = {};
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
       });
-
+      console.log(this.asignarGlobales);
     }else {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }

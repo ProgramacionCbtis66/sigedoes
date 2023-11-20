@@ -184,8 +184,8 @@ administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
 
 administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
     const conexion = await ccn();
-    try{
-        const [row] = await conexion.execute('select idglobales,periodoescolar.periodo, periodoescolar,descripcion,semestre,tipo, docenteDni from globales,materias,periodoescolar where (globales.idMateria = materias.idMateria) and (globales.idperiodoescolar = periodoescolar.idperiodoescolar) and (estado = 0);');
+    try{        
+        const [row] = await conexion.execute(`select * from materias m, periodoescolar p where (m.periodo = p.idperiodoescolar) and idMateria in (select distinct idMateria from globales where (estado = 2))`);                                                    
         if(row.length > 0){
             res.send({ok:row});                
         } else if(row.length == 0){
@@ -201,11 +201,17 @@ administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
 administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
     const data = req.body;
     const conexion = await ccn();
-    try{        
-        let sql = `insert into asignaglobal (lugar, hora, fecha, idglobales, status, docenteDni) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idglobales}', '0', '${data.docenteDni}');`;
+    try{                
+        let sql = `insert into asignaglobal (lugar, hora, fecha, idMateria, status, docenteDni, idperiodoescolar) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idMateria}', '0', '${data.docenteDni}', '${data.idperiodoescolar}');`;
         const [row] = await conexion.execute(sql);
         if(row.affectedRows > 0){
-            sql = `UPDATE globales SET estado = '1' WHERE (idglobales = '${data.idglobales}');`;
+            const [actu] = await conexion.execute(`select idglobales from globales where (estado = 2) and (idMateria = ${data.idMateria})`);
+            let listGlobales = [];
+            actu.forEach(globales => {
+                listGlobales.push(globales.idglobales);
+            });
+            const ready = listGlobales.join(',');            
+            sql = `UPDATE globales SET estado = '3' WHERE idglobales in (${ready});`;
             await conexion.execute(sql);                        
             res.send({ok:"ok"});            
         }else {
