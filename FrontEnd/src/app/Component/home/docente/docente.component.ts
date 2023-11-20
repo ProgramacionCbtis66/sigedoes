@@ -85,7 +85,7 @@ export class DocenteComponent implements OnInit {
   ngOnInit(): void {
 if(!this.auth.isAuth()){
     this.nav._iflogin = true;
-    this.Link.navigate(['/']);
+    this.nav.salir();
    }
   }
 

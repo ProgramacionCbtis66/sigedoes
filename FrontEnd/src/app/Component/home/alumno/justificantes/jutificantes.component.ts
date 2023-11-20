@@ -25,9 +25,14 @@ export class JutificantesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this.auth.isAuth()){
+      this.nav._iflogin = true;
+      this.nav.salir();
+    }
   }
 
   async enviarJust(){
+    this.ngOnInit();
     try{
       let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
       console.log(this.justForm);

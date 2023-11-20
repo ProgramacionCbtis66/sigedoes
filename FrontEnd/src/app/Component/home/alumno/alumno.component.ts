@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
@@ -55,13 +54,18 @@ export class AlumnoComponent implements OnInit {
     private auth: AuthService,
     private user: UsuarioService,
     private email: SendEmailService,
-    private Link: Router,
+ 
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._homeAlumno = true;
     this.nav._perfil=false;
   }
+
+  salir(): void {
+    if (!this.auth.isAuth()) { this.nav.salir(); }
+  }
+
 
   async ngOnInit() {
     if (this.auth.isAuth()) {
@@ -85,16 +89,16 @@ export class AlumnoComponent implements OnInit {
         this.datos.foto = '.././assets/img/tufoto.png';
       }
     }else{
-      this.Link.navigate(['/']);
+      this.nav.salir();
     }
   }
 
   actualizar() {
-    this.ngOnInit();
+    this.salir();
     this.datosCons.asunto = this.valortipo;
   }
   veridatos() {
-    this.ngOnInit();
+     this.salir();
     this.datosCons.asunto = this.valortipo;
     if (
       this.datosCons.asunto != '' &&
@@ -116,7 +120,7 @@ export class AlumnoComponent implements OnInit {
     }
   }
   generarcons() {
-    this.ngOnInit();
+    this.salir();
     const email = {
       email: this.correo,
       asunto: this.datosCons.asunto,
@@ -157,7 +161,7 @@ export class AlumnoComponent implements OnInit {
     });
   }
   comprobar() {
-    this.ngOnInit();
+    this.salir();
     this.datosCons.asunto = this.valortipo;
     this.datosCons.asunto = this.valortipo;
     this.datosCons.semestre = this.semestre;
