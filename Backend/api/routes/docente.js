@@ -162,7 +162,7 @@ async function buscaRecursaenGlobales(periodo, materia, numControl, dmateria) {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);
         if (registros.length > 0) {
-            if (registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2) {
+            if (registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2 || registros[0].estado == 3) {
 
                 return ({ data: true, mensaje: `alumno: ${numControl} con la materia ${dmateria} esta registrado en la tabla de globales pendiente de examen` });
             } else {
@@ -254,7 +254,7 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
         const [registros] = await conexion.execute(sql, [idglobales]);
         console.log(registros);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=1;}else{ estado=3;}
+                if(calificacion >= 6){ estado=4;}else{ estado=6;}
                 const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
                 const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
                 const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
@@ -312,7 +312,7 @@ docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
         const sql = 'select * from solicitud where idrecursa = ? and activo = 1';
         const [registros] = await conexion.execute(sql, [idrecursa]);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=1;}else{ estado=3;}
+                if(calificacion >= 6){ estado=4;}else{ estado=6;}
                 const sql = 'update recursas set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idrecursa = ?';
                 const [registros1] = await conexion.execute(sql, [idrecursa, estado,calificacion, fecha]);
                 const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';
