@@ -48,7 +48,7 @@ just.post('/guardardatos', verifica, async (req, res) => {
     const sql = 'insert into justificante (numControl, motivo, periodo, inetutor, cartatutor, doctoref, tipo, fecha, estado) values (?,?,?,?,?,?,?,?,?)';
     try {
         const conexion = await ccn();
-        const resultado = await conexion.execute(sql, [datos.numControl, datos.motivo, datos.periodo, datos.inetutor, datos.cartatutor, datos.doctoref, datos.tipo, datos.fecha, 0]);
+        const [resultado] = await conexion.execute(sql, [datos.numControl, datos.motivo, datos.periodo, datos.inetutor, datos.cartatutor, datos.doctoref, datos.tipo, datos.fecha, 0]);
         if (resultado[0].affectedRows > 0) {
             res.json({ status: 'Registrado' });
         }

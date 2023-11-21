@@ -3,12 +3,12 @@
     <div class="d-flex justify-content-center p-1 mb-2">
         <h4 class="m-2">SOLICITUD DE JUSTIFICANTE</h4>
     </div>
-    <div class="container-fluid d-flex flex-wrap">
+    <div class="row d-flex flex-wrap px-4">
         <!--- formulario --->
 
         <!--Lado izquierdo-->
         <div class="col-md-6 mt-2 pe-md-2">
-            <div class="card border border-white px-3">
+            <div class="card border border-white px-3 mb-4">
                 <!--- Section Razon --->
                 <div class="card mt-4">
                     <div class="col-12 px-3 mb-4">
@@ -36,9 +36,10 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <a href="#">
-                                                <img src="assets/img/documentfoto.png" class="card-img-top"
-                                                    alt="documento">
+                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 0)" hidden>
+                                            <a class="pe-auto" (click)="activarInput()">
+                                                <img *ngIf="!foto[0]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="foto[0]" [src]="foto[0]" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>
@@ -56,10 +57,11 @@
                                 </div>
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
-                                        <div class="col-6">
-                                            <a href="#">
-                                                <img src="assets/img/documentfoto.png" class="card-img-top"
-                                                    alt="documento">
+                                        <div class="col-6 ">
+                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 1)" hidden>
+                                            <a class="pe-auto" (click)="activarInput()">
+                                                <img *ngIf="!foto[1]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="foto[1]" [src]="foto[1]" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>
@@ -78,9 +80,10 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <a href="#">
-                                                <img src="assets/img/documentfoto.png" class="card-img-top"
-                                                    alt="documento">
+                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 2)" hidden>
+                                            <a class="pe-auto" (click)="activarInput()">
+                                                <img *ngIf="!foto[2]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="foto[2]" [src]="foto[2]" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>
@@ -98,7 +101,7 @@
 
         <!--Lado Derecho-->
         <div class="col-md-6 ps-md-2 mt-2">
-            <div class="card border border-white p-2">
+            <div class="card border border-white p-2 mb-4">
                 <div class="accordion mb-2" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
