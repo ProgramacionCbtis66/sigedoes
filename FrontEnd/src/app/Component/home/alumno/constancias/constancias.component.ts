@@ -180,7 +180,7 @@ export class ConstanciasComponent implements OnInit {
       title: "Pago Constancia",
       unit_price: 40,
       currency_id: "MXN",
-      quantity: 2,
+      quantity: 1,
     },
       {
         numControl: this.datos.numControl,
