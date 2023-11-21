@@ -1,0 +1,15 @@
+{
+    "editor.fontFamily": "Roboto, Consolas, 'Courier New', monospace, 'Pusab'",
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 18,
+    "editor.renderWhitespace": "selection",
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "on",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.wrappingStrategy": "advanced",
+    "editor.comments.insertSpace": true,
+    "editor.fontWeight": "100",
+    "editor.fontVariations": false,
+    "diffEditor.codeLens": false,
+    "editor.fontLigatures": false
+}
