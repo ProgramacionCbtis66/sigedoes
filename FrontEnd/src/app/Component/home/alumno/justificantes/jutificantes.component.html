@@ -36,10 +36,10 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 0)" hidden>
-                                            <a class="pe-auto" (click)="activarInput()">
-                                                <img *ngIf="!foto[0]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="foto[0]" [src]="foto[0]" alt="documento" class="card-img-top">
+                                            <input #fileInput1 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto1" hidden>
+                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput1">
+                                                <img *ngIf="!justificante.documentoreferencia" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="justificante.documentoreferencia" [src]="justificante.documentoreferencia" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>
@@ -58,10 +58,10 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6 ">
-                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 1)" hidden>
-                                            <a class="pe-auto" (click)="activarInput()">
-                                                <img *ngIf="!foto[1]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="foto[1]" [src]="foto[1]" alt="documento" class="card-img-top">
+                                            <input #fileInput2 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto2" hidden>
+                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput2">
+                                                <img *ngIf="!justificante.inetutor" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="justificante.inetutor" [src]="justificante.inetutor" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>
@@ -80,10 +80,10 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <input #fileInput type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event, 2)" hidden>
-                                            <a class="pe-auto" (click)="activarInput()">
-                                                <img *ngIf="!foto[2]" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="foto[2]" [src]="foto[2]" alt="documento" class="card-img-top">
+                                            <input #fileInput3 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto3" hidden>
+                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput3">
+                                                <img *ngIf="!justificante.cartatutor" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
+                                                <img *ngIf="justificante.cartatutor" [src]="justificante.cartatutor" alt="documento" class="card-img-top">
                                             </a>
                                         </div>
                                     </div>

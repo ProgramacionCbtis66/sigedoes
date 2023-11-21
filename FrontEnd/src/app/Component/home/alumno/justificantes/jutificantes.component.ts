@@ -12,8 +12,27 @@ import { UsuarioService } from 'src/app/service/usuarios.service';
   styleUrls: ['./jutificantes.component.css']
 })
 export class JutificantesComponent implements OnInit {
-  @ViewChild('fileInput') fileInput!: ElementRef;
-  protected justificante: any = [];
+  @ViewChild('fileInput1') fileInput1!: ElementRef;
+  @ViewChild('fileInput2') fileInput2!: ElementRef;
+  @ViewChild('fileInput3') fileInput3!: ElementRef;
+  protected justificante = {
+    idjustificante: 0,
+    numcontrol: "", 
+    motivo: "", 
+    periodo: "", 
+    inetutor: null,
+    cartatutor: null,
+    documentoreferencia: null,
+    tipo: "",
+    fecha: "",
+    estado: 0,
+    correoTutor: "", 
+    nombreTutor: "", 
+    observaciones: "", 
+    fechaEstado: "", 
+    horas1: "", 
+    horas2: "",
+  }
   protected justForm: any = [];
   protected images: any = [];
 
@@ -56,34 +75,50 @@ export class JutificantesComponent implements OnInit {
     }
   }
 
-  cargarFoto(event: any, index: number): void {
+  foto64(event: any):any{
     const archivo = event.target.files[0];
     this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
 
       const foto64 = imagenBase64.base;
 
       this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
-        this.foto[index] = imagenRedimensionada.base;
-        console.log(this.foto);
-        if(index == 0){
-          this.images[0] = this.foto[0];
-        }
-        if(index == 1){
-          this.images[1] = this.foto[1];
-        }
-        if(index == 2){
-          this.images[3] = this.foto[3];
-        }
+        return imagenRedimensionada.base;
       }).catch((error: any) => {
+        return null;
         console.error('Error al redimensionar la imagen', error);
       });
     }).catch((error: any) => {
+      return null;
       console.error('Error al extraer la imagen en base64', error);
     });
   }
 
-  activarInput() {
-    this.fileInput.nativeElement.click();
+  recargarFoto(event: any): void {
+    const control = event.target.id;
+    if(control == "foto1"){
+      this.justificante.documentoreferencia = this.foto64(event);
+    }
+    if(control == "foto2"){
+      this.justificante.inetutor = this.foto64(event);
+    }
+    if(control == "foto3"){
+      this.justificante.cartatutor = this.foto64(event);
+    }
   }
+
+  activarInput(event: any){
+    const control = event.target.id;
+    if(control == "fileinput1"){
+      this.fileInput1.nativeElement.click();
+    }
+    if(control == "fileinput2"){
+      this.fileInput2.nativeElement.click();
+    }
+    if(control == "fileinput3"){
+      this.fileInput3.nativeElement.click();
+    }
+  }
+
+  cambiarSelecionDia(){}
 
 }
