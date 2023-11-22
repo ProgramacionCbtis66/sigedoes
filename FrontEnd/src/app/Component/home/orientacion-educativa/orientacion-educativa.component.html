@@ -153,13 +153,11 @@
                             <div class="col">
                                 <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'dias'">
                                     Por este conducto solicito a ustedes le sea(n) justificado(s) el/los dia(s):
-                                    {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior le pedimos
-                                    sean tan amables de justificar las inasistencias de la(s) fecha(s) señalada(s).
+                                    {{alumno.fecha1}} al {{alumno.fecha2}} por el motivo ya antes mencionado. Por lo anterior le pedimos sean tan amables de justificar las inasistencias de la(s) fecha(s) señalada(s).
                                 </p>
                                 <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'horas'">
                                     Por este conducto solicito a ustedes le sea(n) justificada(s) la(s) hora(s): de
-                                    {{alumno.periodo}} por el motivo ya antes mencionado. Por lo anterior sean tan
-                                    amables de justificar la(s) inasistencia(s) de la(s) hora(s) señalada(s).
+                                    {{alumno.horas1}} a {{alumno.horas2}} por el motivo ya antes mencionado. Por lo anterior sean tan amables de justificar la(s) inasistencia(s) de la(s) hora(s) señalada(s).
                                 </p>
                             </div>
                             <div class="col-12">
