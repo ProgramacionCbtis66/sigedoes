@@ -44,11 +44,11 @@ just.get('/obtenerdatos', verifica, async (req, res) => {
 
 
 just.post('/guardardatos', verifica, async (req, res) => {
-    const datos = req.body;
-    const sql = 'insert into justificante (numControl, motivo, periodo, inetutor, cartatutor, doctoref, tipo, fecha, estado) values (?,?,?,?,?,?,?,?,?)';
+    const {numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror} = req.body;
+    const sql = "insert into justificante (numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror) values (?,?,?,?,?,?,?,?,?,?,?)"
     try {
         const conexion = await ccn();
-        const [resultado] = await conexion.execute(sql, [datos.numControl, datos.motivo, datos.periodo, datos.inetutor, datos.cartatutor, datos.doctoref, datos.tipo, datos.fecha, 0]);
+        const [resultado] = await conexion.execute(sql, [numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror]);
         if (resultado[0].affectedRows > 0) {
             res.json({ status: 'Registrado' });
         }
@@ -62,11 +62,16 @@ just.post('/guardardatos', verifica, async (req, res) => {
 
 just.post('/aprobarJustificante', verifica, async (req, res) => {
     const alumno = req.body;
+    let timeElapsed = Date.now().toLocaleString();
+    const today = new Date(timeElapsed);
+    alumno.fechaRespuesta = today.toLocaleDateString();
+
+    let fechaFormateada = dia + '/' + mes + '/' + año;
     
-    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? , horas1 = ?, horas2= ? where idjustificante = ?';
-  
+    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaRespuesta = ?, idorientacioneducativa = ?  where idjustificante = ?';
+    
         const conexion = await ccn();
-        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.horas1, alumno.horas2, alumno.idjustificante]);
+        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaRespuesta, alumno.idorientacioneducativa, alumno.idjustificante]);
         if (resultado[0].affectedRows > 0) {
             if (alumno.estado == 1) {
                 res.json({ data: true });
@@ -79,10 +84,14 @@ just.post('/aprobarJustificante', verifica, async (req, res) => {
 
 just.post('/rechazarJustificante', verifica, async (req, res) => {
     const alumno = req.body;
-    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaEstado = ? where idjustificante = ?';
+    let timeElapsed = Date.now().toLocaleString();
+    const today = new Date(timeElapsed);
+    alumno.fechaRespuesta = today.toLocaleDateString();
+
+    const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaRespuesta = ?, idorientacioneducativa = ? where idjustificante = ?';
     try {
         const conexion = await ccn();
-        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaEstado, alumno.idjustificante]);
+        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaRespuesta, alumno.idorientacioneducativa, alumno.idjustificante]);
         if (resultado[0].affectedRows > 0) {
             res.json({ data: true });
         }

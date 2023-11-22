@@ -68,12 +68,16 @@ export class OrientacionEducativaComponent implements OnInit {
     this.ngOnInit()
     try{
       this.alumno.estado=op;
+      this.alumno.asunto= "Envio de Justificante";
+      this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
+      this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+      this.alumno.fechaRespuesta =  '';
+      this.alumno.idorientacioneducativa = this.auth.decodifica().numControl;
+      
       let res = await firstValueFrom(this.just.aprobarJustificante(this.alumno));
       if(res.data){
         Notiflix.Notify.success("Respuesta enviada al alumno");
-          this.alumno.asunto= "Envio de Justificante";
-          this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
-          this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+          
           
         let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
@@ -87,12 +91,16 @@ export class OrientacionEducativaComponent implements OnInit {
     this.ngOnInit()
     try{
       this.alumno.estado=op;
+      this.alumno.asunto= "Envio de Notificación de observaciones del Justificante";
+      this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
+      this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+      this.alumno.fechaRespuesta =  '';
+      this.alumno.idorientacioneducativa = this.auth.decodifica().numControl;
+
       let res = await firstValueFrom(this.just.rechazarJustificante(this.alumno));
       if(res.data){
         Notiflix.Notify.success("Enviando  CORREO respuesta enviada al alumno");
-        this.alumno.asunto= "Envio de Notificación de observaciones del Justificante";
-        this.alumno.nombre = this.alumno.nombre + " " + this.alumno.apellidoP + " " + this.alumno.apellidoM;
-        this.alumno.nombreOE = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+        
         let email = await firstValueFrom(this.just.notificacion(this.alumno));
         this.obtenerDatos();
       }
