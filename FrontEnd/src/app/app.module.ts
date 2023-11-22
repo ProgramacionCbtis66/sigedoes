@@ -22,6 +22,8 @@ import { AdministrativoComponent } from './Component/home/administrativo/adminis
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
 import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
+import { GlobalComponent } from './Component/home/alumno/global/global.component';
+import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { JutificantesComponent } from './Component/home/alumno/justificantes/jut
     AdministrativoComponent,
     ConstanciasComponent,
     OrientacionEducativaComponent,
-    JutificantesComponent
+    JutificantesComponent,
+    GlobalComponent,
+    RecursaComponent,
   ],
   imports: [
     BrowserModule,
