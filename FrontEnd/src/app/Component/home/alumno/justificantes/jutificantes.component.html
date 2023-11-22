@@ -17,7 +17,7 @@
                         </div>
                         <div class="container">
                             <div class="row">
-                                <textarea class="form-control" [(ngModel)]="justForm.razon"></textarea>
+                                <textarea class="form-control" [(ngModel)]="justificante.motivo"></textarea>
                             </div>
                         </div>
                     </div>
@@ -36,10 +36,11 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <input #fileInput1 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto1" hidden>
-                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput1">
-                                                <img *ngIf="!justificante.documentoreferencia" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="justificante.documentoreferencia" [src]="justificante.documentoreferencia" alt="documento" class="card-img-top">
+                                            <input #fileInput1 type="file" class="form-control form-control-sm"
+                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                id="foto1" hidden>
+                                            <a class="pe-auto" (click)="activarInput($event)" >
+                                                <img [src]="justificante.documentoreferencia" alt="documento" class="card-img-top" id="fileinput1">
                                             </a>
                                         </div>
                                     </div>
@@ -58,11 +59,12 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6 ">
-                                            <input #fileInput2 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto2" hidden>
-                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput2">
-                                                <img *ngIf="!justificante.inetutor" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="justificante.inetutor" [src]="justificante.inetutor" alt="documento" class="card-img-top">
-                                            </a>
+                                            <input #fileInput2 type="file" class="form-control form-control-sm"
+                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                id="foto2" hidden>
+                                                <a class="pe-auto" (click)="activarInput($event)" >
+                                                    <img [src]="justificante.inetutor" alt="documento" class="card-img-top" id="fileinput2">
+                                                </a>
                                         </div>
                                     </div>
                                 </div>
@@ -80,11 +82,12 @@
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-6">
-                                            <input #fileInput3 type="file" class="form-control form-control-sm" capture="camera" accept="image/*" (change)="cargarFoto($event)" id="foto3" hidden>
-                                            <a class="pe-auto" (click)="activarInput($event)" id="fileinput3">
-                                                <img *ngIf="!justificante.cartatutor" src="assets/img/documentfoto.png" class="card-img-top" alt="documento">
-                                                <img *ngIf="justificante.cartatutor" [src]="justificante.cartatutor" alt="documento" class="card-img-top">
-                                            </a>
+                                            <input #fileInput3 type="file" class="form-control form-control-sm"
+                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                id="foto3" hidden>
+                                                <a class="pe-auto" (click)="activarInput($event)" >
+                                                    <img [src]="justificante.cartatutor" alt="documento" class="card-img-top" id="fileinput3">
+                                                </a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,70 +117,44 @@
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
-                                            aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                            Justificar por Día(s)
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                        <div class="accordion-body">
-                                            <!--- Fechas Justificar --->
-                                            <div class="col-12 px-3 mt-4">
-                                                <div class="container p-0">
-                                                    <div class="row">
-                                                        <div class="col mb-2">
-                                                            <h5>Día(s) a Justificar:</h5>
-                                                        </div>
-                                                        <div class="col mb-2">
-                                                            <select class="form-select">
-                                                                <option value="1">Día</option>
-                                                                <option value="2">Días</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                    <!--- Fechas Justificar --->
+                                    <div class="col-12 px-3 mt-4">
+                                        <div class="container p-0">
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-2">
+                                                    <h5>Justificante por:</h5>
                                                 </div>
-                                                <div class="container mb-2">
-                                                    <div class="row d-flex">
-                                                        <input type="date" class="fs-6 form-control" placeholder="" [(ngModel)]="justForm.dia0">
-                                                    </div>
-                                                </div>
-                                                <div class="container mb-2">
-                                                    <div class="row d-flex">
-                                                        <div class="col-6 p-0 d-flex">
-                                                            <p class="mx-2">De:</p>
-                                                            <input type="date" class="fs-6 form-control" placeholder="" [(ngModel)]="justForm.dia1">
-                                                        </div>
-                                                        <div class="col-6 p-0 d-flex">
-                                                            <p class="mx-2">a</p>
-                                                            <input type="date" class="fs-6 form-control" placeholder="" [(ngModel)]="justForm.dia2">
-                                                        </div>
-                                                    </div>
+                                                <div class="col-lg-6 mb-2">
+                                                    <select class="form-select" (change)="cambiarSelecionDia($event)">
+                                                        <option value="dias">Día(s)</option>
+                                                        <option value="horas">Hora(s)</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
-                                            aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                            Justificante solo Hora(s)
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                                        <div class="accordion-body">
-                                            <strong>
-                                                <div class="d-flex justify-content-center">
-                                                    <h6>Intervalo</h6>
+                                        <div class="container mb-2">
+                                            <div class="row d-flex" *ngIf="diasHoras">
+                                                <div class="col-6 p-0 d-flex">
+                                                    <p class="mx-2">De:</p>
+                                                    <input type="date" class="fs-6 form-control" placeholder=""
+                                                        [(ngModel)]="justificante.horas1">
                                                 </div>
-                                                <div class="row">
+                                                <div class="col-6 p-0 d-flex">
+                                                    <p class="mx-2">a</p>
+                                                    <input type="date" class="fs-6 form-control" placeholder=""
+                                                        [(ngModel)]="justificante.horas2">
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex" *ngIf="!diasHoras">
+                                                <div class="d-flex justify-content-center">
+                                                    <h6 class="mb-0">Intervalo</h6>
+                                                </div>
+                                                <div class="row m-0">
                                                     <!--Lado izquierdo-->
                                                     <div class="col-5 px-3 mb-4">
                                                         <div class="card d-flex justify-content-center mt-4">
-                                                            <input type="number" [(ngModel)]="justForm.hora1" class="form-control text-center">
+                                                            <input type="number" [(ngModel)]="justificante.horas1"
+                                                                class="form-control text-center">
                                                         </div>
                                                     </div>
                                                     <div class="col-2 d-flex justify-content-center">
@@ -188,12 +165,12 @@
                                                     <!--Lado Derecho-->
                                                     <div class="col-5 px-3 mb-4">
                                                         <div class="card mt-4">
-                                                            <input type="number" [(ngModel)]="justForm.hora2" class="form-control text-center">
+                                                            <input type="number" [(ngModel)]="justificante.horas2"
+                                                                class="form-control text-center">
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                            </strong>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

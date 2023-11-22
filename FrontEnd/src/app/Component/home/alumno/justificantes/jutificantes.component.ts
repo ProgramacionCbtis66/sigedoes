@@ -20,9 +20,9 @@ export class JutificantesComponent implements OnInit {
     numcontrol: "", 
     motivo: "", 
     periodo: "", 
-    inetutor: null,
-    cartatutor: null,
-    documentoreferencia: null,
+    inetutor: 'assets/img/documentfoto.png',
+    cartatutor: 'assets/img/documentfoto.png',
+    documentoreferencia: 'assets/img/documentfoto.png',
     tipo: "",
     fecha: "",
     estado: 0,
@@ -33,7 +33,7 @@ export class JutificantesComponent implements OnInit {
     horas1: "", 
     horas2: "",
   }
-  protected justForm: any = [];
+  protected diasHoras:boolean = true;
   protected images: any = [];
 
   protected foto: any = [];
@@ -60,8 +60,8 @@ export class JutificantesComponent implements OnInit {
     this.ngOnInit();
     try{
       //let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
-      console.log(this.images);
-      this.just.enviarJustificante(this.justForm).subscribe((response) => {
+      //console.log(this.images);
+      this.just.enviarJustificante(this.justificante).subscribe((response) => {
         console.log('Respuesta del servidor:', response);
         // Puedes hacer algo con la respuesta aquí
         if(response.status === 'Registrado') {
@@ -95,6 +95,7 @@ export class JutificantesComponent implements OnInit {
 
   recargarFoto(event: any): void {
     const control = event.target.id;
+    alert(control)
     if(control == "foto1"){
       this.justificante.documentoreferencia = this.foto64(event);
     }
@@ -119,6 +120,18 @@ export class JutificantesComponent implements OnInit {
     }
   }
 
-  cambiarSelecionDia(){}
+  cambiarSelecionDia(event: any){
+    const horaDia = event.target.value;
+    if(horaDia == "dias"){
+      this.diasHoras = true;
+      this.justificante.horas1 = "";
+      this.justificante.horas2 = "";
+    }
+    if(horaDia == "horas"){
+      this.diasHoras = false;
+      this.justificante.horas1 = "";
+      this.justificante.horas2 = "";
+    }
+  }
 
 }
