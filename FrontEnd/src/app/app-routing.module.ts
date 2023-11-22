@@ -16,6 +16,8 @@ import { AdministrativoComponent } from './Component/home/administrativo/adminis
 import { ConstanciasComponent } from './Component/home/alumno/constancias/constancias.component';
 import { OrientacionEducativaComponent } from './Component/home/orientacion-educativa/orientacion-educativa.component';
 import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
+import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
+import { GlobalComponent } from './Component/home/alumno/global/global.component';
 
 
 const routes: Routes = [
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
   {path:"perfil", component: PerfilComponent},
+  {path:"recursa", component: RecursaComponent,canActivate:[AuthLogin]},
+  {path:"globales", component: GlobalComponent,canActivate:[AuthLogin]},
   {path:"**", component: Error404Component },
 ];
 
