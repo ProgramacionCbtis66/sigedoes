@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
   {path:"perfil", component: PerfilComponent},
   {path:"recursa", component: RecursaComponent,canActivate:[AuthLogin]},
-  {path:"globales", component: GlobalComponent,canActivate:[AuthLogin]},
+  {path:"global", component: GlobalComponent,canActivate:[AuthLogin]},
   {path:"**", component: Error404Component },
 ];
 
