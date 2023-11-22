@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import decode from 'jwt-decode';
+import * as Notiflix from 'notiflix';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -53,6 +54,7 @@ export class AuthService {
     const token = localStorage.getItem("color");
     if (token !== null && token !== "" && !this.tokeExpired() && token !== undefined) {
       if (this.jwt.isTokenExpired(token)) {
+        Notiflix.Notify.failure("Su sesión ha expirado...");
         return false;
       } else {
         return true;

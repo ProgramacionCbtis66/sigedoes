@@ -76,6 +76,7 @@ export class JutificantesComponent implements OnInit {
   }
 
   foto64(event: any): any{
+    this.ngOnInit();
     const archivo = event.target.files[0];
     const control = event.target.id;
     this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
@@ -101,6 +102,7 @@ export class JutificantesComponent implements OnInit {
   }
 
   activarInput(event: any){
+    this.ngOnInit();
     const control = event.target.id;
     if(control == "fileinput1"){
       this.fileInput1.nativeElement.click();
@@ -114,6 +116,7 @@ export class JutificantesComponent implements OnInit {
   }
 
   cambiarSelecionDia(event: any){
+    this.ngOnInit();
     const horaDia = event.target.value;
     if(horaDia == "dias"){
       this.diasHoras = true;
