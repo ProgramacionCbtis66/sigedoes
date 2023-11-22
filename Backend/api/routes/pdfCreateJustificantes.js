@@ -58,7 +58,7 @@ async function createJustificante(req, res, tipo) {
             { text: `\n ATENTAMENTE. \n \n`, style: Style.normal, alignment: 'center' },
             { text: "________________________________", style: Style.normal, alignment: 'center', bold: true },
             { text: "OFICINA DE ORIENTACION EDUCATIVA", style: Style.normal, alignment: 'center', bold: true },
-            { text: `${alumno.Esc_Director}`, style: Style.firma, alignment: "center" },
+            { text: `${alumno.nombreOE}`, style: Style.firma, alignment: "center" },
             { image: './api/assets/tablajustificantes.png', width: 560, absolutePosition: { x: 12, y: 506 } },
             { image: './api/assets/pieformato.png', width: 570, absolutePosition: { x: 8, y: 765 } },
         ]
