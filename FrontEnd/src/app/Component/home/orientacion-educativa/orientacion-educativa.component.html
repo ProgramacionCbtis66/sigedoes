@@ -16,6 +16,18 @@
                 </h2>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
                     <div class="accordion-body overflow-x-auto">
+                        <div class="row mb-3">
+                            <div class="col-6"></div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <div class="d-flex pe-2" role="search">
+                                    <input class="form-control me-2" type="date" placeholder="Busqueda por fecha"
+                                        aria-label="Search" id="filtroFecha">
+                                    <button class="btn btn-outline-success" type="submit" (click)="filtrar()">Filtrar</button>
+                                </div>
+                                <button type="button" class="btn btn-info" (click)="obtenerDatos()">Cargar
+                                    solicitudes</button>
+                            </div>
+                        </div>
                         <table class="table table-responsive table-bordered" *ngIf="justificantes.length > 0">
                             <thead>
                                 <tr class="justify-content-center">
@@ -153,11 +165,15 @@
                             <div class="col">
                                 <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'dias'">
                                     Por este conducto solicito a ustedes le sea(n) justificado(s) el/los dia(s):
-                                    {{alumno.fecha1}} al {{alumno.fecha2}} por el motivo ya antes mencionado. Por lo anterior le pedimos sean tan amables de justificar las inasistencias de la(s) fecha(s) señalada(s).
+                                    {{alumno.fecha1}} al {{alumno.fecha2}} por el motivo ya antes mencionado. Por lo
+                                    anterior le pedimos sean tan amables de justificar las inasistencias de la(s)
+                                    fecha(s) señalada(s).
                                 </p>
                                 <p class="fs-6 fw-lighter" *ngIf="alumno.tipo == 'horas'">
                                     Por este conducto solicito a ustedes le sea(n) justificada(s) la(s) hora(s): de
-                                    {{alumno.horas1}} a {{alumno.horas2}} por el motivo ya antes mencionado. Por lo anterior sean tan amables de justificar la(s) inasistencia(s) de la(s) hora(s) señalada(s).
+                                    {{alumno.horas1}} a {{alumno.horas2}} por el motivo ya antes mencionado. Por lo
+                                    anterior sean tan amables de justificar la(s) inasistencia(s) de la(s) hora(s)
+                                    señalada(s).
                                 </p>
                             </div>
                             <div class="col-12">
@@ -175,9 +191,11 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" *ngIf="alumno.estado==0" >
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="rechazarJustificante(2)">Rechazar</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="aprobarJustificante(1)">Autorizar</button>
+            <div class="modal-footer" *ngIf="alumno.estado==0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="rechazarJustificante(2)">Rechazar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="aprobarJustificante(1)">Autorizar</button>
             </div>
         </div>
     </div>

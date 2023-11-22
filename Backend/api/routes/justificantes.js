@@ -7,7 +7,7 @@ const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos', verifica, async (req, res) => {
     console.log('entro');
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, j.fecha1, j.fecha2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
