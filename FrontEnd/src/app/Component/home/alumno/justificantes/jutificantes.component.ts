@@ -17,21 +17,22 @@ export class JutificantesComponent implements OnInit {
   @ViewChild('fileInput3') fileInput3!: ElementRef;
   protected justificante = {
     idjustificante: 0,
-    numcontrol: "", 
-    motivo: "", 
-    periodo: "", 
+    numcontrol: "",
+    motivo: "",
+    periodo: "",
     inetutor: 'assets/img/documentfoto.png',
     cartatutor: 'assets/img/documentfoto.png',
     documentoreferencia: 'assets/img/documentfoto.png',
     tipo: "",
-    fecha: "",
+    fecha: '',
     estado: 0,
-    correoTutor: "", 
-    nombreTutor: "", 
-    observaciones: "", 
-    fechaEstado: "", 
-    horas1: "", 
+    correoTutor: "",
+    nombreTutor: "",
+    fechaEstado: "",
+    horas1: "",
     horas2: "",
+    fecha1: "",
+    fecha2: "",
   }
   protected diasHoras:boolean = true;
   protected images: any = [];
@@ -58,6 +59,10 @@ export class JutificantesComponent implements OnInit {
 
   async enviarJust(){
     this.ngOnInit();
+    let timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    this.justificante.fecha = today.toLocaleDateString();
+    alert(this.justificante.fecha);
     try{
       //let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
       //console.log(this.images);
