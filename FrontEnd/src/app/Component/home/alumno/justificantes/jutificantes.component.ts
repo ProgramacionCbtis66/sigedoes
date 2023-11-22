@@ -17,18 +17,16 @@ export class JutificantesComponent implements OnInit {
   @ViewChild('fileInput3') fileInput3!: ElementRef;
   protected justificante = {
     idjustificante: 0,
-    numcontrol: "",
+    numControl: this.auth.decodifica().numControl,
     motivo: "",
-    periodo: "",
     inetutor: 'assets/img/documentfoto.png',
     cartatutor: 'assets/img/documentfoto.png',
     documentoreferencia: 'assets/img/documentfoto.png',
-    tipo: "",
+    tipo: 'dias',
     fecha: '',
     estado: 0,
     correoTutor: "",
     nombreTutor: "",
-    fechaEstado: "",
     horas1: "",
     horas2: "",
     fecha1: "",
@@ -62,19 +60,16 @@ export class JutificantesComponent implements OnInit {
     let timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     this.justificante.fecha = today.toLocaleDateString();
-    alert(this.justificante.fecha);
     try{
-      //let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
-      //console.log(this.images);
-      this.just.enviarJustificante(this.justificante).subscribe((response) => {
-        console.log('Respuesta del servidor:', response);
-        // Puedes hacer algo con la respuesta aquí
-        if(response.status === 'Registrado') {
-          console.log('Los datos se registraron correctamente.');
-        } else {
-          console.log('Hubo un error al registrar los datos.');
-        }
-      });
+      let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
+      console.log(res); 
+      
+      // Puedes hacer algo con la respuesta aquí
+      if(res.status === 'Registrado') {
+        console.log('Los datos se registraron correctamente.');
+      } else {
+        console.log('Hubo un error al registrar los datos.');
+      }
     } catch(error){
       console.error(error);
     }
@@ -125,11 +120,13 @@ export class JutificantesComponent implements OnInit {
     const horaDia = event.target.value;
     if(horaDia == "dias"){
       this.diasHoras = true;
+      this.justificante.tipo = "dias";
       this.justificante.horas1 = "";
       this.justificante.horas2 = "";
     }
     if(horaDia == "horas"){
       this.diasHoras = false;
+      this.justificante.tipo = "horas";
       this.justificante.horas1 = "";
       this.justificante.horas2 = "";
     }
