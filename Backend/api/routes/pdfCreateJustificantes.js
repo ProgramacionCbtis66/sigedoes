@@ -34,6 +34,11 @@ async function createJustificante(req, res, tipo) {
     let mes = textomes(fecha.getMonth());
     let year = convertir(fecha.getFullYear());
 
+    if(just.fecha1==just.fecha2){
+        var fechaj = just.fecha1;
+    }else{
+        var fechaj = just.fecha1 + " al " + just.fecha2;
+    }
     const justificante1 = {
         asunto: [
 
@@ -47,7 +52,7 @@ async function createJustificante(req, res, tipo) {
             { text: `TURNO: "${just.turno}"`, style: Style.normal, alignment: 'right', bold: true },
             { text: `P R E S E N T E S.-`, style: Style.normal, alignment: 'right', bold: true  },
             { text: " ", style: Style.normal  },
-            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a: ${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :${just.razon}, no asistio a clases el (los) dias(s) ${fecha.getDate()} del presente año. Por lo anterior le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n `, style: Style.normal, alignment: 'justify' },
+            { text: `Por este conducto, solicito a ustedes le sean justificadas la(s) inasistencia(s) a: ${just.nombre} ${just.apellidoP} ${just.apellidoM} quien por motivos de :${just.razon}, no asistio a clases el (los) dias(s) ${fechaj} del presente año. Por lo anterior le pedimos sean tan amables de justificar las insistencias de lo(s) dia(s) señalado(s) \n `, style: Style.normal, alignment: 'justify' },
             { text: `     Cabe señalar que es RESPONSABILIDAD DEL ALUMNO regularizarse en la entrega de trabajos y/o tareas que el (la) profesor (a) haya enconmendado, haciendo mencion que el presente documento NO EXENTA al alumno de sus obligaciones academicas\n `, style: Style.normal, alignment: 'justify' },
 
             { text: `\n ATENTAMENTE. \n \n`, style: Style.normal, alignment: 'center' },
