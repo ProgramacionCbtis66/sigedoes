@@ -75,36 +75,29 @@ export class JutificantesComponent implements OnInit {
     }
   }
 
-  foto64(event: any):any{
+  foto64(event: any): any{
     const archivo = event.target.files[0];
+    const control = event.target.id;
     this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
 
       const foto64 = imagenBase64.base;
 
       this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
-        return imagenRedimensionada.base;
+        if(control == "foto1"){
+          this.justificante.documentoreferencia = imagenRedimensionada.base;
+        }
+        if(control == "foto2"){
+          this.justificante.inetutor = imagenRedimensionada.base;
+        }
+        if(control == "foto3"){
+          this.justificante.cartatutor = imagenRedimensionada.base;
+        }
       }).catch((error: any) => {
         return null;
-        console.error('Error al redimensionar la imagen', error);
       });
     }).catch((error: any) => {
       return null;
-      console.error('Error al extraer la imagen en base64', error);
     });
-  }
-
-  recargarFoto(event: any): void {
-    const control = event.target.id;
-    alert(control)
-    if(control == "foto1"){
-      this.justificante.documentoreferencia = this.foto64(event);
-    }
-    if(control == "foto2"){
-      this.justificante.inetutor = this.foto64(event);
-    }
-    if(control == "foto3"){
-      this.justificante.cartatutor = this.foto64(event);
-    }
   }
 
   activarInput(event: any){

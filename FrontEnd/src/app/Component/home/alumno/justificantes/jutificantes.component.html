@@ -24,9 +24,9 @@
 
                 </div>
                 <!--- Section Documento (Foto) --->
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <!--Parte 1-->
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-6">
                         <div class="card">
 
                             <div class="container p-md-0 mb-2 ">
@@ -35,12 +35,12 @@
                                 </div>
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
-                                        <div class="col-6">
+                                        <div class="col-8">
                                             <input #fileInput1 type="file" class="form-control form-control-sm"
-                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                capture="camera" accept="image/*" (change)="foto64($event)"
                                                 id="foto1" hidden>
                                             <a class="pe-auto" (click)="activarInput($event)" >
-                                                <img [src]="justificante.documentoreferencia" alt="documento" class="card-img-top" id="fileinput1">
+                                                <img [src]="justificante.documentoreferencia" alt="documento" class="card-img" id="fileinput1">
                                             </a>
                                         </div>
                                     </div>
@@ -49,22 +49,22 @@
                         </div>
                     </div>
                     <!--Parte 2-->
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-6">
                         <div class="card">
 
-                            <div class="container p-md-0 mb-2 ">
+                            <div class="container p-md-0 mb-2">
                                 <div class="row text-center">
                                     <h5>Copia De Identificacion Del Tutor</h5>
                                 </div>
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
-                                        <div class="col-6 ">
+                                        <div class="col-8">
                                             <input #fileInput2 type="file" class="form-control form-control-sm"
-                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                capture="camera" accept="image/*" (change)="foto64($event)"
                                                 id="foto2" hidden>
-                                                <a class="pe-auto" (click)="activarInput($event)" >
-                                                    <img [src]="justificante.inetutor" alt="documento" class="card-img-top" id="fileinput2">
-                                                </a>
+                                            <a class="pe-auto" (click)="activarInput($event)" >
+                                                <img [src]="justificante.inetutor" alt="documento" class="card-img" id="fileinput2">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <!--Parte 3-->
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-8">
                         <div class="card">
 
                             <div class="container p-md-0 mb-2 ">
@@ -81,13 +81,13 @@
                                 </div>
                                 <div class="container py-2">
                                     <div class="row d-flex justify-content-center">
-                                        <div class="col-6">
+                                        <div class="col-8">
                                             <input #fileInput3 type="file" class="form-control form-control-sm"
-                                                capture="camera" accept="image/*" (change)="recargarFoto($event)"
+                                                capture="camera" accept="image/*" (change)="foto64($event)"
                                                 id="foto3" hidden>
-                                                <a class="pe-auto" (click)="activarInput($event)" >
-                                                    <img [src]="justificante.cartatutor" alt="documento" class="card-img-top" id="fileinput3">
-                                                </a>
+                                            <a class="pe-auto" (click)="activarInput($event)" >
+                                                <img [src]="justificante.cartatutor" alt="documento" class="card-img" id="fileinput3">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
