@@ -13,13 +13,15 @@ export class NavegacionService {
   private registro = new BehaviorSubject<boolean>(false);
   private iflogin = new BehaviorSubject<boolean>(false);
   private Administrador = new BehaviorSubject<boolean>(false);
-  private  docente = new BehaviorSubject<boolean>(false);
+  private docente = new BehaviorSubject<boolean>(false);
   private forgotpass = new BehaviorSubject<boolean>(false);
   private foto = new BehaviorSubject<any>("");
   private usuario = new BehaviorSubject<string>("");
   private orientacionEdu = new BehaviorSubject<boolean>(false);
   private perfil = new BehaviorSubject<boolean>(false);
   private regresar = new BehaviorSubject<boolean>(false);
+  private recursa = new BehaviorSubject<boolean>(false);
+  private global = new BehaviorSubject<boolean>(false);
 
   
 
@@ -47,6 +49,10 @@ export class NavegacionService {
   set _orientacionEdu(value:boolean) { this.orientacionEdu.next(value);} 
   get _perfil():any { return this.perfil.getValue(); }
   set _perfil(value:boolean) { this.perfil.next(value);}
+  get _recursa():any { return this.recursa.getValue(); }
+  set _recursa(value:boolean) { this.recursa.next(value);}
+  get _global():any { return this.global.getValue(); }
+  set _global(value:boolean) { this.global.next(value);}
   get _regresar():any { return this.regresar.getValue(); }
   set _regresar(value:boolean) { this.regresar.next(value);}
 
@@ -66,6 +72,8 @@ export class NavegacionService {
     this._forgotpass=false;
     this._logout=false;
     this._home=false;
+    this._recursa=false;
+    this._global=false;
     this._usuario="";
     localStorage.clear();
     this.routerLink.navigate(['/']);
