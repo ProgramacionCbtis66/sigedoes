@@ -7,7 +7,7 @@ const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos', verifica, async (req, res) => {
     console.log('entro');
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaEstado, j.idjustificante, j.horas1, j.horas2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
+    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
@@ -45,7 +45,7 @@ just.get('/obtenerdatos', verifica, async (req, res) => {
 
 just.post('/guardardatos', verifica, async (req, res) => {
     const {numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror} = req.body;
-    const sql = "insert into justificante (numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror) values (?,?,?,?,?,?,?,?,?,?,?)"
+    const sql = "insert into justificante (numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTutor) values (?,?,?,?,?,?,?,?,?,?,?)"
     try {
         const conexion = await ccn();
         const [resultado] = await conexion.execute(sql, [numControl, motivo, periodo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correotutor, nombreTuror]);
