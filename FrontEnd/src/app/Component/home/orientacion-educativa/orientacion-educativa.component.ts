@@ -55,10 +55,10 @@ export class OrientacionEducativaComponent implements OnInit {
     }
   }
 
-  revisarDocumentos(numControl: number){
+  revisarDocumentos(idjustificante: number){
     this.ngOnInit()
     //busar en el array de justificantes el id
-    const datosSolicitante =  this.justificantes.find((element: any) => element.numControl == numControl);
+    const datosSolicitante =  this.justificantes.find((element: any) => element.idjustificante == idjustificante);
     
     this.alumno = datosSolicitante;
     
