@@ -182,14 +182,15 @@
                       <td scope="col">{{dato.descripcion}}</td>
                       <td scope="col">{{dato.grado}}{{dato.grupo}}</td>
                       <td scope="col">{{dato.tipo}}</td>
-                      <td scope="col" class="text-center" *ngIf="dato.docenteDniApli==''"><button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">Ver</button></td>
+                      <td scope="col" class="text-center" *ngIf="dato.docenteDniApli==''">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">Ver</button></td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli!=''">
-                        <a class="btn btn-sm btn-info position-relative" disabled>
+                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">
                           Grupo asignado
                           <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                             <span class="visually-hidden">!</span>
                           </span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   </tbody>
