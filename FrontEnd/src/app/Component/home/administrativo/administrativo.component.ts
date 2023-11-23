@@ -22,7 +22,7 @@ export class AdministrativoComponent implements OnInit {
     descripcion: "Pago Realizado Con Éxito",
   };
 
-  datosEsc :any = [];
+  datosEsc: any = [];
 
   clavesEsp = {
     programacion: "",
@@ -32,7 +32,7 @@ export class AdministrativoComponent implements OnInit {
     alimentos: ""
   };
 
-  usuario : any = [];
+  usuario: any = [];
   alumno: any = [];
   nc: any = [];
 
@@ -40,11 +40,11 @@ export class AdministrativoComponent implements OnInit {
   datosDocente: any = [];
   datos: any = [];
   datosAdmisnitrativo: any = [];
-  globales:any = [];
-  recursas:any = [];
-  asignarRecursas:any ={};
-  maestros:any = [];
-  asignarGlobales:any = {};  
+  globales: any = [];
+  recursas: any = [];
+  asignarRecursas: any = {};
+  maestros: any = [];
+  asignarGlobales: any = {};
 
   aceptado: any = [];
   verificado = false;
@@ -63,12 +63,13 @@ export class AdministrativoComponent implements OnInit {
     this.auth.isAuth() ? null : this.nav.salir();
   }
   async cargaSoliciudAceeso() {
+    this.ngOnInit();
     try {
-      const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl:  this.auth.decodifica().numControl}));
+      const res = await firstValueFrom(this.auth.solicitudAcceso({ numControl: this.auth.decodifica().numControl }));
       if (res.validar) {
-        if (res.docentes.length!=0) this.datosDocente = res.docentes;
-        if (res.administrativos.length!=0) this.datosAdmisnitrativo=res.administrativos;
-        if (res.alumnos.length!=0) this.datosAlumno=res.alumnos;
+        if (res.docentes.length != 0) this.datosDocente = res.docentes;
+        if (res.administrativos.length != 0) this.datosAdmisnitrativo = res.administrativos;
+        if (res.alumnos.length != 0) this.datosAlumno = res.alumnos;
       }
       else {
         Notiflix.Notify.failure("Error, Intente De Nuevo " + res.err);
@@ -78,37 +79,40 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   aceptar(op: any) {
-    this.admin.usuarioAceptado({numControl:op}).subscribe((res: any) => {
+    this.ngOnInit();
+    this.admin.usuarioAceptado({ numControl: op }).subscribe((res: any) => {
       Notiflix.Notify.success(res);
-      if(this.usuario.rol=="Alumno"){this.datosAlumno = [];}
-      if(this.usuario.rol=="Docente"){this.datosDocente = [];}
-      if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
-      if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
+      if (this.usuario.rol == "Alumno") { this.datosAlumno = []; }
+      if (this.usuario.rol == "Docente") { this.datosDocente = []; }
+      if (this.usuario.rol = "Control Escolar") { this.datosAdmisnitrativo = []; }
+      if (this.usuario.rol = "Orientación Educativa") { this.datosAdmisnitrativo = []; }
       this.cargaSoliciudAceeso();
       this.CorreoAcpetacion(1);
       this.ngOnInit();
     });
-   
-    
+
+
   }
   Noaceptado(op: any) {
-    this.admin.usuarioAceptado({numControl:op}).subscribe((res: any) => {
+    this.ngOnInit();
+    this.admin.usuarioAceptado({ numControl: op }).subscribe((res: any) => {
       Notiflix.Notify.failure(res);
       this.CorreoAcpetacion(2);
-      if(this.usuario.rol=="Alumno"){this.datosAlumno = [];}
-      if(this.usuario.rol=="Docente"){this.datosDocente = [];}
-      if(this.usuario.rol = "Control Escolar"){this.datosAdmisnitrativo = [];}
-      if(this.usuario.rol = "Orientación Educativa"){this.datosAdmisnitrativo = [];}
+      if (this.usuario.rol == "Alumno") { this.datosAlumno = []; }
+      if (this.usuario.rol == "Docente") { this.datosDocente = []; }
+      if (this.usuario.rol = "Control Escolar") { this.datosAdmisnitrativo = []; }
+      if (this.usuario.rol = "Orientación Educativa") { this.datosAdmisnitrativo = []; }
       this.cargaSoliciudAceeso();
       this.ngOnInit();
     });
-    this.usuario = [];  
+    this.usuario = [];
     this.cargaSoliciudAceeso();
   }
   CorreoAcpetacion(op: any) {
+    this.ngOnInit();
     const usuario = this.usuario;
-    var nombre =  `${this.usuario.nombre} ${this.usuario.apellidoP} ${this.usuario.apellidoM}`;
-    this.email.correoAcpetacion({correo: usuario.correo, tipo:"validacion", op:op, nombre: nombre, numControl: usuario.numControl, password: usuario.password}).subscribe((res: any) => {
+    var nombre = `${this.usuario.nombre} ${this.usuario.apellidoP} ${this.usuario.apellidoM}`;
+    this.email.correoAcpetacion({ correo: usuario.correo, tipo: "validacion", op: op, nombre: nombre, numControl: usuario.numControl, password: usuario.password }).subscribe((res: any) => {
       Notiflix.Notify.info("Correo Enviado");
     });
     this.ngOnInit();
@@ -116,7 +120,7 @@ export class AdministrativoComponent implements OnInit {
   verificar() {
     const numcontrol = {
       numControl: this.nc,
-      rol:"AL"
+      rol: "AL"
     };
     if (this.nc == null || this.nc == "") {
       Notiflix.Notify.failure("No se ha ingresado un número de control");
@@ -133,13 +137,14 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   GenerarCodigoPago() {
+    this.ngOnInit();
     this.numero = "hola";
     const numPago = {
       numPago: this.generateRandomString(12),
       numcontrol: this.nc
     };
     this.admin.verificaNoPago(numPago).subscribe((res: any) => {
-      
+
       if (res.valido == "Aceptado") {
         this.numero = numPago.numPago;
       } else { this.numero = this.generateRandomString(12); }
@@ -157,6 +162,7 @@ export class AdministrativoComponent implements OnInit {
     return result1;
   }
   enviarSolicitud() {
+    this.ngOnInit();
     if (this.numero !== "") {
       const admin = this.auth.decodifica();
       this.solicitud.emitio = admin.nombre;
@@ -200,15 +206,15 @@ export class AdministrativoComponent implements OnInit {
     }
   }
   obtenerDatos(numControl: any, rol: any) {
-  
+    this.ngOnInit();
     this.userServicio.verInfo({ numControl: numControl, rol: rol }).subscribe((res: any) => {
-     
+
       if (res.verificado) {
         this.usuario = res.data;
-        if(res.data.rol=="AL") this.usuario.rol = "Alumno";
-        if(res.data.rol=="DO") this.usuario.rol = "Docente";
-        if(res.data.rol=="CE") this.usuario.rol = "Control Escolar";
-        if(res.data.rol=="OE") this.usuario.rol = "Orientación Educativa";
+        if (res.data.rol == "AL") this.usuario.rol = "Alumno";
+        if (res.data.rol == "DO") this.usuario.rol = "Docente";
+        if (res.data.rol == "CE") this.usuario.rol = "Control Escolar";
+        if (res.data.rol == "OE") this.usuario.rol = "Orientación Educativa";
       } else {
         Notiflix.Notify.failure("Error, Intente De Nuevo ");
       }
@@ -222,10 +228,10 @@ export class AdministrativoComponent implements OnInit {
 
   */
 
- async obtenerdatEsc() {
+  async obtenerdatEsc() {
 
     const escuela = await firstValueFrom(this.admin.datosEsc());
-      this.datosEsc = escuela.data;
+    this.datosEsc = escuela.data;
     const claves = await firstValueFrom(this.admin.getClavesEsp());
     if (claves != null) {
       console.log(claves.alimentos.clave);
@@ -238,6 +244,7 @@ export class AdministrativoComponent implements OnInit {
     this.ngOnInit();
   }
   guardCambios() {
+    this.ngOnInit();
     Notiflix.Loading.standard("Guardando");
     this.admin.guardarDatosEsc(this.datosEsc).subscribe((res: any) => {
       Notiflix.Loading.remove();
@@ -250,16 +257,19 @@ export class AdministrativoComponent implements OnInit {
     this.ngOnInit();
   }
   progactu() {
+    this.ngOnInit();
     this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   contaActu() {
+    this.ngOnInit();
     this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
   }
   ElectricidadActu() {
+    this.ngOnInit();
     this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
@@ -273,62 +283,68 @@ export class AdministrativoComponent implements OnInit {
     this.admin.guardarClavesEsp(this.clavesEsp).subscribe((res: any) => {
       Notiflix.Notify.info(res.ok);
     });
-    
+
   }
-   getGlobales(){
-    this.admin.getMateriasGlobales().subscribe((res) => {
-      if(res.ok == "vacio"){
-        this.globales = [];        
-      } else {      
-        this.globales = res.ok;                        
-      }
-    });
-  }  
-  async viewModalGlobal(dato:any){            
-    if(dato.idrecursa != null){            
+  async getGlobales() {
+    this.ngOnInit();
+    const res = await firstValueFrom(this.admin.getMateriasGlobales());
+    if (res.ok == "vacio") {
+      this.globales = [];
+    } else {
+      console.log(res.ok);
+      this.globales = res.ok;
+    }
+
+  }
+  async viewModalGlobal(dato: any) {
+    this.ngOnInit();
+    if (dato.idrecursa != null) {
       this.asignarRecursas.docenteDni = dato.docenteDni;
-      this.asignarRecursas.idrecursa = dato.idrecursa;           
-    } else {    
-      this.asignarGlobales = dato;         
-      console.log(this.asignarGlobales);    
+      this.asignarRecursas.idrecursa = dato.idrecursa;
+    } else {
+      this.asignarGlobales = dato;
+
     }
     const maestros = await firstValueFrom(this.admin.getMaestros());
-    this.maestros = maestros.ok;                                 
+    this.maestros = maestros.ok;
   }
-  subirRegistroGlobal(){
-    
-    if(this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined){    
+  subirRegistroGlobal() {
+    this.ngOnInit();
+   
+    if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
-        if(res.ok == "ok"){
-          Notiflix.Notify.info("Global Acreditado");                
-          this.getGlobales();                          
+        if (res.ok == "ok") {
+          Notiflix.Notify.info("Global Acreditado");
+          this.getGlobales();
           this.asignarGlobales = {};
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
       });
-      console.log(this.asignarGlobales);
-    }else {
+
+    } else {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }
-    
-  }  
-  setDNI(DNI:any){
+
+  }
+  setDNI(DNI: any) {
+    this.ngOnInit();
     this.asignarGlobales.docenteDni = DNI;
   }
-  async getRecursas(){
+  async getRecursas() {
     const r = await firstValueFrom(this.admin.getMateriasRecursa());
-    if(r.ok == 'vacio'){
+    if (r.ok == 'vacio') {
       this.recursas = [];
     } else {
-      this.recursas = r.ok;   
+      this.recursas = r.ok;
     }
   }
-  subirRegistroRecursa(){
-    if(this.asignarRecursas.lugar != undefined && this.asignarRecursas.hora != undefined && this.asignarRecursas.fecha != undefined && this.asignarRecursas.docenteDni != undefined && this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != ''){    
+  subirRegistroRecursa() {
+    this.ngOnInit();
+    if (this.asignarRecursas.lugar != undefined && this.asignarRecursas.hora != undefined && this.asignarRecursas.fecha != undefined && this.asignarRecursas.docenteDni != undefined && this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '') {
       this.admin.guardarAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
-        if(res.ok == 'ok'){
-          Notiflix.Notify.info("Recursa Acreditado");     
+        if (res.ok == 'ok') {
+          Notiflix.Notify.info("Recursa Acreditado");
           this.getRecursas();
           this.asignarRecursas = {};
         } else {
@@ -339,8 +355,9 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Notify.failure("Rellene Todos Los Campos");
     }
   }
-  setDNIr(dni:any){
-    this.asignarRecursas.docenteDni = dni;    
+  setDNIr(dni: any) {
+    this.ngOnInit();
+    this.asignarRecursas.docenteDni = dni;
   }
 
 
@@ -351,6 +368,6 @@ export class AdministrativoComponent implements OnInit {
   
   */
 
-  
+
 
 }
