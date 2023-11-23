@@ -6,7 +6,7 @@
     <div class="row d-flex flex-wrap px-4">
         <!--Lado izquierdo-->
         <div class="col-md-12 mt-2">
-            <div class="col-6 d-flex ">
+            <div class="col-12 d-flex ">
                 <button type="button" class="btn btn-info">Cargar Materias</button>
             </div>
             <table class="table table-responsive table-bordered">
@@ -21,14 +21,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>aaeaeaeaaeaeaeaeaeaeaea</td>
+                        <td>bacacacacacacaccacacaca</td>
+                        <td>cjuanjuanjuanjuanjuan</td>
+                        <td>ghgvQVVEGGEGEGEGEGEc </td>
                         <td>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" *ngIf="recursaDatos.estado == 0">Solicitar</button>
-                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar Comprobante</button>
+                            <div class="justify-content-center">
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" *ngIf="recursaDatos.estado == 0">Solicitar</button>
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar Comprobante</button>
+                            </div>
                         </td>
 
                     </tr>
@@ -39,5 +40,5 @@
 </div>
 <!--modal-->
 <div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
-    
+
 </div>
