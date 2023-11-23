@@ -17,7 +17,7 @@ export class GlobalComponent implements OnInit {
     idMateria: '',
     idPeriodo: '',
     fecha: '',
-    estado: '',
+    estado: 0,
   }
 
   constructor(

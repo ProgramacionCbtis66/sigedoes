@@ -6,9 +6,6 @@
     <div class="row d-flex flex-wrap px-4">
         <!--Lado izquierdo-->
         <div class="col-md-12 mt-2">
-            <div class="col-12 d-flex ">
-                <button type="button" class="btn btn-info">Cargar Materias</button>
-            </div>
             <table class="table table-responsive table-bordered">
                 <thead>
                     <tr class="justify-content-center">
@@ -21,17 +18,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>aaeaeaeaaeaeaeaeaeaeaea</td>
-                        <td>bacacacacacacaccacacaca</td>
-                        <td>cjuanjuanjuanjuanjuan</td>
-                        <td>ghgvQVVEGGEGEGEGEGEc </td>
+                        <td>5</td>
+                        <td>Mtro Jorge Cortez Domingues</td>
+                        <td>Programacion Orientada a Objetos</td>
+                        <td>No Acreditada </td>
                         <td>
                             <div class="justify-content-center">
                                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    *ngIf="recursaDatos.estado == 0">Solicitar</button>
+                                    *ngIf="globalDatos.estado == 0">Solicitar</button>
                                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-                                    data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar
+                                    data-bs-target="#versolicitud" *ngIf="globalDatos.estado == 2">Cargar
                                     Comprobante</button>
+                                <button type="button" class="btn btn-outline-info" data-bs-target="#versolicitud"
+                                    *ngIf="globalDatos.estado == 4">Solicitar datos de Global</button>
                             </div>
                         </td>
 
@@ -113,8 +112,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Enviar</button>
-                        <button type="button" class="btn btn-danger">Cancelar</button>
+                        <button type="button" class="btn btn-outline-success">Enviar</button>
+                        <button type="button" class="btn btn-outline-danger">Cancelar</button>
                     </div>
                 </div>
             </div>

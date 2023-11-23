@@ -32,6 +32,8 @@
                                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
                                     data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar
                                     Comprobante</button>
+                                <button type="button" class="btn btn-outline-info" data-bs-target="#versolicitud"
+                                    *ngIf="recursaDatos.estado == 4">Solicitar datos de Recursamiento</button>
                             </div>
                         </td>
 
@@ -113,8 +115,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Enviar</button>
-                        <button type="button" class="btn btn-danger">Cancelar</button>
+                        <button type="button" class="btn btn-outline-success">Enviar</button>
+                        <button type="button" class="btn btn-outline-danger">Cancelar</button>
                     </div>
                 </div>
             </div>
