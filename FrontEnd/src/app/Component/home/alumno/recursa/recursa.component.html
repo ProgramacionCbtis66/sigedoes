@@ -27,8 +27,11 @@
                         <td>ghgvQVVEGGEGEGEGEGEc </td>
                         <td>
                             <div class="justify-content-center">
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" *ngIf="recursaDatos.estado == 0">Solicitar</button>
-                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar Comprobante</button>
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                                    *ngIf="recursaDatos.estado == 0">Solicitar</button>
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar
+                                    Comprobante</button>
                             </div>
                         </td>
 
@@ -40,5 +43,81 @@
 </div>
 <!--modal-->
 <div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-md-12 mt-2">
+                    <div class="card">
+                        <!--Titulo-->
+                        <div class="row">
+                            <div class="d-flex justify-content-center p-1 mb-2">
+                                <h4 class="m-2">Cargar comprobantes</h4>
+                            </div>
+                        </div>
+                        <!--Cargar comprobantes-->
+                        <div class="row d-flex flex-wrap px-4">
+                            <div class="container p-md-0 mb-2 ">
 
+
+                                <div class="row d-flex justify-content-center">
+                                    <!--Parte 1-->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+
+                                            <div class="container p-md-0 mb-2 ">
+                                                <div class="row text-center">
+                                                    <h5>PAGO A CEAR</h5>
+                                                </div>
+                                                <div class="container py-2">
+                                                    <div class="row d-flex justify-content-center">
+                                                        <div class="col-8">
+                                                            <input #fileInput1 type="file"
+                                                                class="form-control form-control-sm" capture="camera"
+                                                                accept="image/*" id="foto1" hidden>
+                                                            <a class="pe-auto">
+                                                                <img [src]="" alt="documento" class="card-img"
+                                                                    id="fileinput1">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Parte 2-->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+
+                                            <div class="container p-md-0 mb-2">
+                                                <div class="row text-center">
+                                                    <h5>PAGO HACIENDA</h5>
+                                                </div>
+                                                <div class="container py-2">
+                                                    <div class="row d-flex justify-content-center">
+                                                        <div class="col-8">
+                                                            <input #fileInput2 type="file"
+                                                                class="form-control form-control-sm" capture="camera"
+                                                                accept="" id="foto2" hidden>
+                                                            <a class="pe-auto">
+                                                                <img [src]="" alt="documento" class="card-img"
+                                                                    id="fileinput2">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success">Enviar</button>
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

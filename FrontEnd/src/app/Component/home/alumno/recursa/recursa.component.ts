@@ -16,7 +16,7 @@ export class RecursaComponent implements OnInit {
     idPeriodo: '',
     docenteDni: '',
     fecha: '',
-    estado: 0,
+    estado: 2,
     docenteDniApli: '',
   }
 
