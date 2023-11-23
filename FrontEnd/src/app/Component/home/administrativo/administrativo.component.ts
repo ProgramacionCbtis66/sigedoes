@@ -234,7 +234,7 @@ export class AdministrativoComponent implements OnInit {
     this.datosEsc = escuela.data;
     const claves = await firstValueFrom(this.admin.getClavesEsp());
     if (claves != null) {
-      console.log(claves.alimentos.clave);
+     
       this.clavesEsp.programacion = claves.programacion.clave;
       this.clavesEsp.contabilidad = claves.contabilidad.clave;
       this.clavesEsp.electricidad = claves.electricidad.clave;
@@ -291,7 +291,6 @@ export class AdministrativoComponent implements OnInit {
     if (res.ok == "vacio") {
       this.globales = [];
     } else {
-      console.log(res.ok);
       this.globales = res.ok;
     }
 
@@ -299,15 +298,29 @@ export class AdministrativoComponent implements OnInit {
   async viewModalGlobal(dato: any) {
     this.ngOnInit();
     if (dato.idrecursa != null) {
-      this.asignarRecursas.docenteDni = dato.docenteDni;
-      this.asignarRecursas.idrecursa = dato.idrecursa;
+      this.asignarRecursas = dato;
     } else {
       this.asignarGlobales = dato;
-
     }
     const maestros = await firstValueFrom(this.admin.getMaestros());
     this.maestros = maestros.ok;
   }
+
+  async getAsignaRecursa(dato: any) {
+    this.ngOnInit();
+    const res = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
+      if (res.ok == "vacio") {
+        this.recursas = [];
+      } else {
+        this.recursas = res.ok;
+      }
+      const maestros = await firstValueFrom(this.admin.getMaestros());
+      this.maestros = maestros.ok;
+  }
+  async asignaOtroMaestro(dato: any){
+    
+  }
+
   subirRegistroGlobal() {
     this.ngOnInit();
    
@@ -336,6 +349,7 @@ export class AdministrativoComponent implements OnInit {
     if (r.ok == 'vacio') {
       this.recursas = [];
     } else {
+      console.log(r.ok);  
       this.recursas = r.ok;
     }
   }

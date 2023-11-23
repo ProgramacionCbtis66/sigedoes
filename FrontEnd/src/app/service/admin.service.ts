@@ -47,7 +47,7 @@ export class AdminService {
     return this.http.get(`${this.URL}/admin/getMaestros`,this.usr);
   }
   getMateriasRecursa():Observable<any>{
-    return this.http.get(`${this.URL}/admin/getGlobales`, this.usr);
+    return this.http.get(`${this.URL}/admin/getMateriasRecursa`, this.usr);
   }
   getMaestrosRecursa():Observable<any>{
     return this.http.get(`${this.URL}/admin/getMaestrosRecursa`, this.usr);
@@ -79,5 +79,7 @@ export class AdminService {
     return this.http.post(`${this.URL}/admin/guardarAsignacionRecursa`, data, this.usr);
   }
 
-
+  getAsignaRecursa(data:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/getAsignaRecursas`,data, this.usr);
+  }
 }

@@ -231,10 +231,17 @@
                       <tr *ngFor="let recursa of recursas; index as i">
                         <td scope="col">{{recursa.periodoescolar}}</td>
                         <td scope="col">{{recursa.descripcion}}</td>
-                        <td scope="col">{{recursa.semestre}}</td>
+                        <td scope="col">{{recursa.grado}}{{recursa.grupo}}</td>
                         <td scope="col">{{recursa.tipo}}</td>
-                        <td scope="col" class="text-center"><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa)">Ver</button></td>
-                        
+                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa)">Ver</button></td>
+                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli != null && recursa.docenteDniApli != ''">
+                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursa(recursa)">
+                            Grupo asignado
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                              <span class="visually-hidden">!</span>
+                            </span>
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -823,8 +830,8 @@
                 <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDni">                        
-                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNIr(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDniApli" (change)="setDNIr(asignarRecursas.docenteDni)">                        
+                        <option *ngFor="let dato of maestros"  [value]="dato.numControl">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
                       </select>
                       <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
                     </div>

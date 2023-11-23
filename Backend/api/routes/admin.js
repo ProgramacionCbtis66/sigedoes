@@ -190,7 +190,7 @@ administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
         INNER JOIN periodoescolar p ON g.idperiodoescolar = p.idperiodoescolar
         INNER JOIN materias m ON m.idMateria = g.idMateria
         JOIN alumno a ON g.alumnoNumControl = a.numControl
-        WHERE g.estado = 2`);                                                    
+        WHERE g.estado < 3`);                                                    
         if(row.length > 0){
             res.send({ok:row});                
         } else if(row.length == 0){
@@ -210,7 +210,9 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
         let sql = `insert into asignaglobal (lugar, hora, fecha, idMateria, status, docenteDni, idperiodoescolar) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idMateria}',0, '${data.docenteDni}', '${data.idperiodoescolar}')`;
         const [row] = await conexion.execute(sql);
         if(row.affectedRows > 0){
-             const [actu] = await conexion.execute(`select idglobales from globales where (estado > 1 and estado<4) and (idMateria = ${data.idMateria}) and (idperiodoescolar = ${data.idperiodoescolar})`);
+             const [actu] = await conexion.execute(`select idglobales from globales 
+             join alumno on alumno.numControl = globales.alumnoNumControl
+             where (estado > 1 and estado<4) and (idMateria = '${data.idMateria}') and (idperiodoescolar = '${data.idperiodoescolar}') and (alumno.grado = '${data.grado}') and (alumno.grupo = '${data.grupo}')`);
              let listGlobales = [];
              actu.forEach(globales => {
              listGlobales.push(globales.idglobales);
@@ -233,7 +235,12 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
 administrador.get('/getMateriasRecursa', verifica, async(req,res) => {
     const conexion = await ccn();
     try{        
-        const [row] = await conexion.execute(`select * from materias m, periodoescolar p where (m.periodo = p.idperiodoescolar) and idMateria in (select distinct idMateria from recursa where (estado = 2))`);                                                    
+        const [row] = await conexion.execute(`SELECT distinct  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, r.idMateria, r.idperiodoescolar, r.docenteDniApli 
+        FROM recursas r
+        INNER JOIN periodoescolar p ON r.idperiodoescolar = p.idperiodoescolar
+        INNER JOIN materias m ON m.idMateria = r.idMateria
+        JOIN alumno a ON r.alumnoNumControl = a.numControl
+        WHERE r.estado < 3`);                                                    
         if(row.length > 0){
             res.send({ok:row});                
         } else if(row.length == 0){
@@ -253,13 +260,15 @@ administrador.post('/AsignacionRecursa', verifica, async(req,res) => {
         let sql = `insert into asignaglobal (lugar, hora, fecha, idMateria, status, docenteDni, idperiodoescolar) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idMateria}', '0', '${data.docenteDni}', '${data.idperiodoescolar}');`;
         const [row] = await conexion.execute(sql);
         if(row.affectedRows > 0){
-             const [actu] = await conexion.execute(`select idrecursa from recursa where (estado = 2) and (idMateria = ${data.idMateria})`);
+             const [actu] = await conexion.execute(`select idrecursa from recursa 
+             join alumno on alumno.numControl = recursa.alumnoNumControl
+             where (estado = 2) and (idMateria = '${data.idMateria}') and (idperiodoescolar = '${data.idperiodoescolar}') and (grado = '${data.grado}') and (grupo = '${data.grupo}')`);
              let listGlobales = [];
              actu.forEach(recursa => {
              listGlobales.push(recursa.idglobales);
             });
              const ready = listGlobales.join(',');            
-             sql = `UPDATE recursa SET docenteDniApli = ${data.docenteDni} WHERE idrecursa in (${ready});`;
+             sql = `UPDATE recursa SET docenteDniApli = '${data.docenteDni}' WHERE idrecursa in (${ready});`;
              await conexion.execute(sql);                        
             res.send({ok:"ok"});            
         }else {
@@ -320,6 +329,39 @@ administrador.post('/guardarAsignacionRecursa', verifica, async(req, res) => {
         
     } finally{
         conexion.end();
+    }
+});
+
+administrador.post('/getAsignaRecursas', verifica, async(req,res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`SELECT ar.lugar, ar.fecha, ar.hora, ar.docenteDni 
+        FROM asignarecursa ar, recursas r , alumno u 
+        WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl) and (ar.docenteDni = u.numControl) and (r.grado = '${data.grado}') and (r.grupo = '${data.grupo}')`);
+        if(row.length > 0){
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+administrador.post('/getAsignaGlobales', verifica, async(req,res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`SELECT ag.lugar, ag.fecha, ag.hora, ag.docenteDni 
+        FROM asignaglobal ag, globales g , alumno u 
+        WHERE (ag.docenteDni = g.docenteDniApli) and (ag.docenteDni = u.numControl) and (g.alumnoNumControl = u.numControl) and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}')`);
+        if(row.length > 0){
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    }catch(error){
+        console.log(error);
     }
 });
 
