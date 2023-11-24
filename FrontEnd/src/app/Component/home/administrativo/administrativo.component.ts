@@ -441,9 +441,11 @@ export class AdministrativoComponent implements OnInit {
 
   /*
   
-  modulo de asignacion de globales
+  modulo de solicitus de globales y recursas
   
   */
+
+  solicitudesGlobales: any = [];
 
 
 

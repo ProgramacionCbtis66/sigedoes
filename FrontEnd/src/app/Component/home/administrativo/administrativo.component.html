@@ -387,7 +387,7 @@
     <div class="row">
       <!-- modulo para las solicitudes de alumnos para examen global -->
       <div class="col-lg-12 accordion" id="accordionSolicitudGlobales">
-        <div class="accordio mb-2">
+        <div class="accordion mb-2">
           <div class="accordion-item">
             <div class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -402,14 +402,45 @@
             <div id="solicitudGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitudGlobales">
               <div class="accordion-body">
                 <div class="row">
-                  <div class="col-5">
-                    <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                  <div class="col-4">
                     <div class="input-group">
                       <div class="input-group-text">Solicitante :</div>
-                      <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
+                      <input [(ngModel)]="solicitudesGlobales.numControl" type="text" class="form-control" id="autoSizingInputGroup"
                         placeholder="Número de Control" required>
                     </div>
                   </div>
+                  <div class="col-4">
+                    <div class="input-group">
+                      <div class="input-group-text">Grado :</div>
+                      <input [(ngModel)]="solicitudesGlobales.grado" type="number" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Grado" required>
+                    </div>
+                  </div>
+                  <div class="col-4">                   
+                    <div class="input-group">
+                      <div class="input-group-text">grupo :</div>
+                      <input [(ngModel)]="solicitudesGlobales.grupo" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Grupo" required>
+                    </div>
+                  </div>
+                  <div class="col-4">                  
+                    <div class="input-group">
+                      <div class="input-group-text">especialidad :</div>
+                      <input [(ngModel)]="solicitudesGlobales.especialidad" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Especialidad" required>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="input-group mt-2">
+                      <div class="input-group-text">Turno :</div>
+                      <select class="form-select" aria-label="Default select example" [(ngModel)]="solicitudesGlobales.turno">
+                        <option value="Matutino" >Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Filtrar</button>
                 </div>
               </div>
             </div>
