@@ -5,8 +5,9 @@
   <div class="container-fluid">
     <div class="row d-flex">
       <!-- Lado izquierdo -->
-      <!-- modulo para validar solicitudes de usuarios -->
+
       <div class="col-lg-6 accordion" id="accordionSolicitud">
+        <!-- modulo para validar solicitudes de usuarios -->
         <div class="accordion-item mb-2">
           <div class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -171,11 +172,11 @@
                       <th scope="col">Periodo Escolar</th>
                       <th scope="col">Materia</th>
                       <th scope="col">Semestre</th>
-                      <th scope="col">Tipo</th>  
-                      <th scope="col">Asignar</th>                      
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Asignar</th>
                     </tr>
                   </thead>
-                  <tbody class="table-group-divider" >
+                  <tbody class="table-group-divider">
                     <!-- aqui programar datos -->
                     <tr *ngFor="let dato of globales">
                       <td scope="col">{{dato.periodoescolar}}</td>
@@ -183,11 +184,15 @@
                       <td scope="col">{{dato.grado}}{{dato.grupo}}</td>
                       <td scope="col">{{dato.tipo}}</td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli==''">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato,'global')">Ver</button></td>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales"
+                          (click)="viewModalGlobal(dato,'global')">Ver</button>
+                      </td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli!=''">
-                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="getAsignaRecursaGlobal(dato,'global')">
+                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal"
+                          data-bs-target="#modalGlobales" (click)="getAsignaRecursaGlobal(dato,'global')">
                           Grupo asignado
-                          <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                          <span
+                            class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                             <span class="visually-hidden">!</span>
                           </span>
                         </button>
@@ -223,7 +228,7 @@
                         <th scope="col">Periodo Escolar</th>
                         <th scope="col">Materia</th>
                         <th scope="col">Semestre</th>
-                        <th scope="col">Tipo</th>                        
+                        <th scope="col">Tipo</th>
                         <th class="text-center">Acciones</th>
                       </tr>
                     </thead>
@@ -233,11 +238,17 @@
                         <td scope="col">{{recursa.descripcion}}</td>
                         <td scope="col">{{recursa.grado}}{{recursa.grupo}}</td>
                         <td scope="col">{{recursa.tipo}}</td>
-                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa,'recursa')">Ver</button></td>
-                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli != null && recursa.docenteDniApli != ''">
-                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa,'recursa')">
+                        <td scope="col" class="text-center"
+                          *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button"
+                            data-bs-toggle="modal" data-bs-target="#modalRecursas"
+                            (click)="viewModalGlobal(recursa,'recursa')">Ver</button></td>
+                        <td scope="col" class="text-center"
+                          *ngIf="recursa.docenteDniApli != null && recursa.docenteDniApli != ''">
+                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal"
+                            data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa,'recursa')">
                             Grupo asignado
-                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            <span
+                              class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                               <span class="visually-hidden">!</span>
                             </span>
                           </button>
@@ -256,7 +267,6 @@
       <!-- Lado derecho -->
       <!-- modulo para generar codigo de pago -->
       <div class="col-lg-6 mb-2">
-
         <div class="accordion" id="accordionPago">
           <div class="accordion-item">
             <div class="accordion-header">
@@ -270,7 +280,7 @@
                   data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos de la Escuela</button>
               </button>
             </div>
-            <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago"  >
+            <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago">
               <div class="accordion-body">
                 <div class="row ">
 
@@ -356,7 +366,7 @@
                 </p>
               </button>
             </div>
-            <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP"  >
+            <div id="collapseGCP" class="accordion-collapse collapse" data-bs-parent="#accordionGCP">
               <div class="accordion-body">
                 <div class="row">
                   <div class="col-12 bg-light rounded-8 bg-gradient align-baseline d-flex justify-content-center py-4">
@@ -374,9 +384,43 @@
       </div> <!-- Fin del modulo para generar CP -->
       <!-- Fin lado derecho -->
     </div>
+    <div class="row">
+      <!-- modulo para las solicitudes de alumnos para examen global -->
+      <div class="col-lg-12 accordion" id="accordionSolicitudGlobales">
+        <div class="accordio mb-2">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#solicitudGlobales" aria-expanded="false" aria-controls="solicitudGlobales"
+                style="height: 3rem;">
+                <p class="fs-6 fw-light text-center text-secondary mt-3">
+                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                  Solicitudes de alumnos para examen global
+                </p>
+              </button>
+            </div>
+            <div id="solicitudGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitudGlobales">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-5">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Número de Control</label>
+                    <div class="input-group">
+                      <div class="input-group-text">Solicitante :</div>
+                      <input [(ngModel)]="nc" type="text" class="form-control" id="autoSizingInputGroup"
+                        placeholder="Número de Control" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal de Generador de Código de Pago-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" arilocalhostdatoa-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" arilocalhostdatoa-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -438,7 +482,7 @@
             <div class="row">
               <!-- Lado Izquierdo -->
               <div class="col-md-4 text-center">
-                  <img [src]="usuario.foto" class="img-fluid" width="200" alt="image desc">
+                <img [src]="usuario.foto" class="img-fluid" width="200" alt="image desc">
               </div>
               <!-- lado derecho -->
               <div class="col-md-8">
@@ -515,12 +559,12 @@
           </div>
           <div class="modal-footer">
             <td class="text-center">
-              <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#aceptado"
-                disabled>
+              <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal"
+                data-bs-target="#aceptado" disabled>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
-              </a> 
-              <a (click)="Noaceptado(usuario.numControl)" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#aceptado"
-                disabled>
+              </a>
+              <a (click)="Noaceptado(usuario.numControl)" class="badge bg-danger" data-bs-toggle="modal"
+                data-bs-target="#aceptado" disabled>
                 <i class="fa-solid fa-circle-xmark"></i>
               </a>
             </td>
@@ -716,9 +760,11 @@
     </div>
   </div>
 </div>
+
+
 <!--Modal Globales-->
 <div id="modalGlobales" class="modal fade" role="dialog">
-  <div class="modal-dialog">    
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
@@ -741,12 +787,12 @@
                     </div>
                   </th>
                 </tr>
-                
+
                 <tr>
                   <th class=" c2">
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.fecha">
+                      <input type="datetime-local" class="form-control" id="floatingInput"
+                        placeholder="name@example.com" [(ngModel)]="asignarGlobales.fecha">
                       <label for="floatingInput">Fecha </label>
                     </div>
                   </th>
@@ -763,13 +809,15 @@
                 <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">                        
-                        <option *ngFor="let dato of maestros"  [value]="dato.numControl" (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">
+                        <option *ngFor="let dato of maestros" [value]="dato.numControl"
+                          (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}
+                        </option>
                       </select>
-                      <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
+                      <label for="floatingInput">Dni del docente que lo impartirá</label>
                     </div>
                   </th>
-                </tr>                
+                </tr>
               </table>
             </div>
           </div>
@@ -777,16 +825,18 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()" *ngIf="asignarGlobales.idasiglobd==null">Enviar Registro</button>
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="actualizarRegistroGlobal()" *ngIf="asignarGlobales.idasiglobd!=null">Actualizar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()"
+          *ngIf="asignarGlobales.idasiglobd==null">Enviar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="actualizarRegistroGlobal()"
+          *ngIf="asignarGlobales.idasiglobd!=null">Actualizar Registro</button>
         <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-
+<!--Modal Recursas-->
 <div id="modalRecursas" class="modal fade" role="dialog">
-  <div class="modal-dialog">    
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -809,7 +859,7 @@
                     </div>
                   </th>
                 </tr>
-                
+
                 <tr>
                   <th class=" c2">
                     <div class="form-floating">
@@ -831,13 +881,15 @@
                 <tr>
                   <th class="c1">
                     <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDniApli" (change)="setDNIr(asignarRecursas.docenteDni)">                        
-                        <option *ngFor="let dato of maestros"  [value]="dato.numControl">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}</option>                     
+                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDniApli"
+                        (change)="setDNIr(asignarRecursas.docenteDni)">
+                        <option *ngFor="let dato of maestros" [value]="dato.numControl">{{dato.nombre}}
+                          {{dato.apellidoM}} {{dato.apellidoP}}</option>
                       </select>
-                      <label for="floatingInput" >Dni del docente que lo impartirá</label>                      
+                      <label for="floatingInput">Dni del docente que lo impartirá</label>
                     </div>
                   </th>
-                </tr>                
+                </tr>
               </table>
             </div>
           </div>
@@ -845,7 +897,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroRecursa()">Enviar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroRecursa()">Enviar
+          Registro</button>
         <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
