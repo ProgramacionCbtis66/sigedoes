@@ -265,6 +265,8 @@ administrador.post('/actualizaAsignacionGlobal', verifica, async(req, res) => {
     }
 });
 
+
+
 administrador.get('/getMateriasRecursa', verifica, async(req,res) => {
     const conexion = await ccn();
     try{        
@@ -365,11 +367,31 @@ administrador.post('/guardarAsignacionRecursa', verifica, async(req, res) => {
     }
 });
 
+administrador.post('/actualizaAsignacionRecursa', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const data = req.body;
+    try{        
+        const sql = `update  asignarecursa Lugar = ?, hora = ?, fecha = ?, docenteDni = ?, status = ?, idrecursa = ? where idasigrecursa = ?;`;        
+        const [result] = await conexion.execute(sql, [data.lugar, data.hora, data.fecha, data.docenteDni, 0, data.idrecursa, data.idasigrecursa]);
+        if(result.affectedRows > 0){
+            const [lastresult] = await conexion.execute(`UPDATE recursas SET estado = '1' WHERE (idrecursa = '${data.idrecursa}')`);            
+            res.send({ok:'ok'});            
+        } else {
+            res.send({err:'err'});
+        }
+        
+    }catch(error){
+        
+    } finally{
+        conexion.end();
+    }
+});
+
 administrador.post('/getAsignaRecursas', verifica, async(req,res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`SELECT ar.lugar, ar.fecha, ar.hora, ar.docenteDni 
+        const [row] = await conexion.execute(`SELECT ar.idasigrecursa, ar.lugar, ar.fecha, ar.hora, ar.docenteDni 
         FROM asignarecursa ar, recursas r , alumno u 
         WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl)  and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}') and (r.idMateria = '${data.idMateria}')`);
         if(row.length > 0){

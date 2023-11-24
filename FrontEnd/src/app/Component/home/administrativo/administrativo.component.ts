@@ -285,6 +285,14 @@ export class AdministrativoComponent implements OnInit {
     });
 
   }
+
+
+  /*
+
+  modulo de asignacion de globales y Recursas
+
+  */
+
   async getGlobales() {
     this.ngOnInit();
     const res = await firstValueFrom(this.admin.getMateriasGlobales());
@@ -368,6 +376,24 @@ export class AdministrativoComponent implements OnInit {
           Notiflix.Notify.info("Global Actualizado");
           this.getGlobales();
           this.asignarGlobales = {};
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      });
+
+    } else {
+      Notiflix.Notify.failure('Rellene Todos Los Campos');
+    }
+  }
+
+  actualizarRegistroRecursa(){
+    this.ngOnInit();
+    if (this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '' && this.asignarRecursas.docenteDni != '' && this.asignarRecursas.docenteDni != undefined) {
+      this.admin.actualizaAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
+        if (res.ok == "ok") {
+          Notiflix.Notify.info("Recursa Actualizado");
+          this.getRecursas();
+          this.asignarRecursas = {};
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
