@@ -76,6 +76,7 @@ administrador.post('/guardarDatosEsc',verifica, async (req, res) => {
         conexion.end();
     }
 });
+
 administrador.get('/GetdatosEsc',verifica, async (req, res) => {
     const conexion = await ccn();
     try {
