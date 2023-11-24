@@ -285,6 +285,14 @@ export class AdministrativoComponent implements OnInit {
     });
 
   }
+
+
+  /*
+
+  modulo de asignacion de globales y Recursas
+
+  */
+
   async getGlobales() {
     this.ngOnInit();
     const res = await firstValueFrom(this.admin.getMateriasGlobales());
@@ -292,12 +300,13 @@ export class AdministrativoComponent implements OnInit {
       this.globales = [];
     } else {
       this.globales = res.ok;
+       
     }
 
   }
-  async viewModalGlobal(dato: any) {
+  async viewModalGlobal(dato: any, op: any) {
     this.ngOnInit();
-    if (dato.idrecursa != null) {
+    if (op == 'recursa') {
       this.asignarRecursas = dato;
     } else {
       this.asignarGlobales = dato;
@@ -306,24 +315,42 @@ export class AdministrativoComponent implements OnInit {
     this.maestros = maestros.ok;
   }
 
-  async getAsignaRecursa(dato: any) {
+  async getAsignaRecursaGlobal(dato: any, op: any) {
     this.ngOnInit();
-    const res = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
-      if (res.ok == "vacio") {
-        this.recursas = [];
-      } else {
-        this.recursas = res.ok;
+    if(op=='recursa'){
+    const recursa = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
+      if (recursa.ok != "vacio") {
+        this.asignarRecursas = dato;
+        this.asignarRecursas.lugar = recursa.ok.lugar;
+        this.asignarRecursas.fecha = recursa.ok.fecha;
+        this.asignarRecursas.hora = recursa.ok.hora;
+        this.asignarRecursas.docenteDniApli = recursa.ok.docenteDni;
+        this.asignarRecursas.idasigrecursa = recursa.ok.idasigrecursa;
       }
+    }else{
+      
+      const global = await firstValueFrom(this.admin.getAsignaGlobal(dato))
+     
+      if(global.ok != "vacio"){
+        this.asignarGlobales = dato;
+        this.asignarGlobales.lugar = global.ok.lugar;
+        this.asignarGlobales.fecha = global.ok.fecha;
+        this.asignarGlobales.hora = global.ok.hora;
+        this.asignarGlobales.docenteDniApli = global.ok.docenteDni;
+        this.asignarGlobales.idasiglobd = global.ok.idasiglobd; 
+      }
+    }
       const maestros = await firstValueFrom(this.admin.getMaestros());
       this.maestros = maestros.ok;
+      console.log(this.asignarGlobales);
   }
+  
   async asignaOtroMaestro(dato: any){
     
   }
 
   subirRegistroGlobal() {
     this.ngOnInit();
-   
     if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
         if (res.ok == "ok") {
@@ -339,6 +366,42 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }
 
+  }
+
+  actualizarRegistroGlobal(){
+    this.ngOnInit();
+    if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
+      this.admin.actualizaAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
+        if (res.ok == "ok") {
+          Notiflix.Notify.info("Global Actualizado");
+          this.getGlobales();
+          this.asignarGlobales = {};
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      });
+
+    } else {
+      Notiflix.Notify.failure('Rellene Todos Los Campos');
+    }
+  }
+
+  actualizarRegistroRecursa(){
+    this.ngOnInit();
+    if (this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '' && this.asignarRecursas.docenteDni != '' && this.asignarRecursas.docenteDni != undefined) {
+      this.admin.actualizaAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
+        if (res.ok == "ok") {
+          Notiflix.Notify.info("Recursa Actualizado");
+          this.getRecursas();
+          this.asignarRecursas = {};
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      });
+
+    } else {
+      Notiflix.Notify.failure('Rellene Todos Los Campos');
+    }
   }
   setDNI(DNI: any) {
     this.ngOnInit();
@@ -378,9 +441,11 @@ export class AdministrativoComponent implements OnInit {
 
   /*
   
-  modulo de asignacion de globales
+  modulo de solicitus de globales y recursas
   
   */
+
+  solicitudesGlobales: any = [];
 
 
 
