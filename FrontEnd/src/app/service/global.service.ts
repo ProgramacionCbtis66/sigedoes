@@ -14,7 +14,7 @@ export class GlobalService {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
   }
 
-  listaGlobal(): Observable<any>{
-    return this.http.get(`${this.URL}/global/traerdatos`, this.usr);
+  listaGlobal(numControl: any): Observable<any>{
+    return this.http.post(`${this.URL}/globales/getglobales`, numControl, this.usr);
   }
 }

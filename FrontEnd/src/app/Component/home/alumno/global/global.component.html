@@ -9,31 +9,28 @@
             <table class="table table-responsive table-bordered">
                 <thead>
                     <tr class="justify-content-center">
+                        <th>Periodo</th>
                         <th>Semestre</th>
-                        <th>Maestro</th>
                         <th>Materia</th>
                         <th>Estado</th>
-                        <th>Proceso</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>5</td>
-                        <td>Mtro Jorge Cortez Domingues</td>
-                        <td>Programacion Orientada a Objetos</td>
-                        <td>No Acreditada </td>
+                    <tr *ngFor="let dato of listaGlobales">
+                        <td>{{dato.periodoescolar}}</td>
+                        <td>{{dato.grado}}{{dato.grupo}}</td>
+                        <td>{{dato.descripcion}}</td>
                         <td>
-                            <div class="justify-content-center">
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    *ngIf="globalDatos.estado == 0">Solicitar</button>
+                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                                    *ngIf="dato.estado == 0">Solicitar</button>
                                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-                                    data-bs-target="#versolicitud" *ngIf="globalDatos.estado == 2">Cargar
+                                    data-bs-target="#versolicitud" *ngIf="dato.estado == 2">Cargar
                                     Comprobante</button>
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#versolicitud" *ngIf="dato.estado == 3" disabled>En proceso de autorización a examen</button>
                                 <button type="button" class="btn btn-outline-info" data-bs-target="#versolicitud"
-                                    *ngIf="globalDatos.estado == 4">Solicitar datos de Global</button>
-                            </div>
+                                    *ngIf="dato.estado == 4">Solicitar datos de Global</button>
                         </td>
-
                     </tr>
                 </tbody>
             </table>

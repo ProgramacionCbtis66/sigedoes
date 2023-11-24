@@ -13,12 +13,12 @@ import { firstValueFrom } from 'rxjs';
 export class GlobalComponent implements OnInit {
   protected globalDatos = {
     alumnoNumControl: '',
-    docenteDni: '',
     idMateria: '',
     idPeriodo: '',
     fecha: '',
     estado: 0,
   }
+  protected listaGlobales: any = [];
 
   constructor(
     private alumno: UsuarioService,
@@ -29,6 +29,7 @@ export class GlobalComponent implements OnInit {
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._global = true;
+    this.cargarGlobales();
   }
 
   ngOnInit(): void {
@@ -42,7 +43,8 @@ export class GlobalComponent implements OnInit {
   async cargarGlobales(){
     this.ngOnInit();
     try{
-      let res = await firstValueFrom(this.global.listaGlobal());
+      let res = await firstValueFrom(this.global.listaGlobal({numControl: this.auth.decodifica().numControl}));
+      this.listaGlobales = res.data;
       console.log(res);
     } catch (error){
       console.log(error);

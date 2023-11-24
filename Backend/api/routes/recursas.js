@@ -16,3 +16,5 @@ recursa.get('/traerdatos', verifica, async (req, res) => {
         res.json({ data: [] });
     }
 });
+
+module.exports = recursa;
