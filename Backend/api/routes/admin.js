@@ -185,12 +185,13 @@ administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
 administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
     const conexion = await ccn();
     try{        
-        const [row] = await conexion.execute(`SELECT distinct  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, g.idMateria, g.idperiodoescolar, g.docenteDniApli 
+        const [row] = await conexion.execute(`SELECT distinct g.idglobales,  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, g.idMateria, g.idperiodoescolar, g.docenteDniApli 
         FROM globales g
         INNER JOIN periodoescolar p ON g.idperiodoescolar = p.idperiodoescolar
         INNER JOIN materias m ON m.idMateria = g.idMateria
         JOIN alumno a ON g.alumnoNumControl = a.numControl
-        WHERE g.estado < 3`);                                                    
+        WHERE g.estado < 3`); 
+                                                         
         if(row.length > 0){
             res.send({ok:row});                
         } else if(row.length == 0){
@@ -235,7 +236,7 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
 administrador.get('/getMateriasRecursa', verifica, async(req,res) => {
     const conexion = await ccn();
     try{        
-        const [row] = await conexion.execute(`SELECT distinct  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, r.idMateria, r.idperiodoescolar, r.docenteDniApli 
+        const [row] = await conexion.execute(`SELECT distinct r.idrecursa,  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, r.idMateria, r.idperiodoescolar, r.docenteDniApli 
         FROM recursas r
         INNER JOIN periodoescolar p ON r.idperiodoescolar = p.idperiodoescolar
         INNER JOIN materias m ON m.idMateria = r.idMateria
@@ -338,9 +339,9 @@ administrador.post('/getAsignaRecursas', verifica, async(req,res) => {
     try{
         const [row] = await conexion.execute(`SELECT ar.lugar, ar.fecha, ar.hora, ar.docenteDni 
         FROM asignarecursa ar, recursas r , alumno u 
-        WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl) and (ar.docenteDni = u.numControl) and (r.grado = '${data.grado}') and (r.grupo = '${data.grupo}')`);
+        WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl)  and (r.grado = '${data.grado}') and (r.grupo = '${data.grupo}') and (r.idMateria = '${data.idMateria}')`);
         if(row.length > 0){
-            res.send({ok:row});
+            res.send({ok:row[0]});
         } else if(row.length == 0){
             res.send({ok:"vacio"});
         }
@@ -350,13 +351,15 @@ administrador.post('/getAsignaRecursas', verifica, async(req,res) => {
 });
 administrador.post('/getAsignaGlobales', verifica, async(req,res) => {
     const data = req.body;
+    console.log(data);
     const conexion = await ccn();
     try{
         const [row] = await conexion.execute(`SELECT ag.lugar, ag.fecha, ag.hora, ag.docenteDni 
         FROM asignaglobal ag, globales g , alumno u 
-        WHERE (ag.docenteDni = g.docenteDniApli) and (ag.docenteDni = u.numControl) and (g.alumnoNumControl = u.numControl) and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}')`);
+        WHERE (ag.docenteDni = g.docenteDniApli) and (g.alumnoNumControl = u.numControl) and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}') and (g.idMateria = '${data.idMateria}')`);
+        console.log(row[0]);  
         if(row.length > 0){
-            res.send({ok:row});
+            res.send({ok:row[0]});
         } else if(row.length == 0){
             res.send({ok:"vacio"});
         }

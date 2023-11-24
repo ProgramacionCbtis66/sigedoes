@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "Roboto, Consolas, 'Courier New', monospace, 'Pusab'",
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
     "files.autoSave": "afterDelay",
     "editor.fontSize": 18,
     "editor.renderWhitespace": "selection",

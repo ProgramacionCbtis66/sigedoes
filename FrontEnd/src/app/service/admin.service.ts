@@ -82,4 +82,7 @@ export class AdminService {
   getAsignaRecursa(data:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/getAsignaRecursas`,data, this.usr);
   }
+  getAsignaGlobal(data:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/getAsignaGlobales`,data, this.usr);
+  }
 }

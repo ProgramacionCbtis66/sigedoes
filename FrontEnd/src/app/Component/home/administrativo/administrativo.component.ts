@@ -292,6 +292,7 @@ export class AdministrativoComponent implements OnInit {
       this.globales = [];
     } else {
       this.globales = res.ok;
+       
     }
 
   }
@@ -306,17 +307,34 @@ export class AdministrativoComponent implements OnInit {
     this.maestros = maestros.ok;
   }
 
-  async getAsignaRecursa(dato: any) {
+  async getAsignaRecursaGlobal(dato: any) {
     this.ngOnInit();
-    const res = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
-      if (res.ok == "vacio") {
-        this.recursas = [];
-      } else {
-        this.recursas = res.ok;
+    
+    if(dato.idrecursa != null && dato.idrecursa != undefined){
+    const recursa = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
+      if (recursa.ok != "vacio") {
+        this.asignarRecursas = dato;
+        this.asignarRecursas.lugar = recursa.ok.lugar;
+        this.asignarRecursas.fecha = recursa.ok.fecha;
+        this.asignarRecursas.hora = recursa.ok.hora;
+        this.asignarRecursas.docenteDniApli = recursa.ok.docenteDni;
       }
+    }else{
+      console.log(dato.idglobales)
+      const global = await firstValueFrom(this.admin.getAsignaGlobal(dato))
+      console.log(global)
+      if(global.ok != "vacio"){
+        this.asignarGlobales = dato;
+        this.asignarGlobales.lugar = global.ok.lugar;
+        this.asignarGlobales.fecha = global.ok.fecha;
+        this.asignarGlobales.hora = global.ok.hora;
+        this.asignarGlobales.docenteDniApli = global.ok.docenteDni; 
+      }
+    }
       const maestros = await firstValueFrom(this.admin.getMaestros());
       this.maestros = maestros.ok;
   }
+  
   async asignaOtroMaestro(dato: any){
     
   }

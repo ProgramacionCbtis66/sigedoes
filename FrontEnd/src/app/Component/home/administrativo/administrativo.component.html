@@ -177,7 +177,7 @@
                   </thead>
                   <tbody class="table-group-divider" >
                     <!-- aqui programar datos -->
-                    <tr *ngFor="let dato of globales; index as i; first as idFirst">
+                    <tr *ngFor="let dato of globales">
                       <td scope="col">{{dato.periodoescolar}}</td>
                       <td scope="col">{{dato.descripcion}}</td>
                       <td scope="col">{{dato.grado}}{{dato.grupo}}</td>
@@ -185,7 +185,7 @@
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli==''">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">Ver</button></td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli!=''">
-                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">
+                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="getAsignaRecursaGlobal(dato)">
                           Grupo asignado
                           <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                             <span class="visually-hidden">!</span>
@@ -235,7 +235,7 @@
                         <td scope="col">{{recursa.tipo}}</td>
                         <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa)">Ver</button></td>
                         <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli != null && recursa.docenteDniApli != ''">
-                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursa(recursa)">
+                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa)">
                             Grupo asignado
                             <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                               <span class="visually-hidden">!</span>
