@@ -183,9 +183,9 @@
                       <td scope="col">{{dato.grado}}{{dato.grupo}}</td>
                       <td scope="col">{{dato.tipo}}</td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli==''">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato)">Ver</button></td>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="viewModalGlobal(dato,'global')">Ver</button></td>
                       <td scope="col" class="text-center" *ngIf="dato.docenteDniApli!=''">
-                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="getAsignaRecursaGlobal(dato)">
+                        <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalGlobales" (click)="getAsignaRecursaGlobal(dato,'global')">
                           Grupo asignado
                           <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                             <span class="visually-hidden">!</span>
@@ -233,9 +233,9 @@
                         <td scope="col">{{recursa.descripcion}}</td>
                         <td scope="col">{{recursa.grado}}{{recursa.grupo}}</td>
                         <td scope="col">{{recursa.tipo}}</td>
-                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa)">Ver</button></td>
+                        <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli == null || recursa.docenteDniApli == ''  "><button type="button" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="viewModalGlobal(recursa,'recursa')">Ver</button></td>
                         <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli != null && recursa.docenteDniApli != ''">
-                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa)">
+                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal" data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa,'recursa')">
                             Grupo asignado
                             <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                               <span class="visually-hidden">!</span>
@@ -721,7 +721,7 @@
   <div class="modal-dialog">    
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         <h4 class="modal-title">Establer Datos Para Globales</h4>
       </div>
       <div class="modal-body">
@@ -777,7 +777,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()">Enviar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()" *ngIf="asignarGlobales.idasiglobd==null">Enviar Registro</button>
+        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="actualizarRegistroGlobal()" *ngIf="asignarGlobales.idasiglobd!=null">Actualizar Registro</button>
         <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

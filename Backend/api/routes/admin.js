@@ -185,12 +185,12 @@ administrador.post('/guardarClavesEspSoporte',verifica, async (req, res) => {
 administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
     const conexion = await ccn();
     try{        
-        const [row] = await conexion.execute(`SELECT distinct g.idglobales,  p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, g.idMateria, g.idperiodoescolar, g.docenteDniApli 
+        const [row] = await conexion.execute(`SELECT distinct p.periodoescolar, a.grado, a.grupo, m.descripcion, m.tipo, g.idMateria, g.idperiodoescolar, g.docenteDniApli 
         FROM globales g
         INNER JOIN periodoescolar p ON g.idperiodoescolar = p.idperiodoescolar
         INNER JOIN materias m ON m.idMateria = g.idMateria
         JOIN alumno a ON g.alumnoNumControl = a.numControl
-        WHERE g.estado < 3`); 
+        WHERE g.estado < 4`); 
                                                          
         if(row.length > 0){
             res.send({ok:row});                
@@ -207,6 +207,7 @@ administrador.get('/getMateriasGlobales', verifica, async(req,res) => {
 administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
     const data = req.body;
     const conexion = await ccn();
+    console.log(data);
     try{                
         let sql = `insert into asignaglobal (lugar, hora, fecha, idMateria, status, docenteDni, idperiodoescolar) values ('${data.lugar}', '${data.hora}', '${data.fecha}', '${data.idMateria}',0, '${data.docenteDni}', '${data.idperiodoescolar}')`;
         const [row] = await conexion.execute(sql);
@@ -221,6 +222,37 @@ administrador.post('/AsignacionGlobal', verifica, async(req,res) => {
              const ready = listGlobales.join(',');           
              sql = `UPDATE globales SET docenteDniApli = '${data.docenteDni}' WHERE idglobales in (${ready});`;
              await conexion.execute(sql);                        
+            res.send({ok:"ok"});            
+        }else {
+            console.log("Error ");
+        }
+    }catch(error){
+        console.log(error);
+    }finally{
+        
+        conexion.end();
+    }
+});
+
+
+administrador.post('/actualizaAsignacionGlobal', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    console.log(data);
+    try{                
+        let sql = `update asignaglobal set lugar = ?, hora = ?, fecha = ?, idMateria = ?, status = ?, docenteDni = ?, idperiodoescolar = ? where idasiglobd = ?`;
+        const [row] = await conexion.execute(sql, [data.lugar, data.hora, data.fecha, data.idMateria, 0, data.docenteDni, data.idperiodoescolar, data.idasiglobd]);
+        if(row.affectedRows > 0){
+             const [actu] = await conexion.execute(`select idglobales from globales 
+             join alumno on alumno.numControl = globales.alumnoNumControl
+             where (estado > 1 and estado<4) and (idMateria = '${data.idMateria}') and (idperiodoescolar = '${data.idperiodoescolar}') and (alumno.grado = '${data.grado}') and (alumno.grupo = '${data.grupo}')`);
+             let listGlobales = [];
+             actu.forEach(globales => {
+             listGlobales.push(globales.idglobales);
+            });
+             const ready = listGlobales.join(',');           
+             sql = `UPDATE globales SET docenteDniApli = ? WHERE idglobales in (?);`;
+             await conexion.execute(sql, [data.docenteDni, ready]);                        
             res.send({ok:"ok"});            
         }else {
             console.log("Error ");
@@ -300,7 +332,7 @@ administrador.get('/getMaestros', verifica, async(req,res) => {
 administrador.get('/getGlobales', verifica, async(req,res) => {
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute('select idrecursa,periodoescolar.periodo, periodoescolar,descripcion,semestre,tipo, docenteDni from recursas,materias,periodoescolar where (recursas.idMateria = materias.idMateria) and (recursas.idperiodoescolar = periodoescolar.idperiodoescolar) and (estado = 0);');        
+        const [row] = await conexion.execute('select idrecursa,periodoescolar.periodo, periodoescolar,descripcion,semestre,tipo, docenteDni from recursas,materias,periodoescolar where (recursas.idMateria = materias.idMateria) and (recursas.idperiodoescolar = periodoescolar.idperiodoescolar);');        
         if(row.length > 0){            
             res.send({ok:row});                            
         } else if(row.length == 0){
@@ -339,7 +371,7 @@ administrador.post('/getAsignaRecursas', verifica, async(req,res) => {
     try{
         const [row] = await conexion.execute(`SELECT ar.lugar, ar.fecha, ar.hora, ar.docenteDni 
         FROM asignarecursa ar, recursas r , alumno u 
-        WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl)  and (r.grado = '${data.grado}') and (r.grupo = '${data.grupo}') and (r.idMateria = '${data.idMateria}')`);
+        WHERE (ar.docenteDni = r.docenteDniApli) and (r.alumnoNumControl = u.numControl)  and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}') and (r.idMateria = '${data.idMateria}')`);
         if(row.length > 0){
             res.send({ok:row[0]});
         } else if(row.length == 0){
@@ -354,7 +386,7 @@ administrador.post('/getAsignaGlobales', verifica, async(req,res) => {
     console.log(data);
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`SELECT ag.lugar, ag.fecha, ag.hora, ag.docenteDni 
+        const [row] = await conexion.execute(`SELECT ag.idasiglobd, ag.lugar, ag.fecha, ag.hora, ag.docenteDni 
         FROM asignaglobal ag, globales g , alumno u 
         WHERE (ag.docenteDni = g.docenteDniApli) and (g.alumnoNumControl = u.numControl) and (u.grado = '${data.grado}') and (u.grupo = '${data.grupo}') and (g.idMateria = '${data.idMateria}')`);
         console.log(row[0]);  

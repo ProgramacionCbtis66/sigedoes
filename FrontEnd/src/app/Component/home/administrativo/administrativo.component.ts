@@ -296,9 +296,9 @@ export class AdministrativoComponent implements OnInit {
     }
 
   }
-  async viewModalGlobal(dato: any) {
+  async viewModalGlobal(dato: any, op: any) {
     this.ngOnInit();
-    if (dato.idrecursa != null) {
+    if (op == 'recursa') {
       this.asignarRecursas = dato;
     } else {
       this.asignarGlobales = dato;
@@ -307,10 +307,9 @@ export class AdministrativoComponent implements OnInit {
     this.maestros = maestros.ok;
   }
 
-  async getAsignaRecursaGlobal(dato: any) {
+  async getAsignaRecursaGlobal(dato: any, op: any) {
     this.ngOnInit();
-    
-    if(dato.idrecursa != null && dato.idrecursa != undefined){
+    if(op=='recursa'){
     const recursa = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
       if (recursa.ok != "vacio") {
         this.asignarRecursas = dato;
@@ -318,21 +317,24 @@ export class AdministrativoComponent implements OnInit {
         this.asignarRecursas.fecha = recursa.ok.fecha;
         this.asignarRecursas.hora = recursa.ok.hora;
         this.asignarRecursas.docenteDniApli = recursa.ok.docenteDni;
+        this.asignarRecursas.idasigrecursa = recursa.ok.idasigrecursa;
       }
     }else{
-      console.log(dato.idglobales)
+      
       const global = await firstValueFrom(this.admin.getAsignaGlobal(dato))
-      console.log(global)
+     
       if(global.ok != "vacio"){
         this.asignarGlobales = dato;
         this.asignarGlobales.lugar = global.ok.lugar;
         this.asignarGlobales.fecha = global.ok.fecha;
         this.asignarGlobales.hora = global.ok.hora;
-        this.asignarGlobales.docenteDniApli = global.ok.docenteDni; 
+        this.asignarGlobales.docenteDniApli = global.ok.docenteDni;
+        this.asignarGlobales.idasiglobd = global.ok.idasiglobd; 
       }
     }
       const maestros = await firstValueFrom(this.admin.getMaestros());
       this.maestros = maestros.ok;
+      console.log(this.asignarGlobales);
   }
   
   async asignaOtroMaestro(dato: any){
@@ -341,7 +343,6 @@ export class AdministrativoComponent implements OnInit {
 
   subirRegistroGlobal() {
     this.ngOnInit();
-   
     if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
       this.admin.guardarAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
         if (res.ok == "ok") {
@@ -357,6 +358,24 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }
 
+  }
+
+  actualizarRegistroGlobal(){
+    this.ngOnInit();
+    if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
+      this.admin.actualizaAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
+        if (res.ok == "ok") {
+          Notiflix.Notify.info("Global Actualizado");
+          this.getGlobales();
+          this.asignarGlobales = {};
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      });
+
+    } else {
+      Notiflix.Notify.failure('Rellene Todos Los Campos');
+    }
   }
   setDNI(DNI: any) {
     this.ngOnInit();
