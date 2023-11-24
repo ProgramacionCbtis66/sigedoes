@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as Notiflix from 'notiflix';
+import { Notify } from 'notiflix';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { JustificanteService } from 'src/app/service/justificante.service';
@@ -67,6 +69,7 @@ export class JutificantesComponent implements OnInit {
       // Puedes hacer algo con la respuesta aquí
       if(res.status === 'Registrado') {
         console.log('Los datos se registraron correctamente.');
+        Notiflix.Notify.success("Justificante Enviado");
       } else {
         console.log('Hubo un error al registrar los datos.');
       }

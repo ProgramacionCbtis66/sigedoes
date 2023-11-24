@@ -51,5 +51,11 @@ app.use('/pagos', paymentRouter);
 //Justificantes
 const justificacionRouter = require('./api/routes/justificantes');
 app.use('/just', justificacionRouter);
+//Global
+const globalRouter = require('./api/routes/globales');
+app.use('/globales', globalRouter);
+//Recursa
+const recursaRouter = require('./api/routes/recursas');
+app.use('/recursas', recursaRouter);
 
 module.exports = app;
