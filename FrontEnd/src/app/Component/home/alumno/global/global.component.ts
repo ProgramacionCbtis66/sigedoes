@@ -4,6 +4,7 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 import { GlobalService } from 'src/app/service/global.service';
 import { UsuarioService } from 'src/app/service/usuarios.service';
 import { firstValueFrom } from 'rxjs';
+import * as Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-global',
@@ -50,5 +51,17 @@ export class GlobalComponent implements OnInit {
       console.log(error);
     }
   }
+
+  async solicitarGlobal(dato: any){
+     this.ngOnInit();
+     dato.numControl=this.auth.decodifica().numControl;
+     const res = await firstValueFrom(this.global.crearSolicitud(dato));
+     console.log(res);
+    if(res.data ){
+      this.cargarGlobales();
+      Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+    }
+  }
+
 
 }

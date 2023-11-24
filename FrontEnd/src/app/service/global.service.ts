@@ -17,4 +17,7 @@ export class GlobalService {
   listaGlobal(numControl: any): Observable<any>{
     return this.http.post(`${this.URL}/globales/getglobales`, numControl, this.usr);
   }
+  crearSolicitud(dato: any): Observable<any>{
+    return this.http.post(`${this.URL}/globales/solicitudGlobal`, dato, this.usr);
+  }
 }

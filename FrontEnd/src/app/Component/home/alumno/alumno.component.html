@@ -1,186 +1,163 @@
 <div class="card border border-white mt-4 px-2">
-      <div class="d-flex justify-content-center mt-4">
-        <div class="card border border-white px-3">
-          <div class="text-success">
-            <p class="text-center fw-light fs-4">
-              Bienvenido al {{proyecto}}
-            </p>
-            <p class="text-center fw-light fs-5">Alumna (o) : {{ datos.nombre }}</p>
+  <div class="d-flex justify-content-center mt-4">
+    <div class="card border border-white px-3">
+      <div class="text-success">
+        <p class="text-center fw-light fs-4">
+          Bienvenido al {{proyecto}}
+        </p>
+        <p class="text-center fw-light fs-5">Alumna (o) : {{ datos.nombre }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!--Lado Izquierdo-->
+    <div class="col-md-6 mt-2">
+      <div class="card mb-2 bg-color-1">
+        <div class="row">
+          <div class="d-flex justify-content-center p-1">
+            <h4 class="singup-3 m-2">{{datos.nombre}}</h4>
           </div>
         </div>
       </div>
-  
-      <div class="row">
-        <!--Lado Izquierdo-->
-        <div class="col-md-6 mt-2">
-            <div class="card mb-2 bg-color-1">
-              <div class="row">
-                <div class="d-flex justify-content-center p-1">
-                  <h4 class="singup-3 m-2">{{datos.nombre}}</h4>
-                </div>
-              </div>
-            </div>
-            <div class="card border-color-1">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="container-fluid">
-                      <div class="row justify-content-center">
-                        <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
-                          <div class="d-flex justify-content-center mb-2">
-                            <div class="card border-color-1">
-                              <a [routerLink]="['/perfil']">
-                              <img class="card-img-top" [src]="datos.foto" alt="foto-de-perfil">
-                              </a>
-                              <div class="col card-body">
-                                <h4 class="card-title d-flex justify-content-center">
-                                  
-                                  <a class="">
-                                    <i class="bi bi-twitter-x fs-6"></i>
-                                  </a>
-                                  <a class="">
-                                    <i class="bi bi-facebook fs-6 ps-2 text-primary"></i>
-                                  </a>
-                                  <a class="">
-                                    <i class="bi bi-instagram fs-6 ps-2 "></i>
-                                  </a>
-                                  <a class="">
-                                    <i class="bi bi-whatsapp fs-6 ps-2 text-success"></i>
-                                  </a>
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
+      <div class="card border-color-1">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="container-fluid">
+                <div class="row justify-content-center">
+                  <div class="col-lg-12 col-md-6 col-sm-12 mb-2">
+                    <div class="d-flex justify-content-center mb-2">
+                      <div class="card border-color-1">
+                        <a [routerLink]="['/perfil']">
+                          <img class="card-img-top" [src]="datos.foto" alt="foto-de-perfil">
+                        </a>
+                        <div class="col card-body">
+                          <h4 class="card-title d-flex justify-content-center">
+
+                            <a class="">
+                              <i class="bi bi-twitter-x fs-6"></i>
+                            </a>
+                            <a class="">
+                              <i class="bi bi-facebook fs-6 ps-2 text-primary"></i>
+                            </a>
+                            <a class="">
+                              <i class="bi bi-instagram fs-6 ps-2 "></i>
+                            </a>
+                            <a class="">
+                              <i class="bi bi-whatsapp fs-6 ps-2 text-success"></i>
+                            </a>
+                          </h4>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-8">
-                    <p>INFORMACION DE EL ALUMNO</p>
-                    <div class="">
-                      <table class="table table-bordered table-responsive border-color-1 m-0">
-                        <tr>
-                          <th scope="col">ALUMNO:</th>
-                          <th>{{datos.nombre}}</th>
-                        </tr>
-                        <tr>
-                          <th>NO.CONTROL</th>
-                          <td>{{datos.numControl}}</td>
-                        </tr>
-                        <tr>
-                          <th>CURP</th>
-                          <td>{{datos.CURP}}</td>
-                        </tr>
-                        <tr>
-                          <th>ESPECIALIDAD</th>
-                          <td>{{datos.especialidad}}</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
-  
-        <!--Lado Derecho-->
-        <div class="col-md-6 mt-2">
-          <div class="card mb-2 bg-color-1">
-            <div class="row">
-              <div class="d-flex justify-content-center p-1">
-                <h4 class="singup-3 m-2">SERVICIOS</h4>
+            <div class="col-lg-8">
+              <p>INFORMACION DE EL ALUMNO</p>
+              <div class="">
+                <table class="table table-bordered table-responsive border-color-1 m-0">
+                  <tr>
+                    <th scope="col">ALUMNO:</th>
+                    <th>{{datos.nombre}}</th>
+                  </tr>
+                  <tr>
+                    <th>NO.CONTROL</th>
+                    <td>{{datos.numControl}}</td>
+                  </tr>
+                  <tr>
+                    <th>CURP</th>
+                    <td>{{datos.CURP}}</td>
+                  </tr>
+                  <tr>
+                    <th>ESPECIALIDAD</th>
+                    <td>{{datos.especialidad}}</td>
+                  </tr>
+                </table>
               </div>
-            </div>
-          </div>
-          <div class="card mb-2">
-  
-            <div class="row">
-              <div class="col-lg-6 border-end">
-                <div class="d-flex justify-content-center">
-                  <a class="singup-4 m-2">Recursa</a>
-                </div>
-                <div class="mx-2">
-                  <p class="mb-2">Aquí puedes ver los calendarios de recursamiento así como tambien solicitarlos. Texto de
-                    Prueba...</p>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <button routerLink="/recursa" class="enter-2 m-0">Solicitar</button>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <div class="card border-primary p-2">
-                    <img class="img-fluid" src="" alt="imagen">
-                  </div>
-                </div>
-                <hr class="d-lg-none">
-              </div>
-  
-              <div class="col-lg-6 border-end">
-                <div class="d-flex justify-content-center">
-                  <a class="singup-4 m-2">Globales</a>
-                </div>
-                <div class="mx-2">
-                  <p class="mb-2">Texto de prueba... Texto de prueba... Texto de prueba... Texto de prueba... Texto de
-                    prueba...</p>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <button routerLink="/global" class="enter-2 m-0">Solicitar</button>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <div class="card border-primary p-2">
-                    <img class="img-fluid" src="" alt="imagen">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <div class="card mb-4">
-            <div class="row">
-              <div class="col-lg-6 border-end">
-                <div class="d-flex justify-content-center">
-                  <a class="singup-4 m-2">Justificante</a>
-                </div>
-                <div class="mx-2">
-                  <p class="mb-2 justify-content-center">Realiza la Justificacion de tus faltas</p>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <button routerLink="/justificante" class="enter-2 m-0">Solicitar</button>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <div class="card border-primary p-2">
-                    <img class="img-fluid" src="" alt="imagen">
-                  </div>
-                </div>
-                <hr class="d-lg-none">
-              </div>
-  
-  
-              <div class="col-lg-6">
-                <div class="d-flex justify-content-center">
-                  <a class="singup-4 m-2">Constancia</a>
-                </div>
-                <div class="mx-2">
-                  <p class="mb-2">Texto de prueba... Texto de prueba... Texto de prueba... Texto de prueba... Texto de
-                    prueba...</p>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <button routerLink = "/Alumnoconstancia" class="enter-2 m-0">Solicitar</button>
-                </div>
-                <div class="d-flex justify-content-center mb-2">
-                  <div class="card border-primary p-2">
-                    <img class="img-fluid" src="" alt="imagen">
-                  </div>
-                </div>
-              </div>
-  
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!--Lado Derecho-->
+    <div class="col-md-6 mt-2">
+      <div class="card mb-2 bg-color-1">
+        <div class="row">
+          <div class="d-flex justify-content-center p-1">
+            <h4 class="singup-3 m-2">SERVICIOS</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-2">
+
+        <div class="row">
+          <div class="col-lg-6 border-end">
+            <div class="d-flex justify-content-center">
+              <a class="singup-4 m-2">Recursa</a>
+            </div>
+            <div class="mx-2 d-flex justify-content-center">
+              <p class="mb-2"> Aquí puedes ver los calendarios de recursamiento así como tambien solicitarlos.</p>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+              <button routerLink="/recursa" class="enter-2 m-0">Solicitar</button>
+            </div>
+            <hr class="d-lg-none">
+          </div>
+
+          <div class="col-lg-6 border-end">
+            <div class="d-flex justify-content-center">
+              <a class="singup-4 m-2">Globales</a>
+            </div>
+            <div class="mx-2">
+              <p class="mb-2">Aquí puedes ver los calendarios de Globales así como tambien solicitarlos.</p>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+              <button routerLink="/global" class="enter-2 m-0">Solicitar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="row">
+          <div class="col-lg-6 border-end">
+            <div class="d-flex justify-content-center">
+              <a class="singup-4 m-2">Justificante</a>
+            </div>
+            <div class="mx-2">
+              <p class="mb-2 justify-content-center">Realiza la Justificacion de tus faltas</p>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+              <button routerLink="/justificante" class="enter-2 m-0">Solicitar</button>
+            </div>
+            <hr class="d-lg-none">
+          </div>
+
+
+          <div class="col-lg-6">
+            <div class="d-flex justify-content-center">
+              <a class="singup-4 m-2">Constancia</a>
+            </div>
+            <div class="mx-2">
+              <p class="mb-2">Texto de prueba... Texto de prueba... Texto de prueba... Texto de prueba... Texto de
+                prueba...</p>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+              <button routerLink="/Alumnoconstancia" class="enter-2 m-0">Solicitar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 
 
 
-        <!-- <div class="col-lg-6">
+    <!-- <div class="col-lg-6">
          
           <div class="d-flex justify-content-center ms-3" *ngIf="true">
             <div>
@@ -282,123 +259,123 @@
             </div>
           </div>
         </div> -->
-      </div>
-     
   </div>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="comprobacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-4" id="staticBackdropLabel">Paso 4</h1>
-          <h5 class="px-3 pt-2 fw-lighter">Verifica los datos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12 bg-light">
-              <div class="h5 fw-lighter p-2">Datos de la donstancia</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-control">
-                  <p>Nombre : {{ datos.nombre }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Asunto: {{ datosCons.asunto }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Matrícula: {{ datosCons.matricula }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Clave Institucional: {{ datosCons.claveIns }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Semestre : {{ datosCons.semestre }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Especialidad : {{ datosCons.especialidad }}</p>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-control">
-                  <p>Clave Escolar: {{ datosCons.claveEsc }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Area: {{ datosCons.area }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Turno: {{ datosCons.turno }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Horario: {{ datosCons.horario }}</p>
-                </div>
-                <div class="form-control">
-                  <p>Periodo :{{ datosCons.periodo }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Cerrar
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()">
-              Generar constancia
-            </button>
-          </div>
-        </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="comprobacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="staticBackdropLabel">Paso 4</h1>
+        <h5 class="px-3 pt-2 fw-lighter">Verifica los datos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>
-  </div>
-  
-  <!--Modal de la info-->
-  <div class="modal fade" id="info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="h3 text-danger fw-light">
-            Métodos Para Solicitar Un Código De Pago:
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 bg-light">
+            <div class="h5 fw-lighter p-2">Datos de la donstancia</div>
           </div>
-        </div>
-  
-        <div class="modal-body">
           <div class="row">
-  
-            <div class="col-lg-6 border-end border-2 ">
-              <div class="">
-                <div class="d-flex mb-4">
-                  <div class="me-3 h4">Método 1:</div>
-                  <div class="h4 text-success">Por Correo Electrónico</div>
-                </div>
-                <div class="mb-3">| Solicita al CEAP por correo electrónico un número de pago, anexando el comprobante de
-                  la cuota del servicio.</div>
-                <div>| Posteriormente le otorgarán el código de pago para usarlo en la aplicación y generar su constancia.
-                </div>
+            <div class="col-sm-6">
+              <div class="form-control">
+                <p>Nombre : {{ datos.nombre }}</p>
+              </div>
+              <div class="form-control">
+                <p>Asunto: {{ datosCons.asunto }}</p>
+              </div>
+              <div class="form-control">
+                <p>Matrícula: {{ datosCons.matricula }}</p>
+              </div>
+              <div class="form-control">
+                <p>Clave Institucional: {{ datosCons.claveIns }}</p>
+              </div>
+              <div class="form-control">
+                <p>Semestre : {{ datosCons.semestre }}</p>
+              </div>
+              <div class="form-control">
+                <p>Especialidad : {{ datosCons.especialidad }}</p>
               </div>
             </div>
-  
-            <div class="col-lg-6">
-              <div class="">
-                <div class="d-flex mb-4">
-                  <div class="me-3 h4">Método 2:</div>
-                  <div class="h4 text-success">Forma Presencial</div>
-                </div>
-                <div class="mb-3">| Asiste a tu escuela a la oficina de control escolar con el recibo de pago
-                  correspondiente al servicio o cubriendo la cuota en el sitio.</div>
-                <div>| Posteriormente le otorgarán el código de pago para usarlo en la aplicación y generar su constancia.
-                </div>
+            <div class="col-sm-6">
+              <div class="form-control">
+                <p>Clave Escolar: {{ datosCons.claveEsc }}</p>
+              </div>
+              <div class="form-control">
+                <p>Area: {{ datosCons.area }}</p>
+              </div>
+              <div class="form-control">
+                <p>Turno: {{ datosCons.turno }}</p>
+              </div>
+              <div class="form-control">
+                <p>Horario: {{ datosCons.horario }}</p>
+              </div>
+              <div class="form-control">
+                <p>Periodo :{{ datosCons.periodo }}</p>
               </div>
             </div>
           </div>
         </div>
-  
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="tabla" (click)="generarcons()">
+            Generar constancia
+          </button>
         </div>
-  
       </div>
     </div>
+  </div>
+</div>
+
+<!--Modal de la info-->
+<div class="modal fade" id="info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="h3 text-danger fw-light">
+          Métodos Para Solicitar Un Código De Pago:
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-lg-6 border-end border-2 ">
+            <div class="">
+              <div class="d-flex mb-4">
+                <div class="me-3 h4">Método 1:</div>
+                <div class="h4 text-success">Por Correo Electrónico</div>
+              </div>
+              <div class="mb-3">| Solicita al CEAP por correo electrónico un número de pago, anexando el comprobante de
+                la cuota del servicio.</div>
+              <div>| Posteriormente le otorgarán el código de pago para usarlo en la aplicación y generar su constancia.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="">
+              <div class="d-flex mb-4">
+                <div class="me-3 h4">Método 2:</div>
+                <div class="h4 text-success">Forma Presencial</div>
+              </div>
+              <div class="mb-3">| Asiste a tu escuela a la oficina de control escolar con el recibo de pago
+                correspondiente al servicio o cubriendo la cuota en el sitio.</div>
+              <div>| Posteriormente le otorgarán el código de pago para usarlo en la aplicación y generar su constancia.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>

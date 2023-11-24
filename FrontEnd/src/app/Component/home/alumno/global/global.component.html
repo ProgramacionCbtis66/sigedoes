@@ -21,9 +21,9 @@
                         <td>{{dato.grado}}{{dato.grupo}}</td>
                         <td>{{dato.descripcion}}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" (click)="solicitarGlobal(dato)"
                                     *ngIf="dato.estado == 0">Solicitar</button>
-                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"  
                                     data-bs-target="#versolicitud" *ngIf="dato.estado == 2">Cargar
                                     Comprobante</button>
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
