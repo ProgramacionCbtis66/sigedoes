@@ -6,44 +6,42 @@
     <div class="row d-flex flex-wrap px-4">
         <!--Lado izquierdo-->
         <div class="col-md-12 mt-2">
-            <div class="col-12 d-flex ">
-                <button type="button" class="btn btn-info">Cargar Materias</button>
-            </div>
             <table class="table table-responsive table-bordered">
                 <thead>
                     <tr class="justify-content-center">
+                        <th>Periodo</th>
                         <th>Semestre</th>
-                        <th>Maestro</th>
                         <th>Materia</th>
                         <th>Estado</th>
-                        <th>Proceso</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>aaeaeaeaaeaeaeaeaeaeaea</td>
-                        <td>bacacacacacacaccacacaca</td>
-                        <td>cjuanjuanjuanjuanjuan</td>
-                        <td>ghgvQVVEGGEGEGEGEGEc </td>
+                    <tr *ngFor="let dato of listaRecursa">
+                        <td>{{dato.periodoescolar}}</td>
+                        <td>{{dato.grado}}{{dato.grupo}}</td>
+                        <td>{{dato.descripcion}}</td>
                         <td>
-                            <!---<div class="justify-content-center">
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                                    *ngIf="recursaDatos.estado == 0">Solicitar</button>
-                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-                                    data-bs-target="#versolicitud" *ngIf="recursaDatos.estado == 2">Cargar
-                                    Comprobante</button>
-                                <button type="button" class="btn btn-outline-info" data-bs-target="#versolicitud"
-                                    *ngIf="recursaDatos.estado == 4">Solicitar datos de Recursamiento</button>
-                            </div>--->
+                            <!-- boton para soliciar  -->
+                            <button type="button" class="btn btn-outline-dark" (click)="solicitarRecrusa(dato)" *ngIf="dato.estado == 0">Solicitar</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 1" disabled>En proceso de autorización</button>
+                            <!--  boton cargar comprobantes -->
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Cargar Comprobante</button>
+                            <!-- pediente de confirmacion de pago -->
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
+                            <!-- Autorizado a examen -->
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
+                            <!-- Aprobado -->
+                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 5"  disabled>Aprobado</button>
+                            <!-- Recursa -->
+                            <button type="button" class="btn btn-danger" *ngIf="dato.estado == 6"  disabled>En Recursamiento</button>
                         </td>
-
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<!--modal-->
+<!--modal de pago de globales-->
 <div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -59,8 +57,6 @@
                         <!--Cargar comprobantes-->
                         <div class="row d-flex flex-wrap px-4">
                             <div class="container p-md-0 mb-2 ">
-
-
                                 <div class="row d-flex justify-content-center">
                                     <!--Parte 1-->
                                     <div class="col-lg-4 col-md-6">
@@ -68,16 +64,16 @@
 
                                             <div class="container p-md-0 mb-2 ">
                                                 <div class="row text-center">
-                                                    <h5>PAGO A CEAR</h5>
+                                                    <h5>PAGO A CEAP</h5>
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">
                                                         <div class="col-8">
-                                                            <input #fileInput1 type="file"
+                                                            <input #fileInput1 type="file" 
                                                                 class="form-control form-control-sm" capture="camera"
-                                                                accept="image/*" id="foto1" hidden>
-                                                            <a class="pe-auto">
-                                                                <img [src]="" alt="documento" class="card-img"
+                                                                accept="image/*" id="foto1" (change)="foto64($event)" hidden>
+                                                            <a class="pe-auto" (click)="activarInput($event)">
+                                                                <img [src]="datoPago.ceap" alt="documento" class="card-img"
                                                                     id="fileinput1">
                                                             </a>
                                                         </div>
@@ -99,9 +95,9 @@
                                                         <div class="col-8">
                                                             <input #fileInput2 type="file"
                                                                 class="form-control form-control-sm" capture="camera"
-                                                                accept="" id="foto2" hidden>
-                                                            <a class="pe-auto">
-                                                                <img [src]="" alt="documento" class="card-img"
+                                                                accept="" id="foto2" (change)="foto64($event)" hidden>
+                                                            <a class="pe-auto" (click)="activarInput($event)">
+                                                                <img [src]="datoPago.frm5" alt="documento" class="card-img"
                                                                     id="fileinput2">
                                                             </a>
                                                         </div>
@@ -115,8 +111,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-success">Enviar</button>
-                        <button type="button" class="btn btn-outline-danger">Cancelar</button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="enviarPago()">Enviar Pago</button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
