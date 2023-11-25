@@ -442,7 +442,7 @@ administrador.get('/getCEAP', verifica, async(req, res) => {
     const conexion = await ccn();
     try{
         const [registro] = await conexion.execute(`SELECT * FROM ceap`);
-        console.log(registro);
+         
         if(registro.length > 0){
             res.send({ok:registro});
         } else if(registro.length == 0){
