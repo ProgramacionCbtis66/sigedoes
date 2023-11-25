@@ -17,64 +17,68 @@ export class GlobalComponent implements OnInit {
   @ViewChild('fileInput2') fileInput2!: ElementRef;
 
   protected listaGlobales: any = [];
-  protected datoPago: any ={};
+  protected datoPago: any = {};
 
   constructor(
     private Base64: UsuarioService,
     private global: GlobalService,
     private auth: AuthService,
     private nav: NavegacionService,
-  
-  ){
-    this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
+
+  ) {
+    this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._global = true;
     this.cargarGlobales();
   }
 
   ngOnInit(): void {
-    if(!this.auth.isAuth()){
+    if (!this.auth.isAuth()) {
       this.nav._iflogin = true;
       this.nav.salir();
       this.cargarGlobales();
     }
   }
 
-  async cargarGlobales(){
+  async cargarGlobales() {
     this.ngOnInit();
-    try{
-      let res = await firstValueFrom(this.global.listaGlobal({numControl: this.auth.decodifica().numControl}));
+    try {
+      let res = await firstValueFrom(this.global.listaGlobal({ numControl: this.auth.decodifica().numControl }));
       this.listaGlobales = res.data;
-      console.log(res);
-    } catch (error){
+    } catch (error) {
       console.log(error);
     }
   }
 
-  async solicitarGlobal(dato: any){
+  async solicitarGlobal(dato: any) {
     this.ngOnInit();
-    dato.numControl=this.auth.decodifica().numControl;
-    console.log(dato);
-    const res = await firstValueFrom(this.global.crearSolicitud(dato));
-    if(res.data ){
-      this.cargarGlobales();
-      Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+    const filtro = this.listaGlobales.filter((global: any) => global.estado <= 4 && global.estado > 0);
+    console.log(filtro.length);
+    if (filtro.length < 3) {
+      dato.numControl = this.auth.decodifica().numControl;
+      const res = await firstValueFrom(this.global.crearSolicitud(dato));
+      if (res.data) {
+        this.cargarGlobales();
+        Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+      }
+    } else {
+      Notiflix.Notify.warning("Este proceso solo permite 3 solicitudes");
     }
   }
 
-  activarInput(event: any){
+  activarInput(event: any) {
     this.ngOnInit()
     const control = event.target.id;
-    if(control == "fileinput1"){
+    if (control == "fileinput1") {
       this.fileInput1.nativeElement.click();
     }
-    if(control == "fileinput2"){
+    if (control == "fileinput2") {
       this.fileInput2.nativeElement.click();
     }
 
   }
 
-  foto64(event: any): any{
+  foto64(event: any): any {
     this.ngOnInit();
     const archivo = event.target.files[0];
     const control = event.target.id;
@@ -83,10 +87,10 @@ export class GlobalComponent implements OnInit {
       const foto64 = imagenBase64.base;
 
       this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
-        if(control == "foto1"){
+        if (control == "foto1") {
           this.datoPago.ceap = imagenRedimensionada.base;
         }
-        if(control == "foto2"){
+        if (control == "foto2") {
           this.datoPago.frm5 = imagenRedimensionada.base;
         }
       }).catch((error: any) => {
@@ -97,17 +101,17 @@ export class GlobalComponent implements OnInit {
     });
   }
 
- async enviarPago(){
+  async enviarPago() {
     this.ngOnInit();
-    try{
+    try {
       this.datoPago.numControl = this.auth.decodifica().numControl;
       const res = await firstValueFrom(this.global.enviarPago(this.datoPago));
-      console.log(res);
-      if(res.data){
+      console.log(res.data);
+      if (res.data) {
         this.cargarGlobales();
         Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
       }
-    } catch (error){
+    } catch (error) {
       console.log(error);
     }
   }

@@ -29,7 +29,11 @@
                             <!-- pediente de confirmacion de pago -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->
-                            <button type="button" class="btn btn-outline-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
+                            <!-- Aprobado -->
+                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 5"  disabled>Aprobado</button>
+                            <!-- Recursa -->
+                            <button type="button" class="btn btn-danger" *ngIf="dato.estado == 6"  disabled>En Recursamiento</button>
                         </td>
                     </tr>
                 </tbody>
@@ -60,7 +64,7 @@
 
                                             <div class="container p-md-0 mb-2 ">
                                                 <div class="row text-center">
-                                                    <h5>PAGO A CEAR {{datoPago.idglobales}}</h5>
+                                                    <h5>PAGO A CEAP</h5>
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">

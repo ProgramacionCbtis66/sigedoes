@@ -86,13 +86,10 @@ docente.post('/datosPeriodoEscolar', verifica, async (req, res) => {
 docente.post('/enviarGR', verifica, async (req, res) => {
 
     const { periodo, materia, docente, tipo, alumnos } = req.body;
-    const fechaActual = new Date();
+    let tiempo = Date.now();
+    let hoy = new Date(tiempo);
+    const fecha = hoy.toLocaleDateString();
 
-    const mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Agrega un 0 adelante si es necesario
-    const dia = ('0' + fechaActual.getDate()).slice(-2); // Agrega un 0 adelante si es necesario
-    const año = fechaActual.getFullYear();
-     
-    const fecha = `${dia}/${mes}/${año}`;
     if (tipo == "global") {
         for (let alumno of alumnos) {
             const sql = 'insert into globales (alumnoNumControl, docenteDni, idMateria, idperiodoescolar, fecha , estado) values (?,?,?,?,?,?)';
@@ -162,9 +159,9 @@ async function buscaRecursaenGlobales(periodo, materia, numControl, dmateria) {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [periodo, materia, numControl]);
         if (registros.length > 0) {
-            if (registros[0].estado == 0 || registros[0].estado == 1 || registros[0].estado == 2 || registros[0].estado == 3) {
+            if (registros[0].estado >= 0 && registros[0].estado < 6) {
 
-                return ({ data: true, mensaje: `alumno: ${numControl} con la materia ${dmateria} esta registrado en la tabla de globales pendiente de examen` });
+                return ({ data: true, mensaje: `alumno: ${numControl} con la materia ${dmateria} esta registrado en la tabla de globales` });
             } else {
 
                 return false;
@@ -240,13 +237,10 @@ docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
 docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
     const { idasiglobd, calificacion, idglobales } = req.body;
     const estado= 0;
-    const fechaActual = new Date();
-
-    const mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Agrega un 0 adelante si es necesario
-    const dia = ('0' + fechaActual.getDate()).slice(-2); // Agrega un 0 adelante si es necesario
-    const año = fechaActual.getFullYear();
-
-    const fecha = `${dia}/${mes}/${año}`;
+    
+    let tiempo = Date.now();
+    let hoy = new Date(tiempo);
+    const fecha = hoy.toLocaleDateString();
   
     const conexion = await ccn();
     try {
@@ -254,7 +248,7 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
         const [registros] = await conexion.execute(sql, [idglobales]);
         console.log(registros);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=4;}else{ estado=6;}
+                if(calificacion >= 6){ estado=5;}else{ estado=6;}
                 const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
                 const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
                 const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
@@ -301,18 +295,16 @@ docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
 docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
     const { idasigrecursa, calificacion, idrecursa } = req.body;
     const estado= 0;
-    const fechaActual = new Date();
-    const mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Agrega un 0 adelante si es necesario
-    const dia = ('0' + fechaActual.getDate()).slice(-2); // Agrega un 0 adelante si es necesario
-    const año = fechaActual.getFullYear();
-    const fecha = `${dia}/${mes}/${año}`;
+    let tiempo = Date.now();
+    let hoy = new Date(tiempo);
+    const fecha = hoy.toLocaleDateString();
     const conexion = await ccn();
 
     try {
         const sql = 'select * from solicitud where idrecursa = ? and activo = 1';
         const [registros] = await conexion.execute(sql, [idrecursa]);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=4;}else{ estado=6;}
+                if(calificacion >= 6){ estado=5;}else{ estado=6;}
                 const sql = 'update recursas set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idrecursa = ?';
                 const [registros1] = await conexion.execute(sql, [idrecursa, estado,calificacion, fecha]);
                 const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';
