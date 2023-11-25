@@ -17,7 +17,7 @@ export class AdministrativoComponent implements OnInit {
     numControl: "",
     emitio: "",
     codigoPago: "",
-    fechaSolicitud: new Date().toLocaleDateString('en-us'),
+    fechaSolicitud: new Date().toLocaleDateString(),
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
   };
@@ -31,7 +31,7 @@ export class AdministrativoComponent implements OnInit {
     electricidad: "",
     alimentos: ""
   };
-
+  ceap: any = [];
   usuario: any = [];
   alumno: any = [];
   nc: any = [];
@@ -50,14 +50,16 @@ export class AdministrativoComponent implements OnInit {
   verificado = false;
   numero: string = "";
 
-  constructor(private userServicio: UsuarioService,
-    private nav: NavegacionService,
-    private email: SendEmailService,
-    private admin: AdminService,
-    private auth: AuthService) {
+  constructor(protected userServicio: UsuarioService,
+    protected nav: NavegacionService,
+    protected email: SendEmailService,
+    protected admin: AdminService,
+    protected auth: AuthService) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
     this.nav._perfil = false;
+    this.getCEAP();
+    this.obtenerdatEsc();
   }
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
@@ -436,6 +438,33 @@ export class AdministrativoComponent implements OnInit {
     this.ngOnInit();
     this.asignarRecursas.docenteDni = dni;
   }
+/*
+ módulo de asignación de CEAP
+*/
+
+  async getCEAP(){
+    this.ngOnInit();
+    const res = await firstValueFrom(this.admin.getCEAP());
+    if(res.ok == "vacio"){
+      this.ceap = [];
+    }else{
+      this.ceap = res.ok;
+    }
+  }
+
+async actceap(dato:any){
+  this.ngOnInit();
+  console.log(dato);
+  const res = await firstValueFrom(this.admin.actualizaCEAP(dato));
+    if(res.ok == "ok"){
+    Notiflix.Notify.info(`Costo de ${dato.concepto} Actualizado`,{
+      timeout: 2000,
+    });
+    }else{
+      Notiflix.Notify.failure("Ha Ocurrido Un Error");
+    }
+  }
+
 
 
 
@@ -446,6 +475,9 @@ export class AdministrativoComponent implements OnInit {
   */
 
   solicitudesGlobales: any = [];
+
+
+
 
 
 

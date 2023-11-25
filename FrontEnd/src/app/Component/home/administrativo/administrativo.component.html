@@ -265,7 +265,7 @@
       </div>
       <!-- Fin lado izquierdo -->
       <!-- Lado derecho -->
-      <!-- modulo para generar codigo de pago -->
+      <!-- modulo para generar codigo de pago y DAtos de la escuela -->
       <div class="col-lg-6 mb-2">
         <div class="accordion" id="accordionPago">
           <div class="accordion-item">
@@ -276,8 +276,6 @@
                   <i class="fa fa-address-card" aria-hidden="true"></i>
                   Solicitud de Pago de Servicio
                 </p>
-                <button class="badge bg-sigese text-wrap ms-auto" data-bs-toggle="modal" style="height: 2rem;"
-                  data-bs-target="#infoEscu" (click)="obtenerdatEsc()">Datos de la Escuela</button>
               </button>
             </div>
             <div id="collapsePago" class="accordion-collapse collapse" data-bs-parent="#accordionPago">
@@ -353,8 +351,6 @@
             </div>
           </div>
         </div>
-
-
         <div class="accordion" id="accordionGCP" *ngIf="verificado">
           <div class="accordion-item">
             <div class="accordion-header">
@@ -381,7 +377,232 @@
             </div>
           </div>
         </div>
-      </div> <!-- Fin del modulo para generar CP -->
+        <!-- accordion datos de la escuela -->
+        <div class="accordion" id="accordionEscuela">
+          <!-- datos de la escuela -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Información de la Escuela
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionEscuela">
+              <div class="accordion-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+                      <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+                        <tr class="">
+                          <th class=" c1  ">
+                            <div class="form-floating">
+                              <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_nombre"
+                                style="height: 110px">
+                        </textarea>
+                              <label for="floatingTextarea2">Nombre de la Escuela</label>
+                            </div>
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th class=" c2">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.CTO">
+                              <label for="floatingInput">CTO </label>
+                            </div>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th class="c1">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_direccion">
+                              <label for="floatingInput">Dirección de la Escuela</label>
+                            </div>
+                          </th>
+                        </tr>
+
+                        <tr class="">
+                          <th class=" c2">
+                            <div class="form-floating">
+                              <input type="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_correo">
+                              <label for="floatingInput">Correo de la Escuela</label>
+                            </div>
+                          </th>
+                        </tr>
+
+                        <tr class="">
+                          <th class="c1">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_telefono">
+                              <label for="floatingInput">Dirección de la Escuela</label>
+                            </div>
+                          </th>
+                        </tr>
+
+                        <tr class="">
+                          <th class="c2">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_Director">
+                              <label for="floatingInput">Director de la Escuela</label>
+                            </div>
+                          </th>
+                        </tr>
+
+                        <tr class="">
+                          <th class="c1">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" id="floatingInput"
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_Periodo">
+                              <label for="floatingInput">Periodo Escolar</label>
+                            </div>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th class="c1">
+                            <div class="">
+                              <button type="button" class="badge bg-sigese" (click)="guardCambios()"
+                                data-bs-toggle="modal" data-bs-target="#infoEscu">Guardar Cambios</button>
+                            </div>
+                          </th>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- datos de la especialidad -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+
+                Claves de las Especialidades
+
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionEscuela">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-lg-2"></div>
+                  <div class="col-lg-8">
+                    <div class="d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+                      <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+                        <tr class="">
+                          <th class="ps-3 c1">Programación</th>
+                          <th class="c1">
+                            <div class="text-center">
+                              <input class="border border-light c1" [(ngModel)]="clavesEsp.programacion">
+                            </div>
+                          </th>
+                          <th class="c1 text-center  pt-2">
+                            <button type="button" (click)="progactu()"
+                              class="btn btn-outline-success mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+
+                        <tr class="">
+                          <th class="ps-3 c2">Contabilidad</th>
+                          <th class="c2">
+                            <div class="text-center">
+                              <input class="border border-light c2" [(ngModel)]="clavesEsp.contabilidad">
+                            </div>
+                          </th>
+                          <th class="c2 text-center  pt-2">
+                            <button type="button" (click)="contaActu()"
+                              class="btn btn-outline-primary mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+                        <tr class="">
+                          <th class="ps-3 c1">Electricidad</th>
+                          <th class="c1">
+                            <div class="text-center">
+                              <input class="border border-light c1" [(ngModel)]="clavesEsp.electricidad">
+                            </div>
+                          </th>
+                          <th class="c1 text-center  pt-2">
+                            <button type="button" (click)="ElectricidadActu()"
+                              class="btn btn-outline-success mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+                        <tr class="">
+                          <th class="ps-3 c2">Prod. Ind. Alimentos</th>
+                          <th class="c2  ">
+                            <div class="text-center">
+                              <input class="border border-light c2" [(ngModel)]="clavesEsp.alimentos">
+                            </div>
+                          </th>
+                          <th class="c2 text-center  pt-2">
+                            <button type="button" (click)="AlimentosActu()"
+                              class="btn btn-outline-primary mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+                        <tr class="">
+                          <th class="ps-3 c1">S.P de E. de Computo</th>
+                          <th class=" c1  ">
+                            <div class="text-center">
+                              <input class="border border-bottom border-light c1" [(ngModel)]="clavesEsp.soporte">
+                            </div>
+                          </th>
+                          <th class="c1 text-center pt-2">
+                            <button type="button" (click)="SoporteActu()"
+                              class="btn btn-outline-success mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-lg-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- datos de costos del ceap -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                Aportaciones CEAP
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionEscuela">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-lg-2"></div>
+                  <div class="col-lg-8">
+                    <div class="d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+                      <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+                        <tr class="" *ngFor="let dato of ceap">
+                          <th class="ps-3 c1">{{dato.concepto}}</th>
+                          <th class="c1">
+                            <div class="text-center">
+                              <input class="border border-light c1" [(ngModel)]="dato.costo">
+                            </div>
+                          </th>
+                          <th class="c1 text-center  pt-2">
+                            <button type="button" (click)="actceap(dato)"
+                              class="btn btn-outline-success mb-2">Actualizar</button>
+                          </th>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-lg-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
       <!-- Fin lado derecho -->
     </div>
     <div class="row">
@@ -399,539 +620,359 @@
                 </p>
               </button>
             </div>
-            <div id="solicitudGlobales" class="accordion-collapse collapse" data-bs-parent="#accordionSolicitudGlobales">
+            <div id="solicitudGlobales" class="accordion-collapse collapse"
+              data-bs-parent="#accordionSolicitudGlobales">
               <div class="accordion-body">
                 <div class="row">
                   <div class="col-4">
                     <div class="input-group">
                       <div class="input-group-text">Solicitante :</div>
-                      <input [(ngModel)]="solicitudesGlobales.numControl" type="text" class="form-control" id="autoSizingInputGroup"
-                        placeholder="Número de Control" required>
+                      <input [(ngModel)]="solicitudesGlobales.numControl" type="text" class="form-control"
+                        id="autoSizingInputGroup" placeholder="Número de Control" required>
+                    </div>
+                  </div>
+                  <!-- formulario para filtrar solicitudes -->
+                  <div class="col-4">
+                    <div class="input-group">
+                      <div class="input-group-text">Grado :</div>
+                      <input [(ngModel)]="solicitudesGlobales.grado" type="number" class="form-control"
+                        id="autoSizingInputGroup" placeholder="Grado" required>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="input-group">
-                      <div class="input-group-text">Grado :</div>
-                      <input [(ngModel)]="solicitudesGlobales.grado" type="number" class="form-control" id="autoSizingInputGroup"
-                        placeholder="Grado" required>
-                    </div>
-                  </div>
-                  <div class="col-4">                   
-                    <div class="input-group">
                       <div class="input-group-text">grupo :</div>
-                      <input [(ngModel)]="solicitudesGlobales.grupo" type="text" class="form-control" id="autoSizingInputGroup"
-                        placeholder="Grupo" required>
+                      <input [(ngModel)]="solicitudesGlobales.grupo" type="text" class="form-control"
+                        id="autoSizingInputGroup" placeholder="Grupo" required>
                     </div>
                   </div>
-                  <div class="col-4">                  
+                  <div class="col-4">
                     <div class="input-group">
                       <div class="input-group-text">especialidad :</div>
-                      <input [(ngModel)]="solicitudesGlobales.especialidad" type="text" class="form-control" id="autoSizingInputGroup"
-                        placeholder="Especialidad" required>
+                      <input [(ngModel)]="solicitudesGlobales.especialidad" type="text" class="form-control"
+                        id="autoSizingInputGroup" placeholder="Especialidad" required>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="input-group mt-2">
                       <div class="input-group-text">Turno :</div>
-                      <select class="form-select" aria-label="Default select example" [(ngModel)]="solicitudesGlobales.turno">
-                        <option value="Matutino" >Matutino</option>
+                      <select class="form-select" aria-label="Default select example"
+                        [(ngModel)]="solicitudesGlobales.turno">
+                        <option value="Matutino">Matutino</option>
                         <option value="Vespertino">Vespertino</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Filtrar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal de Generador de Código de Pago-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" arilocalhostdatoa-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Generador de Código del {{alumno.Esc_nombre}}</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <input [(ngModel)]="numero" class="form-control form-control-lg" type="text"
-                aria-label=".form-control-lg example" disabled="disabled">
-            </div>
-            <div class="row">
-              <div class="col-12 d-flex justify-content-center mt-3">
-                <a (click)="GenerarCodigoPago()" class="btn btn-primary mb-3">Generar</a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 d-flex justify-content-center mt-3">
-                <label class="visually-hidden" for="autoSizingInputGroup">Costo</label>
-                <div class="input-group">
-                  <div class="input-group-text"> $ :</div>
-                  <input [(ngModel)]="solicitud.aportacion" type="number" class="form-control"
-                    id="autoSizingInputGroup">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 d-flex justify-content-center mt-3">
-                <label class="visually-hidden" for="autoSizingInputGroup">Descripcion</label>
-                <div class="input-group">
-                  <div class="input-group-text"> Descripcion</div>
-                  <textarea [(ngModel)]="solicitud.descripcion" type="text" class="form-control"
-                    id="autoSizingInputGroup" placeholder="Descripción del pago">
-                  </textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar
-              Solicitud</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Modal dato del Alumno docente administrativo-->
-    <div class="modal fade" id="aceptado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div class="h3">
-              Datos Del Solicitante:
-            </div>
-          </div>
-          <div class="modal-body">
-
-            <div class="row">
-              <!-- Lado Izquierdo -->
-              <div class="col-md-4 text-center">
-                <img [src]="usuario.foto" class="img-fluid" width="200" alt="image desc">
-              </div>
-              <!-- lado derecho -->
-              <div class="col-md-8">
-                <!-- rol -->
-                <div class="input-group mb-3 px-3 mt-2">
-                  <span class="input-group-text" id="basic-addon1">Tipo de Usuario</span>
-                  <input [(ngModel)]="usuario.rol" type="text" class="form-control" placeholder="Tipo de Usuario"
-                    aria-label="Tipo de Usuario" aria-describedby="basic-addon1">
-                </div>
-                <!--Nombre-->
-                <div class="input-group mb-3 px-3 mt-2">
-                  <span class="input-group-text" id="Nombre">Name</span>
-                  <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
-                    aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <!--Correo Institucional-->
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
-                  <input [(ngModel)]="usuario.correo" type="text" class="form-control"
-                    placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <!--Direccion-->
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text" id="basic-addon1">D</span>
-                  <input [(ngModel)]="usuario.direccion" type="text" class="form-control"
-                    placeholder="Ingrese Su Dirección" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <!--Curp-->
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text" id="basic-addon1">Curp</span>
-                  <input [(ngModel)]="usuario.CURP" type="text" class="form-control" placeholder="Ingrese Su Curp"
-                    aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div *ngIf="usuario.rol=='AL'">
-                  <!--Especialidad y Semestre-->
-                  <div class="row d-flex mb-3">
-                    <div class="col-sm-5">
-                      <div class="input-group px-3">
-                        <span class="input-group-text">Especialidad:</span>
-                        <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
-                          placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
-                      </div>
-                    </div>
-                    <div class="col-sm-7 d-flex">
-                      <div class="input-group px-3">
-                        <span class="input-group-text" id="basic-addon1">Sem.</span>
-                        <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
-                      </div>
-                      <div class="input-group px-3">
-                        <span class="input-group-text" id="basic-addon1">Grupo</span>
-                        <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <!--Area y Turno-->
-                  <div class="input-group mb-3 px-3">
-                    <span class="input-group-text" id="basic-addon1">Área</span>
-                    <input type="text" [(ngModel)]="usuario.area" class="form-control">
-
-                    <span class="input-group-text" id="basic-addon1">Turno</span>
-                    <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
                   </div>
                 </div>
-                <!--No Control-->
-                <div class="input-group mb-3 px-3">
-                  <span class="input-group-text" id="basic-addon1">#</span>
-                  <input [(ngModel)]="usuario.numControl" type="text" class="form-control"
-                    placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
-                  <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
-                </div>
               </div>
             </div>
-
-          </div>
-          <div class="modal-footer">
-            <td class="text-center">
-              <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal"
-                data-bs-target="#aceptado" disabled>
-                <i class="fa fa-check-circle" aria-hidden="true"></i>
-              </a>
-              <a (click)="Noaceptado(usuario.numControl)" class="badge bg-danger" data-bs-toggle="modal"
-                data-bs-target="#aceptado" disabled>
-                <i class="fa-solid fa-circle-xmark"></i>
-              </a>
-            </td>
           </div>
         </div>
       </div>
-    </div>
 
-
-    <!-- Modal para Modificar la información de la escuela-->
-    <div class="modal fade" id="infoEscu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="text-success fw-light">Datos De La Escuela</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <!-- datos de la escuela -->
-          <div class="modal-body">
-            <div class="container">
+      <!-- Modal de Generador de Código de Pago-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" arilocalhostdatoa-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Generador de Código del {{alumno.Esc_nombre}}</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
               <div class="row">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
-                  <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
-                    <tr class="">
-                      <th class=" c1  ">
-                        <div class="form-floating">
-                          <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2"
-                            placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_nombre" style="height: 110px">
-                        </textarea>
-                          <label for="floatingTextarea2">Nombre de la Escuela</label>
-                        </div>
-                      </th>
-                    </tr>
-
-                    <tr>
-                      <th class=" c2">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.CTO">
-                          <label for="floatingInput">CTO </label>
-                        </div>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th class="c1">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.Esc_direccion">
-                          <label for="floatingInput">Dirección de la Escuela</label>
-                        </div>
-                      </th>
-                    </tr>
-
-                    <tr class="">
-                      <th class=" c2">
-                        <div class="form-floating">
-                          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.Esc_correo">
-                          <label for="floatingInput">Correo de la Escuela</label>
-                        </div>
-                      </th>
-                    </tr>
-
-                    <tr class="">
-                      <th class="c1">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.Esc_telefono">
-                          <label for="floatingInput">Dirección de la Escuela</label>
-                        </div>
-                      </th>
-                    </tr>
-
-                    <tr class="">
-                      <th class="c2">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.Esc_Director">
-                          <label for="floatingInput">Director de la Escuela</label>
-                        </div>
-                      </th>
-                    </tr>
-
-                    <tr class="">
-                      <th class="c1">
-                        <div class="form-floating">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            [(ngModel)]="datosEsc.Esc_Periodo">
-                          <label for="floatingInput">Periodo Escolar</label>
-                        </div>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th class="c1">
-                        <div class="">
-                          <button type="button" class="btn btn-lg btn-3GB bg-gradient" (click)="guardCambios()"
-                            data-bs-toggle="modal" data-bs-target="#infoEscu">Guardar Cambios</button>
-                        </div>
-                      </th>
-                    </tr>
-                  </table>
+                <input [(ngModel)]="numero" class="form-control form-control-lg" type="text"
+                  aria-label=".form-control-lg example" disabled="disabled">
+              </div>
+              <div class="row">
+                <div class="col-12 d-flex justify-content-center mt-3">
+                  <a (click)="GenerarCodigoPago()" class="btn btn-primary mb-3">Generar</a>
                 </div>
               </div>
-
-            </div>
-            <hr>
-            <!-- datos de la especialidad -->
-            <div class="h3 text-success fw-light mb-3 mt-2">
-              Claves De Especialidad
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-lg-2"></div>
-              <div class="col-lg-8">
-                <div class="d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
-                  <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
-                    <tr class="">
-                      <th class="ps-3 c1">Programación</th>
-                      <th class="c1">
-                        <div class="text-center">
-                          <input class="border border-light c1" [(ngModel)]="clavesEsp.programacion">
-                        </div>
-                      </th>
-                      <th class="c1 text-center  pt-2">
-                        <button type="button" (click)="progactu()"
-                          class="btn btn-outline-success mb-2">Actualizar</button>
-                      </th>
-                    </tr>
-
-                    <tr class="">
-                      <th class="ps-3 c2">Contabilidad</th>
-                      <th class="c2">
-                        <div class="text-center">
-                          <input class="border border-light c2" [(ngModel)]="clavesEsp.contabilidad">
-                        </div>
-                      </th>
-                      <th class="c2 text-center  pt-2">
-                        <button type="button" (click)="contaActu()"
-                          class="btn btn-outline-primary mb-2">Actualizar</button>
-                      </th>
-                    </tr>
-                    <tr class="">
-                      <th class="ps-3 c1">Electricidad</th>
-                      <th class="c1">
-                        <div class="text-center">
-                          <input class="border border-light c1" [(ngModel)]="clavesEsp.electricidad">
-                        </div>
-                      </th>
-                      <th class="c1 text-center  pt-2">
-                        <button type="button" (click)="ElectricidadActu()"
-                          class="btn btn-outline-success mb-2">Actualizar</button>
-                      </th>
-                    </tr>
-                    <tr class="">
-                      <th class="ps-3 c2">Prod. Ind. Alimentos</th>
-                      <th class="c2  ">
-                        <div class="text-center">
-                          <input class="border border-light c2" [(ngModel)]="clavesEsp.alimentos">
-                        </div>
-                      </th>
-                      <th class="c2 text-center  pt-2">
-                        <button type="button" (click)="AlimentosActu()"
-                          class="btn btn-outline-primary mb-2">Actualizar</button>
-                      </th>
-                    </tr>
-                    <tr class="">
-                      <th class="ps-3 c1">S.P de E. de Computo</th>
-                      <th class=" c1  ">
-                        <div class="text-center">
-                          <input class="border border-bottom border-light c1" [(ngModel)]="clavesEsp.soporte">
-                        </div>
-                      </th>
-                      <th class="c1 text-center pt-2">
-                        <button type="button" (click)="SoporteActu()"
-                          class="btn btn-outline-success mb-2">Actualizar</button>
-                      </th>
-                    </tr>
-                  </table>
+              <div class="row">
+                <div class="col-12 d-flex justify-content-center mt-3">
+                  <label class="visually-hidden" for="autoSizingInputGroup">Costo</label>
+                  <div class="input-group">
+                    <div class="input-group-text"> $ :</div>
+                    <input [(ngModel)]="solicitud.aportacion" type="number" class="form-control"
+                      id="autoSizingInputGroup">
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-2"></div>
+              <div class="row">
+                <div class="col-12 d-flex justify-content-center mt-3">
+                  <label class="visually-hidden" for="autoSizingInputGroup">Descripcion</label>
+                  <div class="input-group">
+                    <div class="input-group-text"> Descripcion</div>
+                    <textarea [(ngModel)]="solicitud.descripcion" type="text" class="form-control"
+                      id="autoSizingInputGroup" placeholder="Descripción del pago">
+                  </textarea>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
-              <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><i
-                  class="fa-solid fa-right-from-bracket pe-3"></i>Cerrar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <a (click)="enviarSolicitud()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Enviar
+                Solicitud</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-
-<!--Modal Globales-->
-<div id="modalGlobales" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Establer Datos Para Globales</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-2">
+      <!--Modal dato del Alumno docente administrativo-->
+      <div class="modal fade" id="aceptado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="h3">
+                Datos Del Solicitante:
+              </div>
             </div>
-            <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
-              <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+            <div class="modal-body">
 
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.lugar">
-                      <label for="floatingInput">Salon </label>
+              <div class="row">
+                <!-- Lado Izquierdo -->
+                <div class="col-md-4 text-center">
+                  <img [src]="usuario.foto" class="img-fluid" width="200" alt="image desc">
+                </div>
+                <!-- lado derecho -->
+                <div class="col-md-8">
+                  <!-- rol -->
+                  <div class="input-group mb-3 px-3 mt-2">
+                    <span class="input-group-text" id="basic-addon1">Tipo de Usuario</span>
+                    <input [(ngModel)]="usuario.rol" type="text" class="form-control" placeholder="Tipo de Usuario"
+                      aria-label="Tipo de Usuario" aria-describedby="basic-addon1">
+                  </div>
+                  <!--Nombre-->
+                  <div class="input-group mb-3 px-3 mt-2">
+                    <span class="input-group-text" id="Nombre">Name</span>
+                    <input [(ngModel)]="usuario.nombre" type="text" class="form-control" placeholder="Nombre"
+                      aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <!--Correo Institucional-->
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
+                    <input [(ngModel)]="usuario.correo" type="text" class="form-control"
+                      placeholder="Correo Institucional" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <!--Direccion-->
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text" id="basic-addon1">D</span>
+                    <input [(ngModel)]="usuario.direccion" type="text" class="form-control"
+                      placeholder="Ingrese Su Dirección" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <!--Curp-->
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text" id="basic-addon1">Curp</span>
+                    <input [(ngModel)]="usuario.CURP" type="text" class="form-control" placeholder="Ingrese Su Curp"
+                      aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <div *ngIf="usuario.rol=='AL'">
+                    <!--Especialidad y Semestre-->
+                    <div class="row d-flex mb-3">
+                      <div class="col-sm-5">
+                        <div class="input-group px-3">
+                          <span class="input-group-text">Especialidad:</span>
+                          <input [(ngModel)]="usuario.especialidad" type="text" class="form-control"
+                            placeholder="Ingrese Su Curp" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                      </div>
+                      <div class="col-sm-7 d-flex">
+                        <div class="input-group px-3">
+                          <span class="input-group-text" id="basic-addon1">Sem.</span>
+                          <input id="input-group-text" [(ngModel)]="usuario.semestre" class="form-control">
+                        </div>
+                        <div class="input-group px-3">
+                          <span class="input-group-text" id="basic-addon1">Grupo</span>
+                          <input id="input-group-text" [(ngModel)]="usuario.grupo" class="form-control">
+                        </div>
+                      </div>
                     </div>
-                  </th>
-                </tr>
+                    <!--Area y Turno-->
+                    <div class="input-group mb-3 px-3">
+                      <span class="input-group-text" id="basic-addon1">Área</span>
+                      <input type="text" [(ngModel)]="usuario.area" class="form-control">
 
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="datetime-local" class="form-control" id="floatingInput"
-                        placeholder="name@example.com" [(ngModel)]="asignarGlobales.fecha">
-                      <label for="floatingInput">Fecha </label>
+                      <span class="input-group-text" id="basic-addon1">Turno</span>
+                      <input id="input-group-text" [(ngModel)]="usuario.turno" class="form-control">
                     </div>
-                  </th>
-                </tr>
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarGlobales.hora">
-                      <label for="floatingInput">Hora </label>
-                    </div>
-                  </th>
-                </tr>
-                <tr>
-                  <th class="c1">
-                    <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">
-                        <option *ngFor="let dato of maestros" [value]="dato.numControl"
-                          (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}
-                        </option>
-                      </select>
-                      <label for="floatingInput">Dni del docente que lo impartirá</label>
-                    </div>
-                  </th>
-                </tr>
-              </table>
+                  </div>
+                  <!--No Control-->
+                  <div class="input-group mb-3 px-3">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                    <input [(ngModel)]="usuario.numControl" type="text" class="form-control"
+                      placeholder="Numero de Control" aria-label="Username" aria-describedby="basic-addon1" value="">
+                    <span class="input-group-text" id="basic-addon1">!IMPORTANT</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()"
-          *ngIf="asignarGlobales.idasiglobd==null">Enviar Registro</button>
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="actualizarRegistroGlobal()"
-          *ngIf="asignarGlobales.idasiglobd!=null">Actualizar Registro</button>
-        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Modal Recursas-->
-<div id="modalRecursas" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Establer Datos Para Recursa</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
-              <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
-
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarRecursas.lugar">
-                      <label for="floatingInput">Salon </label>
-                    </div>
-                  </th>
-                </tr>
-
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarRecursas.fecha">
-                      <label for="floatingInput">Fecha </label>
-                    </div>
-                  </th>
-                </tr>
-                <tr>
-                  <th class=" c2">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                        [(ngModel)]="asignarRecursas.hora">
-                      <label for="floatingInput">Hora </label>
-                    </div>
-                  </th>
-                </tr>
-                <tr>
-                  <th class="c1">
-                    <div class="form-floating">
-                      <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDniApli"
-                        (change)="setDNIr(asignarRecursas.docenteDni)">
-                        <option *ngFor="let dato of maestros" [value]="dato.numControl">{{dato.nombre}}
-                          {{dato.apellidoM}} {{dato.apellidoP}}</option>
-                      </select>
-                      <label for="floatingInput">Dni del docente que lo impartirá</label>
-                    </div>
-                  </th>
-                </tr>
-              </table>
+            <div class="modal-footer">
+              <td class="text-center">
+                <a (click)="aceptar(usuario.numControl)" class="badge bg-success" data-bs-toggle="modal"
+                  data-bs-target="#aceptado" disabled>
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                </a>
+                <a (click)="Noaceptado(usuario.numControl)" class="badge bg-danger" data-bs-toggle="modal"
+                  data-bs-target="#aceptado" disabled>
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </a>
+              </td>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroRecursa()">Enviar
-          Registro</button>
-        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+
+
+
+    </div>
+  </div>
+
+
+  <!--Modal Globales-->
+  <div id="modalGlobales" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Establer Datos Para Globales</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+                <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                          [(ngModel)]="asignarGlobales.lugar">
+                        <label for="floatingInput">Salon </label>
+                      </div>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="datetime-local" class="form-control" id="floatingInput"
+                          placeholder="name@example.com" [(ngModel)]="asignarGlobales.fecha">
+                        <label for="floatingInput">Fecha </label>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                          [(ngModel)]="asignarGlobales.hora">
+                        <label for="floatingInput">Hora </label>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="c1">
+                      <div class="form-floating">
+                        <select class="form-select form-select-sm" [(ngModel)]="asignarGlobales.docenteDni">
+                          <option *ngFor="let dato of maestros" [value]="dato.numControl"
+                            (click)="setDNI(dato.numControl)">{{dato.nombre}} {{dato.apellidoM}} {{dato.apellidoP}}
+                          </option>
+                        </select>
+                        <label for="floatingInput">Dni del docente que lo impartirá</label>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroGlobal()"
+            *ngIf="asignarGlobales.idasiglobd==null">Enviar Registro</button>
+          <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="actualizarRegistroGlobal()"
+            *ngIf="asignarGlobales.idasiglobd!=null">Actualizar Registro</button>
+          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <!--Modal Recursas-->
+  <div id="modalRecursas" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Establer Datos Para Recursa</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
+                <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                          [(ngModel)]="asignarRecursas.lugar">
+                        <label for="floatingInput">Salon </label>
+                      </div>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                          [(ngModel)]="asignarRecursas.fecha">
+                        <label for="floatingInput">Fecha </label>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class=" c2">
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                          [(ngModel)]="asignarRecursas.hora">
+                        <label for="floatingInput">Hora </label>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="c1">
+                      <div class="form-floating">
+                        <select class="form-select form-select-sm" [(ngModel)]="asignarRecursas.docenteDniApli"
+                          (change)="setDNIr(asignarRecursas.docenteDni)">
+                          <option *ngFor="let dato of maestros" [value]="dato.numControl">{{dato.nombre}}
+                            {{dato.apellidoM}} {{dato.apellidoP}}</option>
+                        </select>
+                        <label for="floatingInput">Dni del docente que lo impartirá</label>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default " data-bs-dismiss="modal" (click)="subirRegistroRecursa()">Enviar
+            Registro</button>
+          <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

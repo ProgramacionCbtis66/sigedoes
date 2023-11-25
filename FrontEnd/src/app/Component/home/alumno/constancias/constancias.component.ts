@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { firstValueFrom } from 'rxjs';
+import { AdminService } from 'src/app/service/admin.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
 import { SendEmailService } from 'src/app/service/send-email.service';
@@ -39,17 +40,20 @@ export class ConstanciasComponent implements OnInit {
     NoPago: '',
     numControl: '',
   };
- 
+ ceap : any = [];
+
   constructor(
     private nav: NavegacionService,
     private auth: AuthService,
     private user: UsuarioService,
     private email: SendEmailService,
+    private admin: AdminService,
     private Link: Router,
 
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
+    this.getCEAP();
   }
   
   async ngOnInit() {
@@ -175,10 +179,12 @@ export class ConstanciasComponent implements OnInit {
 
   async crearOrden(){
     this.ngOnInit();
+
+    const precio = this.ceap.find((item: any) => item.concepto == 'Constancias');
     Notiflix.Loading.standard('Generando Orden de Pago');
     const item = [{
       title: "Pago Constancia",
-      unit_price: 40,
+      unit_price: Number(precio.costo),
       currency_id: "MXN",
       quantity: 1,
     },
@@ -198,4 +204,15 @@ export class ConstanciasComponent implements OnInit {
       console.error(error);
     }
   }
+
+  async getCEAP(){
+    this.ngOnInit();
+    const res = await firstValueFrom(this.admin.getCEAP());
+    if(res.ok == "vacio"){
+      this.ceap = [];
+    }else{
+      this.ceap = res.ok;
+    }
+  }
+
 }

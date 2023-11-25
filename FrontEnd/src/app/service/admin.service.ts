@@ -91,4 +91,11 @@ export class AdminService {
   getAsignaGlobal(data:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/getAsignaGlobales`,data, this.usr);
   }
+  
+  getCEAP():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getCEAP`, this.usr);
+  }
+  actualizaCEAP(ceap:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/actualizaCEAP`,ceap, this.usr);
+  }
 }

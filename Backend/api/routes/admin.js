@@ -423,4 +423,34 @@ administrador.post('/getAsignaGlobales', verifica, async(req,res) => {
     }
 });
 
+administrador.post('/actualizaCEAP', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`UPDATE ceap SET costo = ? WHERE concepto = ?`, [data.costo, data.concepto]);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        } else {
+            res.send({err:"err"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
+administrador.get('/getCEAP', verifica, async(req, res) => {
+    const conexion = await ccn();
+    try{
+        const [registro] = await conexion.execute(`SELECT * FROM ceap`);
+        console.log(registro);
+        if(registro.length > 0){
+            res.send({ok:registro});
+        } else if(registro.length == 0){
+            res.send({ok:"vacio"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
 module.exports = administrador;

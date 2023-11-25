@@ -25,7 +25,6 @@ import { JutificantesComponent } from './Component/home/alumno/justificantes/jut
 import { GlobalComponent } from './Component/home/alumno/global/global.component';
 import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
