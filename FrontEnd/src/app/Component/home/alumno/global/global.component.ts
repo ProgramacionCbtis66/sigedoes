@@ -12,14 +12,9 @@ import * as Notiflix from 'notiflix';
   styleUrls: ['./global.component.css']
 })
 export class GlobalComponent implements OnInit {
-  protected globalDatos = {
-    alumnoNumControl: '',
-    idMateria: '',
-    idPeriodo: '',
-    fecha: '',
-    estado: 0,
-  }
+
   protected listaGlobales: any = [];
+  protected datoPago: any ={};
 
   constructor(
     private alumno: UsuarioService,
@@ -53,15 +48,17 @@ export class GlobalComponent implements OnInit {
   }
 
   async solicitarGlobal(dato: any){
-     this.ngOnInit();
-     dato.numControl=this.auth.decodifica().numControl;
-     const res = await firstValueFrom(this.global.crearSolicitud(dato));
+    this.ngOnInit();
+    dato.numControl=this.auth.decodifica().numControl;
+    console.log(dato);
+    const res = await firstValueFrom(this.global.crearSolicitud(dato));
      console.log(res);
     if(res.data ){
       this.cargarGlobales();
       Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
     }
   }
+
 
 
 }

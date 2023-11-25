@@ -1,7 +1,7 @@
 <!--- Titulo --->
 <div class="card border border-white mt-4">
     <div class="d-flex justify-content-center p-1 mb-2">
-        <h4 class="m-2">SOLICITUD DE RECURSAMIENTO</h4>
+        <h4 class="m-2">SOLICITUD DE EXAMEN GLOBAL</h4>
     </div>
     <div class="row d-flex flex-wrap px-4">
         <!--Lado izquierdo-->
@@ -21,15 +21,15 @@
                         <td>{{dato.grado}}{{dato.grupo}}</td>
                         <td>{{dato.descripcion}}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" (click)="solicitarGlobal(dato)"
-                                    *ngIf="dato.estado == 0">Solicitar</button>
-                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"  
-                                    data-bs-target="#versolicitud" *ngIf="dato.estado == 2">Cargar
-                                    Comprobante</button>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                    data-bs-target="#versolicitud" *ngIf="dato.estado == 3" disabled>En proceso de autorización a examen</button>
-                                <button type="button" class="btn btn-outline-info" data-bs-target="#versolicitud"
-                                    *ngIf="dato.estado == 4">Solicitar datos de Global</button>
+                            <!-- boton para soliciar  -->
+                            <button type="button" class="btn btn-outline-dark" (click)="solicitarGlobal(dato)" *ngIf="dato.estado == 0">Solicitar</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 1" disabled>En proceso de autorización</button>
+                            <!--  boton cargar comprobantes -->
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Cargar Comprobante</button>
+                            <!-- pediente de confirmacion de pago -->
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En proceso de autorización a examen</button>
+                            <!-- Autorizado a examen -->
+                            <button type="button" class="btn btn-outline-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
                         </td>
                     </tr>
                 </tbody>
@@ -53,8 +53,6 @@
                         <!--Cargar comprobantes-->
                         <div class="row d-flex flex-wrap px-4">
                             <div class="container p-md-0 mb-2 ">
-
-
                                 <div class="row d-flex justify-content-center">
                                     <!--Parte 1-->
                                     <div class="col-lg-4 col-md-6">
@@ -62,16 +60,16 @@
 
                                             <div class="container p-md-0 mb-2 ">
                                                 <div class="row text-center">
-                                                    <h5>PAGO A CEAR</h5>
+                                                    <h5>PAGO A CEAR {{datoPago.idglobales}}</h5>
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">
                                                         <div class="col-8">
-                                                            <input #fileInput1 type="file"
+                                                            <input #fileInput1 type="file" 
                                                                 class="form-control form-control-sm" capture="camera"
                                                                 accept="image/*" id="foto1" hidden>
                                                             <a class="pe-auto">
-                                                                <img [src]="" alt="documento" class="card-img"
+                                                                <img [src]="datoPago.ceap" alt="documento" class="card-img"
                                                                     id="fileinput1">
                                                             </a>
                                                         </div>
@@ -95,7 +93,7 @@
                                                                 class="form-control form-control-sm" capture="camera"
                                                                 accept="" id="foto2" hidden>
                                                             <a class="pe-auto">
-                                                                <img [src]="" alt="documento" class="card-img"
+                                                                <img [src]="datoPago.frm5" alt="documento" class="card-img"
                                                                     id="fileinput2">
                                                             </a>
                                                         </div>
