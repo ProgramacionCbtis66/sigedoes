@@ -10,15 +10,7 @@ import { UsuarioService } from 'src/app/service/usuarios.service';
   styleUrls: ['./recursa.component.css']
 })
 export class RecursaComponent implements OnInit {
-  protected recursaDatos = {
-    alumnoNumControl: '',
-    idMateria: '',
-    idPeriodo: '',
-    docenteDni: '',
-    fecha: '',
-    estado: 4,
-    docenteDniApli: '',
-  }
+  protected listaRecursas: any = [];
 
   constructor(
     private alumno: UsuarioService,
@@ -32,6 +24,17 @@ export class RecursaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  async cargarGlobales(){
+    this.ngOnInit();
+    try{
+      let res = await firstValueFrom(this.recursa.listaGlobal({numControl: this.auth.decodifica().numControl}));
+      this.listaRecursas = res.data;
+      console.log(res);
+    } catch (error){
+      console.log(error);
+    }
   }
 
 }
