@@ -21,17 +21,18 @@ global.post('/getglobales', verifica, async (req, res) => {
         res.json({ data: [] });
     }
 });
+
 global.post('/solicitudGlobal', verifica, async (req, res) => {
     const data = req.body;
     let tiempo = Date.now();
     let hoy = new Date(tiempo);
     data.fecha = hoy.toLocaleDateString();
-    const sql = 'INSERT INTO solicitudglobal set numControl, idglobales, estado, frm5, ceap, idasiglobd, fecha values ?,?,?,?,?,?';
+    const sql = 'INSERT INTO solicitudglobal (numControl, idglobales, estado, frm5, ceap, idasiglobd, fecha) values (?,?,?,?,?,?,?)';
     const sqlestatus = 'UPDATE globales SET estado = ? WHERE idglobales = ?';
     try {
         const conexion = await ccn();
         const [respuesta] = await conexion.execute(sql, [data.numControl, data.idglobales, 0, null, null, data.idasiglobd, data.fecha]);
-        const {actualizaEstatusGlobal} = await conexion.execute(sqlestatus, [1, data.idglobales]);
+        const [actualizaEstatusGlobal] = await conexion.execute(sqlestatus, [1, data.idglobales]);
         console.log(respuesta, actualizaEstatusGlobal);
         if(respuesta.affectedRows > 0){
             res.json({data:true});
@@ -39,11 +40,8 @@ global.post('/solicitudGlobal', verifica, async (req, res) => {
             res.json({data:false});
         }
     } catch (error) {
-        
+        console.error(error);
     }
 });
-
-
-
 
 module.exports = global;
