@@ -27,7 +27,7 @@
                             <!--  boton cargar comprobantes -->
                             <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Cargar Comprobante</button>
                             <!-- pediente de confirmacion de pago -->
-                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En proceso de autorización a examen</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->
                             <button type="button" class="btn btn-outline-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
                         </td>
@@ -37,7 +37,7 @@
         </div>
     </div>
 </div>
-<!--modal-->
+<!--modal de pago de globales-->
 <div class="modal fade" id="versolicitud" tabindex="-1" aria-labelledby="versolicitudLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -68,7 +68,7 @@
                                                             <input #fileInput1 type="file" 
                                                                 class="form-control form-control-sm" capture="camera"
                                                                 accept="image/*" id="foto1" hidden>
-                                                            <a class="pe-auto">
+                                                            <a class="pe-auto" (click)="activarInput($event)">
                                                                 <img [src]="datoPago.ceap" alt="documento" class="card-img"
                                                                     id="fileinput1">
                                                             </a>
@@ -107,8 +107,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-success">Enviar</button>
-                        <button type="button" class="btn btn-outline-danger">Cancelar</button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="enviarPago()">Enviar Pago</button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>

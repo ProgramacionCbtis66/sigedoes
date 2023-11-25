@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { NavegacionService } from 'src/app/service/navegacion.service';
 import { GlobalService } from 'src/app/service/global.service';
@@ -13,14 +13,18 @@ import * as Notiflix from 'notiflix';
 })
 export class GlobalComponent implements OnInit {
 
+  @ViewChild('fileInput1') fileInput1!: ElementRef;
+  @ViewChild('fileInput2') fileInput2!: ElementRef;
+
   protected listaGlobales: any = [];
   protected datoPago: any ={};
 
   constructor(
-    private alumno: UsuarioService,
+    private Base64: UsuarioService,
     private global: GlobalService,
     private auth: AuthService,
     private nav: NavegacionService,
+  
   ){
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._foto = this.auth.decodifica().foto;
@@ -59,6 +63,54 @@ export class GlobalComponent implements OnInit {
     }
   }
 
+  activarInput(event: any){
+    this.ngOnInit()
+    const control = event.target.id;
+    if(control == "fileinput1"){
+      this.fileInput1.nativeElement.click();
+    }
+    if(control == "fileinput2"){
+      this.fileInput2.nativeElement.click();
+    }
 
+  }
+
+  foto64(event: any): any{
+    this.ngOnInit();
+    const archivo = event.target.files[0];
+    const control = event.target.id;
+    this.Base64.extraerBase64(archivo).then((imagenBase64: any) => {
+
+      const foto64 = imagenBase64.base;
+
+      this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
+        if(control == "foto1"){
+          this.datoPago.ceap = imagenRedimensionada.base;
+        }
+        if(control == "foto2"){
+          this.datoPago.frm5 = imagenRedimensionada.base;
+        }
+      }).catch((error: any) => {
+        return null;
+      });
+    }).catch((error: any) => {
+      return null;
+    });
+  }
+
+ async enviarPago(){
+    this.ngOnInit();
+    try{
+      this.datoPago.numControl = this.auth.decodifica().numControl;
+      const res = await firstValueFrom(this.global.enviarPago(this.datoPago));
+      console.log(res);
+      if(res.data){
+        this.cargarGlobales();
+        Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+      }
+    } catch (error){
+      console.log(error);
+    }
+  }
 
 }

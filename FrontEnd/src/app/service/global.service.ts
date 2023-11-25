@@ -20,4 +20,7 @@ export class GlobalService {
   crearSolicitud(dato: any): Observable<any>{
     return this.http.post(`${this.URL}/globales/solicitudGlobal`, dato, this.usr);
   }
+  enviarPago(datoPago:any): Observable<any>{
+    return this.http.post(`${this.URL}/globales/sendPagosGlobales`, datoPago, this.usr);
+  }
 }

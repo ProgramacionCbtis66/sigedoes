@@ -44,4 +44,25 @@ global.post('/solicitudGlobal', verifica, async (req, res) => {
     }
 });
 
+global.post('/sendPagosGlobales', verifica, async (req, res) => {
+    const data = req.body;
+    const sql = 'UPDATE solicitudGlobal SET frm5=?, ceap=? WHERE idglobales = ?';
+    const sqlestatus = 'UPDATE globales SET estado = ? WHERE idglobales = ?';
+    try {
+        const conexion = await ccn();
+        const [respuesta] = await conexion.execute(sql, [data.frm5, data.ceap, data.idglobales]);
+        const [actualizaEstatusGlobal] = await conexion.execute(sqlestatus, [3, data.idglobales]);
+        console.log(respuesta, actualizaEstatusGlobal);
+        if(respuesta.affectedRows > 0){
+            res.json({data:true});
+        }else{
+            res.json({data:false});
+        }
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
+
 module.exports = global;
