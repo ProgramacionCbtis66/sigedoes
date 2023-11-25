@@ -53,13 +53,16 @@ export class GlobalComponent implements OnInit {
   async solicitarGlobal(dato: any) {
     this.ngOnInit();
     const filtro = this.listaGlobales.filter((global: any) => global.estado <= 4 && global.estado > 0);
-    console.log(filtro.length);
     if (filtro.length < 3) {
-      dato.numControl = this.auth.decodifica().numControl;
-      const res = await firstValueFrom(this.global.crearSolicitud(dato));
-      if (res.data) {
-        this.cargarGlobales();
-        Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+      if(dato.idasiglobd != null){
+        dato.numControl = this.auth.decodifica().numControl;
+        const res = await firstValueFrom(this.global.crearSolicitud(dato));
+        if (res.data) {
+          this.cargarGlobales();
+          Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+        }
+      } else {
+        Notiflix.Notify.failure("No es tiempo aún de Globales");
       }
     } else {
       Notiflix.Notify.warning("Este proceso solo permite 3 solicitudes");

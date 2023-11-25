@@ -53,11 +53,15 @@ export class RecursaComponent implements OnInit {
     this.ngOnInit();
     const filtro = this.listaRecursa.filter((recursa: any) => recursa.estado <= 4 && recursa.estado > 0);
     if (filtro.length < 3) {
-      dato.numControl = this.auth.decodifica().numControl;
-      const res = await firstValueFrom(this.recursa.crearSolicitud(dato));
-      if (res.data) {
-        this.cargarRecursa();
-        Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+      if(dato.idasigrecursa != null){
+        dato.numControl = this.auth.decodifica().numControl;
+        const res = await firstValueFrom(this.recursa.crearSolicitud(dato));
+        if (res.data) {
+          this.cargarRecursa();
+          Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
+        }
+      } else {
+        Notiflix.Notify.failure("No es tiempo aún de Recursamiento");
       }
     } else {
       Notiflix.Notify.warning("Este proceso solo permite 3 solicitudes");
