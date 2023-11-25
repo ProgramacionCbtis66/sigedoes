@@ -67,7 +67,7 @@
                                                         <div class="col-8">
                                                             <input #fileInput1 type="file" 
                                                                 class="form-control form-control-sm" capture="camera"
-                                                                accept="image/*" id="foto1" hidden>
+                                                                accept="image/*" id="foto1" (change)="foto64($event)" hidden>
                                                             <a class="pe-auto" (click)="activarInput($event)">
                                                                 <img [src]="datoPago.ceap" alt="documento" class="card-img"
                                                                     id="fileinput1">
@@ -91,8 +91,8 @@
                                                         <div class="col-8">
                                                             <input #fileInput2 type="file"
                                                                 class="form-control form-control-sm" capture="camera"
-                                                                accept="" id="foto2" hidden>
-                                                            <a class="pe-auto">
+                                                                accept="" id="foto2" (change)="foto64($event)" hidden>
+                                                            <a class="pe-auto" (click)="activarInput($event)">
                                                                 <img [src]="datoPago.frm5" alt="documento" class="card-img"
                                                                     id="fileinput2">
                                                             </a>

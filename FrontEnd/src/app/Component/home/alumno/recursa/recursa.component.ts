@@ -29,9 +29,9 @@ export class RecursaComponent implements OnInit {
   async cargarGlobales(){
     this.ngOnInit();
     try{
-      let res = await firstValueFrom(this.recursa.listaGlobal({numControl: this.auth.decodifica().numControl}));
-      this.listaRecursas = res.data;
-      console.log(res);
+      //let res = await firstValueFrom(this.recursa.listaGlobal({numControl: this.auth.decodifica().numControl}));
+      //this.listaRecursas = res.data;
+      //console.log(res);
     } catch (error){
       console.log(error);
     }
