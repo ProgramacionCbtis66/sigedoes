@@ -52,7 +52,6 @@ export class RecursaComponent implements OnInit {
   async solicitarRecrusa(dato: any) {
     this.ngOnInit();
     const filtro = this.listaRecursa.filter((recursa: any) => recursa.estado <= 4 && recursa.estado > 0);
-    console.log(filtro.length);
     if (filtro.length < 3) {
       dato.numControl = this.auth.decodifica().numControl;
       const res = await firstValueFrom(this.recursa.crearSolicitud(dato));
