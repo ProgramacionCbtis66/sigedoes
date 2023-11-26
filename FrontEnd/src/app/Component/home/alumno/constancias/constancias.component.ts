@@ -72,7 +72,7 @@ export class ConstanciasComponent implements OnInit {
         console.error(error);
       }
     }else{
-      this.Link.navigate(['/']);
+      this.nav.salir();
     }
   }
 
