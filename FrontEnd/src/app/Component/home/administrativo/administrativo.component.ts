@@ -60,6 +60,7 @@ export class AdministrativoComponent implements OnInit {
     this.nav._perfil = false;
     this.getCEAP();
     this.obtenerdatEsc();
+    this.getSolicitudesGlobales();
   }
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
@@ -236,7 +237,7 @@ export class AdministrativoComponent implements OnInit {
     this.datosEsc = escuela.data;
     const claves = await firstValueFrom(this.admin.getClavesEsp());
     if (claves != null) {
-     
+
       this.clavesEsp.programacion = claves.programacion.clave;
       this.clavesEsp.contabilidad = claves.contabilidad.clave;
       this.clavesEsp.electricidad = claves.electricidad.clave;
@@ -302,7 +303,7 @@ export class AdministrativoComponent implements OnInit {
       this.globales = [];
     } else {
       this.globales = res.ok;
-       
+
     }
 
   }
@@ -319,8 +320,8 @@ export class AdministrativoComponent implements OnInit {
 
   async getAsignaRecursaGlobal(dato: any, op: any) {
     this.ngOnInit();
-    if(op=='recursa'){
-    const recursa = await firstValueFrom(this.admin.getAsignaRecursa(dato)); 
+    if (op == 'recursa') {
+      const recursa = await firstValueFrom(this.admin.getAsignaRecursa(dato));
       if (recursa.ok != "vacio") {
         this.asignarRecursas = dato;
         this.asignarRecursas.lugar = recursa.ok.lugar;
@@ -329,26 +330,26 @@ export class AdministrativoComponent implements OnInit {
         this.asignarRecursas.docenteDniApli = recursa.ok.docenteDni;
         this.asignarRecursas.idasigrecursa = recursa.ok.idasigrecursa;
       }
-    }else{
-      
+    } else {
+
       const global = await firstValueFrom(this.admin.getAsignaGlobal(dato))
-     
-      if(global.ok != "vacio"){
+
+      if (global.ok != "vacio") {
         this.asignarGlobales = dato;
         this.asignarGlobales.lugar = global.ok.lugar;
         this.asignarGlobales.fecha = global.ok.fecha;
         this.asignarGlobales.hora = global.ok.hora;
         this.asignarGlobales.docenteDniApli = global.ok.docenteDni;
-        this.asignarGlobales.idasiglobd = global.ok.idasiglobd; 
+        this.asignarGlobales.idasiglobd = global.ok.idasiglobd;
       }
     }
-      const maestros = await firstValueFrom(this.admin.getMaestros());
-      this.maestros = maestros.ok;
-      console.log(this.asignarGlobales);
+    const maestros = await firstValueFrom(this.admin.getMaestros());
+    this.maestros = maestros.ok;
+    console.log(this.asignarGlobales);
   }
-  
-  async asignaOtroMaestro(dato: any){
-    
+
+  async asignaOtroMaestro(dato: any) {
+
   }
 
   subirRegistroGlobal() {
@@ -370,7 +371,7 @@ export class AdministrativoComponent implements OnInit {
 
   }
 
-  actualizarRegistroGlobal(){
+  actualizarRegistroGlobal() {
     this.ngOnInit();
     if (this.asignarGlobales.lugar != '' && this.asignarGlobales.hora != '' && this.asignarGlobales.fecha != '' && this.asignarGlobales.docenteDni != '' && this.asignarGlobales.docenteDni != undefined) {
       this.admin.actualizaAsignacionGlobal(this.asignarGlobales).subscribe((res) => {
@@ -388,7 +389,7 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  actualizarRegistroRecursa(){
+  actualizarRegistroRecursa() {
     this.ngOnInit();
     if (this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '' && this.asignarRecursas.docenteDni != '' && this.asignarRecursas.docenteDni != undefined) {
       this.admin.actualizaAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
@@ -414,7 +415,7 @@ export class AdministrativoComponent implements OnInit {
     if (r.ok == 'vacio') {
       this.recursas = [];
     } else {
-      console.log(r.ok);  
+      console.log(r.ok);
       this.recursas = r.ok;
     }
   }
@@ -438,29 +439,29 @@ export class AdministrativoComponent implements OnInit {
     this.ngOnInit();
     this.asignarRecursas.docenteDni = dni;
   }
-/*
- módulo de asignación de CEAP
-*/
+  /*
+   módulo de asignación de CEAP
+  */
 
-  async getCEAP(){
+  async getCEAP() {
     this.ngOnInit();
     const res = await firstValueFrom(this.admin.getCEAP());
-    if(res.ok == "vacio"){
+    if (res.ok == "vacio") {
       this.ceap = [];
-    }else{
+    } else {
       this.ceap = res.ok;
     }
   }
 
-async actceap(dato:any){
-  this.ngOnInit();
-  console.log(dato);
-  const res = await firstValueFrom(this.admin.actualizaCEAP(dato));
-    if(res.ok == "ok"){
-    Notiflix.Notify.info(`Costo de ${dato.concepto} Actualizado`,{
-      timeout: 2000,
-    });
-    }else{
+  async actceap(dato: any) {
+    this.ngOnInit();
+    console.log(dato);
+    const res = await firstValueFrom(this.admin.actualizaCEAP(dato));
+    if (res.ok == "ok") {
+      Notiflix.Notify.info(`Costo de ${dato.concepto} Actualizado`, {
+        timeout: 2000,
+      });
+    } else {
       Notiflix.Notify.failure("Ha Ocurrido Un Error");
     }
   }
@@ -474,7 +475,83 @@ async actceap(dato:any){
   
   */
 
+                        /*  Globales */
   solicitudesGlobales: any = [];
+
+  async getSolicitudesGlobales() {
+    this.ngOnInit();
+
+    const res = await firstValueFrom(this.admin.getSolicitudesGlobales());
+    if (res.ok == "vacio") {
+      this.solicitudesGlobales = [];
+    } else {
+      this.solicitudesGlobales = res.ok;
+    }
+  }
+
+  async autorizarGlobal(event: any, dato: any) {
+    const control = event.target.id;
+    if (control == "Autorizado") {
+      const autorizado = {
+        estado: 2,
+        idgloables: dato.idgloables
+      }
+      if (control == 'Rechazado') {
+        const autorizado = {
+          estado: 6,
+          idglobales: dato.idglobales
+        }
+      }
+      if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
+        const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
+        if (res.ok == "ok") {
+          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control=='Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
+          this.getSolicitudesGlobales();
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      }
+    }
+  }
+
+  async autorizarPagoGlobal(event:any, dato:any){
+    const control = event.target.id;
+    if (control == "Autorizado") {
+      var autorizado = {
+        estado: 4,
+        idglobales: dato.idgloables
+      }
+      if (control == 'Rechazado') {
+        autorizado = {
+          estado: 7,
+          idglobales: dato.idglobales
+        }
+      }
+      if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
+        const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
+        if (res.ok == "ok") {
+          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control=='Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
+          this.getSolicitudesGlobales();
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      }
+    }
+  }
+
+                 /*  Recursas */
+  solicitudesRecursas: any = [];
+  async getSolicitudesRecursas() {
+    this.ngOnInit();
+    const res = await firstValueFrom(this.admin.getSolicitudesRecursas());
+    if (res.ok == "vacio") {
+      this.solicitudesRecursas = [];
+    } else {
+      this.solicitudesRecursas = res.ok;
+    }
+  }
 
 
 

@@ -453,4 +453,67 @@ administrador.get('/getCEAP', verifica, async(req, res) => {
     }
 });
 
+administrador.get('/getSolicitudesGlobales', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const sql = `SELECT idglobales, idMateria, g.idperiodoescolar, alumnoNumControl, grado, grupo, especilialidad, turno, periodoescolar, m.descripcion, m.semestre 
+    FROM globales g ,alumno a, periodoescolar p, materias m 
+    WHERE (g.alumnoNumControl = a.numControl) and (g.idperiodoescolar = p.idperiodoescolar) and (g.idMateria=m.idMateria)`;
+    try{
+        const [row] = await conexion.execute(sql);
+        if(row.length > 0){
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
+administrador.get('/getSolicitudesRecursas', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const sql = `SELECT idrecursa, idMateria, r.idperiodoescolar, alumnoNumControl, grado, grupo, especilialidad, turno, periodoescolar, m.descripcion, m.semestre 
+    FROM recursas r ,alumno a, periodoescolar p, materias m 
+    WHERE (r.alumnoNumControl = a.numControl) and (r.idperiodoescolar = p.idperiodoescolar) and (r.idMateria=m.idMateria)`;
+    try{
+        const [row] = await conexion.execute(sql);
+        if(row.length > 0){
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
+administrador.post('/autorizarGlobal'), verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`UPDATE globales SET estado =? WHERE (idglobales = ?)`,[data.estado, data.idglobales]);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        } else {
+            res.send({err:"err"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+};
+
+administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idrecursa = ?)`,[data.estado, data.idrecursa]);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        } else {
+            res.send({err:"err"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+};
 module.exports = administrador;

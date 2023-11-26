@@ -98,4 +98,17 @@ export class AdminService {
   actualizaCEAP(ceap:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/actualizaCEAP`,ceap, this.usr);
   }
+  getSolicitudesGlobales():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getSolicitudesGlobales`, this.usr);
+  }
+  getSolicitudesRecursas():Observable<any>{
+    return this.http.get(`${this.URL}/admin/getSolicitudesRecursa`, this.usr);
+  }
+  autorizarGlobal(autorizado:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/autorizarGlobal`,autorizado, this.usr);
+  }
+  autorizarRecursa(autorizado:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/autorizarRecursa`,autorizado, this.usr);
+  }
+
 }

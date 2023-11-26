@@ -62,20 +62,20 @@ export class NavegacionService {
   salir(): void {
     this._perfil=false;
     this._regresar=false;
-    this._homeAlumno=false;
-    this._registro= false;
-    this._orientacionEdu=false;
-    this._iflogin=true;
-    this._Administrador= false;
-    this._docente=false;
-    this._foto="";
-    this._forgotpass=false;
-    this._logout=false;
-    this._home=false;
-    this._recursa=false;
-    this._global=false;
-    this._usuario="";
+    this._homeAlumno = false;
+    this._registro = false;
+    this._orientacionEdu = false;
+    this._iflogin = true;
+    this._Administrador = false;
+    this._docente = false;
+    this._foto = "";
+    this._forgotpass = false;
+    this._logout = false;
+    this._home = false;
+    this._recursa = false;
+    this._global = false;
+    this._usuario = "";
     localStorage.clear();
-    this.routerLink.navigate(['/']);
+    location.reload();
   }
 }

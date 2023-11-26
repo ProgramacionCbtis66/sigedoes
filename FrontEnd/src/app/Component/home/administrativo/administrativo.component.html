@@ -399,8 +399,7 @@
                           <th class=" c1  ">
                             <div class="form-floating">
                               <textarea class="bg-danger" type="text" class="form-control" id="floatingTextarea2"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_nombre"
-                                style="height: 110px">
+                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_nombre" style="height: 110px">
                         </textarea>
                               <label for="floatingTextarea2">Nombre de la Escuela</label>
                             </div>
@@ -410,8 +409,8 @@
                         <tr>
                           <th class=" c2">
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.CTO">
+                              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.CTO">
                               <label for="floatingInput">CTO </label>
                             </div>
                           </th>
@@ -419,8 +418,8 @@
                         <tr>
                           <th class="c1">
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_direccion">
+                              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.Esc_direccion">
                               <label for="floatingInput">Dirección de la Escuela</label>
                             </div>
                           </th>
@@ -429,8 +428,8 @@
                         <tr class="">
                           <th class=" c2">
                             <div class="form-floating">
-                              <input type="email" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_correo">
+                              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.Esc_correo">
                               <label for="floatingInput">Correo de la Escuela</label>
                             </div>
                           </th>
@@ -439,8 +438,8 @@
                         <tr class="">
                           <th class="c1">
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_telefono">
+                              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.Esc_telefono">
                               <label for="floatingInput">Dirección de la Escuela</label>
                             </div>
                           </th>
@@ -449,8 +448,8 @@
                         <tr class="">
                           <th class="c2">
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_Director">
+                              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.Esc_Director">
                               <label for="floatingInput">Director de la Escuela</label>
                             </div>
                           </th>
@@ -459,8 +458,8 @@
                         <tr class="">
                           <th class="c1">
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="floatingInput"
-                                placeholder="name@example.com" [(ngModel)]="datosEsc.Esc_Periodo">
+                              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                [(ngModel)]="datosEsc.Esc_Periodo">
                               <label for="floatingInput">Periodo Escolar</label>
                             </div>
                           </th>
@@ -602,7 +601,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       <!-- Fin lado derecho -->
     </div>
     <div class="row">
@@ -623,16 +622,15 @@
             <div id="solicitudGlobales" class="accordion-collapse collapse"
               data-bs-parent="#accordionSolicitudGlobales">
               <div class="accordion-body">
-              <!-- formulario para filtrar solicitudes -->
+                <!-- formulario para filtrar solicitudes -->
                 <div class="row">
                   <div class="col-4">
                     <div class="input-group">
                       <div class="input-group-text">Solicitante :</div>
-                      <input [(ngModel)]="solicitudesGlobales.numControl" type="text" class="form-control"
+                      <input [(ngModel)]="solicitudesGlobales.alumnoNumControl" type="text" class="form-control"
                         id="autoSizingInputGroup" placeholder="Número de Control" required>
                     </div>
                   </div>
-                  
                   <div class="col-4">
                     <div class="input-group">
                       <div class="input-group-text">Grado :</div>
@@ -648,7 +646,7 @@
                     </div>
                   </div>
                   <div class="col-4">
-                    <div class="input-group">
+                    <div class="input-group pt-2">
                       <div class="input-group-text">especialidad :</div>
                       <input [(ngModel)]="solicitudesGlobales.especialidad" type="text" class="form-control"
                         id="autoSizingInputGroup" placeholder="Especialidad" required>
@@ -668,16 +666,17 @@
                     <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Filtrar</button>
                   </div>
                   <div class="col-2 text-end">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Cargar Solicitudes</button>
+                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Cargar
+                      Solicitudes</button>
                   </div>
                 </div>
-              <!-- lista de solicitudes de examen global -->
-                <div class="row">
-                  <div class="table-responsive">
+                <!-- lista de solicitudes de examen global -->
+                <div class="row mt-2">
+                  <div class="table-responsive table-dark table-hover">
                     <table class="table table-primary">
                       <thead>
                         <tr>
-                          <th scope="col">Semestre</th>
+                          <th scope="col">Periodo Escolar</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Materia</th>
                           <th scope="col">Grado y Grupo</th>
@@ -685,31 +684,54 @@
                           <th scope="col">Turno</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Acciones</th>
-
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="">
-                          <td scope="row">R1C1</td>
-                          <td>R1C2</td>
-                          <td>R1C3</td>
-                        </tr>
-                        <tr class="">
-                          <td scope="row">Item</td>
-                          <td>Item</td>
-                          <td>Item</td>
+                        <tr class="" *ngFor="let dato of solicitudesGlobales">
+                          <td>{{dato.periodoescolar}}</td>
+                          <td>{{dato.nombre}}</td>
+                          <td>{{dato.materia}} semestre : {{dato.semestre}}</td>
+                          <td>{{dato.grado}}{{dato.grupo}}</td>
+                          <td>{{dato.especialidad}}</td>
+                          <td>{{dato.turno}}</td>
+                          <td *ngIf="dato.estado==0">
+                            Sin solicitar
+                          </td>
+                          <td *ngIf="dato.estado==1">
+                             <button type="button" class="btn btn-primary btn-lg" (click)="autorizarGlobal($event, dato)" id="Autorizado">Autorizar</button>
+                             <button type="button" class="btn btn-primary btn-lg" (click)="autorizarGlobal($event, dato)" id="Rechazado">Rechazar</button>
+                          </td>
+                          <td *ngIf="dato.estado==2">
+                            En proceso de Pago
+                          </td>
+                          <td *ngIf="dato.estado==3">
+                            <button type="button" class="btn btn-primary btn-lg" (click)="autorizarPagoGlobal($event, dato)" id="Autorizado">Autorizar</button>
+                             <button type="button" class="btn btn-danger btn-lg" (click)="autorizarPagoGlobal($event, dato)" id="Rechazado">Rechazar</button>
+                          </td>
+                          <td *ngIf="dato.estado==4">
+                            estado 4
+                          </td>
+                          <td *ngIf="dato.estado==5">
+                            estado 5
+                          </td>
+                          <td *ngIf="dato.estado==6">
+                            estado 6
+                          </td>
+                          <td *ngIf="dato.estado==7">
+                            estado 7
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
 
 
       <!-- Modal de Generador de Código de Pago-->
