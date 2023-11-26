@@ -53,8 +53,10 @@ export class RegistroComponent implements OnInit {
   }
   public Registro(): void {
 
+    var validEmail = /^[a-z0-9._%+-]+@cbtis66\.edu\.mx$/i;
+
     if (this.tipoUsuario == "Docente") {
-      if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && this.docente._correo !== "" && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== "" && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
+      if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && validEmail.test(this.docente._correo) && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== "" && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
         this.docente._tipoUsuario = "Docente";
         this.docente._rol = "DO";
         this.docente._numControl = this.docente._correo;
@@ -80,7 +82,7 @@ export class RegistroComponent implements OnInit {
         Notiflix.Notify.failure("Faltan Datos");
       }
     } else if (this.tipoUsuario == "Alumno") {
-      if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && this.alumno._correo != "" && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._grado != "" && this.alumno._area != "" && this.alumno._foto != null) {
+      if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && validEmail.test(this.alumno._correo) && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._grado != "" && this.alumno._area != "" && this.alumno._foto != null) {
         if (this.alumno._pass === this.alumno._pass2) {
           this.alumno._tipoUsuario = "Alumno";
           this.alumno._rol = "AL";
@@ -103,7 +105,7 @@ export class RegistroComponent implements OnInit {
       } else {
         Notiflix.Notify.failure("Faltan Datos");
       }
-    } else if (this.administrativo._nombre != "" && this.administrativo._apellidoP != "" && this.administrativo._apellidoM != "" && this.administrativo._correo != "" && this.administrativo._curp != "" && this.administrativo._departamento != "" && this.administrativo._direccion != "" && this.administrativo._foto != null && this.administrativo._nivelOperativo != "" && this.administrativo._departamento != "") {
+    } else if (this.administrativo._nombre != "" && this.administrativo._apellidoP != "" && this.administrativo._apellidoM != "" && validEmail.test(this.administrativo._correo) && this.administrativo._curp != "" && this.administrativo._departamento != "" && this.administrativo._direccion != "" && this.administrativo._foto != null && this.administrativo._nivelOperativo != "" && this.administrativo._departamento != "") {
       this.administrativo._numControl = this.administrativo._correo;
       this.administrativo._rol = this.tipoUsuario;
       this.administrativo._foto = this.foto;

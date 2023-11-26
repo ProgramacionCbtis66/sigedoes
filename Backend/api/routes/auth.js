@@ -110,7 +110,7 @@ peticion.post('/registro', async (req, res) => {
         }
         //Subir datos a la tabla profesor
         if (datos.tipoUsuario == 'Docente') {
-            const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,gradoAcademico,telefono,RFC,CURP,CEDULA,fechaNac,foto,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            const consulta3 = await conexion.execute('INSERT INTO docente (numControl,direccion,gradoAcademico,telefono,RFC,CURP,CEDULA,fechaNac,facebook,instagram,twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [datos.numControl,
                 datos.direccion,
                 datos.gradoAcademico,
@@ -119,7 +119,6 @@ peticion.post('/registro', async (req, res) => {
                 datos.curp,
                 datos.CEDULA,
                 datos.fechaNac,
-                datos.foto,
                 datos.facebook,
                 datos.instagram,
                 datos.twitter
@@ -128,7 +127,7 @@ peticion.post('/registro', async (req, res) => {
         //Subir datos a la tabla administrativo
         if (datos.tipoUsuario == "CE" || datos.tipoUsuario == "OE") {
 
-            const consulta4 = await conexion.execute('INSERT INTO administrativo (numControl, direccion, telefono, departamento, turno, CURP,foto,nivelOperativo) VALUES (?,?,?,?,?,?,?,?)',
+            const consulta4 = await conexion.execute('INSERT INTO administrativo (numControl, direccion, telefono, departamento, turno, CURP,nivelOperativo) VALUES (?,?,?,?,?,?,?)',
                 [
                     datos.numControl,
                     datos.direccion,
@@ -136,7 +135,6 @@ peticion.post('/registro', async (req, res) => {
                     datos.departamento,
                     datos.turno,
                     datos.curp,
-                    datos.foto,
                     datos.nivelOperativo
                 ]);
         }
