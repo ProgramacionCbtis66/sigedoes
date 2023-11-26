@@ -666,14 +666,14 @@
                     <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Filtrar</button>
                   </div>
                   <div class="col-2 text-end">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Cargar
+                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;" (click)="getSolicitudesGlobales()">Cargar
                       Solicitudes</button>
                   </div>
                 </div>
                 <!-- lista de solicitudes de examen global -->
                 <div class="row mt-2">
-                  <div class="table-responsive table-dark table-hover">
-                    <table class="table table-primary">
+                  <div class="table-responsive">
+                    <table class="table table-dark table-hover">
                       <thead>
                         <tr>
                           <th scope="col">Periodo Escolar</th>
@@ -683,7 +683,6 @@
                           <th scope="col">Especialidad</th>
                           <th scope="col">Turno</th>
                           <th scope="col">Estado</th>
-                          <th scope="col">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -698,8 +697,8 @@
                             Sin solicitar
                           </td>
                           <td *ngIf="dato.estado==1">
-                             <button type="button" class="btn btn-primary btn-lg" (click)="autorizarGlobal($event, dato)" id="Autorizado">Autorizar</button>
-                             <button type="button" class="btn btn-primary btn-lg" (click)="autorizarGlobal($event, dato)" id="Rechazado">Rechazar</button>
+                             <button type="button" class="btn btn-primary btn-sm me-2" (click)="autorizarGlobal($event, dato)" id="Autorizado">Autorizar</button>
+                             <button type="button" class="btn btn-primary btn-sm" (click)="autorizarGlobal($event, dato)" id="Rechazado">Rechazar</button>
                           </td>
                           <td *ngIf="dato.estado==2">
                             En proceso de Pago
@@ -709,16 +708,19 @@
                              <button type="button" class="btn btn-danger btn-lg" (click)="autorizarPagoGlobal($event, dato)" id="Rechazado">Rechazar</button>
                           </td>
                           <td *ngIf="dato.estado==4">
-                            estado 4
+                            Autorizado para Examen
                           </td>
                           <td *ngIf="dato.estado==5">
-                            estado 5
+                            Aceptado para Examen
                           </td>
                           <td *ngIf="dato.estado==6">
-                            estado 6
+                            Aprobado
                           </td>
                           <td *ngIf="dato.estado==7">
-                            estado 7
+                            En correción de pago
+                          </td>
+                          <td *ngIf="dato.estado==8">
+                            No aprovado
                           </td>
                         </tr>
                       </tbody>
@@ -731,6 +733,135 @@
           </div>
         </div>
       </div>
+      <!-- modulo para las solicitudes de alumnos para recursamiento -->
+      <div class="col-lg-12 accordion" id="accordionSolicitudReursamiento">
+      <div class="accordion mb-2">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#solicitudRecursamiento" aria-expanded="false" aria-controls="solicitudRecursamiento"
+            style="height: 3rem;">
+            <p class="fs-6 fw-light text-center text-secondary mt-3">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              Solicitudes de alumnos para Recursamiento
+            </p>
+          </button>
+        </div>
+        <div id="solicitudRecursamiento" class="accordion-collapse collapse"
+          data-bs-parent="#accordionSolicitudReursamiento">
+          <div class="accordion-body">
+            <!-- formulario para filtrar solicitudes -->
+            <div class="row">
+              <div class="col-4">
+                <div class="input-group">
+                  <div class="input-group-text">Solicitante :</div>
+                  <input [(ngModel)]="solicitudesRecursas.alumnoNumControl" type="text" class="form-control"
+                    id="autoSizingInputGroup" placeholder="Número de Control" required>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group">
+                  <div class="input-group-text">Grado :</div>
+                  <input [(ngModel)]="solicitudesRecursas.grado" type="number" class="form-control"
+                    id="autoSizingInputGroup" placeholder="Grado" required>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group">
+                  <div class="input-group-text">grupo :</div>
+                  <input [(ngModel)]="solicitudesRecursas.grupo" type="text" class="form-control"
+                    id="autoSizingInputGroup" placeholder="Grupo" required>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group pt-2">
+                  <div class="input-group-text">especialidad :</div>
+                  <input [(ngModel)]="solicitudesRecursas.especialidad" type="text" class="form-control"
+                    id="autoSizingInputGroup" placeholder="Especialidad" required>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group mt-2">
+                  <div class="input-group-text">Turno :</div>
+                  <select class="form-select" aria-label="Default select example"
+                    [(ngModel)]="solicitudesRecursas.turno">
+                    <option value="Matutino">Matutino</option>
+                    <option value="Vespertino">Vespertino</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;">Filtrar</button>
+              </div>
+              <div class="col-2 text-end">
+                <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;" (click)="getSolicitudesRecursas()">Cargar
+                  Solicitudes</button>
+              </div>
+            </div>
+            <!-- lista de solicitudes de examen global -->
+            <div class="row mt-2">
+              <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Periodo Escolar</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Materia</th>
+                      <th scope="col">Grado y Grupo</th>
+                      <th scope="col">Especialidad</th>
+                      <th scope="col">Turno</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let dato of solicitudesRecursas">
+                      <td>{{dato.periodoescolar}}</td>
+                      <td>{{dato.nombre}}{{dato.apellidoP}}{{dato.apellidoM}}</td>
+                      <td>{{dato.materia}} semestre : {{dato.semestre}}</td>
+                      <td>{{dato.grado}}{{dato.grupo}}</td>
+                      <td>{{dato.especialidad}}</td>
+                      <td>{{dato.turno}}</td>
+                      <td *ngIf="dato.estado==0">
+                        Sin solicitar
+                      </td>
+                      <td *ngIf="dato.estado==1">
+                          <button type="button" class="btn btn-primary btn-sm me-2" (click)="autorizarRecursa($event, dato)" id="Autorizado">Autorizar</button>
+                          <button type="button" class="btn btn-primary btn-sm" (click)="autorizarRecursa($event, dato)" id="Rechazado">Rechazar</button>
+                      </td>
+                      <td *ngIf="dato.estado==2">
+                        En proceso de Pago
+                      </td>
+                      <td *ngIf="dato.estado==3">
+                        <button type="button" class="btn btn-primary btn-lg" (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Autorizar</button>
+                          <button type="button" class="btn btn-danger btn-lg" (click)="autorizarPagoRecursa($event, dato)" id="Rechazado">Rechazar</button>
+                      </td>
+                      <td *ngIf="dato.estado==4">
+                        Autorizado para Examen
+                      </td>
+                      <td *ngIf="dato.estado==5">
+                        Aceptado para Examen
+                      </td>
+                      <td *ngIf="dato.estado==6">
+                        Aprobado
+                      </td>
+                      <td *ngIf="dato.estado==7">
+                        En correción de pago
+                      </td>
+                      <td *ngIf="dato.estado==8">
+                        No aprovado
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      
 
 
 

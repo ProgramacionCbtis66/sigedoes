@@ -234,37 +234,6 @@ docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
     }
 });
 
-docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
-    const { idasiglobd, calificacion, idglobales } = req.body;
-    const estado= 0;
-    
-    let tiempo = Date.now();
-    let hoy = new Date(tiempo);
-    const fecha = hoy.toLocaleDateString();
-  
-    const conexion = await ccn();
-    try {
-        const sql = 'select * from solicitud where idglobales = ? and activo = 1';
-        const [registros] = await conexion.execute(sql, [idglobales]);
-        console.log(registros);
-        if (registros.length > 0) {
-                if(calificacion >= 6){ estado=5;}else{ estado=6;}
-                const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
-                const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
-                const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
-                const [registros2] = await conexion.execute(sql2, [idasiglobd]);
-                const sql3 = 'update solicitud set activo = 0 where idglobales = ?';
-                const [registros3] = await conexion.execute(sql3, [idglobales]);
-                res.json({ data: true });
-        }else{
-                 res.json({data: false, mensaje: "El alumno no ha pagado la cuota de examen"});
-        }
-        await conexion.end();
-    } catch (error) {
-        console.log(error);
-    }
-});
-
 docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
     const { docenteDni } = req.body;
     const sql = `select idasigrecursa, r.idrecursa, ar.docenteDni , alumnoNumControl, r.idMateria as idmateria, ar.fecha, ar.status, 
@@ -292,6 +261,37 @@ docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
     }
 });
 
+docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
+    const { idasiglobd, calificacion, idglobales } = req.body;
+    const estado= 0;
+    
+    let tiempo = Date.now();
+    let hoy = new Date(tiempo);
+    const fecha = hoy.toLocaleDateString();
+  
+    const conexion = await ccn();
+    try {
+        const sql = 'select * from solicitud where idglobales = ? and activo = 1';
+        const [registros] = await conexion.execute(sql, [idglobales]);
+        console.log(registros);
+        if (registros.length > 0) {
+                if(calificacion >= 6){ estado=6;}else{ estado=8;}
+                const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
+                const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
+                const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
+                const [registros2] = await conexion.execute(sql2, [idasiglobd]);
+                const sql3 = 'update solicitud set activo = 0 where idglobales = ?';
+                const [registros3] = await conexion.execute(sql3, [idglobales]);
+                res.json({ data: true });
+        }else{
+                 res.json({data: false, mensaje: "El alumno no ha pagado la cuota de examen"});
+        }
+        await conexion.end();
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
     const { idasigrecursa, calificacion, idrecursa } = req.body;
     const estado= 0;
@@ -299,12 +299,12 @@ docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
     let hoy = new Date(tiempo);
     const fecha = hoy.toLocaleDateString();
     const conexion = await ccn();
-
+    
     try {
         const sql = 'select * from solicitud where idrecursa = ? and activo = 1';
         const [registros] = await conexion.execute(sql, [idrecursa]);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=5;}else{ estado=6;}
+                if(calificacion >= 6){ estado=6;}else{ estado=8;}
                 const sql = 'update recursas set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idrecursa = ?';
                 const [registros1] = await conexion.execute(sql, [idrecursa, estado,calificacion, fecha]);
                 const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';

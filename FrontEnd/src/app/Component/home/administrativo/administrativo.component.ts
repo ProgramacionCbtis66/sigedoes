@@ -60,7 +60,6 @@ export class AdministrativoComponent implements OnInit {
     this.nav._perfil = false;
     this.getCEAP();
     this.obtenerdatEsc();
-    this.getSolicitudesGlobales();
   }
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
@@ -537,6 +536,18 @@ export class AdministrativoComponent implements OnInit {
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
+        if(control=='Autorizado'){
+          var ae = {
+            idgloables: dato.idgloables,
+            idasiglobd: dato.idasiglobd,
+            numControl: dato.numControl
+          }
+            const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae));
+            dato.fecha = examen.ok.fecha;
+            dato.hora = examen.ok.hora;
+            dato.salon = examen.ok.salon;
+        }
+        const correo = await firstValueFrom(this.email.envioSolicitud({correo:dato, tipo:"solicitudExmamenGlobal"}));
       }
     }
   }
@@ -553,9 +564,69 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
+  async autorizarRecursa(event: any, dato: any) {
+    const control = event.target.id;
+    if (control == "Autorizado") {
+      const autorizado = {
+        estado: 2,
+        idrecursas: dato.idrecursas
+      }
+      if (control == 'Rechazado') {
+        const autorizado = {
+          estado: 6,
+          idrecursas: dato.idrecursas
+        }
+      }
+      if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
+        const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
+        if (res.ok == "ok") {
+          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control=='Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
+          this.getSolicitudesRecursas();
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+      }
+    }
+  }
 
+  async autorizarPagoRecursa(event:any, dato:any){
+    const control = event.target.id;
+    if (control == "Autorizado") {
+      var autorizado = {
+        estado: 4,
+        idrecursas: dato.idrecursas
+      }
 
-
-
+      if (control == 'Rechazado') {
+        autorizado = {
+          estado: 7,
+          idrecursas: dato.idrecursas
+        }
+      }
+      if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
+        const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
+        if (res.ok == "ok") {
+          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control=='Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
+          this.getSolicitudesRecursas();
+        } else {
+          Notiflix.Notify.failure("Ha Ocurrido Un Error");
+        }
+        if(control=='Autorizado'){
+          var cr = {
+            idrecursas: dato.idrecursas,
+            idasigrecursa: dato.idasigrecursa,
+            numControl: dato.numControl
+          }
+          const examen = await firstValueFrom(this.admin.cursoRecursa(cr));
+          dato.fecha = examen.ok.fecha;
+          dato.hora = examen.ok.hora;
+          dato.salon = examen.ok.salon;
+        }
+        const correo = await firstValueFrom(this.email.envioSolicitud({correo:dato, tipo:"solicitudRecursamiento"}));
+      }
+    }
+  }
 
 }

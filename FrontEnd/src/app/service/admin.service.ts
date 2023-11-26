@@ -102,7 +102,7 @@ export class AdminService {
     return this.http.get(`${this.URL}/admin/getSolicitudesGlobales`, this.usr);
   }
   getSolicitudesRecursas():Observable<any>{
-    return this.http.get(`${this.URL}/admin/getSolicitudesRecursa`, this.usr);
+    return this.http.get(`${this.URL}/admin/getSolicitudesRecursas`, this.usr);
   }
   autorizarGlobal(autorizado:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/autorizarGlobal`,autorizado, this.usr);
@@ -110,5 +110,11 @@ export class AdminService {
   autorizarRecursa(autorizado:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/autorizarRecursa`,autorizado, this.usr);
   }
-
+  aplicaionExamenGlobal(dato:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/aplicaionExamenGlobal`,dato, this.usr);
+  }
+  cursoRecursa(dato:any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/aplicaionRecursa`,dato, this.usr);
+  }
+  
 }

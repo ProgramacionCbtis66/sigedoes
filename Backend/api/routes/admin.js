@@ -455,9 +455,9 @@ administrador.get('/getCEAP', verifica, async(req, res) => {
 
 administrador.get('/getSolicitudesGlobales', verifica, async(req, res) => {
     const conexion = await ccn();
-    const sql = `SELECT idglobales, idMateria, g.idperiodoescolar, alumnoNumControl, grado, grupo, especilialidad, turno, periodoescolar, m.descripcion, m.semestre 
-    FROM globales g ,alumno a, periodoescolar p, materias m 
-    WHERE (g.alumnoNumControl = a.numControl) and (g.idperiodoescolar = p.idperiodoescolar) and (g.idMateria=m.idMateria)`;
+    const sql = `SELECT g.idglobales, g.idMateria, g.idperiodoescolar, g.idasiglobd, alumnoNumControl, grado, grupo, a.especialidad, turno, a.correo, periodoescolar, m.descripcion as materia, m.semestre, u.nombre, u.apellidoP, u.apellidoM, g.estado
+    FROM globales g ,alumno a, periodoescolar p, materias m, usuario u 
+    WHERE (g.alumnoNumControl = a.numControl) and (g.idperiodoescolar = p.idperiodoescolar) and (g.alumnoNumControl=u.numControl) and (g.idMateria=m.idMateria)`;
     try{
         const [row] = await conexion.execute(sql);
         if(row.length > 0){
@@ -472,9 +472,9 @@ administrador.get('/getSolicitudesGlobales', verifica, async(req, res) => {
 
 administrador.get('/getSolicitudesRecursas', verifica, async(req, res) => {
     const conexion = await ccn();
-    const sql = `SELECT idrecursa, idMateria, r.idperiodoescolar, alumnoNumControl, grado, grupo, especilialidad, turno, periodoescolar, m.descripcion, m.semestre 
-    FROM recursas r ,alumno a, periodoescolar p, materias m 
-    WHERE (r.alumnoNumControl = a.numControl) and (r.idperiodoescolar = p.idperiodoescolar) and (r.idMateria=m.idMateria)`;
+    const sql = `SELECT r.idrecursa, r.idMateria, r.idperiodoescolar,r.idasigrecursa, r.alumnoNumControl, a.grado, a.grupo, a.especialidad, a.turno, a.correo, p.periodoescolar, m.descripcion as materia, m.semestre, u.nombre, u.apellidoP, u.apellidoM, r.estado 
+    FROM recursas r ,alumno a, periodoescolar p, materias m , usuario u
+    WHERE (r.alumnoNumControl = a.numControl) and (r.idperiodoescolar = p.idperiodoescolar) and (r.alumnoNumControl=u.numControl)  and (r.idMateria=m.idMateria)`;
     try{
         const [row] = await conexion.execute(sql);
         if(row.length > 0){
@@ -516,4 +516,35 @@ administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
         console.log(error);
     }
 };
+
+administrador.post('/aplicaionExamenGlobal', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`select ag.fecha, ag.hora, ag.lugar sa salon from globales g, asignaglobal ag where (g.idasiglobd = ag.idasiglobd) and (g.idglobales = ?)`,[data.idglobales]);
+        if(row.affectedRows > 0){
+            res.send({ok:row});
+        } else {
+            res.send({err:"err"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
+administrador.post('/aplicaionRecursa', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`select ar.fecha, ar.hora, ar.lugar sa salon from recursas r, asignarecursa ar where (r.idasigrecursa = ar.idasigrecursa) and (r.idrecursa = ?)`,[data.idrecursa]);
+        if(row.affectedRows > 0){
+            res.send({ok:row});
+        } else {
+            res.send({err:"err"});
+        }
+    }catch(error){
+        console.log(error);
+    }
+});
+
 module.exports = administrador;

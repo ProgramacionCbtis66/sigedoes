@@ -30,7 +30,7 @@ function enviarCorreo(email, res) {
 }
 
 function MailOptions(tipo, email) {
-     
+
     switch (tipo) {
         case "Constancia":
             const mailOptions = {
@@ -79,37 +79,71 @@ function MailOptions(tipo, email) {
             return mailOptions4;
         case "boleta":
             const mailOptions5 = {
-                from: `"Control escolar", "c"`,
+                from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
                 to: `"${email.correo}"`,
                 subject: `"Boleta de calificaciones"`,
                 html: `<h3>Estimado Usuario se le envía su boleta de calificaciones del semestre :  ${email.semestre} del periodo escolar ${email.periodo} grupo ${email.grupo}`,
             };
             return mailOptions5;
         case "justificante":
-           if(email.estado == 1){
-            var mailOptions6 = {
-                from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
-                to: `"${email.correo}"`,
-                subject: `"Justificante"`,
-                html: `<b>Estimado Usuario se le envía su justificante: ${email.justificante}`,
-                attachments: [
-                    {
-                        filename: `just${email.numControl}cb66.pdf`,
-                        path: `./api/assets/just${email.numControl}cb66.pdf`,
-                        cid: `${email.correo}`,
-                    },
-                ],
-            };
+            if (email.estado == 1) {
+                var mailOptions6 = {
+                    from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
+                    to: `"${email.correo}"`,
+                    subject: `"Justificante"`,
+                    html: `<b>Estimado Usuario se le envía su justificante: ${email.justificante}`,
+                    attachments: [
+                        {
+                            filename: `just${email.numControl}cb66.pdf`,
+                            path: `./api/assets/just${email.numControl}cb66.pdf`,
+                            cid: `${email.correo}`,
+                        },
+                    ],
+                };
+                return mailOptions6;
+            } else {
+                var mailOptions6 = {
+                    from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
+                    to: `"${email.correo}"`,
+                    subject: `"Justificante"`,
+                    html: `<h5> Estimado Usuario ${email.nombre} se le envía su ubservacion de la solicitud de su justificante: ${email.observaciones}</h5>`,
+                };
+            }
             return mailOptions6;
-        }else{
-            var mailOptions6 = {
-                from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
-                to: `"${email.correo}"`,
-                subject: `"Justificante"`,
-                html: `<h5> Estimado Usuario ${email.nombre} se le envía su ubservacion de la solicitud de su justificante: ${email.observaciones}</h5>`,
-            };
-        }
-            return mailOptions6;
+        case "solicitudExmamenGlobal":
+            if (email.estado == 4) {
+                var mailOptions7 = {
+                    from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                    to: `"${email.correo}"`,
+                    subject: `"Solicitud de examen global"`,
+                    html: `<h3>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
+                    };
+                } else {
+                    var mailOptions7 = {
+                        from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                        to: `"${email.correo}"`,
+                        subject: `"Solicitud de examen global"`,
+                        html: `<h5>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
+                    };
+                }
+                return mailOptions7;
+        case "solicitudRecursamiento":
+            if (email.estado == 4) {
+                var mailOptions8 = {
+                    from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                    to: `"${email.correo}"`,
+                    subject: `"Solicitud de recursamiento"`,
+                    html: `<h3>Estimado Alumno(a) su apliccacion de recursamiento de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
+                    };
+                }else{
+                    var mailOptions8 = {
+                        from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                        to: `"${email.correo}"`,
+                        subject: `"Solicitud de recursamiento"`,
+                        html: `<h5>Estimado Alumno(a) su apliccacion de recursamiento de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
+                    };
+                }
+                return mailOptions8;
     }
 }
 
