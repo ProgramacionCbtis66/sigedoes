@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
     nav._iflogin = true;
   }
 
-  ngOnInit(): void { }
-  public registrarse(): void { this.router.navigate(['registro']); }
+  ngOnInit(): void {}
+  public registrarse(): void { this.router.navigate(['registro']);}
   public Acceso(): void {
     if (this.usuario.nombre !== "" && this.usuario.pass !== "") {
       try {

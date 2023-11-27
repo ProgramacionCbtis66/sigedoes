@@ -76,6 +76,7 @@ export class NavegacionService {
     this._global = false;
     this._usuario = "";
     localStorage.clear();
-    location.reload();
+    this.routerLink.navigate(['/']);
+    
   }
 }

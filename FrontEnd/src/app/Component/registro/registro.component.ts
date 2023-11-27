@@ -54,7 +54,7 @@ export class RegistroComponent implements OnInit {
   public Registro(): void {
 
     var validEmail = /^[a-z0-9._%+-]+@cbtis66\.edu\.mx$/i;
-
+    
     if (this.tipoUsuario == "Docente") {
       if (this.docente._nombre !== "" && this.docente._apellidoP !== "" && this.docente._apellidoM !== "" && this.docente._fechaNac !== null && validEmail.test(this.docente._correo) && this.docente._pass !== "" && this.docente._pass2 !== "" && this.docente._curp !== "" && this.docente && this.docente._CEDULA !== "" && this.docente._gradoAcademico !== "" && this.docente._foto != null) {
         this.docente._tipoUsuario = "Docente";
@@ -79,7 +79,7 @@ export class RegistroComponent implements OnInit {
           Notiflix.Notify.failure("Las contraseñas no coinciden");
         }
       } else {
-        Notiflix.Notify.failure("Faltan Datos");
+        Notiflix.Notify.failure("Faltan Datos o correo invalido");
       }
     } else if (this.tipoUsuario == "Alumno") {
       if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && validEmail.test(this.alumno._correo) && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._grado != "" && this.alumno._area != "" && this.alumno._foto != null) {

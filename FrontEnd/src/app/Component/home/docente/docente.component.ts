@@ -43,13 +43,10 @@ export class DocenteComponent implements OnInit {
     private location: Location,
     private Link: Router
   ) {
-    this.nav._usuario =
-      this.auth.decodifica().nombre +
-      ' ' +
-      this.auth.decodifica().apellidoP +
-      ' ' +
-      this.auth.decodifica().apellidoM;
+    this.nav._perfil = false;
+    this.nav._usuario = this.auth.decodifica().nombre + ' ' + this.auth.decodifica().apellidoP +' ' +this.auth.decodifica().apellidoM;
     this.nav._docente = true;
+    this.nav._foto = this.auth.decodifica().foto;
     this.datos();
     this.datosPeridoEscolar();
   }
