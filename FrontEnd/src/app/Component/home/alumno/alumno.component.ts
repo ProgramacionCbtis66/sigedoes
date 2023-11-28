@@ -57,10 +57,12 @@ export class AlumnoComponent implements OnInit {
  
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
-    this.nav._foto = this.auth.decodifica().foto;
+  
     this.nav._homeAlumno = true;
     this.nav._perfil=false;
   }
+
+   
 
   salir(): void {
     if (!this.auth.isAuth()) { this.nav.salir(); }
@@ -83,9 +85,9 @@ export class AlumnoComponent implements OnInit {
       }
       this.datos.nombre = this.datos.nombre + ' ' + this.datos.apellidoP + ' ' + this.datos.apellidoM;
       if (this.datos.foto != null) {
-        this.nav._foto = this.datos.foto;
+  
       } else {
-        this.nav._foto = '.././assets/img/tufoto.png';
+     
         this.datos.foto = '.././assets/img/tufoto.png';
       }
     }else{

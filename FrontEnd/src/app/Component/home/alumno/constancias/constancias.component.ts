@@ -52,7 +52,7 @@ export class ConstanciasComponent implements OnInit {
 
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
-    this.nav._foto = this.auth.decodifica().foto;
+    
     this.getCEAP();
   }
   

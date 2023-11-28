@@ -56,11 +56,13 @@ export class AdministrativoComponent implements OnInit {
     protected admin: AdminService,
     protected auth: AuthService) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
-    this.nav._foto = this.auth.decodifica().foto;
     this.nav._perfil = false;
     this.getCEAP();
     this.obtenerdatEsc();
   }
+
+  
+
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
   }

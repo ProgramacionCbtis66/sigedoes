@@ -23,7 +23,7 @@ export class PerfilComponent implements OnInit {
     private Base64: UsuarioService,
   ) {
     this.nav._perfil = true;
-    this.nav._foto = this.auth.decodifica().foto;
+    this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
   }
 
   salir(): void {
@@ -59,6 +59,7 @@ export class PerfilComponent implements OnInit {
       this.userService.modificarPerfil(this.perfil).subscribe((res: any) => {
         if (res.valida) {
           Notiflix.Notify.info("Datos Actualizados");
+          this.nav._foto = this.perfil.foto;
           this.ngOnInit();
         }else{
           Notiflix.Notify.failure("Error al actualizar datos");

@@ -33,7 +33,7 @@ peticion.post('/recuperarContraseña', async (req, res) => {
 
 peticion.post('/acceso', async (req, res) => {
     const { nombre, pass } = req.body;
-    let sql = `select nombre, apellidoP, apellidoM,  rol,  numControl , foto
+    let sql = `select nombre, apellidoP, apellidoM,  rol,  numControl 
     from usuario  
     where numControl = ? and password = ? and alta = 1`;
     var usuario = '';
@@ -41,24 +41,27 @@ peticion.post('/acceso', async (req, res) => {
     try {
         const [registros] = await conexion.execute(sql, [nombre, pass]);
         usuario = registros;
+        const [foto] = await conexion.execute('SELECT foto from usuario where numControl = ?', [usuario[0].numControl]);
+        var picture = foto;
+         
     } catch (error) {
         console.log(error);
-        res.json({ Error: error });
+        res.json({ Error: "Usuario y contraseña incorrecta" });
     } finally {
         await conexion.end();
     }
 
     if (usuario[0] !== undefined && usuario.length > 0) {
-        if (usuario[0].foto == null) {
-            usuario[0].foto = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
+        if (picture[0].foto == null) {
+            picture[0].foto = "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
         } else {
-            usuario[0].foto = usuario[0].foto.toString();
+            picture[0].foto = picture[0].foto.toString();
         }
         var datos = JSON.stringify(usuario[0]);
         var dato = JSON.parse(datos);
-        const token = jwt.sign(dato, 'MA@L', { expiresIn: '20m' });
+        const token = jwt.sign(dato, 'MA@L', { expiresIn: '30m' });
         console.log("Usuario y contraseña correcta");
-        res.json({ token });
+        res.json({ token, foto: picture[0].foto });
     } else {
         console.log("Usuario y contraseña incorrecta");
         res.json({ Error: "Usuario y contraseña incorrecta" });

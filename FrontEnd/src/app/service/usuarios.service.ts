@@ -13,8 +13,14 @@ export class UsuarioService {
   private URL = environment.HTTPS;
   private usr = environment.autorization;
 
+
+
   constructor(private http: HttpClient, private sanitizer:DomSanitizer ) {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
+   }
+
+   obtenerFoto(dato: any): Observable<any> {
+    return this.http.post(`${this.URL}/insize/obtenerFoto`, dato, this.usr);
    }
 
   datosUser(numcontrol: any): Observable<any> {

@@ -46,7 +46,6 @@ export class DocenteComponent implements OnInit {
     this.nav._perfil = false;
     this.nav._usuario = this.auth.decodifica().nombre + ' ' + this.auth.decodifica().apellidoP +' ' +this.auth.decodifica().apellidoM;
     this.nav._docente = true;
-    this.nav._foto = this.auth.decodifica().foto;
     this.datos();
     this.datosPeridoEscolar();
   }
@@ -79,7 +78,7 @@ export class DocenteComponent implements OnInit {
         } else {
           this.datosDocente._foto = registro.foto;
         }
-        this.nav._foto = this.datosDocente._foto;
+       
       }
     } catch (error) {}
   }

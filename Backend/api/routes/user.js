@@ -6,6 +6,26 @@ const ccn = require('../connection/connection');
 
 const verifica = require('./verificaToken');
 
+
+peticion.post('/obtenerFoto', verifica, async (req, res) => {
+    const numControl = req.body.numControl;
+    const conexion = await ccn();
+    try {
+        const [rows] = await conexion.execute('SELECT foto from usuario where numControl = ?', [numControl]);
+        if (rows.length > 0) {
+            if (rows[0].foto !== null) { rows[0].foto = rows[0].foto.toString('utf-8'); }
+            let datos = JSON.stringify(rows[0]);
+            let dato = JSON.parse(datos);
+            let foto = JSON.stringify(dato.foto);
+            res.json({ foto: foto });
+        }
+    } catch (error) {
+        //no tiene otra sentencia aparte del res.json del if
+    } finally {
+        conexion.end();
+    }
+});
+
 peticion.post('/datosUser', verifica, async (req, res) => {
     const numControl = req.body.numControl;
     const rol = req.body.rol;

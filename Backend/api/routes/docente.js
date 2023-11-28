@@ -210,7 +210,7 @@ async function buscaRecursa(periodo, materia, numControl, dmateria) {
 
 docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
     const { docenteDni } = req.body;
-    const sql = `select idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status, 
+    const sql = `select g.idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status, 
     us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia FROM asignaglobal as ag
     join globales as g on ag.idglobales = g.idglobales
     join docente as d on d.numControl = g.docenteDni
