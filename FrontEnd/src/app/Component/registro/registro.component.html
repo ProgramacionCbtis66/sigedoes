@@ -62,7 +62,7 @@
                 <div class="col-md-4">
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
                   <input [(ngModel)]="alumno._nombre" type="text" class="form-control tm" id="nombre" #nombre
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;"
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;"
                     id="nombre" (keyup)="valida($event)" autocomplete="off">
                 </div>
                 <!--Apellido Paterno-->
@@ -70,14 +70,14 @@
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="alumno._apellidoP" type="text" class="form-control tm" id="ap"
                     (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="ap" autocomplete="off">
+                    style="font-size: small;" id="ap" autocomplete="off">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="alumno._apellidoM" type="text" class="form-control tm" id="am"
                     (keyup)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="am" autocomplete="off">
+                    style="font-size: small;" id="am" autocomplete="off">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
@@ -96,13 +96,13 @@
                 <div class="col-md-4">
                   <label for="curp" class="form-label ps-2 tm">CURP</label>
                   <input [(ngModel)]="alumno._curp" type="text" class="form-control tm" placeholder="CURP" id="curp"
-                    (keyup)="valida($event)" style="font-size: small;text-transform: uppercase;" id="curp" autocomplete="off">
+                    (keyup)="valida($event)" style="font-size: small; text-transform: uppercase;" id="curp" autocomplete="off">
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
-                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <label for="direccion" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="alumno._direccion" type="text area" class="form-control tm"
-                    (keyup)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
+                    (keyup)="valida($event)" placeholder="Dirección" id="direccion" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
@@ -215,21 +215,21 @@
                 <div class="col-md-4">
                   <label for="nombre" class="form-label ps-2 tm">Nombre</label>
                   <input [(ngModel)]="docente._nombre" type="text" class="form-control tm" id="nombre" #nombre
-                    placeholder="Nombre empezando con mayúscula" style="font-size: small;text-transform: uppercase;" id="nombre" (keypress)="valida($event)" autocomplete="off">
+                    placeholder="Nombre empezando con mayúscula" style="font-size: small;" id="nombre" (keypress)="valida($event)" autocomplete="off">
                 </div>
                 <!--Apellido Paterno-->
                 <div class="col-md-4">
                   <label for="ap" class="form-label ps-2 tm">Apellido Paterno</label>
                   <input [(ngModel)]="docente._apellidoP" type="text" class="form-control tm" id="ap"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="ap" autocomplete="off">
+                    style="font-size: small;" id="ap" autocomplete="off">
                 </div>
                 <!--Apellido Materno-->
                 <div class="col-md-4">
                   <label for="am" class="form-label ps-2 tm">Apellido Materno</label>
                   <input [(ngModel)]="docente._apellidoM" type="text" class="form-control tm" id="am"
                     (keypress)="valida($event)" placeholder="Apellido empezando con mayúscula"
-                    style="font-size: small;text-transform: uppercase;" id="am" autocomplete="off">
+                    style="font-size: small;" id="am" autocomplete="off">
                 </div>
                 <!--Fecha de nacimiento-->
                 <div class="col-md-6">
@@ -251,9 +251,9 @@
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
-                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <label for="direccion" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="docente._direccion" type="text area" class="form-control tm"
-                    (keypress)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
+                    (keypress)="valida($event)" placeholder="Dirección" id="direccion" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">
@@ -351,9 +351,9 @@
                 </div>
                 <!-- dirección -->
                 <div class="col-md-8">
-                  <label for="dir" class="form-label ps-2 tm">Dirección</label>
+                  <label for="direccion" class="form-label ps-2 tm">Dirección</label>
                   <input [(ngModel)]="administrativo._direccion" type="text area" class="form-control tm"
-                    (keypress)="valida($event)" placeholder="Dirección" id="dir" autocomplete="off">
+                    (keypress)="valida($event)" placeholder="Dirección" id="direccion" autocomplete="off">
                 </div>
                 <!-- telefono -->
                 <div class="col-md-3">

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-nav-sigese bg-gradient text-color-sigese pe-3" aria-label="breadcrumb">
   <div class="container-fluid">
     <!-- Logo de la aplicación -->
-    <a class="navbar-brand " routerLink="homeAlumno" (click)="visibleLoginRegistro()">
+    <a class="navbar-brand " routerLink="/" (click)="visibleLoginRegistro()">
       <img src="{{logo}}" width="85" class="text-color-sigese">
     </a>
 
@@ -16,8 +16,8 @@
     <div class="collapse navbar-collapse mb-2 mt-2" id="navbarSupportedContent">
       <!-- Links de la barra de navegación -->
       <ul class="navbar-nav">
-        <li *ngIf="nav._iflogin " class="nav-item" id="idlogin">
-          <a class="nav-link">Inicio de sesión</a>
+        <li *ngIf="nav._iflogin" class="nav-item" id="idlogin">
+          <a class="nav-link" [routerLink]="['/']">Inicio de sesión</a>
         </li>
         <li class="nav-item" id="idhome" *ngIf="nav._homeAlumno">
           <a class="nav-link pe-auto" [routerLink]="['/homeAlumno']" >Alumno</a>
@@ -26,7 +26,7 @@
           <a class="nav-link pe-auto" id="idregistro">Administrador</a>
         </li>
         <li class="nav-item" *ngIf="nav._docente">
-          <a class="nav-link pe-auto">Docente</a>
+          <a class="nav-link pe-auto" [routerLink]="['/homeDocente']">Docente</a>
         </li>
         <li class="nav-item" *ngIf="nav._registro">
           <a class="nav-link pe-auto">Registro</a>

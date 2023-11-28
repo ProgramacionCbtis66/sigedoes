@@ -46,7 +46,6 @@ export class JutificantesComponent implements OnInit {
     private Base64: UsuarioService
   ){
     this.nav._usuario = this.auth.decodifica().nombre+ " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
-    this.nav._foto = this.auth.decodifica().foto;
     this.nav._homeAlumno = true;
   }
 

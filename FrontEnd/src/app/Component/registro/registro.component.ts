@@ -35,8 +35,7 @@ export class RegistroComponent implements OnInit {
     private nav: NavegacionService,
     private Base64: UsuarioService,
   ) {
-    this.nav._logout = false; this.nav._registro = true; this.nav._iflogin = false;
-
+    this.nav._logout = false; this.nav._registro = true; this.nav._iflogin = true;
   }
 
   ngOnInit(): void { }
@@ -62,6 +61,8 @@ export class RegistroComponent implements OnInit {
         this.docente._numControl = this.docente._correo;
 
         this.docente._foto = this.foto;
+        this.docente._curp = this.docente._curp.toUpperCase();
+
         if (this.docente._pass === this.docente._pass2) {
           Notiflix.Loading.standard("Validando");
           this.auth.registro(this.docente).subscribe((res: any) => {
@@ -88,6 +89,7 @@ export class RegistroComponent implements OnInit {
           this.alumno._rol = "AL";
           this.alumno._foto = this.foto;
           this.alumno._horario = "1";
+          this.alumno._curp = this.alumno._curp.toUpperCase();
           Notiflix.Loading.standard("Validando");
           this.auth.registro(this.alumno).subscribe((res: any) => {
             if (res.Aceptado == "Datos Guardados") {
@@ -109,6 +111,7 @@ export class RegistroComponent implements OnInit {
       this.administrativo._numControl = this.administrativo._correo;
       this.administrativo._rol = this.tipoUsuario;
       this.administrativo._foto = this.foto;
+      this.administrativo._curp = this.administrativo._curp.toUpperCase();
       if (this.administrativo._pass === this.administrativo._pass2) {
         this.administrativo._tipoUsuario = this.tipoUsuario;
         Notiflix.Loading.standard("Validando");
@@ -204,7 +207,7 @@ export class RegistroComponent implements OnInit {
     if (input == "curp") {
       if (code == 8) { // backspace.
         return true;
-      } else if (code >= 65 && code <= 90 || code >= 48 && code <= 57) { // is a letter.
+      } else if (code >= 65 && code <= 90 || code >= 48 && code <= 57 || code >= 97 && code <= 122) { // is a letter.
         return true;
       } else { // other keys.
         return false;
@@ -247,7 +250,7 @@ export class RegistroComponent implements OnInit {
     if (input == "direccion") {
       if (code == 8) { // backspace.
         return true;
-      } else if (code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 32 || code >= 48 && code <= 57 || code == 35) { // is a letter.
+      } else if (code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 32 || code >= 48 && code <= 57 || code == 35) { 
         return true;
       } else { // other keys.
         return false;

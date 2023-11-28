@@ -30,12 +30,12 @@
           <div class="accordion-body">
             <!-- buscar alumno  y datos para captura -->
             <div class="d-flex justify-content-between mb-3">
-              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
+              <input class="form-control me-1" type="search" placeholder="Numero de Control" aria-label="Search"
                 [(ngModel)]="numControlAlumnoGlobal">
-              <button (click)="buscarAlumno($event)" class="btn btn-outline-success" type="submit"
-                id="global">Buscar</button>
+              <button (click)="buscarAlumno($event)" class="btn btn-outline-success me-1" type="submit"
+                id="global">Agregar</button>
               <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoGlobal"
+              <select class="form-select form-select-sm me-1" aria-label="Small select example" [(ngModel)]="periodoGlobal"
                 (change)="datosMateria($event)" id="selectGlobalesP" [disabled]="disableGlobal">
                 <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
                   periodo.periodoescolar}}
@@ -146,19 +146,19 @@
         <div id="collapseRecursa" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="d-flex justify-content-between mb-3">
-              <input class="form-control me-2" type="search" placeholder="Numero de Control" aria-label="Search"
+              <input class="form-control me-1" type="search" placeholder="Numero de Control" aria-label="Search"
                 [(ngModel)]="numControlAlumnoRecursa" [disabled]="disableRecursa">
-              <button (click)="buscarAlumno($event)" class="btn btn-outline-success btn-sm" type="submit"
-                id="recursa">Bucar</button>
+              <button (click)="buscarAlumno($event)" class="btn btn-outline-success btn-sm me-1" type="submit"
+                id="recursa">Agregar</button>
               <!-- periodo -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="periodoRecursa"
+              <select class="form-select form-select-sm me-1" aria-label="Small select example" [(ngModel)]="periodoRecursa"
                 id="selectRecursasP" (change)="datosMateria($event)" [disabled]="disableRecursa">
                 <option *ngFor="let periodo of periodoEscolar" [value]="periodo.idperiodoescolar">{{
                   periodo.periodoescolar }}
                 </option>
               </select>
               <!-- Materia -->
-              <select class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="materiaRecursa"
+              <select class="form-select form-select-sm me-1" aria-label="Small select example" [(ngModel)]="materiaRecursa"
                 id="selectRecursasM" [disabled]="disableRecursa">
                 <option *ngFor="let materia of materias" [value]="materia.idMateria">{{ materia.descripcion }}
                 </option>

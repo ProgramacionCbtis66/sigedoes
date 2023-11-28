@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router, private nav: NavegacionService) {
     nav._iflogin = true;
+    nav._registro = false;
   }
 
   ngOnInit(): void {}
