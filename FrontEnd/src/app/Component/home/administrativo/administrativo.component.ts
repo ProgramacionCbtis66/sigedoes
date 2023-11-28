@@ -61,7 +61,7 @@ export class AdministrativoComponent implements OnInit {
     this.obtenerdatEsc();
   }
 
-  
+
 
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
@@ -467,17 +467,16 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-
-
-
   /*
   
   modulo de solicitus de globales y recursas
   
   */
 
-                        /*  Globales */
+  /*  Globales */
   solicitudesGlobales: any = [];
+  filtroGlobales: any = [];
+  filtroSolicitudesGlobales: any = [];
 
   async getSolicitudesGlobales() {
     this.ngOnInit();
@@ -506,8 +505,8 @@ export class AdministrativoComponent implements OnInit {
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
         if (res.ok == "ok") {
-          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
-          if (control=='Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
+          if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control == 'Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
           this.getSolicitudesGlobales();
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
@@ -516,7 +515,7 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  async autorizarPagoGlobal(event:any, dato:any){
+  async autorizarPagoGlobal(event: any, dato: any) {
     const control = event.target.id;
     if (control == "Autorizado") {
       var autorizado = {
@@ -532,30 +531,65 @@ export class AdministrativoComponent implements OnInit {
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
         if (res.ok == "ok") {
-          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
-          if (control=='Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
+          if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control == 'Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
           this.getSolicitudesGlobales();
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
-        if(control=='Autorizado'){
+        if (control == 'Autorizado') {
           var ae = {
             idgloables: dato.idgloables,
             idasiglobd: dato.idasiglobd,
             numControl: dato.numControl
           }
-            const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae));
-            dato.fecha = examen.ok.fecha;
-            dato.hora = examen.ok.hora;
-            dato.salon = examen.ok.salon;
+          const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae));
+          dato.fecha = examen.ok.fecha;
+          dato.hora = examen.ok.hora;
+          dato.salon = examen.ok.salon;
         }
-        const correo = await firstValueFrom(this.email.envioSolicitud({correo:dato, tipo:"solicitudExmamenGlobal"}));
+        const correo = await firstValueFrom(this.email.envioSolicitud({ correo: dato, tipo: "solicitudExmamenGlobal" }));
       }
     }
   }
 
-                 /*  Recursas */
+  filtroSolicitudGlobales() {
+    this.ngOnInit();
+    var numControl = this.filtroGlobales.alumnoNumControl
+    var gardo = this.filtroGlobales.grado
+    var grupo = this.filtroGlobales.grupo
+    var especialidad = this.filtroGlobales.especialidad
+    var turno = this.filtroGlobales.turno
+
+    if (numControl != "") {
+      this.filtroSolicitudesGlobales = this.solicitudesGlobales.filter((item: any) => item.numControl == numControl);
+    } else {
+      if (gardo != "") {
+        this.filtroSolicitudesGlobales = this.solicitudesGlobales.filter((item: any) => item.grado == gardo);
+      } 
+      if(grupo != "") {
+        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grupo == grupo);
+      }
+      if(especialidad != "") {
+        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.especialidad == especialidad);
+      }
+      if(turno != "") {
+        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.turno == turno);
+      }
+    }
+
+
+
+
+
+  }
+
+  /*  Recursas */
+
   solicitudesRecursas: any = [];
+  filtroRecusas: any = [];
+  filtroSolicitudesRecusas: any = [];
+
   async getSolicitudesRecursas() {
     this.ngOnInit();
     const res = await firstValueFrom(this.admin.getSolicitudesRecursas());
@@ -582,8 +616,8 @@ export class AdministrativoComponent implements OnInit {
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
         if (res.ok == "ok") {
-          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
-          if (control=='Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
+          if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control == 'Rechazada') Notiflix.Notify.info("Solicitud Rechazada");
           this.getSolicitudesRecursas();
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
@@ -592,7 +626,7 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  async autorizarPagoRecursa(event:any, dato:any){
+  async autorizarPagoRecursa(event: any, dato: any) {
     const control = event.target.id;
     if (control == "Autorizado") {
       var autorizado = {
@@ -609,13 +643,13 @@ export class AdministrativoComponent implements OnInit {
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
         if (res.ok == "ok") {
-          if (control=='Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
-          if (control=='Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
+          if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
+          if (control == 'Rechazada') Notiflix.Notify.info("Por falta de documentos o documento ilegible, se rechaza la solicitud");
           this.getSolicitudesRecursas();
         } else {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
-        if(control=='Autorizado'){
+        if (control == 'Autorizado') {
           var cr = {
             idrecursas: dato.idrecursas,
             idasigrecursa: dato.idasigrecursa,
@@ -626,7 +660,33 @@ export class AdministrativoComponent implements OnInit {
           dato.hora = examen.ok.hora;
           dato.salon = examen.ok.salon;
         }
-        const correo = await firstValueFrom(this.email.envioSolicitud({correo:dato, tipo:"solicitudRecursamiento"}));
+        const correo = await firstValueFrom(this.email.envioSolicitud({ correo: dato, tipo: "solicitudRecursamiento" }));
+      }
+    }
+  }
+  
+  filtroSolicitudRecursas() {
+    this.ngOnInit();
+    var numControl = this.filtroRecusas.alumnoNumControl
+    var gardo = this.filtroRecusas.grado
+    var grupo = this.filtroRecusas.grupo
+    var especialidad = this.filtroRecusas.especialidad
+    var turno = this.filtroRecusas.turno
+
+    if (numControl != "") {
+      this.filtroSolicitudesRecusas = this.solicitudesRecursas.filter((item: any) => item.numControl == numControl);
+    } else {
+      if (gardo != "") {
+        this.filtroSolicitudesRecusas = this.solicitudesRecursas.filter((item: any) => item.grado == gardo);
+      } 
+      if(grupo != "") {
+        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grupo == grupo);
+      }
+      if(especialidad != "") {
+        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.especialidad == especialidad);
+      }
+      if(turno != "") {
+        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.turno == turno);
       }
     }
   }
