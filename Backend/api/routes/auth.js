@@ -41,7 +41,10 @@ peticion.post('/acceso', async (req, res) => {
     try {
         const [registros] = await conexion.execute(sql, [nombre, pass]);
         usuario = registros;
-        const [foto] = await conexion.execute('SELECT foto from usuario where numControl = ?', [usuario[0].numControl]);
+        if (usuario.length > 0) {
+            const [foto] = await conexion.execute('SELECT foto from usuario where numControl = ?', [usuario[0].numControl]);
+            var picture = foto;
+        }
         var picture = foto;
          
     } catch (error) {
