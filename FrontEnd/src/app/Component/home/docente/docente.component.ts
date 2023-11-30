@@ -53,30 +53,27 @@ export class DocenteComponent implements OnInit {
   async datos() {
     this.ngOnInit();
     this.datosDocente._numControl = this.auth.decodifica().numControl;
-    const numControl = {
-      numControl: this.datosDocente._numControl,
-    };
-
     try {
-      const res = await firstValueFrom(this.docente.datosDocente(numControl));
+      const res = await firstValueFrom(this.docente.datosDocente({
+        numControl: this.datosDocente._numControl,
+      }));
       if (res != '' && res != undefined) {
-        const registro = res.data;
-        this.datosDocente._nombre = registro.nombre;
-        this.datosDocente._apellidoP = registro.apellidoP;
-        this.datosDocente._apellidoM = registro.apellidoM;
-        this.datosDocente._correo = registro.correo;
-        this.datosDocente._curp = registro.CURP;
-        this.datosDocente._CEDULA = registro.CEDULA;
-        this.datosDocente._RFC = registro.RFC;
-        this.datosDocente._gradoAcademico = registro.gradoAcademico;
+        this.datosDocente._nombre = res.data.nombre;
+        this.datosDocente._apellidoP = res.data.apellidoP;
+        this.datosDocente._apellidoM = res.data.apellidoM;
+        this.datosDocente._correo = res.data.correo;
+        this.datosDocente._curp = res.data.CURP;
+        this.datosDocente._CEDULA = res.data.CEDULA;
+        this.datosDocente._RFC = res.data.RFC;
+        this.datosDocente._gradoAcademico = res.data.gradoAcademico;
         if (
-          registro.foto == null ||
-          registro.foto == undefined ||
-          registro.foto == ''
+          res.data.foto == null ||
+          res.data.foto == undefined ||
+          res.data.foto == ''
         ) {
           this.datosDocente._foto = '.././assets/img/tufoto.png';
         } else {
-          this.datosDocente._foto = registro.foto;
+          this.datosDocente._foto = res.data.foto;
         }
        
       }
@@ -371,15 +368,11 @@ export class DocenteComponent implements OnInit {
         (item: any) => item.idasiglobd == idasiglobd
       );
       try {
-        const res = await firstValueFrom(
-          this.docente.enviarCalificacionesGlobales(filtro[0])
-        );
+        const res = await firstValueFrom(this.docente.enviarCalificacionesGlobales(filtro[0]));
         if (res.data) {
           Notiflix.Notify.success('Calificaciones enviadas');
           //borrar de la lista
-          this.ListaAlumnosGlobales = this.ListaAlumnosGlobales.filter(
-            (item: any) => item.idasiglobd != idasiglobd
-          );
+          this.ListaAlumnosGlobales = this.ListaAlumnosGlobales.filter((item: any) => item.idasiglobd != idasiglobd);
         } else {
           Notiflix.Notify.warning(res.mensaje);
         }
@@ -402,7 +395,7 @@ export class DocenteComponent implements OnInit {
           })
         );
         if (res.data != undefined && res.data != '') {
-          this.alumnosRecursas = res.data;
+          this.ListaAlumnosRecursas = res.data;
         } else {
           Notiflix.Notify.warning('No hay alumnos asignados');
         }
@@ -424,7 +417,7 @@ export class DocenteComponent implements OnInit {
       );
       try {
         const res = await firstValueFrom(
-          this.docente.enviarCalificacionesGlobales(filtro[0])
+          this.docente.enviarCalificacionesRecursas(filtro[0])
         );
         if (res.data) {
           Notiflix.Notify.success('Calificaciones enviadas');

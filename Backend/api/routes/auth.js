@@ -45,8 +45,6 @@ peticion.post('/acceso', async (req, res) => {
             const [foto] = await conexion.execute('SELECT foto from usuario where numControl = ?', [usuario[0].numControl]);
             var picture = foto;
         }
-        var picture = foto;
-         
     } catch (error) {
         console.log(error);
         res.json({ Error: "Usuario y contraseña incorrecta" });

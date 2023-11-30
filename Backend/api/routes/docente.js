@@ -212,7 +212,7 @@ docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
     const { docenteDni } = req.body;
     const sql = `select g.idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status, 
     us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia FROM asignaglobal as ag
-    join globales as g on ag.idglobales = g.idglobales
+    join globales as g on ag.idasiglobd = g.idasiglobd
     join docente as d on d.numControl = g.docenteDni
     join usuario as us on us.numControl = g.alumnoNumControl
     join materias as m on m.idMateria = g.idMateria
@@ -236,10 +236,9 @@ docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
 
 docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
     const { docenteDni } = req.body;
-    const sql = `select idasigrecursa, r.idrecursa, ar.docenteDni , alumnoNumControl, r.idMateria as idmateria, ar.fecha, ar.status, 
-    us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia 
-    FROM asignarecursa as ar
-    join recursas as r on ar.idrecursa = r.idrecursa
+    const sql = `select ar.idasigrecursa, r.idrecursa, ar.docenteDni , alumnoNumControl, r.idMateria as idmateria, ar.fecha, ar.status, us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia 
+    FROM asignarecursa as ar 
+    join recursas as r on ar.idasigrecursa = r.idasigrecursa
     join docente as d on d.numControl = r.docenteDni
     join usuario as us on us.numControl = r.alumnoNumControl
     join materias as m on m.idMateria = r.idMateria
@@ -262,7 +261,7 @@ docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
 });
 
 docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
-    const { idasiglobd, calificacion, idglobales } = req.body;
+    const { idasiglobd, calificacion, idglobales, docenteDni } = req.body;
     const estado= 0;
     
     let tiempo = Date.now();
@@ -273,9 +272,22 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
     try {
         const sql = 'select * from solicitud where idglobales = ? and activo = 1';
         const [registros] = await conexion.execute(sql, [idglobales]);
-        console.log(registros);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=6;}else{ estado=8;}
+                if(calificacion >= 6){estado=6;}else{estado=8;
+                    const [global] = await conexion.execute('select * from globales where idglobales = ?', [idglobales]);
+                    if(global.length > 0){
+                        const _global=global[0];
+                        const [recursas] = await conexion.execute('insert into recursas (alumnoNumControl,idMateria,idperiodoescolar,docenteDni,fecha,estado) values (?,?,?,?,?,?)', 
+                        [
+                            _global.alumnoNumControl,
+                            _global.idMateria,
+                            _global.idperiodoescolar,
+                            docenteDni,
+                            fecha,
+                            0
+                        ]);
+                    }
+                }
                 const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
                 const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
                 const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';

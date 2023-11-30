@@ -304,7 +304,6 @@ export class AdministrativoComponent implements OnInit {
       this.globales = [];
     } else {
       this.globales = res.ok;
-
     }
 
   }
@@ -346,7 +345,7 @@ export class AdministrativoComponent implements OnInit {
     }
     const maestros = await firstValueFrom(this.admin.getMaestros());
     this.maestros = maestros.ok;
-    console.log(this.asignarGlobales);
+ 
   }
 
   async asignaOtroMaestro(dato: any) {
@@ -407,6 +406,7 @@ export class AdministrativoComponent implements OnInit {
       Notiflix.Notify.failure('Rellene Todos Los Campos');
     }
   }
+
   setDNI(DNI: any) {
     this.ngOnInit();
     this.asignarGlobales.docenteDni = DNI;
@@ -416,13 +416,13 @@ export class AdministrativoComponent implements OnInit {
     if (r.ok == 'vacio') {
       this.recursas = [];
     } else {
-      console.log(r.ok);
       this.recursas = r.ok;
     }
   }
   subirRegistroRecursa() {
     this.ngOnInit();
     if (this.asignarRecursas.lugar != undefined && this.asignarRecursas.hora != undefined && this.asignarRecursas.fecha != undefined && this.asignarRecursas.docenteDni != undefined && this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '') {
+      console.log(this.asignarRecursas);
       this.admin.guardarAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
         if (res.ok == 'ok') {
           Notiflix.Notify.info("Recursa Acreditado");
@@ -456,7 +456,6 @@ export class AdministrativoComponent implements OnInit {
 
   async actceap(dato: any) {
     this.ngOnInit();
-    console.log(dato);
     const res = await firstValueFrom(this.admin.actualizaCEAP(dato));
     if (res.ok == "ok") {
       Notiflix.Notify.info(`Costo de ${dato.concepto} Actualizado`, {
@@ -494,12 +493,14 @@ export class AdministrativoComponent implements OnInit {
     if (control == "Autorizado") {
       const autorizado = {
         estado: 2,
-        idgloables: dato.idgloables
+        idgloables: dato.idgloables,
+        docenteDni: this.auth.decodifica().numControl,
       }
       if (control == 'Rechazado') {
         const autorizado = {
-          estado: 6,
-          idglobales: dato.idglobales
+          estado: 8,
+          idglobales: dato.idglobales,
+          docenteDni: this.auth.decodifica().numControl,
         }
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
@@ -520,12 +521,14 @@ export class AdministrativoComponent implements OnInit {
     if (control == "Autorizado") {
       var autorizado = {
         estado: 4,
-        idglobales: dato.idgloables
+        idglobales: dato.idgloables,
+         
       }
       if (control == 'Rechazado') {
         autorizado = {
           estado: 7,
-          idglobales: dato.idglobales
+          idglobales: dato.idglobales,
+          
         }
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
@@ -609,7 +612,7 @@ export class AdministrativoComponent implements OnInit {
       }
       if (control == 'Rechazado') {
         const autorizado = {
-          estado: 6,
+          estado: 8,
           idrecursas: dato.idrecursas
         }
       }

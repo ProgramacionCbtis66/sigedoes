@@ -218,17 +218,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let alumno of ListaAlumnosGlobales">
+                  <tr *ngFor="let alumno of ListaAlumnosRecursas">
                     <td>{{alumno.alumnoNumControl}}</td>
                     <td>{{alumno.nombre+" "+alumno.apellidoP+" "+alumno.apellidoM}}</td>
                     <td>{{alumno.materia}}</td>
                     <td>
-                      <input type="number" class="form-control" [(ngModel)]="alumno.calificacion" min="0" max="100"
-                        step="0.01">
+                      <input type="number" class="form-control" [(ngModel)]="alumno.calificacion" min="0" max="10"
+                        step="1">
                     </td>
                     <td>
                       <button class="btn btn-sm btn-danger"
-                        (click)="enviarCalificacionesGlobales(alumno.idrecursa, alumno.idasigrecursa, alumno.calificacion)">Calificar</button>
+                        (click)="enviarCalificacionesRecursas(alumno.idrecursa, alumno.idasigrecursa, alumno.calificacion)">Calificar</button>
                     </td>
                   </tr>
                 </tbody>
