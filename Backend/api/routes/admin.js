@@ -461,7 +461,7 @@ administrador.get('/getSolicitudesRecursas', verifica, async(req, res) => {
     }
 });
 
-administrador.post('/autorizarGlobal'), verifica, async(req, res) => {
+administrador.post('/autorizarGlobal', verifica, async(req, res) => {
     const data = req.body;
     let tiempo = Date.now();
     let hoy = new Date(tiempo);
@@ -492,7 +492,7 @@ administrador.post('/autorizarGlobal'), verifica, async(req, res) => {
     }catch(error){
         console.log(error);
     }
-};
+});
 
 administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
     const data = req.body;

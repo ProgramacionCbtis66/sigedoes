@@ -485,6 +485,7 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesGlobales = [];
     } else {
       this.solicitudesGlobales = res.ok;
+      this.filtroSolicitudesGlobales=this.solicitudesGlobales;
     }
   }
 
@@ -493,7 +494,7 @@ export class AdministrativoComponent implements OnInit {
     if (control == "Autorizado") {
       const autorizado = {
         estado: 2,
-        idgloables: dato.idgloables,
+        idglobales: dato.idglobales,
         docenteDni: this.auth.decodifica().numControl,
       }
       if (control == 'Rechazado') {
@@ -503,6 +504,7 @@ export class AdministrativoComponent implements OnInit {
           docenteDni: this.auth.decodifica().numControl,
         }
       }
+      console.log(autorizado)
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
         if (res.ok == "ok") {
@@ -600,6 +602,7 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesRecursas = [];
     } else {
       this.solicitudesRecursas = res.ok;
+      this.filtroSolicitudesRecusas=this.solicitudesRecursas;
     }
   }
 
