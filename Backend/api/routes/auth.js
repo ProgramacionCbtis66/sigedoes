@@ -180,7 +180,7 @@ peticion.post('/solicitudAcceso', verifica, async (req, res) => {
                 if(registroAdministrativo[i].foto!==null) {registroAdministrativo[i].foto = registroAdministrativo[i].foto.toString('utf-8');}
             }
         }
-        console.log(registroDocente.length)
+      
         res.json({ validar: true, alumnos: registroAlumno, docentes: registroDocente, administrativos: registroAdministrativo });
 
     } catch (error) {

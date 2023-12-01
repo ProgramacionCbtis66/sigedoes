@@ -89,7 +89,7 @@ function MailOptions(tipo, email) {
             if (email.estado == 1) {
                 var mailOptions6 = {
                     from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
-                    to: `"${email.correo}"`,
+                    to: `${email.correo},  ${email.correoTutor}`,
                     subject: `"Justificante"`,
                     html: `<b>Estimado Usuario se le envía su justificante: ${email.justificante}`,
                     attachments: [
@@ -104,7 +104,7 @@ function MailOptions(tipo, email) {
             } else {
                 var mailOptions6 = {
                     from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
-                    to: `"${email.correo}"`,
+                    to: `${email.correo},  ${email.correoTutor}`,
                     subject: `"Justificante"`,
                     html: `<h5> Estimado Usuario ${email.nombre} se le envía su ubservacion de la solicitud de su justificante: ${email.observaciones}</h5>`,
                 };
@@ -114,15 +114,15 @@ function MailOptions(tipo, email) {
             if (email.estado == 4) {
                 var mailOptions7 = {
                     from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
-                    to: `"${email.correo}"`,
-                    subject: `"Solicitud de examen global"`,
+                    to: `${email.correo}`,
+                    subject: "Solicitud de examen global",
                     html: `<h3>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
                     };
                 } else {
                     var mailOptions7 = {
                         from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
-                        to: `"${email.correo}"`,
-                        subject: `"Solicitud de examen global"`,
+                        to: `${email.correo}`,
+                        subject: `Solicitud de examen global`,
                         html: `<h5>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
                     };
                 }

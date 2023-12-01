@@ -36,7 +36,6 @@ export class OrientacionEducativaComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.isAuth()) {
-      this.nav._iflogin = true;
       this.nav.salir();
     }
   }

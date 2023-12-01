@@ -45,7 +45,7 @@ global.post('/solicitudGlobal', verifica, async (req, res) => {
 
 global.post('/sendPagosGlobales', verifica, async (req, res) => {
     const data = req.body;
-    console.log(data);
+   
     const sql = 'UPDATE solicitudglobal SET frm5=?, ceap=? WHERE idglobales = ?';
     const sqlestatus = 'UPDATE globales SET estado = ? WHERE idglobales = ?';
     try {

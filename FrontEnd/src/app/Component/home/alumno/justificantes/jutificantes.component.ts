@@ -68,7 +68,7 @@ export class JutificantesComponent implements OnInit {
       // Puedes hacer algo con la respuesta aquí
       if(res.status === 'Registrado') {
         console.log('Los datos se registraron correctamente.');
-        Notiflix.Notify.success("Justificante Enviado");
+        Notiflix.Notify.success("Solicitud de Justificante Enviado");
       } else {
         console.log('Hubo un error al registrar los datos.');
       }

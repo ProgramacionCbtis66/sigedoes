@@ -45,14 +45,14 @@ recursa.post('/solicitudRecursas', verifica, async (req, res) => {
 
 recursa.post('/sendPagosrecursas', verifica, async (req, res) => {
     const data = req.body;
-    console.log(data);
+ 
     const sql = 'UPDATE solicitudrecursa SET frm5=?, ceap=? WHERE idsolicitudrecursa = ?';
     const sqlestatus = 'UPDATE recursas SET estado = ? WHERE idsolicitudrecursa = ?';
     try {
         const conexion = await ccn();
         const [respuesta] = await conexion.execute(sql, [data.frm5, data.ceap, data.idsolicitudrecursa]);
         const [actualizaEstatusRecursa] = await conexion.execute(sqlestatus, [3, data.idsolicitudrecursa]);
-        console.log(respuesta);
+       
         if(respuesta.affectedRows > 0){
             res.json({data:true});
         }else{

@@ -26,7 +26,6 @@ const datoAlumno = async (numControl) => {
 
 async function createJustificante(req, res, tipo) {
     const just = req;
-    console.log(just);
     alumno = await datoAlumno(just.numControl);
      
     const fecha = new Date();
@@ -43,7 +42,7 @@ async function createJustificante(req, res, tipo) {
         asunto: [
 
             { image: './api/assets/JustificanteSubSec.png', width: 520 },
-            { text: `\n Tierra Blanca. Ver, a ${dia.toLowerCase()} de ${mes} de ${year.toLowerCase()}  \n `, style: Style.normal, alignment: 'center' },
+            { text: `\n Tierra Blanca. Ver, a ${fecha.getDate()} de ${mes} de ${fecha.getFullYear()}  \n `, style: Style.normal, alignment: 'center' },
 
             { text: `JUSTIFICANTE DE INASISTENCIA:`, style: Style.normal, alignment: 'center', bold: true, decoration: 'underline', decorationStyle: 'solid' },
 
@@ -97,7 +96,6 @@ async function createJustificante(req, res, tipo) {
         ]
     }
     
-    console.log(" debes aparecer hijo del maiz palomero   "+ just.tipo);
 
     if (just.tipo == "dias") {
         docDefinition = {

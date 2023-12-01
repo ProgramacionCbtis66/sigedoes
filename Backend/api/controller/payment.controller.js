@@ -92,7 +92,7 @@ const receiveWebhookConstancias = async (req, res) => {
 
 
 const pendienteConstancias = async (req, res) => {
-    console.log(req.body);
+    
     res.send('pendiente');
 }
 
