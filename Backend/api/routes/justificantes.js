@@ -6,8 +6,13 @@ const ccn = require('../connection/connection');
 const verifica = require('./verificaToken');
 
 just.get('/obtenerdatos', verifica, async (req, res) => {
-   
-    const sql = 'select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.correoTutor, j.nombreTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, j.fecha1, j.fecha2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl';
+    var fecha = new Date();
+    var mes = fecha.getMonth() + 1;
+    var periodo1 = mes < 7 ? 1 : 7;
+    var periodo2 = mes < 7 ? 6 : 12;
+    var year = fecha.getFullYear();
+
+    const sql = `select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.nombreTutor, j.correoTutor, j.telTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, j.fecha1, j.fecha2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where MONTH(STR_TO_DATE(j.fecha, '%d/%m/%y')) >= ${periodo1} and MONTH(STR_TO_DATE(j.fecha, '%d/%m/%y')) <= ${periodo2} and YEAR(STR_TO_DATE(j.fecha, '%d/%m/%y')) = ${year}`;
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);
@@ -44,13 +49,13 @@ just.get('/obtenerdatos', verifica, async (req, res) => {
 
 
 just.post('/guardardatos', verifica, async (req, res) => {
-    const {numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correoTutor, nombreTutor, fecha1, fecha2, horas1, horas2} = req.body;
-    const sql = "insert into justificante (numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correoTutor, nombreTutor, fecha1, fecha2, horas1, horas2) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    const { numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, nombreTutor, correoTutor, telTutor, fecha1, fecha2, horas1, horas2 } = req.body;
+    const sql = "insert into justificante (numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, nombreTutor, correoTutor, telTutor, fecha1, fecha2, horas1, horas2) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try {
         const conexion = await ccn();
-        const [resultado] = await conexion.execute(sql, [numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, correoTutor, nombreTutor, fecha1, fecha2, horas1, horas2]);
-    
+        const [resultado] = await conexion.execute(sql, [numControl, motivo, inetutor, cartatutor, documentoreferencia, tipo, fecha, estado, nombreTutor, correoTutor, telTutor, fecha1, fecha2, horas1, horas2]);
+
         if (resultado.affectedRows > 0) {
             res.json({ status: 'Registrado' });
         }
@@ -69,20 +74,20 @@ just.post('/aprobarJustificante', verifica, async (req, res) => {
     const today = new Date(timeElapsed);
     alumno.fechaRespuesta = today.toLocaleDateString();
 
-    
-    
+
+
     const sql1 = 'update justificante set estado = ?, observaciones = ?, fechaRespuesta = ?, idorientacioneducativa = ?  where idjustificante = ?';
-    
-        const conexion = await ccn();
-        const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaRespuesta, alumno.idorientacioneducativa, alumno.idjustificante]);
-        if (resultado[0].affectedRows > 0) {
-            if (alumno.estado == 1) {
-                res.json({ data: true });
-            }
-            else {
-                res.json({ data: false });
-            }
+
+    const conexion = await ccn();
+    const resultado = await conexion.execute(sql1, [alumno.estado, alumno.observaciones, alumno.fechaRespuesta, alumno.idorientacioneducativa, alumno.idjustificante]);
+    if (resultado[0].affectedRows > 0) {
+        if (alumno.estado == 1) {
+            res.json({ data: true });
         }
+        else {
+            res.json({ data: false });
+        }
+    }
 });
 
 just.post('/rechazarJustificante', verifica, async (req, res) => {

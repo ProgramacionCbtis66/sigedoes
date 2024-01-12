@@ -27,8 +27,9 @@ export class JutificantesComponent implements OnInit {
     tipo: 'dias',
     fecha: '',
     estado: 0,
-    correoTutor: "",
     nombreTutor: "",
+    correoTutor: "",
+    telTutor: "",
     horas1: "",
     horas2: "",
     fecha1: "",
@@ -63,7 +64,7 @@ export class JutificantesComponent implements OnInit {
     this.justificante.fecha = today.toLocaleDateString();
     try{
       let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
-      console.log(res); 
+      console.log(res);
       
       // Puedes hacer algo con la respuesta aquí
       if(res.status === 'Registrado') {
