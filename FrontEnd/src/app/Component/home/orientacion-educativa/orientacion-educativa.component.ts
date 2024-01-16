@@ -47,6 +47,7 @@ export class OrientacionEducativaComponent implements OnInit {
       let res = await firstValueFrom(this.just.ListaJustificantes());
       if (res.data.length > 0) {
         this.justificantes = res.data;
+        this.justificanteFiltro = this.justificantes;
       }
       else {
         this.justificantes = [];
@@ -113,19 +114,15 @@ export class OrientacionEducativaComponent implements OnInit {
 
   filtrar() {
     this.ngOnInit();
-    const fecha = <HTMLInputElement>document.getElementById('filtroFecha');
-    console.log(fecha.value);
-    if (fecha.value != '') {
-      let dia = String(fecha.value).substring(8, 10);
-      let mes = String(fecha.value).substring(5, 7);
-      let año = String(fecha.value).substring(0, 4);
-
-      let fechaFormateada = dia + '/' + mes + '/' + año;
-      this.justificantes=this.justificantes.filter((element: any) => element.fecha == fechaFormateada);
-      fecha.value = '';
-    }
-    else {
-      this.obtenerDatos();
+    const filtroEstado = <HTMLSelectElement>document.getElementById("filtro");
+    if(filtroEstado.value == "0"){
+      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 0);
+    } else if(filtroEstado.value == "1"){
+      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 1);
+    } else if(filtroEstado.value == "2"){
+      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 2);
+    } else {
+      this.justificanteFiltro = this.justificantes;
     }
   }
 }

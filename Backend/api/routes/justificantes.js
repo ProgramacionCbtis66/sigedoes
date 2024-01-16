@@ -12,7 +12,7 @@ just.get('/obtenerdatos', verifica, async (req, res) => {
     var periodo2 = mes < 7 ? 6 : 12;
     var year = fecha.getFullYear();
 
-    const sql = `select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.nombreTutor, j.correoTutor, j.telTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, j.fecha1, j.fecha2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where MONTH(STR_TO_DATE(j.fecha, '%d/%m/%y')) >= ${periodo1} and MONTH(STR_TO_DATE(j.fecha, '%d/%m/%y')) <= ${periodo2} and YEAR(STR_TO_DATE(j.fecha, '%d/%m/%y')) = ${year}`;
+    const sql = `select u.nombre, u.apellidoP, u.apellidoM, u.numControl, u.foto, j.idjustificante, j.motivo, j.periodo, j.inetutor, j.cartatutor, j.documentoreferencia, j.tipo, j.fecha, a.especialidad, a.grado, a.grupo, a.turno, j.nombreTutor, j.correoTutor, j.telTutor, j.estado, j.observaciones, j.fechaRespuesta, j.idjustificante, j.horas1, j.horas2, j.fecha1, j.fecha2, a.correo from justificante as j join alumno as a on j.numControl = a.numControl join usuario as u on a.numControl = u.numControl where MONTH(STR_TO_DATE(j.fecha, '%d/%m/%Y')) >= ${periodo1} and MONTH(STR_TO_DATE(j.fecha, '%d/%m/%Y')) <= ${periodo2} and YEAR(STR_TO_DATE(j.fecha, '%d/%m/%Y')) = ${year}`;
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql);

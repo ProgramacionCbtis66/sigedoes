@@ -20,8 +20,12 @@
                             <div class="col-6"></div>
                             <div class="col-6 d-flex justify-content-end">
                                 <div class="d-flex pe-2" role="search">
-                                    <input class="form-control me-2" type="date" placeholder="Busqueda por fecha"
-                                        aria-label="Search" id="filtroFecha">
+                                    <select class="form-select me-2" type="" id="filtro">
+                                        <option value="">-</option>
+                                        <option value="0">Por Autorizar</option>
+                                        <option value="2">Rechazado</option>
+                                        <option value="1">Autorizado</option>
+                                    </select>
                                     <button class="btn btn-outline-success" type="submit" (click)="filtrar()">Filtrar</button>
                                 </div>
                                 <button type="button" class="btn btn-info" (click)="obtenerDatos()">Cargar
@@ -37,13 +41,13 @@
                                     <th class="text-md-2">Especialidad</th>
                                     <th class="text-md-2">Grado</th>
                                     <th class="text-md-2">Turno</th>
-                                    <th class="text-md-2">Justificante por:</th>
+                                    <th class="text-md-2">Justificante Por</th>
                                     <th class="text-md-2">Ver Info.</th>
                                     <th class="text-md-2">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let solicitud of justificantes; index as i">
+                                <tr *ngFor="let solicitud of justificanteFiltro; index as i">
                                     <td class="text-center"><img [src]="solicitud.foto" alt="" width="50"></td>
                                     <td class="text-md-2">{{solicitud.numControl}}</td>
                                     <td class="text-md-2">{{solicitud.nombre}} {{solicitud.apellidoP}}
