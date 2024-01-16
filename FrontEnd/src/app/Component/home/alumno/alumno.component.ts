@@ -65,7 +65,15 @@ export class AlumnoComponent implements OnInit {
    
 
   salir(): void {
-    if (!this.auth.isAuth()) { this.nav.salir(); }
+    if (!this.auth.isAuth()) { 
+      let sino = confirm('¿Desea Salir?');
+      
+      if (sino) {
+        this.nav.salir();
+      }else{
+        this.auth.continuar();
+      }
+     }
   }
 
 

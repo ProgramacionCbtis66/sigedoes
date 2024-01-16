@@ -68,6 +68,15 @@ export class AuthService {
     return decode(localStorage.getItem("color"));
   }
 
+  public continuar(): void {
+    let tokedecode = this.decodifica();
+    tokedecode.exp += 1800;
+    let tokecode = this.jwt.decodeToken(tokedecode);
+    localStorage.setItem("color", tokecode);
+  }
+
+
+
   public tokeExpired(): boolean {
     const tokenDecode = this.decodifica();
     var tiempo = (tokenDecode.exp - Date.now() / 1000);
@@ -79,12 +88,6 @@ export class AuthService {
     }
   }
 
-  public userToken(token: any, kill?: string): void {
-    if (kill) {
-      localStorage.clear();
-    } else {
-      localStorage.setItem('token', token);
-    }
-  }
+
 
 }
