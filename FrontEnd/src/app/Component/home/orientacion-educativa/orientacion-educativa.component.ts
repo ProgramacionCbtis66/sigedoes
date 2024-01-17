@@ -35,9 +35,15 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.auth.isAuth()) {
-      this.nav.salir();
-    }
+    if (!this.auth.isAuth()) { 
+      let sino = confirm('¿Desea Salir?');
+      
+      if (sino) {
+        this.nav.salir();
+      }else{
+        this.auth.continuar();
+      }
+     }
   }
 
   async obtenerDatos() {
@@ -47,7 +53,7 @@ export class OrientacionEducativaComponent implements OnInit {
       let res = await firstValueFrom(this.just.ListaJustificantes());
       if (res.data.length > 0) {
         this.justificantes = res.data;
-        this.justificanteFiltro = this.justificantes;
+        this.filtrar();
       }
       else {
         this.justificantes = [];
@@ -115,14 +121,6 @@ export class OrientacionEducativaComponent implements OnInit {
   filtrar() {
     this.ngOnInit();
     const filtroEstado = <HTMLSelectElement>document.getElementById("filtro");
-    if(filtroEstado.value == "0"){
-      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 0);
-    } else if(filtroEstado.value == "1"){
-      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 1);
-    } else if(filtroEstado.value == "2"){
-      this.justificanteFiltro = this.justificantes.filter((jf: any) => jf.estado == 2);
-    } else {
-      this.justificanteFiltro = this.justificantes;
-    }
+    this.justificanteFiltro = (filtroEstado.value === "0" || filtroEstado.value === "1" || filtroEstado.value === "2") ? this.justificantes.filter((jf: any) => jf.estado == parseInt(filtroEstado.value)) : this.justificantes;
   }
 }
