@@ -476,6 +476,7 @@ export class AdministrativoComponent implements OnInit {
   solicitudesGlobales: any = [];
   filtroGlobales: any = [];
   filtroSolicitudesGlobales: any = [];
+  globFil: any = [];
 
   async getSolicitudesGlobales() {
     this.ngOnInit();
@@ -485,7 +486,17 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesGlobales = [];
     } else {
       this.solicitudesGlobales = res.ok;
-      this.filtroSolicitudesGlobales=this.solicitudesGlobales;
+      
+      this.globFil[0] = [...new Set(this.solicitudesGlobales.map((gd: any) => gd.grado))];
+      this.globFil[1] = [...new Set(this.solicitudesGlobales.map((gp: any) => gp.grupo))];
+      this.globFil[2] = [...new Set(this.solicitudesGlobales.map((esp: any) => esp.especialidad))];
+      this.globFil[3] = [...new Set(this.solicitudesGlobales.map((tn: any) => tn.turno))];
+
+      this.globFil[0] = this.globFil[0].sort();
+      this.globFil[1] = this.globFil[1].sort();
+      this.globFil[2] = this.globFil[2].sort();
+
+      this.filtroSolicitudGlobales();
     }
   }
 
@@ -560,33 +571,29 @@ export class AdministrativoComponent implements OnInit {
 
   filtroSolicitudGlobales() {
     this.ngOnInit();
-    var numControl = this.filtroGlobales.alumnoNumControl
-    var gardo = this.filtroGlobales.grado
-    var grupo = this.filtroGlobales.grupo
-    var especialidad = this.filtroGlobales.especialidad
-    var turno = this.filtroGlobales.turno
+    var numControl = this.filtroGlobales.alumnoNumControl;
+    var grado = this.filtroGlobales.grado;
+    var grupo = this.filtroGlobales.grupo;
+    var especialidad = this.filtroGlobales.especialidad;
+    var turno = this.filtroGlobales.turno;
 
-    if (numControl != "") {
-      this.filtroSolicitudesGlobales = this.solicitudesGlobales.filter((item: any) => item.numControl == numControl);
-    } else {
-      if (gardo != "") {
-        this.filtroSolicitudesGlobales = this.solicitudesGlobales.filter((item: any) => item.grado == gardo);
-      } 
-      if(grupo != "") {
-        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grupo == grupo);
-      }
-      if(especialidad != "") {
-        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.especialidad == especialidad);
-      }
-      if(turno != "") {
-        this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.turno == turno);
-      }
+    this.filtroSolicitudesGlobales = this.solicitudesGlobales;
+
+    if(numControl != "" && numControl != undefined) {
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.numControl == numControl);
     }
-
-
-
-
-
+    if (grado != "-" && grado != undefined) {
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grado == grado);
+    }
+    if(grupo != "-" && grupo != undefined) {
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grupo == grupo);
+    }
+    if(especialidad != "-" && especialidad != undefined) {
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.especialidad == especialidad);
+    }
+    if(turno != "-" && turno != undefined) {
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.turno == turno);
+    }
   }
 
   /*  Recursas */
@@ -594,6 +601,7 @@ export class AdministrativoComponent implements OnInit {
   solicitudesRecursas: any = [];
   filtroRecusas: any = [];
   filtroSolicitudesRecusas: any = [];
+  recurFil: any = [];
 
   async getSolicitudesRecursas() {
     this.ngOnInit();
@@ -602,7 +610,17 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesRecursas = [];
     } else {
       this.solicitudesRecursas = res.ok;
-      this.filtroSolicitudesRecusas=this.solicitudesRecursas;
+      
+      this.recurFil[0] = [...new Set(this.solicitudesRecursas.map((gd: any) => gd.grado))];
+      this.recurFil[1] = [...new Set(this.solicitudesRecursas.map((gp: any) => gp.grupo))];
+      this.recurFil[2] = [...new Set(this.solicitudesRecursas.map((esp: any) => esp.especialidad))];
+      this.recurFil[3] = [...new Set(this.solicitudesRecursas.map((tn: any) => tn.turno))];
+
+      this.recurFil[0] = this.recurFil[0].sort();
+      this.recurFil[1] = this.recurFil[1].sort();
+      this.recurFil[2] = this.recurFil[2].sort();
+
+      this.filtroSolicitudRecursas();
     }
   }
 
@@ -673,27 +691,28 @@ export class AdministrativoComponent implements OnInit {
   
   filtroSolicitudRecursas() {
     this.ngOnInit();
-    var numControl = this.filtroRecusas.alumnoNumControl
-    var gardo = this.filtroRecusas.grado
-    var grupo = this.filtroRecusas.grupo
-    var especialidad = this.filtroRecusas.especialidad
-    var turno = this.filtroRecusas.turno
+    var numControl = this.filtroRecusas.alumnoNumControl;
+    var grado = this.filtroRecusas.grado;
+    var grupo = this.filtroRecusas.grupo;
+    var especialidad = this.filtroRecusas.especialidad;
+    var turno = this.filtroRecusas.turno;
 
-    if (numControl != "") {
-      this.filtroSolicitudesRecusas = this.solicitudesRecursas.filter((item: any) => item.numControl == numControl);
-    } else {
-      if (gardo != "") {
-        this.filtroSolicitudesRecusas = this.solicitudesRecursas.filter((item: any) => item.grado == gardo);
-      } 
-      if(grupo != "") {
-        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grupo == grupo);
-      }
-      if(especialidad != "") {
-        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.especialidad == especialidad);
-      }
-      if(turno != "") {
-        this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.turno == turno);
-      }
+    this.filtroSolicitudesRecusas = this.solicitudesRecursas;
+
+    if(numControl != "" && numControl != undefined) {
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.numControl == numControl);
+    }
+    if (grado != "-" && grado != undefined) {
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grado == grado);
+    }
+    if(grupo != "-" && grupo != undefined) {
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grupo == grupo);
+    }
+    if(especialidad != "-" && especialidad != undefined) {
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.especialidad == especialidad);
+    }
+    if(turno != "-" && turno != undefined) {
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.turno == turno);
     }
   }
 
