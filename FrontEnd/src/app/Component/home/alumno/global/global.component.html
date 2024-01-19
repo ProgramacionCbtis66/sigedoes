@@ -25,7 +25,7 @@
                             <button type="button" class="btn btn-outline-dark" (click)="solicitarGlobal(dato)" *ngIf="dato.estado == 0">Solicitar</button>
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 1" disabled>En proceso de autorización</button>
                             <!--  boton cargar comprobantes -->
-                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Cargar Comprobante</button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Informacion de Pago</button>
                             <!-- pediente de confirmacion de pago -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->
@@ -89,7 +89,7 @@
 
                                             <div class="container p-md-0 mb-2">
                                                 <div class="row text-center">
-                                                    <h5>PAGO HACIENDA</h5>
+                                                    <h5>PAGO E5CINCO</h5>
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">
@@ -111,7 +111,31 @@
                                 </div>
                             </div>
                         </div>
+                        
+                       
                     </div>
+                    <!--Parte Baja-->
+                    <div class="card">
+                                <table class="table table-responsive table-bordered justify-content-center">
+                                    <thead>
+                                        <tr class="justify-content-center">
+                                            <th>No. Cuenta Banorte</th>
+                                            <th>Beneficiario</th>
+                                            <th>Pago de Derechos e5cinco</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="justify-content-center">
+                                            <td>1187817418</td>
+                                            <td>CEAP del CBTIS 66</td>
+                                            <td>
+                                                <a href="https://www.sep.gob.mx/work/appsite/e5_ene12/dpa/hojaayuda.html?institucion=dgeti"><Button type="button" class="btn btn-info">Informacion de Pago e5cinco</Button></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                    </div>
+                    <!--botones-->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="enviarPago()">Enviar Pago</button>
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
