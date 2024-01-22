@@ -66,6 +66,7 @@ export class AdministrativoComponent implements OnInit {
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
   }
+  
   async cargaSoliciudAceeso() {
     this.ngOnInit();
     try {
