@@ -711,17 +711,15 @@
                           <td *ngIf="dato.estado==1">
                             <button type="button" class="btn btn-primary btn-sm me-2"
                               (click)="autorizarGlobal($event, dato)" id="Autorizado">Autorizar</button>
-                            <button type="button" class="btn btn-primary btn-sm" (click)="autorizarGlobal($event, dato)"
-                              id="Rechazado">Rechazar</button>
+                            <button type="button" class="btn btn-primary btn-sm ms-2" (click)="autorizarGlobal($event, dato)" id="Rechazado">Rechazar</button>
                           </td>
                           <td *ngIf="dato.estado==2">
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-primary btn-lg"
-                              (click)="autorizarPagoGlobal($event, dato)" id="Autorizado">Autorizar</button>
-                            <button type="button" class="btn btn-danger btn-lg"
-                              (click)="autorizarPagoGlobal($event, dato)" id="Rechazado">Rechazar</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#versolicitud"
+                              (click)="autorizarPagoGlobal($event, dato)" id="Autorizado">Revisar Comprabantes</button>
+                              
                           </td>
                           <td *ngIf="dato.estado==4">
                             Autorizado para Examen
@@ -858,10 +856,8 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-primary btn-lg"
-                              (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Autorizar</button>
-                            <button type="button" class="btn btn-danger btn-lg"
-                              (click)="autorizarPagoRecursa($event, dato)" id="Rechazado">Rechazar</button>
+                            <button type="button "  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado==3"
+                              (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Revisar comprobantes</button>
                           </td>
                           <td *ngIf="dato.estado==4">
                             Autorizado para Examen

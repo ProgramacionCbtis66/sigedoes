@@ -72,10 +72,10 @@ export class GlobalComponent implements OnInit {
   activarInput(event: any) {
     this.ngOnInit()
     const control = event.target.id;
-    if (control == "fileinput1") {
+    if (control == "img1") {
       this.fileInput1.nativeElement.click();
     }
-    if (control == "fileinput2") {
+    if (control == "img2") {
       this.fileInput2.nativeElement.click();
     }
 
@@ -89,7 +89,7 @@ export class GlobalComponent implements OnInit {
 
       const foto64 = imagenBase64.base;
 
-      this.Base64.redimensionarImagen(foto64, 150, 150).then((imagenRedimensionada: any) => {
+      this.Base64.redimensionarImagen(foto64, 200, 200).then((imagenRedimensionada: any) => {
         if (control == "foto1") {
           this.datoPago.ceap = imagenRedimensionada.base;
         }

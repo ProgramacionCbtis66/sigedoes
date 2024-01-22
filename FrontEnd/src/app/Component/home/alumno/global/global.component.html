@@ -68,16 +68,15 @@
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">
-                                                        <div class="col-8">
-                                                            <input #fileInput1 type="file" 
-                                                                class="form-control form-control-sm" capture="camera"
-                                                                accept="image/*" id="foto1" (change)="foto64($event)" hidden>
-                                                            <a class="pe-auto" (click)="activarInput($event)">
-                                                                <button  type="button" class="btn btn-warning">
-                                                                    CARGAR COMPROBANTE
-                                                                </button>
-                                                            </a>
-                                                        </div>
+                                                        <input #fileInput1 type="file" 
+                                                            class="form-control form-control-sm" capture="camera"
+                                                            accept="image/*" id="foto1" (change)="foto64($event)" hidden>
+                                                        <a class="pe-auto" (click)="activarInput($event)">
+                                                            <button id="img1" type="button" class="btn btn-warning">
+                                                                CARGAR COMPROBANTE
+                                                            </button>
+                                                        </a>
+                                                        <img src="{{datoPago.ceap}}" class="mt-2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,16 +92,15 @@
                                                 </div>
                                                 <div class="container py-2">
                                                     <div class="row d-flex justify-content-center">
-                                                        <div class="col-8">
-                                                            <input #fileInput2 type="file"
-                                                                class="form-control form-control-sm" capture="camera"
-                                                                accept="" id="foto2" (change)="foto64($event)" hidden>
-                                                            <a class="pe-auto" (click)="activarInput($event)">
-                                                                <button  type="button" class="btn btn-warning">
-                                                                    CARGAR COMPROBANTE
-                                                                </button>
-                                                            </a>
-                                                        </div>
+                                                        <input #fileInput2 type="file"
+                                                            class="form-control form-control-sm" capture="camera"
+                                                            accept="image/*" id="foto2" (change)="foto64($event)" hidden>
+                                                        <a class="pe-auto" (click)="activarInput($event)">
+                                                            <button id="img2" type="button" class="btn btn-warning">
+                                                                CARGAR COMPROBANTE
+                                                            </button>
+                                                        </a>
+                                                        <img src="{{datoPago.frm5}}" class="mt-2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +110,6 @@
                             </div>
                         </div>
                         
-                       
                     </div>
                     <!--Parte Baja-->
                     <div class="card">
@@ -137,7 +134,7 @@
                     </div>
                     <!--botones-->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="enviarPago()">Enviar Pago</button>
+                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="enviarPago()">Enviar</button>
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
