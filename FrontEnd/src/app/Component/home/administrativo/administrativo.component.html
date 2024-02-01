@@ -717,7 +717,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#versolicitud"
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#"
                               (click)="autorizarPagoGlobal($event, dato)" id="Autorizado">Revisar Comprabantes</button>
                               
                           </td>
@@ -856,8 +856,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button "  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado==3"
-                              (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Revisar comprobantes</button>
+                            <button type="button "  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalRecursas" *ngIf="dato.estado==3" (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Revisar comprobantes</button>
                           </td>
                           <td *ngIf="dato.estado==4">
                             Autorizado para Examen
@@ -1138,14 +1137,13 @@
               <div class="col-lg-2">
               </div>
               <div class="col-lg-8 d-flex shadow p-3 mb-3 bg-body-tertiary c1 bg-gradient">
-                <table class="table shadow p-3 mb-2 bg-body-tertiary  mb-2">
+                <table class="table shadow p-3 mb-2 bg-body-tertiary mb-2">
 
                   <tr>
-                    <th class=" c2">
+                    <th class="c2">
                       <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"
-                          [(ngModel)]="asignarRecursas.lugar">
-                        <label for="floatingInput">Salon </label>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="asignarRecursas.lugar">
+                        <label for="floatingInput">Salon</label>
                       </div>
                     </th>
                   </tr>

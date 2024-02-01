@@ -532,8 +532,9 @@ export class AdministrativoComponent implements OnInit {
 
   async autorizarPagoGlobal(event: any, dato: any) {
     const control = event.target.id;
+    var autorizado;
     if (control == "Autorizado") {
-      var autorizado = {
+      autorizado = {
         estado: 4,
         idglobales: dato.idgloables,
          
