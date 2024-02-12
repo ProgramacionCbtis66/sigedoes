@@ -717,8 +717,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#versolicitud"
-                              (click)="autorizarPagoGlobal($event, dato)" id="Autorizado">Revisar Comprabantes</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#versolicitud" (click)="dato.estado = dato;" >Revisar Comprabantes</button>
                               
                           </td>
                           <td *ngIf="dato.estado==4">

@@ -97,7 +97,7 @@ export class OrientacionEducativaComponent implements OnInit {
   }
 
   async rechazarJustificante(op: number) {
-    this.ngOnInit()
+    this.ngOnInit();
     try {
       this.alumno.estado = op;
       this.alumno.asunto = "Envio de Notificación de observaciones del Justificante";
