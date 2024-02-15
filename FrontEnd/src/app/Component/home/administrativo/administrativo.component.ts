@@ -581,7 +581,7 @@ export class AdministrativoComponent implements OnInit {
     this.filtroSolicitudesGlobales = this.solicitudesGlobales;
 
     if(numControl != "" && numControl != undefined) {
-      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.numControl == numControl);
+      this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.alumnoNumControl == numControl);
     }
     if (grado != "-" && grado != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grado == grado);
@@ -701,7 +701,7 @@ export class AdministrativoComponent implements OnInit {
     this.filtroSolicitudesRecusas = this.solicitudesRecursas;
 
     if(numControl != "" && numControl != undefined) {
-      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.numControl == numControl);
+      this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.alumnoNumControl == numControl);
     }
     if (grado != "-" && grado != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grado == grado);
