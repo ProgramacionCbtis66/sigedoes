@@ -104,10 +104,10 @@
 }
 
 .center-y{
-  width: 100%;
+  height: 100%;
   
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -171,9 +171,9 @@
   padding: 10px;
   position: absolute;
   z-index: 1;
-  top: 125%;
+  top: 80%;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -150px;
   opacity: 0;
   transition: opacity 0.3s;
 }
