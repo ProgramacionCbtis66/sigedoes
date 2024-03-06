@@ -640,6 +640,7 @@ export class AdministrativoComponent implements OnInit {
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
+        console.log(res);
         if (res.ok == "ok") {
           if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
           if (control == 'Rechazada') Notiflix.Notify.info("Solicitud Rechazada");

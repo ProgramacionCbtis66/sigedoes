@@ -658,8 +658,8 @@
                     <div class="input-group pt-2">
                       <div class="input-group-text">Especialidad :</div>
                       <select class="form-select" [(ngModel)]="filtroGlobales.especialidad">
-                        <option value="-" selected>-</option>
-                        <option *ngFor="let esp of globFil[2]" value="{{ esp }}">{{ esp }}</option>
+                        <option value="-">-</option>
+                        <option *ngFor="let esp of globFil[2]" (value)="esp">{{ esp }}</option>
                       </select>
                     </div>
                   </div>
@@ -673,13 +673,15 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-2">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
-                      (click)="filtroSolicitudGlobales()">Filtrar</button>
-                  </div>
-                  <div class="col-2 text-end">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
-                      (click)="getSolicitudesGlobales()">Cargar Solicitudes</button>
+                  <div class="col-4 d-flex flex-wrap">
+                    <div class="col">
+                      <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
+                        (click)="filtroSolicitudGlobales()">Filtrar</button>
+                    </div>
+                    <div class="col text-end">
+                      <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
+                        (click)="getSolicitudesGlobales()">Cargar Solicitudes</button>
+                    </div>
                   </div>
                 </div>
                 <!-- lista de solicitudes de examen global -->
@@ -717,7 +719,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#versolicitud" (click)="dato.estado = dato;" >Revisar Comprabantes</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#estate3">Revisar Comprabantes</button>
                               
                           </td>
                           <td *ngIf="dato.estado==4">
@@ -809,14 +811,16 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-2">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
-                      (click)="filtroSolicitudRecursas()">Filtrar</button>
-                  </div>
-                  <div class="col-2 text-end">
-                    <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
-                      (click)="getSolicitudesRecursas()">Cargar
-                      Solicitudes</button>
+                  <div class="col-4 d-flex flex-wrap">
+                    <div class="col">
+                      <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
+                        (click)="filtroSolicitudRecursas()">Filtrar</button>
+                    </div>
+                    <div class="col text-end">
+                      <button class="badge bg-sigese text-wrap ms-auto mt-2" style="height: 2rem;"
+                        (click)="getSolicitudesRecursas()">Cargar
+                        Solicitudes</button>
+                    </div>
                   </div>
                 </div>
                 <!-- lista de solicitudes de Recursa -->
@@ -846,17 +850,17 @@
                             Sin solicitar
                           </td>
                           <td *ngIf="dato.estado==1">
-                            <button type="button" class="btn btn-primary btn-sm me-2 btn btn-outline-warning" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                               (click)="autorizarRecursa($event, dato)" id="Autorizado">Autorizar</button>
-                            <button type="button" class="btn btn-primary btn-sm"
+                            <button type="button" class="btn btn-primary btn-sm me-2"
                               (click)="autorizarRecursa($event, dato)" id="Rechazado">Rechazar</button>
                           </td>
                           <td *ngIf="dato.estado==2">
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button "  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado==3"
-                              (click)="autorizarPagoRecursa($event, dato)" id="Autorizado">Revisar comprobantes</button>
+                            <button type="button"  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#estate3" *ngIf="dato.estado==3"
+                               id="Autorizado">Revisar comprobantes</button>
                           </td>
                           <td *ngIf="dato.estado==4">
                             Autorizado para Examen
@@ -1193,3 +1197,59 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal Para estado 3 De Recursa y Global -->
+<div class="modal fade" id="estate3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="px-3 pt-2 fw-lighter">Verificacion de comprobantes</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12 bg-light">
+          <div class="h5 fw-lighter p-2">Comprobantes enviados</div>
+        </div>
+        <div class="row justify-content-center">
+          <!--lado izquierdo-->
+          <div class="col-sm-12 justify-content-center">
+            <div class="row">
+              <div class="col-md-4 text-center">
+                  <div class="card">
+                      <div class="card-header">
+                          <p class="fs-6 fw-lighter">Pago CEAP</p>
+                      </div>
+                      <div class="card-body">
+                          <img [src]="alumno.inetutor" class="img-fluid">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4 text-center">
+                  <div class="card">
+                      <div class="card-header">
+                          <p class="fs-6 fw-lighter">Pago E5CINCO</p>
+                      </div>
+                      <div class="card-body">
+                          <img [src]="alumno.documentoreferencia" class="img-fluid">
+                      </div>
+                  </div>
+              </div>
+            </div>
+          <!--lado derecho-->
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Generar constancia
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
