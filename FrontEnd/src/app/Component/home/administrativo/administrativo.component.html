@@ -719,7 +719,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#estate3">Revisar Comprabantes</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#estate3" (click)="verGlobalComprobante(dato.idglobales)">Revisar Comprabantes</button>
                               
                           </td>
                           <td *ngIf="dato.estado==4">
@@ -859,8 +859,7 @@
                             En proceso de Pago
                           </td>
                           <td *ngIf="dato.estado==3">
-                            <button type="button"  class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#estate3" *ngIf="dato.estado==3"
-                               id="Autorizado">Revisar comprobantes</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#estate3" (click)="verRecursaComprobante(dato.idrecursa)">Revisar Comprabantes</button>
                           </td>
                           <td *ngIf="dato.estado==4">
                             Autorizado para Examen
@@ -1222,7 +1221,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                           <p class="fs-6 fw-lighter">Pago CEAP</p>
                       </div>
                       <div class="card-body">
-                          <img [src]="alumno.inetutor" class="img-fluid">
+                          <img [src]="selectGlobalRecursa.imgCeap" class="img-fluid">
                       </div>
                   </div>
               </div>
@@ -1232,7 +1231,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                           <p class="fs-6 fw-lighter">Pago E5CINCO</p>
                       </div>
                       <div class="card-body">
-                          <img [src]="alumno.documentoreferencia" class="img-fluid">
+                          <img [src]="selectGlobalRecursa.imgFrm5" class="img-fluid">
                       </div>
                   </div>
               </div>
@@ -1245,8 +1244,8 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cerrar
         </button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-          Generar constancia
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="aprobarGlobalRecursaType()">
+          Aprobar
         </button>
       </div>
     </div>

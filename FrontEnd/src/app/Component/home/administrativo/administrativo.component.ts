@@ -50,6 +50,11 @@ export class AdministrativoComponent implements OnInit {
   verificado = false;
   numero: string = "";
 
+  allGlobalData = [];
+  allRecursaData = [];
+
+  selectGlobalRecursa = {imgCeap: "", imgFrm5: "", id: "", type: ""};
+
   constructor(protected userServicio: UsuarioService,
     protected nav: NavegacionService,
     protected email: SendEmailService,
@@ -423,7 +428,6 @@ export class AdministrativoComponent implements OnInit {
   subirRegistroRecursa() {
     this.ngOnInit();
     if (this.asignarRecursas.lugar != undefined && this.asignarRecursas.hora != undefined && this.asignarRecursas.fecha != undefined && this.asignarRecursas.docenteDni != undefined && this.asignarRecursas.lugar != '' && this.asignarRecursas.hora != '' && this.asignarRecursas.fecha != '') {
-      console.log(this.asignarRecursas);
       this.admin.guardarAsignacionRecursa(this.asignarRecursas).subscribe((res) => {
         if (res.ok == 'ok') {
           Notiflix.Notify.info("Recursa Acreditado");
@@ -483,6 +487,7 @@ export class AdministrativoComponent implements OnInit {
     this.ngOnInit();
 
     const res = await firstValueFrom(this.admin.getSolicitudesGlobales());
+    await this.traerGlobalComprobante();
     if (res.ok == "vacio") {
       this.solicitudesGlobales = [];
     } else {
@@ -516,7 +521,6 @@ export class AdministrativoComponent implements OnInit {
           docenteDni: this.auth.decodifica().numControl,
         }
       }
-      console.log(autorizado)
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarGlobal(autorizado));
         if (res.ok == "ok") {
@@ -527,6 +531,58 @@ export class AdministrativoComponent implements OnInit {
           Notiflix.Notify.failure("Ha Ocurrido Un Error");
         }
       }
+    }
+  }
+
+  async aprobarGlobalRecursaType(){
+    if(this.selectGlobalRecursa.type == "global"){
+      await this.aprobarGlobalComprobante();
+    } else if(this.selectGlobalRecursa.type == "recursa"){
+      await this.aprobarRecursaComprobante();
+    }
+  }
+
+  async traerGlobalComprobante(){
+    const res = await firstValueFrom(this.admin.traerGlobalDatos());
+    this.allGlobalData = res.ok;
+  }
+
+  verGlobalComprobante(numGlobal: any){
+    var res = this.allGlobalData.filter((data: any) => Number(data.id) == numGlobal);
+    this.selectGlobalRecursa = res[0];
+    this.selectGlobalRecursa.type = "global";
+  }
+
+  async aprobarGlobalComprobante(){
+    var res = await firstValueFrom(this.admin.aprovedGlobalComprobante(this.selectGlobalRecursa));
+    if(res.ok == "ok"){
+      Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+      this.getSolicitudesGlobales();
+    } else {
+      Notiflix.Notify.failure("Ocurrio un Error al Aprobar");
+      this.getSolicitudesGlobales();
+    }
+  }
+
+  async traerRecursaComprobante(){
+    const res = await firstValueFrom(this.admin.traerRecursaDatos());
+    this.allRecursaData = res.ok;
+  }
+
+  verRecursaComprobante(numRecursa: any){
+    var res = this.allRecursaData.filter((data: any) => Number(data.id) == numRecursa);
+    this.selectGlobalRecursa = res[0];
+    this.selectGlobalRecursa.type = "recursa";
+  }
+
+  async aprobarRecursaComprobante(){
+    var res = await firstValueFrom(this.admin.aprovedRecursaComprobante(this.selectGlobalRecursa));
+    if(res.ok == "ok"){
+      Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+      this.getSolicitudesRecursas();
+    } else {
+      Notiflix.Notify.failure("Ocurrio un Error al Aprobar");
+      this.getSolicitudesRecursas();
     }
   }
 
@@ -607,6 +663,7 @@ export class AdministrativoComponent implements OnInit {
   async getSolicitudesRecursas() {
     this.ngOnInit();
     const res = await firstValueFrom(this.admin.getSolicitudesRecursas());
+    await this.traerRecursaComprobante();
     if (res.ok == "vacio") {
       this.solicitudesRecursas = [];
     } else {
@@ -640,7 +697,6 @@ export class AdministrativoComponent implements OnInit {
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
         const res = await firstValueFrom(this.admin.autorizarRecursa(autorizado));
-        console.log(res);
         if (res.ok == "ok") {
           if (control == 'Autorizada') Notiflix.Notify.info("Solicitud Autorizada");
           if (control == 'Rechazada') Notiflix.Notify.info("Solicitud Rechazada");

@@ -494,6 +494,78 @@ administrador.post('/autorizarGlobal', verifica, async(req, res) => {
     }
 });
 
+administrador.get('/traerGlobalData', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const sql = `SELECT idsolicitudglobal AS idSoliGlobal, numControl AS numCtrl, idglobales AS id, estado AS state, frm5 AS imgFrm5, ceap AS imgCeap, idasiglobd AS idAsigBd FROM solicitudglobal`;
+    try{
+        const [row] = await conexion.execute(sql);
+        if(row.length > 0){
+            for(var i = 0; i <= row.length - 1; i++){
+                if(row[i].imgCeap != null && row[i].imgFrm5 != null){
+                    row[i].imgCeap = row[i].imgCeap = row[i].imgCeap.toString('utf-8');
+                    row[i].imgFrm5 = row[i].imgFrm5 = row[i].imgFrm5.toString('utf-8');
+                }
+            }
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    } catch(error){
+        console.log(error);
+    }
+});
+
+administrador.post('/aprobarGlobalComprobar', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`UPDATE globales SET estado =? WHERE (idglobales = ?)`, [4, data.id]);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        } else {
+            res.send({err:"err"});
+        }
+    } catch(error){
+        console.log(error);
+    }
+});
+
+administrador.get('/traerRecursaData', verifica, async(req, res) => {
+    const conexion = await ccn();
+    const sql = `SELECT idsolicitudrecursa AS idSoliRecursa, numControl AS numCtrl, idrecursas AS id, estado AS state, frm5 AS imgFrm5, ceap AS imgCeap, idasigrecursa AS idAsigRc FROM solicitudrecursa`;
+    try{
+        const [row] = await conexion.execute(sql);
+        if(row.length > 0){
+            for(var i = 0; i <= row.length - 1; i++){
+                if(row[i].imgCeap != null && row[i].imgFrm5 != null){
+                    row[i].imgCeap = row[i].imgCeap = row[i].imgCeap.toString('utf-8');
+                    row[i].imgFrm5 = row[i].imgFrm5 = row[i].imgFrm5.toString('utf-8');
+                }
+            }
+            res.send({ok:row});
+        } else if(row.length == 0){
+            res.send({ok:"vacio"});
+        }
+    } catch(error){
+        console.log(error);
+    }
+});
+
+administrador.post('/aprobarRecursaComprobar', verifica, async(req, res) => {
+    const data = req.body;
+    const conexion = await ccn();
+    try{
+        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idrecursa = ?)`, [4, data.id]);
+        if(row.affectedRows > 0){
+            res.send({ok:"ok"});
+        } else {
+            res.send({err:"err"});
+        }
+    } catch(error){
+        console.log(error);
+    }
+});
+
 administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();

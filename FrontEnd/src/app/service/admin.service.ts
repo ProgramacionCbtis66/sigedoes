@@ -108,6 +108,18 @@ export class AdminService {
   autorizarGlobal(autorizado:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/autorizarGlobal`,autorizado, this.usr);
   }
+  traerGlobalDatos():Observable<any>{
+    return this.http.get(`${this.URL}/admin/traerGlobalData`, this.usr);
+  }
+  aprovedGlobalComprobante(dato: any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/aprobarGlobalComprobar`, dato, this.usr);
+  }
+  traerRecursaDatos():Observable<any>{
+    return this.http.get(`${this.URL}/admin/traerRecursaData`, this.usr);
+  }
+  aprovedRecursaComprobante(dato: any):Observable<any>{
+    return this.http.post(`${this.URL}/admin/aprobarRecursaComprobar`, dato, this.usr);
+  }
   autorizarRecursa(autorizado:any):Observable<any>{
     return this.http.post(`${this.URL}/admin/autorizarRecursa`,autorizado, this.usr);
   }
