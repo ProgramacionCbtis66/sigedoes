@@ -64,7 +64,6 @@ export class JutificantesComponent implements OnInit {
     this.justificante.fecha = today.toLocaleDateString();
     try{
       let res = await firstValueFrom(this.just.enviarJustificante(this.justificante));
-      console.log(res);
       
       // Puedes hacer algo con la respuesta aquí
       if(res.status === 'Registrado') {

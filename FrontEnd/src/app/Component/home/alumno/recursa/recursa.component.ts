@@ -68,12 +68,12 @@ export class RecursaComponent implements OnInit {
   }
 
   activarInput(event: any) {
-    this.ngOnInit()
+    this.ngOnInit();
     const control = event.target.id;
-    if (control == "fileinput1") {
+    if (control == "img1") {
       this.fileInput1.nativeElement.click();
     }
-    if (control == "fileinput2") {
+    if (control == "img2") {
       this.fileInput2.nativeElement.click();
     }
 
@@ -107,7 +107,6 @@ export class RecursaComponent implements OnInit {
     try {
       this.datoPago.numControl = this.auth.decodifica().numControl;
       const res = await firstValueFrom(this.recursa.enviarPago(this.datoPago));
-      console.log(res.data);
       if (res.data) {
         this.cargarRecursa();
         Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");

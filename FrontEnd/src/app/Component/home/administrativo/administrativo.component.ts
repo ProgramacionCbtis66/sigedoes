@@ -686,13 +686,13 @@ export class AdministrativoComponent implements OnInit {
     const control = event.target.id;
     if (control == "Autorizado") {
       const autorizado = {
-        estado: 2,
-        idrecursas: dato.idrecursas
+        estado: 3,
+        idrecursas: dato.idrecursa
       }
       if (control == 'Rechazado') {
         const autorizado = {
-          estado: 8,
-          idrecursas: dato.idrecursas
+          estado: 9,
+          idrecursas: dato.idrecursa
         }
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {

@@ -79,7 +79,6 @@ export class AdminService {
     return this.http.post(`${this.URL}/admin/actualizaAsignacionGlobal`, data, this.usr);
   }
   guardarAsignacionRecursa(data:any):Observable<any>{
-    console.log("guardarAsignacionRecursa");
     return this.http.post(`${this.URL}/admin/guardarAsignacionRecursa`, data, this.usr);
   }
   actualizaAsignacionRecursa(data:any):Observable<any>{

@@ -22,19 +22,19 @@
                         <td>{{dato.descripcion}}</td>
                         <td>
                             <!-- boton para soliciar  -->
-                            <button type="button" class="btn btn-outline-dark" (click)="solicitarRecrusa(dato)" *ngIf="dato.estado == 0">Solicitar</button>
+                            <button type="button" class="btn btn-outline-dark" (click)="solicitarRecrusa(dato)" *ngIf="dato.estado == 1">Solicitar</button>
                             <!-- Boton en proceso de atuorizacion -->
-                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 1" disabled>En proceso de autorización</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 2" disabled>En proceso de autorización</button>
                             <!--  boton cargar comprobantes -->
-                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Informacion de pago</button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 3" (click)="datoPago = dato;" >Informacion de pago</button>
                             <!-- pediente de confirmacion de pago -->
-                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 4" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->
-                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
+                            <button type="button" class="btn btn-info" *ngIf="dato.estado == 5"  disabled>Autorizado a examen</button>
                             <!-- Aprobado -->
-                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 5"  disabled>Aprobado</button>
+                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 6"  disabled>Aprobado</button>
                             <!-- Recursa -->
-                            <button type="button" class="btn btn-danger" *ngIf="dato.estado == 6"  disabled>En Recursamiento</button>
+                            <button type="button" class="btn btn-danger" *ngIf="dato.estado == 7"  disabled>En Recursamiento</button>
                         </td>
                     </tr>
                 </tbody>
@@ -73,8 +73,9 @@
                                                             <input #fileInput1 type="file" 
                                                                 class="form-control form-control-sm" capture="camera"
                                                                 accept="image/*" id="foto1" (change)="foto64($event)" hidden>
-                                                            <a class="pe-auto" (click)="activarInput($event)">
-                                                                <button  type="button" class="btn btn-warning">
+                                                            <img [src]="datoPago.ceap">
+                                                            <a class="pe-auto"(click)="activarInput($event)">
+                                                                <button id="img1" type="button" class="btn btn-warning">
                                                                     CARGAR COMPROBANTE
                                                                 </button>
                                                             </a>
@@ -98,8 +99,9 @@
                                                             <input #fileInput2 type="file"
                                                                 class="form-control form-control-sm" capture="camera"
                                                                 accept="" id="foto2" (change)="foto64($event)" hidden>
+                                                            <img [src]="datoPago.frm5">
                                                             <a class="pe-auto" (click)="activarInput($event)">
-                                                                <button  type="button" class="btn btn-warning">
+                                                                <button id="img2" type="button" class="btn btn-warning">
                                                                     CARGAR COMPROBANTE
                                                                 </button>
                                                             </a>

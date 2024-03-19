@@ -249,8 +249,7 @@
                             data-bs-toggle="modal" data-bs-target="#modalRecursas"
                             (click)="viewModalGlobal(recursa,'recursa')">Ver</button></td>
                         <td scope="col" class="text-center" *ngIf="recursa.docenteDniApli != null">
-                          <button class="btn btn-sm btn-info position-relative" data-bs-toggle="modal"
-                            data-bs-target="#modalRecursas" (click)="getAsignaRecursaGlobal(recursa,'recursa')">
+                          <button class="btn btn-sm btn-info position-relative">
                             Grupo asignado
                             <span
                               class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
@@ -846,34 +845,34 @@
                           <td>{{dato.grado}}{{dato.grupo}}</td>
                           <td>{{dato.especialidad}}</td>
                           <td>{{dato.turno}}</td>
-                          <td *ngIf="dato.estado==0">
+                          <td *ngIf="dato.estado==1">
                             Sin solicitar
                           </td>
-                          <td *ngIf="dato.estado==1">
+                          <td *ngIf="dato.estado==2">
                             <button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                               (click)="autorizarRecursa($event, dato)" id="Autorizado">Autorizar</button>
                             <button type="button" class="btn btn-primary btn-sm me-2"
                               (click)="autorizarRecursa($event, dato)" id="Rechazado">Rechazar</button>
                           </td>
-                          <td *ngIf="dato.estado==2">
+                          <td *ngIf="dato.estado==3">
                             En proceso de Pago
                           </td>
-                          <td *ngIf="dato.estado==3">
+                          <td *ngIf="dato.estado==4">
                             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#estate3" (click)="verRecursaComprobante(dato.idrecursa)">Revisar Comprabantes</button>
                           </td>
-                          <td *ngIf="dato.estado==4">
-                            Autorizado para Examen
-                          </td>
                           <td *ngIf="dato.estado==5">
-                            Aceptado para Examen
+                            Autorizado para Recursar
                           </td>
                           <td *ngIf="dato.estado==6">
-                            Aprobado
+                            Aceptado para Recursar
                           </td>
                           <td *ngIf="dato.estado==7">
-                            En correción de pago
+                            Aprobado
                           </td>
                           <td *ngIf="dato.estado==8">
+                            En correción de pago
+                          </td>
+                          <td *ngIf="dato.estado==9">
                             No aprobado
                           </td>
                         </tr>

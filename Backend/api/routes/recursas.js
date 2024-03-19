@@ -32,7 +32,7 @@ recursa.post('/solicitudRecursas', verifica, async (req, res) => {
     try {
         const conexion = await ccn();
         const [respuesta] = await conexion.execute(sql, [data.numControl, data.idrecursa, 0, null, null, data.idasigrecursa, data.fecha]);
-        const [actualizaEstatusRecursa] = await conexion.execute(sqlestatus, [1, data.idrecursa]);
+        const [actualizaEstatusRecursa] = await conexion.execute(sqlestatus, [2, data.idrecursa]);
         if(respuesta.affectedRows > 0){
             res.json({data:true});
         }else{
@@ -46,12 +46,12 @@ recursa.post('/solicitudRecursas', verifica, async (req, res) => {
 recursa.post('/sendPagosrecursas', verifica, async (req, res) => {
     const data = req.body;
  
-    const sql = 'UPDATE solicitudrecursa SET frm5=?, ceap=? WHERE idsolicitudrecursa = ?';
-    const sqlestatus = 'UPDATE recursas SET estado = ? WHERE idsolicitudrecursa = ?';
+    const sql = 'UPDATE solicitudrecursa SET frm5=?, ceap=? WHERE idasigrecursa = ?';
+    const sqlestatus = 'UPDATE recursas SET estado = ? WHERE idasigrecursa = ?';
     try {
         const conexion = await ccn();
-        const [respuesta] = await conexion.execute(sql, [data.frm5, data.ceap, data.idsolicitudrecursa]);
-        const [actualizaEstatusRecursa] = await conexion.execute(sqlestatus, [3, data.idsolicitudrecursa]);
+        const [respuesta] = await conexion.execute(sql, [data.frm5, data.ceap, data.idasigrecursa]);
+        const [actualizaEstatusRecursa] = await conexion.execute(sqlestatus, [4, data.idasigrecursa]);
        
         if(respuesta.affectedRows > 0){
             res.json({data:true});

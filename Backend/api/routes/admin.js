@@ -210,12 +210,12 @@ administrador.get('/getMateriasRecursa', verifica, async(req,res) => {
         INNER JOIN periodoescolar p ON r.idperiodoescolar = p.idperiodoescolar
         INNER JOIN materias m ON m.idMateria = r.idMateria
         JOIN alumno a ON r.alumnoNumControl = a.numControl
-        WHERE r.estado < 3`);                                                    
+        WHERE r.estado < 3`);
         if(row.length > 0){
-            res.send({ok:row});                
+            res.send({ok:row});
         } else if(row.length == 0){
-            res.send({ok:"vacio"});                 
-        }                         
+            res.send({ok:"vacio"});
+        }
     }catch(error){ 
         console.log(error);
     }finally{
@@ -284,7 +284,6 @@ administrador.post('/actualizaAsignacionGlobal', verifica, async(req, res) => {
     }
 });
 administrador.post('/guardarAsignacionRecursa', verifica, async(req, res) => {
- 
     const conexion = await ccn();
     const info = req.body;
     try{        
@@ -298,8 +297,8 @@ administrador.post('/guardarAsignacionRecursa', verifica, async(req, res) => {
                 listRecusa.push(recursa.idrecursa);
             });
             const ready = listRecusa.join(',');
-            const [lastresult] = await conexion.execute(`UPDATE recursas SET docenteDniApli = '${info.docenteDni}', idasigrecursa = '${idasigrecursa[0].idasigrecursa}' WHERE idrecursa in (${ready});`);         
-            res.send({ok:'ok'});            
+            const [lastresult] = await conexion.execute(`UPDATE recursas SET docenteDniApli = '${info.docenteDni}', idasigrecursa = '${idasigrecursa[0].idasigrecursa}', estado = 1 WHERE idrecursa in (${ready});`);     
+            res.send({ok:'ok'});
         } else {
             res.send({err:'err'});
         }
@@ -430,8 +429,8 @@ administrador.get('/getCEAP', verifica, async(req, res) => {
 administrador.get('/getSolicitudesGlobales', verifica, async(req, res) => {
     const conexion = await ccn();
     const sql = `SELECT g.idglobales, g.idMateria, g.idperiodoescolar, g.idasiglobd, alumnoNumControl, grado, grupo, a.especialidad, turno, a.correo, periodoescolar, m.descripcion as materia, m.semestre, u.nombre, u.apellidoP, u.apellidoM, g.estado
-    FROM globales g ,alumno a, periodoescolar p, materias m, usuario u 
-    WHERE (g.alumnoNumControl = a.numControl) and (g.idperiodoescolar = p.idperiodoescolar) and (g.alumnoNumControl=u.numControl) and (g.idMateria=m.idMateria)`;
+    FROM globales g ,alumno a, periodoescolar p, materias m, usuario u, solicitudglobal sg
+    WHERE (g.alumnoNumControl = a.numControl) and (g.idperiodoescolar = p.idperiodoescolar) and (g.alumnoNumControl=u.numControl) and (g.idMateria=m.idMateria) and (g.idglobales = sg.idglobales)`;
     try{
         const [row] = await conexion.execute(sql);
         if(row.length > 0){
@@ -447,8 +446,8 @@ administrador.get('/getSolicitudesGlobales', verifica, async(req, res) => {
 administrador.get('/getSolicitudesRecursas', verifica, async(req, res) => {
     const conexion = await ccn();
     const sql = `SELECT r.idrecursa, r.idMateria, r.idperiodoescolar,r.idasigrecursa, r.alumnoNumControl, a.grado, a.grupo, a.especialidad, a.turno, a.correo, p.periodoescolar, m.descripcion as materia, m.semestre, u.nombre, u.apellidoP, u.apellidoM, r.estado 
-    FROM recursas r ,alumno a, periodoescolar p, materias m , usuario u
-    WHERE (r.alumnoNumControl = a.numControl) and (r.idperiodoescolar = p.idperiodoescolar) and (r.alumnoNumControl=u.numControl)  and (r.idMateria=m.idMateria)`;
+    FROM recursas r ,alumno a, periodoescolar p, materias m , usuario u, solicitudrecursa sr
+    WHERE (r.alumnoNumControl = a.numControl) and (r.idperiodoescolar = p.idperiodoescolar) and (r.alumnoNumControl=u.numControl)  and (r.idMateria=m.idMateria) and (r.idrecursa = sr.idrecursas)`;
     try{
         const [row] = await conexion.execute(sql);
         if(row.length > 0){
@@ -555,7 +554,7 @@ administrador.post('/aprobarRecursaComprobar', verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idrecursa = ?)`, [4, data.id]);
+        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idasigrecursa = ?)`, [5, data.idAsigRc]);
         if(row.affectedRows > 0){
             res.send({ok:"ok"});
         } else {
@@ -566,11 +565,11 @@ administrador.post('/aprobarRecursaComprobar', verifica, async(req, res) => {
     }
 });
 
-administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
+administrador.post('/autorizarRecursa', verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idrecursa = ?)`,[data.estado, data.idrecursa]);
+        const [row] = await conexion.execute(`UPDATE recursas SET estado = ? WHERE (idrecursa = ?)`,[data.estado, data.idrecursas]);
         if(row.affectedRows > 0){
             res.send({ok:"ok"});
         } else {
@@ -579,7 +578,7 @@ administrador.post('/autorizarRecursa'), verifica, async(req, res) => {
     }catch(error){
         console.log(error);
     }
-};
+});
 
 administrador.post('/aplicaionExamenGlobal', verifica, async(req, res) => {
     const data = req.body;

@@ -109,7 +109,6 @@ export class GlobalComponent implements OnInit {
     try {
       this.datoPago.numControl = this.auth.decodifica().numControl;
       const res = await firstValueFrom(this.global.enviarPago(this.datoPago));
-      console.log(res.data);
       if (res.data) {
         this.cargarGlobales();
         Notiflix.Notify.success("Solicitud enviada y pendiente por confirmar");
