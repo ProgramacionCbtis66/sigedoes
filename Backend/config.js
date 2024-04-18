@@ -16,8 +16,11 @@ const CLIENT_SECRET = process.env.client_secret;
 const REDIRECT_URL = process.env.redirect_url;
 const REFRESH_TOKEN = process.env.refresh_token;
 
+const correoKey = process.env.correo;
+const pwdKey = process.env.passwordCorreo;
+
  
 
 module.exports = { ACCESS_TOKEN, PUBLIC_KEY, NOTIFICACION_URL, PORT,
      HOST, DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD,
-      CLIENT_ID, CLIENT_SECRET, REDIRECT_URL, REFRESH_TOKEN};
+      CLIENT_ID, CLIENT_SECRET, REDIRECT_URL, REFRESH_TOKEN, correoKey, pwdKey};

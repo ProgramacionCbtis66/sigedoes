@@ -10,7 +10,7 @@ import { NavegacionService } from 'src/app/service/navegacion.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       try {
         this.auth.acceso(this.usuario).subscribe(
           (res: any) => {
+            console.log(res);
             if (res.token !== null && res.token != undefined) {
                 localStorage.setItem('color', res.token);
                 this.nav._foto = res.foto;

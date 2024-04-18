@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-
+const {correoKey, pwdKey} = require("../../config.js");
 
 
 function enviarCorreo(email, res) {
@@ -11,8 +11,8 @@ function enviarCorreo(email, res) {
         port: 465,
         secure: true,
         auth: {
-            user: "sigedoes@cbtis66.edu.mx",
-            pass: "wwkajnuwaejakxvy",
+            user: correoKey,
+            pass: pwdKey,
         },
     });
 
