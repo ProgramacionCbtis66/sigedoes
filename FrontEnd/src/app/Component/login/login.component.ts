@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       try {
         this.auth.acceso(this.usuario).subscribe(
           (res: any) => {
-            console.log(res);
             if (res.token !== null && res.token != undefined) {
                 localStorage.setItem('color', res.token);
                 this.nav._foto = res.foto;

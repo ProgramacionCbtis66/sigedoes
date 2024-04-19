@@ -38,6 +38,10 @@ export class AuthService {
       catchError(this.handleError));
   }
 
+  public semestre(year: any) {
+    if(true){}
+  }
+
   public registro(usuario: any): Observable<any> {
     return this.http.post(`${this.ruta}/auth/registro`, usuario);
   }
