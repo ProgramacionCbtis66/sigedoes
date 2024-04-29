@@ -85,6 +85,11 @@ export class RegistroComponent implements OnInit {
     } else if (this.tipoUsuario == "Alumno") {
       if (this.alumno._nombre != "" && this.alumno._apellidoP != "" && this.alumno._apellidoM != "" && this.alumno._fechaNac != null && validEmail.test(this.alumno._correo) && this.alumno._pass != "" && this.alumno._pass2 != "" && this.alumno._curp != "" && this.alumno._numControl != "" && this.alumno._turno != "" && this.alumno._direccion != "" && this.alumno._telefono != "" && this.alumno._grupo != "" && this.alumno._especialidad != "" && this.alumno._grado != "" && this.alumno._area != "" && this.alumno._foto != null) {
         if (this.alumno._pass === this.alumno._pass2) {
+          var fechaActual = new Date();
+          var dia = fechaActual.getDate();
+          var mes = fechaActual.getMonth() + 1;
+          var year = fechaActual.getFullYear();
+          this.alumno._fecha = dia + "/" + mes + "/" + year;
           this.alumno._tipoUsuario = "Alumno";
           this.alumno._rol = "AL";
           this.alumno._foto = this.foto;
