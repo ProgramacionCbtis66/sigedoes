@@ -123,4 +123,43 @@ export class UsuarioService {
     });
   }
 
+  obtenerGrado(grado: number, numControl: string){
+    var fechaActual = new Date();
+    var mes = fechaActual.getMonth() + 1;
+    var year = fechaActual.getFullYear();
+
+    var semestral = 0;
+    var gd = Number(grado);
+    var ingreso = Number("20" + numControl[0] + numControl[1]);
+
+    if((gd % 2) == 0){
+      semestral = 1;
+    } else {
+      semestral = 2;
+    }
+    
+    for(var i = 0; i <= year - ingreso; i++){
+      console.log(mes);
+      if(semestral == 1){
+        if(mes >= 9 && mes <= 12 || (year - i) != ingreso){
+          gd++;
+        }
+      } else if(semestral == 2){
+        if(mes >= 1 && mes <= 8 || (year - i) != ingreso){
+          gd++;
+        }
+      }
+    }
+
+    if(semestral == 1){
+      gd += year - ingreso;
+    }
+
+    if(gd > 6){
+      gd = 6;
+    }
+
+    return gd;
+  }
+
 }
