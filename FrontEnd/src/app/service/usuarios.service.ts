@@ -123,36 +123,71 @@ export class UsuarioService {
     });
   }
 
-  obtenerGrado(grado: number, numControl: string){
+  obtenerGrado(grado: number, numControl: string, escIn: string){
     var fechaActual = new Date();
     var mes = fechaActual.getMonth() + 1;
     var year = fechaActual.getFullYear();
+
+    var diaOut = 0;
+    var mesOut = 0;
+    var yearOut = 0;
+    var position = 1;
+    var tempt = "";
+
+    console.log(escIn);
+    for(var i = 0; i <= escIn.length; i++){
+      if(escIn[i] == "/" || escIn[i] == undefined){
+        if(position == 1){
+          diaOut = Number(tempt);
+        } else if(position == 2){
+          mesOut = Number(tempt);
+        } else if(position == 3){
+          yearOut = Number(tempt);
+        }
+
+        tempt = "";
+        position++;
+      } else {
+        tempt += escIn[i];
+      }
+    }
 
     var semestral = 0;
     var gd = Number(grado);
     var ingreso = Number("20" + numControl[0] + numControl[1]);
 
-    if((gd % 2) == 0){
+    if(mesOut <= 8){
       semestral = 1;
     } else {
       semestral = 2;
     }
     
     for(var i = 0; i <= year - ingreso; i++){
-      console.log(mes);
       if(semestral == 1){
-        if(mes >= 9 && mes <= 12 || (year - i) != ingreso){
-          gd++;
+        if((year - i) != ingreso){
+          if((year - i) - ingreso == 1){
+            if(mes >= 9 && mes <= 12){
+              gd++;
+            } else {
+              gd += 2;
+            }
+          } else {
+            gd += 2;
+          }
         }
       } else if(semestral == 2){
-        if(mes >= 1 && mes <= 8 || (year - i) != ingreso){
-          gd++;
+        if((year - i) != ingreso){
+          if((year - i) - ingreso == 1){
+            if(mes >= 1 && mes <= 8){
+              gd++;
+            } else {
+              gd += 2;
+            }
+          } else {
+            gd += 2;
+          }
         }
       }
-    }
-
-    if(semestral == 1){
-      gd += year - ingreso;
     }
 
     if(gd > 6){
