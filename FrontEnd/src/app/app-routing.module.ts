@@ -18,6 +18,7 @@ import { OrientacionEducativaComponent } from './Component/home/orientacion-educ
 import { JutificantesComponent } from './Component/home/alumno/justificantes/jutificantes.component';
 import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
 import { GlobalComponent } from './Component/home/alumno/global/global.component';
+import { SadminComponent } from './Component/sadmin/sadmin.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:"perfil", component: PerfilComponent},
   {path:"recursa", component: RecursaComponent},
   {path:"global", component: GlobalComponent},
+  {path:"supAdmin", component: SadminComponent},
   {path:"**", component: Error404Component },
 ];
 
