@@ -32,10 +32,10 @@ const routes: Routes = [
   {path:"forgotPassword", component: OlvidePassComponent, canActivate:[AuthLogin]},
   {path:"login", component: LoginComponent, canActivate:[AuthLogin]},
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
-  {path:"perfil", component: PerfilComponent},
-  {path:"recursa", component: RecursaComponent},
-  {path:"global", component: GlobalComponent},
-  {path:"supAdmin", component: SadminComponent},
+  {path:"perfil", component: PerfilComponent,canActivate:[AuthGuard]},
+  {path:"recursa", component: RecursaComponent,canActivate:[AuthGuard]},
+  {path:"global", component: GlobalComponent,canActivate:[AuthGuard]},
+  {path:"supAdmin", component: SadminComponent,canActivate:[AuthGuard]},  
   {path:"**", component: Error404Component },
 ];
 

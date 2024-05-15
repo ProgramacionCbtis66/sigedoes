@@ -59,7 +59,8 @@ export class AdministrativoComponent implements OnInit {
     protected nav: NavegacionService,
     protected email: SendEmailService,
     protected admin: AdminService,
-    protected auth: AuthService) {
+    protected auth: AuthService,
+    protected alumn: UsuarioService) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._perfil = false;
     this.getCEAP();
@@ -493,6 +494,10 @@ export class AdministrativoComponent implements OnInit {
     } else {
       this.solicitudesGlobales = res.ok;
       
+      for(var i = 0; i <= this.solicitudesGlobales.length - 1; i++){
+        this.solicitudesGlobales[i].gradoAndGrupo = this.alumn.obtenerGrado(this.solicitudesGlobales[i].grado, this.solicitudesGlobales[i].alumnoNumControl, this.solicitudesGlobales[i].Ingreso) + this.solicitudesGlobales[i].grupo;
+      }
+      
       this.globFil[0] = [...new Set(this.solicitudesGlobales.map((gd: any) => gd.grado))];
       this.globFil[1] = [...new Set(this.solicitudesGlobales.map((gp: any) => gp.grupo))];
       this.globFil[2] = [...new Set(this.solicitudesGlobales.map((esp: any) => esp.especialidad))];
@@ -668,6 +673,10 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesRecursas = [];
     } else {
       this.solicitudesRecursas = res.ok;
+
+      for(var i = 0; i <= this.solicitudesRecursas.length - 1; i++){
+        this.solicitudesRecursas[i].gradoAndGrupo = this.alumn.obtenerGrado(this.solicitudesRecursas[i].grado, this.solicitudesRecursas[i].alumnoNumControl, this.solicitudesRecursas[i].Ingreso) + this.solicitudesRecursas[i].grupo;
+      }
       
       this.recurFil[0] = [...new Set(this.solicitudesRecursas.map((gd: any) => gd.grado))];
       this.recurFil[1] = [...new Set(this.solicitudesRecursas.map((gp: any) => gp.grupo))];

@@ -134,7 +134,6 @@ export class UsuarioService {
     var position = 1;
     var tempt = "";
 
-    console.log(escIn);
     for(var i = 0; i <= escIn.length; i++){
       if(escIn[i] == "/" || escIn[i] == undefined){
         if(position == 1){
