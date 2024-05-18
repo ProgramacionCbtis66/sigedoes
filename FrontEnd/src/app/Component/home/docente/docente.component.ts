@@ -97,6 +97,49 @@ export class DocenteComponent implements OnInit {
     return false;
   }
 
+  async buscarAlumnoOut(evento: any){
+    if(evento.target.id == "loadGlobal"){
+      try{
+        var result = await firstValueFrom(this.docente.buscarAlumnoExistente(this.numControlAlumnoGlobal));
+        if(result.Error != "no"){
+          var obj = {
+            anio: this.alumno.obtenerGrado(result.almnResult.grado, result.almnResult.numControl, result.almnResult.Ingreso, "year"),
+            idperiodoescolar: this.periodoEscolar.length + 1,
+            periodo: this.alumno.obtenerGrado(result.almnResult.grado, result.almnResult.numControl, result.almnResult.Ingreso, "periodo"),
+            periodoescolar: this.alumno.obtenerGrado(result.almnResult.grado, result.almnResult.numControl, result.almnResult.Ingreso, "semestral")
+          }
+
+          var count = 0;
+
+          for(var i = 0; i <= this.periodoEscolar.length - 1; i++){
+            if(this.periodoEscolar[i].periodoescolar != obj.periodoescolar){
+              count++;
+            } else if(this.periodoEscolar[i].periodoescolar == obj.periodoescolar) {
+              obj.idperiodoescolar = this.periodoEscolar[i].idperiodoescolar;
+            }
+          }
+
+          if(count >= this.periodoEscolar.length){
+            this.periodoEscolar.push(obj);
+          }
+
+          this.periodoGlobal = obj.idperiodoescolar;
+          var event = {
+            target: {
+              id: "selectGlobalesP"
+            }
+          };
+          this.datosMateria(event);
+          Notiflix.Notify.success("Alumno Disponible");
+        } else {
+          Notiflix.Notify.failure("No se encontro el Alumno");
+        }
+      } catch(error){
+        console.log(error);
+      }
+    }
+  }
+
   async buscarAlumno(evento: any) {
     this.ngOnInit();
     if (this.verificaCamposMP()) {
@@ -160,6 +203,7 @@ export class DocenteComponent implements OnInit {
               this.alumno.verInfo(numeroCtrl)
             );
             if (respuesta.data != '' && respuesta.data != undefined) {
+              respuesta.data.semestral = this.alumno.obtenerGrado(Number(respuesta.data.grado), respuesta.data.numControl, respuesta.data.Ingreso, "semestral");
               if (evento.target.id == 'global') {
                 respuesta.data.materia = this.materiaGlobal;
                 respuesta.data.periodo = this.periodoGlobal;

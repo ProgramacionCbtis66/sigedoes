@@ -31,9 +31,8 @@
             <!-- buscar alumno  y datos para captura -->
             <div class="d-flex justify-content-between mb-3">
               <input class="form-control me-1" type="search" placeholder="Numero de Control" aria-label="Search"
-                [(ngModel)]="numControlAlumnoGlobal">
-              <button (click)="buscarAlumno($event)" class="btn btn-outline-success me-1" type="submit"
-                id="global">Agregar</button>
+                [(ngModel)]="numControlAlumnoGlobal" (blur)="buscarAlumnoOut($event)" id="loadGlobal">
+              <button (click)="buscarAlumno($event)" class="btn btn-outline-success me-1" type="submit" id="global">Agregar</button>
               <!-- periodo -->
               <select class="form-select form-select-sm me-1" aria-label="Small select example" [(ngModel)]="periodoGlobal"
                 (change)="datosMateria($event)" id="selectGlobalesP" [disabled]="disableGlobal">

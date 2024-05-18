@@ -123,7 +123,7 @@ export class UsuarioService {
     });
   }
 
-  obtenerGrado(grado: number, numControl: string, escIn: string){
+  obtenerGrado(grado: number, numControl: string, escIn: string, mode: string){
     var fechaActual = new Date();
     var mes = fechaActual.getMonth() + 1;
     var year = fechaActual.getFullYear();
@@ -161,39 +161,50 @@ export class UsuarioService {
       semestral = 2;
     }
     
-    for(var i = 0; i <= year - ingreso; i++){
-      if(semestral == 1){
-        if((year - i) != ingreso){
-          if((year - i) - ingreso == 1){
-            if(mes >= 9 && mes <= 12){
-              gd++;
+    if(mode == "grado"){
+      for(var i = 0; i <= year - ingreso; i++){
+        if(semestral == 1){
+          if((year - i) != ingreso){
+            if((year - i) - ingreso == 1){
+              if(mes >= 9 && mes <= 12){
+                gd++;
+              } else {
+                gd += 2;
+              }
             } else {
               gd += 2;
             }
-          } else {
-            gd += 2;
           }
-        }
-      } else if(semestral == 2){
-        if((year - i) != ingreso){
-          if((year - i) - ingreso == 1){
-            if(mes >= 1 && mes <= 8){
-              gd++;
+        } else if(semestral == 2){
+          if((year - i) != ingreso){
+            if((year - i) - ingreso == 1){
+              if(mes >= 1 && mes <= 8){
+                gd++;
+              } else {
+                gd += 2;
+              }
             } else {
               gd += 2;
             }
-          } else {
-            gd += 2;
           }
         }
       }
+
+      if(gd > 6){
+        gd = 6;
+      }
+
+      return gd;
+    } else if(mode == "semestral") {
+      return `SEMESTRAL ${semestral} - ${yearOut}`;
+    } else if(mode == "year"){
+      return `${ingreso}`;
+    } else if(mode == "periodo"){
+      return semestral;
+    } else {
+      return null;
     }
 
-    if(gd > 6){
-      gd = 6;
-    }
-
-    return gd;
   }
 
 }

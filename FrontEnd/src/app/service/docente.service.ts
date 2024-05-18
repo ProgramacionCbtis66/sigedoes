@@ -12,7 +12,11 @@ export class DocenteService {
 
   constructor(private http: HttpClient) {
     this.usr.headers = this.usr.headers.set('authorization', 'Bearer ' + localStorage.getItem('color'));
-   }
+  }
+
+  buscarAlumnoExistente(numControl: any): Observable<any> {
+    return this.http.post(`${this.URL}/docente/loadAlmn`, {numControl}, this.usr);
+  }
 
   datosDocente(numControl: any): Observable<any> {
     return this.http.post(`${this.URL}/docente/datosDocente`, numControl, this.usr);

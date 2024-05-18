@@ -5,6 +5,30 @@ const ccn = require('../connection/connection');
 
 const verifica = require('./verificaToken');
 
+docente.post('/loadAlmn', verifica, async (req, res) => {
+    const numControl = req.body.numControl;
+    const sql = 'SELECT * FROM alumno WHERE numControl = ?';
+
+    try{
+        const conexion = await ccn();
+        const [alumnoEncontrado] = await conexion.execute(sql, [numControl]);
+
+        if(alumnoEncontrado.length > 0){
+            let almn = JSON.stringify(alumnoEncontrado[0]);
+            let almnResult = JSON.parse(almn);
+
+            res.json({ almnResult });
+        } else {
+            res.json({ Error: "no" });
+        }
+
+        await conexion.end();
+    } catch(error){
+        console.log(error);
+        res.json({ Error: "no" });
+    }
+});
+
 docente.post('/datosDocente', verifica, async (req, res) => {
     const numControl = req.body.numControl;
 
@@ -44,6 +68,7 @@ docente.post('/datosMateria', verifica, async (req, res) => {
     const { periodo } = req.body;
     const sqlperiodo = 'select periodo from periodoescolar where idperiodoescolar = ?';
     const sql = 'select * from materias where periodo = ?';
+    console.log(periodo);
     try {
         const conexion = await ccn();
         const [xperiodo] = await conexion.execute(sqlperiodo, [periodo]);

@@ -495,7 +495,7 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesGlobales = res.ok;
       
       for(var i = 0; i <= this.solicitudesGlobales.length - 1; i++){
-        this.solicitudesGlobales[i].grado = this.alumn.obtenerGrado(this.solicitudesGlobales[i].grado, this.solicitudesGlobales[i].alumnoNumControl, this.solicitudesGlobales[i].Ingreso);
+        this.solicitudesGlobales[i].grado = this.alumn.obtenerGrado(this.solicitudesGlobales[i].grado, this.solicitudesGlobales[i].alumnoNumControl, this.solicitudesGlobales[i].Ingreso, "grado");
       }
       
       this.globFil[0] = [...new Set(this.solicitudesGlobales.map((gd: any) => gd.grado))];
@@ -675,7 +675,7 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesRecursas = res.ok;
 
       for(var i = 0; i <= this.solicitudesRecursas.length - 1; i++){
-        this.solicitudesRecursas[i].grado = this.alumn.obtenerGrado(this.solicitudesRecursas[i].grado, this.solicitudesRecursas[i].alumnoNumControl, this.solicitudesRecursas[i].Ingreso);
+        this.solicitudesRecursas[i].grado = this.alumn.obtenerGrado(this.solicitudesRecursas[i].grado, this.solicitudesRecursas[i].alumnoNumControl, this.solicitudesRecursas[i].Ingreso, "grado");
       }
       
       this.recurFil[0] = [...new Set(this.solicitudesRecursas.map((gd: any) => gd.grado))];

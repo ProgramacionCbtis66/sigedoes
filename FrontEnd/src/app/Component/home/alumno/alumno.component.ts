@@ -87,7 +87,7 @@ export class AlumnoComponent implements OnInit {
         const res = await firstValueFrom(this.user.datosUser(numControl));
         if (res != '' && res != undefined) {
           this.datos = res.dato;
-          this.datos.grado = this.user.obtenerGrado(this.datos.grado, numControl.numControl, this.datos.Ingreso);
+          this.datos.grado = this.user.obtenerGrado(this.datos.grado, numControl.numControl, this.datos.Ingreso, "grado");
         }
       } catch (error) {
         console.error(error);
