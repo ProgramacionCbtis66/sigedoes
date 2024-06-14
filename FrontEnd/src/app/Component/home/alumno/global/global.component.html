@@ -31,9 +31,10 @@
                             <!-- Autorizado a examen -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 4"  disabled>Autorizado a examen</button>
                             <!-- Aprobado -->
-                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 5"  disabled>Aprobado</button>
+                            <button type="button" class="btn btn-success" *ngIf="dato.estado == 6"  disabled>Aprobado</button>
                             <!-- Recursa -->
-                            <button type="button" class="btn btn-danger" *ngIf="dato.estado == 6"  disabled>En Recursamiento</button>
+                            {{dato.estado}}
+                            <button type="button" class="btn btn-danger" *ngIf="dato.estado >= 7"  disabled>En Recursamiento</button>
                         </td>
                     </tr>
                 </tbody>

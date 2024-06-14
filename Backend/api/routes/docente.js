@@ -9,11 +9,11 @@ docente.post('/loadAlmn', verifica, async (req, res) => {
     const numControl = req.body.numControl;
     const sql = 'SELECT * FROM alumno WHERE numControl = ?';
 
-    try{
+    try {
         const conexion = await ccn();
         const [alumnoEncontrado] = await conexion.execute(sql, [numControl]);
 
-        if(alumnoEncontrado.length > 0){
+        if (alumnoEncontrado.length > 0) {
             let almn = JSON.stringify(alumnoEncontrado[0]);
             let almnResult = JSON.parse(almn);
 
@@ -23,7 +23,7 @@ docente.post('/loadAlmn', verifica, async (req, res) => {
         }
 
         await conexion.end();
-    } catch(error){
+    } catch (error) {
         console.log(error);
         res.json({ Error: "no" });
     }
@@ -233,7 +233,7 @@ async function buscaRecursa(periodo, materia, numControl, dmateria) {
     }
 }
 
-docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
+docente.post('/ListaAlumnosGlobalesAsignados', verifica, async (req, res) => {
     const { docenteDni } = req.body;
     const sql = `select g.idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status, 
     us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia FROM asignaglobal as ag
@@ -259,7 +259,7 @@ docente.post('/ListaAlumnosGlobalesAsignados',verifica, async (req, res) => {
     }
 });
 
-docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
+docente.post('/ListaAlumnosRecursasAsignados', verifica, async (req, res) => {
     const { docenteDni } = req.body;
     const sql = `select ar.idasigrecursa, r.idrecursa, ar.docenteDni , alumnoNumControl, r.idMateria as idmateria, ar.fecha, ar.status, us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia 
     FROM asignarecursa as ar 
@@ -287,22 +287,25 @@ docente.post('/ListaAlumnosRecursasAsignados',verifica, async (req, res) => {
 
 docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
     const { idasiglobd, calificacion, idglobales, docenteDni } = req.body;
-    const estado= 0;
-    
+    var estado = 0;
+
     let tiempo = Date.now();
     let hoy = new Date(tiempo);
     const fecha = hoy.toLocaleDateString();
-  
+
     const conexion = await ccn();
     try {
-        const sql = 'select * from solicitud where idglobales = ? and activo = 1';
+        const sql = 'select * from globales where idglobales = ? and (estado = 4 or estado = 6)';
         const [registros] = await conexion.execute(sql, [idglobales]);
         if (registros.length > 0) {
-                if(calificacion >= 6){estado=6;}else{estado=8;
-                    const [global] = await conexion.execute('select * from globales where idglobales = ?', [idglobales]);
-                    if(global.length > 0){
-                        const _global=global[0];
-                        const [recursas] = await conexion.execute('insert into recursas (alumnoNumControl,idMateria,idperiodoescolar,docenteDni,fecha,estado) values (?,?,?,?,?,?)', 
+            if (calificacion >= 6) {
+                estado = 6;
+            } else {
+                estado = 8;
+                const [global] = await conexion.execute('select * from globales where idglobales = ?', [idglobales]);
+                if (global.length > 0) {
+                    const _global = global[0];
+                    const [recursas] = await conexion.execute('insert into recursas (alumnoNumControl,idMateria,idperiodoescolar,docenteDni,fecha,estado) values (?,?,?,?,?,?)',
                         [
                             _global.alumnoNumControl,
                             _global.idMateria,
@@ -311,17 +314,18 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
                             fecha,
                             0
                         ]);
-                    }
                 }
-                const sql = 'update globales set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idglobales = ?';
-                const [registros1] = await conexion.execute(sql, [idglobales, estado,calificacion, fecha]);
-                const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
-                const [registros2] = await conexion.execute(sql2, [idasiglobd]);
-                const sql3 = 'update solicitud set activo = 0 where idglobales = ?';
-                const [registros3] = await conexion.execute(sql3, [idglobales]);
-                res.json({ data: true });
-        }else{
-                 res.json({data: false, mensaje: "El alumno no ha pagado la cuota de examen"});
+            }
+            console.log(estado, calificacion, fecha, idglobales);
+            const sql = 'update globales set estado = ?, calificacion = ?, fechaCalificacion = ? where idglobales = ?';
+            const [registros1] = await conexion.execute(sql, [estado, calificacion, fecha, idglobales]);
+            const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
+            const [registros2] = await conexion.execute(sql2, [idasiglobd]);
+            // const sql3 = 'update solicitud set activo = 0 where idglobales = ?';
+            // const [registros3] = await conexion.execute(sql3, [idglobales]);
+            res.json({ data: true });
+        } else {
+            res.json({ data: false, mensaje: "El alumno no ha pagado la cuota de examen" });
         }
         await conexion.end();
     } catch (error) {
@@ -331,30 +335,30 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
 
 docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
     const { idasigrecursa, calificacion, idrecursa } = req.body;
-    const estado= 0;
+    const estado = 0;
     let tiempo = Date.now();
     let hoy = new Date(tiempo);
     const fecha = hoy.toLocaleDateString();
     const conexion = await ccn();
-    
+
     try {
-        const sql = 'select * from solicitud where idrecursa = ? and activo = 1';
+        const sql = 'select * from recursas where idrecursa = ? and estado = 4';
         const [registros] = await conexion.execute(sql, [idrecursa]);
         if (registros.length > 0) {
-                if(calificacion >= 6){ estado=6;}else{ estado=8;}
-                const sql = 'update recursas set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idrecursa = ?';
-                const [registros1] = await conexion.execute(sql, [idrecursa, estado,calificacion, fecha]);
-                const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';
-                const [registros2] = await conexion.execute(sql2, [idasigrecursa]);
-                const sql3 = 'update solicitud set activo = 0 where idrecursa = ?';
-                const [registros3] = await conexion.execute(sql3, [idrecursa]);
-                res.json({ data: true });
-        }else{
-            res.json({data: false, mensaje: "El alumno no ha pagado la cuota de examen"});
+            if (calificacion >= 6) { estado = 6; } else { estado = 8; }
+            const sql = 'update recursas set (estado = ?, calificacion = ?, fechaCalificacion = ?) where idrecursa = ?';
+            const [registros1] = await conexion.execute(sql, [idrecursa, estado, calificacion, fecha]);
+            const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';
+            const [registros2] = await conexion.execute(sql2, [idasigrecursa]);
+            const sql3 = 'update solicitud set activo = 0 where idrecursa = ?';
+            const [registros3] = await conexion.execute(sql3, [idrecursa]);
+            res.json({ data: true });
+        } else {
+            res.json({ data: false, mensaje: "El alumno no ha pagado la cuota de examen" });
         }
     } catch (error) {
         console.log(error);
-        res.json({data: false, mensaje: error});
+        res.json({ data: false, mensaje: error });
     }
 
 });
