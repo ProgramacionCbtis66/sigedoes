@@ -33,8 +33,7 @@
                             <!-- Aprobado -->
                             <button type="button" class="btn btn-success" *ngIf="dato.estado == 6"  disabled>Aprobado</button>
                             <!-- Recursa -->
-                            {{dato.estado}}
-                            <button type="button" class="btn btn-danger" *ngIf="dato.estado >= 7"  disabled>En Recursamiento</button>
+                            <button type="button" class="btn btn-warning" *ngIf="dato.estado >= 7"  disabled>Acreditacion Pendiente (Por Recursar)</button>
                         </td>
                     </tr>
                 </tbody>

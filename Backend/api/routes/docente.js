@@ -301,7 +301,7 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
             if (calificacion >= 6) {
                 estado = 6;
             } else {
-                estado = 8;
+                estado = 8 ;
                 const [global] = await conexion.execute('select * from globales where idglobales = ?', [idglobales]);
                 if (global.length > 0) {
                     const _global = global[0];
