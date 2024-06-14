@@ -24,7 +24,7 @@ docente.post('/loadAlmn', verifica, async (req, res) => {
 
         await conexion.end();
     } catch (error) {
-        console.log(error);
+         
         res.json({ Error: "no" });
     }
 });
@@ -46,7 +46,7 @@ docente.post('/datosDocente', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+      
         res.json({ Error: "En base de datos" });
     }
 });
@@ -68,7 +68,7 @@ docente.post('/datosMateria', verifica, async (req, res) => {
     const { periodo } = req.body;
     const sqlperiodo = 'select periodo from periodoescolar where idperiodoescolar = ?';
     const sql = 'select * from materias where periodo = ?';
-    console.log(periodo);
+     
     try {
         const conexion = await ccn();
         const [xperiodo] = await conexion.execute(sqlperiodo, [periodo]);
@@ -82,7 +82,7 @@ docente.post('/datosMateria', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+        
         res.json({ Error: "En base de datos" });
     }
 });
@@ -103,7 +103,7 @@ docente.post('/datosPeriodoEscolar', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+       
         res.json({ Error: "En base de datos" });
     }
 });
@@ -122,7 +122,7 @@ docente.post('/enviarGR', verifica, async (req, res) => {
                 const conexion = await ccn();
                 const [registros] = await conexion.execute(sql, [alumno.numControl, docente, materia, periodo, fecha, 0]);
             } catch (error) {
-                console.log(error);
+                
                 res.json({ data: false });
             }
         }
@@ -135,7 +135,7 @@ docente.post('/enviarGR', verifica, async (req, res) => {
                 const conexion = await ccn();
                 const [registros] = await conexion.execute(sql, [alumno.numControl, materia, periodo, docente, fecha, 0]);
             } catch (error) {
-                console.log(error);
+                
                 res.json({ data: false });
             }
         }
@@ -196,7 +196,7 @@ async function buscaRecursaenGlobales(periodo, materia, numControl, dmateria) {
         }
 
     } catch (error) {
-        console.log(error);
+         
         return false;
     }
 }
@@ -212,7 +212,7 @@ async function buscaGlobales(periodo, materia, numControl, dmateria) {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+        
         return false;
     }
 }
@@ -228,20 +228,20 @@ async function buscaRecursa(periodo, materia, numControl, dmateria) {
         }
 
     } catch (error) {
-        console.log(error);
+         
         return false;
     }
 }
 
 docente.post('/ListaAlumnosGlobalesAsignados', verifica, async (req, res) => {
     const { docenteDni } = req.body;
-    const sql = `select g.idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status, 
-    us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia FROM asignaglobal as ag
+    const sql = `select g.idasiglobd, g.idglobales, ag.docenteDni , alumnoNumControl, g.idMateria as idmateria, ag.fecha  , ag.status,us.nombre as nombre, us.apellidoP as apellidoP , us.apellidoM as apellidoM , m.descripcion as materia, g.estado as estado 
+    FROM asignaglobal as ag
     join globales as g on ag.idasiglobd = g.idasiglobd
     join docente as d on d.numControl = g.docenteDni
     join usuario as us on us.numControl = g.alumnoNumControl
     join materias as m on m.idMateria = g.idMateria
-    where ag.docenteDni = ?`;
+    where ag.docenteDni = ? and estado = 4`;
     try {
         const conexion = await ccn();
         const [registros] = await conexion.execute(sql, [docenteDni]);
@@ -254,7 +254,7 @@ docente.post('/ListaAlumnosGlobalesAsignados', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+         
         res.json({ Error: "En base de datos" });
     }
 });
@@ -280,7 +280,7 @@ docente.post('/ListaAlumnosRecursasAsignados', verifica, async (req, res) => {
         }
         await conexion.end();
     } catch (error) {
-        console.log(error);
+         
         res.json({ Error: "En base de datos" });
     }
 });
@@ -316,13 +316,11 @@ docente.post('/enviarCalificacionesGlobales', verifica, async (req, res) => {
                         ]);
                 }
             }
-            console.log(estado, calificacion, fecha, idglobales);
+            
             const sql = 'update globales set estado = ?, calificacion = ?, fechaCalificacion = ? where idglobales = ?';
             const [registros1] = await conexion.execute(sql, [estado, calificacion, fecha, idglobales]);
             const sql2 = 'update asignaglobal set status = 1 where idasiglobd = ?';
             const [registros2] = await conexion.execute(sql2, [idasiglobd]);
-            // const sql3 = 'update solicitud set activo = 0 where idglobales = ?';
-            // const [registros3] = await conexion.execute(sql3, [idglobales]);
             res.json({ data: true });
         } else {
             res.json({ data: false, mensaje: "El alumno no ha pagado la cuota de examen" });
@@ -350,8 +348,6 @@ docente.post('/enviarCalificacionesRecursas', verifica, async (req, res) => {
             const [registros1] = await conexion.execute(sql, [idrecursa, estado, calificacion, fecha]);
             const sql2 = 'update asignarecursa set status = 1 where idasigrecursa = ?';
             const [registros2] = await conexion.execute(sql2, [idasigrecursa]);
-            const sql3 = 'update solicitud set activo = 0 where idrecursa = ?';
-            const [registros3] = await conexion.execute(sql3, [idrecursa]);
             res.json({ data: true });
         } else {
             res.json({ data: false, mensaje: "El alumno no ha pagado la cuota de examen" });

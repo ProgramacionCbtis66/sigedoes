@@ -44,7 +44,7 @@ export class DocenteComponent implements OnInit {
     private Link: Router
   ) {
     this.nav._perfil = false;
-    this.nav._usuario = this.auth.decodifica().nombre + ' ' + this.auth.decodifica().apellidoP +' ' +this.auth.decodifica().apellidoM;
+    this.nav._usuario = this.auth.decodifica().nombre + ' ' + this.auth.decodifica().apellidoP + ' ' + this.auth.decodifica().apellidoM;
     this.nav._docente = true;
     this.datos();
     this.datosPeridoEscolar();
@@ -75,9 +75,9 @@ export class DocenteComponent implements OnInit {
         } else {
           this.datosDocente._foto = res.data.foto;
         }
-       
+
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   ngOnInit(): void {
@@ -97,11 +97,11 @@ export class DocenteComponent implements OnInit {
     return false;
   }
 
-  async buscarAlumnoOut(evento: any){
-    if(evento.target.id == "loadGlobal"){
-      try{
+  async buscarAlumnoOut(evento: any) {
+    if (evento.target.id == "loadGlobal") {
+      try {
         var result = await firstValueFrom(this.docente.buscarAlumnoExistente(this.numControlAlumnoGlobal));
-        if(result.Error != "no"){
+        if (result.Error != "no") {
           var obj = {
             anio: this.alumno.obtenerGrado(result.almnResult.grado, result.almnResult.numControl, result.almnResult.Ingreso, "year"),
             idperiodoescolar: this.periodoEscolar.length + 1,
@@ -111,15 +111,15 @@ export class DocenteComponent implements OnInit {
 
           var count = 0;
 
-          for(var i = 0; i <= this.periodoEscolar.length - 1; i++){
-            if(this.periodoEscolar[i].periodoescolar != obj.periodoescolar){
+          for (var i = 0; i <= this.periodoEscolar.length - 1; i++) {
+            if (this.periodoEscolar[i].periodoescolar != obj.periodoescolar) {
               count++;
-            } else if(this.periodoEscolar[i].periodoescolar == obj.periodoescolar) {
+            } else if (this.periodoEscolar[i].periodoescolar == obj.periodoescolar) {
               obj.idperiodoescolar = this.periodoEscolar[i].idperiodoescolar;
             }
           }
 
-          if(count >= this.periodoEscolar.length){
+          if (count >= this.periodoEscolar.length) {
             this.periodoEscolar.push(obj);
           }
 
@@ -134,7 +134,7 @@ export class DocenteComponent implements OnInit {
         } else {
           Notiflix.Notify.failure("No se encontro el Alumno");
         }
-      } catch(error){
+      } catch (error) {
         console.log(error);
       }
     }
@@ -380,13 +380,10 @@ export class DocenteComponent implements OnInit {
 
   async cargarAlumnosGlobalesAsignados() {
     this.ngOnInit();
-    if (
-      this.ListaAlumnosGlobales.length <= 0 ||
-      this.ListaAlumnosGlobales == undefined
-    ) {
+    if ( this.ListaAlumnosGlobales.length <= 0 ||  this.ListaAlumnosGlobales == undefined) 
+      {
       try {
-        const res = await firstValueFrom(
-          this.docente.ListaAlumnosGlobalesAsignados({
+        const res = await firstValueFrom(this.docente.ListaAlumnosGlobalesAsignados({
             docenteDni: this.auth.decodifica().numControl,
           })
         );
