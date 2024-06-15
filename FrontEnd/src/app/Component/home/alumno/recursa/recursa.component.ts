@@ -40,7 +40,6 @@ export class RecursaComponent implements OnInit {
   }
 
   async cargarRecursa() {
-    this.ngOnInit();
     try {
       let res = await firstValueFrom(this.recursa.listaRecursas({ numControl: this.auth.decodifica().numControl }));
       this.listaRecursa = res.data;
