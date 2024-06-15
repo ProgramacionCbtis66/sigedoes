@@ -18,8 +18,11 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuth()) {
       
       if(this.authService.decodifica().rol=="AL"){
-        if(activatedRoute=="Alumnoconstancia" || activatedRoute=="homeAlumno" || activatedRoute=="justificante"){ return true;}
-        else { this.router.navigate(['/homeAlumno']);}
+        if(activatedRoute=="Alumnoconstancia" || activatedRoute=="homeAlumno" || activatedRoute=="justificante" || activatedRoute=="recursa" || activatedRoute=="global"){ return true;}
+        
+        else { 
+           
+          this.router.navigate(['/homeAlumno']);}
       } 
       if(this.authService.decodifica().rol=="DO"){
         if(activatedRoute=="homeDocente") {return true;}

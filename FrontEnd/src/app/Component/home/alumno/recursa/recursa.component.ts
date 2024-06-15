@@ -27,14 +27,15 @@ export class RecursaComponent implements OnInit {
   ) {
     this.nav._usuario = this.auth.decodifica().nombre + " " + this.auth.decodifica().apellidoP + " " + this.auth.decodifica().apellidoM;
     this.nav._recursa = true;
-    this.cargarRecursa();
   }
 
   ngOnInit(): void {
-    if (!this.auth.isAuth()) {
+    if (this.auth.isAuth()) {
+      this.cargarRecursa();
+    }else{
+      console.log("No esta logeado");
       this.nav._iflogin = true;
       this.nav.salir();
-      this.cargarRecursa();
     }
   }
 

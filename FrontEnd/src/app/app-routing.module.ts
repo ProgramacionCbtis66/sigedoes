@@ -34,7 +34,7 @@ const routes: Routes = [
   {path:"registro", component: RegistroComponent,canActivate:[AuthLogin]},
   {path:"perfil", component: PerfilComponent,canActivate:[AuthGuard]},
   {path:"recursa", component: RecursaComponent,canActivate:[AuthGuard]},
-  {path:"global", component: GlobalComponent},
+  {path:"global", component: GlobalComponent, canActivate:[AuthGuard]},
   {path:"supAdmin", component: SadminComponent,canActivate:[AuthGuard]},  
   {path:"**", component: Error404Component },
 ];
