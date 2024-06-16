@@ -4,7 +4,7 @@ const {correoKey, pwdKey} = require("../../config.js");
 
 function enviarCorreo(email, res) {
 
-  console.log("email: ", email);
+  console.log("email estado: ", email.estado);
     // Configuración del correo
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -111,8 +111,6 @@ function MailOptions(tipo, email) {
             }
             return mailOptions6;
         case "solicitudExmamenGlobal":
-            
-
             if (email.estado == "Aceptado") {
                 var mailOptions7 = {
                     from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
@@ -125,12 +123,12 @@ function MailOptions(tipo, email) {
                         from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                         to: `${email.correo}`,
                         subject: `Solicitud de examen global`,
-                        html: `<h5>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
+                        html: `<h5>Estimado Alumno(a) su aplicación del examen global de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sugerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
                     };
                 }
                 return mailOptions7;
         case "solicitudRecursamiento":
-            if (email.estado == 4) {
+            if (email.estado == "Aceptado") {
                 var mailOptions8 = {
                     from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                     to: `"${email.correo}"`,
@@ -142,7 +140,7 @@ function MailOptions(tipo, email) {
                         from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                         to: `"${email.correo}"`,
                         subject: `"Solicitud de recursamiento"`,
-                        html: `<h5>Estimado Alumno(a) su apliccacion de recursamiento de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
+                        html: `<h5>Estimado Alumno(a) su aplicacion de recursamiento de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sugerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
                     };
                 }
                 return mailOptions8;

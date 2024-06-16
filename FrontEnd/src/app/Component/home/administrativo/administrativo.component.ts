@@ -21,7 +21,7 @@ export class AdministrativoComponent implements OnInit {
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
   };
- 
+
   datosEsc: any = [];
 
   clavesEsp = {
@@ -53,7 +53,7 @@ export class AdministrativoComponent implements OnInit {
   allGlobalData = [];
   allRecursaData = [];
 
-  selectGlobalRecursa : any = {};
+  selectGlobalRecursa: any = {};
 
   constructor(protected userServicio: UsuarioService,
     protected nav: NavegacionService,
@@ -72,7 +72,7 @@ export class AdministrativoComponent implements OnInit {
   ngOnInit() {
     this.auth.isAuth() ? null : this.nav.salir();
   }
-  
+
   async cargaSoliciudAceeso() {
     this.ngOnInit();
     try {
@@ -352,7 +352,7 @@ export class AdministrativoComponent implements OnInit {
     }
     const maestros = await firstValueFrom(this.admin.getMaestros());
     this.maestros = maestros.ok;
- 
+
   }
 
   async asignaOtroMaestro(dato: any) {
@@ -484,7 +484,7 @@ export class AdministrativoComponent implements OnInit {
   filtroSolicitudesGlobales: any = [];
   globFil: any = [];
   ae: any = {};
- 
+
 
   async getSolicitudesGlobales() {
     this.ngOnInit();
@@ -495,11 +495,11 @@ export class AdministrativoComponent implements OnInit {
       this.solicitudesGlobales = [];
     } else {
       this.solicitudesGlobales = res.ok;
-      
-      for(var i = 0; i <= this.solicitudesGlobales.length - 1; i++){
+
+      for (var i = 0; i <= this.solicitudesGlobales.length - 1; i++) {
         this.solicitudesGlobales[i].grado = this.alumn.obtenerGrado(this.solicitudesGlobales[i].grado, this.solicitudesGlobales[i].alumnoNumControl, this.solicitudesGlobales[i].Ingreso, "grado");
       }
-      
+
       this.globFil[0] = [...new Set(this.solicitudesGlobales.map((gd: any) => gd.grado))];
       this.globFil[1] = [...new Set(this.solicitudesGlobales.map((gp: any) => gp.grupo))];
       this.globFil[2] = [...new Set(this.solicitudesGlobales.map((esp: any) => esp.especialidad))];
@@ -541,52 +541,56 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  async aprobarGlobalRecursaType(estado: any){
-    if(this.selectGlobalRecursa.type == "global"){
+  async aprobarGlobalRecursaType(estado: any) {
+    if (this.selectGlobalRecursa.type == "global") {
       await this.aprobarGlobalComprobante(estado);
-    } else if(this.selectGlobalRecursa.type == "recursa"){
+    } else if (this.selectGlobalRecursa.type == "recursa") {
       await this.aprobarRecursaComprobante(estado);
     }
   }
 
-  async traerGlobalComprobante(){
+  async traerGlobalComprobante() {
     const res = await firstValueFrom(this.admin.traerGlobalDatos());
     this.allGlobalData = res.ok;
   }
 
-  verGlobalComprobante(numGlobal: any){
+  verGlobalComprobante(numGlobal: any) {
     var res = this.allGlobalData.filter((data: any) => Number(data.id) == numGlobal);
     this.selectGlobalRecursa = res[0];
     this.selectGlobalRecursa.type = "global";
   }
 
-  async aprobarGlobalComprobante(estado: any){
+  async aprobarGlobalComprobante(estado: any) {
     this.selectGlobalRecursa.estado = estado;
     var res = await firstValueFrom(this.admin.aprovedGlobalComprobante(this.selectGlobalRecursa));
-    if(res.ok == "ok"){
-      if(estado == "correccion") {
+    if (res.ok == "ok") {
+      var ae1 = {
+        idAsigBd: this.selectGlobalRecursa.idAsigBd,
+      }
+      const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
+
+      var esg = {
+        numControl: this.selectGlobalRecursa.numCtrl,
+        fecha: examen.ok.fecha,
+        hora: examen.ok.hora,
+        salon: examen.ok.lugar,
+        materia: examen.ok.materia,
+        correo: examen.ok.correo,
+        tipo: "solicitudExmamenGlobal",
+        estado: ""
+      }
+      if (estado == "correccion") {
         Notiflix.Notify.success("Regreso para corrección de datos del pago");
+        esg.estado = "Corrección";
       }
       else {
         Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
-            //  enviar correo de aceptación
-             var ae1 = {
-              idAsigBd: this.selectGlobalRecursa.idAsigBd,
-            }
-            const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
-            console.log("hola loco  : " + examen.ok);
-            let esg = {
-            numControl : this.selectGlobalRecursa.numCtrl,
-            fecha : examen.ok.fecha,
-            hora : examen.ok.hora,
-            salon : examen.ok.lugar,
-            estado : "Aceptado",
-            materia : examen.ok.materia,
-            correo : examen.ok.correo,
-            tipo : "solicitudExmamenGlobal"
-            }
-            const correo = await firstValueFrom(this.email.envioSolicitud(esg));
+        esg.estado = "Aceptado";
       }
+      //  enviar correo de aceptación
+    
+
+      const correo = await firstValueFrom(this.email.envioSolicitud(esg));
       this.getSolicitudesGlobales();
     } else {
       Notiflix.Notify.failure("Ocurrio un Error en los comprobantes" + res.err);
@@ -594,44 +598,50 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  async traerRecursaComprobante(){
+  async traerRecursaComprobante() {
     const res = await firstValueFrom(this.admin.traerRecursaDatos());
     this.allRecursaData = res.ok;
   }
 
-  verRecursaComprobante(numRecursa: any){
+  verRecursaComprobante(numRecursa: any) {
     var res = this.allRecursaData.filter((data: any) => Number(data.id) == numRecursa);
     this.selectGlobalRecursa = res[0];
     this.selectGlobalRecursa.type = "recursa";
     this.ae = this.filtroSolicitudesRecusas.filter((item: any) => item.idasigrecursa == numRecursa);
   }
 
-  async aprobarRecursaComprobante(estado: any){
+  async aprobarRecursaComprobante(estado: any) {
     this.selectGlobalRecursa.estado = estado;
+
     var res = await firstValueFrom(this.admin.aprovedRecursaComprobante(this.selectGlobalRecursa));
-    if(res.ok == "ok"){
-      
-      if(estado == "correccion") {Notiflix.Notify.success("Regreso para corrección de datos del pago");}
-      else {
-        Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
-        //  enviar correo de aceptación
-        var ae1 = {
-          idgloables: this.ae.idgloables,
-          idasiglobd: this.ae.idasiglobd,
-          numControl: this.ae.numControl
-        }
-         
-        const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
-        this.ae.fecha = examen.ok.fecha;
-        this.ae.hora = examen.ok.hora;
-        this.ae.dato.salon = examen.ok.salon;
-        const correo = await firstValueFrom(this.email.envioSolicitud({ correo: this.ae, tipo: "solicitudRecursamiento" }));
+    if (res.ok == "ok") {
+      //  enviar correo de aceptación
+      const examen = await firstValueFrom(this.admin.cursoRecursa({ id: this.selectGlobalRecursa.id }));
+      var esr = {
+        numControl: this.selectGlobalRecursa.numCtrl,
+        fecha: examen.ok.fecha,
+        hora: examen.ok.hora,
+        salon: examen.ok.lugar,
+        materia: examen.ok.materia,
+        correo: examen.ok.correo,
+        tipo: "solicitudRecursamiento",
+        estado: ""
       }
-      this.getSolicitudesRecursas();
+      if (estado == "correccion") {
+        Notiflix.Notify.success("Regreso para corrección de datos del pago");
+        esr.estado = "correccion";
+      } else {
+        Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+        esr.estado = "Aceptado";
+      }
+
+
+      const correo = await firstValueFrom(this.email.envioSolicitud(esr));
+
     } else {
       Notiflix.Notify.failure("Ocurrio un Error en los comprobantes" + res.err);
-      this.getSolicitudesRecursas();
     }
+    this.getSolicitudesRecursas();
   }
 
   async autorizarPagoGlobal(event: any, dato: any) {
@@ -640,13 +650,13 @@ export class AdministrativoComponent implements OnInit {
       var autorizado = {
         estado: 4,
         idglobales: dato.idgloables,
-         
+
       }
       if (control == 'Rechazado') {
         autorizado = {
           estado: 7,
           idglobales: dato.idglobales,
-          
+
         }
       }
       if (confirm("¿Esta usted seguro de Autorizar o Rechazar la Solicitud?")) {
@@ -684,19 +694,19 @@ export class AdministrativoComponent implements OnInit {
 
     this.filtroSolicitudesGlobales = this.solicitudesGlobales;
 
-    if(numControl != "" && numControl != undefined) {
+    if (numControl != "" && numControl != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.alumnoNumControl == numControl);
     }
     if (grado != "-" && grado != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grado == grado);
     }
-    if(grupo != "-" && grupo != undefined) {
+    if (grupo != "-" && grupo != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.grupo == grupo);
     }
-    if(especialidad != "-" && especialidad != undefined) {
+    if (especialidad != "-" && especialidad != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.especialidad == especialidad);
     }
-    if(turno != "-" && turno != undefined) {
+    if (turno != "-" && turno != undefined) {
       this.filtroSolicitudesGlobales = this.filtroSolicitudesGlobales.filter((item: any) => item.turno == turno);
     }
   }
@@ -717,10 +727,10 @@ export class AdministrativoComponent implements OnInit {
     } else {
       this.solicitudesRecursas = res.ok;
 
-      for(var i = 0; i <= this.solicitudesRecursas.length - 1; i++){
+      for (var i = 0; i <= this.solicitudesRecursas.length - 1; i++) {
         this.solicitudesRecursas[i].grado = this.alumn.obtenerGrado(this.solicitudesRecursas[i].grado, this.solicitudesRecursas[i].alumnoNumControl, this.solicitudesRecursas[i].Ingreso, "grado");
       }
-      
+
       this.recurFil[0] = [...new Set(this.solicitudesRecursas.map((gd: any) => gd.grado))];
       this.recurFil[1] = [...new Set(this.solicitudesRecursas.map((gp: any) => gp.grupo))];
       this.recurFil[2] = [...new Set(this.solicitudesRecursas.map((esp: any) => esp.especialidad))];
@@ -798,7 +808,7 @@ export class AdministrativoComponent implements OnInit {
       }
     }
   }
-  
+
   filtroSolicitudRecursas() {
     this.ngOnInit();
     var numControl = this.filtroRecusas.alumnoNumControl;
@@ -809,19 +819,19 @@ export class AdministrativoComponent implements OnInit {
 
     this.filtroSolicitudesRecusas = this.solicitudesRecursas;
 
-    if(numControl != "" && numControl != undefined) {
+    if (numControl != "" && numControl != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.alumnoNumControl == numControl);
     }
     if (grado != "-" && grado != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grado == grado);
     }
-    if(grupo != "-" && grupo != undefined) {
+    if (grupo != "-" && grupo != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.grupo == grupo);
     }
-    if(especialidad != "-" && especialidad != undefined) {
+    if (especialidad != "-" && especialidad != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.especialidad == especialidad);
     }
-    if(turno != "-" && turno != undefined) {
+    if (turno != "-" && turno != undefined) {
       this.filtroSolicitudesRecusas = this.filtroSolicitudesRecusas.filter((item: any) => item.turno == turno);
     }
   }

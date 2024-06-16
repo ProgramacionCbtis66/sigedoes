@@ -592,10 +592,10 @@ administrador.post('/aplicaionExamenGlobal', verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`select ag.fecha, ag.hora, ag.lugar, m.descripcion as materia, usr.correo from globales g, asignaglobal ag, materias m, usuario as usr
+        const [row] = await conexion.execute(`select ag.fecha, ag.hora, ag.lugar, m.descripcion as materia, usr.correo from globales g, asignaglobal ag, materias m, usuario usr
 where (g.idasiglobd = ag.idasiglobd) and (m.idMateria = g.idMateria) 
 and (usr.numControl = g.alumnoNumControl) and (g.idasiglobd =  ?)`,[data.idAsigBd]);
-        console.log(row[0]);
+         
         res.send({ok:row[0]});
         if(row.length > 0){
             
@@ -610,11 +610,13 @@ and (usr.numControl = g.alumnoNumControl) and (g.idasiglobd =  ?)`,[data.idAsigB
 
 administrador.post('/aplicaionRecursa', verifica, async(req, res) => {
     const data = req.body;
+    console.log(" elelel  sdfsdf  " + data);
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`select ar.fecha, ar.hora, ar.lugar sa salon from recursas r, asignarecursa ar where (r.idasigrecursa = ar.idasigrecursa) and (r.idrecursa = ?)`,[data.idrecursa]);
-        if(row.affectedRows > 0){
-            res.send({ok:row});
+        const [row] = await conexion.execute(`select ar.fecha, ar.hora, ar.Lugar as lugar, m.descripcion as materia, usr.correo from recursas r, asignarecursa ar, materias m, usuario usr  where (r.idasigrecursa = ar.idasigrecursa) and (m.idMateria = r.idMateria) and (usr.numControl = r.alumnoNumControl) and (r.idrecursa = ?)`,[data.id]);
+
+        if(row.length > 0){
+            res.send({ok:row[0]});
         } else {
             res.send({err:"err"});
         }
