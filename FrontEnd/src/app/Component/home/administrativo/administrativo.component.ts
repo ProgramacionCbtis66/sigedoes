@@ -483,7 +483,7 @@ export class AdministrativoComponent implements OnInit {
   filtroGlobales: any = [];
   filtroSolicitudesGlobales: any = [];
   globFil: any = [];
-  ae: any = [];
+  ae: any = {};
  
 
   async getSolicitudesGlobales() {
@@ -575,14 +575,17 @@ export class AdministrativoComponent implements OnInit {
             }
             const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
             console.log("hola loco  : " + examen.ok);
-            this.ae.numControl = this.selectGlobalRecursa.numCtrl;
-            this.ae.fecha = examen.ok.fecha;
-            this.ae.hora = examen.ok.hora;
-            this.ae.salon = examen.ok.lugar;
-            this.ae.estado = "Aceptado";
-            this.ae.materia = examen.ok.materia;
-            this.ae.correo = examen.ok.correo;
-            const correo = await firstValueFrom(this.email.envioSolicitud({ correo: this.ae, tipo: "solicitudExmamenGlobal"}));
+            let esg = {
+            numControl : this.selectGlobalRecursa.numCtrl,
+            fecha : examen.ok.fecha,
+            hora : examen.ok.hora,
+            salon : examen.ok.lugar,
+            estado : "Aceptado",
+            materia : examen.ok.materia,
+            correo : examen.ok.correo,
+            tipo : "solicitudExmamenGlobal"
+            }
+            const correo = await firstValueFrom(this.email.envioSolicitud(esg));
       }
       this.getSolicitudesGlobales();
     } else {

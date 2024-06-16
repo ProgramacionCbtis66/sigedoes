@@ -4,7 +4,7 @@ const {correoKey, pwdKey} = require("../../config.js");
 
 function enviarCorreo(email, res) {
 
-
+  console.log("email: ", email);
     // Configuración del correo
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -111,7 +111,7 @@ function MailOptions(tipo, email) {
             }
             return mailOptions6;
         case "solicitudExmamenGlobal":
-            console.log("es desde "+ email.estado);
+            
 
             if (email.estado == "Aceptado") {
                 var mailOptions7 = {
