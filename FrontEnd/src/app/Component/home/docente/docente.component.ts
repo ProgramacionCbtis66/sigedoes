@@ -352,6 +352,7 @@ export class DocenteComponent implements OnInit {
     Notiflix.Loading.pulse('Enviando alumnos a Global...', {
       interval: 2000,
     } as any);
+   
     if (this.alumnosGlobales.length > 0) {
       let datos = {
         alumnos: this.alumnosGlobales,

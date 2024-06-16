@@ -516,9 +516,14 @@ administrador.get('/traerGlobalData', verifica, async(req, res) => {
 
 administrador.post('/aprobarGlobalComprobar', verifica, async(req, res) => {
     const data = req.body;
+    let Estado = 0;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`UPDATE globales SET estado =? WHERE (idglobales = ?)`, [4, data.id]);
+        console.log(data.estado)
+        if(data.estado == "aprobado"){	Estado = 4;	} else { 
+            if(data.estado == "correccion"){    Estado = 7;	} else {    Estado = 8;	}
+        }
+        const [row] = await conexion.execute(`UPDATE globales SET estado =? WHERE (idglobales = ?)`, [Estado, data.id]);
         if(row.affectedRows > 0){
             res.send({ok:"ok"});
         } else {
@@ -554,7 +559,10 @@ administrador.post('/aprobarRecursaComprobar', verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idasigrecursa = ?)`, [5, data.idAsigRc]);
+        if(data.estado == "aprobado"){	Estado = 5;	} else {
+            if(data.estado == "correccion"){    Estado = 8;	} else {    Estado = 9;	}
+        }
+        const [row] = await conexion.execute(`UPDATE recursas SET estado =? WHERE (idasigrecursa = ?)`, [Estado, data.idAsigRc]);
         if(row.affectedRows > 0){
             res.send({ok:"ok"});
         } else {
@@ -584,9 +592,14 @@ administrador.post('/aplicaionExamenGlobal', verifica, async(req, res) => {
     const data = req.body;
     const conexion = await ccn();
     try{
-        const [row] = await conexion.execute(`select ag.fecha, ag.hora, ag.lugar sa salon from globales g, asignaglobal ag where (g.idasiglobd = ag.idasiglobd) and (g.idglobales = ?)`,[data.idglobales]);
-        if(row.affectedRows > 0){
-            res.send({ok:row});
+        const [row] = await conexion.execute(`select ag.fecha, ag.hora, ag.lugar, m.descripcion as materia, usr.correo from globales g, asignaglobal ag, materias m, usuario as usr
+where (g.idasiglobd = ag.idasiglobd) and (m.idMateria = g.idMateria) 
+and (usr.numControl = g.alumnoNumControl) and (g.idasiglobd =  ?)`,[data.idAsigBd]);
+        console.log(row[0]);
+        res.send({ok:row[0]});
+        if(row.length > 0){
+            
+           //res.send({ok:row[0]});
         } else {
             res.send({err:"err"});
         }

@@ -21,7 +21,7 @@ export class AdministrativoComponent implements OnInit {
     aportacion: "",
     descripcion: "Pago Realizado Con Éxito",
   };
-
+ 
   datosEsc: any = [];
 
   clavesEsp = {
@@ -53,7 +53,7 @@ export class AdministrativoComponent implements OnInit {
   allGlobalData = [];
   allRecursaData = [];
 
-  selectGlobalRecursa = {imgCeap: "", imgFrm5: "", id: "", type: ""};
+  selectGlobalRecursa : any = {};
 
   constructor(protected userServicio: UsuarioService,
     protected nav: NavegacionService,
@@ -483,6 +483,8 @@ export class AdministrativoComponent implements OnInit {
   filtroGlobales: any = [];
   filtroSolicitudesGlobales: any = [];
   globFil: any = [];
+  ae: any = [];
+ 
 
   async getSolicitudesGlobales() {
     this.ngOnInit();
@@ -539,11 +541,11 @@ export class AdministrativoComponent implements OnInit {
     }
   }
 
-  async aprobarGlobalRecursaType(){
+  async aprobarGlobalRecursaType(estado: any){
     if(this.selectGlobalRecursa.type == "global"){
-      await this.aprobarGlobalComprobante();
+      await this.aprobarGlobalComprobante(estado);
     } else if(this.selectGlobalRecursa.type == "recursa"){
-      await this.aprobarRecursaComprobante();
+      await this.aprobarRecursaComprobante(estado);
     }
   }
 
@@ -558,13 +560,33 @@ export class AdministrativoComponent implements OnInit {
     this.selectGlobalRecursa.type = "global";
   }
 
-  async aprobarGlobalComprobante(){
+  async aprobarGlobalComprobante(estado: any){
+    this.selectGlobalRecursa.estado = estado;
     var res = await firstValueFrom(this.admin.aprovedGlobalComprobante(this.selectGlobalRecursa));
     if(res.ok == "ok"){
-      Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+      if(estado == "correccion") {
+        Notiflix.Notify.success("Regreso para corrección de datos del pago");
+      }
+      else {
+        Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+            //  enviar correo de aceptación
+             var ae1 = {
+              idAsigBd: this.selectGlobalRecursa.idAsigBd,
+            }
+            const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
+            console.log("hola loco  : " + examen.ok);
+            this.ae.numControl = this.selectGlobalRecursa.numCtrl;
+            this.ae.fecha = examen.ok.fecha;
+            this.ae.hora = examen.ok.hora;
+            this.ae.salon = examen.ok.lugar;
+            this.ae.estado = "Aceptado";
+            this.ae.materia = examen.ok.materia;
+            this.ae.correo = examen.ok.correo;
+            const correo = await firstValueFrom(this.email.envioSolicitud({ correo: this.ae, tipo: "solicitudExmamenGlobal"}));
+      }
       this.getSolicitudesGlobales();
     } else {
-      Notiflix.Notify.failure("Ocurrio un Error al Aprobar");
+      Notiflix.Notify.failure("Ocurrio un Error en los comprobantes" + res.err);
       this.getSolicitudesGlobales();
     }
   }
@@ -578,15 +600,33 @@ export class AdministrativoComponent implements OnInit {
     var res = this.allRecursaData.filter((data: any) => Number(data.id) == numRecursa);
     this.selectGlobalRecursa = res[0];
     this.selectGlobalRecursa.type = "recursa";
+    this.ae = this.filtroSolicitudesRecusas.filter((item: any) => item.idasigrecursa == numRecursa);
   }
 
-  async aprobarRecursaComprobante(){
+  async aprobarRecursaComprobante(estado: any){
+    this.selectGlobalRecursa.estado = estado;
     var res = await firstValueFrom(this.admin.aprovedRecursaComprobante(this.selectGlobalRecursa));
     if(res.ok == "ok"){
-      Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+      
+      if(estado == "correccion") {Notiflix.Notify.success("Regreso para corrección de datos del pago");}
+      else {
+        Notiflix.Notify.success("Comprobantes Verificados y Aceptados.");
+        //  enviar correo de aceptación
+        var ae1 = {
+          idgloables: this.ae.idgloables,
+          idasiglobd: this.ae.idasiglobd,
+          numControl: this.ae.numControl
+        }
+         
+        const examen = await firstValueFrom(this.admin.aplicaionExamenGlobal(ae1));
+        this.ae.fecha = examen.ok.fecha;
+        this.ae.hora = examen.ok.hora;
+        this.ae.dato.salon = examen.ok.salon;
+        const correo = await firstValueFrom(this.email.envioSolicitud({ correo: this.ae, tipo: "solicitudRecursamiento" }));
+      }
       this.getSolicitudesRecursas();
     } else {
-      Notiflix.Notify.failure("Ocurrio un Error al Aprobar");
+      Notiflix.Notify.failure("Ocurrio un Error en los comprobantes" + res.err);
       this.getSolicitudesRecursas();
     }
   }
@@ -721,13 +761,13 @@ export class AdministrativoComponent implements OnInit {
     const control = event.target.id;
     if (control == "Autorizado") {
       var autorizado = {
-        estado: 4,
+        estado: 5,
         idrecursas: dato.idrecursas
       }
 
       if (control == 'Rechazado') {
         autorizado = {
-          estado: 7,
+          estado: 8,
           idrecursas: dato.idrecursas
         }
       }

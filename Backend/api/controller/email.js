@@ -34,7 +34,7 @@ function MailOptions(tipo, email) {
     switch (tipo) {
         case "Constancia":
             const mailOptions = {
-                from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
+                from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                 to: `"${email.email}"`,
                 subject: `"${email.asunto}"`,
                 html: "<h1>Constancia De Estudios</h1>",
@@ -49,7 +49,7 @@ function MailOptions(tipo, email) {
             return mailOptions;
         case "forgotPassword":
             const mailOptions2 = {
-                from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
+                from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                 to: `"${email.correo}"`,
                 subject: `"Recuperacion de contraseña"`,
                 html: `<h1>Enviando recuperacion de Contraseña</h1> <br>
@@ -62,7 +62,7 @@ function MailOptions(tipo, email) {
                     ? `<h3> Aceptado, sus datos son: </h3> <br><h4>Nombre: ${email.nombre}   , Usuario: ${email.numControl}  , contraseña: ${email.password}</h4>`
                     : `Rechazado, </h3>, <br><h5>favor de enviar un correo a a la siguiente direccion: Direcion@cbtis66.edu.mx</h5>`;
             const mailOptions3 = {
-                from: `"Control escolar", "jorgecortescbtis66@gmail.com"`,
+                from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                 to: `"${email.correo}"`,
                 subject: `"Aceptacion o Rechazo"`,
                 html: `<h3>Estimado Usuario se le notifica que usted ha sido ${validacion}`,
@@ -71,7 +71,7 @@ function MailOptions(tipo, email) {
             return mailOptions3;
         case "numPago":
             const mailOptions4 = {
-                from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                 to: `"${email.correo}"`,
                 subject: `"Código de Pago Constancia en Línea"`,
                 html: `<h3>Estimado Usuario se le envía su código de pago :  ${email.numPago}`,
@@ -79,7 +79,7 @@ function MailOptions(tipo, email) {
             return mailOptions4;
         case "boleta":
             const mailOptions5 = {
-                from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                 to: `"${email.correo}"`,
                 subject: `"Boleta de calificaciones"`,
                 html: `<h3>Estimado Usuario se le envía su boleta de calificaciones del semestre :  ${email.semestre} del periodo escolar ${email.periodo} grupo ${email.grupo}`,
@@ -88,7 +88,7 @@ function MailOptions(tipo, email) {
         case "justificante":
             if (email.estado == 1) {
                 var mailOptions6 = {
-                    from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
+                    from: `"Orientacion Educativa", "sigedoes@cbtis66.edu.mx"`,
                     to: `${email.correo},  ${email.correoTutor}`,
                     subject: `"Justificante"`,
                     html: `<b>Estimado Usuario se le envía su justificante: ${email.justificante}`,
@@ -103,7 +103,7 @@ function MailOptions(tipo, email) {
                 return mailOptions6;
             } else {
                 var mailOptions6 = {
-                    from: `"Orientacion Educativa", "ControlEscolarCbtis66@gmail.com"`,
+                    from: `"Orientacion Educativa", "sigedoes@cbtis66.edu.mx"`,
                     to: `${email.correo},  ${email.correoTutor}`,
                     subject: `"Justificante"`,
                     html: `<h5> Estimado Usuario ${email.nombre} se le envía su ubservacion de la solicitud de su justificante: ${email.observaciones}</h5>`,
@@ -111,16 +111,18 @@ function MailOptions(tipo, email) {
             }
             return mailOptions6;
         case "solicitudExmamenGlobal":
-            if (email.estado == 4) {
+            console.log("es desde "+ email.estado);
+
+            if (email.estado == "Aceptado") {
                 var mailOptions7 = {
-                    from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                    from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                     to: `${email.correo}`,
                     subject: "Solicitud de examen global",
-                    html: `<h3>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
+                    html: `<h3>Estimado Alumno(a) su aplicación del examen global de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
                     };
                 } else {
                     var mailOptions7 = {
-                        from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                        from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                         to: `${email.correo}`,
                         subject: `Solicitud de examen global`,
                         html: `<h5>Estimado Alumno(a) su apliccacion del examen global de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,
@@ -130,14 +132,14 @@ function MailOptions(tipo, email) {
         case "solicitudRecursamiento":
             if (email.estado == 4) {
                 var mailOptions8 = {
-                    from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                    from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                     to: `"${email.correo}"`,
                     subject: `"Solicitud de recursamiento"`,
                     html: `<h3>Estimado Alumno(a) su apliccacion de recursamiento de la materia : ${email.materia} se aplicará el dia ${email.fecha} a las ${email.hora} en el salon ${email.salon} </h3>`,
                     };
                 }else{
                     var mailOptions8 = {
-                        from: `"Control escolar", "ControlEscolarCbtis66@gmail.com"`,
+                        from: `"Control escolar", "sigedoes@cbtis66.edu.mx"`,
                         to: `"${email.correo}"`,
                         subject: `"Solicitud de recursamiento"`,
                         html: `<h5>Estimado Alumno(a) su apliccacion de recursamiento de la materia : ${email.materia} fue rechazada por el siguiente motivo: Documento ilegible o falta de comprobante de pago, le sujerimos que envíe de nuevo los ducuemntos de pago correspondientes. Saludos. </h5>`,

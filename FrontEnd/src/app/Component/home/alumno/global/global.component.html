@@ -26,6 +26,8 @@
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 1" disabled>En proceso de autorización</button>
                             <!--  boton cargar comprobantes -->
                             <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 2" (click)="datoPago = dato;" >Informacion de Pago</button>
+                            <!--  boton cargar comprobantes -->
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado ==7" (click)="datoPago = dato;" >Observaciones en el de Pago</button>
                             <!-- pediente de confirmacion de pago -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 3" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->
@@ -33,7 +35,7 @@
                             <!-- Aprobado -->
                             <button type="button" class="btn btn-success" *ngIf="dato.estado == 6"  disabled>Aprobado</button>
                             <!-- Recursa -->
-                            <button type="button" class="btn btn-warning" *ngIf="dato.estado >= 7"  disabled>Acreditacion Pendiente (Por Recursar)</button>
+                            <button type="button" class="btn btn-warning" *ngIf="dato.estado >= 8"  disabled>Acreditacion Pendiente (Por Recursar)</button>
                         </td>
                     </tr>
                 </tbody>

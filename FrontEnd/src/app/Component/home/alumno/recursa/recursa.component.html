@@ -26,7 +26,7 @@
                             <!-- Boton en proceso de atuorizacion -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 2" disabled>En proceso de autorización</button>
                             <!--  boton cargar comprobantes -->
-                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 3" (click)="datoPago = dato;" >Informacion de pago</button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#versolicitud" *ngIf="dato.estado == 3 || dato.estado == 8" (click)="datoPago = dato;" >Informacion de pago</button>
                             <!-- pediente de confirmacion de pago -->
                             <button type="button" class="btn btn-info" *ngIf="dato.estado == 4" disabled>En revisión de pagos</button>
                             <!-- Autorizado a examen -->

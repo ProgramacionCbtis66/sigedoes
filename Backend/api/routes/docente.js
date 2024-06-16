@@ -114,7 +114,6 @@ docente.post('/enviarGR', verifica, async (req, res) => {
     let tiempo = Date.now();
     let hoy = new Date(tiempo);
     const fecha = hoy.toLocaleDateString();
-
     if (tipo == "global") {
         for (let alumno of alumnos) {
             const sql = 'insert into globales (alumnoNumControl, docenteDni, idMateria, idperiodoescolar, fecha , estado) values (?,?,?,?,?,?)';
@@ -122,7 +121,6 @@ docente.post('/enviarGR', verifica, async (req, res) => {
                 const conexion = await ccn();
                 const [registros] = await conexion.execute(sql, [alumno.numControl, docente, materia, periodo, fecha, 0]);
             } catch (error) {
-                
                 res.json({ data: false });
             }
         }
