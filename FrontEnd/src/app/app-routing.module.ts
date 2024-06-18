@@ -19,6 +19,7 @@ import { JutificantesComponent } from './Component/home/alumno/justificantes/jut
 import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
 import { GlobalComponent } from './Component/home/alumno/global/global.component';
 import { SadminComponent } from './Component/sadmin/sadmin.component';
+import { MantenimientoComponent } from './Component/adicional/mantenimiento/mantenimiento.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path:"recursa", component: RecursaComponent,canActivate:[AuthGuard]},
   {path:"global", component: GlobalComponent, canActivate:[AuthGuard]},
   {path:"supAdmin", component: SadminComponent,canActivate:[AuthGuard]},  
+  {path:"mantenimiento", component: MantenimientoComponent},
   {path:"**", component: Error404Component },
 ];
 

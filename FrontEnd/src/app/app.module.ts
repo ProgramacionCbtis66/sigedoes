@@ -25,6 +25,7 @@ import { JutificantesComponent } from './Component/home/alumno/justificantes/jut
 import { GlobalComponent } from './Component/home/alumno/global/global.component';
 import { RecursaComponent } from './Component/home/alumno/recursa/recursa.component';
 import { SadminComponent } from './Component/sadmin/sadmin.component';
+import { MantenimientoComponent } from './Component/adicional/mantenimiento/mantenimiento.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SadminComponent } from './Component/sadmin/sadmin.component';
     GlobalComponent,
     RecursaComponent,
     SadminComponent,
+    MantenimientoComponent,
   ],
   imports: [
     BrowserModule,
